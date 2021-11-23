@@ -1,0 +1,26 @@
+.header_part_compo {
+  padding: 10px;
+  display: flex;
+  flex-direction: left;
+  justify-content: flex-end;
+}
+
+.search_bar {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.page_selector {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.drop_down_menu {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* style={{ textAlign: "end", padding: "10px" }} */
