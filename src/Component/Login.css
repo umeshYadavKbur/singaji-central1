@@ -1,0 +1,44 @@
+ .loginDivFirst {
+     background-image: url('./assets/LoginBGimg.png');
+     background-size: cover;
+     /* aspect-ratio: 18/9; */
+     background-repeat: no-repeat;
+     display: grid;
+     justify-content: center;
+     height: 100vh;
+     width: 100vw;
+ }
+ 
+ .loginDiv {
+     display: grid;
+     align-items: center;
+     flex-direction: column;
+     height: 80vh;
+     width: 120vh;
+     margin: 9vh 0vh;
+     background-image: url('./assets/LogibBG1img.svg');
+     background-size: cover;
+     background-repeat: no-repeat;
+     display: flex;
+     justify-content: center;
+ }
+ 
+ .loginLableColor {
+     color: grey;
+ }
+ 
+ #LoginForm {
+     padding-left: 5%;
+     padding-right: 16%;
+     padding-top: 8%;
+     padding-bottom: 8%;
+ }
+ 
+ .containertwo {
+     height: 65vh;
+     width: 65vw;
+ }
+ 
+ #LoginFormSideImg {
+     padding: 16% 5% 14% 13%;
+ }
