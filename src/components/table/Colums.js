@@ -1,5 +1,7 @@
 import { format } from "date-fns";
-import SliderColumnFilter from "./SliderColumnFilter";
+import NumberRangeColumnFilter from "./features/NumberRangeColumnFilter";
+import SelectColumnFilter from "./features/SelectColumnFilter";
+import SliderColumnFilter from "./features/SliderColumnFilter";
 
 export const COLUMNS = [
   {
@@ -37,7 +39,7 @@ export const COLUMNS = [
     Header: "Country",
     Footer: "Country",
     accessor: "country",
-    // Filter: ColumnFilter,
+    Filter: SelectColumnFilter,
   },
   {
     Header: "Phone",
@@ -55,7 +57,7 @@ export const COLUMNS = [
     Header: "Age",
     Footer: "Age",
     accessor: "age",
-    // Filter: NumberRangeColumnFilter,
+    Filter: NumberRangeColumnFilter,
   },
 ];
 

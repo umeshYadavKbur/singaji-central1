@@ -15,11 +15,11 @@ import {
 } from "mdb-react-ui-kit";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 
-import ColumnFilter from "./ColumnFilter";
+import ColumnFilter from "./features/ColumnFilter";
 import { COLUMNS } from "./Colums";
-import GlobalFilter from "./GlobalFilter";
+import GlobalFilter from "./features/GlobalFilter";
 import MOCK_DATA from "./MOCK_DATA.json";
-import CheckBox from "./CheckBox";
+import CheckBox from "./features/CheckBox";
 import "./Table.css";
 
 const Table = () => {
