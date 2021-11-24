@@ -28,6 +28,7 @@ function SliderColumnFilter({
         }}
       />
       <button onClick={() => setFilter(undefined)}>Off</button>
+
     </>
   );
 }

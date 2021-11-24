@@ -1,21 +1,32 @@
-import React from 'react'
+import React from "react";
+import "../Table.css";
 
 function SelectColumnFilter({
-    column: { filterValue, setFilter, preFilteredRows, id },
-  }) {
-    // Calculate the options for filtering
-    // using the preFilteredRows
-    const options = React.useMemo(() => {
-      const options = new Set();
-      preFilteredRows.forEach((row) => {
-        options.add(row.values[id]);
-      });
-      return [...options.values()];
-    }, [id, preFilteredRows]);
-  
-    // Render a multi-select box
-    return (
+  column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options = React.useMemo(() => {
+    const options = new Set();
+    preFilteredRows.forEach((row) => {
+      options.add(row.values[id]);
+    });
+    return [...options.values()];
+  }, [id, preFilteredRows]);
+
+  // Render a multi-select box
+  return (
+    <div>
       <select
+        style={{
+          color: "blue",
+          marginTop: "10px",
+          borderRadius: "4px",
+          borderColor: "blue",
+          height: "33px",
+        }}
+        id="dropdown-basic-button"
+        title="Select"
         value={filterValue}
         onChange={(e) => {
           setFilter(e.target.value || undefined);
@@ -28,7 +39,8 @@ function SelectColumnFilter({
           </option>
         ))}
       </select>
-    );
-  }
-  
-export default SelectColumnFilter
+    </div>
+  );
+}
+
+export default SelectColumnFilter;

@@ -5,7 +5,6 @@ import {
   useFilters,
   usePagination,
   useRowSelect,
-  // useAsyncDebounce,
 } from "react-table";
 import {
   MDBDropdown,
@@ -89,7 +88,6 @@ const Table = () => {
   const { pageIndex, pageSize } = state;
   // const firstPageRows = rows.slice(0, 10);
 
-
   return (
     <div>
       <div className="header_part_compo">
@@ -106,6 +104,12 @@ const Table = () => {
         {/* select the page size code  */}
         <div className="page_selector">
           <select
+            style={{
+              color: "blue",
+              borderRadius: "4px",
+              borderColor: "blue",
+              height: "33px",
+            }}
             value={pageSize}
             onChange={(e) => setPageSize(Number(e.target.value))}
           >
