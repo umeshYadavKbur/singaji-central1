@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import {
   useTable,
   useGlobalFilter,
@@ -20,11 +20,14 @@ import GlobalFilter from "./features/GlobalFilter";
 import MOCK_DATA from "./MOCK_DATA.json";
 import CheckBox from "./features/CheckBox";
 import "./Table.css";
+import Email from "./features/email/Email";
 
 const Table = () => {
   //Reder the data only once when we use useMemo()
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => MOCK_DATA, []);
+  // const [show, setShow] = useState(false);
+  // const [selectedData, setSelectedData] = useState([]);
 
   const defaultColumn = useMemo(() => {
     return {
@@ -145,8 +148,11 @@ const Table = () => {
             </MDBDropdownMenu>
           </MDBDropdown>
         </div>
-
         {/* dropdown list end here  */}
+      </div>
+
+      <div>
+        <Email />
       </div>
 
       <div>
