@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Login from './Component/Login';
 import ForgotPassword from './Component/ForgotPassword';
@@ -20,7 +21,6 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/ForgotPassword" component={ForgotPassword} />
           <Route path="/create_new_password/:token" component={ResetPassword} />
-
           <Route path='*' render={() =>
           (
             <Redirect to="/error" />
