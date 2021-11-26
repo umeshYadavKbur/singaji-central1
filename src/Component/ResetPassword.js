@@ -1,15 +1,16 @@
 import React from 'react';
-import { useParams } from 'react-router';
+import { Redirect, useParams } from 'react-router';
 import {useMediaQuery} from 'react-responsive';
 import './Login.css';
 import Loginlogo from './assets/LoginBG2img.svg';
 import {useFormik} from 'formik';
 import axios from 'axios';
 import {baseUrl} from '../url/baseUrl';
-
+import { useHistory } from 'react-router';
 
 function ResetPassword() {
 
+    let history = useHistory();
     const {token} = useParams();
 
     console.log(token)
@@ -39,29 +40,29 @@ function ResetPassword() {
         onSubmit: async (values) => {
             console.log(values);
             if(formik.values.password === formik.values.confirm){
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type","application/json");
-
-            var raw = JSON.stringify({
-                
+            var data = JSON.stringify({
                 "password": formik.values.password
             });
-// console.log("match both");
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
+
+            var config = {
+                method: 'post',
+                url: `${baseUrl}/api/resetPasswordLink/${token}`,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
             };
-            console.log(requestOptions);
-            try {
-                const response = await axios.post(`${baseUrl}/api/login`,requestOptions);
+
+            axios(config)      
+                const response = await axios(config);
                 console.log(response);
-            } catch(error) {
-                console.error(error);
-            }
-        }
+                if(response.status === 200)
+                {
+                    
+                    return history.push("/login")
+                }
     }
+}
     })
     return (
         <>
