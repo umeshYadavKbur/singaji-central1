@@ -10,7 +10,7 @@ import {baseUrl} from '../url/baseUrl';
 
 
 function Login() {
-    
+
 
         // const os = 'Windows'; // add your OS values
        
@@ -97,6 +97,8 @@ function Login() {
                             </div>
 
                         </form>
+         
+
                     </div>
                 </div>
 
