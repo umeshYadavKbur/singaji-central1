@@ -1,12 +1,10 @@
-
 import React from "react";
-import Table from "./components/table/Table";
-
+import ForgetPass from "./components/resetPass/ForgetPass";
 
 function App() {
   return (
     <div>
-      <Table />
+      <ForgetPass />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import {
   useTable,
   useGlobalFilter,
@@ -26,7 +26,7 @@ const Table = () => {
   //Reder the data only once when we use useMemo()
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => MOCK_DATA, []);
-  const [selectedRowData, setSelectedRowData] = useState([]);
+  // const [selectedRowData, setSelectedRowData] = useState([]);
 
   const defaultColumn = useMemo(() => {
     return {
@@ -201,18 +201,15 @@ const Table = () => {
         </MDBTable>
 
         {/* selected row code show in ui in table */}
-        {/* <code>
-          {setSelectedRowData(()=>{
-           return(   
-             JSON.stringify(
-                {
-                  selectedFlatRows: selectedFlatRows.map((row) => row.original),
-                },
-                null,
-                2
-              ))
-          })}
-        </code> */}
+        <code>
+          {JSON.stringify(
+            {
+              selectedFlatRows: selectedFlatRows.map((row) => row.original),
+            },
+            null,
+            2
+          )}
+        </code>
         {/* Code of data end here */}
       </div>
       <div>
