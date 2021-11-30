@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Login from './Component/Login';
 import ForgotPassword from './Component/ForgotPassword';
@@ -6,6 +5,7 @@ import ResetPassword from './Component/ResetPassword';
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import { Redirect } from 'react-router';
 // import { useParams } from 'react-router';
+
 
 
 function App() {
