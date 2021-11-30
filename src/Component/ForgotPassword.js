@@ -65,11 +65,13 @@ function ForgotPassword() {
             <div style={{height: "100vh",width: "100vw",background: "#f3eded"}}>
                 <div className="position-absolute top-50 start-50 translate-middle " style={{width: '100%',maxWidth: "420px",padding: "25px 45px 45px 45px",margin: "auto",background: "white",borderRadius: "10px"}}>
                     <form >
-                        <div className="mx-5">
+                        <div className="d-flex justify-content-center">
 
-                            <img className="mb-2 " src={logo} alt width={100} height={82} style={{alignItems: "center",borderRadius: "40px"}} />
+                            <img className="mb-2 " src={logo} alt width={100} height={82} style={{alignItems: "center",borderRadius: "40px"}} /> <br /> 
+                             </div>
+                             <div className="d-flex justify-content-center">
                             <h5 className="h3 mb-3 fw-normal" style={{fontWeight: "bold"}}>Enter your Email</h5>
-                        </div>
+                      </div>
                         <div className="mb-3">
                             <input type="text" className="form-control" placeholder="Email" />
 
