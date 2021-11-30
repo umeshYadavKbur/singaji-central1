@@ -1,7 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router';
 // import {useMediaQuery} from 'react-responsive';
-
+import './login.css'
+import logo from './assets/logo.png'
 import {useFormik} from 'formik';
 import axios from 'axios';
 import {baseUrl} from '../url/baseUrl';
@@ -65,7 +66,27 @@ function ResetPassword() {
     })
     return (
         <>
-            <div className="loginDivFirst">
+            <div style={{height: "100vh",width: "100vw",background: "#f3eded"}}>
+                <div className="position-absolute top-50 start-50 translate-middle " style={{width: '100%',maxWidth: "400px",padding: "25px 45px 45px 45px",margin: "auto",background: "white",borderRadius: "10px"}}>
+                    <form onSubmit={formik.handleSubmit}>
+                        <div className="d-flex justify-content-center">
+
+                            <img className="mb-2 " src={logo} alt="logo ssism" width={100} height={82} style={{alignItems: "center",borderRadius: "40px"}} /> <br />
+                        </div>
+                        <div className="d-flex justify-content-center">
+                            <h4 className="h4 mb-3" style={{fontWeight: "bold"}}>Enter New Password</h4>
+                        </div>
+                        <div className="mb-3">
+                            <input value={formik.values.password} onChange={formik.handleChange} name="password" type="text" className="form-control mb-2" placeholder="Password" />
+                            {formik.errors.password && <div className="error">{formik.errors.password}</div>}
+                            <input value={formik.values.confirm} onChange={formik.handleChange} name="confirm" type="text" className="form-control" placeholder="Confirm Password" />
+                            {formik.errors.confirm && <div className="error">{formik.errors.confirm}</div>}
+
+                        </div>
+                        <button style={{color: "white",fontWeight: "500"}} className="w-100 btn btn-md btn-warning" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
 
                 {/* <div className="loginDiv">
                     <div className="containertwo" style={{display: isTabletOrMobile ? 'none' : "flex"}} >
@@ -93,7 +114,6 @@ function ResetPassword() {
                     </div>
                 </div>  */}
 
-            </div>
         </>
     )
 }
