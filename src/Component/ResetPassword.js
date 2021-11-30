@@ -1,8 +1,7 @@
 import React from 'react';
-import { Redirect, useParams } from 'react-router';
-import {useMediaQuery} from 'react-responsive';
-import './Login.css';
-import Loginlogo from './assets/LoginBG2img.svg';
+import { useParams } from 'react-router';
+// import {useMediaQuery} from 'react-responsive';
+
 import {useFormik} from 'formik';
 import axios from 'axios';
 import {baseUrl} from '../url/baseUrl';
@@ -17,7 +16,7 @@ function ResetPassword() {
 
 
     // const isBigScreen = useMediaQuery({query: '(min-width: 1824px)'})
-    const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'})
+    // const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'})
 
     const formik = useFormik({
         initialValues: {
@@ -58,7 +57,7 @@ function ResetPassword() {
                 console.log(response);
                 if(response.status === 200)
                 {
-                    
+
                     return history.push("/login")
                 }
     }
@@ -68,10 +67,10 @@ function ResetPassword() {
         <>
             <div className="loginDivFirst">
 
-                <div className="loginDiv">
+                {/* <div className="loginDiv">
                     <div className="containertwo" style={{display: isTabletOrMobile ? 'none' : "flex"}} >
-                        {!isTabletOrMobile && <img id="img" src={Loginlogo} alt="this is left logo" />}
-                    </div>
+                        {/* {!isTabletOrMobile && <img id="img" src={Loginlogo} alt="this is left logo" />} */}
+                    {/* </div>
                     <div className="containertwo" >
                         <form onSubmit={formik.handleSubmit} id="ForgotPassformContainer" ><h6 id="forgothadline" style={{color: "dark-gray"}}>Create Your New Password</h6>
 
@@ -86,13 +85,13 @@ function ResetPassword() {
 
                             </div>
 
-                            <div className="d-grid col-9 mx-auto">
-                                <button id="btn" className=" btn btn-dark btn-lg rounded-pill" type="submit">submit</button>
-                            </div>
+                                <div className="d-grid col-9 mx-auto">
+                                    <button id="btn" className=" btn btn-dark btn-lg rounded-pill" type="submit">submit</button>
+                                </div>
 
                         </form>
                     </div>
-                </div>
+                </div>  */}
 
             </div>
         </>

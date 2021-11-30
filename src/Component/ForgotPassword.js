@@ -1,8 +1,7 @@
 import React from 'react';
-import { Redirect } from 'react-router';
-import {useMediaQuery} from 'react-responsive';
-import './ForgotPassword.css';
-import Loginlogo from './assets/LoginBG2img.svg';
+import {Redirect} from 'react-router';
+// import {useMediaQuery} from 'react-responsive';
+import logo from './assets/logo.png'
 import {useFormik} from 'formik';
 import axios from 'axios';
 import {baseUrl} from '../url/baseUrl';
@@ -10,16 +9,17 @@ import {baseUrl} from '../url/baseUrl';
 
 function ForgotPassword() {
 
-   
+
 
     const formik = useFormik({
         initialValues: {
             email: ''
         },validate: values => {
+            const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
             let errors = {};
             if(!values.email) {
                 errors.email = 'Required!'
-            } else if(!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(values.email))) {
+            } else if(!regex.test(values.email)) {
                 errors.email = 'Invalid email format!'
             }
             return errors;
@@ -41,22 +41,16 @@ function ForgotPassword() {
             };
             const result = await axios(config);
             console.log(result)
-            if(result.status === 200)
-            {
+            if(result.status === 200) {
                 alert("mail send successfull")
-               return <Redirect to='/login'  />
-                           
-            }
-            if(result.status === 406){
+                return <Redirect to='/login' />
 
             }
-            
-            // try {
-            //     const response = await axios.post(`${baseUrl}/api/login`,requestOptions);
-            //     console.log(response);
-            // } catch(error) {
-            //     console.error(error);
-            // }
+            if(result.status === 406) {
+
+            }
+
+
 
 
         }
@@ -64,35 +58,26 @@ function ForgotPassword() {
 
 
     // const isBigScreen = useMediaQuery({query: '(min-width: 1824px)'})
-    const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'})
+    // const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'})
 
     return (
         <>
-            <div className="loginDivFirst">
+            <div style={{height: "100vh",width: "100vw",background: "#f3eded"}}>
+                <div className="position-absolute top-50 start-50 translate-middle " style={{width: '100%',maxWidth: "420px",padding: "25px 45px 45px 45px",margin: "auto",background: "white",borderRadius: "10px"}}>
+                    <form >
+                        <div className="mx-5">
 
-                <div className="loginDiv">
-                    <div className="containertwo" style={{display: isTabletOrMobile ? 'none' : "flex"}} >
-                        {!isTabletOrMobile && <img id="img" src={Loginlogo} alt="this is left logo" />}
-                    </div>
-                    <div className="containertwo" >
-                        <form onSubmit={formik.handleSubmit} id="ForgotPassformContainer" ><h6 id="forgothadline" style={{color: "dark-gray"}}>Enter your Email and Get Link for Reset password</h6>
+                            <img className="mb-2 " src={logo} alt width={100} height={82} style={{alignItems: "center",borderRadius: "40px"}} />
+                            <h5 className="h3 mb-3 fw-normal" style={{fontWeight: "bold"}}>Enter your Email</h5>
+                        </div>
+                        <div className="mb-3">
+                            <input type="text" className="form-control" placeholder="Email" />
 
-                            <div className="mb-3" style={{width: "auto"}}>
-                                <input name="email" value={formik.values.email} onChange={formik.handleChange} id="inputLablesize" type="email" className="form-control rounded-pill" placeholder="Email" />
-                                {formik.errors.email && <div className="error">{formik.errors.email}</div>}
-
-                            </div>
-
-                            <div className="d-grid col-9 mx-auto">
-                                <button id="btn" className=" btn btn-dark btn-lg rounded-pill" type="submit">Get Link</button>
-                            </div>
-
-                        </form>
-                    </div>
+                        </div>
+                        <button style={{color: "white",fontWeight: "500"}} className="w-100 btn btn-md btn-warning" type="submit">Get link</button>
+                    </form>
                 </div>
-
             </div>
-            
         </>
 
     )
