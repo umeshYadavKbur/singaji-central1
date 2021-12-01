@@ -3,6 +3,8 @@ import { useParams } from 'react-router';
 // import {useMediaQuery} from 'react-responsive';
 import './login.css'
 import logo from './assets/logo.png'
+import Singaji_logo from './assets/Singaji_logo.svg'
+
 import {useFormik} from 'formik';
 import axios from 'axios';
 import {baseUrl} from '../url/baseUrl';
@@ -71,10 +73,10 @@ function ResetPassword() {
                     <form onSubmit={formik.handleSubmit}>
                         <div className="d-flex justify-content-center">
 
-                            <img className="mb-2 " src={logo} alt="logo ssism" width={100} height={82} style={{alignItems: "center",borderRadius: "40px"}} /> <br />
+                            <img onClick={() => {history.push('/login')}} className="mb-2 cursor-pointer " src={Singaji_logo} alt="logo ssism" width={100} height={82} style={{alignItems: "center",borderRadius: "40px"}} /> <br />
                         </div>
                         <div className="d-flex justify-content-center">
-                            <h4 className="h4 mb-3" style={{fontWeight: "bold"}}>Enter New Password</h4>
+                            <h4 className="h4 mb-3 fw-bold" >Enter New Password</h4>
                         </div>
                         <div className="mb-3">
                             <input value={formik.values.password} onChange={formik.handleChange} name="password" type="text" className="form-control mb-2" placeholder="Password" />
