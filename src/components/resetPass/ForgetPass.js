@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import logo from "../assests/image/logo.png";
 
 function ForgetPass() {
-  const [isFocused, setIsFocused] = useState(false);
+  // const [isFocused, setIsFocused] = useState(false);
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
-  const handleFocus = () => {
-    console.log("handle focus triggered");
-    setIsFocused(true);
-  };
-  const handleBlur = () => {
-    console.log("handle blur triggered");
-    setIsFocused(false);
-  };
+  // const handleFocus = () => {
+  //   console.log("handle focus triggered");
+  //   setIsFocused(true);
+  // };
+  // const handleBlur = () => {
+  //   console.log("handle blur triggered");
+  //   setIsFocused(false);
+  // };
 
   const handleSubmit = () => {
     if (password !== confirmPassword) {
@@ -27,7 +27,7 @@ function ForgetPass() {
       <div
         style={{
           backgroundColor: "#f1cafa",
-          width: "100%",
+          width: "100vw",
           height: "100vh",
           display: "flex",
           justifyContent: "center",
@@ -95,8 +95,8 @@ function ForgetPass() {
             onchange={(e) => setPassword(e.target.value)}
           />
           <input
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+            // onFocus={handleFocus}
+            // onBlur={handleBlur}
             style={{
               marginTop: "4%",
               height: "13%",
@@ -104,10 +104,8 @@ function ForgetPass() {
               fontSize: "90%",
               backgroundColor: "#f1cafa",
               borderRadius: "4px",
-              borderWidth: "2px",
-              // border: "2px solid #c9c9c9",
+              border: "2px solid #c9c9c9",
               color: "black",
-              borderColor: isFocused ? "red" : "blue",
               paddingLeft: "5%",
             }}
             type="text"
