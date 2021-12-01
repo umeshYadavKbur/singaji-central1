@@ -1,16 +1,19 @@
 import React from 'react';
 import {Redirect} from 'react-router';
+import { useHistory } from 'react-router';
 // import {useMediaQuery} from 'react-responsive';
+import {useState} from 'react';
 import './login.css'
-import logo from './assets/logo.png'
+import Singaji_logo from './assets/Singaji_logo.svg'
 import {useFormik} from 'formik';
 import axios from 'axios';
 import {baseUrl} from '../url/baseUrl';
 // import Toaster from './Toaster';
 
 function ForgotPassword() {
+const history=useHistory()
 
-
+    const [reserror,setReserror] = useState("");
 
     const formik = useFormik({
         initialValues: {
@@ -42,17 +45,20 @@ function ForgotPassword() {
             };
             const result = await axios(config);
             console.log(result)
+
             if(result.status === 200) {
                 alert("mail send successfull")
+                console.log(result.statusText);
                 return <Redirect to='/login' />
 
             }
-            if(result.status === 406) {
-
+            if(result.status === 404) {
+                setReserror("User not found");
+                // console.log("ok");
+                return alert("user not found")
             }
 
-
-
+            console.log(reserror);
 
         }
     })
@@ -64,21 +70,23 @@ function ForgotPassword() {
     return (
         <>
             <div style={{height: "100vh",width: "100vw",background: "#f3eded"}}>
-                <div className="position-absolute top-50 start-50 translate-middle " style={{width: '100%',maxWidth: "400px",padding: "25px 45px 45px 45px",margin: "auto",background: "white",borderRadius: "10px"}}>
+                <div className="position-absolute top-50 start-50 translate-middle m-auto bg-light px-5 pt-2 pb-5 shadow rounded-5" style={{width: '100%',maxWidth: "400px"}}>
                     <form onSubmit={formik.handleSubmit}>
                         <div className="d-flex justify-content-center">
 
-                            <img  src={logo} alt="logo ssism" width={100} height={82} style={{alignItems: "center",borderRadius: "40px"}} /> <br /> 
-                             </div>
-                             <div className="d-flex justify-content-center">
-                            <h5 className=" mb-3 " style={{fontWeight: "bold"}}>Enter your Email</h5>
-                      </div>
+                            <img  onClick={()=>{history.push('/login')}} src={Singaji_logo} alt="logo ssism" width={100} height={82} />
+                        </div>
+                        <div className="d-flex justify-content-center">
+                            <h4 className="h4 mb-3 fw-bold" >Enter your E-mail</h4>
+                        </div>
                         <div className="mb-3">
+
                             <input value={formik.values.email} onChange={formik.handleChange} name="email" type="text" className="form-control" placeholder="Email" />
                             {formik.errors.email && <div className="error">{formik.errors.email}</div>}
+                            {reserror && <div>{reserror}</div>}
 
                         </div>
-                        <button style={{color: "white",fontWeight: "500"}} className="w-100 btn btn-md btn-warning" type="submit">Get Link</button>
+                        <button className="w-100 btn btn-md btn-warning fw-bold text-light" type="submit">Get Link</button>
                     </form>
                 </div>
             </div>

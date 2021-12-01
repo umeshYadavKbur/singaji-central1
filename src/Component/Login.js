@@ -2,13 +2,17 @@ import React from 'react';
 // import {useMediaQuery} from 'react-responsive';
 import {useFormik} from 'formik';
 import {Link} from 'react-router-dom';
+import Singaji_logo from './assets/Singaji_logo.svg'
+
 import './login.css'
 import logo from './assets/logo.png'
 import axios from 'axios';
 import {baseUrl} from '../url/baseUrl';
-
+import { useHistory } from 'react-router';
 
 function Login() {
+
+    const history=useHistory()
 
     const formik = useFormik({
         initialValues: {
@@ -44,7 +48,11 @@ function Login() {
                 data: data
             };
           const result = await  axios(config);
-          console.log(result)
+          console.log("result" + result)
+          if(result.status ===200)
+          {
+              history.push('/')
+          }
                            
         }
     })
@@ -61,7 +69,7 @@ function Login() {
                     <form onSubmit={formik.handleSubmit}>
                         <div className="d-flex justify-content-center">
 
-                            <img  src={logo} alt="logo ssism" width={100} height={82} style={{alignItems: "center",borderRadius: "40px"}} /> <br />
+                            <img  src={Singaji_logo} alt="logo ssism" width={100} height={82} style={{alignItems: "center",borderRadius: "40px"}} /> <br />
                         </div>
                         <div className="d-flex justify-content-center">
                             <h4 className="h4 mb-3 " style={{fontWeight: "bold"}}>Login</h4>
@@ -74,7 +82,7 @@ function Login() {
 
                         </div>
                         <div className="d-flex justify-content-end mb-1">
-                            <Link to='/ForgotPassword' style={{color:"gray",cursor:"pointer",textDecoration:"none"}}>forgot password</Link>
+                            <Link to='/ForgotPassword' style={{color:"gray",cursor:"pointer",textDecoration:"none"}}>Forgot password</Link>
                             </div>
                         <button style={{color: "white",fontWeight: "500"}} className="w-100 btn btn-md btn-warning" type="submit">Sumbit</button>
                     </form>

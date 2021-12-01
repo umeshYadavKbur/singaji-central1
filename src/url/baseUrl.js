@@ -1,1 +1,1 @@
-export const baseUrl = ' https://singaji-central-server.herokuapp.com'
+export const baseUrl = 'https://singaji-central-server.herokuapp.com'
