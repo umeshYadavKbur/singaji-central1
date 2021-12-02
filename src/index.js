@@ -9,7 +9,7 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Adding mdb bootstrap
-import 'mdb-react-ui-kit/dist/css/mdb.min.css'
+// import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 
 ReactDOM.render(
   <React.StrictMode>
