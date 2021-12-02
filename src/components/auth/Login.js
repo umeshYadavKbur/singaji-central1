@@ -2,12 +2,12 @@ import React from 'react';
 // import {useMediaQuery} from 'react-responsive';
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
-import Singaji_logo from './assets/Singaji_logo.svg'
+import Singaji_logo from '../assests/image/Singaji_logo.svg'
 
-import './login.css'
-import logo from './assets/logo.png'
+// import './login.css'
+// import logo from './assets/logo.png'
 import axios from 'axios';
-import { baseUrl } from '../url/baseUrl';
+import { baseUrl } from '../../redux/constants/url';
 import { useHistory } from 'react-router';
 
 function Login() {
@@ -26,6 +26,7 @@ function Login() {
             }
             if (!values.email) {
                 errors.email = 'Required!'
+                // eslint-disable-next-line
             } else if (!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(values.email))) {
                 errors.email = 'Invalid email format!'
             }
