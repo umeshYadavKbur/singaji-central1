@@ -82,7 +82,7 @@ function Login() {
 
                         </div>
                         <div className="d-flex justify-content-end mb-1">
-                            <Link to='/ForgotPassword' style={{ color: "gray", cursor: "pointer", textDecoration: "none" }}>Forgot password</Link>
+                            <Link to='/forgetpassword' style={{ color: "gray", cursor: "pointer", textDecoration: "none" }}>Forgot password</Link>
                         </div>
                         <button style={{ color: "white", fontWeight: "500" }} className="w-100 btn btn-md btn-warning" type="submit">Sumbit</button>
                     </form>

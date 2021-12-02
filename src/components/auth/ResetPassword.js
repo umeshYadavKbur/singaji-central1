@@ -1,13 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router';
 // import {useMediaQuery} from 'react-responsive';
-import './login.css'
-import logo from './assets/logo.png'
-import Singaji_logo from './assets/Singaji_logo.svg'
+// import './login.css'
+// import logo from './assets/logo.png'
+import Singaji_logo from '../assests/image/Singaji_logo.svg'
 
 import { useFormik } from 'formik';
 import axios from 'axios';
-import { baseUrl } from '../url/baseUrl';
+import { baseUrl } from '../../redux/constants/url';
 import { useHistory } from 'react-router';
 
 function ResetPassword() {

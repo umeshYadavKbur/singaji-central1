@@ -3,11 +3,11 @@ import { Redirect } from 'react-router';
 import { useHistory } from 'react-router';
 // import {useMediaQuery} from 'react-responsive';
 import { useState } from 'react';
-import './login.css'
-import Singaji_logo from './assets/Singaji_logo.svg'
+// import './login.css'
+import Singaji_logo from '../assests/image/Singaji_logo.svg'
 import { useFormik } from 'formik';
 import axios from 'axios';
-import { baseUrl } from '../url/baseUrl';
+import { baseUrl } from '../../redux/constants/url';
 // import Toaster from './Toaster';
 
 function ForgotPassword() {
@@ -19,6 +19,7 @@ function ForgotPassword() {
         initialValues: {
             email: ''
         }, validate: values => {
+            // eslint-disable-next-line
             const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
             let errors = {};
             if (!values.email) {
