@@ -2,25 +2,28 @@ import axios from 'axios'
 import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS } from '../constants/actions'
 
 export const fetchUsers = (bodyjson) => {
+  // URL : "https://singaji-central-server.herokuapp.com/api/login"
+  console.log(bodyjson)
   return async (dispatch) => {
-    let url = LOGIN_PATH + "username=" + bodyjson.userName + "&password" + "=" + bodyjson.password;
-    let response = await post(url, bodyjson)
+    let url = "https://singaji-central-server.herokuapp.com/api/login"
+    let response = await axios.post(url, bodyjson)
     if (response.status === 200) {
-      localStorage.setItem('user', bodyjson.userName);
-      localStorage.setItem('access_token', response.payload.access_token);
-      history.push('/');
-      dispatch({
-        type: LOGIN_SUCCESS,
-        data: response.payload,
-      })
+      console.log(response.data);
+      // localStorage.setItem('user', bodyjson.userName);
+      // localStorage.setItem('access_token', response.payload.access_token);
+      // history.push('/');
+      // dispatch({
+      //   type: LOGIN_SUCCESS,
+      //   data: response.payload,
+      // })
       // let newApiResponse = await post(newUrl, newBodyjson)
       //Do stuffs with new api response
     }
     else {
-      dispatch({
-        type: LOGIN_FAILED,
-        data: response.status,
-      });
+      // dispatch({
+      //   type: LOGIN_FAILED,
+      //   data: response.status,
+      // });
     }
   }
 }

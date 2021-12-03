@@ -1,1 +1,1 @@
-export * from './actionDispatcher/authDispatcher'
+export * from './actionDispatcher/authDispatcher.js'

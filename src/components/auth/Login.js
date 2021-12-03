@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 // import { LOGIN_REQUEST } from "../../redux/constants/actions";
 // import agent from "../../services/agent";
-import fetchUsers from '../../redux/index'
+import { fetchUsers } from '../../redux/actionDispatcher/authDispatcher'
 // import { baseUrl } from "../../redux/constants/url";
 // import { useHistory } from "react-router";
 // import logo from './assets/logo.png'
@@ -40,18 +40,12 @@ function Login({ userData, fetchUsers }) {
       return errors;
     },
     onSubmit: (values) => {
-      // console.log(values);
-      // const value = dispatch({
-      //   type: LOGIN_REQUEST,
-      //   payload: agent.AuthServices.login(
-      //     formik.values.email,
-      //     formik.values.password
-      //   ),
-      //   dispatch: { dispatch },
-      // });
-      // var data = JSON.stringify(value);
-
-      fetchUsers(values)
+      const data = {
+        email: formik.values.email,
+        password: formik.values.password
+      }
+      console.log(data.email);
+      fetchUsers(data)
     },
   });
 

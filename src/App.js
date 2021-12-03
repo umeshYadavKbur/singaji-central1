@@ -8,7 +8,6 @@ import store from "./redux/store";
 import Login from "./components/auth/Login";
 import ForgotPassword from "./components/auth/ForgetPassword";
 import ResetPassword from "./components/auth/ResetPassword";
-import UserContainer from "./components/UserContainer";
 function App() {
   // const Reset = `/CreateNewPassword/:${token}`
   return (
@@ -16,14 +15,13 @@ function App() {
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/userdata" component={UserContainer} />
           <Route path="/forgetpassword" component={ForgotPassword} />
           <Route path="/create_new_password/:token" component={ResetPassword} />
           <Route
             path="*"
             render={() => (
               // <Redirect to="/error" />
-              <Redirect to="/userdata" />
+              <Redirect to="/login" />
             )}
           />
         </Switch>
