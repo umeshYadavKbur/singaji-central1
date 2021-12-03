@@ -1,20 +1,21 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 // import {useMediaQuery} from 'react-responsive';
 // import { connect } from "react-redux";
-import { LOGIN_REQUEST } from "../../redux/constants/actions";
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
-import agent from "../../services/agent";
+// import { LOGIN_REQUEST } from "../../redux/constants/actions";
+// import agent from "../../services/agent";
+import fetchUsers from '../../redux/index'
 // import { baseUrl } from "../../redux/constants/url";
 // import { useHistory } from "react-router";
 // import logo from './assets/logo.png'
 // import './login.css'
 
-function Login() {
+function Login({ userData, fetchUsers }) {
   //   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -40,16 +41,17 @@ function Login() {
     },
     onSubmit: (values) => {
       // console.log(values);
-      const value = dispatch({
-        type: LOGIN_REQUEST,
-        payload: agent.AuthServices.login(
-          formik.values.email,
-          formik.values.password
-        ),
-        dispatch: { dispatch },
-      });
-      var data = JSON.stringify(value);
-      console.log("The data is ::", data);
+      // const value = dispatch({
+      //   type: LOGIN_REQUEST,
+      //   payload: agent.AuthServices.login(
+      //     formik.values.email,
+      //     formik.values.password
+      //   ),
+      //   dispatch: { dispatch },
+      // });
+      // var data = JSON.stringify(value);
+
+      fetchUsers(values)
     },
   });
 
@@ -136,4 +138,19 @@ function Login() {
   );
 }
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    userData: state.auth
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchUsers: () => dispatch(fetchUsers())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login)
