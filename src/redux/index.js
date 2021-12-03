@@ -1,1 +1,1 @@
-export * from "./actionDispatcher/auth";
+export * from './actionDispatcher/authDispatcher'
