@@ -2,21 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
-// import {useMediaQuery} from 'react-responsive';
-// import { connect } from "react-redux";
+
+//importing Components
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
-// import { LOGIN_REQUEST } from "../../redux/constants/actions";
-// import agent from "../../services/agent";
 import { fetchUsers } from '../../redux/actionDispatcher/authDispatcher'
-// import { baseUrl } from "../../redux/constants/url";
-// import { useHistory } from "react-router";
-// import logo from './assets/logo.png'
-// import './login.css'
+
 
 function Login({ userData, fetchUsers }) {
-  //   const history = useHistory();
-  // const dispatch = useDispatch();
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -44,6 +36,8 @@ function Login({ userData, fetchUsers }) {
         email: formik.values.email,
         password: formik.values.password
       }
+
+      //passing the data in fetchUsers which contain the dispatch method
       fetchUsers(data)
     },
   });
@@ -131,18 +125,22 @@ function Login({ userData, fetchUsers }) {
   );
 }
 
+//Getting the state from the store
 const mapStateToProps = state => {
   return {
     userData: state.auth
   }
 }
 
+//passing the userData in fetchUsers function and also dispatch method
 const mapDispatchToProps = dispatch => {
   return {
     fetchUsers: (data) => dispatch(fetchUsers(data))
   }
 }
 
+
+//Connecting the component to our store
 export default connect(
   mapStateToProps,
   mapDispatchToProps
