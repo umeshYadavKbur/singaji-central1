@@ -1,77 +1,76 @@
 import axios from 'axios'
+// import { history } from '../../helpers/history'
 import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS } from '../constants/actions'
+import { baseUrl } from '../constants/url'
 
-export const fetchUsers = (bodyjson) => {
-  // URL : "https://singaji-central-server.herokuapp.com/api/login"
-  console.log(bodyjson)
-  return async (dispatch) => {
-    let url = "https://singaji-central-server.herokuapp.com/api/login"
-    let response = await axios.post(url, bodyjson)
-    if (response.status === 200) {
-      console.log(response.data);
-      // localStorage.setItem('user', bodyjson.userName);
-      // localStorage.setItem('access_token', response.payload.access_token);
-      // history.push('/');
-      // dispatch({
-      //   type: LOGIN_SUCCESS,
-      //   data: response.payload,
-      // })
-      // let newApiResponse = await post(newUrl, newBodyjson)
-      //Do stuffs with new api response
+async function getData(data, loginUrl) {
+  var url = `${baseUrl}${loginUrl}`
+  try {
+    let res = await axios.post(url, data)
+    if (res.status === 200) {
+      // console.log(res.data)
+      return res.data
     }
-    else {
-      // dispatch({
-      //   type: LOGIN_FAILED,
-      //   data: response.status,
-      // });
-    }
+    // Don't forget to return something   
+    return res.data
+  }
+  catch (err) {
+    console.error("Error ", err);
   }
 }
 
-// first type of fetching the data
-// return (dispatch) => {
-//   dispatch(loginRequest())
-//   axios
-//     .get('https://jsonplaceholder.typicode.com/users')
-//     .then(response => {
-//       // response.data is the users
-//       const users = response.data
-//       dispatch(loginSuccess(users))
-//     })
-//     .catch(error => {
-//       // error.message is the error message
-//       dispatch(loginFailure(error.message))
-//     })
-// }
+export const fetchUsers = (data) => {
+  return async (dispatch) => {
+    const loginUrl = "/api/login"
+    var userResData = await getData(data, loginUrl)
+    console.log("Working or not working :::: ", userResData);
+    try {
 
-//Second type of fetching the data 
-// return () => async (dispatch) => {
-//   try {
-//     dispatch(loginRequest())
-//     const { data } = await axios.get('https://jsonplaceholder.typicode.com/users')
-//     dispatch(loginSuccess(data))
-//     return data;
-//   } catch (e) {
-//     console.log(e);
-//     dispatch(loginFailure(e.message))
-//     return e.message
-//   }
-// }
+      if (userResData.token) {
+        localStorage.setItem('user', userResData.user);
+        localStorage.setItem('token', userResData.token);
+        localStorage.setItem('role', userResData.role);
+        // history.push('/');
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: userResData,
+        })
+      }
+    } catch (error) {
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: error,
+      })
+    }
+  }
 
-//perfect for getting the data
-// return async (dispatch) => {
-//   try {
-//     dispatch(loginRequest())
-//     const { data } = await axios.get('https://jsonplaceholder.typicode.com/users')
-//     dispatch(loginSuccess(data))
-//     return data;
-//   } catch (e) {
-//     console.log(e);
-//     dispatch(loginFailure(e.message))
-//     return e.message
-//   }
-// }
-// }
+
+
+  // URL : "https://singaji-central-server.herokuapp.com/api/login"
+  // console.log("Email", data.email)
+  // console.log("Password ", data.password)
+  // return async (dispatch) => {
+  //   let url = `${baseUrl}/api/login`
+  //   let response = await axios.post(url, data)
+  //   if (response.status === 200) {
+  //     console.log(response.data);
+  //     localStorage.setItem('user', response.data.user);
+  //     localStorage.setItem('token', response.data.token);
+  //     localStorage.setItem('role', response.data.role);
+  //     // history.push('/');
+  //     dispatch({
+  //       type: LOGIN_SUCCESS,
+  //       payload: response.data,
+  //     })
+  //   }
+  //   else {
+  //     dispatch({
+  //       type: LOGIN_FAIL,
+  //       payload: response.status,
+  //     });
+  //   }
+  // }
+}
 
 
 export const loginRequest = () => {

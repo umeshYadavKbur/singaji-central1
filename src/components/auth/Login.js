@@ -44,7 +44,6 @@ function Login({ userData, fetchUsers }) {
         email: formik.values.email,
         password: formik.values.password
       }
-      console.log(data.email);
       fetchUsers(data)
     },
   });
@@ -140,7 +139,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchUsers: () => dispatch(fetchUsers())
+    fetchUsers: (data) => dispatch(fetchUsers(data))
   }
 }
 
