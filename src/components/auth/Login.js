@@ -35,12 +35,12 @@ function Login() {
       }
       return errors;
     },
-    onSubmit: async (values) => {
+    onSubmit:(values) => {
       var data = JSON.stringify({
         email: formik.values.email,
         password: formik.values.password,
       });
-      // console.log(data);
+      console.log(values);
       fetchUserInfo(data);
     },
   });
