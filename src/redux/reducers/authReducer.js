@@ -17,7 +17,7 @@ export const userReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         loading: false,
-        userInfo: action.payload,
+        userInfo: action.payload.user,
         token: action.payload.token,
         role: action.payload.role,
         error: "",

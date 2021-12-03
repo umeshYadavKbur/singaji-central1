@@ -39,11 +39,17 @@ function Login() {
       return errors;
     },
     onSubmit: (values) => {
-      console.log(values);
-      dispatch({
+      // console.log(values);
+      const value = dispatch({
         type: LOGIN_REQUEST,
-        payload: agent.Auth.login(formik.values.email, formik.values.password),
+        payload: agent.AuthServices.login(
+          formik.values.email,
+          formik.values.password
+        ),
+        dispatch: { dispatch },
       });
+      var data = JSON.stringify(value);
+      console.log("The data is ::", data);
     },
   });
 
