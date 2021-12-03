@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import {useMediaQuery} from 'react-responsive';
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
@@ -12,7 +12,6 @@ import { fetchUserInfo } from "../../redux/actionDispatcher/authDispatcher";
 // import { useHistory } from "react-router";
 
 function Login() {
-  const [data, setData] = useState();
   //   const history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -37,27 +36,12 @@ function Login() {
       return errors;
     },
     onSubmit: async (values) => {
-      // var data = JSON.stringify({
-      //   email: formik.values.email,
-      //   password: formik.values.password,
-      // });
-      console.log("Data of the user :", values);
-      // setData(values);
-      fetchUserInfo(values);
-
-      // var config = {
-      //     method: 'post',
-      //     url: `${baseUrl}/api/login`,
-      //     headers: {
-      //         'Content-Type': 'application/json'
-      //     },
-      //     data: data
-      // };
-      // const result = await axios(config);
-      // console.log("result" + result)
-      // if (result.status === 200) {
-      //     history.push('/')
-      // }
+      var data = JSON.stringify({
+        email: formik.values.email,
+        password: formik.values.password,
+      });
+      // console.log(data);
+      fetchUserInfo(data);
     },
   });
 
