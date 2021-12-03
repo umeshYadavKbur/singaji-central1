@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 // import {useMediaQuery} from 'react-responsive';
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { connect } from "react-redux";
-import { fetchUserInfo } from "../../redux/actionDispatcher/auth";
+import { fetchUserInfo } from "../../redux/actionDispatcher/authDispatcher";
 // import './login.css'
 // import logo from './assets/logo.png'
 // import axios from "axios";
 // import { baseUrl } from "../../redux/constants/url";
 // import { useHistory } from "react-router";
 
-function Login({ fetchUserInfo }) {
+function Login() {
+  const [data, setData] = useState();
   //   const history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -36,13 +37,14 @@ function Login({ fetchUserInfo }) {
       return errors;
     },
     onSubmit: async (values) => {
-      console.log(values);
-      // console.log(requestOptions);
-      var data = JSON.stringify({
-        email: formik.values.email,
-        password: formik.values.password,
-      });
-      fetchUserInfo(data);
+      // var data = JSON.stringify({
+      //   email: formik.values.email,
+      //   password: formik.values.password,
+      // });
+      console.log("Data of the user :", values);
+      // setData(values);
+      fetchUserInfo(values);
+
       // var config = {
       //     method: 'post',
       //     url: `${baseUrl}/api/login`,
@@ -144,7 +146,7 @@ function Login({ fetchUserInfo }) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUserInfo: () => dispatch(fetchUserInfo()),
+    fetchUserInfo: (data) => dispatch(fetchUserInfo(data)),
   };
 };
 
