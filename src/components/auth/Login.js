@@ -3,7 +3,7 @@ import React from "react";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { fetchUserInfo } from "../../redux/actionDispatcher/authDispatcher";
 // import './login.css'
 // import logo from './assets/logo.png'
@@ -36,11 +36,8 @@ function Login() {
       return errors;
     },
     onSubmit:(values) => {
-      var data = JSON.stringify({
-        email: formik.values.email,
-        password: formik.values.password,
-      });
-      console.log(values);
+      var data = values ;
+      console.log(data);
       fetchUserInfo(data);
     },
   });
@@ -128,10 +125,12 @@ function Login() {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchUserInfo: (data) => dispatch(fetchUserInfo(data)),
-  };
-};
 
-export default connect(null, mapDispatchToProps)(Login);
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     fetchUserInfo: (data) => dispatch(fetchUserInfo(data)),
+//   };
+// };
+
+// export default connect(null, mapDispatchToProps)(Login);
+export default Login;
