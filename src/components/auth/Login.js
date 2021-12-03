@@ -1,18 +1,21 @@
 import React from "react";
-// import {useMediaQuery} from 'react-responsive';
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
-import Singaji_logo from "../assests/image/Singaji_logo.svg";
+// import {useMediaQuery} from 'react-responsive';
 // import { connect } from "react-redux";
-import { fetchUserInfo } from "../../redux/actionDispatcher/authDispatcher";
-// import './login.css'
-// import logo from './assets/logo.png'
-// import axios from "axios";
+import { LOGIN_REQUEST } from "../../redux/constants/actions";
+import Singaji_logo from "../assests/image/Singaji_logo.svg";
+import agent from "../../services/agent";
 // import { baseUrl } from "../../redux/constants/url";
 // import { useHistory } from "react-router";
+// import logo from './assets/logo.png'
+// import './login.css'
 
 function Login() {
   //   const history = useHistory();
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -35,10 +38,12 @@ function Login() {
       }
       return errors;
     },
-    onSubmit:(values) => {
-      var data = values ;
-      console.log(data);
-      fetchUserInfo(data);
+    onSubmit: (values) => {
+      console.log(values);
+      dispatch({
+        type: LOGIN_REQUEST,
+        payload: agent.Auth.login(formik.values.email, formik.values.password),
+      });
     },
   });
 
@@ -125,12 +130,4 @@ function Login() {
   );
 }
 
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     fetchUserInfo: (data) => dispatch(fetchUserInfo(data)),
-//   };
-// };
-
-// export default connect(null, mapDispatchToProps)(Login);
 export default Login;
