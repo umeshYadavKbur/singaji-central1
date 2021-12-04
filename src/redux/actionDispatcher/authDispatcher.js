@@ -24,26 +24,25 @@ export const fetchUsers = (data) => {
     } catch(error) {
       dispatch(loginFailure(error))
     }
-  }
-}
-
+  };
+};
 
 export const loginRequest = () => {
   return {
-    type: LOGIN_REQUEST
-  }
-}
+    type: LOGIN_REQUEST,
+  };
+};
 
-export const loginSuccess = users => {
+export const loginSuccess = (users) => {
   return {
     type: LOGIN_SUCCESS,
-    payload: users
-  }
-}
+    payload: users,
+  };
+};
 
-export const loginFailure = error => {
+export const loginFailure = (error) => {
   return {
     type: LOGIN_FAIL,
-    payload: error
-  }
-}
+    payload: error,
+  };
+};
