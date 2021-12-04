@@ -19,9 +19,11 @@ export const fetchUsers = (data) => {
         localStorage.setItem("role", userResData.role);
         //Redirect to the home page remaining
         // history.push('/');
-
         //dispatch action and store data in it
         dispatch(loginSuccess(userResData));
+      }
+      else{
+      dispatch(loginFailure(userResData));
       }
     } catch (error) {
       //if crudential fails than Login fail action dispatch
