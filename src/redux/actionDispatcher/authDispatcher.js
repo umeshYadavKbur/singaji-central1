@@ -1,37 +1,28 @@
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS } from '../constants/actions'
+import {LOGIN_FAIL,LOGIN_REQUEST,LOGIN_SUCCESS} from '../constants/actions'
 import getData from '../../services/agent'
+import { history } from '../../helpers/history'
 
 export const fetchUsers = (data) => {
   return async (dispatch) => {
 
-    // Sending the additional url to be attached on baseUrl in other function
-    const loginUrl = "/api/login"
 
-    // wait untill the data not received so getData function take data and url part
-    var userResData = await getData(data, loginUrl)
-    // Printing the data is coming or not
+    const loginUrl = "/api/login"
+    dispatch(loginRequest())
+    var userResData = await getData(data,loginUrl)
     // console.log("Working  :::: ", userResData);
     try {
-      if (userResData.token) {
-        //setting the Items in localStorage
-        localStorage.setItem('user', userResData.user);
-        localStorage.setItem('token', userResData.token);
-        localStorage.setItem('role', userResData.role);
-        //Redirect to the home page remaining
-        // history.push('/');
-
-        //dispatch action and store data in it
-        dispatch({
-          type: LOGIN_SUCCESS,
-          payload: userResData,
-        })
+      if(userResData.token) {
+        localStorage.setItem('user',userResData.user);
+        localStorage.setItem('token',userResData.token);
+        localStorage.setItem('role',userResData.role);
+        history.push('/home');
+        dispatch(loginSuccess(userResData))
       }
-    } catch (error) {
-      //if crudential fails than Login fail action dispatch
-      dispatch({
-        type: LOGIN_FAIL,
-        payload: error,
-      })
+      else{
+        dispatch(loginFailure(userResData))
+      }
+    } catch(error) {
+      dispatch(loginFailure(error))
     }
   }
 }

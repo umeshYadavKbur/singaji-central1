@@ -78,12 +78,12 @@ function ResetPassword() {
                         </div>
                         <div className="mb-3">
                             <input value={formik.values.password} onChange={formik.handleChange} name="password" type="text" className="form-control mb-2" placeholder="Password" />
-                            {formik.errors.password && <div className="error">{formik.errors.password}</div>}
+                            {formik.errors.password && <div className="text-danger fs-6">{formik.errors.password}</div>}
                             <input value={formik.values.confirm} onChange={formik.handleChange} name="confirm" type="text" className="form-control" placeholder="Confirm Password" />
-                            {formik.errors.confirm && <div className="error">{formik.errors.confirm}</div>}
+                            {formik.errors.confirm && <div className="text-danger fs-6">{formik.errors.confirm}</div>}
 
                         </div>
-                        <button style={{ color: "white", fontWeight: "500" }} className="w-100 btn btn-md btn-warning" type="submit">Submit</button>
+                        <button  className="w-100 btn btn-md btn-warning text-light fw-bold" type="submit">Submit</button>
                     </form>
                 </div>
             </div>
