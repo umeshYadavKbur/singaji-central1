@@ -4,16 +4,17 @@ import { useParams } from 'react-router';
 // import './login.css'
 // import logo from './assets/logo.png'
 import Singaji_logo from '../assests/image/Singaji_logo.svg'
-
+import { connect } from 'react-redux';
 import { useFormik } from 'formik';
-import axios from 'axios';
-import { baseUrl } from '../../redux/constants/url';
-import { useHistory } from 'react-router';
+import {history} from '../../helpers/history'
+import { newPasswordRequest } from '../../redux/actionDispatcher/newPassDispatcher';
+
 
 function ResetPassword() {
 
-    let history = useHistory();
-    const { token } = useParams();
+
+    const { token  } = useParams();
+    // const token = "920a7eb54472fded897ac4be2"
 
     console.log(token)
 
@@ -41,28 +42,13 @@ function ResetPassword() {
         onSubmit: async (values) => {
             console.log(values);
             if (formik.values.password === formik.values.confirm) {
-                var data = JSON.stringify({
-                    "password": formik.values.password
-                });
-
-                var config = {
-                    method: 'post',
-                    url: `${baseUrl}/api/resetPasswordLink/${token}`,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data: data
-                };
-
-                axios(config)
-                const response = await axios(config);
-                console.log(response);
-                if (response.status === 200) {
-
-                    return history.push("/login")
+                var data = {
+                    password: formik.values.password,
+                    token:token
                 }
-            }
+                newPasswordRequest(data)
         }
+    }
     })
     return (
         <>
@@ -88,34 +74,30 @@ function ResetPassword() {
                 </div>
             </div>
 
-            {/* <div className="loginDiv">
-                    <div className="containertwo" style={{display: isTabletOrMobile ? 'none' : "flex"}} >
-                        {/* {!isTabletOrMobile && <img id="img" src={Loginlogo} alt="this is left logo" />} */}
-            {/* </div>
-                    <div className="containertwo" >
-                        <form onSubmit={formik.handleSubmit} id="ForgotPassformContainer" ><h6 id="forgothadline" style={{color: "dark-gray"}}>Create Your New Password</h6>
-
-                            <div className="mb-3" style={{width: "auto"}}>
-                                <input name="password" value={formik.values.password} onChange={formik.handleChange} id="inputLablesize" type="text" className="form-control rounded-pill" placeholder="Password" />
-                                {formik.errors.password && <div className="error">{formik.errors.password}</div>}
-
-                            </div>
-                            <div className="mb-3" style={{width: "auto"}}>
-                                <input name="confirm" value={formik.values.confirm} onChange={formik.handleChange} id="inputLablesize" type="text" className="form-control rounded-pill" placeholder="Confirm Password" />
-                                {formik.errors.confirm && <div className="error">{formik.errors.confirm}</div>}
-
-                            </div>
-
-                                <div className="d-grid col-9 mx-auto">
-                                    <button id="btn" className=" btn btn-dark btn-lg rounded-pill" type="submit">submit</button>
-                                </div>
-
-                        </form>
-                    </div>
-                </div>  */}
-
+           
         </>
     )
 }
 
-export default ResetPassword
+
+
+//Getting the state from the store
+const mapStateToProps = state => {
+    return {
+  newPass:state.newPass
+    }
+  }
+  
+  //passing the userData in fetchUsers function and also dispatch method
+  const mapDispatchToProps = dispatch => {
+    return {
+        newPasswordRequest: (data) => dispatch(newPasswordRequest(data))
+    }
+  }
+  
+  
+  //Connecting the component to our store
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ResetPassword)
