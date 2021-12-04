@@ -6,22 +6,16 @@ import {
 import getData from "../../services/agent";
 
 export const newPasswordRequest = (data) => {
- 
   return async (dispatch) => {
-
-    console.log("data from dispatcher ::",data);
-
-    
     const newPassUrl = `/api/resetPasswordLink/${data.token}`;
     dispatch(newPassRequest());
-    var userResData = await getData(data, newPassUrl);
-    // console.log("Working  :::: ", userResData);
+    var newPasswordData = await getData(data, newPassUrl);
     try {
-      if (userResData.token) {
+      if (newPasswordData.status === 200) {
         // history.push('/');
-        dispatch(passReqSuccess(userResData));
+        dispatch(passReqSuccess());
       } else {
-        dispatch(passReqFail(userResData));
+        dispatch(passReqFail(newPasswordData));
       }
     } catch (error) {
       dispatch(passReqFail(error));
@@ -35,10 +29,9 @@ export const newPassRequest = () => {
   };
 };
 
-export const passReqSuccess = (users) => {
+export const passReqSuccess = () => {
   return {
     type: NEW_PASS_SUCCESS,
-    payload: users,
   };
 };
 

@@ -12,7 +12,7 @@ export const fetchUsers = (data) => {
     // Printing the data is coming or not
     // console.log("Working  :::: ", userResData);
     try {
-      if (userResData.token) {
+      if (userResData.data.token) {
         //setting the Items in localStorage
         localStorage.setItem("user", userResData.user);
         localStorage.setItem("token", userResData.token);
@@ -20,9 +20,9 @@ export const fetchUsers = (data) => {
         //Redirect to the home page remaining
         // history.push('/');
         //dispatch action and store data in it
-        dispatch(loginSuccess(userResData));
+        dispatch(loginSuccess(userResData.data));
       } else {
-        dispatch(loginFailure(userResData));
+        dispatch(loginFailure(userResData.data));
       }
     } catch (error) {
       //if crudential fails than Login fail action dispatch
