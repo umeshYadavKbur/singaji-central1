@@ -27,7 +27,7 @@ export const fetchUsers = (data) => {
         })
       }
     } catch (error) {
-      //if crudential fails than Login fail action dispatch
+      //if cridential fails than Login fail action dispatch
       dispatch({
         type: LOGIN_FAIL,
         payload: error,
