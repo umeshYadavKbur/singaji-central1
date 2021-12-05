@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 //importing Components
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from '../../redux/actionDispatcher/authDispatcher'
-
+// import { history } from "../../helpers/history";
 
 function Login({ userData, fetchUsers }) {
   const formik = useFormik({
