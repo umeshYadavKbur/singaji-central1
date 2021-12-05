@@ -9,6 +9,8 @@ import { useFormik } from 'formik';
 import axios from 'axios';
 import { baseUrl } from '../../redux/constants/url';
 import { useHistory } from 'react-router';
+import *as Yup from 'yup';
+
 
 function ResetPassword() {
 
@@ -16,7 +18,10 @@ function ResetPassword() {
     const { token } = useParams();
 
     console.log(token)
-
+    const validationSchema = Yup.object({
+        password: Yup.string().required("Required*"),
+        confirm: Yup.string().required("Required*")
+    })
 
     // const isBigScreen = useMediaQuery({query: '(min-width: 1824px)'})
     // const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'})
@@ -25,19 +30,7 @@ function ResetPassword() {
         initialValues: {
             confirm: '',
             password: ''
-        }, validate: values => {
-            let errors = {};
-            if (!values.password) {
-                errors.password = 'Required!'
-            }
-            if (!values.confirm) {
-                errors.confirm = 'Required!'
-            }
-            else if (values.confirm !== values.password) {
-                errors.confirm = 'Confirm Password Not Match'
-            }
-            return errors;
-        },
+        }, validationSchema,
         onSubmit: async (values) => {
             console.log(values);
             if (formik.values.password === formik.values.confirm) {

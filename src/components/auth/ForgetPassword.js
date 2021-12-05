@@ -5,10 +5,13 @@ import Singaji_logo from '../assests/image/Singaji_logo.svg'
 import {useFormik} from 'formik';
 import {connect} from 'react-redux';
 import {fetchUserEmail} from '../../redux/actionDispatcher/forgotpassDispatcher';
-import {history} from '../../helpers/history';
 import *as Yup from 'yup'
+import { useHistory } from 'react-router';
+
 
 function ForgotPassword({passData,fetchUserEmail}) {
+    const history = useHistory()
+
     const validationSchema = Yup.object({
         email: Yup.string().email("Invalid Email Format*").required("Required*")
     })
@@ -39,11 +42,11 @@ function ForgotPassword({passData,fetchUserEmail}) {
                         </div>
                         <div className="mb-3">
 
-                            <input value={formik.values.email} onBlur={formik.handleBlur} onChange={formik.handleChange} name="email" type="text" className="form-control" placeholder="Email" />
+                            <input disabled={passData.loading} value={formik.values.email} onBlur={formik.handleBlur} onChange={formik.handleChange} name="email" type="text" className="form-control" placeholder="Email" />
                             {formik.errors.email && formik.touched.email ? (<div className="text-danger fs-6">{formik.errors.email}</div>) : ''}
                         </div>
 
-                        <button className="w-100 btn btn-md btn-warning fw-bold text-light" type="submit">{
+                        <button disabled={passData.loading} className="w-100 btn btn-md btn-warning fw-bold text-light" type="submit">{
                             passData.loading ? "loading..." : "Get Link"
                         }</button>
                     </form>

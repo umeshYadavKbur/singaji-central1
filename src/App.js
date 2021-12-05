@@ -22,8 +22,8 @@ function App() {
           <Route
             path="*"
             render={() => (
-              // <Redirect to="/error" />
-              <Redirect to="/login" />
+              <Redirect to="/error" />
+              // <Redirect to="/login" />
             )}
           />
         </Switch>

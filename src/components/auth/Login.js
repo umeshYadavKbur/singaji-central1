@@ -6,13 +6,20 @@ import * as Yup from 'yup'
 //importing Components
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import {fetchUsers} from '../../redux/actionDispatcher/authDispatcher'
+import { useHistory } from "react-router";
+import swal from "sweetalert";
 
 
 function Login({userData,fetchUsers}) {
   
-  // console.log(userData)
+  const history = useHistory()
+  console.log("maijn page",userData)
  
+  if(userData.loginSucces)
+{
 
+   history.push('/home')
+}
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Required*"),
     password: Yup.string().required("Required*"),

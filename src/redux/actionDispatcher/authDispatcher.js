@@ -1,6 +1,5 @@
 import {LOGIN_FAIL,LOGIN_REQUEST,LOGIN_SUCCESS} from '../constants/actions'
 import getData from '../../services/agent'
-import { history } from '../../helpers/history'
 import swal from 'sweetalert';
 
 
@@ -13,21 +12,30 @@ export const fetchUsers = (data) => {
     var userResData = await getData(data,loginUrl)
     console.log("Working  :::: ", userResData);
     try {
-      if(userResData.token) {
+      if(userResData.status ===200) {
         localStorage.setItem('user',userResData.user);
         localStorage.setItem('token',userResData.token);
         localStorage.setItem('role',userResData.role);
-        history.push('/home');
-        dispatch(loginSuccess(userResData))
-        swal({
-          title: "Login Successfull",
-          icon: "success",
-        });
+     
+        
+       
+  swal({
+    title: "Login Success",
+    icon: "success",
+  })
+  dispatch(loginSuccess(userResData))
       }
+     
       else{
         dispatch(loginFailure(userResData))
       }
     } catch(error) {
+      if(error.status === 404) {
+        swal({
+          title: "Login Success",
+          icon: "warning",
+        })
+      }
       // console.log("errror in login ::",error)
       dispatch(loginFailure(error))
     }
