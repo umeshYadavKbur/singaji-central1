@@ -1,12 +1,12 @@
 import React from "react";
 import { useParams } from "react-router";
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { history } from "../../helpers/history";
-import { newPasswordRequest } from "../../redux/actionDispatcher/newPassDispatcher";
 
-function ResetPassword({ newPasswordRequest }) {
+// function ResetPassword({ newPasswordRequest }) {
+function ResetPassword() {
   const { token } = useParams();
 
   // const isBigScreen = useMediaQuery({query: '(min-width: 1824px)'})
@@ -35,7 +35,8 @@ function ResetPassword({ newPasswordRequest }) {
           password: formik.values.password,
           token: token,
         };
-        newPasswordRequest(data);
+        console.log(data);
+        // newPasswordRequest(data);
       }
     },
   });
@@ -110,11 +111,13 @@ function ResetPassword({ newPasswordRequest }) {
 }
 
 //passing the userData in fetchUsers function and also dispatch method
-const mapDispatchToProps = (dispatch) => {
-  return {
-    newPasswordRequest: (data) => dispatch(newPasswordRequest(data)),
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     newPasswordRequest: (data) => dispatch(newPasswordRequest(data)),
+//   };
+// };
 
 //Connecting the component to our store
-export default connect(null, mapDispatchToProps)(ResetPassword);
+// export default connect(null, mapDispatchToProps)(ResetPassword);
+export default ResetPassword;
+
