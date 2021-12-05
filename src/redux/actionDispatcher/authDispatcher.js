@@ -9,14 +9,13 @@ export const fetchUsers = (data) => {
     // wait untill the data not received so getData function take data and url part
     dispatch(loginRequest());
     var userResData = await getData(data, loginUrl);
-    // Printing the data is coming or not
-    // console.log("Working  :::: ", userResData);
+    // changing the userResData if we need token so userResData.data.toke will be used
     try {
       if (userResData.data.token) {
         //setting the Items in localStorage
-        localStorage.setItem("user", userResData.user);
-        localStorage.setItem("token", userResData.token);
-        localStorage.setItem("role", userResData.role);
+        localStorage.setItem("user", userResData.data.user);
+        localStorage.setItem("token", userResData.data.token);
+        localStorage.setItem("role", userResData.data.role);
         //Redirect to the home page remaining
         // history.push('/');
         //dispatch action and store data in it
