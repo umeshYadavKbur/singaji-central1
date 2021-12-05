@@ -14,11 +14,11 @@ async function getData(data,loginUrl) {
       return res.data
     }
     // Don't forget to return something   
-    return res.data
+    return res
   }
-  catch(err) {
-    console.log("catch",err);
-    return err.status;
+  catch(res) {
+    console.log("catch",res);
+    return res;
   }
 }
 
