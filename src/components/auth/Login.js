@@ -38,6 +38,7 @@ function Login({ userData, fetchUsers }) {
       }
 
       //passing the data in fetchUsers which contain the dispatch method
+      //Add new lines and response in fetchUsers function
       fetchUsers(data)
     },
   });
