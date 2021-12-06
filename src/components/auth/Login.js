@@ -6,19 +6,28 @@ import * as Yup from 'yup'
 //importing Components
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import {fetchUsers} from '../../redux/actionDispatcher/authDispatcher'
-import { useHistory } from "react-router";
+import { useHistory} from "react-router";
 // import swal from "sweetalert";
-
+import { useEffect } from "react";
 
 function Login({userData,fetchUsers}) {
-  
   const history = useHistory()
-  console.log("maijn page",userData)
-  if(userData.loginSucces)
-{
-
-   history.push('/home')
-}
+  
+  useEffect(() => {
+    if(localStorage.getItem('role')==='SUPERADMIN'){
+      history.push('/home')
+    }
+    else if(localStorage.getItem('role') === 'STUDENT')
+    {
+      history.push('/student')
+    }
+    else if(localStorage.getItem('role') === 'ADMIN') {
+      history.push('/admin')
+    }
+  })
+  
+  // console.log("maijn page",userData)
+  
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Required*"),
     password: Yup.string().required("Required*"),
@@ -34,6 +43,7 @@ function Login({userData,fetchUsers}) {
     },validationSchema,
 
     onSubmit: (values) => {
+      console.log(values);
       const data = {
         email: formik.values.email,
         password: formik.values.password

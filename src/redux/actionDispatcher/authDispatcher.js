@@ -35,7 +35,7 @@ export const fetchUsers = (data) => {
         dispatch(loginFailure(userResData.data));}
        else if(userResData.request.status === 400) {
           swal({
-            title: "Invalid credential",
+            title: "Invalid Credential",
             icon: "warning",
           }) 
           dispatch(loginFailure(userResData.data));

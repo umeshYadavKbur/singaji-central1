@@ -99,7 +99,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
                 placeholder="Confirm Password"
               />
               {formik.errors.confirm && (
-                <div className="error">{formik.errors.confirm}</div>
+                <div className="text-warn fs-small ">{formik.errors.confirm}</div>
               )}
             </div>
             <button
