@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseUrl } from "../redux/constants/url";
+import {baseUrl} from "../redux/constants/url";
 
 // Make a post api where we can call it and hold the data in another variable
 async function getData(data, loginUrl) {
