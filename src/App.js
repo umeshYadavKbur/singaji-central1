@@ -18,8 +18,8 @@ function App() {
           <Route exact path="/home" component={Home}  />
           <Route path="/login" component={Login} />
           <Route path="/home" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/settings" component={Settings} />
+          {/* <Route path="/about" component={About} /> */}
+          {/* <Route path="/settings" component={Settings} /> */}
           <Route path="/forgetpassword" component={ForgotPassword} />
           <Route path="/create_new_password/:token" component={ResetPassword} />
           <Route

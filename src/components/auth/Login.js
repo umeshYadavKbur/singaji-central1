@@ -7,14 +7,13 @@ import * as Yup from 'yup'
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import {fetchUsers} from '../../redux/actionDispatcher/authDispatcher'
 import { useHistory } from "react-router";
-import swal from "sweetalert";
+// import swal from "sweetalert";
 
 
 function Login({userData,fetchUsers}) {
   
   const history = useHistory()
   console.log("maijn page",userData)
- 
   if(userData.loginSucces)
 {
 
