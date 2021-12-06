@@ -1,16 +1,20 @@
 import React from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 // import { connect } from "react-redux";
 import { useFormik } from "formik";
-import { history } from "../../helpers/history";
+// import { newPasswordRequest } from '../../redux/actionDispatcher/authDispatcher'
+import { newPasswordRequest } from '../../redux/actionDispatcher/newPassDispatcher'
+import { connect } from "react-redux";
 
-// function ResetPassword({ newPasswordRequest }) {
-function ResetPassword() {
+function ResetPassword({ newPassword, newPasswordRequest }) {
   const { token } = useParams();
-
+  const history = useHistory();
   // const isBigScreen = useMediaQuery({query: '(min-width: 1824px)'})
   // const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'})
+  // const redirection = () => {
+  //   history.push('./login')
+  // }
 
   const formik = useFormik({
     initialValues: {
@@ -35,8 +39,7 @@ function ResetPassword() {
           password: formik.values.password,
           token: token,
         };
-        console.log(data);
-        // newPasswordRequest(data);
+        newPasswordRequest(data);
       }
     },
   });
@@ -100,8 +103,12 @@ function ResetPassword() {
               style={{ color: "white", fontWeight: "500" }}
               className="w-100 btn btn-md btn-warning"
               type="submit"
+              disabled={newPassword.loading}
             >
-              Submit
+              {
+                newPassword.loading ? 'loading...' : 'Submit'
+              }
+
             </button>
           </form>
         </div>
@@ -109,15 +116,19 @@ function ResetPassword() {
     </>
   );
 }
+//Getting the state from the store
+const mapStateToProps = state => {
+  return {
+    newPassword: state.newPassword
+  }
+}
 
 //passing the userData in fetchUsers function and also dispatch method
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     newPasswordRequest: (data) => dispatch(newPasswordRequest(data)),
-//   };
-// };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    newPasswordRequest: (data) => dispatch(newPasswordRequest(data)),
+  };
+};
 
 //Connecting the component to our store
-// export default connect(null, mapDispatchToProps)(ResetPassword);
-export default ResetPassword;
-
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);

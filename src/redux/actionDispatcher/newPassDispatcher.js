@@ -12,13 +12,15 @@ export const newPasswordRequest = (data) => {
     var newPasswordData = await getData(data, newPassUrl);
     try {
       if (newPasswordData.status === 200) {
-        // history.push('/');
-        dispatch(passReqSuccess());
-      } else {
+        dispatch(passReqSuccess())
+      }
+      else {
         dispatch(passReqFail(newPasswordData));
       }
-    } catch (error) {
-      dispatch(passReqFail(error));
+    }
+    catch (error) {
+      // dispatch(passReqFail(error));
+      console.log(error);
     }
   };
 };
