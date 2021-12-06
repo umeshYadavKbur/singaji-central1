@@ -2,6 +2,7 @@ import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS } from "../constants/actions"
 
 const initialState = {
   loading: false,
+  loginSucces:false,
   role: '',
   token: '',
   userInfo: '',
@@ -18,7 +19,7 @@ const userReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         loading: false,
-        // users: action.payload,
+        loginSucces: true,
         role: action.payload.role,
         token: action.payload.token,
         userInfo: action.payload.user,
@@ -27,6 +28,7 @@ const userReducer = (state = initialState, action) => {
     case LOGIN_FAIL:
       return {
         loading: false,
+        loginSucces: false,
         role: '',
         token: '',
         userInfo: '',
