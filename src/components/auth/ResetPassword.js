@@ -4,7 +4,7 @@ import Singaji_logo from "../assests/image/Singaji_logo.svg";
 // import { connect } from "react-redux";
 import { useFormik } from "formik";
 // import { newPasswordRequest } from '../../redux/actionDispatcher/authDispatcher'
-import { newPasswordRequest } from '../../redux/actionDispatcher/newPassDispatcher'
+import { newPasswordRequest } from "../../redux/actionDispatcher/newPassDispatcher";
 import { connect } from "react-redux";
 
 function ResetPassword({ newPassword, newPasswordRequest }) {
@@ -40,6 +40,9 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
           token: token,
         };
         newPasswordRequest(data);
+        if (newPassword.newPass) {
+          history.push("/login");
+        }
       }
     },
   });
@@ -105,10 +108,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
               type="submit"
               disabled={newPassword.loading}
             >
-              {
-                newPassword.loading ? 'loading...' : 'Submit'
-              }
-
+              {newPassword.loading ? "loading..." : "Submit"}
             </button>
           </form>
         </div>
@@ -117,11 +117,11 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   );
 }
 //Getting the state from the store
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    newPassword: state.newPassword
-  }
-}
+    newPassword: state.newPassword,
+  };
+};
 
 //passing the userData in fetchUsers function and also dispatch method
 const mapDispatchToProps = (dispatch) => {
