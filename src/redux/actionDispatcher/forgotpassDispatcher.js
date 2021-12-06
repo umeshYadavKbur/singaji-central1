@@ -17,6 +17,20 @@ export const fetchUserEmail = (data) => {
             })
             dispatch(forgotPasswordSuccess(forgetPasswordData))
         }
+        else if(forgetPasswordData.request.status === 404) {
+            swal({
+                title: "User not Found",
+                icon: "warning",
+            })
+            dispatch(forgotPasswordFailure(forgetPasswordData.data));
+        }
+        // else if(forgetPasswordData.request.status === 400) {
+        //     swal({
+        //         title: "Invalid credential",
+        //         icon: "warning",
+        //     })
+        //     dispatch(forgotPasswordFailure(forgetPasswordData.data));
+        // }
         else {
             console.log("Catch block");
             dispatch(forgotPasswordFailure(forgetPasswordData))

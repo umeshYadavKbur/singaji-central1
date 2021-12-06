@@ -3,6 +3,7 @@ import {
   NEW_PASS_REQUEST,
   NEW_PASS_SUCCESS,
 } from "../constants/actions";
+import swal from "sweetalert";
 import getData from "../../services/agent";
 
 export const newPasswordRequest = (data) => {
@@ -13,6 +14,17 @@ export const newPasswordRequest = (data) => {
     try {
       if (newPasswordData.status === 200) {
         dispatch(passReqSuccess())
+        swal({
+          title: "Login Success",
+          icon: "success",
+        })
+      }
+      else if(newPasswordData.request.status === 406) {
+        swal({
+          title: "Oops ! link expire",
+          icon: "warning",
+        })
+        dispatch(passReqFail(newPasswordData));
       }
       else {
         dispatch(passReqFail(newPasswordData));
