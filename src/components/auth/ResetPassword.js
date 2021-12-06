@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 // import { newPasswordRequest } from '../../redux/actionDispatcher/authDispatcher'
 import { newPasswordRequest } from "../../redux/actionDispatcher/newPassDispatcher";
 import { connect } from "react-redux";
-
+import * as Yup from 'yup'
 function ResetPassword({ newPassword, newPasswordRequest }) {
   const { token } = useParams();
   const history = useHistory();
@@ -15,24 +15,17 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   // const redirection = () => {
   //   history.push('./login')
   // }
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid Email Format*").required("Required*"),
+    password: Yup.string().required("Required*"),
+  })
 
   const formik = useFormik({
     initialValues: {
       confirm: "",
       password: "",
     },
-    validate: (values) => {
-      let errors = {};
-      if (!values.password) {
-        errors.password = "Required!";
-      }
-      if (!values.confirm) {
-        errors.confirm = "Required!";
-      } else if (values.confirm !== values.password) {
-        errors.confirm = "Confirm Password Not Match";
-      }
-      return errors;
-    },
+    validationSchema,
     onSubmit: async (values) => {
       if (formik.values.password === formik.values.confirm) {
         var data = {
@@ -88,7 +81,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
                 placeholder="Password"
               />
               {formik.errors.password && (
-                <div className="error">{formik.errors.password}</div>
+                <div className="text-danger fs-6">{formik.errors.password}</div>
               )}
               <input
                 value={formik.values.confirm}
@@ -99,7 +92,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
                 placeholder="Confirm Password"
               />
               {formik.errors.confirm && (
-                <div className="text-warn fs-small ">{formik.errors.confirm}</div>
+                <div className="text-danger fs-6">{formik.errors.confirm}</div>
               )}
             </div>
             <button
