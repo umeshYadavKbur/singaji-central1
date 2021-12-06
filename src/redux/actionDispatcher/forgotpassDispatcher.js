@@ -19,7 +19,7 @@ export const fetchUserEmail = (data) => {
         }
         else if(forgetPasswordData.request.status === 404) {
             swal({
-                title: "User not Found",
+                title: "Email not Found",
                 icon: "warning",
             })
             dispatch(forgotPasswordFailure(forgetPasswordData.data));

@@ -15,7 +15,7 @@ export const newPasswordRequest = (data) => {
       if (newPasswordData.status === 200) {
         dispatch(passReqSuccess())
         swal({
-          title: "Login Success",
+          title: "Password Reset Success",
           icon: "success",
         })
       }
