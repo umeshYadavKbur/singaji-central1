@@ -3,6 +3,14 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@emotion/react": "^11.7.0",
+        "@emotion/styled": "^11.6.0",
+        "@material-ui/core": "^4.12.3",
+        "@material-ui/icons": "^4.5.1",
+        "@mui/icons-material": "^5.2.0",
+        "@mui/material": "^5.2.2",
+        "@mui/styled-engine-sc": "^5.1.0",
+        "@mui/x-data-grid": "^5.1.0",
         "@testing-library/jest-dom": "^5.15.0",
         "@testing-library/react": "^11.2.7",
         "@testing-library/user-event": "^12.8.3",
@@ -21,10 +29,11 @@
         "redux-devtools-extension": "^2.13.9",
         "redux-logger": "^3.0.6",
         "redux-thunk": "^2.4.1",
+        "rxjs": "^7.2.0",
+        "styled-components": "^5.3.3",
         "sweetalert": "^2.1.2",
         "sweetalert2": "^11.2.2",
         "web-vitals": "^1.1.2",
-        "rxjs": "^7.2.0",
         "yup": "^0.32.11"
     },
     "scripts": {
