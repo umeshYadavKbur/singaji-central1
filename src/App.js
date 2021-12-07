@@ -1,8 +1,8 @@
 import React from "react";
-import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import { useParams } from 'react-router';
-import {Redirect} from "react-router";
-import {Provider} from "react-redux";
+import { Redirect } from "react-router";
+import { Provider } from "react-redux";
 import store from "./redux/store";
 
 import Login from "./components/auth/Login";
@@ -12,7 +12,7 @@ import Home from "./components/superAdmin/Home";
 import AdminMainPage from "./components/superAdmin/AdminMainPage";
 import StudenMainpage from "./components/superAdmin/StudenMainpage";
 import ProtectedRoute from "./redux/constants/ProtectedRoute";
-import Sidebar from "./components/superAdmin/dashbord/Sidebar";
+import Dashboard from "./components/superAdmin/dashbord/Dashboard";
 
 function App() {
   // const Reset = `/CreateNewPassword/:${token}`
@@ -21,11 +21,11 @@ function App() {
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/sidebar" component={Sidebar} />
+          <Route path="/dashbord" component={Dashboard} />
           <Route path="/forgetpassword" component={ForgotPassword} />
           <Route path="/create_new_password/:token" component={ResetPassword} />
-          
-{/* protected Route is for  any can not jump in  another page */}
+
+          {/* protected Route is for  any can not jump in  another page */}
 
           <Route path="/student" ><ProtectedRoute Cmp={StudenMainpage} ></ProtectedRoute></Route>
           <Route path="/admin" ><ProtectedRoute Cmp={AdminMainPage} ></ProtectedRoute></Route>
@@ -34,7 +34,7 @@ function App() {
           <Route
             path="*"
             render={() => (
-              <Redirect to="/sidebar" />
+              <Redirect to="/dashbord" />
               // <Redirect to="/login" />
             )}
           />

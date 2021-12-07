@@ -1,5 +1,7 @@
 import React from 'react'
-import "/idebar.css";
+import './sidebar.css';
+import logoName from './designn/logo.png';
+import personImage from './designn/Person.png';
 
 function Sidebar() {
   return (
@@ -8,10 +10,10 @@ function Sidebar() {
       <div className="sidebar" >
         {/* logo content */}
         <div className="profile_content">
-          <img src="logo.png" className="clg_logo" />
+          <img src={logoName} className="clg_logo" />
           <div className="profile">
             <div className="profile_detail">
-              <img src="Mask Group 39.png" className="logo_img" />
+              <img src={personImage} className="logo_img" />
               <div className="name_job">
                 <div className="name">david</div>
               </div>
@@ -35,7 +37,7 @@ function Sidebar() {
             <a href="#" >
 
               {/* <!-- <span className="links_name">Dashboard</span> --> */}
-              <i className='bx bx-grid-alt logos'></i>
+              <i className="fas fa-plus-square logos"></i>
 
               <select name="Student" className=" fields form-select links_name" id="inputGroupSelect03" >
                 <option selected>Add Student</option>
