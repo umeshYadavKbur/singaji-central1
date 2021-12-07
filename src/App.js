@@ -12,7 +12,7 @@ import Home from "./components/superAdmin/Home";
 import AdminMainPage from "./components/superAdmin/AdminMainPage";
 import StudenMainpage from "./components/superAdmin/StudenMainpage";
 import ProtectedRoute from "./redux/constants/ProtectedRoute";
-
+import Sidebar from "./components/superAdmin/dashbord/Sidebar";
 
 function App() {
   // const Reset = `/CreateNewPassword/:${token}`
@@ -21,6 +21,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
+          <Route path="/sidebar" component={Sidebar} />
           <Route path="/forgetpassword" component={ForgotPassword} />
           <Route path="/create_new_password/:token" component={ResetPassword} />
           
@@ -33,7 +34,7 @@ function App() {
           <Route
             path="*"
             render={() => (
-              <Redirect to="/error" />
+              <Redirect to="/sidebar" />
               // <Redirect to="/login" />
             )}
           />
