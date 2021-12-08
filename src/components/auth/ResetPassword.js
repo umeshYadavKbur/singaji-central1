@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 // import { newPasswordRequest } from '../../redux/actionDispatcher/authDispatcher'
 import { newPasswordRequest } from "../../redux/actionDispatcher/newPassDispatcher";
 import { connect } from "react-redux";
-import * as Yup from 'yup'
+import * as Yup from "yup";
 function ResetPassword({ newPassword, newPasswordRequest }) {
   const { token } = useParams();
   const history = useHistory();
@@ -18,8 +18,10 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Required*"),
     password: Yup.string().required("Required*"),
-  })
-
+  });
+  if (newPassword.newPass) {
+    history.push("/login");
+  }
   const formik = useFormik({
     initialValues: {
       confirm: "",
@@ -33,9 +35,6 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
           token: token,
         };
         newPasswordRequest(data);
-        if (newPassword.newPass) {
-          history.push("/login");
-        }
       }
     },
   });

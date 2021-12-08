@@ -1,12 +1,17 @@
+// import { useParams } from "react-router";
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { useFormik } from "formik";
-// import { Link } from "react-router-dom";`
 import * as Yup from "yup";
-import logo from "../../../assests/image/ssism_si.svg";
 import Modal from "react-modal";
+// import { Link } from "react-router-dom";`
+import logo from "../../../assests/image/ssism_si.svg";
 import "../styles/createAdmin.css";
+import { createNewAdmin } from "../../../../redux/actionDispatcher/createNewAdminDispatcher";
 
-function CreateAdmin() {
+function CreateAdmin({ createAdmin, createNewAdmin }) {
+  const token = localStorage.getItem("token");
+  console.log("The token is  ", token);
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal() {
@@ -16,6 +21,7 @@ function CreateAdmin() {
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Required*"),
     name: Yup.string().required("Required*"),
+    role: Yup.string().required("Required*"),
   });
 
   const formik = useFormik({
@@ -27,16 +33,17 @@ function CreateAdmin() {
     validationSchema,
 
     onSubmit: (values) => {
-      console.log(values);
-      const data = {
-        name: formik.values.name,
+      var data = {
         email: formik.values.email,
+        name: formik.values.name,
         role: formik.values.role,
+        token: token,
       };
 
-      //passing the data in fetchUsers which contain the dispatch method
-      //Add new lines and response in fetchUsers function
-      // fetchUsers(data);
+      console.log(data);
+      createNewAdmin(data);
+      //passing the data in createNewAdmin which contain the dispatch method
+      //Add new lines and response in createNewAdmin function
     },
   });
 
@@ -146,4 +153,19 @@ function CreateAdmin() {
   );
 }
 
-export default CreateAdmin;
+//Getting the state from the store
+const mapStateToProps = (state) => {
+  return {
+    adminData: state.createAdmin,
+  };
+};
+
+//passing the userData in createNewAdmin function and also dispatch method
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createNewAdmin: (data) => dispatch(createNewAdmin(data)),
+  };
+};
+
+//Connecting the component to our store
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAdmin);

@@ -21,22 +21,21 @@ function App() {
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/dashbord" component={Dashboard} />
           <Route path="/forgetpassword" component={ForgotPassword} />
           <Route path="/create_new_password/:token" component={ResetPassword} />
-          
-          {/* protected Route is for  any can not jump in  another page */}
-          <Route path="/student" ><ProtectedRoute Cmp={StudenMainpage} ></ProtectedRoute></Route>
-          <Route path="/admin" ><ProtectedRoute Cmp={AdminMainPage} ></ProtectedRoute></Route>
-          <Route path="/home"  ><ProtectedRoute Cmp={Home} ></ProtectedRoute></Route>
 
-          <Route
-            path="*"
-            render={() => (
-              <Redirect to="/dashbord" />
-              // <Redirect to="/login" />
-            )}
-          />
+          {/* protected Route is for  any can not jump in  another page */}
+          <Route path="/student">
+            <ProtectedRoute Cmp={StudenMainpage}></ProtectedRoute>
+          </Route>
+          <Route path="/admin">
+            <ProtectedRoute Cmp={AdminMainPage}></ProtectedRoute>
+          </Route>
+          <Route path="/dashbord">
+            <ProtectedRoute Cmp={Dashboard}></ProtectedRoute>
+          </Route>
+
+          <Route path="*" render={() => <Redirect to="/login" />} />
         </Switch>
       </Router>
     </Provider>
@@ -44,4 +43,3 @@ function App() {
 }
 
 export default App;
-

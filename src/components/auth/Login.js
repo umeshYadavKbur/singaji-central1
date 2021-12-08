@@ -13,18 +13,20 @@ import { useEffect } from "react";
 function Login({ userData, fetchUsers }) {
   const history = useHistory();
 
-  useEffect(() => {
-    if (localStorage.getItem("role") === "SUPERADMIN") {
-      history.push("/home");
-    } else if (localStorage.getItem("role") === "STUDENT") {
-      history.push("/student");
-    } else if (localStorage.getItem("role") === "ADMIN") {
-      history.push("/admin");
-    }
-  });
+  // useEffect(() => {
+  //   if (localStorage.getItem("role") === "SUPERADMIN") {
+  //     history.push("/home");
+  //   } else if (localStorage.getItem("role") === "STUDENT") {
+  //     history.push("/student");
+  //   } else if (localStorage.getItem("role") === "ADMIN") {
+  //     history.push("/admin");
+  //   }
+  // });
 
   // console.log("maijn page",userData)
-
+  if (userData.role) {
+    history.push("/dashbord");
+  }
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Required*"),
     password: Yup.string().required("Required*"),
