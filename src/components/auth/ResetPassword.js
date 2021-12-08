@@ -8,6 +8,7 @@ import { newPasswordRequest } from "../../redux/actionDispatcher/newPassDispatch
 import { connect } from "react-redux";
 import * as Yup from 'yup'
 function ResetPassword({ newPassword, newPasswordRequest }) {
+  console.log(newPassword);
   const { token } = useParams();
   const history = useHistory();
   // const isBigScreen = useMediaQuery({query: '(min-width: 1824px)'})
@@ -33,9 +34,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
           token: token,
         };
         newPasswordRequest(data);
-        if (newPassword.newPass) {
-          history.push("/login");
-        }
+       
       }
     },
   });

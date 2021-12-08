@@ -12,6 +12,7 @@ import Home from "./components/superAdmin/Home";
 import AdminMainPage from "./components/superAdmin/AdminMainPage";
 import StudenMainpage from "./components/superAdmin/StudenMainpage";
 import ProtectedRoute from "./redux/constants/ProtectedRoute";
+import AddStudent from "./components/superAdmin/AddStudent";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 {/* protected Route is for  any can not jump in  another page */}
 
           <Route path="/student" ><ProtectedRoute Cmp={StudenMainpage} ></ProtectedRoute></Route>
+          <Route path="/add_student" ><ProtectedRoute Cmp={AddStudent} ></ProtectedRoute></Route>
           <Route path="/admin" ><ProtectedRoute Cmp={AdminMainPage} ></ProtectedRoute></Route>
           <Route path="/home"  ><ProtectedRoute Cmp={Home} ></ProtectedRoute></Route>
 
