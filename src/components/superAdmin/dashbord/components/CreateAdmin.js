@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 import Modal from "react-modal";
 // import { Link } from "react-router-dom";`
 import logo from "../../../assests/image/ssism_si.svg";
@@ -33,15 +34,33 @@ function CreateAdmin({ createAdmin, createNewAdmin }) {
     validationSchema,
 
     onSubmit: (values) => {
-      var data = {
+      var data = JSON.stringify({
         email: formik.values.email,
         name: formik.values.name,
         role: formik.values.role,
-        token: token,
+      });
+      var config = {
+        method: "post",
+        url: "https://singaji-central-server.herokuapp.com/api/createNewAdmin",
+        headers: {
+          Authorization:
+            `Bearer ${token}`,
+          // token,
+          "Content-Type": "application/json",
+        },
+        data: data,
       };
 
-      console.log(data);
-      createNewAdmin(data);
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      // console.log(data);
+      // createNewAdmin(data);
       //passing the data in createNewAdmin which contain the dispatch method
       //Add new lines and response in createNewAdmin function
     },
