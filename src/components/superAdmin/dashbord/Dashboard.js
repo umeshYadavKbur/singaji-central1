@@ -1,16 +1,29 @@
-import React from 'react'
-import Sidebar from './Sidebar'
-import CreateAdmin from './CreateAdmin'
-import FeeStructure from './FeeStructure'
+import React from "react";
+import CreateAdmin from "./components/CreateAdmin";
+import Sidebar from "./components/Sidebar";
 
 function Dashboard() {
-    return (
-        <div>
-            <Sidebar></Sidebar>
-            {/* <CreateAdmin></CreateAdmin> */}
-            {/* <FeeStructure></FeeStructure> */}
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          direction: "column",
+          justifyContent: "flex-end",
+          margin: "20px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+          }}
+        >
+          <CreateAdmin />
         </div>
-    )
+      </div>
+      <Sidebar />
+    </div>
+  );
 }
 
-export default Dashboard
+export default Dashboard;
