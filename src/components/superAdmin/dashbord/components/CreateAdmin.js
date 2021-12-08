@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useFormik } from "formik";
+// import { Link } from "react-router-dom";`
+import * as Yup from "yup";
 import logo from "../../../assests/image/ssism_si.svg";
 import Modal from "react-modal";
 import "../styles/createAdmin.css";
@@ -9,6 +12,33 @@ function CreateAdmin() {
   function toggleModal() {
     setIsOpen(!isOpen);
   }
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid Email Format*").required("Required*"),
+    name: Yup.string().required("Required*"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      name: "",
+      role: null,
+    },
+    validationSchema,
+
+    onSubmit: (values) => {
+      console.log(values);
+      const data = {
+        name: formik.values.name,
+        email: formik.values.email,
+        role: formik.values.role,
+      };
+
+      //passing the data in fetchUsers which contain the dispatch method
+      //Add new lines and response in fetchUsers function
+      // fetchUsers(data);
+    },
+  });
 
   return (
     <>
@@ -44,32 +74,47 @@ function CreateAdmin() {
                     ×
                   </span>
                 </button>
-                <form onsubmit="{formik.handleSubmit}">
+                <form onSubmit={formik.handleSubmit}>
                   <div>
                     <img src={logo} alt="logo ssism" className="logo_img" />{" "}
                     <br />
                   </div>
                   <div classname=" mb-3 ">
                     <input
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                       className="inputs"
                       name="email"
                       type="text"
-                      classname=" "
                       placeholder="Email"
                     />
+                    {formik.errors.email && formik.touched.email ? (
+                      <div className="text-danger fs-6">
+                        {formik.errors.email}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+
                     <input
+                      value={formik.values.name}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
                       className="inputs"
                       name="name"
                       type="text"
-                      classname="  mt-2 mb-2"
+                      classname="mt-2 mb-2"
                       placeholder="Name"
                     />
                     <select
                       name="role"
-                      // onchange="{formik.handleChange}"
-                      // value="{formik.values.role}"
                       className="fields form-select "
-                      // id="inputGroupSelect02"
+                      value={formik.values.role}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      name="role"
+                      type="text"
                     >
                       <option selected className="fields form-select">
                         Role
