@@ -8,11 +8,12 @@ import store from "./redux/store";
 import Login from "./components/auth/Login";
 import ForgotPassword from "./components/auth/ForgetPassword";
 import ResetPassword from "./components/auth/ResetPassword";
-import Home from "./components/superAdmin/Home";
 import AdminMainPage from "./components/superAdmin/AdminMainPage";
 import StudenMainpage from "./components/superAdmin/StudenMainpage";
 import ProtectedRoute from "./redux/constants/ProtectedRoute";
 import Dashboard from "./components/superAdmin/dashbord/Dashboard";
+import '@coreui/coreui/dist/css/coreui.min.css'
+// import Home from "./components/superAdmin/Home";
 
 function App() {
   // const Reset = `/CreateNewPassword/:${token}`
