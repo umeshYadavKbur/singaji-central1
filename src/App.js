@@ -8,14 +8,15 @@ import store from "./redux/store";
 import Login from "./components/auth/Login";
 import ForgotPassword from "./components/auth/ForgetPassword";
 import ResetPassword from "./components/auth/ResetPassword";
-import Home from "./components/superAdmin/Home";
 import AdminMainPage from "./components/superAdmin/AdminMainPage";
 import StudenMainpage from "./components/superAdmin/StudenMainpage";
 import ProtectedRoute from "./redux/constants/ProtectedRoute";
 
 //import coreUireact js 
 import '@coreui/coreui/dist/css/coreui.min.css';
-import Toast from "./components/Toast";
+import Toast from "./components/superAdmin/dashbord/components/Toast";
+import Dashboard from "./components/superAdmin/dashbord/Dashboard";
+
 
 function App() {
   // const Reset = `/CreateNewPassword/:${token}`
@@ -30,7 +31,7 @@ function App() {
           {/* protected Route is for  any can not jump in  another page */}
           <Route path="/student" ><ProtectedRoute Cmp={StudenMainpage} ></ProtectedRoute></Route>
           <Route path="/admin" ><ProtectedRoute Cmp={AdminMainPage} ></ProtectedRoute></Route>
-          <Route path="/home"  ><ProtectedRoute Cmp={Home} ></ProtectedRoute></Route>
+          <Route path="/home"  ><ProtectedRoute Cmp={Dashboard} ></ProtectedRoute></Route>
           <Route
             path="*"
             render={() => (

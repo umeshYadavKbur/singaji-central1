@@ -1,5 +1,6 @@
+import axios from "axios";
 import swal from "sweetalert";
-import getData from "../../services/agent";
+// import getData from "../../services/agent";
 import {
   CREATE_NEW_ADMIN_FAIL,
   CREATE_NEW_ADMIN_REQUEST,
@@ -8,26 +9,36 @@ import {
 
 export const createNewAdmin = (data) => {
   return async (dispatch) => {
-    const newPassUrl = `/api/createNewAdmin`;
-    dispatch(newAdminReq());
-    var newAdminData = await getData(data, newPassUrl);
-    console.log("The data is ", newAdminData);
+    // Console the data getting from the form of create admin 
+    // console.log("The data is ", data);
     try {
-      if (newAdminData.status === 200) {
-        dispatch(newAdminReqSuccess());
-        swal({
-          title: "Admin Create Success",
-          icon: "success",
+      dispatch(newAdminReq());
+      axios(data)
+        .then(function (response) {
+          //Printing the response of the data
+          // console.log(("Response is  :::", response));
+          // console.log(("The response code is ::", response.status));
+
+          if (response.status === 208) {
+            swal({
+              title: "Admin already created",
+              icon: "info",
+            });
+          }
+
+          else if (response.status === 200) {
+            dispatch(newAdminReqSuccess());
+            swal({
+              title: "New admin has been Created",
+              icon: "success",
+            });
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          dispatch(newAdminReqFail(error));
         });
-      } else if (newAdminData.status === 401) {
-        dispatch(newAdminReqFail());
-        swal({
-          title: "Admin Create Success",
-          icon: "success",
-        });
-      }
     } catch (error) {
-      dispatch(newAdminReqFail(error));
       console.log(error);
     }
   };

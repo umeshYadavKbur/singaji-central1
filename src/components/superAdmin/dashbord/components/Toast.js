@@ -11,17 +11,22 @@ import Modal from './Modal';
 function Toast() {
     const [toast, addToast] = useState(0);
     const toaster = useRef();
-    const exampleToast = (
-        <CToast autohide={true} visible={true} className="align-items-center">
-            <div className="d-flex">
-                <CToastBody> Login successfully </CToastBody>
-                <CToastClose className="me-2 m-auto" />
-            </div>
-        </CToast>
+    const MainFuntion = (
+        <>
+            <CToast autohide={true} delay={1000} color="primary" visible={true} className="align-items-center" style={{ color: 'white' }} >
+                <div className="d-flex" >
+                    <CToastBody> Login successfully </CToastBody>
+                    <CToastClose className="me-2 m-auto" white />
+                </div>
+            </CToast>
+        </>
     );
+
     return (
         <>
-            <CButton onClick={() => addToast(exampleToast)}>Send a toast</CButton>
+            <CButton onClick={() => addToast(MainFuntion)}>Send a toast</CButton>
+
+
             <CToaster ref={toaster} push={toast} placement="top-end" />
             {/* Anoter thoast */}
             <ToastAction />

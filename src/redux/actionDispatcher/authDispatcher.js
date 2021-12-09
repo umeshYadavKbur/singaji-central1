@@ -10,10 +10,10 @@ export const fetchUsers = (data) => {
     // wait untill the data not received so getData function take data and url part
     dispatch(loginRequest());
     var userResData = await getData(data, loginUrl);
-    console.log("the response is ::",userResData.request.status);
+    console.log("the response is ::", userResData.request.status);
     // changing the userResData if we need token so userResData.data.toke will be used
     try {
-      if(userResData.request.status === 200) {
+      if (userResData.request.status === 200) {
         //setting the Items in localStorage
         localStorage.setItem("user", userResData.data.user);
         localStorage.setItem("token", userResData.data.token);
@@ -27,26 +27,27 @@ export const fetchUsers = (data) => {
           icon: "success",
         })
       }
-      else if(userResData.request.status === 404) {
+      else if (userResData.request.status === 404) {
         swal({
           title: "User not Found",
           icon: "warning",
         })
-        dispatch(loginFailure(userResData.data));}
-       else if(userResData.request.status === 400) {
-          swal({
-            title: "Invalid Credential",
-            icon: "warning",
-          }) 
-          dispatch(loginFailure(userResData.data));
+        dispatch(loginFailure(userResData.data));
       }
-       else {
+      else if (userResData.request.status === 400) {
+        swal({
+          title: "Invalid Credential",
+          icon: "warning",
+        })
+        dispatch(loginFailure(userResData.data));
+      }
+      else {
 
         dispatch(loginFailure(userResData.data));
       }
       return userResData.request.status
     }
-     catch (error) {
+    catch (error) {
       //if crudential fails than Login fail action dispatch
       dispatch(loginFailure(error));
     }

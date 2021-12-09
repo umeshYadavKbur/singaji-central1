@@ -1,7 +1,7 @@
 import React from "react";
-import CreateAdmin from "./components/CreateAdmin";
+// import CreateAdmin from "./components/CreateAdmin";
 import Sidebar from "./components/Sidebar";
-import Table from '../Table'
+// import Table from '../Table'
 import './styles/dashboard.css'
 function Dashboard() {
   return (
@@ -11,10 +11,10 @@ function Dashboard() {
       </div>
       <div className="header_table">
         <div className="header_dashboard">
-          <CreateAdmin />
+          {/* <CreateAdmin /> */}
         </div>
         <div className="table_dashboard">
-          <Table />
+          {/* <Table /> */}
         </div>
       </div>
     </div>

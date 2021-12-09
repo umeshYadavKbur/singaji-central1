@@ -2,57 +2,34 @@ import React from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
 import * as Yup from 'yup'
 //importing Components
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from '../../redux/actionDispatcher/authDispatcher'
-=======
-import * as Yup from "yup";
-//importing Components
-import Singaji_logo from "../assests/image/Singaji_logo.svg";
-import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
->>>>>>> 2c025d663a155666f8bd0dc108c0b966226884fb
 import { useHistory } from "react-router";
 // import swal from "sweetalert";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 function Login({ userData, fetchUsers }) {
-<<<<<<< HEAD
   const history = useHistory()
 
-  useEffect(() => {
-    if (localStorage.getItem('role') === 'SUPERADMIN') {
-      history.push('/home')
-    }
-    else if (localStorage.getItem('role') === 'STUDENT') {
-      history.push('/student')
-    }
-    else if (localStorage.getItem('role') === 'ADMIN') {
-      history.push('/admin')
-    }
-  })
-
-  // console.log("maijn page",userData)
-
-=======
-  const history = useHistory();
-
   // useEffect(() => {
-  //   if (localStorage.getItem("role") === "SUPERADMIN") {
-  //     history.push("/home");
-  //   } else if (localStorage.getItem("role") === "STUDENT") {
-  //     history.push("/student");
-  //   } else if (localStorage.getItem("role") === "ADMIN") {
-  //     history.push("/admin");
+  //   if (localStorage.getItem('role') === 'SUPERADMIN') {
+  //     history.push('/home')
   //   }
-  // });
+  //   else if (localStorage.getItem('role') === 'STUDENT') {
+  //     history.push('/student')
+  //   }
+  //   else if (localStorage.getItem('role') === 'ADMIN') {
+  //     history.push('/admin')
+  //   }
+  // })
 
-  // console.log("maijn page",userData)
-  if (userData.role) {
-    history.push("/dashbord");
+  console.log("maijn page", userData)
+  if (userData.role === "SUPERADMIN") {
+    history.push('/home')
   }
->>>>>>> 2c025d663a155666f8bd0dc108c0b966226884fb
+
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Required*"),
     password: Yup.string().required("Required*"),
@@ -62,13 +39,7 @@ function Login({ userData, fetchUsers }) {
     initialValues: {
       email: "",
       password: "",
-<<<<<<< HEAD
-
     }, validationSchema,
-=======
-    },
-    validationSchema,
->>>>>>> 2c025d663a155666f8bd0dc108c0b966226884fb
 
     onSubmit: (values) => {
       console.log(values);

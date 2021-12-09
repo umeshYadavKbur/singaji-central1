@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "poppins", sans-serif;
+  font-family: 'poppins', sans-serif;
 }
 body {
   position: relative;
@@ -50,6 +50,7 @@ body {
 
 .sidebar ul {
   margin-top: 20px;
+  /* background-color: red; */
 }
 .sidebar .nav_list li {
   position: relative;
@@ -128,10 +129,6 @@ body {
   color: rgb(0, 0, 0);
   background: rgb(211, 209, 209);
 }
-/* .profile_content  .profile .profile_details{
-    display: flex;
-    align-items: center;    
-} */
 
 .clg_logo {
   display: block;
@@ -154,6 +151,7 @@ body {
   font-size: 20px;
   font-weight: 400;
   text-align: center;
+  color: black;
 }
 .links_name {
   font-size: 20px;
@@ -167,25 +165,3 @@ body {
   border: none !important;
   width: 100%;
 }
-
-/* .pagination{
-    float: right !important;
-     padding-left: 0;
-     margin-top: 900px;
-     border-radius: 4px;
-} */
-
-/* .field{
-    height: 38px;
-    width: 100%;
-    outline: none;
-    border: none;
-    background-color: rgb(241, 241, 241);
-    font-size: 18px;
-    color: rgb(131, 131, 131);
-    margin-top: 10px;
-    border-radius: 4px;
-    padding-left: 10px;
-    
-    
-} */
