@@ -2,15 +2,23 @@ import React from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import * as Yup from 'yup'
 //importing Components
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from '../../redux/actionDispatcher/authDispatcher'
+=======
+import * as Yup from "yup";
+//importing Components
+import Singaji_logo from "../assests/image/Singaji_logo.svg";
+import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
+>>>>>>> 2c025d663a155666f8bd0dc108c0b966226884fb
 import { useHistory } from "react-router";
 // import swal from "sweetalert";
 import { useEffect } from "react";
 
 function Login({ userData, fetchUsers }) {
+<<<<<<< HEAD
   const history = useHistory()
 
   useEffect(() => {
@@ -27,30 +35,51 @@ function Login({ userData, fetchUsers }) {
 
   // console.log("maijn page",userData)
 
+=======
+  const history = useHistory();
+
+  // useEffect(() => {
+  //   if (localStorage.getItem("role") === "SUPERADMIN") {
+  //     history.push("/home");
+  //   } else if (localStorage.getItem("role") === "STUDENT") {
+  //     history.push("/student");
+  //   } else if (localStorage.getItem("role") === "ADMIN") {
+  //     history.push("/admin");
+  //   }
+  // });
+
+  // console.log("maijn page",userData)
+  if (userData.role) {
+    history.push("/dashbord");
+  }
+>>>>>>> 2c025d663a155666f8bd0dc108c0b966226884fb
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Required*"),
     password: Yup.string().required("Required*"),
-  })
-
-
+  });
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
+<<<<<<< HEAD
 
     }, validationSchema,
+=======
+    },
+    validationSchema,
+>>>>>>> 2c025d663a155666f8bd0dc108c0b966226884fb
 
     onSubmit: (values) => {
       console.log(values);
       const data = {
         email: formik.values.email,
-        password: formik.values.password
-      }
+        password: formik.values.password,
+      };
 
       //passing the data in fetchUsers which contain the dispatch method
       //Add new lines and response in fetchUsers function
-      fetchUsers(data)
+      fetchUsers(data);
     },
   });
 
@@ -83,9 +112,7 @@ function Login({ userData, fetchUsers }) {
               <br />
             </div>
             <div className="d-flex justify-content-center fw-bold">
-              <h4 className="h4 mb-3 " >
-                Login
-              </h4>
+              <h4 className="h4 mb-3 ">Login</h4>
             </div>
             <div className="mb-3">
               <input
@@ -100,7 +127,9 @@ function Login({ userData, fetchUsers }) {
               />
               {formik.errors.email && formik.touched.email ? (
                 <div className="text-danger fs-6">{formik.errors.email}</div>
-              ) : ''}
+              ) : (
+                ""
+              )}
               <input
                 value={formik.values.password}
                 onChange={formik.handleChange}
@@ -113,10 +142,13 @@ function Login({ userData, fetchUsers }) {
               />
               {formik.errors.password && formik.touched.password ? (
                 <div className="text-danger fs-6">{formik.errors.password}</div>
-              ) : ''}
+              ) : (
+                ""
+              )}
             </div>
             <div className="d-flex justify-content-end mb-1">
-              <Link disabled={userData.loading}
+              <Link
+                disabled={userData.loading}
                 to="/forgetpassword"
                 style={{
                   color: "gray",
@@ -128,9 +160,9 @@ function Login({ userData, fetchUsers }) {
               </Link>
             </div>
             <button
-
               className="w-100 btn btn-md btn-warning fw-bold text-light"
-              type="submit" disabled={userData.loading}
+              type="submit"
+              disabled={userData.loading}
             >
               {userData.loading ? "loading..." : "Sumbit"}
             </button>
@@ -142,22 +174,18 @@ function Login({ userData, fetchUsers }) {
 }
 
 //Getting the state from the store
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    userData: state.auth
-  }
-}
+    userData: state.auth,
+  };
+};
 
 //passing the userData in fetchUsers function and also dispatch method
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUsers: (data) => dispatch(fetchUsers(data))
-  }
-}
-
+    fetchUsers: (data) => dispatch(fetchUsers(data)),
+  };
+};
 
 //Connecting the component to our store
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

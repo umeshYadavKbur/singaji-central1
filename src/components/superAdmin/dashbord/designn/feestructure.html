@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="style1.css">
+    <title>fees</title>
+  </head>
+  <body>
+    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal1">fees structure <i class="fas fa-edit"></i></button>
+
+    <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">      
+    <div class="first_div">
+        <div class="second_div ">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <!-- <div>
+                <img src="logo.png" alt="logo ssism" class="logo_img" > <br />
+            </div> -->
+            <form onSubmit={formik.handleSubmit}>
+                <div className=" mb-3 ">
+
+                <select name="Stream" class=" fields form-select " id="inputGroupSelect03">
+                    <option selected>Stream</option>
+                    <option value="1">Bca</option>
+                    <option value="2">BBA</option>
+                    <option value="3">ba(CA)</option>
+                    <option value="4">BSC(bt)</option>
+                    <option value="5">BSC(micro)</option>
+                    <option value="6">B.com(CA)</option>
+                    <option value="7">MEG(diploma)</option>
+                    <option value="8">BEG (diploma)</option>
+                </select>
+            
+            
+           
+               
+                <input  name="Starting year" type="text" className="form-control mb-2 " placeholder="Starting year" >
+                <input  name="Ending year" type="text" className="form-control mb-2 " placeholder="Ending year" >
+                <input  name="Total fees" type="number" className="form-control mb-2 " placeholder="Total fees" >
+                
+               
+               
+            </div>
+
+            <button  class=" submit_btn w-100 mt-2 btn btn-md text-light font-weight-bold" type="submit">Create</button>
+        </form>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

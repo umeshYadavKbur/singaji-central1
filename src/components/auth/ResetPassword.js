@@ -1,15 +1,18 @@
-import React from "react";
 import { useHistory, useParams } from "react-router";
-import Singaji_logo from "../assests/image/Singaji_logo.svg";
-// import { connect } from "react-redux";
-import { useFormik } from "formik";
-// import { newPasswordRequest } from '../../redux/actionDispatcher/authDispatcher'
-import { newPasswordRequest } from "../../redux/actionDispatcher/newPassDispatcher";
 import { connect } from "react-redux";
-import * as Yup from 'yup'
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import React from "react";
+import Singaji_logo from "../assests/image/Singaji_logo.svg";
+import { newPasswordRequest } from "../../redux/actionDispatcher/newPassDispatcher";
+
+
 function ResetPassword({ newPassword, newPasswordRequest }) {
   const { token } = useParams();
   const history = useHistory();
+
+  console.log(newPassword);
+
   // const isBigScreen = useMediaQuery({query: '(min-width: 1824px)'})
   // const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'})
   // const redirection = () => {
@@ -18,8 +21,11 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Required*"),
     password: Yup.string().required("Required*"),
-  })
+  });
 
+  if (newPassword.newPass) {
+    history.push("/login");
+  }
   const formik = useFormik({
     initialValues: {
       confirm: "",
@@ -32,10 +38,8 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
           password: formik.values.password,
           token: token,
         };
+        console.log("DAta", data);
         newPasswordRequest(data);
-        if (newPassword.newPass) {
-          history.push("/login");
-        }
       }
     },
   });

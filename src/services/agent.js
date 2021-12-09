@@ -7,7 +7,7 @@ async function getData(data, loginUrl) {
   console.log(url);
   try {
     var res = await axios.post(url, data);
-    console.log("The response of new password is :: ", res);
+    console.log("The response of dat is :: ", res);
     if (res.status === 200) {
       //here i change the return data so the response object coming from an api is directly return
       return res;

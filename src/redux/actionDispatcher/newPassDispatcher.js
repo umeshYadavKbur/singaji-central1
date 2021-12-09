@@ -13,24 +13,21 @@ export const newPasswordRequest = (data) => {
     var newPasswordData = await getData(data, newPassUrl);
     try {
       if (newPasswordData.status === 200) {
-        dispatch(passReqSuccess())
+        dispatch(passReqSuccess());
         swal({
           title: "Password Reset Success",
           icon: "success",
-        })
-      }
-      else if(newPasswordData.request.status === 406) {
+        });
+      } else if (newPasswordData.request.status === 406) {
         swal({
           title: "Oops ! link expire",
           icon: "warning",
-        })
+        });
+        dispatch(passReqFail(newPasswordData));
+      } else {
         dispatch(passReqFail(newPasswordData));
       }
-      else {
-        dispatch(passReqFail(newPasswordData));
-      }
-    }
-    catch (error) {
+    } catch (error) {
       // dispatch(passReqFail(error));
       console.log(error);
     }
