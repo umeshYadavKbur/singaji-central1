@@ -15,8 +15,8 @@ import AddStudent from "./components/superAdmin/AddStudent";
 
 //import coreUireact js 
 import '@coreui/coreui/dist/css/coreui.min.css';
-import Toast from "./components/superAdmin/dashbord/components/Toast";
 import Dashboard from "./components/superAdmin/dashbord/Dashboard";
+import Table from "./components/superAdmin/table/Table";
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path="/toast" component={Toast} />
+          <Route path="/table" component={Table} />
           <Route path="/login" component={Login} />
           <Route path="/forgetpassword" component={ForgotPassword} />
           <Route path="/create_new_password/:token" component={ResetPassword} />
