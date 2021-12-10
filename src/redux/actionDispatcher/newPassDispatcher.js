@@ -5,11 +5,11 @@ import {
 } from "../constants/actions";
 import swal from "sweetalert";
 import getData from "../../services/agent";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
+    // const history = useHistory()
 
 export const newPasswordRequest = (data) => {
   return async (dispatch) => {
-    const history = useHistory()
     const newPassUrl = `/api/resetPasswordLink/${data.token}`;
     dispatch(newPassRequest());
     var newPasswordData = await getData(data, newPassUrl);
@@ -20,7 +20,7 @@ export const newPasswordRequest = (data) => {
           title: "Password Reset Success",
           icon: "success",
         })
-        history.push('/login')
+        // history.push('/login')
       }
       else if(newPasswordData.request.status === 406) {
         swal({

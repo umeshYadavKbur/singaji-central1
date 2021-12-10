@@ -16,26 +16,33 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   // const redirection = () => {
   //   history.push('./login')
   // }
+  if(newPassword.newPass) {
+    history.push('/login');
+  }
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid Email Format*").required("Required*"),
     password: Yup.string().required("Required*"),
+    confirm: Yup.string().required("Required*"),
   })
 
+ 
   const formik = useFormik({
     initialValues: {
       confirm: "",
       password: "",
     },
     validationSchema,
-    onSubmit: async (values) => {
-      if (formik.values.password === formik.values.confirm) {
-        var data = {
-          password: formik.values.password,
-          token: token,
-        };
-        newPasswordRequest(data);
-       
+    onSubmit: (values) => {
+      
+      if(formik.values.confirm === formik.values.password){
+      const data = {
+        password: formik.values.password,
+        token:token
       }
+// console.log(values);
+      // //passing the data in fetchUsers which contain the dispatch method
+      // //Add new lines and response in fetchUsers function
+        newPasswordRequest(data)
+    }
     },
   });
   return (
@@ -97,7 +104,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
             <button
               style={{ color: "white", fontWeight: "500" }}
               className="w-100 btn btn-md btn-warning"
-              type="submit"
+             type="submit"
               disabled={newPassword.loading}
             >
               {newPassword.loading ? "loading..." : "Submit"}
