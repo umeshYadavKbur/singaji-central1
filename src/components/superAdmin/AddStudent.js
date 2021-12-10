@@ -4,10 +4,14 @@ import * as Yup from 'yup';
 import {connect} from 'react-redux';
 import AddNewStudent from '../../redux/actionDispatcher/addNewStudentDispatcher';
 import axios from 'axios';
-
+import Select from 'react-select';
 
 function AddStudent() {
 
+  const option =[{value:'PCM',label:'PCM'},
+    {value: 'chocolate',label: 'Chocolate'},
+    {value: 'strawberry',label: 'Strawberry'},
+    {value: 'vanilla',label: 'Vanilla'},];
   const [tehsil,setTehsil] = useState();
 
   const validationSchema = Yup.object({
@@ -308,14 +312,24 @@ function AddStudent() {
                         ) : ''}
                       </div>
                       <div className="col">
-                        <label htmlFor="">Village </label>
-                        <input name="village" value={formik.values.village} onChange={formik.handleChange} type="text" className="form-control" placeholder="Village" />
-                        {formik.errors.village && formik.touched.village ? (
-                          <div className="text-danger fs-6">{formik.errors.village}</div>
+                        <label htmlFor="">Trace Name</label>
+                        <select name="year" value={formik.values.year} onChange={formik.handleChange} className="form-select" id="inputGroupSelect02" placeholder="select">
+                          <option value="1">Kolari</option>
+                          <option value="2">Narsulaganj</option>
+                          <option value="3">Haran</option>
+                        </select>{formik.errors.year && formik.touched.year ? (
+                          <div className="text-danger fs-6">{formik.errors.year}</div>
                         ) : ''}
                       </div>
                     </div>
                     <div className="row">
+                      <div className="col">
+                        <label htmlFor="">Village </label>
+                        <Select options={option} placeholder="search your village" onChange={(e) => {console.log(e); formik.setFieldValue('village',e.value)}} ></Select>
+                        {formik.errors.village && formik.touched.village ? (
+                          <div className="text-danger fs-6">{formik.errors.village}</div>
+                        ) : ''}
+                      </div>
                       <div className="col">
                         <label htmlFor="">Tehsil</label>
                         <input name="tehsil" value={tehsil} onChange={formik.handleChange} type="text" className="form-control" placeholder="Tehsil" />
@@ -323,6 +337,9 @@ function AddStudent() {
                           <div className="text-danger fs-6">{formik.errors.tehsil}</div>
                         ) : ''}
                       </div>
+                     
+                    </div>
+                    <div className="row">
                       <div className="col">
                         <label htmlFor="">District</label>
                         <input name="district" value={formik.values.district} type="text" className="form-control" placeholder=" District" />
@@ -330,27 +347,24 @@ function AddStudent() {
                     <div className="text-danger fs-6">{formik.errors.district}</div>
                   ) : ''} */}
                       </div>
-                    </div>
-                    <div className="row">
-
-                      <div className="col">
+                      <div className="col mt-3">
                         <div>
-                        <label className="radio-inline m-2">
-                          <input type="radio" name="optradio" defaultChecked /> Male
-                        </label>
-                        <label className="radio-inline m-2">
-                          <input type="radio" name="optradio" /> Female
-                        </label>
-                        <label className="radio-inline m-2">
-                          <input type="radio" name="optradio" /> Other
-                        </label>
-</div>
+                          <label htmlFor="">Gender :-</label>
+                          <label className="radio-inline m-2">
+                            <input className='bg-warning' type="radio" name="optradio" defaultChecked /> Male
+                          </label>
+                          <label className="radio-inline m-2">
+                            <input className='bg-warning' type="radio" name="optradio" /> Female
+                          </label>
+                        
+                        </div>
 
                         {formik.errors.gender && formik.touched.gender ? (
                           <div className="text-danger fs-6">{formik.errors.gender}</div>
                         ) : ''}
                         {/* {formik.errors.role && <div className="error">{formik.errors.role}</div>} */}
                       </div>
+
                     </div>
                   </div>
                   <div className="col px-4">
