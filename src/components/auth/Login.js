@@ -9,16 +9,16 @@ import {fetchUsers} from '../../redux/actionDispatcher/authDispatcher'
 import { useHistory} from "react-router";
 // import swal from "sweetalert";
 import { useEffect } from "react";
-import { checkOnlineStatus } from "../../services/onlineOfflineStatus";
+// import { checkOnlineStatus } from "../../services/onlineOfflineStatus";
 import swal from "sweetalert";
 
 function Login({userData,fetchUsers}) {
 
 
-  setInterval(async () => {
-    const result = await checkOnlineStatus();
-    result ?console.log("online"):console.log("offline");
-  },300);
+  // setInterval(async () => {
+  //   const result = await checkOnlineStatus();
+  //   result ?console.log("online"):console.log("offline");
+  // },300);
 
   const history = useHistory()
   
@@ -49,7 +49,8 @@ function Login({userData,fetchUsers}) {
       email: "",
       password: "",
 
-    },validationSchema,
+    },
+    validationSchema,
 
     onSubmit: (values) => {
       console.log(values);
