@@ -1,12 +1,12 @@
 import React from "react";
-import {connect} from "react-redux";
-import {useFormik} from "formik";
-import {Link} from "react-router-dom";
+import { connect } from "react-redux";
+import { useFormik } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from 'yup'
 //importing Components
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
-import {fetchUsers} from '../../redux/actionDispatcher/authDispatcher'
-import { useHistory} from "react-router";
+import { fetchUsers } from '../../redux/actionDispatcher/authDispatcher'
+import { useHistory } from "react-router";
 // import swal from "sweetalert";
 import { useEffect } from "react";
 // import { checkOnlineStatus } from "../../services/onlineOfflineStatus";
@@ -21,22 +21,21 @@ function Login({userData,fetchUsers}) {
   // },300);
 
   const history = useHistory()
-  
+
   useEffect(() => {
-    if(localStorage.getItem('role')==='SUPERADMIN'){
+    if (localStorage.getItem('role') === 'SUPERADMIN') {
       history.push('/home')
     }
-    else if(localStorage.getItem('role') === 'STUDENT')
-    {
+    else if (localStorage.getItem('role') === 'STUDENT') {
       history.push('/student')
     }
-    else if(localStorage.getItem('role') === 'ADMIN') {
+    else if (localStorage.getItem('role') === 'ADMIN') {
       history.push('/admin')
     }
   })
-  
+
   // console.log("maijn page",userData)
-  
+
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Required*"),
     password: Yup.string().required("Required*"),
@@ -49,8 +48,7 @@ function Login({userData,fetchUsers}) {
       email: "",
       password: "",
 
-    },
-    validationSchema,
+    }, validationSchema,
 
     onSubmit: (values) => {
       console.log(values);
@@ -70,7 +68,7 @@ function Login({userData,fetchUsers}) {
 
   return (
     <>
-      <div style={{height: "100vh",width: "100vw",background: "#f3eded"}}>
+      <div style={{ height: "100vh", width: "100vw", background: "#f3eded" }}>
         <div
           className="position-absolute top-50 start-50 translate-middle "
           style={{
@@ -89,7 +87,7 @@ function Login({userData,fetchUsers}) {
                 alt="logo ssism"
                 width={100}
                 height={82}
-                style={{alignItems: "center",borderRadius: "40px"}}
+                style={{ alignItems: "center", borderRadius: "40px" }}
               />{" "}
               <br />
             </div>
