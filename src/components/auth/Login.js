@@ -2,43 +2,55 @@ import React from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
-
+import * as Yup from 'yup'
 //importing Components
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from '../../redux/actionDispatcher/authDispatcher'
-
+import { useHistory } from "react-router";
+// import swal from "sweetalert";
+// import { useEffect } from "react";
 
 function Login({ userData, fetchUsers }) {
+  const history = useHistory()
+
+  // useEffect(() => {
+  //   if (localStorage.getItem('role') === 'SUPERADMIN') {
+  //     history.push('/home')
+  //   }
+  //   else if (localStorage.getItem('role') === 'STUDENT') {
+  //     history.push('/student')
+  //   }
+  //   else if (localStorage.getItem('role') === 'ADMIN') {
+  //     history.push('/admin')
+  //   }
+  // })
+
+  console.log("maijn page", userData)
+  if (userData.role === "SUPERADMIN") {
+    history.push('/home')
+  }
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid Email Format*").required("Required*"),
+    password: Yup.string().required("Required*"),
+  });
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
-    },
-    validate: (values) => {
-      let errors = {};
-      if (!values.password) {
-        errors.password = "Required!";
-      }
-      if (!values.email) {
-        errors.email = "Required!";
-      } else if (
-        // eslint-disable-next-line
-        !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(
-          values.email
-        )
-      ) {
-        errors.email = "Invalid email format!";
-      }
-      return errors;
-    },
+    }, validationSchema,
+
     onSubmit: (values) => {
+      console.log(values);
       const data = {
         email: formik.values.email,
-        password: formik.values.password
-      }
+        password: formik.values.password,
+      };
 
       //passing the data in fetchUsers which contain the dispatch method
-      fetchUsers(data)
+      //Add new lines and response in fetchUsers function
+      fetchUsers(data);
     },
   });
 
@@ -70,37 +82,44 @@ function Login({ userData, fetchUsers }) {
               />{" "}
               <br />
             </div>
-            <div className="d-flex justify-content-center">
-              <h4 className="h4 mb-3 " style={{ fontWeight: "bold" }}>
-                Login
-              </h4>
+            <div className="d-flex justify-content-center fw-bold">
+              <h4 className="h4 mb-3 ">Login</h4>
             </div>
             <div className="mb-3">
               <input
                 value={formik.values.email}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 name="email"
                 type="text"
                 className="form-control mb-2"
                 placeholder="Email"
+                disabled={userData.loading}
               />
-              {formik.errors.email && (
-                <div className="error">{formik.errors.email}</div>
+              {formik.errors.email && formik.touched.email ? (
+                <div className="text-danger fs-6">{formik.errors.email}</div>
+              ) : (
+                ""
               )}
               <input
                 value={formik.values.password}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 name="password"
-                type="text"
+                type="password"
                 className="form-control "
                 placeholder="Password"
+                disabled={userData.loading}
               />
-              {formik.errors.password && (
-                <div className="error">{formik.errors.password}</div>
+              {formik.errors.password && formik.touched.password ? (
+                <div className="text-danger fs-6">{formik.errors.password}</div>
+              ) : (
+                ""
               )}
             </div>
             <div className="d-flex justify-content-end mb-1">
               <Link
+                disabled={userData.loading}
                 to="/forgetpassword"
                 style={{
                   color: "gray",
@@ -112,11 +131,11 @@ function Login({ userData, fetchUsers }) {
               </Link>
             </div>
             <button
-              style={{ color: "white", fontWeight: "500" }}
-              className="w-100 btn btn-md btn-warning"
+              className="w-100 btn btn-md btn-warning fw-bold text-light"
               type="submit"
+              disabled={userData.loading}
             >
-              Sumbit
+              {userData.loading ? "loading..." : "Sumbit"}
             </button>
           </form>
         </div>
@@ -126,22 +145,18 @@ function Login({ userData, fetchUsers }) {
 }
 
 //Getting the state from the store
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    userData: state.auth
-  }
-}
+    userData: state.auth,
+  };
+};
 
 //passing the userData in fetchUsers function and also dispatch method
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUsers: (data) => dispatch(fetchUsers(data))
-  }
-}
-
+    fetchUsers: (data) => dispatch(fetchUsers(data)),
+  };
+};
 
 //Connecting the component to our store
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
