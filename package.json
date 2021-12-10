@@ -4,6 +4,8 @@
     "private": true,
     "dependencies": {
         "@coreui/coreui": "^4.1.0",
+        "@coreui/icons": "^2.1.0",
+        "@coreui/icons-react": "^2.0.0",
         "@coreui/react": "^4.1.0",
         "@emotion/react": "^11.7.0",
         "@emotion/styled": "^11.6.0",
