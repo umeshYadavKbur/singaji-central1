@@ -1,0 +1,54 @@
+/* .first_div{
+    height: "100vh";
+    width: "100vw";
+    background: white;
+}
+
+.second_div{
+    width: 100%;
+    max-width: 400px;
+    padding: 25px 45px 45px 45px;
+    margin: auto;
+    background: "white";
+    border-radius: 10px;
+}
+.logo_img1{
+    
+    border-radius:40px;
+    width:200px;
+    height: 82px; 
+    display: flex;
+    align-content: center;
+    margin-left: 40px;   
+}
+input{
+    
+    height: 38px;
+    width: 100%;
+    outline: none;
+    border: none;
+   background-color: rgb(241, 241, 241);
+    font-size: 18px;
+    color: rgb(148, 148, 148);
+    margin-top: 10px;
+    border-radius: 4px;
+    padding-left: 10px;
+}
+
+.fields{
+    height: 38px;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: rgb(241, 241, 241);
+    font-size: 18px;
+    color: rgb(131, 131, 131);
+    margin-top: 10px;
+    border-radius: 4px;
+    padding-left: 10px;
+    
+    
+}
+.submit_btn{
+    background-color: orange;
+} */
