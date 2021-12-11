@@ -1,10 +1,10 @@
 import React from "react";
-import Model from "./components/CreateAdminPopup";
+import CreateAdminPopup from "./CreateAdminPopup";
 
 function Dashboard() {
   return (
     <div>
-      <Model />
+      <CreateAdminPopup />
       <h1>hello there lorem page hello there eise</h1>
     </div>
   );

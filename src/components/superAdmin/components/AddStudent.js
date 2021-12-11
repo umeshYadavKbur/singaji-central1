@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
-import AddNewStudent from "../../redux/actionDispatcher/addNewStudentDispatcher";
+import AddNewStudent from "../../../redux/actionDispatcher/addNewStudentDispatcher";
 import axios from "axios";
 
 function AddStudent() {

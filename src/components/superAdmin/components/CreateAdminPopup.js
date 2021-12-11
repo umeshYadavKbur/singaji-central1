@@ -6,12 +6,12 @@ import {
   CModalTitle,
 } from "@coreui/react";
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import logo from "../../../assests/image/ssism_si.svg";
-import "../styles/createAdmin.css";
-import { createNewAdmin } from "../../../../redux/actionDispatcher/createNewAdminDispatcher";
-import { connect } from "react-redux";
+import logo from '../../assests/image/ssism_si.svg'
+import "./styles/createAdmin.css";
+import {createNewAdmin} from '../../../redux/actionDispatcher/createNewAdminDispatcher'
 
 function CreateAdminPopup({ createAdmin, createNewAdmin }) {
   const token = localStorage.getItem("token");

@@ -1,6 +1,6 @@
 import React from "react";
-import "../styles/Navbar.css";
-import back_btn from "../../../assests/image/back_btn.svg";
+import "./styles/Navbar.css";
+import back_btn from '../../assests/image/back_btn.svg'
 import AppHeaderDropdown from "./HeaderDropdown";
 
 function Navbar() {

@@ -1,13 +1,14 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
-import AddStudent from "../AddStudent";
-import Table from "../Table";
+import AddStudent from './components/AddStudent'
 
-import Navbar from "./components/Navbar";
 // import Sidebar from "./components/Sidebar";
-import Dashboard from "./Dashboard";
-import "./styles/dashboard.css";
+import Dashboard from "./components/Dashboard";
+import "./components/styles/dashboard.css";
+import Navbar from "./components/Navbar";
+import Table from "./components/Table";
+
 function AdminDashboard() {
   return (
     <div className="main_container_dashboard">

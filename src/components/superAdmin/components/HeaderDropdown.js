@@ -12,8 +12,8 @@ import {
 import { cilLockLocked, cilSettings } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 
-import avatar8 from "../../../assests/image/Mask Group 39.png";
-import "../styles/HeaderDropdown.css";
+import avatar8 from '../../assests/image/Mask Group 39.png'
+import "./styles/HeaderDropdown.css";
 
 const AppHeaderDropdown = () => {
   return (
