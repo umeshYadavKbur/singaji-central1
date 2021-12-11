@@ -74,6 +74,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
             marginLeft: "94px",
             marginBlockEnd: "20px",
             color: "white",
+            width: 'fit-content',
           }}
           href="#"
         >
@@ -87,11 +88,12 @@ const AppHeaderDropdown = ({ userData, logout }) => {
             marginTop: "20px",
             marginLeft: "94px",
             hover: "false",
+            width: 'fit-content',
           }}
         >
           <div className="dropdown_profile_pic" onClick={logoutfunction}>
-            <CIcon icon={cilLockLocked} className="me-2" />
-            Logout
+            {/* <CIcon icon={cilLockLocked} className="me-2" /> */}
+            <button style={{ outline: '1px solid white', color: 'white', backgroundColor: "#7e7e7e", borderRadius: '4px', border: 'none', width: '90px' }}>Log out</button>
           </div>
         </CDropdownItem>
       </CDropdownMenu>
