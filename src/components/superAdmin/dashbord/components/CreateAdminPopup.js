@@ -13,7 +13,7 @@ import "../styles/createAdmin.css";
 import { createNewAdmin } from "../../../../redux/actionDispatcher/createNewAdminDispatcher";
 import { connect } from "react-redux";
 
-function Modal({ createAdmin, createNewAdmin }) {
+function CreateAdminPopup({ createAdmin, createNewAdmin }) {
   const token = localStorage.getItem("token");
 
   const [visible, setVisible] = useState(false);
@@ -162,4 +162,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 //Connecting the component to our store
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAdminPopup);

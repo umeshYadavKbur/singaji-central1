@@ -2,12 +2,12 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import AddStudent from "../AddStudent";
+import Table from "../Table";
 
 import Navbar from "./components/Navbar";
 // import Sidebar from "./components/Sidebar";
 import Dashboard from "./Dashboard";
 import "./styles/dashboard.css";
-import Home from "../Home";
 function AdminDashboard() {
   return (
     <div className="main_container_dashboard">
@@ -24,6 +24,16 @@ function AdminDashboard() {
         >
           Add Student
         </Link>
+        <Link
+          to="/admindashboard/table"
+          style={{
+            color: "gray",
+            cursor: "pointer",
+            textDecoration: "none",
+          }}
+        >
+          Table data
+        </Link>
       </div>
       <div className="header_table">
         <div className="header_dashboard">
@@ -37,7 +47,7 @@ function AdminDashboard() {
               path="/admindashboard/addstudent"
               component={AddStudent}
             />
-            <Route exact path="/admindashboard/home" component={Home} />
+            <Route exact path="/admindashboard/table" component={Table} />
           </Switch>
         </div>
       </div>

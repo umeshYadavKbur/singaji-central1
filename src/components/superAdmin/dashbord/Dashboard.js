@@ -1,5 +1,5 @@
 import React from "react";
-import Model from "./components/Modal";
+import Model from "./components/CreateAdminPopup";
 
 function Dashboard() {
   return (

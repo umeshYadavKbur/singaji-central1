@@ -11,7 +11,6 @@ import ResetPassword from "./components/auth/ResetPassword";
 
 //import coreUireact js
 import "@coreui/coreui/dist/css/coreui.min.css";
-import Dashboard from "./components/superAdmin/dashbord/Dashboard";
 import AdminDashboard from "./components/superAdmin/dashbord/AdminDashboard";
 
 function App() {
