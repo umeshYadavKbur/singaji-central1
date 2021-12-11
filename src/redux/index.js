@@ -2,3 +2,5 @@
 export * from './actionDispatcher/authDispatcher.js'
 export * from './actionDispatcher/newPassDispatcher.js'
 export * from './actionDispatcher/forgotpassDispatcher.js'
+export * from './actionDispatcher/createNewAdminDispatcher.js'
+
