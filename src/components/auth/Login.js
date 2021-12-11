@@ -34,7 +34,7 @@ function Login({ userData, fetchUsers }) {
 
   console.log("maijn page", userData);
   if (userData.role === "SUPERADMIN") {
-    history.push("/dashboard");
+    history.push("/admindashboard");
   }
 
   const validationSchema = Yup.object({
