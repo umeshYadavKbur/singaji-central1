@@ -1,21 +1,26 @@
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS } from "../constants/actions"
+import {
+  LOGIN_FAIL,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT,
+} from "../constants/actions";
 
 const initialState = {
   loading: false,
-  loginSucces:false,
-  role: '',
-  token: '',
-  userInfo: '',
-  error: ''
-}
+  loginSucces: false,
+  role: "",
+  token: "",
+  userInfo: "",
+  error: "",
+};
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
     case LOGIN_SUCCESS:
       return {
         loading: false,
@@ -23,19 +28,30 @@ const userReducer = (state = initialState, action) => {
         role: action.payload.role,
         token: action.payload.token,
         userInfo: action.payload.user,
-        error: ''
-      }
+        error: "",
+      };
     case LOGIN_FAIL:
       return {
         loading: false,
         loginSucces: false,
-        role: '',
-        token: '',
-        userInfo: '',
-        error: action.payload
-      }
-    default: return state
-  }
-}
+        role: "",
+        token: "",
+        userInfo: "",
+        error: action.payload,
+      };
 
-export default userReducer
+    case LOGOUT:
+      return {
+        loading: false,
+        loginSucces: false,
+        role: "",
+        token: "",
+        userInfo: "",
+        error: "",
+      };
+    default:
+      return state;
+  }
+};
+
+export default userReducer;

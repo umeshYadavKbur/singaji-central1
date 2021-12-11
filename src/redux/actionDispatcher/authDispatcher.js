@@ -1,4 +1,9 @@
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS } from "../constants/actions";
+import {
+  LOGIN_FAIL,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT,
+} from "../constants/actions";
 import getData from "../../services/agent";
 import swal from "sweetalert";
 
@@ -67,5 +72,11 @@ export const loginFailure = (error) => {
   return {
     type: LOGIN_FAIL,
     payload: error,
+  };
+};
+
+export const logout = () => {
+  return {
+    type: LOGOUT,
   };
 };

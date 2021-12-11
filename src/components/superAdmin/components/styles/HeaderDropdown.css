@@ -1,3 +1,19 @@
 .dropdown-menu.show {
-  background-color: 'red !important';
+  width: 296px !important;
+  height: 334px !important;
+  background-color: #7e7e7e !important;
+}
+
+/* .dropdown-menu.show li{
+  background-color: red !important;
+} */
+
+.dropdown_profile_pic {
+  background-color: #7e7e7e !important;
+  color: #fff;
+}
+
+.dropdown-item{
+  background-color: #7e7e7e !important;
+  cursor: pointer;
 }
