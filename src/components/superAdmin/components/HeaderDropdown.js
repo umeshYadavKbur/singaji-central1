@@ -65,7 +65,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
               color: "white",
             }}
           >
-            Roshan Yadav roshany.bca2020@ssism.org
+            {userData.userInfo} roshany.bca2020@ssism.org
           </p>
         </div>
         <CDropdownItem
