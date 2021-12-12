@@ -12,7 +12,7 @@ import {
 import { cilLockLocked, cilSettings } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 
-import avatar8 from "../../assests/image/Mask Group 39.png";
+import avatar8 from "../../assests/image/david.png";
 import "./styles/HeaderDropdown.css";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../../redux/actionDispatcher/authDispatcher";
