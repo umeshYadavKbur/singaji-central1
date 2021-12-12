@@ -12,11 +12,11 @@ import AdminMainPage from "./components/superAdmin/AdminMainPage";
 import StudenMainpage from "./components/superAdmin/StudenMainpage";
 import ProtectedRoute from "./redux/constants/ProtectedRoute";
 import AddStudent from "./components/superAdmin/AddStudent";
-
+import DataTable from "./components/superAdmin/Table";
 //import coreUireact js 
 import '@coreui/coreui/dist/css/coreui.min.css';
-import Toast from "./components/superAdmin/dashbord/components/Toast";
-import Dashboard from "./components/superAdmin/dashbord/Dashboard";
+// import Toast from "./components/superAdmin/dashbord/components/Toast";
+// import Dashboard from "./components/superAdmin/dashbord/Dashboard";
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path="/toast" component={Toast} />
+          {/* <Route path="/toast" component={Toast} /> */}
           <Route path="/login" component={Login} />
           <Route path="/forgetpassword" component={ForgotPassword} />
           <Route path="/create_new_password/:token" component={ResetPassword} />
@@ -33,7 +33,8 @@ function App() {
           <Route path="/student" ><ProtectedRoute Cmp={StudenMainpage} ></ProtectedRoute></Route>
           <Route path="/add_student" ><ProtectedRoute Cmp={AddStudent} ></ProtectedRoute></Route>
           <Route path="/admin" ><ProtectedRoute Cmp={AdminMainPage} ></ProtectedRoute></Route>
-          <Route path="/home"  ><ProtectedRoute Cmp={Dashboard} ></ProtectedRoute></Route>
+          {/* <Route path="/home"  ><ProtectedRoute Cmp={Dashboard} ></ProtectedRoute></Route> */}
+          <Route path="/"  ><ProtectedRoute Cmp={DataTable} ></ProtectedRoute></Route>
           <Route
             path="*"
             render={() => (

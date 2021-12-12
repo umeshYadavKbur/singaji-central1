@@ -5,92 +5,36 @@ import {connect} from 'react-redux';
 import AddNewStudent from '../../redux/actionDispatcher/addNewStudentDispatcher';
 import axios from 'axios';
 import Select from 'react-select';
+import getDataFromApi from '../../services/getApi';
+import { useEffect } from 'react';
+
+
+
+
 
 function AddStudent() {
 
-  const option =[{value:'PCM',label:'PCM'},
-    {value: 'chocolate',label: 'Chocolate'},
-    {value: 'strawberry',label: 'Strawberry'},
-    {value: 'vanilla',label: 'Vanilla'},];
+  const [trackName, setTrackName] = useState([{trackName:'loding...',trackId:0}])
+  const [villageName, setVillageName] = useState([{label:'loding...',value:0}])
+  
+  useEffect(() => {
+    getDataFromApi("/api/track_list")
+    .then(items=>{
+      setTrackName(items)
+    })
+  }, [])
+
+  // console.log("tarck",trackName);
+
+  
+
   const [tehsil,setTehsil] = useState();
 
-  const validationSchema = Yup.object({
-    firstName: Yup.string().required("Required!"),
-    lastName: Yup.string().required("Required!"),
-    branchName: Yup.string().required("Required!"),
-    fatherName: Yup.string().required("Required!"),
-    dob: Yup.string().required("Required!"),
-    mobileNo: Yup.string().required("Required!"),
-    email: Yup.string().required("Required!"),
-    traceName: Yup.string().required("Required!"),
-    schoolName: Yup.string().required("Required!"),
-    school12Subject: Yup.string().required("Required!"),
-    percentage12: Yup.string().required("Required!"),
-    percentage11: Yup.string().required("Required!"),
-    percentage10: Yup.string().required("Required!"),
-    aadharNumber: Yup.string().required("Required!"),
-    fatherOccupation: Yup.string().required("Required!"),
-    fatherIncome: Yup.string().required("Required!"),
-    category: Yup.string().required("Required!"),
-    village: Yup.string().required("Required!"),
-    tehsil: Yup.string().required("Required!"),
-    district: Yup.string().required("Required!"),
-    registrationFees: Yup.string().required("Required!"),
-    gender: Yup.string().required("Required!"),
-    schemeFees: Yup.string().required("Required!"),
-    //  courseFees: Yup.string().required("Required!"),
-    //  postmatricScholarship: Yup.string().required("Required!"),
-    //  postmatricScholarshipOwner: Yup.string().required("Required!"),
-    //  gkbScholarship: Yup.string().required("Required!"),
-    //  gkbScholarshipOwner: Yup.string().required("Required!"),
-    //  firstInstallment: Yup.string().required("Required!"),
-    //  firstInstallmentDate: Yup.string().required("Required!"),
-    //  secondInstallment: Yup.string().required("Required!"),
-    //  secondInstallmentDate: Yup.string().required("Required!"),
-    //  thirdInstallment: Yup.string().required("Required!"),
-    //  thirdInstallmentDate: Yup.string().required("Required!"),
-    //  totalFees: Yup.string().required("Required!"),
+  const validationSchema = Yup.object({firstName: Yup.string().required("Required!"),lastName: Yup.string().required("Required!"),branchName: Yup.string().required("Required!"),fatherName: Yup.string().required("Required!"),dob: Yup.string().required("Required!"),mobileNo: Yup.string().required("Required!"),email: Yup.string().required("Required!"),trackName: Yup.string().required("Required!"),schoolName: Yup.string().required("Required!"),school12Subject: Yup.string().required("Required!"),percentage12: Yup.string().required("Required!"),percentage11: Yup.string().required("Required!"),percentage10: Yup.string().required("Required!"),aadharNumber: Yup.string().required("Required!"),fatherOccupation: Yup.string().required("Required!"),fatherIncome: Yup.string().required("Required!"),category: Yup.string().required("Required!"),village: Yup.string().required("Required!"),tehsil: Yup.string().required("Required!"),district: Yup.string().required("Required!"),registrationFees: Yup.string().required("Required!"),gender: Yup.string().required("Required!"),schemeFees: Yup.string().required("Required!"),//  courseFees: Yup.string().required("Required!"),//  postmatricScholarship: Yup.string().required("Required!"),//  postmatricScholarshipOwner: Yup.string().required("Required!"),//  gkbScholarship: Yup.string().required("Required!"),//  gkbScholarshipOwner: Yup.string().required("Required!"),//  firstInstallment: Yup.string().required("Required!"),//  firstInstallmentDate: Yup.string().required("Required!"),//  secondInstallment: Yup.string().required("Required!"),//  secondInstallmentDate: Yup.string().required("Required!"),//  thirdInstallment: Yup.string().required("Required!"),//  thirdInstallmentDate: Yup.string().required("Required!"),//  totalFees: Yup.string().required("Required!"),
   })
 
   const initialValues = {
-    firstName: "",
-    lastName: '',
-    branchName: '',
-    fatherName: '',
-    dob: '',
-    mobileNo: '',
-    email: '',
-    traceName: '',
-    schoolName: '',
-    school12Subject: '',
-    percentage12: '',
-    percentage11: '',
-    percentage10: '',
-    aadharNumber: '',
-    fatherOccupation: '',
-    pincode: '',
-    fatherIncome: '',
-    category: '',
-    village: '',
-    tehsil: '',
-    district: '',
-    registrationFees: '',
-    gender: '',
-    schemeFees: '',
-    courseFees: '',
-    postmatricScholarship: '',
-    postmatricScholarshipOwner: '',
-    gkbScholarship: '',
-    gkbScholarshipOwner: '',
-    firstInstallment: '',
-    firstInstallmentDate: '',
-    secondInstallment: '',
-    secondInstallmentDate: '',
-    thirdInstallment: '',
-    thirdInstallmentDate: '',
-    totalFees: ''
-
-
+    firstName: "",lastName: '', branchName: '',fatherName: '', dob: '', mobileNo: '',email: '',trackName: '',schoolName: '',school12Subject: '',percentage12: '',percentage11: '',percentage10: '',aadharNumber: '',fatherOccupation: '',pincode: '',fatherIncome: '',category: '',village: '',tehsil: '',district: '',registrationFees: '',gender: '',schemeFees: '',courseFees: '',postmatricScholarship: '',postmatricScholarshipOwner: '',gkbScholarship: '',gkbScholarshipOwner: '',firstInstallment: '',firstInstallmentDate: '',secondInstallment: '',secondInstallmentDate: '',thirdInstallment: '',thirdInstallmentDate: '',totalFees: ''
   }
 
   const getPincode = async () => {
@@ -124,7 +68,7 @@ function AddStudent() {
   }
 
 
-
+ 
 
 
 
@@ -143,14 +87,24 @@ function AddStudent() {
   })
 
 
+  const getVillageName  = () =>{
 
+
+    getDataFromApi(`/api//track_name/${formik.values.trackName}`)
+        .then(data => {
+          setVillageName(data)
+        })
+ console.log("villageName ::",villageName);
+  }
+const option =[];
+// console.log("trackName value",formik.values.trackName);
 
   return (
     <>
       {/* <div class="container"> */}
-      <div style={{height: '70px',width: "100%",background: "red"}}>header</div>
+      {/* <div style={{height: '70px',width: "100%",background: "red"}}>header</div> */}
       <div className="d-flex row">
-        <div className="col-2" style={{height: '100vh',width: "auto",background: "red"}}><h3>side bar is here</h3></div>
+        {/* <div className="col-2" style={{height: '100vh',width: "auto",background: "red"}}><h3>side bar is here</h3></div> */}
         <div className="col-10">
           <div className="row p-4" >
 
@@ -278,6 +232,7 @@ function AddStudent() {
                         <label htmlFor="">Year</label>
                         <select name="year" value={formik.values.year} onChange={formik.handleChange} className="form-select" id="inputGroupSelect02">
                           <option selected values="">year</option>
+                          <option value="">select year</option>
                           <option value="1">I</option>
                           <option value="2">II</option>
                           <option value="3">III</option>
@@ -312,20 +267,36 @@ function AddStudent() {
                         ) : ''}
                       </div>
                       <div className="col">
-                        <label htmlFor="">Trace Name</label>
-                        <select name="year" value={formik.values.year} onChange={formik.handleChange} className="form-select" id="inputGroupSelect02" placeholder="select">
-                          <option value="1">Kolari</option>
-                          <option value="2">Narsulaganj</option>
-                          <option value="3">Haran</option>
-                        </select>{formik.errors.year && formik.touched.year ? (
-                          <div className="text-danger fs-6">{formik.errors.year}</div>
+                        <label htmlFor="">Track Name</label>
+                        <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange} onBlur={(e)=>{console.log(e.target.value); getVillageName()}} className="form-select" id="inputGroupSelect02" placeholder="select">
+                          <option value='0'>Select Track</option>
+                        {  trackName.map((ele)=>{
+                               
+                               return(
+                                 <option value={ele.trackid}>{ele.trackname}</option>
+
+                               )
+
+
+
+                          })}
+                          {/* <option value="2">Narsulaganj</option>
+                          <option value="3">Haran</option> */}
+                        </select>
+                        {formik.errors.trackName && formik.touched.trackName ? (
+                          <div className="text-danger fs-6">{formik.errors.trackName}</div>
                         ) : ''}
                       </div>
                     </div>
                     <div className="row">
                       <div className="col">
                         <label htmlFor="">Village </label>
-                        <Select options={option} placeholder="search your village" onChange={(e) => {console.log(e); formik.setFieldValue('village',e.value)}} ></Select>
+                        <Select options={villageName.map((ele) => {
+                          return( {label: ele.label,value: ele.value} )
+                        })
+                        
+                      }
+                        placeholder="search your village" onChange={(e) => {console.log(e); formik.setFieldValue('village',e.value)}} ></Select>
                         {formik.errors.village && formik.touched.village ? (
                           <div className="text-danger fs-6">{formik.errors.village}</div>
                         ) : ''}

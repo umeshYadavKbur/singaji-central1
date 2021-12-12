@@ -1,0 +1,29 @@
+#customers table {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+#customers th {
+    padding-top: 12px;
+    width: auto;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+#customers td {
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    text-align: center;
+    padding: 8px;
+}
+
+#customers tr {
+    background-color: white;
+    border-width: 12px;
+    border-color: #e3f3ff;
+}
+
+#customers tr:hover {
+    background-color: rgb(255, 255, 255);
+}

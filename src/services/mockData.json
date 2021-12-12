@@ -1,229 +1,106 @@
 [{
-    "Message": "Number of pincode(s) found:16",
-    "Status": "Success",
-    "PostOffice": [{
-            "Name": "Ajnas",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Bhandaria",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Chandwana",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Chichli Rajor",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Ganora",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Harangaon",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Jiyagaon",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Kankariya",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Khategaon",
-            "Description": null,
-            "BranchType": "Sub Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Nanasa",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Pipalkota",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Richi",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Sukardi",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Sulgaon",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Tiwdiya",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        },
-        {
-            "Name": "Umaria",
-            "Description": null,
-            "BranchType": "Branch Post Office",
-            "DeliveryStatus": "Delivery",
-            "Circle": "Madhya Pradesh",
-            "District": "Dewas",
-            "Division": "Indore Moffusil",
-            "Region": "Indore",
-            "Block": "Khategaon",
-            "State": "Madhya Pradesh",
-            "Country": "India",
-            "Pincode": "455336"
-        }
-    ]
-}]
+        "SNo": 1,
+        "userId": 2,
+        "email": "riyay.bca2020@ssism.org",
+        "name": "Riya yadav ",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 2,
+        "userId": 72,
+        "email": "sandhyaj.bca2020@ssism.org",
+        "name": "kuldeep",
+        "roleId": "Admin"
+    },
+    {
+        "SNo": 3,
+        "userId": 77,
+        "email": "riyayadav1@gmail.com",
+        "name": "kuldeep",
+        "roleId": "Admin"
+    },
+    {
+        "SNo": 4,
+        "userId": 106,
+        "email": "kuldeeppanwar7697-2@gmail.com",
+        "name": "kuldeep panwar",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 5,
+        "userId": 120,
+        "email": "harshdixit991@gmail.com",
+        "name": "harsh@123",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 6,
+        "userId": 143,
+        "email": "harshd.bca2020@ssism.org",
+        "name": "Harsh dixit",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 7,
+        "userId": 153,
+        "email": "roshany.bca2020@ssism.org",
+        "name": "Roshan",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 8,
+        "userId": 162,
+        "email": "mrroshan738949@gmail.com",
+        "name": "Roshan",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 9,
+        "userId": 166,
+        "email": "anmols.bsccs@ssism.org",
+        "name": "Roshan",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 10,
+        "userId": 167,
+        "email": "anmols.bs@ssism.org",
+        "name": "Roshan",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 11,
+        "userId": 171,
+        "email": "umesh@ssism.org",
+        "name": "Umesh",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 12,
+        "userId": 174,
+        "email": "roshany.bca2020@gmail.com",
+        "name": "Roshanyadav",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 13,
+        "userId": 215,
+        "email": "goutamv.bca2020@ssism.org",
+        "name": "Goutam",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 14,
+        "userId": 216,
+        "email": "kuldeeppanwar7697@gmail.com",
+        "name": "kuldeep panwar",
+        "roleId": "Super Admin"
+    },
+    {
+        "SNo": 15,
+        "userId": 217,
+        "email": "kuldeeppanwar7697@gail.com",
+        "name": "kuldeep panwar",
+        "roleId": "Super Admin"
+    }
+]
