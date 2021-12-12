@@ -10,13 +10,30 @@ import Navbar from "./components/Navbar";
 import Table from "./components/Table";
 
 import Sidebar from "./components/Sidebar";
+import { connect } from "react-redux";
 
-function AdminDashboard() {
+function AdminDashboard({ sidebar }) {
+  console.log("====================================");
+  console.log(sidebar);
+  console.log("====================================");
   return (
     <div className="main_container_dashboard">
-      <div className="side_bar_content">
+      <div
+        style={
+          sidebar.show
+            ? {
+                height: "100vh",
+                width: "95px",
+                backgroundColor: "#F4F7FC",
+              }
+            : {
+                height: "100vh",
+                minWidth: "285px",
+                backgroundColor: "#F4F7FC",
+              }
+        }
+      >
         <Sidebar />
-        {/* sidebar */}
         {/* <Link
           to="/admindashboard/addstudent"
           style={{
@@ -26,16 +43,6 @@ function AdminDashboard() {
           }}
         >
           Add Student
-        </Link>
-        <Link
-          to="/admindashboard/table"
-          style={{
-            color: "gray",
-            cursor: "pointer",
-            textDecoration: "none",
-          }}
-        >
-          Table data
         </Link> */}
       </div>
       <div className="header_table">
@@ -58,4 +65,12 @@ function AdminDashboard() {
   );
 }
 
-export default AdminDashboard;
+//Getting the state from the store
+const mapStateToProps = (state) => {
+  return {
+    sidebar: state.sidebar,
+  };
+};
+
+//Connecting the component to our store
+export default connect(mapStateToProps, null)(AdminDashboard);

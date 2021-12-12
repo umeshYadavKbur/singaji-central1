@@ -9,9 +9,9 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import logo from '../../assests/image/ssism_si.svg'
+import logo from "../../assests/image/ssism_si.svg";
 import "./styles/createAdmin.css";
-import {createNewAdmin} from '../../../redux/actionDispatcher/createNewAdminDispatcher'
+import { createNewAdmin } from "../../../redux/actionDispatcher/createNewAdminDispatcher";
 
 function CreateAdminPopup({ createAdmin, createNewAdmin }) {
   const token = localStorage.getItem("token");
@@ -61,7 +61,17 @@ function CreateAdminPopup({ createAdmin, createNewAdmin }) {
 
   return (
     <>
-      <CButton onClick={() => setVisible(!visible)}>Create Admin</CButton>
+      <CButton
+        style={{
+          backgroundColor: "white",
+          color: "#5A607F",
+          outline: "none",
+          borderColor: "#5A607F",
+        }}
+        onClick={() => setVisible(!visible)}
+      >
+        Create Admin
+      </CButton>
       <CModal
         size="md"
         alignment="center"
@@ -115,7 +125,6 @@ function CreateAdminPopup({ createAdmin, createNewAdmin }) {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     // eslint-disable-next-line
-                    name="role"
                     type="text"
                   >
                     <option selected className="fields form-select">

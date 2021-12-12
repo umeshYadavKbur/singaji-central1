@@ -3,4 +3,5 @@ export * from './actionDispatcher/authDispatcher.js'
 export * from './actionDispatcher/newPassDispatcher.js'
 export * from './actionDispatcher/forgotpassDispatcher.js'
 export * from './actionDispatcher/createNewAdminDispatcher.js'
-
+export * from './actionDispatcher/showSideBarDispather.js'
+export * from './actionDispatcher/createFeesStrucDispather.js'

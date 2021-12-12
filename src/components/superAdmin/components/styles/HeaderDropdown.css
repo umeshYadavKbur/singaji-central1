@@ -17,3 +17,9 @@
   background-color: #7e7e7e !important;
   cursor: pointer;
 }
+.avatar-img {
+  width: 100%;
+  height: auto;
+  border-radius: 50em;
+  margin-block-end: 26px;
+}

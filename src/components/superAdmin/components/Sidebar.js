@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles/sidebar.css";
 import logoimage from "../../assests/image/logoimage.png";
 import david from "../../assests/image/david.png";
+import { connect } from "react-redux";
+import {
+  hideSideBar,
+  showSideBar,
+} from "../../../redux/actionDispatcher/showSideBarDispather";
+import back_btn from "../../assests/image/back_btn.svg";
 
-const Sidebar = () => {
+const Sidebar = ({ hideSideBar, showSideBar }) => {
+  const [toggle, setToggle] = useState(false);
+  const handleClick = () => {
+    if (toggle) {
+      setToggle(false);
+      hideSideBar();
+    } else {
+      setToggle(true);
+      showSideBar();
+    }
+  };
   return (
     <>
       <div>
@@ -11,7 +27,14 @@ const Sidebar = () => {
         <div className="sidebar">
           <center className="images_sidebar">
             <label htmlFor="check">
-              <i className="fas fa-chevron-left" id="sidebar_btn" />
+              <img
+                className="fas fa-chevron-left"
+                id="sidebar_btn"
+                onClick={handleClick}
+                src={back_btn}
+                style={{ marginBlockEnd: "6px" }}
+                alt="back"
+              />
             </label>
             <img src={logoimage} className="profile_image1" alt="" />
             <img src={david} className="profile_image2" alt="" />
@@ -65,4 +88,15 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+//Getting the state from the store
+
+//passing the userData in fetchUsers function and also dispatch method
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showSideBar: () => dispatch(showSideBar()),
+    hideSideBar: () => dispatch(hideSideBar()),
+  };
+};
+
+//Connecting the component to our store
+export default connect(null, mapDispatchToProps)(Sidebar);
