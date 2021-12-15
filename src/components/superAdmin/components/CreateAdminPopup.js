@@ -60,7 +60,8 @@ function CreateAdminPopup({ createAdmin, createNewAdmin }) {
   });
 
   return (
-    <>
+    <div >
+
       <CButton
         style={{
           backgroundColor: "white",
@@ -82,7 +83,7 @@ function CreateAdminPopup({ createAdmin, createNewAdmin }) {
           <CModalTitle>Create new admin</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <div className="first_div">
+          <div className="first_div createAdmin">
             <div className="second_div ">
               <form onSubmit={formik.handleSubmit}>
                 <div>
@@ -152,7 +153,7 @@ function CreateAdminPopup({ createAdmin, createNewAdmin }) {
           </div>
         </CModalBody>
       </CModal>
-    </>
+    </div>
   );
 }
 
