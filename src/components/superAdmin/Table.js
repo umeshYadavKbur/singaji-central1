@@ -118,7 +118,7 @@ export default function DataTable() {
 
             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
             <br />
-            <select value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+            <select style={{height:"50px",width:"9%"}} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                 {
                     [10,25,50].map(pageSize => (
                         <option value={pageSize} key={pageSize}>show Entrie {pageSize}</option>
@@ -166,7 +166,7 @@ export default function DataTable() {
 
                 </tbody>
             </table>
-                <div style={{border:'e3f3ff'}}>
+                <div style={{border:'e3f3ff',justifyContent:'right'}}>
                 <span>
                     Page{' '}
                     <strong>{pageIndex + 1} of {pageOptions.length} </strong>
