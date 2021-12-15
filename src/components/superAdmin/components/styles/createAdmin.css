@@ -20,7 +20,7 @@
   align-content: center;
   margin-left: 40px;
 }
-input {
+.createAdmin input {
   height: 38px;
   width: 100%;
   outline: none;
