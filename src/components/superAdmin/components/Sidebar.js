@@ -3,6 +3,7 @@ import "./styles/sidebar.css";
 import logoimage from "../../assests/image/logoimage.png";
 import david from "../../assests/image/david.png";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   hideSideBar,
   showSideBar,
@@ -57,29 +58,33 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
           <li><a href="#">My Admin</a></li>
           <li><a href="#">View fees structure</a></li>
         </ul> */}
-          <a href="#!">
+          <Link to='/admindashboard'>
             <i className="fas fa-desktop" />
             <span>Dashboard</span>
+          </Link>
+          <Link to="#">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Education</span>
+          </Link>
+          <a href="#!">
+            <i class="fas fa-briefcase"></i>
+            <span>Accounts</span>
           </a>
           <a href="#!">
-            <i className="fas fa-cogs" />
-            <span>Components</span>
+            <i class="fas fa-book-open"></i>
+            <span>Alumini</span>
           </a>
           <a href="#!">
-            <i className="fas fa-table" />
-            <span>Tables</span>
+            <i class="far fa-chart-bar"></i>
+            <span>External Companies</span>
           </a>
           <a href="#!">
-            <i className="fas fa-th" />
-            <span>Forms</span>
+            <i class="fas fa-hand-holding-usd"></i>
+            <span>Donation</span>
           </a>
           <a href="#!">
-            <i className="fas fa-info-circle" />
-            <span>About</span>
-          </a>
-          <a href="#!">
-            <i className="fas fa-sliders-h" />
-            <span>Settings</span>
+            <i class="fas fa-plus-square"></i>
+            <span>Others</span>
           </a>
         </div>
         <div />

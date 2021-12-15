@@ -76,10 +76,13 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
           color: "#5A607F",
           outline: "none",
           borderColor: "#5A607F",
+          marginRight:"10px",
+          border: "none",
+          fontWeight: "bold"
         }}
         onClick={() => setVisible(!visible)}
       >
-        Fees Structure
+        Fees Structure <i class="fas fa-user-edit"></i>
       </CButton>
       <CModal
         // size="md"
@@ -150,29 +153,29 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
                     value={formik.values.startYear}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className="inputs"
+                    // className="inputs"
                     name="startYear"
                     type="text"
                     // eslint-disable-next-line
-                    className="mt-2 mb-2"
+                    className="form-control input-lg"
                     placeholder="Starting year"
                   />
                   <input
                     value={formik.values.endYear}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className="inputs"
+                    // className="inputs"
                     name="endYear"
                     type="text"
                     // eslint-disable-next-line
-                    className="mt-2 mb-2"
+                    className="form-control input-lg"
                     placeholder="Ending year"
                   />
                   <input
                     value={formik.values.totalFees}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className="inputs"
+                    className="form-control input-lg"
                     name="totalFees"
                     type="text"
                     placeholder="Total-fees"
@@ -186,7 +189,7 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
                   )}
                 </div>
                 <button
-                  className=" submit_btn mt-2 w-100  btn-md  font-weight-bold"
+                  className="submit_btn mt-2 w-100 btn-md font-weight-bold"
                   type="submit"
                 >
                   Create

@@ -2,8 +2,8 @@ import React from "react";
 
 function Dashboard() {
   return (
-    <div>
-      <h1>hello there lorem page hello there eise</h1>
+    <div className="position-absolute top-50 start-50 translate-middle text-secondary fw-bold">
+      <h1>Coming Soon...</h1>
     </div>
   );
 }

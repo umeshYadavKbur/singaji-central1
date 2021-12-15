@@ -69,11 +69,13 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
           backgroundColor: "white",
           color: "#5A607F",
           outline: "none",
-          borderColor: "#5A607F",
+          // borderColor: "#5A607F",
+          border: "none",
+          fontWeight: "bold"
         }}
         onClick={() => setVisible(!visible)}
       >
-        Create Admin
+        Create Admin <i class="fas fa-plus"></i>
       </CButton>
       <CModal
         alignment="center"
@@ -81,7 +83,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         onClose={() => setVisible(false)}
       >
         <CModalHeader>
-          <CModalTitle>Create new admin</CModalTitle>
+          <CModalTitle>Create new admin  </CModalTitle>
         </CModalHeader>
         <CModalBody>
           <div className="first_div createAdmin">

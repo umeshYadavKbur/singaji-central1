@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 // import { Link } from "react-router-dom";
 import AddStudent from "./components/AddStudent";
-
 // import Sidebar from "./components/Sidebar";
 import Dashboard from "./components/Dashboard";
 import "./components/styles/dashboard.css";
@@ -55,8 +54,7 @@ function AdminDashboard({ sidebar }) {
             <Route
               exact
               path="/admindashboard/addstudent"
-              component={AddStudent}
-            />
+              component={AddStudent}/>
             <Route exact path="/admindashboard/table" component={Table} />
           </Switch>
         </div>
