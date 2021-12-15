@@ -12,8 +12,12 @@ import * as Yup from "yup";
 import logo from "../../assests/image/ssism_si.svg";
 import { createFeesStructure } from "../../../redux/actionDispatcher/createFeesStrucDispather";
 import "./styles/createAdmin.css";
+import {useParams} from "react-router-dom";
+import axios from "axios";
+
 
 function FeesStructure({ createAdmin, createNewAdmin }) {
+  const {token} =useParams()
   const [visible, setVisible] = useState(false);
   const validationSchema = Yup.object({
     totalFees: Yup.string().required("Required*"),
@@ -31,34 +35,36 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
     },
     validationSchema,
 
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log("====================================");
       console.log(values);
       console.log("====================================");
       //   var data = JSON.stringify({
       //     totalFees: formik.values.totalFees,
-      //     name: formik.values.name,
+      //     startYear: formik.values.startYear,
+      //     endYear: formik.values.endYear,
       //     stream: formik.values.stream,
       //   });
       //   var config = {
       //     method: "post",
       //     url: "https://singaji-central-server.herokuapp.com/api/createNewAdmin",
       //     headers: {
-      //       Authorization: `Bearer ${token}`,
+      //       Authorization: `"Bearer${token}"`,
       //       // token,
       //       "Content-Type": "application/json",
       //     },
       //     data: data,
       //   };
-      //   createNewAdmin(config);
+      //   // createNewAdmin(config);
 
-      // axios(config)
-      //     .then(function (response) {
-      //         console.log(JSON.stringify(response.data));
-      //     })
-      //     .catch(function (error) {
-      //         console.log(error);
-      //     });
+      // const result = await axios.post(config)
+      // console.log(result);
+      //     // .then(function (response) {
+      //     //     console.log(JSON.stringify(response.data));
+      //     // })
+      //     // .catch(function (error) {
+      //     //     console.log(error);
+      //     // });
     },
   });
 
@@ -82,7 +88,7 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
         onClose={() => setVisible(false)}
       >
         <CModalHeader>
-          <CModalTitle>Enter New Fees Structure</CModalTitle>
+          {/* <CModalTitle>Enter New Fees Structure</CModalTitle> */}
         </CModalHeader>
         <CModalBody>
           <div className="first_div">
