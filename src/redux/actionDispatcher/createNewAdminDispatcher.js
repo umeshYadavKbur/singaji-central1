@@ -20,6 +20,7 @@ export const createNewAdmin = (data) => {
           // console.log(("The response code is ::", response.status));
 
           if (response.status === 208) {
+          dispatch(newAdminReqSuccess())
             swal({
               title: "Admin already created",
               icon: "info",

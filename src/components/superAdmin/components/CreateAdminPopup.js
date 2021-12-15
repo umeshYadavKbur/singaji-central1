@@ -12,9 +12,12 @@ import * as Yup from "yup";
 import logo from "../../assests/image/ssism_si.svg";
 import "./styles/createAdmin.css";
 import { createNewAdmin } from "../../../redux/actionDispatcher/createNewAdminDispatcher";
+import { baseUrl } from "../../../url/baseUrl";
 
-function CreateAdminPopup({ createAdmin, createNewAdmin }) {
+function CreateAdminPopup({ adminData, createNewAdmin }) {
   const token = localStorage.getItem("token");
+
+  console.log(adminData);
 
   const [visible, setVisible] = useState(false);
   const validationSchema = Yup.object({
@@ -39,7 +42,7 @@ function CreateAdminPopup({ createAdmin, createNewAdmin }) {
       });
       var config = {
         method: "post",
-        url: "https://singaji-central-server.herokuapp.com/api/createNewAdmin",
+        url: `${baseUrl}/api/createNewAdmin`,
         headers: {
           Authorization: `Bearer ${token}`,
           // token,
@@ -60,8 +63,7 @@ function CreateAdminPopup({ createAdmin, createNewAdmin }) {
   });
 
   return (
-    <div >
-
+    <div>
       <CButton
         style={{
           backgroundColor: "white",
@@ -74,7 +76,6 @@ function CreateAdminPopup({ createAdmin, createNewAdmin }) {
         Create Admin
       </CButton>
       <CModal
-        size="md"
         alignment="center"
         visible={visible}
         onClose={() => setVisible(false)}
@@ -123,6 +124,7 @@ function CreateAdminPopup({ createAdmin, createNewAdmin }) {
                     name="role"
                     className="fields form-select "
                     value={formik.values.role}
+                    // defaultValue="null"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     // eslint-disable-next-line
@@ -143,10 +145,11 @@ function CreateAdminPopup({ createAdmin, createNewAdmin }) {
                   </select>
                 </div>
                 <button
+                  disabled={adminData.loading}
                   className=" submit_btn mt-2 w-100  btn-md  font-weight-bold"
                   type="submit"
                 >
-                  Create
+                  {adminData.loading ? "Loading..." : "Create"}
                 </button>
               </form>
             </div>
