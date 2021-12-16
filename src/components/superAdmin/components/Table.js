@@ -4,11 +4,11 @@ import * as React from 'react';
 // import { useEffect,useState } from 'react';
 import {useMemo} from 'react';
 import {useFormik} from 'formik';
-import { GlobalFilter } from '../../services/GlobalFilter';
+import { GlobalFilter } from '../../../services/GlobalFilter';
 import {useTable,useSortBy,useGlobalFilter,usePagination} from 'react-table';
-import MockData from '../../services/mockData.json'
-import Column from '../../services/Column';
-import './Table.css'
+import MockData from '../../../services/mockData.json'
+import Column from '../../../services/Column'
+import './styles/Table.css'
 
 
 // const columns = [
@@ -114,7 +114,7 @@ export default function DataTable() {
             />
         </div> */}
         
-            <div style={{backgroundColor:"#e3f3ff" ,height:"auto",width:"auto"}}>
+            <div style={{backgroundColor:"rgb(246 249 252)" ,height:"auto",width:"auto"}}>
 
             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
             <br />
