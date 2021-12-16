@@ -26,7 +26,7 @@ function App() {
             component={ResetPassword}
           />
           <Route path="/admindashboard" component={AdminDashboard} />
-          <Route path="*" render={() => <Redirect to="/login" />} />
+          <Route path="*" render={() => <Redirect to="/error" />} />
         </Switch>
       </Router>
     </Provider>
