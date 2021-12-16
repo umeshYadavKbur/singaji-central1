@@ -134,7 +134,7 @@ export default function DataTable() {
                                     headerGroup.headers.map((column) => (
                                         <th  {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('header')}
                                             <span>
-                                                {column.isSorted ? (column.isSortedDesc ? ' ⏬' : ' ⏫') : ''}
+                                                {column.isSorted ? (column.isSortedDesc ? <i class="fas fa-chevron-down ms-2"></i> : <i class="fas fa-chevron-up ms-2"></i>) : ''}
                                             </span></th>
                                     ))
                                 }
@@ -153,7 +153,9 @@ export default function DataTable() {
                                     {
                                         row.cells.map(cell => {
                                             return (
-                                                <td {...cell.getCellProps()}>{cell.render('Cell')} </td>
+                                                
+                                                <td {...cell.getCellProps()}>{cell.render('Cell')} </td> 
+                                                
                                             )
                                         })
                                     }
