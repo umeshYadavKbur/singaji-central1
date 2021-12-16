@@ -9,9 +9,6 @@ import getDataFromApi from '../../services/getApi';
 import { useEffect } from 'react';
 
 
-
-
-
 function AddStudent() {
 
   const [trackName, setTrackName] = useState([{trackName:'loding...',trackId:0}])

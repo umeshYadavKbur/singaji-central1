@@ -58,13 +58,14 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
           <li><a href="#">My Admin</a></li>
           <li><a href="#">View fees structure</a></li>
         </ul> */}
-          <Link to='/admindashboard'>
+          <Link to="/admindashboard">
             <i className="fas fa-desktop" />
             <span>Dashboard</span>
           </Link>
-          <Link to="#">
+          <Link to="/admindashboard/addstudent">
             <i class="fas fa-graduation-cap"></i>
-            <span>Education</span>
+            {/* <span>Education</span> */}
+            <span>Add Student</span>
           </Link>
           <a href="#!">
             <i class="fas fa-briefcase"></i>
