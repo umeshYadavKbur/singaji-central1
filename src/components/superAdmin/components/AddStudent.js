@@ -25,7 +25,7 @@ function AddStudent() {
     aadharNumber: Yup.string().required("Required!"),
     fatherOccupation: Yup.string().required("Required!"),
     fatherIncome: Yup.string().required("Required!"),
-    category: Yup.string().required("Required!"),
+    category: Yup.string().required("Required!"), 
     village: Yup.string().required("Required!"),
     tehsil: Yup.string().required("Required!"),
     district: Yup.string().required("Required!"),
