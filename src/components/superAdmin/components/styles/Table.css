@@ -21,7 +21,7 @@
 #customers tr {
     background-color: white;
     border-width: 12px;
-    border-color: #e3f3ff;
+    border-color: rgb(247, 250, 255);
 }
 
 #customers tr:hover {

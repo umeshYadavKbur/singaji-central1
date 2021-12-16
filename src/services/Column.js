@@ -20,10 +20,10 @@
         header: 'Role',
         accessor: 'roleId'
     },
-    // {
-    //     header: 'Mobile No',
-    //     accessor: 'mobile'
-    // }
+    {
+        header: 'Status',
+        accessor: 'status'
+    }
 
 ]
 

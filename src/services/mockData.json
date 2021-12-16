@@ -1,5 +1,6 @@
 [{
         "SNo": 1,
+        "status": "Active",
         "userId": 2,
         "email": "riyay.bca2020@ssism.org",
         "name": "Riya yadav ",
@@ -7,6 +8,7 @@
     },
     {
         "SNo": 2,
+        "status": "Active",
         "userId": 72,
         "email": "sandhyaj.bca2020@ssism.org",
         "name": "kuldeep",
@@ -14,6 +16,7 @@
     },
     {
         "SNo": 3,
+        "status": "Active",
         "userId": 77,
         "email": "riyayadav1@gmail.com",
         "name": "kuldeep",
@@ -21,6 +24,7 @@
     },
     {
         "SNo": 4,
+        "status": "Active",
         "userId": 106,
         "email": "kuldeeppanwar7697-2@gmail.com",
         "name": "kuldeep panwar",
@@ -28,6 +32,7 @@
     },
     {
         "SNo": 5,
+        "status": "Active",
         "userId": 120,
         "email": "harshdixit991@gmail.com",
         "name": "harsh@123",
@@ -35,6 +40,7 @@
     },
     {
         "SNo": 6,
+        "status": "Active",
         "userId": 143,
         "email": "harshd.bca2020@ssism.org",
         "name": "Harsh dixit",
@@ -42,6 +48,7 @@
     },
     {
         "SNo": 7,
+        "status": "Active",
         "userId": 153,
         "email": "roshany.bca2020@ssism.org",
         "name": "Roshan",
@@ -49,6 +56,7 @@
     },
     {
         "SNo": 8,
+        "status": "Active",
         "userId": 162,
         "email": "mrroshan738949@gmail.com",
         "name": "Roshan",
@@ -56,6 +64,7 @@
     },
     {
         "SNo": 9,
+        "status": "Active",
         "userId": 166,
         "email": "anmols.bsccs@ssism.org",
         "name": "Roshan",
@@ -63,6 +72,7 @@
     },
     {
         "SNo": 10,
+        "status": "Active",
         "userId": 167,
         "email": "anmols.bs@ssism.org",
         "name": "Roshan",
@@ -70,6 +80,7 @@
     },
     {
         "SNo": 11,
+        "status": "Active",
         "userId": 171,
         "email": "umesh@ssism.org",
         "name": "Umesh",
@@ -77,6 +88,7 @@
     },
     {
         "SNo": 12,
+        "status": "Active",
         "userId": 174,
         "email": "roshany.bca2020@gmail.com",
         "name": "Roshanyadav",
@@ -84,6 +96,7 @@
     },
     {
         "SNo": 13,
+        "status": "Active",
         "userId": 215,
         "email": "goutamv.bca2020@ssism.org",
         "name": "Goutam",
@@ -91,6 +104,7 @@
     },
     {
         "SNo": 14,
+        "status": "Active",
         "userId": 216,
         "email": "kuldeeppanwar7697@gmail.com",
         "name": "kuldeep panwar",
@@ -98,6 +112,7 @@
     },
     {
         "SNo": 15,
+        "status": "Active",
         "userId": 217,
         "email": "kuldeeppanwar7697@gail.com",
         "name": "kuldeep panwar",

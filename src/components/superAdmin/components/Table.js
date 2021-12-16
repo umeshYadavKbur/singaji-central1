@@ -118,7 +118,7 @@ export default function DataTable() {
 
             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
             <br />
-            <select style={{height:"50px",width:"9%"}} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+            <select style={{height:"50px",width:"auto" ,borderRadius:"10px",padding:"5px"}} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                 {
                     [10,25,50].map(pageSize => (
                         <option value={pageSize} key={pageSize}>show Entrie {pageSize}</option>
@@ -134,7 +134,7 @@ export default function DataTable() {
                                     headerGroup.headers.map((column) => (
                                         <th  {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('header')}
                                             <span>
-                                                {column.isSorted ? (column.isSortedDesc ? ' ⏬' : ' ⏫') : ''}
+                                                {column.isSorted ? (column.isSortedDesc ? <i class="fas fa-chevron-down ms-2"></i> : <i class="fas fa-chevron-up ms-2"></i>) : ''}
                                             </span></th>
                                     ))
                                 }
@@ -153,7 +153,9 @@ export default function DataTable() {
                                     {
                                         row.cells.map(cell => {
                                             return (
-                                                <td {...cell.getCellProps()}>{cell.render('Cell')} </td>
+                                                
+                                                <td {...cell.getCellProps()}>{cell.render('Cell')} </td> 
+                                                
                                             )
                                         })
                                     }
@@ -166,7 +168,7 @@ export default function DataTable() {
 
                 </tbody>
             </table>
-                <div style={{border:'e3f3ff',justifyContent:'right'}}>
+                <div style={{border: "rgb(246 249 252)",justifyContent:'right'}}>
                 <span>
                     Page{' '}
                     <strong>{pageIndex + 1} of {pageOptions.length} </strong>
