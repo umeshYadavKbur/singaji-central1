@@ -6,7 +6,7 @@ import AddStudent from "./components/AddStudent";
 import Dashboard from "./components/Dashboard";
 import "./components/styles/dashboard.css";
 import Navbar from "./components/Navbar";
-// import Table from "./components/Table";
+import Table from "./components/Table";
 
 import Sidebar from "./components/Sidebar";
 import { connect } from "react-redux";
@@ -51,6 +51,7 @@ function AdminDashboard({ sidebar }) {
         <div className="table_dashboard">
           <Switch>
             <Route exact path="/admindashboard" component={Dashboard} />
+            <Route exact path="/admindashboard/table" component={Table} />
             <Route
               exact
               path="/admindashboard/addstudent"
