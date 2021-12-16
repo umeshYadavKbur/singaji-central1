@@ -6,25 +6,27 @@ body{
   }
 
 .images_sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .left_area h3 {
-    color: #fff;
-    margin: 0;
-    text-transform: uppercase;
-    font-size: 22px;
-    font-weight: 900;
+  color: #fff;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 900;
 }
 
 .left_area span {
-    color: #19b3d3;
+  color: #19b3d3;
 }
 
-
+.toggle_animation {
+  transition: 0.5s;
+}
 /* .logout_btn{
     padding: 5px;
     background: #19B3D3;
@@ -41,179 +43,193 @@ body{
   } */
 
 .logout_btn:hover {
-    background: #0b87a6;
+  background: #0b87a6;
 }
 
 .input_sidebar {
-    background-color: rgb(248, 248, 248);
-    border: none;
-    border-radius: 6px;
-    width: 90%;
-    height: 37px;
-    outline: none;
-    padding-left: 15px;
-    color: black;
+  background-color: rgb(228, 228, 228);
+  border: none;
+  border-radius: 6px;
+  width: 90%;
+  height: 37px;
+  outline: none;
+  padding-left: 15px;
 }
 /* f4f7fc hover */
 
 .input_sidebar :hover {
-    border: none;
-    outline: none;
+  border: none;
+  outline: none;
 }
 
-
-.input_sidebar ::placeholder{
-    color: black;
+/* .input_sidebar ::placeholder{
+    opacity: 2;
     
   }
 
 ::placeholder {
-    color: rgb(5, 5, 5);
-    opacity: 50%;
-    /* Firefox */
-    padding-left: 10px;
-}
+  color: rgb(5, 5, 5);
+  opacity: 50%;
+  /* Firefox */
+  /* padding-left: 10px;
+} */
 .sidebar-logos{
     color: rgb(85, 85, 85);
 }
 
 .sidebar {
-    margin: 10px;
-    border-radius: 4px;
-    /* border: 1px solid black; */
-    box-shadow: 5px 5px 5px 5px rgba(3, 0, 0, 0.061);
-    /* margin-top: 70px; */
-    /* padding-top: 30px; */
-    position: fixed;
-    left: 0;
-    width: 270px;
-    height: 97vh;
-    transition: 0.5s;
-    transition-property: left;
-    background-color: white;
+  margin: 10px;
+  border-radius: 4px;
+  z-index: 100;
+  /* border: 1px solid black; */
+  box-shadow: 5px 5px 5px 5px rgba(3, 0, 0, 0.061);
+  /* margin-top: 70px; */
+  /* padding-top: 30px; */
+  position: fixed;
+  left: 0;
+  width: 270px;
+  height: 97vh;
+  transition: 0.5s;
+  transition-property: left;
+  background-color: white;
 }
 
 .sidebar .profile_image1 {
-    width: 200px;
-    height: 70px;
-    /* margin-top: 10px; */
-    margin-bottom: 0px;
+  width: 180px;
+  height: 70px;
+  /* margin-top: 10px; */
+  margin-bottom: 0px;
 }
 
 .sidebar .profile_image2 {
-    width: 70px;
-    height: 70px;
-    margin-top: 10px;
-    border-radius: 100px;
-    margin-bottom: 4px;
+  width: 70px;
+  height: 70px;
+  margin-top: 10px;
+  border-radius: 100px;
+  margin-bottom: 4px;
 }
 
 .sidebar_david {
-    color: black;
-    opacity: 80%;
-    margin-bottom: 20px;
+  color: black;
+  opacity: 80%;
+  margin-bottom: 20px;
 }
 
 .sidebar h4 {
-    color: #ccc;
-    margin-top: 0;
-    margin-bottom: 20px;
+  color: #ccc;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
-.sidebar a {
-    color: rgb(12, 1, 1);
-    display: block;
-    width: 100%;
-    /* line-height: 60px; */
-    padding: 10px;
-    text-decoration: none;
-    padding-left: 40px;
-    box-sizing: border-box;
-    transition: 0.5s;
-    transition-property: background;
+.sidebar a{
+  color: rgb(12, 1, 1);
+  display: block;
+  width: 100%;
+  /* line-height: 60px; */
+  padding: 10px;
+  text-decoration: none;
+  padding-left: 40px;
+  box-sizing: border-box;
+  transition: 0.5s;
+  transition-property: background;
+}
+.sidebar .small_logo {
+  color: rgb(12, 1, 1);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  right: 15px;
+  top: 55px;
+  text-decoration: none;
+  transition: 0.5s;
+  transition-property: background;
+}
+.sidebar .small_logo_avtar {
+  color: rgb(12, 1, 1);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  right: 15px;
+  top: 120px;
+  text-decoration: none;
+  transition: 0.5s;
+  transition-property: background;
 }
 
 .sidebar a:hover {
-    background: rgb(228, 228, 228);
-    color: black;
+  background: rgb(228, 228, 228);
+  color: black;
 }
 
 .sidebar i {
-    padding-right: 10px;
+  padding-right: 10px;
 }
 
 label #sidebar_btn {
-    z-index: 1;
-    color: rgb(10, 7, 7);
-    position: relative;
-    cursor: pointer;
-    left: 135px;
-    border: 1px solid rgb(184, 184, 184);
-    border-radius: 50%;
-    width: 30px;
-    font-size: 20px;
-    margin-top: 18px;
-    transition: 0.5s;
-    transition-property: color;
-    background-color: white;
-    padding: 5px;
+  z-index: 1;
+  color: rgb(10, 7, 7);
+  position: relative;
+  cursor: pointer;
+  left: 135px;
+  /* border: 1px solid rgb(184, 184, 184); */
+  border-radius: 50%;
+  width: 30px;
+  font-size: 20px;
+  margin-top: 18px;
+  transition: 0.5s;
+  transition-property: color;
+  background-color: white;
+  /* padding: 5px; */
 }
 
 label #sidebar_btn:hover {
-    color: #b5b5b5;
+  color: #b5b5b5;
 }
 
-#check:checked~.sidebar {
-    left: -190px;
+#check:checked ~ .sidebar {
+  left: -190px;
 }
 
-#check:checked~.sidebar a span {
-    display: none;
+#check:checked ~ .sidebar a span {
+  display: none;
 }
 
-#check:checked~.sidebar a {
-    font-size: 20px;
-    margin-left: 170px;
-    width: 80px;
+#check:checked ~ .sidebar a {
+  font-size: 20px;
+  margin-left: 176px;
+  width: 80px;
 }
-
 
 /* .content{
     margin-left: 250px;
     /* background: url(background.png) no-repeat; */
 
-
 /* background-position: center; */
-
 
 /* background-size: cover; */
 
-
 /* height: 100vh; */
-
 
 /* transition: 0.5s; */
 
-
 /* background-color: #bdbdbd; */
-
 
 /* } */
 
 .errspan {
-    /* float: right; */
-    margin-left: 175px;
-    margin-top: -25px;
-    margin-bottom: 20px;
-    /* position: relative; */
-    /* z-index: 2; */
-    color: #424141d5;
+  /* float: right; */
+  margin-left: 145px;
+  margin-top: -25px;
+  margin-bottom: 20px;
+  /* position: relative; */
+  /* z-index: 2; */
+  color: #252429d5;
 }
 
-#check:checked~.content {
-    margin-left: 60px;
+#check:checked ~ .content {
+  margin-left: 60px;
 }
 
 #check {
-    display: none;
+  display: none;
 }
