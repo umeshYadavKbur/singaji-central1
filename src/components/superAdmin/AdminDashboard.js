@@ -33,16 +33,7 @@ function AdminDashboard({ sidebar }) {
         }
       >
         <Sidebar />
-        {/* <Link
-          to="/admindashboard/addstudent"
-          style={{
-            color: "gray",
-            cursor: "pointer",
-            textDecoration: "none",
-          }}
-        >
-          Add Student
-        </Link> */}
+     
       </div>
       <div className="header_table">
         <div className="header_dashboard">
