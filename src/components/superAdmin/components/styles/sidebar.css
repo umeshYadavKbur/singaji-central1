@@ -1,9 +1,9 @@
-/* body{
+body{
     margin: 0;
     padding: 0;
-    font-family: "Roboto", sans-serif;
+    font-family:  'Poppins', sans-serif;
     background-color: #9bafd0;
-  } */
+  }
 
 .images_sidebar {
     display: flex;
@@ -45,14 +45,16 @@
 }
 
 .input_sidebar {
-    background-color: rgb(228, 228, 228);
+    background-color: rgb(248, 248, 248);
     border: none;
     border-radius: 6px;
     width: 90%;
     height: 37px;
     outline: none;
     padding-left: 15px;
+    color: black;
 }
+/* f4f7fc hover */
 
 .input_sidebar :hover {
     border: none;
@@ -60,16 +62,19 @@
 }
 
 
-/* .input_sidebar ::placeholder{
-    opacity: 2;
+.input_sidebar ::placeholder{
+    color: black;
     
-  } */
+  }
 
 ::placeholder {
     color: rgb(5, 5, 5);
     opacity: 50%;
     /* Firefox */
     padding-left: 10px;
+}
+.sidebar-logos{
+    color: rgb(85, 85, 85);
 }
 
 .sidebar {
@@ -89,7 +94,7 @@
 }
 
 .sidebar .profile_image1 {
-    width: 180px;
+    width: 200px;
     height: 70px;
     /* margin-top: 10px; */
     margin-bottom: 0px;
@@ -197,12 +202,12 @@ label #sidebar_btn:hover {
 
 .errspan {
     /* float: right; */
-    margin-left: 145px;
+    margin-left: 175px;
     margin-top: -25px;
     margin-bottom: 20px;
     /* position: relative; */
     /* z-index: 2; */
-    color: #252429d5;
+    color: #424141d5;
 }
 
 #check:checked~.content {

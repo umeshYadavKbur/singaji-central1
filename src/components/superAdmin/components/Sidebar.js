@@ -43,7 +43,8 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
             <input
               className="input_sidebar"
               type="search"
-              placeholder="search.."
+              placeholder="Search.."
+
             />
             <span class="fa fa-search errspan"></span>
           </center>
@@ -59,33 +60,33 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
           <li><a href="#">View fees structure</a></li>
         </ul> */}
           <Link to="/admindashboard">
-            <i className="fas fa-desktop" />
-            <span>Dashboard</span>
+            <i className="fas fa-desktop sidebar-logos" />
+            <span className="text-dark">Dashboard</span>
           </Link>
           <Link to="/admindashboard/addstudent">
-            <i class="fas fa-graduation-cap"></i>
+            <i class="fas fa-graduation-cap  sidebar-logos"></i>
             {/* <span>Education</span> */}
-            <span>Add Student</span>
+            <span className="text-dark">Add Student</span>
           </Link>
           <a href="#!">
-            <i class="fas fa-briefcase"></i>
-            <span>Accounts</span>
+            <i class="fas fa-briefcase  sidebar-logos"></i>
+            <span className="text-dark">Accounts</span>
           </a>
           <a href="#!">
-            <i class="fas fa-book-open"></i>
-            <span>Alumini</span>
+            <i class="fas fa-book-open  sidebar-logos"></i>
+            <span className="text-dark">Alumini</span>
           </a>
           <a href="#!">
-            <i class="far fa-chart-bar"></i>
-            <span>External Companies</span>
+            <i class="far fa-chart-bar  sidebar-logos"></i>
+            <span className="text-dark">External Companies</span>
           </a>
           <a href="#!">
-            <i class="fas fa-hand-holding-usd"></i>
-            <span>Donation</span>
+            <i class="fas fa-hand-holding-usd  sidebar-logos"></i>
+            <span className="text-dark">Donation</span>
           </a>
           <a href="#!">
-            <i class="fas fa-plus-square"></i>
-            <span>Others</span>
+            <i class="fas fa-plus-square sidebar-logos"></i>
+            <span className="text-dark">Others</span>
           </a>
         </div>
         <div />

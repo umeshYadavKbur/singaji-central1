@@ -83,7 +83,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         onClose={() => setVisible(false)}
       >
         <CModalHeader>
-          <CModalTitle>Create new admin  </CModalTitle>
+          {/* <CModalTitle>Create new admin  </CModalTitle> */}
         </CModalHeader>
         <CModalBody>
           <div className="first_div createAdmin">
@@ -148,7 +148,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                 </div>
                 <button
                   disabled={adminData.loading}
-                  className=" submit_btn mt-2 w-100  btn-md  font-weight-bold"
+                  className=" submit_btn mt-2 w-100  btn-md text-light font-weight-bold"
                   type="submit"
                 >
                   {adminData.loading ? "Loading..." : "Create"}

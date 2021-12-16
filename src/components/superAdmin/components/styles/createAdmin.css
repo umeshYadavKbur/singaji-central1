@@ -13,7 +13,7 @@
   border-radius: 10px;
 }
 .logo_img {
-  border-radius: 40px;
+  /* border-radius: 40px; */
   width: 200px;
   height: 82px;
   display: flex;
@@ -26,7 +26,7 @@
   outline: none;
   border: none;
   background-color: rgb(241, 241, 241);
-  font-size: 18px;
+  font-size: 15px;
   color: rgb(148, 148, 148);
   border-radius: 4px;
   padding-left: 10px;
@@ -38,7 +38,7 @@
   width: 100%;
   outline: none;
   border: none;
-  font-size: 18px;
+  font-size: 15px;
   margin-top: 10px;
   border-radius: 4px;
   padding-left: 10px;

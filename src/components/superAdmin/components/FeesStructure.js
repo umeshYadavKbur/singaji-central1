@@ -90,17 +90,15 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
         visible={visible}
         onClose={() => setVisible(false)}
       >
-        <CModalHeader>
-          {/* <CModalTitle>Enter New Fees Structure</CModalTitle> */}
-        </CModalHeader>
+      <CModalHeader>
+
+      </CModalHeader>
+        
         <CModalBody>
-          <div className="first_div">
+          <div className="first_div createAdmin">
             <div className="second_div ">
               <form onSubmit={formik.handleSubmit}>
-                <div>
-                  <img src={logo} alt="logo ssism" className="logo_img" />{" "}
-                  <br />
-                </div>
+               
                 <div className=" mb-3 ">
                   <select
                     name="stream"
@@ -111,32 +109,32 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
                     // eslint-disable-next-line
                     type="text"
                   >
-                    <option selected className="fields form-select">
+                    <option selected className="fields1 form-select">
                       Stream
                     </option>
-                    <option className="fields form-select" value={"BCA"}>
+                    <option className="fields1 form-select" value={"BCA"}>
                       BCA
                     </option>
-                    <option className="fields form-select" value={"BBA"}>
+                    <option className="fields1 form-select" value={"BBA"}>
                       BBA
                     </option>
-                    <option className="fields form-select" value={"BA(CA)"}>
+                    <option className="fields1 form-select" value={"BA(CA)"}>
                       BA(CA)
                     </option>
-                    <option className="fields form-select" value={"BSC(CS)"}>
+                    <option className="fields1 form-select" value={"BSC(CS)"}>
                       BSC(CS)
                     </option>
-                    <option className="fields form-select" value={"BSC(BT)"}>
+                    <option className="fields1 form-select" value={"BSC(BT)"}>
                       BSC(BT)
                     </option>
-                    <option className="fields form-select" value={"BSC(Micro)"}>
+                    <option className="fields1 form-select" value={"BSC(Micro)"}>
                       BSC(Micro)
                     </option>
-                    <option className="fields form-select" value={"B.com(CA)"}>
+                    <option className="fields1 form-select" value={"B.com(CA)"}>
                       B.com(CA)
                     </option>
                     <option
-                      className="fields form-select"
+                      className="fields1 form-select"
                       value={"BEG Diploma"}
                     >
                       BEG Diploma
@@ -189,7 +187,7 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
                   )}
                 </div>
                 <button
-                  className="submit_btn mt-2 w-100 btn-md font-weight-bold"
+                  className="submit_btn mt-2 w-100 btn-md font-weight-bold text-light"
                   type="submit"
                 >
                   Create
