@@ -126,7 +126,7 @@ function AddStudent() {
     <>
       {/* <div class="container"> */}
       {/* <div style={{height: '70px',width: "100%",background: "red"}}>header</div> */}
-      <div className="d-flex row">
+      <div className="d-flex row" style={{ height: "100%", width: "100%" }}>
         {/* <div className="col-2" style={{height: '100vh',width: "auto",background: "red"}}><h3>side bar is here</h3></div> */}
         <div className="col-10">
           <div className="row p-4">
