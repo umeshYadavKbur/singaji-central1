@@ -1,0 +1,9 @@
+<svg id="vuesax_bold_chart" data-name="vuesax/bold/chart" xmlns="http://www.w3.org/2000/svg" width="20.022" height="20.022" viewBox="0 0 20.022 20.022">
+  <g id="chart">
+    <path id="Vector" d="M17.311,1.251H.626A.63.63,0,0,1,0,.626.63.63,0,0,1,.626,0H17.311a.63.63,0,0,1,.626.626A.63.63,0,0,1,17.311,1.251Z" transform="translate(1.043 17.102)" fill="#5a607f"/>
+    <path id="Vector-2" data-name="Vector" d="M0,1.669V16.685H3.754V1.669C3.754.751,3.379,0,2.252,0H1.5C.375,0,0,.751,0,1.669Z" transform="translate(8.134 1.669)" fill="#5a607f"/>
+    <path id="Vector-3" data-name="Vector" d="M0,1.669V11.68H3.337V1.669C3.337.751,3,0,2,0H1.335C.334,0,0,.751,0,1.669Z" transform="translate(2.503 6.674)" fill="#5a607f"/>
+    <path id="Vector-4" data-name="Vector" d="M0,1.669v5.84H3.337V1.669C3.337.751,3,0,2,0H1.335C.334,0,0,.751,0,1.669Z" transform="translate(14.182 10.845)" fill="#5a607f"/>
+    <path id="Vector-5" data-name="Vector" d="M0,0H20.022V20.022H0Z" transform="translate(20.022 20.022) rotate(180)" fill="none" opacity="0"/>
+  </g>
+</svg>

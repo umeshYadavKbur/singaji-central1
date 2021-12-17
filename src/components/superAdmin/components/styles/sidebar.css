@@ -82,11 +82,12 @@ body{
   border-radius: 4px;
   z-index: 100;
   /* border: 1px solid black; */
-  box-shadow: 5px 5px 5px 5px rgba(3, 0, 0, 0.061);
+  /* box-shadow: 5px 5px 5px 5px rgba(3, 0, 0, 0.061); */
   /* margin-top: 70px; */
   /* padding-top: 30px; */
   position: fixed;
   left: 0;
+  margin-left: 10px;
   width: 270px;
   height: 97vh;
   transition: 0.5s;
@@ -120,18 +121,62 @@ body{
   margin-top: 0;
   margin-bottom: 20px;
 }
-
-.sidebar a{
+.sidebar_options:hover::before {
+  content: "";
+  background-color: #ff9e43;
+  height: 37px;
+  width: 5px;
+  position: absolute;
+  padding-bottom: 5px;
+  text-decoration: none;
+  transition: 0.5s;
+    transition-property: all;
+  border-radius: 6px;
+  /* right: -5px; */
+  /* margin-right: 10px; */
+  /* top: 0px; */
+}
+.Sidebar_text{
+  margin-left: 23px;
+  /* padding-top: 5px; */
+}
+/* .Sidebar_text_span{
+  margin-top: 5px;
+} */
+.sidebar_options{
   color: rgb(12, 1, 1);
   display: block;
-  width: 100%;
+  width: 90%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 37px;
+  border-radius: 6px;
   /* line-height: 60px; */
-  padding: 10px;
+  /* padding: 5px; */
+  
   text-decoration: none;
-  padding-left: 40px;
-  box-sizing: border-box;
-  transition: 0.5s;
-  transition-property: background;
+  /* padding-left: 40px; */
+  margin-left: 15px;
+  /* box-sizing: border-box; */
+  /* transition: 0.5s;
+  transition-property: background; */
+}
+.dropdown_heading{
+  text-decoration: none;
+  
+  /* -webkit-appearance: none;
+  appearance: none;
+  color: var(--baseFg); */
+  margin-right: 15px;
+  border: 1px solid var(--baseFg);
+  line-height: 1;
+  outline: 0;
+  inline-size: -webkit-fill-available;  
+  background-color: var(--baseBg);
+}
+.dropdown_options{
+  padding: 10px;
 }
 .sidebar .small_logo {
   color: rgb(12, 1, 1);
@@ -152,16 +197,17 @@ body{
   right: 15px;
   top: 120px;
   text-decoration: none;
-  transition: 0.5s;
-  transition-property: background;
+  /* transition: 0.5s;
+  transition-property: background; */
 }
 
 .sidebar a:hover {
   background: rgb(228, 228, 228);
   color: black;
+  text-decoration: none;
 }
 
-.sidebar i {
+.sidebar_icons {
   padding-right: 10px;
 }
 
@@ -176,8 +222,8 @@ label #sidebar_btn {
   width: 30px;
   font-size: 20px;
   margin-top: 18px;
-  transition: 0.5s;
-  transition-property: color;
+  /* transition: 0.5s;
+  transition-property: color; */
   background-color: white;
   /* padding: 5px; */
 }
@@ -196,8 +242,8 @@ label #sidebar_btn:hover {
 
 #check:checked ~ .sidebar a {
   font-size: 20px;
-  margin-left: 176px;
-  width: 80px;
+  margin-left: 200px;
+  width: 60px;
 }
 
 /* .content{
@@ -218,7 +264,7 @@ label #sidebar_btn:hover {
 
 .errspan {
   /* float: right; */
-  margin-left: 145px;
+  margin-left: 200px;
   margin-top: -25px;
   margin-bottom: 20px;
   /* position: relative; */
@@ -231,5 +277,13 @@ label #sidebar_btn:hover {
 }
 
 #check {
+  display: none;
+}
+
+
+
+
+/* -------------dropdown-------- */
+.display_none{
   display: none;
 }

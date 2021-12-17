@@ -11,6 +11,13 @@ import {
 } from "../../../redux/actionDispatcher/showSideBarDispather";
 import back_btn from "../../assests/image/sidebarIcons/back_btn.svg";
 import toggle_btn_icon from "../../assests/image/sidebarIcons/toggle_btn_sidebar.png";
+import Dashboard_svg from "../../assests/image/sidebarIcons/Dashboard.svg";
+import Alumini_svg from "../../assests/image/sidebarIcons/Alumini.svg";
+import Accounts_svg from "../../assests/image/sidebarIcons/Accounts.svg";
+import External_company_svg from "../../assests/image/sidebarIcons/External_company.svg";
+import Donation_svg from "../../assests/image/sidebarIcons/Donation.svg";
+import Education_svg from "../../assests/image/sidebarIcons/Education.svg";
+import Others_svg from "../../assests/image/sidebarIcons/Others.svg";
 
 const Sidebar = ({ hideSideBar, showSideBar }) => {
   const [toggle, setToggle] = useState(false);
@@ -23,9 +30,15 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
       showSideBar();
     }
   };
+  function getSelectValue()
+        {
+            var selectedValue = document.getElementById("list").value;
+            console.log(selectedValue);
+        }
+        // getSelectValue();
   return (
     <>
-      <div>
+      <div id="sidebar">
         <input type="checkbox" id="check" />
         <div className="sidebar toggle_animation">
           <center className="images_sidebar toggle_animation">
@@ -79,35 +92,56 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
              <li><a href="#">My Admin</a></li>
              <li><a href="#">View fees structure</a></li>
              </ul> */}
-          <Link to="/admindashboard">
-            <i className="fas fa-desktop sidebar-logos" />
-            <span className="text-dark">Dashboard</span>
+             
+          <Link className="sidebar_options" to="/admindashboard">
+            <img src={Dashboard_svg} className="Sidebar_text sidebar_icons" alt=""/>
+           {/* <span className="text-dark">Dashboard</span> */}
+       { !toggle&&     <select className="dropdown_heading"  id="list" onchange={getSelectValue}>
+            <option value="Dashboard">Dashboard</option>
+            <option value="All_Students">All Student</option>
+            <option value="My_Admin">My Admin</option>
+            <option value="Fees_Structure">View Fees Structure</option>
+            
+        </select>}
           </Link>
-          <Link to="/admindashboard/addstudent">
-            <i class="fas fa-graduation-cap  sidebar-logos"></i>
+          <Link className="sidebar_options" to="/admindashboard/addstudent">
+            <img src={Education_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
             {/* <span>Education</span> */}
-            <span className="text-dark">Add Student</span>
+            {/* <span className="text-dark ">Education</span> */}
+            { !toggle&&      <select className="dropdown_heading"  id="list" onchange={getSelectValue}>
+            <option className="dropdown_option" value="Eduction">Education</option>
+            <option value="Applied_Student">Applied Students</option>
+            <option value="Students">Students</option>
+            <option value="Add_Student">Add Student</option>
+            
+        </select>}
+          </Link>
+          
+          <Link className="sidebar_options" href="#!">
+          <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <span className="text-dark ">Accounts</span>
+          </Link>
+          <Link className="sidebar_options" href="#!">
+          <img src={Alumini_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <span className="text-dark">Alumini</span>
+          </Link>
+          <Link className="sidebar_options" href="#!">
+          <img src={External_company_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <span className="text-dark">External Companies</span>
+          </Link>
+          <Link className="sidebar_options" href="#!">
+          <img src={Donation_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <span className="text-dark">Donation</span>
+          </Link>
+          <Link className="sidebar_options" href="#!">
+          <img src={Others_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <span className="text-dark">Others</span>
+           
           </Link>
           <a href="#!">
-            <i class="fas fa-briefcase  sidebar-logos"></i>
-            <span className="text-dark">Accounts</span>
+         
           </a>
-          <a href="#!">
-            <i class="fas fa-book-open  sidebar-logos"></i>
-            <span className="text-dark">Alumini</span>
-          </a>
-          <a href="#!">
-            <i class="far fa-chart-bar  sidebar-logos"></i>
-            <span className="text-dark">External Companies</span>
-          </a>
-          <a href="#!">
-            <i class="fas fa-hand-holding-usd  sidebar-logos"></i>
-            <span className="text-dark">Donation</span>
-          </a>
-          <a href="#!">
-            <i class="fas fa-plus-square sidebar-logos"></i>
-            <span className="text-dark">Others</span>
-          </a>
+          
         </div>
         <div />
       </div>
