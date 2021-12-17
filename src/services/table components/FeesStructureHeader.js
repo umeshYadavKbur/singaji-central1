@@ -1,5 +1,4 @@
 const FeesStructureColumn = [
-
     {
         header: 'S.No',
         accessor: 'sno'
@@ -21,21 +20,38 @@ const FeesStructureColumn = [
         header: 'Total Fees',
         accessor: 'Total_Fees'
     },
+    // {
+    //     header: 'Status',
+    //     accessor: 'status'
+    // },
     {
         header: 'Status',
-        accessor: 'status'
-    },
-    {
         accessor: 'accessor',
-        header: 'status',
         Cell: ({ row: { original } }) => (
-            <button onClick={() => console.log(original.status)}>
-                Button text
+            <button
+                style={
+                    original.status === "Active"
+                        ? {
+                            width: "80px",
+                            borderRadius: "5px",
+                            backgroundColor: "#FFC700",
+                            color: "white",
+                            fontWeight: "bold",
+                            border: '1px #FFC700'
+                        }
+                        : {
+                            width: "80px",
+                            backgroundColor: "#FBC775",
+                            borderRadius: "5px",
+                            fontWeight: "bold",
+                            color: "white",
+                            border: 'none'
+                        }}
+                onClick={() => console.log(original)}>
+                {original.status}
             </button>
         )
     }
-
-
 ]
 
 export default FeesStructureColumn;

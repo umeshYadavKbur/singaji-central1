@@ -23,7 +23,6 @@ const Column = [
     {
         header: 'Status',
         accessor: 'status'
-
     },
 ]
 
