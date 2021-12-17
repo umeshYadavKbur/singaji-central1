@@ -6,7 +6,7 @@ import AddStudent from "./components/AddStudent";
 import Dashboard from "./components/Dashboard";
 import "./components/styles/dashboard.css";
 import Navbar from "./components/Navbar";
-import FeesStructure from "./components/FeesStucture";
+import FeesStructure from "./components/FeesStuctureTable";
 import Table from "./components/Table"
 import Sidebar from "./components/Sidebar";
 import { connect } from "react-redux";
