@@ -25,9 +25,9 @@
   width: 100%;
   outline: none;
   border: none;
-  background-color: rgb(241, 241, 241);
+  background-color: rgb(226, 225, 225);
   font-size: 15px;
-  color: rgb(148, 148, 148);
+  color: rgb(139, 139, 139);
   border-radius: 4px;
   padding-left: 10px;
 }
@@ -56,11 +56,4 @@
 }
 .inputs {
   margin-top: 10px;
-}
-.form-select {
-  color: rgb(255, 255, 255);
-  height: 38px;
-}
-.select-data{
-  background-color: rgb(41, 37, 37);
 }
