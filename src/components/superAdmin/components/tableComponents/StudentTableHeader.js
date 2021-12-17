@@ -1,28 +1,31 @@
-const FeesStructureColumn = [
+const StudentTableHeader = [
     {
-        header: 'S.No',
-        accessor: 'sno'
+        header: 'Name',
+        accessor: 'firstName'
     },
     {
-        header: 'Branch Name',
-        accessor: "branch_name"
+        header: 'Father Name',
+        accessor: "fathersName"
     },
     {
-        header: 'Starting Year',
-        accessor: 'starting_year'
-
+        header: 'Stream',
+        accessor: 'branch'
     },
     {
-        header: 'Ending Year',
-        accessor: 'ending_year'
+        header: 'Year',
+        accessor: 'year'
     },
     {
-        header: 'Total Fees',
-        accessor: 'Total_Fees'
+        header: 'Village',
+        accessor: 'village'
     },
     {
-        header: 'Status',
-        accessor: 'status'
+        header: 'Mobile',
+        accessor: 'mobile'
+    },
+    {
+        header: 'Reg.fee',
+        accessor: 'reg_Fees'
     },
     {
         header: 'Status',
@@ -50,12 +53,12 @@ const FeesStructureColumn = [
                 onClick={() => {
                     // setData(original.status)
                     console.log(original)
-                    alert("Do you want to change status" + original.branch_name)
+                    alert("Do you want to change status of  : " + original.firstName)
                 }}>
-                {original.status}
+                {original.status}Data
             </button>
         )
     }
 ]
 
-export default FeesStructureColumn;
+export default StudentTableHeader;

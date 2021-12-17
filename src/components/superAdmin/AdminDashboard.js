@@ -10,6 +10,7 @@ import FeesStuctureTable from "./components/FeesStuctureTable";
 import AdminTable from "./components/AdminTable"
 import Sidebar from "./components/Sidebar";
 import { connect } from "react-redux";
+import StudentTable from './components/StudentsTable'
 
 function AdminDashboard({ sidebar }) {
   console.log("====================================");
@@ -43,6 +44,7 @@ function AdminDashboard({ sidebar }) {
           <Switch>
             <Route exact path="/admindashboard" component={Dashboard} />
             <Route exact path="/admindashboard/admin_table" component={AdminTable} />
+            <Route exact path="/admindashboard/studenttable" component={StudentTable} />
             <Route exact path="/admindashboard/fees_structure_table" component={FeesStuctureTable} />
             <Route
               exact

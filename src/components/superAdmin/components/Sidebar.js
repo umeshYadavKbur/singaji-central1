@@ -132,7 +132,7 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
             <img src={Donation_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">Donation</span>
           </href>
-          <Link to="/admindashboard/fees_structure_table" className="sidebar_options" href="#!">
+          <Link to="/admindashboard/studenttable" className="sidebar_options" href="#!">
             <img src={Others_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">Others</span>
           </Link>

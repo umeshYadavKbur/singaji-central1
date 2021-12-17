@@ -2,30 +2,14 @@ import * as React from 'react';
 import { useMemo } from 'react';
 import { GlobalFilter } from './tableComponents/GlobalFilter';
 import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
-import MockData from './tableComponents/feesStructureTabledata.json'
-import FeesStructureHeader from './tableComponents/FeesStructureHeader';
+import MockData from './tableComponents/studentTable.json'
+import StudentTableHeader from './tableComponents/StudentTableHeader';
 import './styles/Table.css'
-import { TableCheckbox } from './tableComponents/TableCheckbox';
 
-export default function FeesStructure({ }) {
-
-
-    //     const [adminInfo,setAdminInfo] = useState()
-    //    const access_token = localStorage.getItem("token")
-    //     // console.log(access_token);
-    //     useEffect(() => {
-    //         // getDataFromApi(`/api/infoOfAdmins/`)
-    //         //     .then(data => {
-    //         //         setAdminInfo(data)
-    //         //     }
-    //         // )
-    //             console.log("Admin info:::",adminInfo);
-    //     },[1])
-
-
-    const columns = useMemo(() => FeesStructureHeader, [])
+export default function FeesStructure() {
+    const columns = useMemo(() => StudentTableHeader, [])
+    console.log("The columns are::" + columns);
     const [data, setData] = React.useState(useMemo(() => MockData, []));
-    // const tableData = 
     const {
         getTableProps,
         getTableBodyProps,
@@ -37,53 +21,26 @@ export default function FeesStructure({ }) {
         previousPage,
         canNextPage,
         canPreviousPage,
-        pageOptions,
+        // pageOptions,
         gotoPage,
         pageCount,
         setPageSize,
-        selectedFlatRows,
+        // selectedFlatRows,
         prepareRow,
     } = useTable({
         columns,
         data,
     },
-
-        useGlobalFilter, useSortBy,
-        usePagination, useRowSelect,
-        (hooks) => {
-            hooks.visibleColumns.push((columns) => {
-                return [
-                    {
-                        id: 'selection',
-                        header: ({ getToggleAllRowsSelectedProps }) => (
-                            <TableCheckbox {...getToggleAllRowsSelectedProps()} />
-                        ),
-                        Cell: ({ row }) => (
-                            <TableCheckbox {...row.getToggleRowSelectedProps()} />
-                        )
-                    },
-                    ...columns
-                ]
-            })
-        }
+        useGlobalFilter,
+        useSortBy,
+        usePagination,
+        useRowSelect,
     )
 
-    // console.log("rows number :::", page.length);
-    const { globalFilter } = state
-    const { pageIndex, pageSize, selectedRowIds } = state
 
-    const checkboxData =
-        JSON.stringify(
-            {
-                selectedRowIds: selectedRowIds,
-                'selectedFlatRows[].original': selectedFlatRows.map(
-                    d => d.original
-                ),
-            },
-            null,
-            2
-        )
-    console.log(checkboxData);
+    const { globalFilter } = state
+    const { pageIndex, pageSize } = state
+
     return (
         <>
             <div style={{ backgroundColor: "rgb(246 249 252)", height: "auto", width: "auto" }}>
@@ -141,8 +98,6 @@ export default function FeesStructure({ }) {
                 <div style={{ border: "rgb(246 249 252)" }} className='d-flex mb-4'>
                     <div className='mx-4'>
                         <span>
-                            {/* Page{' '}
-                        <strong>{pageIndex + 1} of {pageOptions.length} </strong> */}
                             Showing 1 to  {page.length} of  {pageCount * pageSize}{' '} Entries {"  "}
                         </span>
                     </div>
