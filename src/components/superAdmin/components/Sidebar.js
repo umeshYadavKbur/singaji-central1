@@ -30,12 +30,11 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
       showSideBar();
     }
   };
-  function getSelectValue()
-        {
-            var selectedValue = document.getElementById("list").value;
-            console.log(selectedValue);
-        }
-        // getSelectValue();
+  function getSelectValue() {
+    var selectedValue = document.getElementById("list").value;
+    console.log(selectedValue);
+  }
+  // getSelectValue();
   return (
     <>
       <div id="sidebar">
@@ -48,7 +47,7 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
                 className="fas fa-chevron-left"
                 id="sidebar_btn"
                 onClick={handleClick}
-                src={!toggle? back_btn:toggle_btn_icon}
+                src={!toggle ? back_btn : toggle_btn_icon}
                 style={{ marginBlockEnd: "6px" }}
                 alt="back"
               />
@@ -92,56 +91,55 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
              <li><a href="#">My Admin</a></li>
              <li><a href="#">View fees structure</a></li>
              </ul> */}
-             
+
           <Link className="sidebar_options" to="/admindashboard">
-            <img src={Dashboard_svg} className="Sidebar_text sidebar_icons" alt=""/>
-           {/* <span className="text-dark">Dashboard</span> */}
-       { !toggle&&     <select className="dropdown_heading"  id="list" onchange={getSelectValue}>
-            <option value="Dashboard">Dashboard</option>
-            <option value="All_Students">All Student</option>
-            <option value="My_Admin">My Admin</option>
-            <option value="Fees_Structure">View Fees Structure</option>
-            
-        </select>}
+            <img src={Dashboard_svg} className="Sidebar_text sidebar_icons" alt="" />
+            {/* <span className="text-dark">Dashboard</span> */}
+            {!toggle && <select className="dropdown_heading" id="list" onchange={getSelectValue}>
+              <option value="Dashboard">Dashboard</option>
+              <option value="All_Students">All Student</option>
+              <option value="My_Admin">My Admin</option>
+              <option value="Fees_Structure">View Fees Structure</option>
+
+            </select>}
           </Link>
           <Link className="sidebar_options" to="/admindashboard/addstudent">
-            <img src={Education_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <img src={Education_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             {/* <span>Education</span> */}
             {/* <span className="text-dark ">Education</span> */}
-            { !toggle&&      <select className="dropdown_heading"  id="list" onchange={getSelectValue}>
-            <option className="dropdown_option" value="Eduction">Education</option>
-            <option value="Applied_Student">Applied Students</option>
-            <option value="Students">Students</option>
-            <option value="Add_Student">Add Student</option>
-            
-        </select>}
+            {!toggle && <select className="dropdown_heading" id="list" onchange={getSelectValue}>
+              <option className="dropdown_option" value="Eduction">Education</option>
+              <option value="Applied_Student">Applied Students</option>
+              <option value="Students">Students</option>
+              <option value="Add_Student">Add Student</option>
+
+            </select>}
           </Link>
-          
-          <Link className="sidebar_options" href="#!">
-          <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+
+          <href className="sidebar_options" href="#!">
+            <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark ">Accounts</span>
-          </Link>
-          <Link className="sidebar_options" href="#!">
-          <img src={Alumini_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+          </href>
+          <href className="sidebar_options" href="#!">
+            <img src={Alumini_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">Alumini</span>
-          </Link>
-          <Link className="sidebar_options" href="#!">
-          <img src={External_company_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+          </href>
+          <href className="sidebar_options" href="#!">
+            <img src={External_company_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">External Companies</span>
-          </Link>
-          <Link className="sidebar_options" href="#!">
-          <img src={Donation_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+          </href>
+          <href className="sidebar_options" href="#!">
+            <img src={Donation_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">Donation</span>
-          </Link>
-          <Link className="sidebar_options" href="#!">
-          <img src={Others_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+          </href>
+          <Link to="/admindashboard/fees_structure_table" className="sidebar_options" href="#!">
+            <img src={Others_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">Others</span>
-           
           </Link>
           <a href="#!">
-         
+
           </a>
-          
+
         </div>
         <div />
       </div>

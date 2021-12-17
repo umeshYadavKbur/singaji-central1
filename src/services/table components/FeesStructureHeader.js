@@ -11,7 +11,7 @@ const FeesStructureColumn = [
     {
         header: 'Starting Year',
         accessor: 'starting_year'
-        
+
     },
     {
         header: 'Ending Year',
@@ -24,6 +24,15 @@ const FeesStructureColumn = [
     {
         header: 'Status',
         accessor: 'status'
+    },
+    {
+        accessor: 'accessor',
+        header: 'status',
+        Cell: ({ row: { original } }) => (
+            <button onClick={() => console.log(original.status)}>
+                Button text
+            </button>
+        )
     }
 
 
