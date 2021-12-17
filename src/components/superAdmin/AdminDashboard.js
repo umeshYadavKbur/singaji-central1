@@ -6,8 +6,8 @@ import AddStudent from "./components/AddStudent";
 import Dashboard from "./components/Dashboard";
 import "./components/styles/dashboard.css";
 import Navbar from "./components/Navbar";
-import FeesStructure from "./components/FeesStuctureTable";
-import Table from "./components/AdminTable"
+import FeesStuctureTable from "./components/FeesStuctureTable";
+import AdminTable from "./components/AdminTable"
 import Sidebar from "./components/Sidebar";
 import { connect } from "react-redux";
 
@@ -21,19 +21,19 @@ function AdminDashboard({ sidebar }) {
         style={
           sidebar.show
             ? {
-                height: "100vh",
-                width: "95px",
-                backgroundColor: "#F4F7FC",
-              }
+              height: "100vh",
+              width: "95px",
+              backgroundColor: "#F4F7FC",
+            }
             : {
-                height: "100vh",
-                minWidth: "285px",
-                backgroundColor: "#F4F7FC",
-              }
+              height: "100vh",
+              minWidth: "285px",
+              backgroundColor: "#F4F7FC",
+            }
         }
       >
         <Sidebar />
-     
+
       </div>
       <div className="header_table">
         <div className="header_dashboard">
@@ -42,8 +42,8 @@ function AdminDashboard({ sidebar }) {
         <div className="table_dashboard">
           <Switch>
             <Route exact path="/admindashboard" component={Dashboard} />
-            <Route exact path="/admindashboard/admin_table" component={Table} />
-            <Route exact path="/admindashboard/fees_structure_table" component={FeesStructure} />
+            <Route exact path="/admindashboard/admin_table" component={AdminTable} />
+            <Route exact path="/admindashboard/fees_structure_table" component={FeesStuctureTable} />
             <Route
               exact
               path="/admindashboard/addstudent"
