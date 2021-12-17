@@ -1,0 +1,6 @@
+<svg id="vuesax_bold_more-square" data-name="vuesax/bold/more-square" xmlns="http://www.w3.org/2000/svg" width="20.909" height="20.909" viewBox="0 0 20.909 20.909">
+  <g id="more-square" transform="translate(0 0)">
+    <path id="Vector" d="M12.362,0h-7.3C1.89,0,0,1.89,0,5.062v7.292c0,3.18,1.89,5.07,5.062,5.07h7.292c3.171,0,5.062-1.89,5.062-5.062v-7.3C17.424,1.89,15.533,0,12.362,0ZM5.227,9.583A.871.871,0,1,1,6.1,8.712.868.868,0,0,1,5.227,9.583Zm3.485,0a.871.871,0,1,1,.871-.871A.868.868,0,0,1,8.712,9.583Zm3.485,0a.871.871,0,1,1,.871-.871A.868.868,0,0,1,12.2,9.583Z" transform="translate(1.742 1.742)" fill="#5a607f"/>
+    <path id="Vector-2" data-name="Vector" d="M0,0H20.909V20.909H0Z" transform="translate(20.909 20.909) rotate(180)" fill="none" opacity="0"/>
+  </g>
+</svg>
