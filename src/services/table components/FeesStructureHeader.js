@@ -20,10 +20,10 @@ const FeesStructureColumn = [
         header: 'Total Fees',
         accessor: 'Total_Fees'
     },
-    // {
-    //     header: 'Status',
-    //     accessor: 'status'
-    // },
+    {
+        header: 'Status',
+        accessor: 'status'
+    },
     {
         header: 'Status',
         accessor: 'accessor',
@@ -47,7 +47,11 @@ const FeesStructureColumn = [
                             color: "white",
                             border: 'none'
                         }}
-                onClick={() => console.log(original)}>
+                onClick={() => {
+                    // setData(original.status)
+                    console.log(original)
+                    alert("Do you want to change status" + original.branch_name)
+                }}>
                 {original.status}
             </button>
         )

@@ -24,9 +24,10 @@ export default function FeesStructure({ }) {
 
 
     const columns = useMemo(() => FeesStructureHeader, [])
-    const data = useMemo(() => MockData, [])
+    const [data, setData] = React.useState(useMemo(() => MockData, []));
     // const tableData = 
-    const { getTableProps,
+    const {
+        getTableProps,
         getTableBodyProps,
         headerGroups,
         state,
@@ -45,7 +46,6 @@ export default function FeesStructure({ }) {
     } = useTable({
         columns,
         data,
-
     },
 
         useGlobalFilter, useSortBy,
@@ -66,11 +66,9 @@ export default function FeesStructure({ }) {
                 ]
             })
         }
-
-
     )
 
-    console.log("rows number :::", page.length);
+    // console.log("rows number :::", page.length);
     const { globalFilter } = state
     const { pageIndex, pageSize, selectedRowIds } = state
 
