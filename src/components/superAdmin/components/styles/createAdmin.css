@@ -33,7 +33,7 @@
 }
 
 .fields {
-  background-color: rgb(131, 131, 131);
+  /* background-color: rgb(131, 131, 131); */
   height: 38px;
   width: 100%;
   outline: none;
@@ -58,6 +58,9 @@
   margin-top: 10px;
 }
 .form-select {
-  color: white;
+  color: rgb(255, 255, 255);
   height: 38px;
+}
+.select-data{
+  background-color: rgb(41, 37, 37);
 }

@@ -124,7 +124,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   />
                   <select
                     name="role"
-                    className="fields form-select "
+                    className="select-data form-select "
                     value={formik.values.role}
                     // defaultValue="null"
                     onChange={formik.handleChange}

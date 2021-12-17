@@ -30,7 +30,7 @@ function ForgotPassword({passData,fetchUserEmail}) {
 
     return (
         <>
-            <div style={{height: "100vh",width: "100vw",background: "#f3eded"}}>
+            <div style={{height: "100vh",width: "100vw",background: "rgb(207 207 207)"}}>
                 <div className="position-absolute top-50 start-50 translate-middle m-auto bg-light px-5 pt-2 pb-5 shadow rounded-5" style={{width: '100%',maxWidth: "400px"}}>
                     <form onSubmit={formik.handleSubmit}>
                         <div className="d-flex justify-content-center">
@@ -38,7 +38,7 @@ function ForgotPassword({passData,fetchUserEmail}) {
                             <img onClick={() => {history.push('/login')}} src={Singaji_logo} alt="logo ssism" width={100} height={82} />
                         </div>
                         <div className="d-flex justify-content-center">
-                            <h4 className="h4 mb-3 fw-bold" >Enter your E-mail</h4>
+                            <h4 className="h4 mb-3 text-secondary" >Enter your Email</h4>
                         </div>
                         <div className="mb-3">
 

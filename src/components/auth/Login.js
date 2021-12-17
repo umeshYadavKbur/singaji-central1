@@ -67,7 +67,7 @@ function Login({ userData, fetchUsers }) {
 
   return (
     <>
-      <div style={{ height: "100vh", width: "100vw", background: "#f3eded" }}>
+      <div style={{ height: "100vh", width: "100vw", background: "rgb(207 207 207)" }}>
         <div
           className="position-absolute top-50 start-50 translate-middle "
           style={{
@@ -91,7 +91,7 @@ function Login({ userData, fetchUsers }) {
               <br />
             </div>
             <div className="d-flex justify-content-center fw-bold">
-              <h4 className="h4 mb-3 ">Login</h4>
+              <h4 className="h4 mb-3 text-secondary">Login</h4>
             </div>
             <div className="mb-3">
               <input
@@ -133,6 +133,7 @@ function Login({ userData, fetchUsers }) {
                   color: "gray",
                   cursor: "pointer",
                   textDecoration: "none",
+                  marginBottom:"5px"
                 }}
               >
                 Forgot password
@@ -143,7 +144,7 @@ function Login({ userData, fetchUsers }) {
               type="submit"
               disabled={userData.loading}
             >
-              {userData.loading ? "loading..." : "Sumbit"}
+              {userData.loading ? "loading..." : "Submit"}
             </button>
           </form>
         </div>

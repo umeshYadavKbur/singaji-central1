@@ -8,12 +8,13 @@ function Navbar() {
   return (
     <div className="container_navbar">
       <div className="navbar_container_start_side">
-        <h3 style={{ color: "#5A607F", marginLeft: "10px" }}>Dashboard</h3>
+        <h3 className="text-secondary fw-bolder ml-4" >Dashboard</h3>
       </div>
       <div className="navbar_container_end_side">
         <FeesStructure />
         <CreateAdminPopup />
         <AppHeaderDropdown />
+        {/* style={{ color: "#5A607F", marginLeft: "10px" }} */}
       </div>
     </div>
   );
