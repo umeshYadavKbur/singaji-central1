@@ -3,21 +3,26 @@ import {
   CModal,
   CModalBody,
   CModalHeader,
-  CModalTitle,
+  // CModalTitle,
 } from "@coreui/react";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import logo from "../../assests/image/ssism_si.svg";
+// import logo from "../../assests/image/ssism_si.svg";
 import { createFeesStructure } from "../../../redux/actionDispatcher/createFeesStrucDispather";
 import "./styles/createAdmin.css";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import { baseUrl } from "../../../url/baseUrl";
+// import swal from 'sweetalert';
 
 
-function FeesStructure({ createAdmin, createNewAdmin }) {
-  const {token} =useParams()
+function FeesStructure({ adminData, createFees }) {
+
+  console.log(adminData);
+
+  const token = localStorage.getItem('token');
   const [visible, setVisible] = useState(false);
   const validationSchema = Yup.object({
     totalFees: Yup.string().required("Required*"),
@@ -39,32 +44,23 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
       console.log("====================================");
       console.log(values);
       console.log("====================================");
-      //   var data = JSON.stringify({
-      //     totalFees: formik.values.totalFees,
-      //     startYear: formik.values.startYear,
-      //     endYear: formik.values.endYear,
-      //     stream: formik.values.stream,
-      //   });
-      //   var config = {
-      //     method: "post",
-      //     url: "https://singaji-central-server.herokuapp.com/api/createNewAdmin",
-      //     headers: {
-      //       Authorization: `"Bearer${token}"`,
-      //       // token,
-      //       "Content-Type": "application/json",
-      //     },
-      //     data: data,
-      //   };
-      //   // createNewAdmin(config);
-
-      // const result = await axios.post(config)
-      // console.log(result);
-      //     // .then(function (response) {
-      //     //     console.log(JSON.stringify(response.data));
-      //     // })
-      //     // .catch(function (error) {
-      //     //     console.log(error);
-      //     // });
+      var data = JSON.stringify({
+        branch_name: formik.values.stream,
+        starting_year: formik.values.startYear,
+        ending_year: formik.values.endYear,
+        total_fees: formik.values.totalFees
+      });
+      var config = {
+        method: "post",
+        url: `${baseUrl}/api/create_schema`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+      console.log(config.data);
+      createFees(config); 
     },
   });
 
@@ -76,7 +72,7 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
           color: "#5A607F",
           outline: "none",
           borderColor: "#5A607F",
-          marginRight:"10px",
+          marginRight: "10px",
           border: "none",
           fontWeight: "bold"
         }}
@@ -90,15 +86,15 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
         visible={visible}
         onClose={() => setVisible(false)}
       >
-      <CModalHeader>
+        <CModalHeader>
 
-      </CModalHeader>
-        
+        </CModalHeader>
+
         <CModalBody>
           <div className="first_div createAdmin">
             <div className="second_div ">
               <form onSubmit={formik.handleSubmit}>
-               
+
                 <div className=" mb-3 ">
                   <select
                     name="stream"
@@ -211,7 +207,7 @@ const mapStateToProps = (state) => {
 //passing the userData in createNewAdmin function and also dispatch method
 const mapDispatchToProps = (dispatch) => {
   return {
-    createFeesStructure: (data) => dispatch(createFeesStructure(data)),
+    createFees: (data) => dispatch(createFeesStructure(data)),
   };
 };
 

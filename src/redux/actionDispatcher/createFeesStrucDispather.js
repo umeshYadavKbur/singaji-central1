@@ -8,9 +8,9 @@ import {
 } from "../constants/actions";
 
 export const createFeesStructure = (data) => {
+  console.log("The data is ", data.data);
   return async (dispatch) => {
     // Console the data getting from the form of create admin
-    // console.log("The data is ", data);
     try {
       dispatch(feesReq());
       axios(data)
@@ -21,20 +21,26 @@ export const createFeesStructure = (data) => {
 
           if (response.status === 208) {
             swal({
-              title: "Admin already created",
+              title: "this fees structure already created",
               icon: "info",
             });
           } else if (response.status === 200) {
             dispatch(feesReqSuccess());
             swal({
-              title: "New admin has been Created",
+              title: "fees structure created successfully",
               icon: "success",
             });
+          } else if (response.status === 401) {
+            dispatch(feesReqSuccess());
+
           }
         })
         .catch(function (error) {
-          console.log(error);
           dispatch(feesReqFail(error));
+          swal({
+            title: "Request failed",
+            icon: "error",
+          });
         });
     } catch (error) {
       console.log(error);

@@ -38,6 +38,10 @@ export const createNewAdmin = (data) => {
         .catch(function (error) {
           console.log(error);
           dispatch(newAdminReqFail(error));
+          swal({
+            title: "something problem",
+            icon: "error",
+          });
         });
     } catch (error) {
       console.log(error);
