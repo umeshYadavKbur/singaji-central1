@@ -54,6 +54,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
               width: "82px",
             }}
           />
+          {/* <h4 className="header-name">Roshan yadav</h4> */}
           <p
             style={{
               marginTop: "20px",
@@ -61,13 +62,18 @@ const AppHeaderDropdown = ({ userData, logout }) => {
               width: "320%",
               fontSize: "12px",
               textAlign: "center",
-              fontWeight: "bold",
+
               color: "white",
             }}
           >
             {userData.userInfo} roshany.bca2020@ssism.org
           </p>
+
         </div>
+
+
+
+        
         <CDropdownItem
           style={{
             marginTop: "120px",
@@ -78,6 +84,10 @@ const AppHeaderDropdown = ({ userData, logout }) => {
           }}
           href="#"
         >
+         {/* <button>
+              Manage your Account
+            </button> */}
+          <CDropdownDivider style={{ color: "white" }} />
           <CIcon icon={cilSettings} className="me-2" />
           Settings
         </CDropdownItem>

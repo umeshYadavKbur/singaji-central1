@@ -25,15 +25,15 @@
   width: 100%;
   outline: none;
   border: none;
-  background-color: rgb(241, 241, 241);
+  background-color: rgb(226, 225, 225);
   font-size: 15px;
-  color: rgb(148, 148, 148);
+  color: rgb(139, 139, 139);
   border-radius: 4px;
   padding-left: 10px;
 }
 
 .fields {
-  background-color: rgb(131, 131, 131);
+  /* background-color: rgb(131, 131, 131); */
   height: 38px;
   width: 100%;
   outline: none;
@@ -56,8 +56,4 @@
 }
 .inputs {
   margin-top: 10px;
-}
-.form-select {
-  color: white;
-  height: 38px;
 }

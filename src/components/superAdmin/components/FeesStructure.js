@@ -109,32 +109,32 @@ function FeesStructure({ createAdmin, createNewAdmin }) {
                     // eslint-disable-next-line
                     type="text"
                   >
-                    <option selected className="fields1 form-select">
+                    <option selected className="fields form-select">
                       Stream
                     </option>
-                    <option className="fields1 form-select" value={"BCA"}>
+                    <option className="fields form-select" value={"BCA"}>
                       BCA
                     </option>
-                    <option className="fields1 form-select" value={"BBA"}>
+                    <option className="fields form-select" value={"BBA"}>
                       BBA
                     </option>
-                    <option className="fields1 form-select" value={"BA(CA)"}>
+                    <option className="fields form-select" value={"BA(CA)"}>
                       BA(CA)
                     </option>
-                    <option className="fields1 form-select" value={"BSC(CS)"}>
+                    <option className="fields form-select" value={"BSC(CS)"}>
                       BSC(CS)
                     </option>
-                    <option className="fields1 form-select" value={"BSC(BT)"}>
+                    <option className="fields form-select" value={"BSC(BT)"}>
                       BSC(BT)
                     </option>
-                    <option className="fields1 form-select" value={"BSC(Micro)"}>
+                    <option className="fields form-select" value={"BSC(Micro)"}>
                       BSC(Micro)
                     </option>
-                    <option className="fields1 form-select" value={"B.com(CA)"}>
+                    <option className="fields form-select" value={"B.com(CA)"}>
                       B.com(CA)
                     </option>
                     <option
-                      className="fields1 form-select"
+                      className="fields form-select"
                       value={"BEG Diploma"}
                     >
                       BEG Diploma

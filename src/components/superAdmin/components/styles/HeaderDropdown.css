@@ -23,3 +23,12 @@
   border-radius: 50em;
   margin-block-end: 26px;
 }
+.header-name{
+  margin-top: 20px;
+  margin-left: 70px;
+  width: 320%;
+  font-size: 12px;
+  text-align: center;
+
+  color: white;
+}

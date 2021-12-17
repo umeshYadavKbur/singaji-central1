@@ -124,7 +124,8 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   />
                   <select
                     name="role"
-                    className="fields form-select "
+                    className=" form-select "
+          
                     value={formik.values.role}
                     // defaultValue="null"
                     onChange={formik.handleChange}
@@ -132,16 +133,16 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     // eslint-disable-next-line
                     type="text"
                   >
-                    <option selected className="fields form-select">
+                    <option selected className="form-select">
                       Role
                     </option>
-                    <option className="fields form-select" value={1}>
+                    <option className="form-select" value={1}>
                       Super Admin
                     </option>
-                    <option className="fields form-select" value={2}>
+                    <option className="form-select" value={2}>
                       Admin
                     </option>
-                    <option className="fields form-select" value={3}>
+                    <option className="form-select" value={3}>
                       Student
                     </option>
                   </select>
