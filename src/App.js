@@ -1,10 +1,35 @@
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import { useParams } from 'react-router';
+import { Redirect } from "react-router";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
+import Login from "./components/auth/Login";
+import ForgotPassword from "./components/auth/ForgetPassword";
+import ResetPassword from "./components/auth/ResetPassword";
+
+//import coreUireact js
+import "@coreui/coreui/dist/css/coreui.min.css";
+import AdminDashboard from "./components/superAdmin/AdminDashboard";
 
 function App() {
   return (
-    <div  >
-      hello
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/forgetpassword" component={ForgotPassword} />
+          <Route
+            exact
+            path="/create_new_password/:token"
+            component={ResetPassword}
+          />
+          <Route path="/admindashboard" component={AdminDashboard} />
+          <Route path="*" render={() => <Redirect to="/login" />} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 

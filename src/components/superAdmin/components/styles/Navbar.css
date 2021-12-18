@@ -1,0 +1,25 @@
+.container_navbar {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.navbar_container_start_side {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* justify-content: center; */
+  width: 50%;
+  margin-left: 10px;
+  margin-left: 0px;
+  margin-top: 13px;
+}
+
+.navbar_container_end_side {
+  justify-content: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+  width: 100%;
+  align-items: center;
+}
