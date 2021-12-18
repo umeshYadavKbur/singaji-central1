@@ -8,8 +8,9 @@ import './styles/Table.css'
 
 export default function FeesStructure() {
     const columns = useMemo(() => StudentTableHeader, [])
-    console.log("The columns are::" + columns);
-    const [data, setData] = React.useState(useMemo(() => MockData, []));
+    // console.log("The columns are::" + columns);
+    // const [data, setData] = React.useState(useMemo(() => MockData, []));
+    const data= React.useState(useMemo(() => MockData, []));
     const {
         getTableProps,
         getTableBodyProps,
@@ -57,7 +58,6 @@ export default function FeesStructure() {
                     <div className='ml-auto me-5'>
                         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
                     </div>
-
                 </div>
                 <table {...getTableProps()} id="customers" className="table table-sm" >
                     <thead >
