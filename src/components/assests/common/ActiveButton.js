@@ -8,9 +8,9 @@ function activeButton({ original, changeStatus }) {
   const token = localStorage.getItem("token");
 
   const changeStateOn = (original) => {
-    console.log("====================================");
-    console.log(original.email);
-    console.log("====================================");
+    // console.log("====================================");
+    // console.log(original.email);
+    // console.log("====================================");
     var data = JSON.stringify({
       email: original.email,
     });
@@ -23,13 +23,6 @@ function activeButton({ original, changeStatus }) {
       },
       data: data,
     };
-    // axios(config)
-    //   .then(function (response) {
-    //     console.log(JSON.stringify(response.data));
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
     changeStatus(config);
   };
 

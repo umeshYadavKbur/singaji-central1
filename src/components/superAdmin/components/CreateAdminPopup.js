@@ -3,7 +3,7 @@ import {
   CModal,
   CModalBody,
   CModalHeader,
-  CModalTitle,
+  // CModalTitle,
 } from "@coreui/react";
 import React, { useState } from "react";
 import { connect } from "react-redux";
