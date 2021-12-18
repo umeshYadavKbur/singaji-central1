@@ -21,6 +21,7 @@ import Others_svg from "../../assests/image/sidebarIcons/Others.svg";
 
 const Sidebar = ({ hideSideBar, showSideBar }) => {
   const [toggle, setToggle] = useState(false);
+  const [tabName, setTabName] = useState('Dashboard');
   const handleClick = () => {
     if (toggle) {
       setToggle(false);
@@ -30,12 +31,25 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
       showSideBar();
     }
   };
-  function getSelectValue()
-        {
-            var selectedValue = document.getElementById("list").value;
-            console.log(selectedValue);
-        }
-        // getSelectValue();
+  function getSelectValue() {
+    var selectedValue = document.getElementById("list").value;
+    console.log(selectedValue);
+  }
+
+  const dLink = (name, url, icon) => {
+
+    return (
+      <Link className="dropdown-item  sidebar_options_link" to={url} onClick={() => { setTabName(name) }} >
+        <img src={icon} className=" Sidebar_text  sidebar_icons" alt="" />
+        <span className="text-dark ">{name}</span>
+      </Link>
+
+    )
+
+
+  }
+
+  // getSelectValue();
   return (
     <>
       <div id="sidebar">
@@ -48,7 +62,7 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
                 className="fas fa-chevron-left"
                 id="sidebar_btn"
                 onClick={handleClick}
-                src={!toggle? back_btn:toggle_btn_icon}
+                src={!toggle ? back_btn : toggle_btn_icon}
                 style={{ marginBlockEnd: "6px" }}
                 alt="back"
               />
@@ -81,67 +95,84 @@ const Sidebar = ({ hideSideBar, showSideBar }) => {
             }
             {/* </> */}
           </center>
-          {/* <i class="fas fa-columns"></i>
-             <span className="link_name">Dashboard</span>
+          <div className="dropdown show">
+            <a className="data-toggle sidebar_options d-flex justify-content-between" href="#!" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+              <div>
+                <img src={Dashboard_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+                <span className="text-dark ">{tabName}</span>
+              </div>
+              {
+                !toggle &&
+                <i class="fas fa-chevron-down mr-3"></i>
+              }
             </a>
-            <i class="fas fa-arrow-down arrow"></i>
-            </div>
-            <ul className="sub-menu">
-            <li><a className="link_name" href="#">Dashboard</a></li>
-             <li><a href="#">All students</a></li>
-             <li><a href="#">My Admin</a></li>
-             <li><a href="#">View fees structure</a></li>
-             </ul> */}
-             
-          <Link className="sidebar_options" to="/admindashboard">
-            <img src={Dashboard_svg} className="Sidebar_text sidebar_icons" alt=""/>
-           {/* <span className="text-dark">Dashboard</span> */}
-       { !toggle&&     <select className="dropdown_heading"  id="list" onchange={getSelectValue}>
-            <option value="Dashboard">Dashboard</option>
-            <option value="All_Students">All Student</option>
-            <option value="My_Admin">My Admin</option>
-            <option value="Fees_Structure">View Fees Structure</option>
-            
-        </select>}
-          </Link>
+
+
+
+            {!toggle && <div className="dropdown-menu dropdown_items_div " aria-labelledby="dropdownMenuLink">
+
+              {tabName !== 'Fees Stucture' && dLink('Fees Stucture', '/admindashboard/fees_structure_table', 'ok')}
+              {tabName !== 'All Student' && dLink('All Student', '/admindashboard', 'ok')}
+              {tabName !== 'My Admin' && dLink('My Admin', '/admindashboard/admin_table', 'ok')}
+              {tabName !== 'Dashboard' && dLink('Dashboard', '/admindashboard', 'ok')}
+
+              {/* {tabName !== 'All Student' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("All Student") }} >
+                <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+                <span className="text-dark ">All Student</span>
+              </Link>}
+              {tabName !== 'Fees Stucture' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("Fees Stucture") }} >
+                <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+                <span className="text-dark ">Fees Stucture</span>
+              </Link>}
+
+              {tabName !== 'My Admin' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("My Admin") }}>
+                <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+                <span className="text-dark ">My Admin</span>
+              </Link>}
+
+              {tabName !== 'Dashboard' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("Dashboard") }}>
+                <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+                <span className="text-dark ">Dashboard</span>
+              </Link>} */}
+
+            </div>}
+          </div>
+
           <Link className="sidebar_options" to="/admindashboard/addstudent">
-            <img src={Education_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <img src={Education_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             {/* <span>Education</span> */}
-            {/* <span className="text-dark ">Education</span> */}
-            { !toggle&&      <select className="dropdown_heading"  id="list" onchange={getSelectValue}>
-            <option className="dropdown_option" value="Eduction">Education</option>
-            <option value="Applied_Student">Applied Students</option>
-            <option value="Students">Students</option>
-            <option value="Add_Student">Add Student</option>
-            
-        </select>}
+            <span className="text-dark ">Education</span>
+            {/* {!toggle && <select className="dropdown_heading" id="list" onchange={getSelectValue}>
+              <option className="dropdown_option" value="Eduction">Education</option>
+              <option value="Applied_Student">Applied Students</option>
+              <option value="Students">Students</option>
+              <option value="Add_Student">Add Student</option>
+
+            </select>} */}
           </Link>
-          
+
           <Link className="sidebar_options" href="#!">
-          <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark ">Accounts</span>
           </Link>
+
+
           <Link className="sidebar_options" href="#!">
-          <img src={Alumini_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <img src={Alumini_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">Alumini</span>
           </Link>
           <Link className="sidebar_options" href="#!">
-          <img src={External_company_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <img src={External_company_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">External Companies</span>
           </Link>
           <Link className="sidebar_options" href="#!">
-          <img src={Donation_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <img src={Donation_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">Donation</span>
           </Link>
           <Link className="sidebar_options" href="#!">
-          <img src={Others_svg} className=" Sidebar_text  sidebar_icons" alt=""/>
+            <img src={Others_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">Others</span>
-           
           </Link>
-          <a href="#!">
-         
-          </a>
-          
         </div>
         <div />
       </div>
