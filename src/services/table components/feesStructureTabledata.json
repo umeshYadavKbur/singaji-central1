@@ -20,7 +20,7 @@
         "starting_year": 2020,
         "ending_year": 2021,
         "Total_Fees": 30500,
-        "status": "Active"
+        "status": "Deactive"
     },
     {
         "sno": 4,
@@ -36,7 +36,7 @@
         "starting_year": 2020,
         "ending_year": 2021,
         "Total_Fees": 30500,
-        "status": "Active"
+        "status": "Deactive"
     },
     {
         "sno": 6,
@@ -60,7 +60,7 @@
         "starting_year": 2020,
         "ending_year": 2021,
         "Total_Fees": 30500,
-        "status": "Active"
+        "status": "Deactive"
     },
     {
         "sno": 9,
@@ -84,7 +84,7 @@
         "starting_year": 2020,
         "ending_year": 2021,
         "Total_Fees": 20500,
-        "status": "Active"
+        "status": "Deactive"
     },
     {
         "sno": 12,
@@ -108,7 +108,7 @@
         "starting_year": 2020,
         "ending_year": 2021,
         "Total_Fees": 20500,
-        "status": "Active"
+        "status": "Deactive"
     },
     {
         "sno": 15,
@@ -140,7 +140,7 @@
         "starting_year": 2020,
         "ending_year": 2021,
         "Total_Fees": 20500,
-        "status": "Active"
+        "status": "Deactive"
     },
     {
         "sno": 19,
@@ -164,7 +164,7 @@
         "starting_year": 2020,
         "ending_year": 2021,
         "Total_Fees": 20500,
-        "status": "Active"
+        "status": "Deactive"
     },
     {
         "sno": 22,
@@ -196,7 +196,7 @@
         "starting_year": 2020,
         "ending_year": 2021,
         "Total_Fees": 20500,
-        "status": "Active"
+        "status": "Deactive"
     },
     {
         "sno": 26,
@@ -220,7 +220,7 @@
         "starting_year": 2020,
         "ending_year": 2021,
         "Total_Fees": 20500,
-        "status": "Active"
+        "status": "Deactive"
     },
     {
         "sno": 28,
@@ -236,6 +236,6 @@
         "starting_year": 2020,
         "ending_year": 2021,
         "Total_Fees": 20500,
-        "status": "Active"
+        "status": "Deactive"
     }
 ]
