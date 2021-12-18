@@ -19,10 +19,11 @@ import Donation_svg from "../../assests/image/sidebarIcons/Donation.svg";
 import Education_svg from "../../assests/image/sidebarIcons/Education.svg";
 import Others_svg from "../../assests/image/sidebarIcons/Others.svg";
 
-const Sidebar = ({ hideSideBar, showSideBar }) => {
+const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
   const [toggle, setToggle] = useState(false);
   const [tabName, setTabName] = useState('Dashboard');
   const handleClick = () => {
+    play(!isPlaying)
     if (toggle) {
       setToggle(false);
       hideSideBar();

@@ -1,5 +1,4 @@
 const FeesStructureColumn = [
-
     {
         header: 'S.No',
         accessor: 'sno'
@@ -11,7 +10,7 @@ const FeesStructureColumn = [
     {
         header: 'Starting Year',
         accessor: 'starting_year'
-        
+
     },
     {
         header: 'Ending Year',
@@ -24,9 +23,7 @@ const FeesStructureColumn = [
     {
         header: 'Status',
         accessor: 'status'
-    }
-
-
+    },
 ]
 
 export default FeesStructureColumn;

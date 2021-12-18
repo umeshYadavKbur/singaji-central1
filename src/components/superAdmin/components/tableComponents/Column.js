@@ -1,7 +1,7 @@
- const Column = [
-    
+const Column = [
+
     {
-        header:'SNo',
+        header: 'SNo',
         accessor: 'SNo'
     },
     {
@@ -23,8 +23,7 @@
     {
         header: 'Status',
         accessor: 'status'
-    }
-
+    },
 ]
 
 export default Column;

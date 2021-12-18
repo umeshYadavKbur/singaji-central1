@@ -10,10 +10,10 @@ async function getDataFromApi(loginUrl) {
         console.log("The response of new password is :: ",response.data);
         if(response.status === 200) {
             //here i change the return data so the response object coming from an api is directly return
-            return response.data;
+            return response;
         }
         // Don't forget to return something
-        return response.data;
+        return response;
     } catch(err) {
         return err;
     }

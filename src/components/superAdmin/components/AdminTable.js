@@ -1,33 +1,34 @@
 import * as React from 'react';
-import {useMemo} from 'react';
-import { GlobalFilter } from '../../../services/table components/GlobalFilter';
-import {useTable,useSortBy,useGlobalFilter,usePagination,useRowSelect} from 'react-table';
-import MockData from '../../../services/table components/mockData.json'
-import Column from '../../../services/table components/Column'
+import { useMemo } from 'react';
+import { GlobalFilter } from './tableComponents/GlobalFilter';
+import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
+import MockData from './tableComponents/mockData.json'
+import Column from './tableComponents/Column'
 import './styles/Table.css'
-import { TableCheckbox } from '../../../services/table components/TableCheckbox';
+// import { TableCheckbox } from '../../../services/table components/TableCheckbox';
+import { TableCheckbox } from './tableComponents/TableCheckbox'
 
 
 export default function DataTable() {
-  
 
-//     const [adminInfo,setAdminInfo] = useState()
-//    const access_token = localStorage.getItem("token")
-//     // console.log(access_token);
-//     useEffect(() => {
-//         // getDataFromApi(`/api/infoOfAdmins/`)
-//         //     .then(data => {
-//         //         setAdminInfo(data)
-//         //     }
-//         // )
-//             console.log("Admin info:::",adminInfo);
-//     },[1])
- 
 
-    const columns = useMemo(() => Column,[])
-    const data = useMemo(() => MockData,[])
+    //     const [adminInfo,setAdminInfo] = useState()
+    //    const access_token = localStorage.getItem("token")
+    //     // console.log(access_token);
+    //     useEffect(() => {
+    //         // getDataFromApi(`/api/infoOfAdmins/`)
+    //         //     .then(data => {
+    //         //         setAdminInfo(data)
+    //         //     }
+    //         // )
+    //             console.log("Admin info:::",adminInfo);
+    //     },[1])
+
+
+    const columns = useMemo(() => Column, [])
+    const data = useMemo(() => MockData, [])
     // const tableData = 
-    const {getTableProps,
+    const { getTableProps,
         getTableBodyProps,
         headerGroups,
         state,
@@ -48,33 +49,33 @@ export default function DataTable() {
         data
     },
 
-        useGlobalFilter,useSortBy,
-        usePagination,useRowSelect,
- (hooks) =>{
-     hooks.visibleColumns.push((columns)=>{
-         return[
-             {
-                 id:'selection',
-                 header: ({getToggleAllRowsSelectedProps})=>(
-                     <TableCheckbox {...getToggleAllRowsSelectedProps()}/>
-                 ),
-                 Cell:({row})=>(
-                     <TableCheckbox {...row.getToggleRowSelectedProps()} />   
-                 )
-             },
-             ...columns
-         ]
-     })
- }
+        useGlobalFilter, useSortBy,
+        usePagination, useRowSelect,
+        (hooks) => {
+            hooks.visibleColumns.push((columns) => {
+                return [
+                    {
+                        id: 'selection',
+                        header: ({ getToggleAllRowsSelectedProps }) => (
+                            <TableCheckbox {...getToggleAllRowsSelectedProps()} />
+                        ),
+                        Cell: ({ row }) => (
+                            <TableCheckbox {...row.getToggleRowSelectedProps()} />
+                        )
+                    },
+                    ...columns
+                ]
+            })
+        }
 
     )
 
 
-    const {globalFilter} = state
-    const {pageIndex,pageSize,selectedRowIds} = state
+    const { globalFilter } = state
+    const { pageIndex, pageSize, selectedRowIds } = state
 
 
-  const checkboxData =  
+    const checkboxData =
         JSON.stringify(
             {
                 selectedRowIds: selectedRowIds,
@@ -89,15 +90,15 @@ export default function DataTable() {
 
     return (
         <>
-          
-        
-            <div style={{backgroundColor:"rgb(246 249 252)" ,height:"auto",width:"auto"}}>
+
+
+            <div style={{ backgroundColor: "rgb(246 249 252)", height: "auto", width: "auto" }}>
 
                 <div className="d-flex">
                     <div className='ms-4'>
-                        <select style={{height: "auto",width: "auto",borderRadius: "10px",padding: "5px"}} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                        <select style={{ height: "auto", width: "auto", borderRadius: "10px", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                             {
-                                [10,25,50].map(pageSize => (
+                                [10, 25, 50].map(pageSize => (
                                     <option value={pageSize} key={pageSize}>show Entrie {pageSize}</option>
                                 ))
                             }
@@ -108,50 +109,50 @@ export default function DataTable() {
                     </div>
 
                 </div>
-            <table {...getTableProps()} id="customers" className="table table-sm" >
-                <thead >
-                    {
-                        headerGroups.map((headerGroup) => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {
-                                    headerGroup.headers.map((column) => (
-                                        <th  {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('header')}
-                                            <span>
-                                                {column.isSorted ? (column.isSortedDesc ? <i class="fas fa-chevron-down ms-2"></i> : <i class="fas fa-chevron-up ms-2"></i>) : ''}
-                                            </span></th>
-                                    ))
-                                }
-
-                            </tr>
-                        ))
-                    }
-
-                </thead>
-                <tbody  {...getTableBodyProps()}>
-                    {
-                        page.map(row => {
-                            prepareRow(row)
-                            return (
-                                <tr {...row.getRowProps()}>
+                <table {...getTableProps()} id="customers" className="table table-sm" >
+                    <thead >
+                        {
+                            headerGroups.map((headerGroup) => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
                                     {
-                                        row.cells.map(cell => {
-                                            return (
-                                                
-                                                <td {...cell.getCellProps()}>{cell.render('Cell')} </td> 
-                                                
-                                            )
-                                        })
+                                        headerGroup.headers.map((column) => (
+                                            <th  {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('header')}
+                                                <span>
+                                                    {column.isSorted ? (column.isSortedDesc ? <i class="fas fa-chevron-down ms-2"></i> : <i class="fas fa-chevron-up ms-2"></i>) : ''}
+                                                </span></th>
+                                        ))
                                     }
 
                                 </tr>
-                            )
-                        })
-                    }
+                            ))
+                        }
+
+                    </thead>
+                    <tbody  {...getTableBodyProps()}>
+                        {
+                            page.map(row => {
+                                prepareRow(row)
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {
+                                            row.cells.map(cell => {
+                                                return (
+
+                                                    <td {...cell.getCellProps()}>{cell.render('Cell')} </td>
+
+                                                )
+                                            })
+                                        }
+
+                                    </tr>
+                                )
+                            })
+                        }
 
 
-                </tbody>
-            </table>
-                <div style={{border: "rgb(246 249 252)"}} className='d-flex mb-4'>
+                    </tbody>
+                </table>
+                <div style={{ border: "rgb(246 249 252)" }} className='d-flex mb-4'>
                     <div className='mx-4'>
                         <span>
                             {/* Page{' '}
@@ -172,10 +173,10 @@ export default function DataTable() {
                 </div>
             </div>
 
-           
+
         </>
     );
-}   
+}
 
 
 

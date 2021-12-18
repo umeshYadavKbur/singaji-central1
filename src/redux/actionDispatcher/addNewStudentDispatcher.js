@@ -14,7 +14,6 @@ import swal from "sweetalert";
         // changing the userResData if we need token so userResData.data.toke will be used
         try {
             if(userResData.request.status === 200) {
-                
                 dispatch(AddNewStudentSuccess(userResData.data));
                 swal({
                     title: "Login Success",
