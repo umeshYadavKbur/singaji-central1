@@ -22,7 +22,7 @@ function DataTable({ table_data, fetchAdminTable }) {
     React.useEffect(() => {
         var config = {
             method: "GET",
-            url: `${baseUrl}/api/registrated_student`,
+            url: `${baseUrl}/api/infoOfAdmins`,
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",

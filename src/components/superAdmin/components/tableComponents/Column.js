@@ -1,8 +1,10 @@
+const i = 0 ;
  const Column = [
-    // {
-    //     header:'SNo',
-    //     accessor: 'Sno'
-    // },
+    {
+        header:'SNo',
+          accessor: 'sno', 
+        
+    },
     {
         header: 'Email',
         accessor: 'email'
@@ -17,7 +19,10 @@
     },
     {
         header: 'Role',
-        accessor: 'roleId'
+        accessor: 'roleId',
+         Cell: ({row: {original}}) => (
+             original.roleId === 1 ? "Super Admin" : original.roleId === 2 ? "Admin" : original.roleId === 1 ? "Student" : ''   
+         )
     }
     ,
      {

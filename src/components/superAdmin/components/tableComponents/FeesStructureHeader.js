@@ -19,7 +19,7 @@ const FeesStructureColumn = [
     },
     {
         header: 'Total Fees',
-        accessor: 'Total_Fees'
+        accessor: 'total_fees'
     },
     
     {

@@ -22,7 +22,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
     React.useEffect(() => {
         var config = {
             method: "GET",
-            url: `${baseUrl}/api/registrated_student`,
+            url: `${baseUrl}/api/list_schema`,
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
