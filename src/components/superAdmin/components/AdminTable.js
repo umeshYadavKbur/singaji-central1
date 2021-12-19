@@ -5,32 +5,6 @@ import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } fro
 import MockData from './tableComponents/mockData.json'
 import Column from './tableComponents/Column'
 import './styles/Table.css'
-<<<<<<< HEAD
-// import { TableCheckbox } from '../../../services/table components/TableCheckbox';
-import { TableCheckbox } from './tableComponents/TableCheckbox'
-
-
-export default function DataTable() {
-
-
-    //     const [adminInfo,setAdminInfo] = useState()
-    //    const access_token = localStorage.getItem("token")
-    //     // console.log(access_token);
-    //     useEffect(() => {
-    //         // getDataFromApi(`/api/infoOfAdmins/`)
-    //         //     .then(data => {
-    //         //         setAdminInfo(data)
-    //         //     }
-    //         // )
-    //             console.log("Admin info:::",adminInfo);
-    //     },[1])
-
-
-    const columns = useMemo(() => Column, [])
-    const data = useMemo(() => MockData, [])
-    // const tableData = 
-    const { getTableProps,
-=======
 import { TableCheckbox } from './tableComponents/TableCheckbox';
 import { useEffect } from 'react';
 import { baseUrl } from '../../../redux/constants/url';
@@ -64,7 +38,6 @@ function DataTable({ table_data, fetchAdminTable }) {
 
     const {
         getTableProps,
->>>>>>> origin/harsh
         getTableBodyProps,
         headerGroups,
         state,
@@ -130,20 +103,11 @@ function DataTable({ table_data, fetchAdminTable }) {
         <h2>{table_data.error}</h2>
     ) : (
         <>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/harsh
             <div style={{ backgroundColor: "rgb(246 249 252)", height: "auto", width: "auto" }}>
 
                 <div className="d-flex">
                     <div className='ms-4'>
-<<<<<<< HEAD
-                        <select style={{ height: "auto", width: "auto", borderRadius: "10px", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-=======
                         <select style={{ height: "auto", width: "auto", outline: "none", border: "none", borderRadius: "10px", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
->>>>>>> origin/harsh
                             {
                                 [10, 25, 50].map(pageSize => (
                                     <option value={pageSize} key={pageSize}>show Entrie {pageSize}</option>
@@ -165,11 +129,7 @@ function DataTable({ table_data, fetchAdminTable }) {
                                         headerGroup.headers.map((column) => (
                                             <th  {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('header')}
                                                 <span>
-<<<<<<< HEAD
-                                                    {column.isSorted ? (column.isSortedDesc ? <i class="fas fa-chevron-down ms-2"></i> : <i class="fas fa-chevron-up ms-2"></i>) : ''}
-=======
                                                     {column.isSorted ? (column.isSortedDesc ? <i className="fas fa-chevron-down ms-2"></i> : <i className="fas fa-chevron-up ms-2"></i>) : ''}
->>>>>>> origin/harsh
                                                 </span></th>
                                         ))
                                     }
@@ -177,10 +137,6 @@ function DataTable({ table_data, fetchAdminTable }) {
                                 </tr>
                             ))
                         }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/harsh
                     </thead>
                     <tbody  {...getTableBodyProps()}>
                         {
@@ -231,15 +187,12 @@ function DataTable({ table_data, fetchAdminTable }) {
         </>
     );
 }
-<<<<<<< HEAD
-=======
 
 const mapStateToProps = (state) => {
     return {
         table_data: state.adminTableData,
     };
 };
->>>>>>> origin/harsh
 
 const mapDispatchToProps = (dispatch) => {
     return {

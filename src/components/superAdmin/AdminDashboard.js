@@ -6,7 +6,7 @@ import AddStudent from "./components/AddStudent";
 import Dashboard from "./components/Dashboard";
 import "./components/styles/adminDashboard.css";
 import Navbar from "./components/Navbar";
-// import FeesStuctureTable from "./components/FeesStuctureTable";
+import FeesStuctureTable from "./components/FeesStuctureTable";
 import FeesStructureTable from "./components/FeesStuctureTable";
 import AdminTable from "./components/AdminTable"
 import Sidebar from "./components/Sidebar";

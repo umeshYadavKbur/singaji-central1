@@ -6,15 +6,10 @@ import MockData from './tableComponents/feesStructureTabledata.json'
 import FeesStructureHeader from './tableComponents/FeesStructureHeader';
 import './styles/Table.css'
 import { TableCheckbox } from './tableComponents/TableCheckbox';
-<<<<<<< HEAD
-
-export default function FeesStructure({ }) {
-=======
 import { connect } from 'react-redux';
 import { fetchFeesTableData } from '../../../redux/actionDispatcher/feesStructureTableDataDispatcher';
 import { baseUrl } from '../../../redux/constants/url';
 
->>>>>>> origin/harsh
 
 function FeesStructure({ table_data, fetchFeesTable }) {
 
@@ -42,16 +37,8 @@ function FeesStructure({ table_data, fetchFeesTable }) {
 
     const columns = useMemo(() => FeesStructureHeader, [])
 
-<<<<<<< HEAD
-    const columns = useMemo(() => FeesStructureHeader, [])
-    const [data, setData] = React.useState(useMemo(() => MockData, []));
-    // const tableData = 
-    const {
-        getTableProps,
-=======
     // const tableData = 
     const { getTableProps,
->>>>>>> origin/harsh
         getTableBodyProps,
         headerGroups,
         state,
@@ -69,11 +56,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
         prepareRow,
     } = useTable({
         columns,
-<<<<<<< HEAD
-        data,
-=======
         data: table_data.table_data,
->>>>>>> origin/harsh
     },
 
         useGlobalFilter, useSortBy,
@@ -96,11 +79,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
         }
     )
 
-<<<<<<< HEAD
-    // console.log("rows number :::", page.length);
-=======
     console.log("rows number :::", page.length);
->>>>>>> origin/harsh
     const { globalFilter } = state
     const { pageIndex, pageSize, selectedRowIds } = state
 
@@ -125,11 +104,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
             <div style={{ backgroundColor: "rgb(246 249 252)", height: "auto", width: "auto" }}>
                 <div className="d-flex">
                     <div className='ms-4'>
-<<<<<<< HEAD
-                        <select style={{ height: "auto", width: "auto", borderRadius: "10px", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-=======
                         <select style={{ height: "auto", width: "auto", outline: "none", border: "none", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
->>>>>>> origin/harsh
                             {
                                 [10, 25, 50].map(pageSize => (
                                     <option value={pageSize} key={pageSize}>show Entrie {pageSize}</option>
@@ -137,18 +112,12 @@ function FeesStructure({ table_data, fetchFeesTable }) {
                             }
                         </select>
                     </div>
-<<<<<<< HEAD
-                    <div className='ml-auto me-5'>
-                        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
-                    </div>
-=======
                     <div className='d-flex ml-auto me-3'>
                         <div className='me-4'>
                             <button type="button" class="btn btn-outline-primary fw-bold ">Active</button>
                         </div><div className='me-4'>
                             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
                         </div></div>
->>>>>>> origin/harsh
 
                 </div>
                 <table {...getTableProps()} id="customers" className="table table-sm" >
@@ -193,19 +162,6 @@ function FeesStructure({ table_data, fetchFeesTable }) {
                             {/* Page{' '}
                         <strong>{pageIndex + 1} of {pageOptions.length} </strong> */}
                             Showing 1 to  {page.length} of  {pageCount * pageSize}{' '} Entries {"  "}
-<<<<<<< HEAD
-                        </span>
-                    </div>
-                    <div className='ml-auto'>
-                        {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
-                        <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-                        <button onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>{pageIndex + 2}</button>
-                        <button onClick={() => gotoPage(pageIndex + 2)} disabled={!canNextPage}>{pageIndex + 3}</button>
-                        <button onClick={() => gotoPage(pageIndex + 3)} disabled={!canNextPage}>{pageIndex + 4}</button>
-                        <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
-                        {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button> */}
-                    </div>
-=======
 
                         </span>
                     </div>
@@ -219,14 +175,10 @@ function FeesStructure({ table_data, fetchFeesTable }) {
                         <button style={{ outline: "none", border: "1px solid gray", borderRadius: "0 10px  10px 0" }} onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
                         {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button> */}
                     </div>
->>>>>>> origin/harsh
                 </div>
             </div>
         </>
     );
-<<<<<<< HEAD
-}
-=======
 }
 
 
@@ -244,4 +196,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeesStructure);
->>>>>>> origin/harsh
