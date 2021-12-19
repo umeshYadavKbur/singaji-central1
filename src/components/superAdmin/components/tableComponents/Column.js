@@ -1,9 +1,8 @@
  const Column = [
-    
-    {
-        header:'SNo',
-        accessor: 'SNo'
-    },
+    // {
+    //     header:'SNo',
+    //     accessor: 'Sno'
+    // },
     {
         header: 'Email',
         accessor: 'email'

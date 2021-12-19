@@ -1,32 +1,44 @@
 import * as React from 'react';
-import {useMemo} from 'react';
-import {GlobalFilter} from '../../../services/table components/GlobalFilter';
-import {useTable,useSortBy,useGlobalFilter,usePagination,useRowSelect} from 'react-table';
-import MockData from '../../../services/table components/feesStructureTabledata.json'
-import FeesStructureHeader from '../../../services/table components/FeesStructureHeader';
+import { useMemo } from 'react';
+import { GlobalFilter } from './tableComponents/GlobalFilter';
+import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
+import MockData from './tableComponents/feesStructureTabledata.json'
+import FeesStructureHeader from './tableComponents/FeesStructureHeader';
 import './styles/Table.css'
-import { TableCheckbox } from '../../../services/table components/TableCheckbox';
-
-export default function FeesStructure({}) {
-
-
-    //     const [adminInfo,setAdminInfo] = useState()
-    //    const access_token = localStorage.getItem("token")
-    //     // console.log(access_token);
-    //     useEffect(() => {
-    //         // getDataFromApi(`/api/infoOfAdmins/`)
-    //         //     .then(data => {
-    //         //         setAdminInfo(data)
-    //         //     }
-    //         // )
-    //             console.log("Admin info:::",adminInfo);
-    //     },[1])
+import { TableCheckbox } from './tableComponents/TableCheckbox';
+import { connect } from 'react-redux';
+import { fetchFeesTableData } from '../../../redux/actionDispatcher/feesStructureTableDataDispatcher';
+import { baseUrl } from '../../../redux/constants/url';
 
 
-    const columns = useMemo(() => FeesStructureHeader,[])
-    const data = useMemo(() => MockData,[])
+function FeesStructure({ table_data, fetchFeesTable }) {
+
+    const token = localStorage.getItem("token");
+
+    console.log("====================================");
+    console.log(table_data);
+    console.log("====================================");
+
+    React.useEffect(() => {
+        var config = {
+            method: "GET",
+            url: `${baseUrl}/api/registrated_student`,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        };
+        fetchFeesTable(config);
+        // setTableData(table_data.table_data);
+
+        // eslint-disable-next-line
+    }, []);
+
+
+    const columns = useMemo(() => FeesStructureHeader, [])
+
     // const tableData = 
-    const {getTableProps,
+    const { getTableProps,
         getTableBodyProps,
         headerGroups,
         state,
@@ -44,21 +56,20 @@ export default function FeesStructure({}) {
         prepareRow,
     } = useTable({
         columns,
-        data,
-        
+        data: table_data.table_data,
     },
 
-        useGlobalFilter,useSortBy,
-        usePagination,useRowSelect,
+        useGlobalFilter, useSortBy,
+        usePagination, useRowSelect,
         (hooks) => {
             hooks.visibleColumns.push((columns) => {
                 return [
                     {
                         id: 'selection',
-                        header: ({getToggleAllRowsSelectedProps}) => (
+                        header: ({ getToggleAllRowsSelectedProps }) => (
                             <TableCheckbox {...getToggleAllRowsSelectedProps()} />
                         ),
-                        Cell: ({row}) => (
+                        Cell: ({ row }) => (
                             <TableCheckbox {...row.getToggleRowSelectedProps()} />
                         )
                     },
@@ -66,13 +77,11 @@ export default function FeesStructure({}) {
                 ]
             })
         }
-
-
     )
 
-console.log("rows number :::",page.length);
-    const {globalFilter} = state
-    const {pageIndex,pageSize,selectedRowIds} = state
+    console.log("rows number :::", page.length);
+    const { globalFilter } = state
+    const { pageIndex, pageSize, selectedRowIds } = state
 
     const checkboxData =
         JSON.stringify(
@@ -86,28 +95,30 @@ console.log("rows number :::",page.length);
             2
         )
     console.log(checkboxData);
-    return (
+    return table_data.loading ? (
+        <h2>Loading</h2>
+    ) : table_data.error ? (
+        <h2>{table_data.error}</h2>
+    ) : (
         <>
-
-
-            <div style={{backgroundColor: "rgb(246 249 252)",height: "auto",width: "auto"}}>
-                <div className="d-flex"> 
-                <div className='ms-4'>
-                <select style={{height: "auto",width: "auto",outline:"none",border:"none",padding: "5px"}} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-                    {
-                        [10,25,50].map(pageSize => (
-                            <option value={pageSize} key={pageSize}>show Entrie {pageSize}</option>
-                        ))
-                    }
-                </select>
-                    </div> 
+            <div style={{ backgroundColor: "rgb(246 249 252)", height: "auto", width: "auto" }}>
+                <div className="d-flex">
+                    <div className='ms-4'>
+                        <select style={{ height: "auto", width: "auto", outline: "none", border: "none", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                            {
+                                [10, 25, 50].map(pageSize => (
+                                    <option value={pageSize} key={pageSize}>show Entrie {pageSize}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
                     <div className='d-flex ml-auto me-3'>
                         <div className='me-4'>
-                        <button type="button" class="btn btn-outline-primary fw-bold ">Active</button>
+                            <button type="button" class="btn btn-outline-primary fw-bold ">Active</button>
                         </div><div className='me-4'>
-                    <GlobalFilter  filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
-                </div></div>
-               
+                            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
+                        </div></div>
+
                 </div>
                 <table {...getTableProps()} id="customers" className="table table-sm" >
                     <thead >
@@ -152,25 +163,25 @@ console.log("rows number :::",page.length);
 
                     </tbody>
                 </table>
-                <div style={{border: "rgb(246 249 252)"}} className='d-flex mb-4'>
+                <div style={{ border: "rgb(246 249 252)" }} className='d-flex mb-4'>
                     <div className='mx-4'>
-                    <span>
-                        {/* Page{' '}
+                        <span>
+                            {/* Page{' '}
                         <strong>{pageIndex + 1} of {pageOptions.length} </strong> */}
-                        Showing 1 to  {page.length} of  {pageCount * pageSize}{' '} Entries {"  "}
-                      
-                    </span>
+                            Showing 1 to  {page.length} of  {pageCount * pageSize}{' '} Entries {"  "}
+
+                        </span>
                     </div>
                     <div className='ml-auto me-3' >
-                    {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
-                        <button style={{outline: "none",border: "1px solid gray",borderRadius: "10px 0 0 10px"}} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-                    <button style={{outline:"none",border:"1px solid gray"}} onClick={() => gotoPage(pageIndex+1)} disabled ={!canNextPage}>1</button>
-                    <button style={{outline:"none",border:"1px solid gray"}} onClick={() => gotoPage(pageIndex+1)} disabled ={!canNextPage}>2</button>
-                    <button style={{outline:"none",border:"1px solid gray"}} onClick={() => gotoPage(pageIndex+2)} disabled ={!canNextPage }>3</button>
-                    <button style={{outline:"none",border:"1px solid gray"}} onClick={() => gotoPage(pageIndex+3)} disabled ={!canNextPage}>4</button>
-                        <button style={{outline: "none",border: "1px solid gray",borderRadius: "0 10px  10px 0"}} onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
-                    {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button> */}
-                </div>
+                        {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
+                        <button style={{ outline: "none", border: "1px solid gray", borderRadius: "10px 0 0 10px" }} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>2</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 2)} disabled={!canNextPage}>3</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 3)} disabled={!canNextPage}>4</button>
+                        <button style={{ outline: "none", border: "1px solid gray", borderRadius: "0 10px  10px 0" }} onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                        {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button> */}
+                    </div>
                 </div>
             </div>
         </>
@@ -179,3 +190,16 @@ console.log("rows number :::",page.length);
 
 
 
+const mapStateToProps = (state) => {
+    return {
+        table_data: state.feesStructTableData,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchFeesTable: (data) => dispatch(fetchFeesTableData(data)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FeesStructure);
