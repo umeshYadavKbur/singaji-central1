@@ -6,7 +6,8 @@ import AddStudent from "./components/AddStudent";
 import Dashboard from "./components/Dashboard";
 import "./components/styles/adminDashboard.css";
 import Navbar from "./components/Navbar";
-import FeesStuctureTable from "./components/FeesStuctureTable";
+// import FeesStuctureTable from "./components/FeesStuctureTable";
+import FeesStructureTable from "./components/FeesStuctureTable";
 import AdminTable from "./components/AdminTable"
 import Sidebar from "./components/Sidebar";
 import StudentTable from './components/StudentsTable'
@@ -40,9 +41,11 @@ function AdminDashboard() {
         <div className="table_dashboard">
           <Switch>
             <Route exact path="/admindashboard" component={Dashboard} />
-            <Route exact path="/admindashboard/admin_table" component={AdminTable} />
+            {/* <Route exact path="/admindashboard/admin_table" component={AdminTable} /> */}
             <Route exact path="/admindashboard/studenttable" component={StudentTable} />
-            <Route exact path="/admindashboard/fees_structure_table" component={FeesStuctureTable} />
+            {/* <Route exact path="/admindashboard/fees_structure_table" component={FeesStuctureTable} /> */}
+            <Route exact path="/admindashboard/admintable" component={AdminTable} />
+            <Route exact path="/admindashboard/feesstructuretable" component={FeesStructureTable} />
             <Route
               exact
               path="/admindashboard/addstudent"

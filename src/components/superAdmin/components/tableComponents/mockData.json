@@ -1,6 +1,6 @@
 [{
         "SNo": 1,
-        "status": "Active",
+        "status": "Deactive",
         "userId": 2,
         "email": "riyay.bca2020@ssism.org",
         "name": "Riya yadav ",
@@ -24,7 +24,7 @@
     },
     {
         "SNo": 4,
-        "status": "Active",
+        "status": "Deactive",
         "userId": 106,
         "email": "kuldeeppanwar7697-2@gmail.com",
         "name": "kuldeep panwar",
@@ -48,7 +48,7 @@
     },
     {
         "SNo": 7,
-        "status": "Active",
+        "status": "Deactive",
         "userId": 153,
         "email": "roshany.bca2020@ssism.org",
         "name": "Roshan",
@@ -80,7 +80,7 @@
     },
     {
         "SNo": 11,
-        "status": "Active",
+        "status": "Deactive",
         "userId": 171,
         "email": "umesh@ssism.org",
         "name": "Umesh",
@@ -104,7 +104,7 @@
     },
     {
         "SNo": 14,
-        "status": "Active",
+        "status": "Deactive",
         "userId": 216,
         "email": "kuldeeppanwar7697@gmail.com",
         "name": "kuldeep panwar",

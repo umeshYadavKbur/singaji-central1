@@ -6,28 +6,52 @@ import MockData from './tableComponents/feesStructureTabledata.json'
 import FeesStructureHeader from './tableComponents/FeesStructureHeader';
 import './styles/Table.css'
 import { TableCheckbox } from './tableComponents/TableCheckbox';
+<<<<<<< HEAD
 
 export default function FeesStructure({ }) {
+=======
+import { connect } from 'react-redux';
+import { fetchFeesTableData } from '../../../redux/actionDispatcher/feesStructureTableDataDispatcher';
+import { baseUrl } from '../../../redux/constants/url';
+
+>>>>>>> origin/harsh
+
+function FeesStructure({ table_data, fetchFeesTable }) {
+
+    const token = localStorage.getItem("token");
+
+    console.log("====================================");
+    console.log(table_data);
+    console.log("====================================");
+
+    React.useEffect(() => {
+        var config = {
+            method: "GET",
+            url: `${baseUrl}/api/list_schema`,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        };
+        fetchFeesTable(config);
+        // setTableData(table_data.table_data);
+
+        // eslint-disable-next-line
+    }, []);
 
 
-    //     const [adminInfo,setAdminInfo] = useState()
-    //    const access_token = localStorage.getItem("token")
-    //     // console.log(access_token);
-    //     useEffect(() => {
-    //         // getDataFromApi(`/api/infoOfAdmins/`)
-    //         //     .then(data => {
-    //         //         setAdminInfo(data)
-    //         //     }
-    //         // )
-    //             console.log("Admin info:::",adminInfo);
-    //     },[1])
+    const columns = useMemo(() => FeesStructureHeader, [])
 
-
+<<<<<<< HEAD
     const columns = useMemo(() => FeesStructureHeader, [])
     const [data, setData] = React.useState(useMemo(() => MockData, []));
     // const tableData = 
     const {
         getTableProps,
+=======
+    // const tableData = 
+    const { getTableProps,
+>>>>>>> origin/harsh
         getTableBodyProps,
         headerGroups,
         state,
@@ -45,7 +69,11 @@ export default function FeesStructure({ }) {
         prepareRow,
     } = useTable({
         columns,
+<<<<<<< HEAD
         data,
+=======
+        data: table_data.table_data,
+>>>>>>> origin/harsh
     },
 
         useGlobalFilter, useSortBy,
@@ -68,7 +96,11 @@ export default function FeesStructure({ }) {
         }
     )
 
+<<<<<<< HEAD
     // console.log("rows number :::", page.length);
+=======
+    console.log("rows number :::", page.length);
+>>>>>>> origin/harsh
     const { globalFilter } = state
     const { pageIndex, pageSize, selectedRowIds } = state
 
@@ -84,12 +116,20 @@ export default function FeesStructure({ }) {
             2
         )
     console.log(checkboxData);
-    return (
+    return table_data.loading ? (
+        <h2>Loading</h2>
+    ) : table_data.error ? (
+        <h2>{table_data.error}</h2>
+    ) : (
         <>
             <div style={{ backgroundColor: "rgb(246 249 252)", height: "auto", width: "auto" }}>
                 <div className="d-flex">
                     <div className='ms-4'>
+<<<<<<< HEAD
                         <select style={{ height: "auto", width: "auto", borderRadius: "10px", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+=======
+                        <select style={{ height: "auto", width: "auto", outline: "none", border: "none", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+>>>>>>> origin/harsh
                             {
                                 [10, 25, 50].map(pageSize => (
                                     <option value={pageSize} key={pageSize}>show Entrie {pageSize}</option>
@@ -97,9 +137,18 @@ export default function FeesStructure({ }) {
                             }
                         </select>
                     </div>
+<<<<<<< HEAD
                     <div className='ml-auto me-5'>
                         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
                     </div>
+=======
+                    <div className='d-flex ml-auto me-3'>
+                        <div className='me-4'>
+                            <button type="button" class="btn btn-outline-primary fw-bold ">Active</button>
+                        </div><div className='me-4'>
+                            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
+                        </div></div>
+>>>>>>> origin/harsh
 
                 </div>
                 <table {...getTableProps()} id="customers" className="table table-sm" >
@@ -144,6 +193,7 @@ export default function FeesStructure({ }) {
                             {/* Page{' '}
                         <strong>{pageIndex + 1} of {pageOptions.length} </strong> */}
                             Showing 1 to  {page.length} of  {pageCount * pageSize}{' '} Entries {"  "}
+<<<<<<< HEAD
                         </span>
                     </div>
                     <div className='ml-auto'>
@@ -155,8 +205,43 @@ export default function FeesStructure({ }) {
                         <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
                         {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button> */}
                     </div>
+=======
+
+                        </span>
+                    </div>
+                    <div className='ml-auto me-3' >
+                        {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
+                        <button style={{ outline: "none", border: "1px solid gray", borderRadius: "10px 0 0 10px" }} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>2</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 2)} disabled={!canNextPage}>3</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 3)} disabled={!canNextPage}>4</button>
+                        <button style={{ outline: "none", border: "1px solid gray", borderRadius: "0 10px  10px 0" }} onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                        {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button> */}
+                    </div>
+>>>>>>> origin/harsh
                 </div>
             </div>
         </>
     );
+<<<<<<< HEAD
 }
+=======
+}
+
+
+
+const mapStateToProps = (state) => {
+    return {
+        table_data: state.feesStructTableData,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchFeesTable: (data) => dispatch(fetchFeesTableData(data)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FeesStructure);
+>>>>>>> origin/harsh

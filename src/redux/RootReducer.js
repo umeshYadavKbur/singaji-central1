@@ -7,6 +7,8 @@ import showSideBarReducer from "./reducers/showSideBarReducer";
 import createNewFeesStructure from "./reducers/createFeesStructureReducer";
 import changeStudentStatus from "./reducers/activeDeactiveStudentReducer";
 import addNewStudentReducer from "./reducers/studentTableReducer";
+import adminTableReducer from "./reducers/adminTableReducer"
+import feesstructureTableReducer from "./reducers/feesStuctureTableReducer"
 
 //Combining the reducer's into a rootReducer
 const RootReducer = combineReducers({
@@ -18,6 +20,8 @@ const RootReducer = combineReducers({
   feeStructure: createNewFeesStructure,
   statusStudent: changeStudentStatus,
   studentTableData: addNewStudentReducer,
+  adminTableData: adminTableReducer,
+  feesStructTableData: feesstructureTableReducer,
   // addStudent: addNewStudentReducer,
 });
 
