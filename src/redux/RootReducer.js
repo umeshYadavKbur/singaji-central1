@@ -5,6 +5,8 @@ import forgetPassReducer from "./reducers/forgotPasswordReducer";
 import newAdminReducer from "./reducers/createAdminReducer";
 import showSideBarReducer from "./reducers/showSideBarReducer";
 import createNewFeesStructure from "./reducers/createFeesStructureReducer";
+import adminTableReducer from "./reducers/adminTableReducer"
+import feesstructureTableReducer from "./reducers/feesStuctureTableReducer"
 
 //Combining the reducer's into a rootReducer
 const RootReducer = combineReducers({
@@ -14,6 +16,8 @@ const RootReducer = combineReducers({
   createAdmin: newAdminReducer,
   sidebar: showSideBarReducer,
   feeStructure: createNewFeesStructure,
+  adminTableData: adminTableReducer,
+  feesStructTableData: feesstructureTableReducer,
   // addStudent: addNewStudentReducer,
 });
 
