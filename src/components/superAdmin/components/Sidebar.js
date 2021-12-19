@@ -32,10 +32,10 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
       showSideBar();
     }
   };
-  function getSelectValue() {
-    var selectedValue = document.getElementById("list").value;
-    console.log(selectedValue);
-  }
+  // function getSelectValue() {
+  //   var selectedValue = document.getElementById("list").value;
+  //   console.log(selectedValue);
+  // }
 
   const dLink = (name, url, icon) => {
 
@@ -91,47 +91,47 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                   type="search"
                   placeholder="search.."
                 />
-                <span class="fa fa-search errspan"></span>
+                <span className="fa fa-search errspan"></span>
               </>
             }
             {/* </> */}
           </center>
           <div className="dropdown show">
-            <a className="data-toggle sidebar_options d-flex justify-content-between" href="#!" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+            <a className="data-toggle sidebar_options d-flex justify-content-between"   role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
               <div>
                 <img src={Dashboard_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">{tabName}</span>
               </div>
               {
                 !toggle &&
-                <i class="fas fa-chevron-down mr-3"></i>
+                <i className="fas fa-chevron-down mr-3"></i>
               }
             </a>
 
 
 
-            {!toggle && <div className="dropdown-menu dropdown_items_div " aria-labelledby="dropdownMenuLink">
+            {<div className="dropdown-menu dropdown_items_div " aria-labelledby="dropdownMenuLink">
 
               {tabName !== 'Fees Stucture' && dLink('Fees Stucture', '/admindashboard/fees_structure_table', 'ok')}
               {tabName !== 'All Student' && dLink('All Student', '/admindashboard/studenttable', 'ok')}
               {tabName !== 'My Admin' && dLink('My Admin', '/admindashboard/admin_table', 'ok')}
               {tabName !== 'Dashboard' && dLink('Dashboard', '/admindashboard', 'ok')}
 
-              {/* {tabName !== 'All Student' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("All Student") }} >
+              {/* {tabName !== 'All Student' && <Link className="dropdown-item  sidebar_options_link" to="#!" onClick={() => { setTabName("All Student") }} >
                 <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">All Student</span>
               </Link>}
-              {tabName !== 'Fees Stucture' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("Fees Stucture") }} >
+              {tabName !== 'Fees Stucture' && <Link className="dropdown-item  sidebar_options_link" to="#!" onClick={() => { setTabName("Fees Stucture") }} >
                 <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">Fees Stucture</span>
               </Link>}
 
-              {tabName !== 'My Admin' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("My Admin") }}>
+              {tabName !== 'My Admin' && <Link className="dropdown-item  sidebar_options_link" to="#!" onClick={() => { setTabName("My Admin") }}>
                 <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">My Admin</span>
               </Link>}
 
-              {tabName !== 'Dashboard' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("Dashboard") }}>
+              {tabName !== 'Dashboard' && <Link className="dropdown-item  sidebar_options_link" to="#!" onClick={() => { setTabName("Dashboard") }}>
                 <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">Dashboard</span>
               </Link>} */}
@@ -152,25 +152,25 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
             </select>} */}
           </Link>
 
-          <Link className="sidebar_options" href="#!">
+          <Link className="sidebar_options" to="#!">
             <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark ">Accounts</span>
           </Link>
 
 
-          <Link className="sidebar_options" href="#!">
+          <Link className="sidebar_options" to="#!">
             <img src={Alumini_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">Alumini</span>
           </Link>
-          <Link className="sidebar_options" href="#!">
+          <Link className="sidebar_options" to="#!">
             <img src={External_company_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">External Companies</span>
           </Link>
-          <Link className="sidebar_options" href="#!">
+          <Link className="sidebar_options" to="#!">
             <img src={Donation_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">Donation</span>
           </Link>
-          <Link className="sidebar_options" href="#!">
+          <Link className="sidebar_options" to="#!">
             <img src={Others_svg} className=" Sidebar_text  sidebar_icons" alt="" />
             <span className="text-dark">Others</span>
           </Link>

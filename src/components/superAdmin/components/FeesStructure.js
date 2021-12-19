@@ -12,8 +12,8 @@ import * as Yup from "yup";
 // import logo from "../../assests/image/ssism_si.svg";
 import { createFeesStructure } from "../../../redux/actionDispatcher/createFeesStrucDispather";
 import "./styles/createAdmin.css";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+// import { useParams } from "react-router-dom";
+// import axios from "axios";
 import { baseUrl } from "../../../url/baseUrl";
 // import swal from 'sweetalert';
 
@@ -78,7 +78,7 @@ function FeesStructure({ adminData, createFees }) {
         }}
         onClick={() => setVisible(!visible)}
       >
-        Fees Structure <i class="fas fa-user-edit"></i>
+        Fees Structure <i className="fas fa-user-edit"></i>
       </CButton>
       <CModal
         // size="md"
