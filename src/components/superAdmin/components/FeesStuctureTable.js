@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {useMemo} from 'react';
-import {GlobalFilter} from '../../../services/table components/GlobalFilter';
+import {GlobalFilter} from './tableComponents/GlobalFilter';
 import {useTable,useSortBy,useGlobalFilter,usePagination,useRowSelect} from 'react-table';
-import MockData from '../../../services/table components/feesStructureTabledata.json'
-import FeesStructureHeader from '../../../services/table components/FeesStructureHeader';
+import MockData from './tableComponents/feesStructureTabledata.json'
+import FeesStructureHeader from './tableComponents/FeesStructureHeader';
 import './styles/Table.css'
-import { TableCheckbox } from '../../../services/table components/TableCheckbox';
+import { TableCheckbox } from './tableComponents/TableCheckbox';
 
 export default function FeesStructure({}) {
 

@@ -1,5 +1,4 @@
  const Column = [
-    
     // {
     //     header:'SNo',
     //     accessor: 'Sno'

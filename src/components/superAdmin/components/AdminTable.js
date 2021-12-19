@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {useMemo} from 'react';
-import { GlobalFilter } from '../../../services/table components/GlobalFilter';
+import { GlobalFilter } from './tableComponents/GlobalFilter';
 import {useTable,useSortBy,useGlobalFilter,usePagination,useRowSelect} from 'react-table';
-import MockData from '../../../services/table components/mockData.json'
-import Column from '../../../services/table components/Column'
+import MockData from './tableComponents/mockData.json'
+import Column from './tableComponents/Column'
 import './styles/Table.css'
-import { TableCheckbox } from '../../../services/table components/TableCheckbox';
+import { TableCheckbox } from './tableComponents/TableCheckbox';
 import { useEffect } from 'react';
 import { baseUrl } from '../../../redux/constants/url';
 import { getDataFromApi } from '../../../services/getApi';

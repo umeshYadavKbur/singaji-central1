@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../components/superAdmin/components/styles/sidebar.css'
+import '../styles/sidebar.css'
 export const GlobalFilter = ({filter , setFilter}) => {
     return (
         <>
