@@ -1,7 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 // import { useParams } from 'react-router';
-import { Redirect } from "react-router";
+// import { Redirect } from "react-router";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
@@ -17,17 +22,17 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/forgetpassword" component={ForgotPassword} />
+        <Routes>
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/forgetpassword" element={<ForgotPassword />} />
           <Route
             exact
             path="/create_new_password/:token"
-            component={ResetPassword}
+            element={<ResetPassword />}
           />
-          <Route path="/admindashboard" component={AdminDashboard} />
-          <Route path="*" render={() => <Redirect to="/login" />} />
-        </Switch>
+          <Route path="/admindashboard/*" element={<AdminDashboard />} />
+          <Route path="*" element={<Navigate replace to="/login" />} />
+        </Routes>
       </Router>
     </Provider>
   );

@@ -14,18 +14,20 @@ import CIcon from "@coreui/icons-react";
 
 import avatar8 from "../../assests/image/david.png";
 import "./styles/HeaderDropdown.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { logout } from "../../../redux/actionDispatcher/authDispatcher";
 import { connect } from "react-redux";
 
 const AppHeaderDropdown = ({ userData, logout }) => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
 
   const logoutfunction = () => {
     console.log("====================================");
     logout();
     localStorage.clear();
-    history.push("/login");
+    navigate("/login");
     console.log("====================================");
   };
   return (

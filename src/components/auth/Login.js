@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 //importing Components
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 // import swal from "sweetalert";
 // import { useEffect } from "react";
 // import { checkOnlineStatus } from "../../services/onlineOfflineStatus";
@@ -18,7 +18,8 @@ function Login({ userData, fetchUsers }) {
   //   result ?console.log("online"):console.log("offline");
   // },300);
 
-  const history = useHistory();
+  // const history = useHistory();
+  var navigate = useNavigate();
 
   // useEffect(() => {
   //   if (localStorage.getItem('role') === 'SUPERADMIN') {
@@ -34,7 +35,7 @@ function Login({ userData, fetchUsers }) {
 
   console.log("maijn page", userData);
   if (userData.role === "SUPERADMIN") {
-    history.push("/admindashboard");
+    navigate("/admindashboard");
   }
 
   const validationSchema = Yup.object({
@@ -67,7 +68,13 @@ function Login({ userData, fetchUsers }) {
 
   return (
     <>
-      <div style={{ height: "100vh", width: "100vw", background: "rgb(207 207 207)" }}>
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          background: "rgb(207 207 207)",
+        }}
+      >
         <div
           className="position-absolute top-50 start-50 translate-middle "
           style={{
@@ -133,7 +140,7 @@ function Login({ userData, fetchUsers }) {
                   color: "gray",
                   cursor: "pointer",
                   textDecoration: "none",
-                  marginBottom:"5px"
+                  marginBottom: "5px",
                 }}
               >
                 Forgot password

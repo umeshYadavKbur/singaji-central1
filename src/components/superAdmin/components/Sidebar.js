@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles/sidebar.css";
 import logoimage from "../../assests/image/logoimage.png";
-import logo from '../../assests/image/logo.png'
+import logo from "../../assests/image/logo.png";
 import david from "../../assests/image/david.png";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -21,9 +21,9 @@ import Others_svg from "../../assests/image/sidebarIcons/Others.svg";
 
 const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
   const [toggle, setToggle] = useState(false);
-  const [tabName, setTabName] = useState('Dashboard');
+  const [tabName, setTabName] = useState("Dashboard");
   const handleClick = () => {
-    play(!isPlaying)
+    play(!isPlaying);
     if (toggle) {
       setToggle(false);
       hideSideBar();
@@ -38,17 +38,19 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
   // }
 
   const dLink = (name, url, icon) => {
-
     return (
-      <Link className="dropdown-item  sidebar_options_link" to={url} onClick={() => { setTabName(name) }} >
+      <Link
+        className="dropdown-item  sidebar_options_link"
+        to={url}
+        onClick={() => {
+          setTabName(name);
+        }}
+      >
         <img src={icon} className=" Sidebar_text  sidebar_icons" alt="" />
         <span className="text-dark ">{name}</span>
       </Link>
-
-    )
-
-
-  }
+    );
+  };
 
   // getSelectValue();
   return (
@@ -58,7 +60,6 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
         <div className="sidebar toggle_animation">
           <center className="images_sidebar toggle_animation">
             <label htmlFor="check">
-
               <img
                 className="fas fa-chevron-left"
                 id="sidebar_btn"
@@ -69,22 +70,21 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
               />
             </label>
 
-            {!toggle ?
+            {!toggle ? (
               // <>
               <>
                 <img src={logoimage} className="profile_image1" alt="" />
                 <img src={david} className="profile_image2" alt="" />
               </>
-              :
+            ) : (
               <>
                 <img src={david} className="small_logo_avtar" alt="" />
                 <img src={david} className="profile_image2" alt="" />
                 <img src={logo} className="small_logo" alt="" />
               </>
-
-            }
+            )}
             <h6 className="sidebar_david">David</h6>
-            {!toggle &&
+            {!toggle && (
               <>
                 <input
                   className="input_sidebar"
@@ -93,31 +93,43 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                 />
                 <span className="fa fa-search errspan"></span>
               </>
-            }
+            )}
             {/* </> */}
           </center>
           <div className="dropdown show">
-            <a className="data-toggle sidebar_options d-flex justify-content-between"   role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+            <a
+              className="data-toggle sidebar_options d-flex justify-content-between"
+              role="button"
+              id="dropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               <div>
-                <img src={Dashboard_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+                <img
+                  src={Dashboard_svg}
+                  className=" Sidebar_text  sidebar_icons"
+                  alt=""
+                />
                 <span className="text-dark ">{tabName}</span>
               </div>
-              {
-                !toggle &&
-                <i className="fas fa-chevron-down mr-3"></i>
-              }
+              {!toggle && <i className="fas fa-chevron-down mr-3"></i>}
             </a>
 
+            {
+              <div
+                className="dropdown-menu dropdown_items_div "
+                aria-labelledby="dropdownMenuLink"
+              >
+                {tabName !== "Fees Stucture" &&
+                  dLink("Fees Stucture", "feesstructuretable", "ok")}
+                {tabName !== "Applied Students" &&
+                  dLink("Applied Students", "studenttable", "ok")}
+                {tabName !== "My Admin" &&
+                  dLink("My Admin", "admintable", "ok")}
+                {tabName !== "Dashboard" && dLink("Dashboard", "", "ok")}
 
-
-            {<div className="dropdown-menu dropdown_items_div " aria-labelledby="dropdownMenuLink">
-
-              {tabName !== 'Fees Stucture' && dLink('Fees Stucture', '/admindashboard/feesstructuretable', 'ok')}
-              {tabName !== 'Applied Students' && dLink('Applied Students', '/admindashboard/studenttable', 'ok')}
-              {tabName !== 'My Admin' && dLink('My Admin', '/admindashboard/admintable', 'ok')}
-              {tabName !== 'Dashboard' && dLink('Dashboard', '/admindashboard', 'ok')}
-
-              {/* {tabName !== 'All Student' && <Link className="dropdown-item  sidebar_options_link" to="#!" onClick={() => { setTabName("All Student") }} >
+                {/* {tabName !== 'All Student' && <Link className="dropdown-item  sidebar_options_link" to="#!" onClick={() => { setTabName("All Student") }} >
                 <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">All Student</span>
               </Link>}
@@ -135,12 +147,16 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                 <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">Dashboard</span>
               </Link>} */}
-
-            </div>}
+              </div>
+            }
           </div>
 
-          <Link className="sidebar_options" to="/admindashboard/addstudent">
-            <img src={Education_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+          <Link className="sidebar_options" to="addstudent">
+            <img
+              src={Education_svg}
+              className=" Sidebar_text  sidebar_icons"
+              alt=""
+            />
             {/* <span>Education</span> */}
             <span className="text-dark ">Education</span>
             {/* {!toggle && <select className="dropdown_heading" id="list" onchange={getSelectValue}>
@@ -153,25 +169,44 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
           </Link>
 
           <Link className="sidebar_options" to="#!">
-            <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+            <img
+              src={Accounts_svg}
+              className=" Sidebar_text  sidebar_icons"
+              alt=""
+            />
             <span className="text-dark ">Accounts</span>
           </Link>
 
-
           <Link className="sidebar_options" to="#!">
-            <img src={Alumini_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+            <img
+              src={Alumini_svg}
+              className=" Sidebar_text  sidebar_icons"
+              alt=""
+            />
             <span className="text-dark">Alumini</span>
           </Link>
           <Link className="sidebar_options" to="#!">
-            <img src={External_company_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+            <img
+              src={External_company_svg}
+              className=" Sidebar_text  sidebar_icons"
+              alt=""
+            />
             <span className="text-dark">External Companies</span>
           </Link>
           <Link className="sidebar_options" to="#!">
-            <img src={Donation_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+            <img
+              src={Donation_svg}
+              className=" Sidebar_text  sidebar_icons"
+              alt=""
+            />
             <span className="text-dark">Donation</span>
           </Link>
-          <Link className="sidebar_options" to="#!">
-            <img src={Others_svg} className=" Sidebar_text  sidebar_icons" alt="" />
+          <Link className="sidebar_options" to="#">
+            <img
+              src={Others_svg}
+              className=" Sidebar_text  sidebar_icons"
+              alt=""
+            />
             <span className="text-dark">Others</span>
           </Link>
         </div>

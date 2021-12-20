@@ -5,12 +5,15 @@ import * as Yup from "yup";
 import React from "react";
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { newPasswordRequest } from "../../redux/actionDispatcher/newPassDispatcher";
+import {useNavigate} from 'react-router-dom'
 
 
 function ResetPassword({ newPassword, newPasswordRequest }) {
   console.log(newPassword);
   const { token } = useParams();
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
+
 
   console.log(newPassword);
 
@@ -20,7 +23,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   //   history.push('./login')
   // }
   if(newPassword.newPass) {
-    history.push('/login');
+    navigate('/login');
   }
   const validationSchema = Yup.object({
     password: Yup.string().required("Required*"),
@@ -66,7 +69,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
             <div className="d-flex justify-content-center">
               <img
                 onClick={() => {
-                  history.push("/login");
+                  navigate("/login");
                 }}
                 className="mb-2 cursor-pointer "
                 src={Singaji_logo}
