@@ -78,7 +78,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
               <br />
             </div>
             <div className="d-flex justify-content-center">
-              <h4 className="h4 mb-3 fw-bold">Enter New Password</h4>
+              <h4 className="h4 mb-3 text-secondary">Enter New Password</h4>
             </div>
             <div className="mb-3">
               <input

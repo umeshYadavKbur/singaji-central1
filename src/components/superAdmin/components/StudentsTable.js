@@ -8,7 +8,7 @@ import {
   usePagination,
   useRowSelect,
 } from "react-table";
-import MockData from "./tableComponents/studentTable.json";
+// import MockData from "./tableComponents/studentTable.json";
 import StudentTableHeader from "./tableComponents/StudentTableHeader";
 import "./styles/Table.css";
 import { baseUrl } from "../../../redux/constants/url";

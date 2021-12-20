@@ -1,11 +1,8 @@
-var i=0;
+
 const FeesStructureColumn = [
     {
         header: 'S.No',
-        accessor: 'sno',
-         Cell: ({row: {original}}) => (
-             i++
-        )
+        accessor: 'sno'
     },
     {
         header: 'Branch Name',

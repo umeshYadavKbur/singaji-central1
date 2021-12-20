@@ -97,7 +97,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
             {/* </> */}
           </center>
           <div className="dropdown show">
-            <a className="data-toggle sidebar_options d-flex justify-content-between"   role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+            <a href="!#" className="data-toggle sidebar_options d-flex justify-content-between"   role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
               <div>
                 <img src={Dashboard_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">{tabName}</span>
