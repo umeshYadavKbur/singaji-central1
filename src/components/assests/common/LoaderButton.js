@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../common/Loader.css'
+import '../common/styles/Loader.css'
 const LoaderButton = () => {
     return (
         <div>

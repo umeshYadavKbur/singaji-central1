@@ -9,7 +9,7 @@ import LoaderButton from "../assests/common/LoaderButton";
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
 import { useHistory } from "react-router";
-
+import { ToastContainer, toast } from 'react-toastify';
 
 // import swal from "sweetalert";
 // import { useEffect } from "react";
@@ -39,7 +39,8 @@ function Login({ userData, fetchUsers }) {
   console.log("maijn page", userData);
   if (userData.role === "SUPERADMIN") {
     history.push("/admindashboard");
-    
+    const notify = () => toast("Wow so easy!");
+    notify();
   }
 
   const validationSchema = Yup.object({
@@ -73,7 +74,7 @@ function Login({ userData, fetchUsers }) {
   return (
     <>
       <div style={{ height: "100vh", width: "100vw", background: "rgb(207 207 207)" }}>
-      
+
         <div
           className="position-absolute top-50 start-50 translate-middle "
           style={{
@@ -85,7 +86,7 @@ function Login({ userData, fetchUsers }) {
             borderRadius: "10px",
           }}
         >
-          
+
           <form onSubmit={formik.handleSubmit}>
             <div className="d-flex justify-content-center">
               <img
@@ -140,7 +141,7 @@ function Login({ userData, fetchUsers }) {
                   color: "gray",
                   cursor: "pointer",
                   textDecoration: "none",
-                  marginBottom:"5px"
+                  marginBottom: "5px"
                 }}
               >
                 Forgot password
@@ -151,7 +152,7 @@ function Login({ userData, fetchUsers }) {
               type="submit"
               disabled={userData.loading}
             >
-              {userData.loading ? (<LoaderButton/>) : "Submit"}
+              {userData.loading ? (<LoaderButton />) : "Submit"}
             </button>
           </form>
         </div>
