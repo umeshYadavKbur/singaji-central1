@@ -13,8 +13,10 @@ import Sidebar from "./components/Sidebar";
 import StudentTable from './components/StudentsTable'
 import { useAnimate } from "react-simple-animate";
 
-
+import { ToastContainer, toast } from 'react-toastify';
 function AdminDashboard() {
+  const notify = () => toast("Wow so easy!");
+    notify();
   const { play, style, isPlaying } = useAnimate({
     start: {
       width: "281px",
@@ -27,6 +29,7 @@ function AdminDashboard() {
   });
   return (
     <div className="main_container_dashboard">
+    <ToastContainer />
       <div
         className="side_bar_content"
         style={style}

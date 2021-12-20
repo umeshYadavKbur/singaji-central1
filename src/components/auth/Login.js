@@ -3,10 +3,14 @@ import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import LoaderButton from "../assests/common/LoaderButton";
+
 //importing Components
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
 import { useHistory } from "react-router";
+
+
 // import swal from "sweetalert";
 // import { useEffect } from "react";
 // import { checkOnlineStatus } from "../../services/onlineOfflineStatus";
@@ -35,11 +39,12 @@ function Login({ userData, fetchUsers }) {
   console.log("maijn page", userData);
   if (userData.role === "SUPERADMIN") {
     history.push("/admindashboard");
+    
   }
 
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid Email Format*").required("Required*"),
-    password: Yup.string().required("Required*"),
+    email: Yup.string().email("Invalid Email Format*").required("Enter you Email!"),
+    password: Yup.string().required("Enter your Password!"),
   });
 
   const formik = useFormik({
@@ -68,6 +73,7 @@ function Login({ userData, fetchUsers }) {
   return (
     <>
       <div style={{ height: "100vh", width: "100vw", background: "rgb(207 207 207)" }}>
+      
         <div
           className="position-absolute top-50 start-50 translate-middle "
           style={{
@@ -79,6 +85,7 @@ function Login({ userData, fetchUsers }) {
             borderRadius: "10px",
           }}
         >
+          
           <form onSubmit={formik.handleSubmit}>
             <div className="d-flex justify-content-center">
               <img
@@ -144,7 +151,7 @@ function Login({ userData, fetchUsers }) {
               type="submit"
               disabled={userData.loading}
             >
-              {userData.loading ? "loading..." : "Submit"}
+              {userData.loading ? (<LoaderButton/>) : "Submit"}
             </button>
           </form>
         </div>
