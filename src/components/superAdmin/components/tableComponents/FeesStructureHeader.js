@@ -1,7 +1,11 @@
+var i=0;
 const FeesStructureColumn = [
     {
         header: 'S.No',
-        accessor: 'sno'
+        accessor: 'sno',
+         Cell: ({row: {original}}) => (
+             i++
+        )
     },
     {
         header: 'Branch Name',
@@ -52,6 +56,14 @@ const FeesStructureColumn = [
                 {original.active === 1 ? 'Active' : 'Deactive'}
             </button>)
     },
+    {
+        header: ' ',
+        accessor: 'icon',
+        Cell: ({row: {original}}) => (
+            <i class="fas fa-file-download"></i>
+        )
+    }
+
 ]
 
 export default FeesStructureColumn;

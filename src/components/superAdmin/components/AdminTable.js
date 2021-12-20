@@ -12,6 +12,7 @@ import { getDataFromApi } from '../../../services/getApi';
 import axios from 'axios'
 import { fetchAdminTableData } from '../../../redux/actionDispatcher/adminTableDatadispatcher';
 import { connect } from 'react-redux';
+import SkeletonColor from '../../../helpers/Skeletrone';
 
 function DataTable({ table_data, fetchAdminTable }) {
     const token = localStorage.getItem("token");
@@ -98,7 +99,7 @@ function DataTable({ table_data, fetchAdminTable }) {
     console.log(checkboxData);
 
     return table_data.loading ? (
-        <h2>Loading</h2>
+        <SkeletonColor></SkeletonColor>
     ) : table_data.error ? (
         <h2>{table_data.error}</h2>
     ) : (
@@ -167,7 +168,7 @@ function DataTable({ table_data, fetchAdminTable }) {
                         <span>
                             {/* Page{' '}
                         <strong>{pageIndex + 1} of {pageOptions.length} </strong> */}
-                            Showing 1 to  {page.length} of  {pageCount * pageSize}{' '} Entries {"  "}
+                                    Showing {(page.length * (pageIndex + 1)-(page.length-1))} to  {page.length*(pageIndex+1)} of  {pageCount * pageSize}{' '} Entries {"  "}
                         </span>
                     </div>
                     <div className='ml-auto me-3' >

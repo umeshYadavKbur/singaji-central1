@@ -7,14 +7,14 @@
     padding-top: 12px;
     width: auto;
     padding-bottom: 12px;
-    text-align: center;
+    /* text-align: center; */
     background-color: #ffffff;
 }
 
 #customers td {
     border: 2px solid rgb(255, 255, 255);
     border-radius: 5px;
-    text-align: center;
+    /* text-align: center;   */
     padding: 8px;
 }
 
