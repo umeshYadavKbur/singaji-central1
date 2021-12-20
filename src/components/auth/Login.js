@@ -39,8 +39,8 @@ function Login({ userData, fetchUsers }) {
   }
 
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid Email Format*").required("Required*"),
-    password: Yup.string().required("Required*"),
+    email: Yup.string().email("Invalid Email Format*").required("Please fill the field above"),
+    password: Yup.string().required("Please fill the field above"),
   });
 
   const formik = useFormik({

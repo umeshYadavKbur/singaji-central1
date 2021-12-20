@@ -13,17 +13,19 @@ import logo from "../../assests/image/ssism_si.svg";
 import "./styles/createAdmin.css";
 import { createNewAdmin } from "../../../redux/actionDispatcher/createNewAdminDispatcher";
 import { baseUrl } from "../../../url/baseUrl";
+import { useNavigate } from "react-router-dom";
 
 function CreateAdminPopup({ adminData, createNewAdmin }) {
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   console.log(adminData);
 
   const [visible, setVisible] = useState(false);
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid Email Format*").required("Required*"),
-    name: Yup.string().required("Required*"),
-    role: Yup.string().required("Required*"),
+    email: Yup.string().email("Invalid Email Format*").required("Please fill the field above"),
+    name: Yup.string().required("Please fill the field above"),
+    role: Yup.string().required("Please fill the field above"),
   });
 
   const formik = useFormik({
@@ -53,12 +55,12 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
       createNewAdmin(config);
 
       // axios(config)
-      //     .then(function (response) {
-      //         console.log(JSON.stringify(response.data));
-      //     })
-      //     .catch(function (error) {
-      //         console.log(error);
-      //     });
+      //   .then(function (response) {
+      //     console.log(response);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
     },
   });
 
@@ -125,7 +127,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   <select
                     name="role"
                     className=" form-select "
-          
+
                     value={formik.values.role}
                     // defaultValue="null"
                     onChange={formik.handleChange}
