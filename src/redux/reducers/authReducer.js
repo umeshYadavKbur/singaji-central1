@@ -9,6 +9,7 @@ const initialState = {
   loading: false,
   loginSucces: false,
   role: "",
+  email:'',
   token: "",
   userInfo: "",
   error: "",

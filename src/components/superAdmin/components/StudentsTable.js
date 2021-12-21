@@ -91,22 +91,15 @@ function StudentTable({ table_data, fetchStudentTable }) {
       >
         <div className="d-flex">
           <div className="ms-4">
-            <select
-              style={{
-                height: "auto",
-                width: "auto",
-                borderRadius: "10px",
-                padding: "5px",
-              }}
-              value={pageSize}
-              onChange={(e) => setPageSize(Number(e.target.value))}
-            >
-              {[10, 25, 50].map((pageSize) => (
-                <option value={pageSize} key={pageSize}>
-                  show Entrie {pageSize}
-                </option>
-              ))}
-            </select>
+                <div className='ms-4'>
+                  <select style={{height: "auto",width: "auto",outline: "none",border: "none",borderRadius: "10px",padding: "5px"}} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                    {
+                      [10,25,50].map(pageSize => (
+                        <option value={pageSize} key={pageSize}>show Entrie {pageSize}</option>
+                      ))
+                    }
+                  </select>
+                </div>
           </div>
           <div className="ml-auto me-5">
             <GlobalFilter
@@ -164,7 +157,7 @@ function StudentTable({ table_data, fetchStudentTable }) {
               <div className='ml-auto me-3' >
                 {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
                 <button style={{outline: "none",border: "1px solid gray",borderRadius: "10px 0 0 10px"}} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-                <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button>
+              { pageIndex+1? <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button>:''}
                 <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>2</button>
                 <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 2)} disabled={!canNextPage}>3</button>
                 <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 3)} disabled={!canNextPage}>4</button>
