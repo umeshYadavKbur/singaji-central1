@@ -5,7 +5,9 @@ import * as Yup from "yup";
 import React from "react";
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { newPasswordRequest } from "../../redux/actionDispatcher/newPassDispatcher";
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 function ResetPassword({ newPassword, newPasswordRequest }) {
@@ -23,7 +25,8 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   //   history.push('./login')
   // }
   if(newPassword.newPass) {
-    navigate('/login');
+    toast.error("Login unsuccessfull");
+    // navigate('/login');
   }
   const validationSchema = Yup.object({
     password: Yup.string().required("Required*"),
@@ -54,6 +57,17 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   return (
     <>
       <div style={{ height: "100vh", width: "100vw", background: "#f3eded" }}>
+      <ToastContainer
+          position="top-center"
+          autoClose={2500}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <div
           className="position-absolute top-50 start-50 translate-middle "
           style={{

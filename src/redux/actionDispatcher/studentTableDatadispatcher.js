@@ -24,10 +24,10 @@ export const fetchStudentTable = (data) => {
           console.log(( response));
           if (response.status === 200) {
             dispatch(fetchSuccessTableData(response.data));
-            swal({
-              title: "Table data successfully fatched",
-              icon: "success",
-            });
+            // swal({
+            //   title: "Table data successfully fatched",
+            //   icon: "success",
+            // });
           }
         })
         .catch(function (error) {
