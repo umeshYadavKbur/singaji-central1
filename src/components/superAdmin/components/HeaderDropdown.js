@@ -68,14 +68,10 @@ const AppHeaderDropdown = ({ userData, logout }) => {
               color: "white",
             }}
           >
-            {userData.userInfo} roshany.bca2020@ssism.org
+            {userData.userInfo} {userData.email}
           </p>
-
         </div>
 
-
-
-        
         <CDropdownItem
           style={{
             marginTop: "120px",
@@ -86,7 +82,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
           }}
           href="#"
         >
-         {/* <button>
+          {/* <button>
               Manage your Account
             </button> */}
           <CDropdownDivider style={{ color: "white" }} />

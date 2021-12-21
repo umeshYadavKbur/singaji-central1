@@ -7,7 +7,7 @@ import swal from "sweetalert";
 import getData from "../../services/agent";
 // import {baseUrl} from "../constants/url";
 // import { useHistory } from "react-router";
-    // const history = useHistory()
+// const history = useHistory()
 
 export const newPasswordRequest = (data) => {
   return async (dispatch) => {
@@ -17,13 +17,12 @@ export const newPasswordRequest = (data) => {
     try {
       if (newPasswordData.status === 200) {
         dispatch(passReqSuccess());
-        swal({
-          title: "Password Reset Success",
-          icon: "success",
-        })
+        // swal({
+        //   title: "Password Reset Success",
+        //   icon: "success",
+        // })
         // history.push('/login')
-      }
-      else if(newPasswordData.request.status === 406) {
+      } else if (newPasswordData.request.status === 406) {
         swal({
           title: "Oops ! link expire",
           icon: "warning",

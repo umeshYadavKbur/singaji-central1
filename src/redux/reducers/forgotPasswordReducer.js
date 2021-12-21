@@ -13,18 +13,21 @@ const forgetPassReducer = (state = initialState,action) => {
                 ...state,
                 loading: true
             }
+
         case FORGETPASSWORD_SUCCESS:
             return {
                 loading: false,
                 success: true,
                 error: ''
             }
+
         case FORGETPASSWORD_FAIL:
             return {
                 loading: false,
                 success: false,
                 error: action.payload
             }
+            
         default: return state
     }
 }

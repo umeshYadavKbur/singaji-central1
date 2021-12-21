@@ -10,9 +10,13 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 
 function ForgotPassword({ passData, fetchUserEmail }) {
-  // const history = useHistory()
   const navigate = useNavigate();
+  // const history = useHistory()
+  // const navigate = useNavigate();
 
+  if (passData.success) {
+    navigate("/login");
+  }
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Required*"),
   });
