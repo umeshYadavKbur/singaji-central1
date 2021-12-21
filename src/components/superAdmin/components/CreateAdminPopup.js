@@ -12,9 +12,9 @@ import * as Yup from "yup";
 import logo from "../../assests/image/ssism_si.svg";
 import "./styles/createAdmin.css";
 import { createNewAdmin } from "../../../redux/actionDispatcher/createNewAdminDispatcher";
-import { baseUrl } from "../../../url/baseUrl";
 import { useNavigate } from "react-router-dom";
 import LoaderButton from "../../assests/common/LoaderButton";
+import { baseUrl } from "../../../redux/constants/url";
 
 function CreateAdminPopup({ adminData, createNewAdmin }) {
   const token = localStorage.getItem("token");

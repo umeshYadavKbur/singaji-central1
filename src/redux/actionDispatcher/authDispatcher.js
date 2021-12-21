@@ -5,7 +5,7 @@ import {
   LOGOUT,
 } from "../constants/actions";
 import getData from "../../services/agent";
-import swal from "sweetalert";
+// import swal from "sweetalert";
 
 
 

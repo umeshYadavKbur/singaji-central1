@@ -14,15 +14,14 @@ import { createFeesStructure } from "../../../redux/actionDispatcher/createFeesS
 import "./styles/createAdmin.css";
 // import { useParams } from "react-router-dom";
 // import axios from "axios";
-import { baseUrl } from "../../../url/baseUrl";
+// import { baseUrl } from "../../../url/baseUrl";
+import { baseUrl } from "../../../redux/constants/url";
 // import swal from 'sweetalert';
 
-
 function FeesStructure({ adminData, createFees }) {
-
   console.log(adminData);
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const [visible, setVisible] = useState(false);
   const validationSchema = Yup.object({
     totalFees: Yup.string().required("Required*"),
@@ -41,14 +40,14 @@ function FeesStructure({ adminData, createFees }) {
     validationSchema,
 
     onSubmit: async (values) => {
-      console.log("====================================");
-      console.log(values);
-      console.log("====================================");
+      // console.log("====================================");
+      // console.log(values);
+      // console.log("====================================");
       var data = JSON.stringify({
         branch_name: formik.values.stream,
         starting_year: formik.values.startYear,
         ending_year: formik.values.endYear,
-        total_fees: formik.values.totalFees
+        total_fees: formik.values.totalFees,
       });
       var config = {
         method: "post",
@@ -74,7 +73,7 @@ function FeesStructure({ adminData, createFees }) {
           borderColor: "#5A607F",
           marginRight: "10px",
           border: "none",
-          fontWeight: "bold"
+          fontWeight: "bold",
         }}
         onClick={() => setVisible(!visible)}
       >
@@ -84,22 +83,17 @@ function FeesStructure({ adminData, createFees }) {
         // size="md"
         alignment="center"
         visible={visible}
-        onClose={() =>{
-          formik.handleReset()
-          setVisible(false)
-
-        }
-        }
+        onClose={() => {
+          formik.handleReset();
+          setVisible(false);
+        }}
       >
-        <CModalHeader>
-
-        </CModalHeader>
+        <CModalHeader></CModalHeader>
 
         <CModalBody>
           <div className="first_div createAdmin">
             <div className="second_div ">
               <form onSubmit={formik.handleSubmit}>
-
                 <div className=" mb-3 ">
                   <select
                     name="stream"
