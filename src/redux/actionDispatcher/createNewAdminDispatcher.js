@@ -8,31 +8,31 @@ import {
   CREATE_NEW_ADMIN_SUCCESS,
 } from "../constants/actions";
 
-export const createNewAdmin = ({ data, navigate }) => {
+export const createNewAdmin = (data) => {
   return async (dispatch) => {
-    // Console the data getting from the form of create admin 
+    // Console the data getting from the form of create admin
     // console.log("The data is ", data);
     try {
       dispatch(newAdminReq());
       axios(data)
         .then(function (response) {
-          //Printing the response of the data
-          // console.log(("Response is  :::", response));
-          // console.log(("The response code is ::", response.status));
-          if (response.status === 208) {
-            navigate("/admindashboard");
-            dispatch(newAdminReqSuccess())
-            swal({
-              title: "Admin already created",
-              icon: "info",
-            });
-          }
-
-          else if (response.status === 200) {
+          if (response.status === 200) {
             dispatch(newAdminReqSuccess());
             swal({
               title: "New admin has been Created",
               icon: "success",
+            });
+          } else if (response.status === 208) {
+            dispatch(newAdminReqSuccess());
+            swal({
+              title: "Admin already created",
+              icon: "info",
+            });
+          } else if (response.status === 404) {
+            dispatch(newAdminReqSuccess());
+            swal({
+              title: "404 status",
+              icon: "info",
             });
           }
         })

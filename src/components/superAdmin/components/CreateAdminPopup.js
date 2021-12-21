@@ -24,7 +24,9 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
 
   const [visible, setVisible] = useState(false);
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid Email Format*").required("Please fill the field above"),
+    email: Yup.string()
+      .email("Invalid Email Format*")
+      .required("Please fill the field above"),
     name: Yup.string().required("Please fill the field above"),
     role: Yup.string().required("Please fill the field above"),
   });
@@ -48,20 +50,11 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         url: `${baseUrl}/api/createNewAdmin`,
         headers: {
           Authorization: `Bearer ${token}`,
-          // token,
           "Content-Type": "application/json",
         },
         data: data,
       };
       createNewAdmin(config);
-
-      // axios(config)
-      //   .then(function (response) {
-      //     console.log(response);
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
     },
   });
 
@@ -74,7 +67,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
           outline: "none",
           // borderColor: "#5A607F",
           border: "none",
-          fontWeight: "bold"
+          fontWeight: "bold",
         }}
         onClick={() => setVisible(!visible)}
       >
@@ -84,10 +77,9 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         alignment="center"
         visible={visible}
         onClose={() => {
-          formik.handleReset()
-          setVisible(false)
-        }
-        }
+          formik.handleReset();
+          setVisible(false);
+        }}
       >
         <CModalHeader>
           {/* <CModalTitle>Create new admin  </CModalTitle> */}
@@ -132,7 +124,6 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   <select
                     name="role"
                     className=" form-select "
-
                     value={formik.values.role}
                     // defaultValue="null"
                     onChange={formik.handleChange}
@@ -159,7 +150,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   className=" submit_btn mt-2 w-100  btn-md text-light font-weight-bold"
                   type="submit"
                 >
-                  {adminData.loading ? (<LoaderButton />) : "Create"}
+                  {adminData.loading ? <LoaderButton /> : "Create"}
                 </button>
               </form>
             </div>
@@ -180,7 +171,7 @@ const mapStateToProps = (state) => {
 //passing the userData in createNewAdmin function and also dispatch method
 const mapDispatchToProps = (dispatch) => {
   return {
-    createNewAdmin: (data) => dispatch(createNewAdmin(data)),
+    createNewAdmin: (config) => dispatch(createNewAdmin(config)),
   };
 };
 
