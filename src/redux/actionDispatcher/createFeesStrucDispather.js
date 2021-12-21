@@ -16,8 +16,8 @@ export const createFeesStructure = (data) => {
       axios(data)
         .then(function (response) {
           //Printing the response of the data
-          // console.log(("Response is  :::", response));
-          // console.log(("The response code is ::", response.status));
+          console.log(("Response is  :::", response));
+          console.log(("The response code is ::", response.status));
 
           if (response.status === 208) {
             swal({

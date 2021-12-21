@@ -112,9 +112,9 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
 
             {!toggle && <div className="dropdown-menu dropdown_items_div " aria-labelledby="dropdownMenuLink">
 
-              {tabName !== 'Fees Stucture' && dLink('Fees Stucture', '/admindashboard/fees_structure_table', 'ok')}
+              {tabName !== 'Fees Stucture' && dLink('Fees Stucture', '/admindashboard/feesstructuretable', 'ok')}
               {tabName !== 'All Student' && dLink('All Student', '/admindashboard', 'ok')}
-              {tabName !== 'My Admin' && dLink('My Admin', '/admindashboard/admin_table', 'ok')}
+              {tabName !== 'My Admin' && dLink('My Admin', '/admindashboard/admintable', 'ok')}
               {tabName !== 'Dashboard' && dLink('Dashboard', '/admindashboard', 'ok')}
 
               {/* {tabName !== 'All Student' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("All Student") }} >

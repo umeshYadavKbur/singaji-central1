@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {fetchUserEmail} from '../../redux/actionDispatcher/forgotpassDispatcher';
 import *as Yup from 'yup'
 import { useHistory } from 'react-router';
+import LoaderButton from '../assests/common/LoaderButton';
 
 
 function ForgotPassword({passData,fetchUserEmail}) {
@@ -47,7 +48,7 @@ function ForgotPassword({passData,fetchUserEmail}) {
                         </div>
 
                         <button disabled={passData.loading} className="w-100 btn btn-md btn-warning fw-bold text-light" type="submit">{
-                            passData.loading ? "loading..." : "Get Link"
+                            passData.loading ? (<LoaderButton />) : "Get Link"
                         }</button>
                     </form>
                 </div>

@@ -84,8 +84,11 @@ function FeesStructure({ adminData, createFees }) {
         // size="md"
         alignment="center"
         visible={visible}
-        onClose={() =>
+        onClose={() =>{
+          formik.handleReset()
           setVisible(false)
+
+        }
         }
       >
         <CModalHeader>

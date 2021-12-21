@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
@@ -35,12 +35,14 @@ function Login({ userData, fetchUsers }) {
   //     history.push('/admin')
   //   }
   // })
+  // console.log(userData)
+
 
   console.log("maijn page", userData);
   if (userData.role === "SUPERADMIN") {
+
     history.push("/admindashboard");
-    const notify = () => toast("Wow so easy!");
-    notify();
+
   }
 
   const validationSchema = Yup.object({
@@ -67,14 +69,34 @@ function Login({ userData, fetchUsers }) {
       fetchUsers(data);
     },
   });
+  // const notify = () =>
 
-  // const isBigScreen = useMediaQuery({query: '(min-width: 1824px)'})
-  // const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'})
+  console.log("The data is ::: ", userData.error);
+
+  
+  useEffect(() => {
+    if (userData.error === "400") {
+      toast.error("Login unsuccessfull");
+    }
+    return () => {
+    }
+  }, [userData.error])
+
 
   return (
     <>
       <div style={{ height: "100vh", width: "100vw", background: "rgb(207 207 207)" }}>
-
+        <ToastContainer
+          position="top-center"
+          autoClose={2500}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <div
           className="position-absolute top-50 start-50 translate-middle "
           style={{
