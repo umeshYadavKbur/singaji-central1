@@ -5,20 +5,16 @@ import {
   LOGOUT,
 } from "../constants/actions";
 import getData from "../../services/agent";
+import { loginUrl } from "../constants/url";
 // import swal from "sweetalert";
 
-
-
 export const fetchUsers = (data) => {
-  // const notify = () => toast("Wow so easy!");
   return async (dispatch) => {
-    // Sending the additional url to be attached on baseUrl in other function
-    const loginUrl = "/api/login";
-
+    const url = loginUrl;
     // wait untill the data not received so getData function take data and url part
     dispatch(loginRequest());
-    var userResData = await getData(data, loginUrl);
-    console.log("the response is ::", userResData.request.status);
+    var userResData = await getData(data, url);
+    // console.log("the response is ::", userResData.request.status);
     // changing the userResData if we need token so userResData.data.toke will be used
     try {
       if (userResData.request.status === 200) {
@@ -26,28 +22,11 @@ export const fetchUsers = (data) => {
         localStorage.setItem("user", userResData.data.user);
         localStorage.setItem("token", userResData.data.token);
         localStorage.setItem("role", userResData.data.role);
-        //Redirect to the home page remaining
-        // history.push('/');
-        //dispatch action and store data in it
+        // dipatching an action    /
         dispatch(loginSuccess(userResData.data));
-        // swal({
-        //   title: "Login Success",
-        //   icon: "success",
-        // });
-
-
       } else if (userResData.request.status === 404) {
         dispatch(loginFailure(userResData.data));
-        // swal({
-        //   title: "User not Found",
-        //   icon: "warning",
-        // });
-        dispatch(loginFailure(userResData.data));
       } else if (userResData.request.status === "400") {
-        // swal({
-        //   title: "Invalid Credential",
-        //   icon: "warning",
-        // });
         let value = JSON.stringify(userResData.request.status);
         dispatch(loginFailure(value));
       } else {

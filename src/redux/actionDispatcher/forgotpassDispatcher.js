@@ -6,10 +6,11 @@ import {
 import getData from "../../services/agent";
 // import {history} from '../../helpers/history'
 import swal from "sweetalert";
+import { forgetPass } from "../constants/url";
 export const fetchUserEmail = (data) => {
   return async (dispatch) => {
     console.log(data);
-    const forgotPasswordUrl = "/api/resetPasswordEmail";
+    const forgotPasswordUrl = forgetPass;
     dispatch(forgotPasswordRequest());
     var forgetPasswordData = await getData(data, forgotPasswordUrl);
     console.log("Working  :::: ", forgetPasswordData);

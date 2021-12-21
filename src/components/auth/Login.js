@@ -8,15 +8,10 @@ import LoaderButton from "../assests/common/LoaderButton";
 //importing Components
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
-// import { useHistory } from "react-router";
 import { ToastContainer, toast } from 'react-toastify';
-
-// import swal from "sweetalert";
-// import { useEffect } from "react";
-// import { checkOnlineStatus } from "../../services/onlineOfflineStatus";
-// import swal from "sweetalert";
-
 function Login({ userData, fetchUsers }) {
+
+
   // setInterval(async () => {
   //   const result = await checkOnlineStatus();
   //   result ?console.log("online"):console.log("offline");
@@ -39,7 +34,6 @@ function Login({ userData, fetchUsers }) {
   // console.log(userData)
 
 
-  console.log("maijn page", userData);
   if (userData.role === "SUPERADMIN") {
 
     navigate("/admindashboard");
@@ -70,9 +64,6 @@ function Login({ userData, fetchUsers }) {
       fetchUsers(data);
     },
   });
-  // const notify = () =>
-
-  console.log("The data is ::: ", userData.error);
 
   
   useEffect(() => {
