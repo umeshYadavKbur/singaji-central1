@@ -1,5 +1,6 @@
 import axios from "axios";
-import swal from "sweetalert";
+// import swal from "sweetalert";
+import Swal from "sweetalert2";
 // import getData from "../../services/agent";
 
 import {
@@ -18,31 +19,108 @@ export const createNewAdmin = (data) => {
         .then(function (response) {
           if (response.status === 200) {
             dispatch(newAdminReqSuccess());
-            swal({
-              title: "New admin has been Created",
-              icon: "success",
-            });
+          
+            let timerInterval
+            Swal.fire({
+              icon: 'success',
+              text: 'New Admin has been created Successfully!',
+              timer: 2500,
+              
+              didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                  b.textContent = Swal.getTimerLeft()
+                }, 100)
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+              /* Read more about handling dismissals below */
+              if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+              }
+            })
           } else if (response.status === 208) {
             dispatch(newAdminReqSuccess());
-            swal({
-              title: "Admin already created",
-              icon: "info",
-            });
+          
+            let timerInterval
+            Swal.fire({
+              icon: 'info',
+              text: 'Admin already created!',
+              timer: 2500,
+              
+              didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                  b.textContent = Swal.getTimerLeft()
+                }, 100)
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+              /* Read more about handling dismissals below */
+              if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+              }
+            })
           } else if (response.status === 404) {
             dispatch(newAdminReqSuccess());
-            swal({
-              title: "404 status",
-              icon: "info",
-            });
+          
+            let timerInterval
+            Swal.fire({
+            
+              text: '404 status',
+              icon: 'info',
+              timer: 2500,
+              
+              didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                  b.textContent = Swal.getTimerLeft()
+                }, 100)
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+              /* Read more about handling dismissals below */
+              if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+              }
+            })
           }
         })
         .catch(function (error) {
           console.log(error);
           dispatch(newAdminReqFail(error));
-          swal({
-            title: "something problem",
-            icon: "error",
-          });
+          
+          let timerInterval
+          Swal.fire({
+            icon: 'error',
+            text: 'Sorry problem occured!',
+            timer: 2500,
+            
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
+            },
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('I was closed by the timer')
+            }
+          })
         });
     } catch (error) {
       console.log(error);

@@ -12,13 +12,13 @@ import Sidebar from "./components/Sidebar";
 import StudentTable from "./components/StudentsTable";
 import { useAnimate } from "react-simple-animate";
 
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 function AdminDashboard() {
 
 
   useEffect(() => {
-    const notify = () => toast.success("Login Successfull");
-    notify();
+    // const notify = () => toast.success("Login Successfull");
+    // notify();
     return () => {
     }
   }, [])
@@ -36,7 +36,7 @@ function AdminDashboard() {
 
   return (
     <div className="main_container_dashboard">
-     <ToastContainer
+     {/* <ToastContainer
 position="top-center"
 autoClose={2500}
 hideProgressBar={true}
@@ -46,7 +46,7 @@ rtl={false}
 pauseOnFocusLoss
 draggable
 pauseOnHover
-/>
+/> */}
       <div
         className="side_bar_content"
         style={style}

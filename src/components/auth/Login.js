@@ -10,6 +10,8 @@ import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
 import { ToastContainer, toast } from 'react-toastify';
 function Login({ userData, fetchUsers }) {
+// import { useHistory } from "react-router";
+// import { ToastContainer, toast } from 'react-toastify';
 
 
   // setInterval(async () => {
@@ -68,7 +70,7 @@ function Login({ userData, fetchUsers }) {
   
   useEffect(() => {
     if (userData.error === "400") {
-      toast.error("Login unsuccessfull");
+      // toast.error("Login unsuccessfull");
     }
     return () => {
     }
@@ -78,7 +80,7 @@ function Login({ userData, fetchUsers }) {
   return (
     <>
       <div style={{ height: "100vh", width: "100vw", background: "rgb(207 207 207)" }}>
-        <ToastContainer
+        {/* <ToastContainer
           position="top-center"
           autoClose={2500}
           hideProgressBar={true}
@@ -88,7 +90,7 @@ function Login({ userData, fetchUsers }) {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-        />
+        /> */}
         <div
           className="position-absolute top-50 start-50 translate-middle "
           style={{

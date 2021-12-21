@@ -7,6 +7,10 @@ import {
 import getData from "../../services/agent";
 import { loginUrl } from "../constants/url";
 // import swal from "sweetalert";
+// import swal from "sweetalert";
+// import Swal from 'sweetalert2';
+
+
 
 export const fetchUsers = (data) => {
   return async (dispatch) => {
