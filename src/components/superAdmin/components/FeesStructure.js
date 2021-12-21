@@ -60,7 +60,7 @@ function FeesStructure({ adminData, createFees }) {
         data: data,
       };
       console.log(config.data);
-      createFees(config); 
+      createFees(config);
     },
   });
 
@@ -84,7 +84,12 @@ function FeesStructure({ adminData, createFees }) {
         // size="md"
         alignment="center"
         visible={visible}
-        onClose={() => setVisible(false)}
+        onClose={() =>{
+          formik.handleReset()
+          setVisible(false)
+
+        }
+        }
       >
         <CModalHeader>
 

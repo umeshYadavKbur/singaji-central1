@@ -13,7 +13,7 @@ import store from "./redux/store";
 import Login from "./components/auth/Login";
 import ForgotPassword from "./components/auth/ForgetPassword";
 import ResetPassword from "./components/auth/ResetPassword";
-
+import 'react-toastify/dist/ReactToastify.css';
 //import coreUireact js
 import "@coreui/coreui/dist/css/coreui.min.css";
 import AdminDashboard from "./components/superAdmin/AdminDashboard";

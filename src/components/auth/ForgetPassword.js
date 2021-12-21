@@ -1,12 +1,13 @@
 import React from "react";
 
 // import './login.css'
-import Singaji_logo from "../assests/image/Singaji_logo.svg";
-import { useFormik } from "formik";
-import { connect } from "react-redux";
-import { fetchUserEmail } from "../../redux/actionDispatcher/forgotpassDispatcher";
-import * as Yup from "yup";
+import Singaji_logo from '../assests/image/Singaji_logo.svg'
+import {useFormik} from 'formik';
+import {connect} from 'react-redux';
+import {fetchUserEmail} from '../../redux/actionDispatcher/forgotpassDispatcher';
+import *as Yup from 'yup'
 // import { useHistory } from 'react-router';
+import LoaderButton from '../assests/common/LoaderButton';
 import { useNavigate } from "react-router-dom";
 
 function ForgotPassword({ passData, fetchUserEmail }) {
@@ -18,7 +19,7 @@ function ForgotPassword({ passData, fetchUserEmail }) {
     navigate("/login");
   }
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid Email Format*").required("Required*"),
+    email: Yup.string().email("Invalid Email Format*").required("Enter the Email!"),
   });
   const formik = useFormik({
     initialValues: {
@@ -73,20 +74,12 @@ function ForgotPassword({ passData, fetchUserEmail }) {
                 className="form-control"
                 placeholder="Email"
               />
-              {formik.errors.email && formik.touched.email ? (
-                <div className="text-danger fs-6">{formik.errors.email}</div>
-              ) : (
-                ""
-              )}
+              {formik.errors.email && formik.touched.email ? (<div className="text-danger fs-6">{formik.errors.email}</div> ) : (  ""  )}
             </div>
 
-            <button
-              disabled={passData.loading}
-              className="w-100 btn btn-md btn-warning fw-bold text-light"
-              type="submit"
-            >
-              {passData.loading ? "loading..." : "Get Link"}
-            </button>
+            <button disabled={passData.loading} className="w-100 btn btn-md btn-warning fw-bold text-light" type="submit">{
+                            passData.loading ? (<LoaderButton />) : "Get Link"
+                        }</button>
           </form>
         </div>
       </div>

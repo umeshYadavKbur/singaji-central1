@@ -14,6 +14,7 @@ import "./styles/createAdmin.css";
 import { createNewAdmin } from "../../../redux/actionDispatcher/createNewAdminDispatcher";
 import { baseUrl } from "../../../url/baseUrl";
 import { useNavigate } from "react-router-dom";
+import LoaderButton from "../../assests/common/LoaderButton";
 
 function CreateAdminPopup({ adminData, createNewAdmin }) {
   const token = localStorage.getItem("token");
@@ -82,7 +83,11 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
       <CModal
         alignment="center"
         visible={visible}
-        onClose={() => setVisible(false)}
+        onClose={() => {
+          formik.handleReset()
+          setVisible(false)
+        }
+        }
       >
         <CModalHeader>
           {/* <CModalTitle>Create new admin  </CModalTitle> */}
@@ -144,9 +149,9 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     <option className="form-select" value={2}>
                       Admin
                     </option>
-                    <option className="form-select" value={3}>
+                    {/* <option className="form-select" value={3}>
                       Student
-                    </option>
+                    </option> */}
                   </select>
                 </div>
                 <button
@@ -154,7 +159,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   className=" submit_btn mt-2 w-100  btn-md text-light font-weight-bold"
                   type="submit"
                 >
-                  {adminData.loading ? "Loading..." : "Create"}
+                  {adminData.loading ? (<LoaderButton />) : "Create"}
                 </button>
               </form>
             </div>

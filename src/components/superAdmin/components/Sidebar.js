@@ -32,7 +32,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
       showSideBar();
     }
   };
-  // function getSelectValue() {
+  // function getSelectValue() { 
   //   var selectedValue = document.getElementById("list").value;
   //   console.log(selectedValue);
   // }
@@ -91,7 +91,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                   type="search"
                   placeholder="search.."
                 />
-                <span className="fa fa-search errspan"></span>
+                <span class="fa fa-search errspan"></span>
               </>
             )}
             {/* </> */}
@@ -133,17 +133,17 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                 <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">All Student</span>
               </Link>}
-              {tabName !== 'Fees Stucture' && <Link className="dropdown-item  sidebar_options_link" to="#!" onClick={() => { setTabName("Fees Stucture") }} >
+              {tabName !== 'Fees Stucture' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("Fees Stucture") }} >
                 <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">Fees Stucture</span>
               </Link>}
 
-              {tabName !== 'My Admin' && <Link className="dropdown-item  sidebar_options_link" to="#!" onClick={() => { setTabName("My Admin") }}>
+              {tabName !== 'My Admin' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("My Admin") }}>
                 <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">My Admin</span>
               </Link>}
 
-              {tabName !== 'Dashboard' && <Link className="dropdown-item  sidebar_options_link" to="#!" onClick={() => { setTabName("Dashboard") }}>
+              {tabName !== 'Dashboard' && <Link className="dropdown-item  sidebar_options_link" href="#!" onClick={() => { setTabName("Dashboard") }}>
                 <img src={Accounts_svg} className=" Sidebar_text  sidebar_icons" alt="" />
                 <span className="text-dark ">Dashboard</span>
               </Link>} */}

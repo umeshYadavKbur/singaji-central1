@@ -7,7 +7,10 @@ import {
 import getData from "../../services/agent";
 import swal from "sweetalert";
 
+
+
 export const fetchUsers = (data) => {
+  // const notify = () => toast("Wow so easy!");
   return async (dispatch) => {
     // Sending the additional url to be attached on baseUrl in other function
     const loginUrl = "/api/login";
@@ -27,30 +30,35 @@ export const fetchUsers = (data) => {
         // history.push('/');
         //dispatch action and store data in it
         dispatch(loginSuccess(userResData.data));
-        swal({
-          title: "Login Success",
-          icon: "success",
-        });
+        // swal({
+        //   title: "Login Success",
+        //   icon: "success",
+        // });
+
+
       } else if (userResData.request.status === 404) {
         dispatch(loginFailure(userResData.data));
-        swal({
-          title: "User not Found",
-          icon: "warning",
-        });
+        // swal({
+        //   title: "User not Found",
+        //   icon: "warning",
+        // });
         dispatch(loginFailure(userResData.data));
-      } else if (userResData.request.status === 400) {
-        swal({
-          title: "Invalid Credential",
-          icon: "warning",
-        });
-        dispatch(loginFailure(userResData.data));
+      } else if (userResData.request.status === "400") {
+        // swal({
+        //   title: "Invalid Credential",
+        //   icon: "warning",
+        // });
+        let value = JSON.stringify(userResData.request.status);
+        dispatch(loginFailure(value));
       } else {
-        dispatch(loginFailure(userResData.data));
+        let value = JSON.stringify(userResData.request.status);
+        dispatch(loginFailure(value));
       }
       return userResData.request.status;
     } catch (error) {
       //if crudential fails than Login fail action dispatch
-      dispatch(loginFailure(error));
+      let value = JSON.stringify(userResData.request.status);
+      dispatch(loginFailure(value));
     }
   };
 };
