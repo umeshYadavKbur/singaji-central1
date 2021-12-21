@@ -24,14 +24,8 @@ export const changeStatus = (data) => {
           if (response.status === 208) {
             // dispatch(newAdminReqSuccess());
             swal({
-              title: "Student already created",
+              title: "Changed status",
               icon: "info",
-            });
-          } else if (response.status === 200) {
-            // dispatch(newAdminReqSuccess());
-            swal({
-              title: "Student active successfully",
-              icon: "success",
             });
           }
         })

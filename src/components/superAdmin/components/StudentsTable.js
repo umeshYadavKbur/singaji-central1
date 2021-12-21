@@ -14,6 +14,8 @@ import "./styles/Table.css";
 import { baseUrl } from "../../../redux/constants/url";
 import { fetchStudentTable } from "../../../redux/actionDispatcher/studentTableDatadispatcher";
 import { connect } from "react-redux";
+import Loader from "react-loader-spinner";
+
 
 function StudentTable({ table_data, fetchStudentTable }) {
   const columns = useMemo(() => StudentTableHeader, []);
@@ -22,19 +24,19 @@ function StudentTable({ table_data, fetchStudentTable }) {
   console.log("====================================");
   console.log(table_data);
   console.log("====================================");
- 
+
   React.useEffect(() => {
     var config = {
-        method: "GET",
-        url: `${baseUrl}/api/registrated_student`,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      };
-      fetchStudentTable(config);
-      // setTableData(table_data.table_data);
- 
+      method: "GET",
+      url: `${baseUrl}/api/registrated_student`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+    fetchStudentTable(config);
+    // setTableData(table_data.table_data);
+
     // eslint-disable-next-line
   }, []);
 
@@ -75,7 +77,9 @@ function StudentTable({ table_data, fetchStudentTable }) {
   const { pageIndex, pageSize } = state;
 
   return table_data.loading ? (
-    <h2>Loading</h2>
+    <div style={{ textAlign: 'center', marginTop: '20%' }}>
+      <Loader type="Oval" color="#7F7F7F" height={80} width={80} />
+    </div>
   ) : table_data.error ? (
     <h2>{table_data.error}</h2>
   ) : (

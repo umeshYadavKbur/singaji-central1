@@ -12,6 +12,8 @@ import { getDataFromApi } from '../../../services/getApi';
 import axios from 'axios'
 import { fetchAdminTableData } from '../../../redux/actionDispatcher/adminTableDatadispatcher';
 import { connect } from 'react-redux';
+import Loader from "react-loader-spinner";
+
 
 function DataTable({ table_data, fetchAdminTable }) {
     const token = localStorage.getItem("token");
@@ -98,7 +100,9 @@ function DataTable({ table_data, fetchAdminTable }) {
     console.log(checkboxData);
 
     return table_data.loading ? (
-        <h2>Loading</h2>
+        <div style={{ textAlign: 'center', marginTop: '20%' }}>
+            <Loader type="Oval" color="#7F7F7F" height={80} width={80} />
+        </div>
     ) : table_data.error ? (
         <h2>{table_data.error}</h2>
     ) : (

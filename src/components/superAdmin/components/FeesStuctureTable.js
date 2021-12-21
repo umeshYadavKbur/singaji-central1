@@ -9,6 +9,7 @@ import { TableCheckbox } from './tableComponents/TableCheckbox';
 import { connect } from 'react-redux';
 import { fetchFeesTableData } from '../../../redux/actionDispatcher/feesStructureTableDataDispatcher';
 import { baseUrl } from '../../../redux/constants/url';
+import Loader from "react-loader-spinner";
 
 
 function FeesStructure({ table_data, fetchFeesTable }) {
@@ -96,7 +97,9 @@ function FeesStructure({ table_data, fetchFeesTable }) {
         )
     console.log(checkboxData);
     return table_data.loading ? (
-        <h2>Loading</h2>
+        <div style={{ textAlign: 'center', marginTop: '20%' }}>
+            <Loader type="Oval" color="#7F7F7F" height={80} width={80} />
+        </div>
     ) : table_data.error ? (
         <h2>{table_data.error}</h2>
     ) : (
