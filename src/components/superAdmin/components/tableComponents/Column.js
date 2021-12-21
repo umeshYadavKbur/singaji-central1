@@ -1,10 +1,9 @@
-const i = 0 ;
+
  const Column = [
-    {
-        header:'SNo',
-          accessor: 'sno', 
-        
-    },
+     {
+         header: 'S.No',
+         accessor: 'sno'
+     },
     {
         header: 'Email',
         accessor: 'email'

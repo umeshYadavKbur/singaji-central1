@@ -22,7 +22,10 @@ export const fetchUsers = (data) => {
         localStorage.setItem("user", userResData.data.user);
         localStorage.setItem("token", userResData.data.token);
         localStorage.setItem("role", userResData.data.role);
-        // dipatching an action    /
+        localStorage.setItem("email", userResData.data.email);
+        //Redirect to the home page remaining
+        // history.push('/');
+        //dispatch action and store data in it
         dispatch(loginSuccess(userResData.data));
       } else if (userResData.request.status === 404) {
         dispatch(loginFailure(userResData.data));
