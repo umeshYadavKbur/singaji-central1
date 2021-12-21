@@ -1,3 +1,6 @@
+// import FeesStructure from "../FeesStructure";
+import Edit_icon from '../../../assests/image/Edit_icon.svg'
+
 
 const FeesStructureColumn = [
     {
@@ -54,13 +57,20 @@ const FeesStructureColumn = [
             </button>)
     },
     {
-        header: ' ',
+        header: 'Edit',
         accessor: 'icon',
         Cell: ({row: {original}}) => (
-            <i class="fas fa-file-download"></i>
+            // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
+            <img src={Edit_icon} alt="Edit" />
+
         )
     }
 
 ]
 
 export default FeesStructureColumn;
+
+ 
+ 
+
+ 
