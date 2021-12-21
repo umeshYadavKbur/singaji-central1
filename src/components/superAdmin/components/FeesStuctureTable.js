@@ -158,11 +158,11 @@ function FeesStructure({ table_data, fetchFeesTable }) {
                 </table>
                 <div style={{ border: "rgb(246 249 252)" }} className='d-flex mb-4'>
                     <div className='mx-4'>
-                                <span>
-                                    {/* Page{' '}
+                        <span>
+                            {/* Page{' '}
                         <strong>{pageIndex + 1} of {pageOptions.length} </strong> */}
-                                    Showing {(page.length * (pageIndex + 1) - (page.length - 1))} to  {page.length * (pageIndex + 1)} of  {pageCount * pageSize}{' '} Entries {"  "}
-                                </span>
+                            Showing {(page.length * (pageIndex + 1) - (page.length - 1))} to  {page.length * (pageIndex + 1)} of  {pageCount * pageSize}{' '} Entries {"  "}
+                        </span>
                     </div>
                     <div className='ml-auto me-3' >
                         {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}

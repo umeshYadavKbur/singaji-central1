@@ -1,6 +1,6 @@
 import * as React from "react";
-import {useMemo} from "react";
-import {GlobalFilter} from "./tableComponents/GlobalFilter";
+import { useMemo } from "react";
+import { GlobalFilter } from "./tableComponents/GlobalFilter";
 import {
   useTable,
   useSortBy,
@@ -11,17 +11,17 @@ import {
 // import MockData from "./tableComponents/studentTable.json";
 import StudentTableHeader from "./tableComponents/StudentTableHeader";
 import "./styles/Table.css";
-import {baseUrl} from "../../../redux/constants/url";
-import {fetchStudentTable} from "../../../redux/actionDispatcher/studentTableDatadispatcher";
-import {connect} from "react-redux";
+import { baseUrl } from "../../../redux/constants/url";
+import { fetchStudentTable } from "../../../redux/actionDispatcher/studentTableDatadispatcher";
+import { connect } from "react-redux";
 import SkeletonColor from "../../../helpers/Skeletrone";
 import Archived_icon from "../../assests/image/Archived_icon.svg"
-import {TableCheckbox} from "./tableComponents/TableCheckbox";
+import { TableCheckbox } from "./tableComponents/TableCheckbox";
 
 
 
-function StudentTable({table_data,fetchStudentTable}) {
-  const columns = useMemo(() => StudentTableHeader,[]);
+function StudentTable({ table_data, fetchStudentTable }) {
+  const columns = useMemo(() => StudentTableHeader, []);
   const token = localStorage.getItem("token");
 
   console.log("====================================");
@@ -41,7 +41,7 @@ function StudentTable({table_data,fetchStudentTable}) {
     // setTableData(table_data.table_data);
 
     // eslint-disable-next-line
-  },[]);
+  }, []);
 
 
   // console.log("The columns are::" + columns);
@@ -79,10 +79,10 @@ function StudentTable({table_data,fetchStudentTable}) {
         return [
           {
             id: 'selection',
-            header: ({getToggleAllRowsSelectedProps}) => (
+            header: ({ getToggleAllRowsSelectedProps }) => (
               <TableCheckbox {...getToggleAllRowsSelectedProps()} />
             ),
-            Cell: ({row}) => (
+            Cell: ({ row }) => (
               <TableCheckbox {...row.getToggleRowSelectedProps()} />
             )
           },
@@ -92,8 +92,8 @@ function StudentTable({table_data,fetchStudentTable}) {
     }
   );
 
-  const {globalFilter} = state;
-  const {pageIndex,pageSize} = state;
+  const { globalFilter } = state;
+  const { pageIndex, pageSize } = state;
 
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
@@ -112,9 +112,9 @@ function StudentTable({table_data,fetchStudentTable}) {
         <div className="d-flex">
           <div className="ms-4">
             <div className='ms-4'>
-              <select style={{height: "auto",width: "auto",outline: "none",border: "none",borderRadius: "10px",padding: "5px"}} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+              <select style={{ height: "auto", width: "auto", outline: "none", border: "none", borderRadius: "10px", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                 {
-                  [10,25,50,100].map(pageSize => (
+                  [10, 25, 50, 100].map(pageSize => (
                     <option value={pageSize} key={pageSize}>Show Entrie {pageSize}</option>
                   ))
                 }
@@ -171,7 +171,7 @@ function StudentTable({table_data,fetchStudentTable}) {
             })}
           </tbody>
         </table>
-        <div style={{border: "rgb(246 249 252)"}} className="d-flex mb-4">
+        <div style={{ border: "rgb(246 249 252)" }} className="d-flex mb-4">
           <div className="mx-4">
             <span>
               {/* Page{' '}
@@ -181,12 +181,12 @@ function StudentTable({table_data,fetchStudentTable}) {
           </div>
           <div className='ml-auto me-3' >
             {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
-            <button style={{outline: "none",border: "1px solid gray",borderRadius: "10px 0 0 10px"}} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-            {pageIndex + 1 ? <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button> : ''}
-            <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>2</button>
-            <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 2)} disabled={!canNextPage}>3</button>
-            <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 3)} disabled={!canNextPage}>4</button>
-            <button style={{outline: "none",border: "1px solid gray",borderRadius: "0 10px  10px 0"}} onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+            <button style={{ outline: "none", border: "1px solid gray", borderRadius: "10px 0 0 10px" }} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+            {pageIndex + 1 ? <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button> : ''}
+            <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>2</button>
+            <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 2)} disabled={!canNextPage}>3</button>
+            <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 3)} disabled={!canNextPage}>4</button>
+            <button style={{ outline: "none", border: "1px solid gray", borderRadius: "0 10px  10px 0" }} onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
             {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button> */}
           </div>
         </div>
@@ -207,4 +207,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(StudentTable);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentTable);
