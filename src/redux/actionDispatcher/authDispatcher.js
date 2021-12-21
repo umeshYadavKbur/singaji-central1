@@ -6,6 +6,7 @@ import {
 } from "../constants/actions";
 import getData from "../../services/agent";
 import { loginUrl } from "../constants/url";
+import {toast} from 'react-toastify'
 // import swal from "sweetalert";
 // import swal from "sweetalert";
 // import Swal from 'sweetalert2';
@@ -32,19 +33,55 @@ export const fetchUsers = (data) => {
         //dispatch action and store data in it
         dispatch(loginSuccess(userResData.data));
       } else if (userResData.request.status === 404) {
+        toast.error('User not found', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         dispatch(loginFailure(userResData.data));
       } else if (userResData.request.status === "400") {
         let value = JSON.stringify(userResData.request.status);
         dispatch(loginFailure(value));
+        toast.warn('Invalid credentials', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
       } else {
         let value = JSON.stringify(userResData.request.status);
         dispatch(loginFailure(value));
+        toast.error('Internal server error', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
       }
       return userResData.request.status;
     } catch (error) {
       //if crudential fails than Login fail action dispatch
       let value = JSON.stringify(userResData.request.status);
       dispatch(loginFailure(value));
+      toast.error('Internal server error', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     }
   };
 };
