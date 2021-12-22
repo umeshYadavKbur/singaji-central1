@@ -62,8 +62,8 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
     <div>
       <CButton
         style={{
-          backgroundColor: "white",
-          color: "#5A607F",
+          backgroundColor: "orange",
+          color: "white",
           outline: "none",
           // borderColor: "#5A607F",
           border: "none",
@@ -93,14 +93,17 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   <br />
                 </div>
                 <div className=" mb-3 ">
+                <label for="gmail" className="labels mbn-3">gmail</label>
                   <input
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className="inputs"
+                    className="inputs mb-2"
+                    // aria-label="email"
                     name="email"
                     type="text"
-                    placeholder="Email"
+                    id="gmail"
+                    placeholder="xyz@gmail.com"
                   />
                   {formik.errors.email && formik.touched.email ? (
                     <div className="text-danger fs-6">
@@ -110,25 +113,27 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     ""
                   )}
 
-                  <input
+                  {/* <input
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     className="inputs"
                     name="name"
                     type="text"
-                    // eslint-disable-next-line
+                    eslint-disable-next-line
                     className="mt-2 mb-2"
                     placeholder="Name"
-                  />
+                  /> */}
+                  <label for="role" className="labels">Role</label>
                   <select
                     name="role"
-                    className=" form-select "
+                    className="form-select text-secondary  border-secondary "
                     value={formik.values.role}
                     // defaultValue="null"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     // eslint-disable-next-line
+                    id="role"
                     type="text"
                   >
                     <option selected className="form-select">
