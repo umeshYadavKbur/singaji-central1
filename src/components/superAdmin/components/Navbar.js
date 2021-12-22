@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/Navbar.css";
 import AppHeaderDropdown from "./HeaderDropdown";
 import CreateAdminPopup from "./CreateAdminPopup";
 import FeesStructure from "./FeesStructure";
+import { useLocation } from "react-router-dom";
+
 
 function Navbar() {
+  const currentLocation = useLocation().pathname;
+  var location = getLocation()
+
+  function getLocation() {
+    console.log("_____________________________________________________________");
+    console.log((currentLocation));
+    if (currentLocation === "/admindashboard") {
+      return "Dashboard"
+    }
+    else if (currentLocation === "/admindashboard/studenttable") {
+      return "Applied Student"
+    }
+    else if (currentLocation === "/admindashboard/feesstructuretable") {
+      return "Fees Structure"
+    }
+    else if (currentLocation === "/admindashboard/admintable") {
+      return "Admin Table"
+    } else {
+      return "Dashboard"
+    }
+  }
+
   return (
     <div className="container_navbar">
       <div className="navbar_container_start_side">
-        <h3 className="text-secondary fw-bolder ml-4">Dashboard</h3>
+        <h3 className="text-secondary fw-bolder ml-4" >{location}</h3>
       </div>
       <div className="navbar_container_end_side">
         <div className="changing_navbar_containt_conditional">

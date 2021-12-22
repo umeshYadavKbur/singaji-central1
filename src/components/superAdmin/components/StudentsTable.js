@@ -24,10 +24,6 @@ function StudentTable({ table_data, fetchStudentTable }) {
   const columns = useMemo(() => StudentTableHeader, []);
   const token = localStorage.getItem("token");
 
-  console.log("====================================");
-  console.log(table_data);
-  console.log("====================================");
-
   React.useEffect(() => {
     var config = {
       method: "GET",
