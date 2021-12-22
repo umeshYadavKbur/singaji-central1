@@ -1,6 +1,6 @@
 import axios from "axios";
-import {baseUrl} from "../redux/constants/url";
-import swal from "sweetalert";
+// import {baseUrl} from "../redux/constants/url";
+// import swal from "sweetalert";
 // Make a post api where we can call it and hold the data in another variable
 
 export const getDataFromApi = (data) => {

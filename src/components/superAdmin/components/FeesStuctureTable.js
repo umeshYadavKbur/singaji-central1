@@ -2,14 +2,14 @@ import * as React from 'react';
 import { useMemo } from 'react';
 import { GlobalFilter } from './tableComponents/GlobalFilter';
 import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
-import MockData from './tableComponents/feesStructureTabledata.json'
+// import MockData from './tableComponents/feesStructureTabledata.json'
 import FeesStructureHeader from './tableComponents/FeesStructureHeader';
 import './styles/Table.css'
 import { TableCheckbox } from './tableComponents/TableCheckbox';
 import { connect } from 'react-redux';
 import { fetchFeesTableData } from '../../../redux/actionDispatcher/feesStructureTableDataDispatcher';
 import { baseUrl } from '../../../redux/constants/url';
-
+import SkeletonColor from '../../../helpers/Skeletrone';
 
 function FeesStructure({ table_data, fetchFeesTable }) {
 
@@ -96,7 +96,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
         )
     console.log(checkboxData);
     return table_data.loading ? (
-        <h2>Loading</h2>
+        <SkeletonColor></SkeletonColor>
     ) : table_data.error ? (
         <h2>{table_data.error}</h2>
     ) : (
@@ -161,8 +161,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
                         <span>
                             {/* Page{' '}
                         <strong>{pageIndex + 1} of {pageOptions.length} </strong> */}
-                            Showing 1 to  {page.length} of  {pageCount * pageSize}{' '} Entries {"  "}
-
+                            Showing {(page.length * (pageIndex + 1) - (page.length - 1))} to  {page.length * (pageIndex + 1)} of  {pageCount * pageSize}{' '} Entries {"  "}
                         </span>
                     </div>
                     <div className='ml-auto me-3' >

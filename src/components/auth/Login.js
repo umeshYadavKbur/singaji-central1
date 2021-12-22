@@ -6,17 +6,14 @@ import * as Yup from "yup";
 import LoaderButton from "../assests/common/LoaderButton";
 
 //importing Components
+import { ToastContainer } from 'react-toastify';
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
-// import { useHistory } from "react-router";
-import { ToastContainer, toast } from 'react-toastify';
-
-// import swal from "sweetalert";
-// import { useEffect } from "react";
-// import { checkOnlineStatus } from "../../services/onlineOfflineStatus";
-// import swal from "sweetalert";
-
+// import { ToastContainer, toast } from 'react-toastify';
 function Login({ userData, fetchUsers }) {
+// import { useHistory } from "react-router";
+
+
   // setInterval(async () => {
   //   const result = await checkOnlineStatus();
   //   result ?console.log("online"):console.log("offline");
@@ -39,7 +36,6 @@ function Login({ userData, fetchUsers }) {
   // console.log(userData)
 
 
-  console.log("maijn page", userData);
   if (userData.role === "SUPERADMIN") {
 
     navigate("/admindashboard");
@@ -47,8 +43,8 @@ function Login({ userData, fetchUsers }) {
   }
 
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid Email Format*").required("Enter you Email!"),
-    password: Yup.string().required("Enter your Password!"),
+    email: Yup.string().email("Invalid Email Format*").required("Please Enter Email"),
+    password: Yup.string().required("Please Enter Password"),
   });
 
   const formik = useFormik({
@@ -70,14 +66,11 @@ function Login({ userData, fetchUsers }) {
       fetchUsers(data);
     },
   });
-  // const notify = () =>
-
-  console.log("The data is ::: ", userData.error);
 
   
   useEffect(() => {
     if (userData.error === "400") {
-      toast.error("Login unsuccessfull");
+      // toast.error("Login unsuccessfull");
     }
     return () => {
     }

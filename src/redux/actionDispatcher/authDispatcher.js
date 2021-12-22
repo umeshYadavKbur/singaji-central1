@@ -5,20 +5,21 @@ import {
   LOGOUT,
 } from "../constants/actions";
 import getData from "../../services/agent";
+import { loginUrl } from "../constants/url";
+import {toast} from 'react-toastify'
 // import swal from "sweetalert";
+// import swal from "sweetalert";
+// import Swal from 'sweetalert2';
 
 
 
 export const fetchUsers = (data) => {
-  // const notify = () => toast("Wow so easy!");
   return async (dispatch) => {
-    // Sending the additional url to be attached on baseUrl in other function
-    const loginUrl = "/api/login";
-
+    const url = loginUrl;
     // wait untill the data not received so getData function take data and url part
     dispatch(loginRequest());
-    var userResData = await getData(data, loginUrl);
-    console.log("the response is ::", userResData.request.status);
+    var userResData = await getData(data, url);
+    // console.log("the response is ::", userResData.request.status);
     // changing the userResData if we need token so userResData.data.toke will be used
     try {
       if (userResData.request.status === 200) {
@@ -26,39 +27,61 @@ export const fetchUsers = (data) => {
         localStorage.setItem("user", userResData.data.user);
         localStorage.setItem("token", userResData.data.token);
         localStorage.setItem("role", userResData.data.role);
+        localStorage.setItem("email", userResData.data.email);
         //Redirect to the home page remaining
         // history.push('/');
         //dispatch action and store data in it
         dispatch(loginSuccess(userResData.data));
-        // swal({
-        //   title: "Login Success",
-        //   icon: "success",
-        // });
-
-
       } else if (userResData.request.status === 404) {
+        toast.error('User not found', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         dispatch(loginFailure(userResData.data));
-        // swal({
-        //   title: "User not Found",
-        //   icon: "warning",
-        // });
-        dispatch(loginFailure(userResData.data));
-      } else if (userResData.request.status === "400") {
-        // swal({
-        //   title: "Invalid Credential",
-        //   icon: "warning",
-        // });
+      } else if (userResData.request.status === 400) {
         let value = JSON.stringify(userResData.request.status);
         dispatch(loginFailure(value));
+        toast.warn('Invalid credentials', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
       } else {
         let value = JSON.stringify(userResData.request.status);
         dispatch(loginFailure(value));
+        toast.error('Internal server error', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
       }
       return userResData.request.status;
     } catch (error) {
       //if crudential fails than Login fail action dispatch
       let value = JSON.stringify(userResData.request.status);
       dispatch(loginFailure(value));
+      toast.error('Internal server error', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     }
   };
 };

@@ -7,21 +7,22 @@
     padding-top: 12px;
     width: auto;
     padding-bottom: 12px;
-    text-align: center;
+    /* text-align: center; */
     background-color: #ffffff;
 }
 
 #customers td {
-    border: 2px solid rgb(255, 255, 255);
+    border: 2px solid #F4F7FC;
     border-radius: 5px;
-    text-align: center;
+    /* text-align: center;   */
     padding: 8px;
 }
 
 #customers tr {
     background-color: white;
     border-width: 12px;
-    border-color: rgb(247, 250, 255);
+    border-radius: 15px;
+    border-color: #F4F7FC;
 }
 
 #customers tr:hover {
