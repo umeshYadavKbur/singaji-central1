@@ -27,52 +27,22 @@ export const createFeesStructure = (data) => {
 
             //  timer: 2000,
             // });
-            let timerInterval
             Swal.fire({
+              position: 'top-center',
               icon: 'warning',
-              text: 'This fees structure is Already created!',
-              timer: 2500,
-             
-              didOpen: () => {
-                Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                  b.textContent = Swal.getTimerLeft()
-                }, 100)
-              },
-              willClose: () => {
-                clearInterval(timerInterval)
-              }
-            }).then((result) => {
-              /* Read more about handling dismissals below */
-              if (result.dismiss === Swal.DismissReason.timer) {
-                console.log('I was closed by the timer')
-              }
+              title: 'This fees structure is Already createrd!',
+              showConfirmButton: false,
+              timer: 2500
             })
           } else if (response.status === 200) {
             dispatch(feesReqSuccess());
 
-            let timerInterval
             Swal.fire({
+              position: 'top-center',
               icon: 'success',
-              text: 'Fees structure created successfully!',
-              timer: 2500,
-              
-              didOpen: () => {
-                Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                  b.textContent = Swal.getTimerLeft()
-                }, 100)
-              },
-              willClose: () => {
-                clearInterval(timerInterval)
-              }
-            }).then((result) => {
-              /* Read more about handling dismissals below */
-              if (result.dismiss === Swal.DismissReason.timer) {
-                console.log('I was closed by the timer')
-              }
+              title: 'Fees structure created successfully!',
+              showConfirmButton: false,
+              timer: 2500
             })
           } else if (response.status === 401) {
             dispatch(feesReqSuccess());
@@ -85,6 +55,13 @@ export const createFeesStructure = (data) => {
           //   title: "Request failed",
           //   icon: "error",
           // });
+          Swal.fire({
+            position: 'top-center',
+            icon: 'error',
+            title: 'Request failed!',
+            showConfirmButton: false,
+            timer: 2500
+          })
         });
     } catch (error) {
       console.log(error);

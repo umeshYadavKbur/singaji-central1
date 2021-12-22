@@ -293,9 +293,7 @@ label #sidebar_btn:hover {
 
 /* -------------dropdown-------- */
 
-
 .dropdown_items_div{
-
   height: auto !important ;
 }
 #sidebar .dropdown-menu.show {
@@ -348,6 +346,11 @@ label #sidebar_btn:hover {
   font-size: 16px !important;
   /* margin-left: 200px; */
   width: 60px;
+}
+#check:checked ~ .sidebar .dropdown_items_div  {
+ 
+  display: none !important;
+ 
 }
 #check:checked ~ .sidebar .dropdown-menu .sidebar_options_link span {
   display: block;

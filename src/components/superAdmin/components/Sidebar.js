@@ -98,6 +98,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
           </center>
           <div className="dropdown show">
             <a
+            href="#!"
               className="data-toggle sidebar_options d-flex justify-content-between"
               role="button"
               id="dropdownMenuLink"
