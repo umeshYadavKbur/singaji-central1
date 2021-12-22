@@ -4,7 +4,7 @@ import {
   FEES_STRUCT_TABLE_DATA_FAIL,
   FEES_STRUCT_TABLE_DATA_SUCCESS,
 } from "../constants/actions";
-import swal from "sweetalert";
+// import swal from "sweetalert";
 
 export const fetchFeesTableData = (data) => {
   return (dispatch) => {
@@ -16,19 +16,15 @@ export const fetchFeesTableData = (data) => {
           console.log((response));
           if (response.status === 200) {
             dispatch(fetchSuccessTableData(response.data));
-            swal({
-              title: "Table data successfully fatched",
-              icon: "success",
-            });
           }
         })
         .catch(function (error) {
           //   console.log(error);
           fetchFailTableData(error);
-          swal({
-            title: "something problem",
-            icon: "error",
-          });
+          // swal({
+          //   title: "something problem",
+          //   icon: "error",
+          // });
         });
     } catch (error) {
       fetchFailTableData(error);

@@ -1,6 +1,6 @@
 import * as React from "react";
-import {useMemo} from "react";
-import {GlobalFilter} from "./tableComponents/GlobalFilter";
+import { useMemo } from "react";
+import { GlobalFilter } from "./tableComponents/GlobalFilter";
 import {
   useTable,
   useSortBy,
@@ -11,17 +11,17 @@ import {
 // import MockData from "./tableComponents/studentTable.json";
 import StudentTableHeader from "./tableComponents/StudentTableHeader";
 import "./styles/Table.css";
-import {baseUrl} from "../../../redux/constants/url";
-import {fetchStudentTable} from "../../../redux/actionDispatcher/studentTableDatadispatcher";
-import {connect} from "react-redux";
+import { baseUrl } from "../../../redux/constants/url";
+import { fetchStudentTable } from "../../../redux/actionDispatcher/studentTableDatadispatcher";
+import { connect } from "react-redux";
 import SkeletonColor from "../../../helpers/Skeletrone";
 import Archived_icon from "../../assests/image/Archived_icon.svg"
-import {TableCheckbox} from "./tableComponents/TableCheckbox";
+import { TableCheckbox } from "./tableComponents/TableCheckbox";
 
 
 
-function StudentTable({table_data,fetchStudentTable}) {
-  const columns = useMemo(() => StudentTableHeader,[]);
+function StudentTable({ table_data, fetchStudentTable }) {
+  const columns = useMemo(() => StudentTableHeader, []);
   const token = localStorage.getItem("token");
 
   console.log("====================================");
@@ -41,7 +41,7 @@ function StudentTable({table_data,fetchStudentTable}) {
     // setTableData(table_data.table_data);
 
     // eslint-disable-next-line
-  },[]);
+  }, []);
 
 
   // console.log("The columns are::" + columns);
@@ -79,10 +79,10 @@ function StudentTable({table_data,fetchStudentTable}) {
         return [
           {
             id: 'selection',
-            header: ({getToggleAllRowsSelectedProps}) => (
+            header: ({ getToggleAllRowsSelectedProps }) => (
               <TableCheckbox {...getToggleAllRowsSelectedProps()} />
             ),
-            Cell: ({row}) => (
+            Cell: ({ row }) => (
               <TableCheckbox {...row.getToggleRowSelectedProps()} />
             )
           },
@@ -92,8 +92,8 @@ function StudentTable({table_data,fetchStudentTable}) {
     }
   );
 
-  const {globalFilter} = state;
-  const {pageIndex,pageSize} = state;
+  const { globalFilter } = state;
+  const { pageIndex, pageSize } = state;
 
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
@@ -106,9 +106,9 @@ function StudentTable({table_data,fetchStudentTable}) {
         <div className="d-flex">
           <div className="ms-4">
             <div className='ms-4'>
-              <select style={{height: "auto",width: "auto",outline: "none",border: "none",borderRadius: "10px",padding: "5px"}} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+              <select style={{ height: "auto", width: "auto", outline: "none", border: "none", borderRadius: "10px", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                 {
-                  [10,25,50,100].map(pageSize => (
+                  [10, 25, 50, 100].map(pageSize => (
                     <option value={pageSize} key={pageSize}>Show Entrie {pageSize}</option>
                   ))
                 }
@@ -165,7 +165,7 @@ function StudentTable({table_data,fetchStudentTable}) {
             })}
           </tbody>
         </table>
-        <div style={{border: "rgb(246 249 252)"}} className="d-flex mb-4">
+        <div style={{ border: "rgb(246 249 252)" }} className="d-flex mb-4">
           <div className="mx-4">
             <span>
               {/* Page{' '}
@@ -201,4 +201,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(StudentTable);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentTable);

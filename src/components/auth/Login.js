@@ -6,10 +6,12 @@ import * as Yup from "yup";
 import LoaderButton from "../assests/common/LoaderButton";
 
 //importing Components
+import { ToastContainer } from 'react-toastify';
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 function Login({ userData, fetchUsers }) {
+// import { useHistory } from "react-router";
 
 
   // setInterval(async () => {
@@ -68,7 +70,7 @@ function Login({ userData, fetchUsers }) {
   
   useEffect(() => {
     if (userData.error === "400") {
-      toast.error("Login unsuccessfull");
+      // toast.error("Login unsuccessfull");
     }
     return () => {
     }
