@@ -62,16 +62,16 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
     <div>
       <CButton
         style={{
-          backgroundColor: "white",
-          color: "#5A607F",
+          backgroundColor: "#ffc107",
+          color: "white",
           outline: "none",
-          // borderColor: "#5A607F",
           border: "none",
           fontWeight: "bold",
+          marginLeft: "30px",
         }}
         onClick={() => setVisible(!visible)}
       >
-        Create Admin <i class="fas fa-plus"></i>
+        Create Admin <i className="fas fa-plus"></i>
       </CButton>
       <CModal
         alignment="center"
@@ -140,9 +140,6 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     <option className="form-select" value={2}>
                       Admin
                     </option>
-                    {/* <option className="form-select" value={3}>
-                      Student
-                    </option> */}
                   </select>
                 </div>
                 <button

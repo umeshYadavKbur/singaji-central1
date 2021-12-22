@@ -67,17 +67,16 @@ function FeesStructure({ adminData, createFees }) {
     <>
       <CButton
         style={{
+          borderWidth: "1px solid #ffc107 ",
           backgroundColor: "white",
-          color: "#5A607F",
+          color: "#ffc107",
           outline: "none",
-          borderColor: "#5A607F",
-          marginRight: "10px",
-          border: "none",
+          borderColor: "#ffc107",
           fontWeight: "bold",
         }}
         onClick={() => setVisible(!visible)}
       >
-        Fees Structure <i className="fas fa-user-edit"></i>
+        Create Fees Structure <i className="fas fa-plus"></i>
       </CButton>
       <CModal
         // size="md"
