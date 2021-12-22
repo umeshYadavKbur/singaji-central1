@@ -13,7 +13,6 @@ const initialState = {
   token: "",
   userInfo: "",
   error: "",
-  email: "",
 };
 
 const userReducer = (state = initialState, action) => {

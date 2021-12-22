@@ -102,13 +102,7 @@ function StudentTable({table_data,fetchStudentTable}) {
   ) : (
     //   return (
     <>
-      <div
-        style={{
-          backgroundColor: "#F4F7FC",
-          height: "auto",
-          width: "auto",
-        }}
-      >
+          <div style={{backgroundColor: "#F4F7FC",height: "auto",width: "auto"}}>
         <div className="d-flex">
           <div className="ms-4">
             <div className='ms-4'>
@@ -182,7 +176,7 @@ function StudentTable({table_data,fetchStudentTable}) {
           <div className='ml-auto me-3' >
             {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
             <button style={{outline: "none",border: "1px solid gray",borderRadius: "10px 0 0 10px"}} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-            {pageIndex + 1 ? <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button> : ''}
+                {canNextPage ? <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button> : ''}
             <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>2</button>
             <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 2)} disabled={!canNextPage}>3</button>
             <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 3)} disabled={!canNextPage}>4</button>

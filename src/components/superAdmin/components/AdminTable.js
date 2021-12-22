@@ -105,7 +105,7 @@ function DataTable({ table_data, fetchAdminTable }) {
     ) : (
         <>
 
-            <div style={{ backgroundColor: "rgb(246 249 252)", height: "auto", width: "auto" }}>
+                    <div style={{backgroundColor: "#F4F7FC",height: "auto",width: "auto"}}>
 
                 <div className="d-flex">
                     <div className='ms-4'>

@@ -11,7 +11,7 @@ import AdminTable from "./components/AdminTable";
 import Sidebar from "./components/Sidebar";
 import StudentTable from "./components/StudentsTable";
 import { useAnimate } from "react-simple-animate";
-
+import AddNewStudent from "./components/AddNewStudent";
 import { ToastContainer, toast } from 'react-toastify';
 function AdminDashboard() {
 
@@ -64,6 +64,7 @@ pauseOnHover
             <Route path="admintable" element={<AdminTable />} />
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
             <Route path="addstudent" element={<AddStudent />} />
+            <Route path="addnewstudent" element={<AddNewStudent />} />
           </Routes>
         </div>
       </div>

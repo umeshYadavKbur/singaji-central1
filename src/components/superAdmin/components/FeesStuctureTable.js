@@ -101,7 +101,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
         <h2>{table_data.error}</h2>
     ) : (
         <>
-            <div style={{ backgroundColor: "rgb(246 249 252)", height: "auto", width: "auto" }}>
+                    <div style={{backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
                 <div className="d-flex">
                     <div className='ms-4'>
                         <select style={{ height: "auto", width: "auto", outline: "none", border: "none", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
