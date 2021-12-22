@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 // importing the loader spinner css 
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 // <!-- Adding react-bootstrap -->
 import "bootstrap/dist/css/bootstrap.min.css";

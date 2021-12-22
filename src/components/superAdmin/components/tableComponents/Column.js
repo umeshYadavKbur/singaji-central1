@@ -50,8 +50,9 @@
                         }}
                 onClick={() => {
                     // setData(original.status)
-                    console.log(original)
+                    console.log(original.email)
                     alert("Do you want to change status of  : " + original.name)
+                
                 }}>
                 {original.is_active === 1 ? 'Active' : 'Deactive'}
             </button>
