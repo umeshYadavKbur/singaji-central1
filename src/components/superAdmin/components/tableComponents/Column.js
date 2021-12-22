@@ -34,7 +34,7 @@
                         ? {
                             width: "80px",
                             borderRadius: "5px",
-                            backgroundColor: "#FFC700",
+                            backgroundColor: "blue",
                             color: "white",
                             fontWeight: "bold",
                             border: '1px #FFC700',
@@ -42,7 +42,7 @@
                         }
                         : {
                             width: "80px",
-                            backgroundColor: "#FBC775",
+                             backgroundColor: "#8585ed",
                             borderRadius: "5px",
                             fontWeight: "bold",
                             color: "white",
@@ -50,8 +50,9 @@
                         }}
                 onClick={() => {
                     // setData(original.status)
-                    console.log(original)
+                    console.log(original.email)
                     alert("Do you want to change status of  : " + original.name)
+                
                 }}>
                 {original.is_active === 1 ? 'Active' : 'Deactive'}
             </button>

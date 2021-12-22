@@ -19,29 +19,29 @@ export const createNewAdmin = (data) => {
         .then(function (response) {
           if (response.status === 200) {
             dispatch(newAdminReqSuccess());
-          
+          alert("admin created")
             let timerInterval
-            Swal.fire({
-              icon: 'success',
-              text: 'New Admin has been created Successfully!',
-              timer: 2500,
+          //   Swal.fire({
+          //     icon: 'success',
+          //     text: 'New Admin has been created Successfully!',
+          //     timer: 2500,
               
-              didOpen: () => {
-                Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                  b.textContent = Swal.getTimerLeft()
-                }, 100)
-              },
-              willClose: () => {
-                clearInterval(timerInterval)
-              }
-            }).then((result) => {
-              /* Read more about handling dismissals below */
-              if (result.dismiss === Swal.DismissReason.timer) {
-                console.log('I was closed by the timer')
-              }
-            })
+          //     didOpen: () => {
+          //       Swal.showLoading()
+          //       const b = Swal.getHtmlContainer().querySelector('b')
+          //       timerInterval = setInterval(() => {
+          //         b.textContent = Swal.getTimerLeft()
+          //       }, 100)
+          //     },
+          //     willClose: () => {
+          //       clearInterval(timerInterval)
+          //     }
+          //   }).then((result) => {
+          //     /* Read more about handling dismissals below */
+          //     if (result.dismiss === Swal.DismissReason.timer) {
+          //       console.log('I was closed by the timer')
+          //     }
+          //   })
           } else if (response.status === 208) {
             dispatch(newAdminReqSuccess());
           

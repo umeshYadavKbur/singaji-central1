@@ -28,6 +28,12 @@ export const fetchStudentTable = (data) => {
             //   title: "Table data successfully fatched",
             //   icon: "success",
             // });
+          }if(response.status===404){
+            dispatch(fetchSuccessTableData(response.data));
+            swal({
+              title: "No Data Found",
+              icon: "success",
+            });
           }
         })
         .catch(function (error) {

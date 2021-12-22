@@ -1,6 +1,8 @@
-import { Fragment } from "react";
+import {Fragment} from "react";
 import ActiveButton from "../../../assests/common/ActiveButton";
 import Edit_icon from '../../../assests/image/Edit_icon.svg'
+import {VerifyStudent} from "../../../../redux/actionDispatcher/studentVerifyTableDataDispatcher";
+import Swal from 'sweetalert2'
 
 const StudentTableHeader = [
   {
@@ -57,6 +59,7 @@ const StudentTableHeader = [
             }}
         onClick={() => {
           // setData(original.status)
+
           console.log(original)
           alert("Do you want to change this   : " + original)
         }}>
@@ -68,20 +71,47 @@ const StudentTableHeader = [
     accessor: "status",
     Cell: ({row: {original}}) => (
       <button
-        style={ {
-              width: "80px",
-              borderRadius: "5px",
-              backgroundColor: "rgb(166 166 226)",
-              color: "white",
-              fontWeight: "bold",
-              border: '1px #FFC700',
-              // height: "15px"
-            }
-           }
+        style={{
+          width: "80px",
+          borderRadius: "5px",
+          backgroundColor: "rgb(166 166 226)",
+          color: "white",
+          fontWeight: "bold",
+          border: '1px #FFC700',
+          // height: "15px"
+        }
+        }
         onClick={() => {
           // setData(original.status)
-          console.log(original)
-          alert("Do you want to change this   : " + original)
+          console.log(original.email)
+          Swal.fire({
+            title: 'Active',
+
+            html:
+              '<hr>' +
+              'Are you sure?' + '<br>' +
+              `You want to active ${original.firstName} ${original.lastName} `,
+            // icon: 'warning',
+            showCancelButton: true,
+            // showCancelButton: true,
+            cancelButtonText: 'Active',
+            confirmButtonText: 'Cancel',
+            showCloseButton:true,
+            cancelButtonColor: 'blue',
+            confirmButtonColor:"gray",
+
+          }).then((result) => {
+            if(result.isConfirmed=== false) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              VerifyStudent(original.email);
+            }
+          })
+          // alert("Do you want to change this   : " + original.email)
+          // VerifyStudent(original.email);
         }}>
         Deactive
       </button>)
@@ -100,10 +130,3 @@ const StudentTableHeader = [
 export default StudentTableHeader;
 
 
-const appliedStudentVerify = () => {
-  return (
-    <div>
-
-    </div>
-  )
-}

@@ -1,0 +1,13 @@
+.Add_Student_Dropdown {
+    background-color: rgb(199 204 209 / 31%);
+    padding: 5px 5px 5px 15px;
+    width: 90%;
+    margin: 9px 0px 9px 15px;
+    border-bottom: 2px solid orange;
+}
+
+.add_student_dropdown_menu.show {
+    width: 90% !important;
+    height: auto !important;
+    background-color: #F4F7FC!important;
+}

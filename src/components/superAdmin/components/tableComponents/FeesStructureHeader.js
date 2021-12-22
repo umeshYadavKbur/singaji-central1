@@ -34,7 +34,7 @@ const FeesStructureColumn = [
                         ? {
                             width: "80px",
                             borderRadius: "5px",
-                            backgroundColor: "#FFC700",
+                            backgroundColor: "#242483",
                             color: "white",
                             fontWeight: "bold",
                             border: '1px #FFC700',
@@ -42,7 +42,7 @@ const FeesStructureColumn = [
                         }
                         : {
                             width: "80px",
-                            backgroundColor: "#FBC775",
+                            backgroundColor: "#8585ed",
                             borderRadius: "5px",
                             fontWeight: "bold",
                             color: "white",
