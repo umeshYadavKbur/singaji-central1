@@ -15,7 +15,6 @@ import CIcon from "@coreui/icons-react";
 import avatar8 from "../../assests/image/david.png";
 import "./styles/HeaderDropdown.css";
 import { useNavigate } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
 import { logout } from "../../../redux/actionDispatcher/authDispatcher";
 import { connect } from "react-redux";
 
@@ -24,99 +23,47 @@ const AppHeaderDropdown = ({ userData, logout }) => {
   const navigate = useNavigate();
 
   const logoutfunction = () => {
-    console.log("====================================");
     logout();
     localStorage.clear();
     navigate("/login");
-    console.log("====================================");
   };
+
+
   return (
+
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
         <CAvatar src={avatar8} size="lg" />
       </CDropdownToggle>
 
       <CDropdownMenu className="pt-0" placement="bottom-end">
-        <div
-          style={{
-            height: "50px",
-            width: "50px",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {/* <img  src={avatar8} alt="logo" /> */}
+        <div style={{ flexDirection: 'column', height: '369px', width: '294px', alignItems: 'center', paddingTop: '49px', display: 'flex', flex: 'basis' }}>
           <CAvatar
             src={avatar8}
-            // size="lg"
             style={{
-              top: "20px",
-              left: "110px",
               height: "82px",
               width: "82px",
             }}
           />
-          {/* <h4 className="header-name">Roshan yadav</h4> */}
-          <p
+          <button
             style={{
-              marginTop: "20px",
-              marginLeft: "70px",
-              width: "320%",
-              fontSize: "12px",
-              textAlign: "center",
-
+              outline: "1px solid white",
               color: "white",
+              backgroundColor: "#7e84a3",
+              borderRadius: "4px",
+              border: "none",
+              height: "29px",
+              width: "220px",
+              fontSize: "13px"
             }}
           >
-            {userData.userInfo} {userData.email}
-          </p>
+            Manage your server
+          </button>
+          <p style={{ color: 'white', fontSize: '11px' }}><span style={{ color: 'white', fontSize: '13px' }}>{userData.userInfo}</span><br /> {userData.email}</p>
+          <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />
         </div>
-
-        <CDropdownItem
-          style={{
-            marginTop: "120px",
-            marginLeft: "94px",
-            marginBlockEnd: "20px",
-            color: "white",
-            width: "fit-content",
-          }}
-          href="#"
-        >
-          {/* <button>
-              Manage your Account
-            </button> */}
-          <CDropdownDivider style={{ color: "white" }} />
-          <CIcon icon={cilSettings} className="me-2" />
-          Settings
-        </CDropdownItem>
-        <CDropdownDivider style={{ color: "white" }} />
-        <CDropdownItem
-          style={{
-            color: "white",
-            marginTop: "20px",
-            marginLeft: "94px",
-            hover: "false",
-            width: "fit-content",
-          }}
-        >
-          <div className="dropdown_profile_pic" onClick={logoutfunction}>
-            {/* <CIcon icon={cilLockLocked} className="me-2" /> */}
-            <button
-              style={{
-                outline: "1px solid white",
-                color: "white",
-                backgroundColor: "#7e7e7e",
-                borderRadius: "4px",
-                border: "none",
-                width: "90px",
-              }}
-            >
-              Log out
-            </button>
-          </div>
-        </CDropdownItem>
       </CDropdownMenu>
-    </CDropdown>
+    </CDropdown >
   );
 };
 
@@ -135,3 +82,31 @@ const mapDispatchToProps = (dispatch) => {
 
 //Connecting the component to our store
 export default connect(mapStateToProps, mapDispatchToProps)(AppHeaderDropdown);
+
+
+{/* <CDropdownDivider style={{ color: "white" }} /> */ }
+{/* <CDropdownItem
+              style={{
+                color: "white",
+                marginTop: "20px",
+                marginLeft: "94px",
+                hover: "false",
+                width: "fit-content",
+              }}
+            > */}
+{/* <div className="dropdown_profile_pic" onClick={logoutfunction}>
+                <CIcon icon={cilLockLocked} className="me-2" />
+                <button
+                  style={{
+                    outline: "1px solid white",
+                    color: "white",
+                    backgroundColor: "#7e7e7e",
+                    borderRadius: "4px",
+                    border: "none",
+                    width: "90px",
+                  }}
+                >
+                  Log out
+                </button>
+              </div> */}
+{/* </CDropdownItem> */ }
