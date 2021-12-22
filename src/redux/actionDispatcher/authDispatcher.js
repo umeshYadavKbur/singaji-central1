@@ -43,7 +43,7 @@ export const fetchUsers = (data) => {
           progress: undefined,
         });
         dispatch(loginFailure(userResData.data));
-      } else if (userResData.request.status === "400") {
+      } else if (userResData.request.status === 400) {
         let value = JSON.stringify(userResData.request.status);
         dispatch(loginFailure(value));
         toast.warn('Invalid credentials', {
