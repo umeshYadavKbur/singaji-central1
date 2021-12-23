@@ -3,8 +3,8 @@ import React from "react";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
 import { fetchFeesTableData } from "../../../redux/actionDispatcher/feesStructureTableDataDispatcher";
+import { fetchFeesTableDataConfig } from "../../../redux/constants/config";
 import { baseUrl } from "../../../redux/constants/url";
-
 function HeaderColumn({ original, fetchFeesTable }) {
   const changeStatus = (data) => {
     const token = localStorage.getItem("token");
@@ -21,20 +21,11 @@ function HeaderColumn({ original, fetchFeesTable }) {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        fetchFeesTable(fetchFeesTableDataConfig);
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    var fetchData = {
-      method: "GET",
-      url: `${baseUrl}/api/list_schema`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
-    fetchFeesTable(fetchData);
   };
 
   return (
