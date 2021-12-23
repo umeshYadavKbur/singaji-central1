@@ -25,7 +25,11 @@ const FeesStructureColumn = [
   {
     header: "Status",
     accessor: "active",
-    Cell: ({ row: { original } }) => <HeaderColumn original={original} />,
+    Cell: ({ row: { original } }) => (
+      <HeaderColumn
+        original={original}
+      />
+    ),
   },
   {
     header: "Edit",
