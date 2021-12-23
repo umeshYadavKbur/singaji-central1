@@ -15,9 +15,9 @@ function FeesStructure({ table_data, fetchFeesTable }) {
 
     const token = localStorage.getItem("token");
 
-    console.log("====================================");
-    console.log(table_data);
-    console.log("====================================");
+    // console.log("====================================");
+    // console.log(table_data);
+    // console.log("====================================");
 
     React.useEffect(() => {
         var config = {
