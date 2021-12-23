@@ -5,8 +5,9 @@ import Singaji_logo from '../assests/image/Singaji_logo.svg'
 import {useFormik} from 'formik';
 import {connect} from 'react-redux';
 import {fetchUserEmail} from '../../redux/actionDispatcher/forgotpassDispatcher';
-import *as Yup from 'yup'
+import *as Yup from 'yup';
 // import { useHistory } from 'react-router';
+import '../superAdmin/components/styles/Login.css';
 import LoaderButton from '../assests/common/LoaderButton';
 import { useNavigate } from "react-router-dom";
 
@@ -37,18 +38,14 @@ function ForgotPassword({ passData, fetchUserEmail }) {
 
   return (
     <>
-      <div
-        style={{
-          height: "100vh",
-          width: "100vw",
-          background: "rgb(207 207 207)",
-        }}
-      >
+
+      <div className="bg-login">
         <div
-          className="position-absolute top-50 start-50 translate-middle m-auto bg-light px-5 pt-2 pb-5 shadow rounded-5"
-          style={{ width: "100%", maxWidth: "400px" }}
+          className="position-absolute  top-50 start-50 translate-middle m-auto bg-light px-5 pt-2 pb-5 shadow rounded-5 login-card"
+          
+        
         >
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit} className="login-form"  style={{ marginTop: "30px"}} >
             <div className="d-flex justify-content-center">
               <img
                 onClick={() => {
@@ -63,7 +60,7 @@ function ForgotPassword({ passData, fetchUserEmail }) {
             <div className="d-flex justify-content-center">
               <h4 className="h4 mb-3 text-secondary">Enter your Email</h4>
             </div>
-            <div className="mb-3">
+            <div className="mb-3 input-login-box">
               <input
                 disabled={passData.loading}
                 value={formik.values.email}
@@ -77,7 +74,7 @@ function ForgotPassword({ passData, fetchUserEmail }) {
               {formik.errors.email && formik.touched.email ? (<div className="text-danger fs-6">{formik.errors.email}</div> ) : (  ""  )}
             </div>
 
-            <button disabled={passData.loading} className="w-100 btn btn-md btn-warning fw-bold text-light" type="submit">{
+            <button disabled={passData.loading} className="w-100 btn btn-md btn-warning fw-bold text-light button-color" type="submit">{
                             passData.loading ? (<LoaderButton />) : "Get Link"
                         }</button>
           </form>

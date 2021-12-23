@@ -9,6 +9,7 @@ import LoaderButton from "../assests/common/LoaderButton";
 import { ToastContainer } from 'react-toastify';
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
+import '../superAdmin/components/styles/Login.css';
 // import { ToastContainer, toast } from 'react-toastify';
 function Login({ userData, fetchUsers }) {
 // import { useHistory } from "react-router";
@@ -79,7 +80,7 @@ function Login({ userData, fetchUsers }) {
 
   return (
     <>
-      <div style={{ height: "100vh", width: "100vw", background: "rgb(207 207 207)" }}>
+      <div className="bg-login">
         <ToastContainer
           position="top-center"
           autoClose={2500}
@@ -92,18 +93,11 @@ function Login({ userData, fetchUsers }) {
           pauseOnHover
         />
         <div
-          className="position-absolute top-50 start-50 translate-middle "
-          style={{
-            width: "100%",
-            maxWidth: "400px",
-            padding: "25px 45px 45px 45px",
-            margin: "auto",
-            background: "white",
-            borderRadius: "10px",
-          }}
+          className="position-absolute top-50 start-50 translate-middle login-card "
+         
         >
 
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit} className="login-form">
             <div className="d-flex justify-content-center">
               <img
                 src={Singaji_logo}
@@ -115,16 +109,16 @@ function Login({ userData, fetchUsers }) {
               <br />
             </div>
             <div className="d-flex justify-content-center fw-bold">
-              <h4 className="h4 mb-3 text-secondary">Login</h4>
+              <h4 className="h4 mb-3 " style={{color: "black"}}>Login</h4>
             </div>
-            <div className="mb-3">
+            <div className="mb-3 input-login-box">
               <input
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 name="email"
                 type="text"
-                className="form-control mb-2"
+                className="form-control mb-2 login-input"
                 placeholder="Email"
                 disabled={userData.loading}
               />
@@ -134,12 +128,13 @@ function Login({ userData, fetchUsers }) {
                 ""
               )}
               <input
+              
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 name="password"
                 type="password"
-                className="form-control "
+                className="form-control login-input "
                 placeholder="Password"
                 disabled={userData.loading}
               />
@@ -164,7 +159,7 @@ function Login({ userData, fetchUsers }) {
               </Link>
             </div>
             <button
-              className="w-100 btn btn-md btn-warning fw-bold text-light"
+              className="w-100 btn btn-md btn-warning fw-bold text-light button-color"
               type="submit"
               disabled={userData.loading}
             >
