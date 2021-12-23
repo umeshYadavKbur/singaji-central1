@@ -2,7 +2,9 @@ import {
   FETCH_FEES_STRUCT_TABLE_DATA,
   FEES_STRUCT_TABLE_DATA_FAIL,
   FEES_STRUCT_TABLE_DATA_SUCCESS,
-
+  FEES_STRUCTURE_CHANGE_STATUS,
+  FEES_STRUCTURE_CHANGE_FAIL,
+  FEES_STRUCTURE_CHANGE_SUCCESS,
 } from "../constants/actions";
 
 const initialState = {
@@ -19,6 +21,7 @@ const feesStructureTableReducer = (state = initialState, action) => {
         ...state,
         loading: true,
       };
+
     case FEES_STRUCT_TABLE_DATA_SUCCESS:
       return {
         loading: false,
@@ -33,7 +36,23 @@ const feesStructureTableReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
+    case FEES_STRUCTURE_CHANGE_STATUS:
+      return {
+        ...state,
+        second_loading: true,
+      };
 
+    case FEES_STRUCTURE_CHANGE_SUCCESS:
+      return {
+        ...state,
+        second_loading: false,
+      };
+
+    case FEES_STRUCTURE_CHANGE_FAIL:
+      return {
+        ...state,
+        second_loading: false,
+      };
 
     default:
       return state;

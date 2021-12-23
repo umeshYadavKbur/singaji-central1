@@ -2,21 +2,12 @@ import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
-import { fetchFeesTableData } from "../../../redux/actionDispatcher/feesStructureTableDataDispatcher";
-import { fetchFeesTableDataConfig } from "../../../redux/constants/config";
+import { changeFeesStructureStatus } from "../../../redux/actionDispatcher/feesStructureTableDataDispatcher";
+// import { fetchFeesTableDataConfig } from "../../../redux/constants/config";
 import { baseUrl } from "../../../redux/constants/url";
-function HeaderColumn({ original, fetchFeesTable }) {
+function HeaderColumn({ original, changeFeesStatus }) {
   const changeStatus = (data) => {
     const token = localStorage.getItem("token");
-    var fetchData = {
-      method: "GET",
-      url: `${baseUrl}/api/list_schema`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
-
     var config = {
       method: "post",
       url: `${baseUrl}/api/active_schema`,
@@ -26,15 +17,7 @@ function HeaderColumn({ original, fetchFeesTable }) {
       },
       data: data,
     };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        fetchFeesTable(fetchFeesTableDataConfig);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    changeFeesStatus(config);
   };
 
   return (
@@ -99,7 +82,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchFeesTable: (data) => dispatch(fetchFeesTableData(data)),
+    changeFeesStatus: (data) => dispatch(changeFeesStructureStatus(data)),
   };
 };
 
