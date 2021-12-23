@@ -2,11 +2,19 @@ import React from 'react'
 import "./styles/AddNewStudent.css"
 
 function AddNewStudent() {
+
+    const initialValues = {
+        firstName: "",lastName: "",dob: "",contactNumber: "",fatherName: "",fatherOccupation: "",fatherIncome: "",FatherContactNumber: "",address: "",village: "",pincode: "",tehsil: "",district: "",email: "",aadharNumber: "",category: "",
+
+        trackName: "",busFees: "",
+    }
+
+
     return (
         <div>
             {/* Personal Details */}
             <div className="dropdown show">
-                <a style={{ color: "#414c97"}}
+                <a style={{color: "#414c97"}}
                     className="data-toggle  Add_Student_Dropdown  d-flex justify-content-between "
                     role="button"
                     id="dropdownMenuLink"
@@ -14,8 +22,8 @@ function AddNewStudent() {
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
-                   <b> Personal Details</b>
-              <i class="fas fa-chevron-down m-2"></i>
+                    <b> Personal Details</b>
+                    <i class="fas fa-chevron-down m-2"></i>
                 </a>
 
 
@@ -26,40 +34,40 @@ function AddNewStudent() {
                     {/* first four input feild */}
                     <div className='row m-1'>
                         <div className="col">
-                           <label htmlFor="">First Name</label>  <input
-                          name="firstName"
-                          type="text"
-                          className="form-control"
-                          placeholder="First name"
-                        />
+                            <label htmlFor="">First Name</label>  <input
+                                name="firstName"
+                                type="text"
+                                className="form-control"
+                                placeholder="First name"
+                            />
                         </div>
                         <div className="col">
-                           <label htmlFor="">First Name</label>  <input
-                          name="lastName"
-                          type="text"
-                          className="form-control"
-                          placeholder="Last name"
-                        />
+                            <label htmlFor="">First Name</label>  <input
+                                name="lastName"
+                                type="text"
+                                className="form-control"
+                                placeholder="Last name"
+                            />
                         </div>
                         <div className="col">
-                           <label htmlFor="">DOB</label>  <input
-                          name="dob"
-                          type="date"
-                          className="form-control"
-                          placeholder="DOB"
-                        />
+                            <label htmlFor="">DOB</label>  <input
+                                name="dob"
+                                type="date"
+                                className="form-control"
+                                placeholder="DOB"
+                            />
                         </div>
                         <div className="col">
-                           <label htmlFor="">Contact Number</label>  <input
-                          name="contactNumber"
-                          type="number"
-                          className="form-control"
-                          placeholder="Contact Number"
-                        />
+                            <label htmlFor="">Contact Number</label>  <input
+                                name="contactNumber"
+                                type="number"
+                                className="form-control"
+                                placeholder="Contact Number"
+                            />
                         </div>
                     </div>
 
-{/* Second Four Input Field */}
+                    {/* Second Four Input Field */}
                     <div className='row m-1'>
                         <div className="col">
                             <label htmlFor="">Father Name</label>  <input
@@ -93,20 +101,20 @@ function AddNewStudent() {
                                 placeholder="Father Contact"
                             />
                         </div>
-                    
+
                     </div>
-{/* Addres Input feild */}
+                    {/* Addres Input feild */}
                     <div className="row m-1">
                         <div className="col">
-                        <label htmlFor="">Address*</label>
-                        <input
-                            name="address"
-                            type="text"
-                            className="form-control"
-                            placeholder="Enter your Address"
-                        />
-                    </div></div>
-{/* third Four input feild */}
+                            <label htmlFor="">Address*</label>
+                            <input
+                                name="address"
+                                type="text"
+                                className="form-control"
+                                placeholder="Enter your Address"
+                            />
+                        </div></div>
+                    {/* third Four input feild */}
                     <div className='row m-1'>
                         <div className="col">
                             <label htmlFor="">Village</label>  <input
@@ -178,7 +186,7 @@ function AddNewStudent() {
                         <div className="col">
                             <label className="radio-inline m-2">Gender</label> <br></br>
                             <label className="radio-inline mx-2">
-                                <input type="radio" name="optradio" defaultChecked/>{"  "}
+                                <input type="radio" name="optradio" defaultChecked />{"  "}
                                 Male
                             </label>
                             <label className="radio-inline mx-2">
@@ -191,9 +199,11 @@ function AddNewStudent() {
 
             </div>
 
+            {/* Personal Details */}
+
             {/* Acadmic Details */}
             <div className="dropdown show">
-                <a style={{ color: "#414c97"}}
+                <a style={{color: "#414c97"}}
                     className="data-toggle Add_Student_Dropdown d-flex justify-content-between"
                     role="button"
                     id="dropdownMenuLink"
@@ -202,7 +212,7 @@ function AddNewStudent() {
                     aria-expanded="false"
                 >
                     <b>Acadmic Details </b>
-              <i class="fas fa-chevron-down m-2"></i>
+                    <i class="fas fa-chevron-down m-2"></i>
                 </a>
 
 
@@ -210,13 +220,82 @@ function AddNewStudent() {
                     className="dropdown-menu add_student_dropdown_menu"
                     aria-labelledby="dropdownMenuLink"
                 >
-                    <h1>hellow</h1>
+                    <div className='row m-1'>
+                        <div className="col">
+                            <label htmlFor="">First Name</label>  <input
+                                name="firstName"
+                                type="text"
+                                className="form-control"
+                                placeholder="First name"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">First Name</label>  <input
+                                name="lastName"
+                                type="text"
+                                className="form-control"
+                                placeholder="Last name"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">DOB</label>  <input
+                                name="dob"
+                                type="date"
+                                className="form-control"
+                                placeholder="DOB"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">Contact Number</label>  <input
+                                name="contactNumber"
+                                type="number"
+                                className="form-control"
+                                placeholder="Contact Number"
+                            />
+                        </div>
+                    </div>
+                    <div className='row m-1'>
+                        <div className="col">
+                            <label htmlFor="">First Name</label>  <input
+                                name="firstName"
+                                type="text"
+                                className="form-control"
+                                placeholder="First name"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">First Name</label>  <input
+                                name="lastName"
+                                type="text"
+                                className="form-control"
+                                placeholder="Last name"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">DOB</label>  <input
+                                name="dob"
+                                type="date"
+                                className="form-control"
+                                placeholder="DOB"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">Contact Number</label>  <input
+                                name="contactNumber"
+                                type="number"
+                                className="form-control"
+                                placeholder="Contact Number"
+                            />
+                        </div>
+                    </div>
                 </div>
 
             </div>
+            {/* Acadmic Details */}
+
             {/* Fees Details */}
             <div className="dropdown show">
-                <a style={{ color: "#414c97"}}
+                <a style={{color: "#414c97"}}
                     className="data-toggle Add_Student_Dropdown d-flex justify-content-between"
                     role="button"
                     id="dropdownMenuLink"
@@ -224,8 +303,8 @@ function AddNewStudent() {
                     aria-haspopup="true"
                     aria-expanded="false"
                 >
-                   <b> Fees Details </b>
-              <i class="fas fa-chevron-down m-2"></i>
+                    <b> Fees Details </b>
+                    <i class="fas fa-chevron-down m-2"></i>
                 </a>
 
 
@@ -237,9 +316,12 @@ function AddNewStudent() {
                 </div>
 
             </div>
+
+            {/* Fees Details */}
+
             {/* Bus Details */}
             <div className="dropdown show">
-                <a style={{ color: "#414c97"}}
+                <a style={{color: "#414c97"}}
                     className="data-toggle Add_Student_Dropdown d-flex justify-content-between"
                     role="button"
                     id="dropdownMenuLink"
@@ -248,7 +330,7 @@ function AddNewStudent() {
                     aria-expanded="false"
                 >
                     <b>Bus Details </b>
-              <i class="fas fa-chevron-down m-2"></i>
+                    <i class="fas fa-chevron-down m-2"></i>
                 </a>
 
 
@@ -256,10 +338,31 @@ function AddNewStudent() {
                     className="dropdown-menu add_student_dropdown_menu"
                     aria-labelledby="dropdownMenuLink"
                 >
-                    <h1>hellow</h1>
+                    <div className='row m-1'>
+                        <div className="col">
+                            <label htmlFor="">Bus Fees</label>  <input
+                                name="busFees"
+                                type="text"
+                                className="form-control"
+                                placeholder="Bus Fees"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">Trace Name</label>  <input
+                                name="trackName"
+                                type="text"
+                                className="form-control"
+                                placeholder="Trace Name"
+                            />
+                        </div>
+                        {/* <div className="col"></div>
+                        <div className="col"></div> */}
+
+                    </div>
                 </div>
 
             </div>
+            {/* Bus Details */}
         </div>
     )
 }

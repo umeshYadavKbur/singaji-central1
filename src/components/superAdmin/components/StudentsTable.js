@@ -22,7 +22,9 @@ import SkeletonColor from "../../../helpers/Skeletrone";
 import Archived_icon from "../../assests/image/Archived_icon.svg"
 import { TableCheckbox } from "./tableComponents/TableCheckbox";
 import { VerifyStudent } from "../../../redux/actionDispatcher/studentVerifyTableDataDispatcher";
-
+import axios from "axios";
+import AllUrl from "../../../redux/constants/url";
+import { toast } from "react-toastify";
 
 
 function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
@@ -85,11 +87,52 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
                 color: "white",
                 border: 'none'
               }}
-          onClick={() => {
+          onClick={async () => {
+             
             // setData(original.status)
+              console.log("orignal",original)
+            var body = JSON.stringify({
+              email: original.email
+            });
 
-            console.log(original)
-            alert("Do you want to change this   : " + original)
+            var config = {
+              method: 'post',
+              url: `${AllUrl.verifyStudentPaidUnpaid}`,
+              headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+              },
+              data: body
+            };
+             const result = await axios(config)
+             console.log(result);
+             if(result.status === 200)
+             {
+               toast.success('Registration Fees Paid SuccessFul',{
+                 position: "top-center",
+                 autoClose: 3000,
+                 hideProgressBar: false,
+                 closeOnClick: true,
+                 pauseOnHover: true,
+                 draggable: true,
+                 progress: undefined,
+               });
+             }
+            else if(result.status === 404)
+             {
+               toast.warning('User Not Found',{
+                 position: "top-center",
+                 autoClose: 3000,
+                 hideProgressBar: false,
+                 closeOnClick: true,
+                 pauseOnHover: true,
+                 draggable: true,
+                 progress: undefined,
+               });
+             }
+          
+            // alert("Do you want to change this   : " + original)
+            
           }}>
           {original.reg_fees_status}
         </button>)
@@ -153,6 +196,22 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
 
 
 ////////
+  async function getData(data,loginUrl) {
+    var url = `${baseUrl}${loginUrl}`;
+    console.log(url);
+    try {
+      var res = await axios.post(url,data);
+      console.log("The response of dat is :: ",res);
+      if(res.status === 200) {
+        //here i change the return data so the response object coming from an api is directly return
+        return res;
+      }
+      // Don't forget to return something
+      return res;
+    } catch(err) {
+      return err;
+    }
+  }
   const columns = useMemo(() => StudentTableHeader, []);
   
   console.log("====================================");
