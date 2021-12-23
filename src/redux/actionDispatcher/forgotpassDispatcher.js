@@ -24,14 +24,17 @@ export const fetchUserEmail = (data) => {
       Swal.fire({
         title: 'Mail sent successfully',
         icon: 'success',
+        showConfirmButton: false,
         timer: 2500,
-        
+
       })
       dispatch(forgotPasswordSuccess(forgetPasswordData));
     } else if (forgetPasswordData.request.status === 404) {
-      swal({
+      Swal.fire({
         title: "Email not Found",
         icon: "warning",
+        showConfirmButton: false,
+        timer: 2500
       });
       dispatch(forgotPasswordFailure(forgetPasswordData.data));
     } else {

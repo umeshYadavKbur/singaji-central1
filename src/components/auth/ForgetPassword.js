@@ -37,13 +37,8 @@ function ForgotPassword({ passData, fetchUserEmail }) {
 
   return (
     <>
-      <div
-        style={{
-          height: "100vh",
-          width: "100vw",
-          background: "rgb(207 207 207)",
-        }}
-      >
+
+      <div className="bg-login">
         <div
           className="position-absolute top-50 start-50 translate-middle m-auto bg-light px-5 pt-2 pb-5 shadow rounded-5"
           style={{ width: "100%", maxWidth: "400px" }}

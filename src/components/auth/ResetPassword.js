@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import React from "react";
+
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { newPasswordRequest } from "../../redux/actionDispatcher/newPassDispatcher";
 import {useNavigate} from 'react-router-dom';
@@ -56,7 +57,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   });
   return (
     <>
-      <div style={{ height: "100vh", width: "100vw", background: "#f3eded" }}>
+      <div className="Reset-passbg">
       <ToastContainer
           position="top-center"
           autoClose={2500}
