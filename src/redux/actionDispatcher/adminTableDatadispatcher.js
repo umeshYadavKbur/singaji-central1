@@ -4,12 +4,11 @@ import {
   ADMIN_TABLE_DATA_FAIL,
   ADMIN_TABLE_DATA_SUCCESS,
 } from "../constants/actions";
-// import swal from "sweetalert";
 
 export const fetchAdminTableData = (data) => {
   return (dispatch) => {
     dispatch(fetchTableData());
-    console.log("getting table data", data);
+    // console.log("getting table data", data);
     // axios(data)
     //   .then(function (response) {
     //     console.log(response)
@@ -20,23 +19,13 @@ export const fetchAdminTableData = (data) => {
     try {
       axios(data)
         .then(function (response) {
-          //Printing the response of the data
           console.log((response));
           if (response.status === 200) {
             dispatch(fetchSuccessTableData(response.data));
-            // swal({
-            //   title: "Table data successfully fatched",
-            //   icon: "success",
-            // });
           }
         })
         .catch(function (error) {
-          //   console.log(error);
           fetchFailTableData(error);
-          // swal({
-          //   title: "something problem",
-          //   icon: "error",
-          // });
         });
     } catch (error) {
       fetchFailTableData(error);

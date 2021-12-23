@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { GlobalFilter } from './tableComponents/GlobalFilter';
 import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
 // import MockData from './tableComponents/mockData.json'
-import Column from './tableComponents/Column'
+import Column from './tableComponents/AdminTableColumn'
 import './styles/Table.css'
 import { TableCheckbox } from './tableComponents/TableCheckbox';
 // import { useEffect } from 'react';

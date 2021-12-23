@@ -13,22 +13,16 @@ export const fetchFeesTableData = (data) => {
       axios(data)
         .then(function (response) {
           //Printing the response of the data
-          console.log((response));
+          console.log(response);
           if (response.status === 200) {
             dispatch(fetchSuccessTableData(response.data));
           }
         })
         .catch(function (error) {
-          //   console.log(error);
           fetchFailTableData(error);
-          // swal({
-          //   title: "something problem",
-          //   icon: "error",
-          // });
         });
     } catch (error) {
       fetchFailTableData(error);
-      //   console.log(error);
     }
   };
 };
@@ -52,3 +46,4 @@ const fetchFailTableData = (error) => {
     payload: error,
   };
 };
+

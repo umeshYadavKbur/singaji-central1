@@ -1,7 +1,7 @@
 .dropdown-menu.show {
   width: 296px !important;
-  height: 334px !important;
-  background-color: #7e7e7e !important;
+  height: 369px !important;
+  background-color: #7e84a3 !important;
 }
 
 /* .dropdown-menu.show li{
@@ -23,7 +23,7 @@
   border-radius: 50em;
   margin-block-end: 26px;
 }
-.header-name{
+.header-name {
   margin-top: 20px;
   margin-left: 70px;
   width: 320%;

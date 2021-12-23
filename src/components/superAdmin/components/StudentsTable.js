@@ -180,7 +180,8 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
             // VerifyStudent(original.email);
           }}>
           Deactive
-        </button>)
+        </button>
+        )
     },
     {
       header: 'Edit',
