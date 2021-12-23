@@ -8,9 +8,18 @@ import { baseUrl } from "../../../redux/constants/url";
 function HeaderColumn({ original, fetchFeesTable }) {
   const changeStatus = (data) => {
     const token = localStorage.getItem("token");
+    var fetchData = {
+      method: "GET",
+      url: `${baseUrl}/api/list_schema`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
     var config = {
       method: "post",
-      url: "https://singaji-central-server.herokuapp.com/api/active_schema",
+      url: `${baseUrl}/api/active_schema`,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",

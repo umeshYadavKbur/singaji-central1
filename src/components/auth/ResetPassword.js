@@ -1,8 +1,9 @@
-import { useHistory, useParams } from "react-router";
+import {  useParams } from "react-router";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import React from "react";
+import '../superAdmin/components/styles/Login.css';
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { newPasswordRequest } from "../../redux/actionDispatcher/newPassDispatcher";
 import {useNavigate} from 'react-router-dom';
@@ -56,7 +57,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   });
   return (
     <>
-      <div style={{ height: "100vh", width: "100vw", background: "#f3eded" }}>
+      <div className="bg-login">
       <ToastContainer
           position="top-center"
           autoClose={2500}
@@ -69,7 +70,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
           pauseOnHover
         />
         <div
-          className="position-absolute top-50 start-50 translate-middle "
+          className="position-absolute top-50 start-50 translate-middle login-card "
           style={{
             width: "100%",
             maxWidth: "400px",
@@ -97,7 +98,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
             <div className="d-flex justify-content-center">
               <h4 className="h4 mb-3 text-secondary">Enter New Password</h4>
             </div>
-            <div className="mb-3">
+            <div className="mb-3 input-login-box button-color">
               <input
                 value={formik.values.password}
                 onChange={formik.handleChange}
