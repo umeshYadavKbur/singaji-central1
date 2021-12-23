@@ -4,6 +4,7 @@ import {
   FORGETPASSWORD_SUCCESS,
 } from "../constants/actions";
 import getData from "../../services/agent";
+import Swal from "sweetalert2";
 // import {history} from '../../helpers/history'
 import swal from "sweetalert";
 import { forgetPass } from "../constants/url";
@@ -20,6 +21,12 @@ export const fetchUserEmail = (data) => {
       //     text:"Check your mail and click on link and reset password before link expire",
       //     icon: "success",
       // })
+      Swal.fire({
+        title: 'Mail sent successfully',
+        icon: 'success',
+        timer: 2500,
+        
+      })
       dispatch(forgotPasswordSuccess(forgetPasswordData));
     } else if (forgetPasswordData.request.status === 404) {
       swal({
