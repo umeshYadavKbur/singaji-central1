@@ -52,10 +52,19 @@ function Navbar() {
           (
             <div className="changing_navbar_containt_conditional">
               <FeesStructure />
+            
               <CreateAdminPopup />
             </div>
           )
         }
+        {/* {
+          location === "Applied Student"
+          (
+            <div className="changing_navbar_containt_conditional">
+             <button />
+            </div>
+          )
+        } */}
         <AppHeaderDropdown />
       </div>
     </div>
