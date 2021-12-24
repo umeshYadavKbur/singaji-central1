@@ -7,7 +7,8 @@ export const forgetPass = "/api/resetPasswordEmail";
 
 const AllUrl ={
     verifyStudent: `${baseUrl}/api/varify_student`,
-     verifyStudentPaidUnpaid: `${baseUrl}/api/reg_fees_status`
+    verifyStudentPaidUnpaid: `${baseUrl}/api/reg_fees_status`,
+    adminStatusChange: `${baseUrl}/api/deactive_or_activate_admin`
 }
 export default AllUrl
 

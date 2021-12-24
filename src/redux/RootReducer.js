@@ -10,21 +10,23 @@ import addNewStudentReducer from "./reducers/studentTableReducer";
 import adminTableReducer from "./reducers/adminTableReducer"
 import feesstructureTableReducer from "./reducers/feesStuctureTableReducer"
 import VerifyStudentReducer from "./reducers/studentVerifyTableReducer";
+import AdminStatusChangeReducer from "./reducers/adminStatusChangeReducer";
 
 //Combining the reducer's into a rootReducer
 const RootReducer = combineReducers({
-  auth: userReducer,
-  newPassword: newPassReducer,
-  response: forgetPassReducer,
-  createAdmin: newAdminReducer,
-  sidebar: showSideBarReducer,
-  feeStructure: createNewFeesStructure,
-  statusStudent: changeStudentStatus,
-  studentTableData: addNewStudentReducer,
-  adminTableData: adminTableReducer,
-  feesStructTableData: feesstructureTableReducer,
-  VerifyStudent: VerifyStudentReducer,
-  // addStudent: addNewStudentReducer,
+    auth: userReducer,
+    newPassword: newPassReducer,
+    response: forgetPassReducer,
+    createAdmin: newAdminReducer,
+    sidebar: showSideBarReducer,
+    feeStructure: createNewFeesStructure,
+    statusStudent: changeStudentStatus,
+    studentTableData: addNewStudentReducer,
+    adminTableData: adminTableReducer,
+    feesStructTableData: feesstructureTableReducer,
+    VerifyStudent: VerifyStudentReducer,
+    AdminStatusChangeData: AdminStatusChangeReducer,
+    // addStudent: addNewStudentReducer,
 });
 
 export default RootReducer;

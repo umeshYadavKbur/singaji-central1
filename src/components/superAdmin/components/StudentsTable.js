@@ -1,9 +1,9 @@
 import * as React from "react";
-import { useMemo } from "react";
+import {useMemo} from "react";
 
 import Edit_icon from '../../assests/image/Edit_icon.svg'
 import Swal from 'sweetalert2'
-import { GlobalFilter } from "./tableComponents/GlobalFilter";
+import {GlobalFilter} from "./tableComponents/GlobalFilter";
 import {
   useTable,
   useSortBy,
@@ -11,28 +11,24 @@ import {
   usePagination,
   useRowSelect,
 } from "react-table";
-import { ToastContainer } from "react-toastify";
+import {ToastContainer} from "react-toastify";
 // import MockData from "./tableComponents/studentTable.json";
 // import StudentTableHeader from "./tableComponents/StudentTableHeader";
 import "./styles/Table.css";
-import { baseUrl } from "../../../redux/constants/url";
-import { fetchStudentTable } from "../../../redux/actionDispatcher/studentTableDatadispatcher";
-import { connect } from "react-redux";
+import {baseUrl} from "../../../redux/constants/url";
+import {fetchStudentTable} from "../../../redux/actionDispatcher/studentTableDatadispatcher";
+import {connect} from "react-redux";
 import SkeletonColor from "../../../helpers/Skeletrone";
 import Archived_icon from "../../assests/image/Archived_icon.svg"
-import { TableCheckbox } from "./tableComponents/TableCheckbox";
-import { VerifyStudent } from "../../../redux/actionDispatcher/studentVerifyTableDataDispatcher";
+import {TableCheckbox} from "./tableComponents/TableCheckbox";
+import {VerifyStudent} from "../../../redux/actionDispatcher/studentVerifyTableDataDispatcher";
 import axios from "axios";
 import AllUrl from "../../../redux/constants/url";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 
 
-function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
+function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
   const token = localStorage.getItem("token");
-
-  ///////////colomns
-
-
 
   const StudentTableHeader = [
     {
@@ -77,62 +73,84 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
                 color: "white",
                 fontWeight: "bold",
                 border: '1px #FFC700',
-                // height: "15px"
-              }
-              : {
+               
+              } : {
                 width: "80px",
                 backgroundColor: "#FFC700",
                 borderRadius: "5px",
                 fontWeight: "bold",
                 color: "white",
-                border: 'none'
+                border: 'none',
               }}
-          onClick={async () => {
-             
-            // setData(original.status)
-              console.log("orignal",original)
-            var body = JSON.stringify({
-              email: original.email
-            });
+          disabled={original.reg_fees_status === "Paid"}
+          onClick={() => {
+            Swal.fire({
+              title: '',
 
-            var config = {
-              method: 'post',
-              url: `${AllUrl.verifyStudentPaidUnpaid}`,
-              headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                'Content-Type': 'application/json'
-              },
-              data: body
-            };
-             const result = await axios(config)
-             console.log(result);
-             if(result.status === 200)
-             {
-               toast.success('Registration Fees Paid SuccessFul',{
-                 position: "top-center",
-                 autoClose: 3000,
-                 hideProgressBar: false,
-                 closeOnClick: true,
-                 pauseOnHover: true,
-                 draggable: true,
-                 progress: undefined,
-               });
-             }
-            else if(result.status === 404)
-             {
-               toast.warning('User Not Found',{
-                 position: "top-center",
-                 autoClose: 3000,
-                 hideProgressBar: false,
-                 closeOnClick: true,
-                 pauseOnHover: true,
-                 draggable: true,
-                 progress: undefined,
-               });
-             }
-          
-            // alert("Do you want to change this   : " + original)
-            
+              html:
+                '<hr>' +
+                'Are you sure?' + '<br>' +
+                `You want to confirm this payment `,
+              // icon: 'warning',
+              showCancelButton: true,
+              // showCancelButton: true,
+              cancelButtonText: 'Payment',
+              confirmButtonText: 'Cancel',
+              showCloseButton: true,
+              cancelButtonColor: 'orange',
+              confirmButtonColor: "gray",
+
+            }).then(async (result) => {
+              if(result.isConfirmed === false) {
+                var body = JSON.stringify({
+                  email: original.email
+                });
+
+                var config = {
+                  method: 'post',
+                  url: `${AllUrl.verifyStudentPaidUnpaid}`,
+                  headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+                  },
+                  data: body
+                };
+
+                const result = await axios(config)
+                console.log("_____________________________________",result);
+                if(result.status === 200) {
+                  toast.success('Registration Fees Paid SuccessFul',{
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                  });
+                  var con = {
+                    method: "GET",
+                    url: `${baseUrl}/api/registrated_student`,
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                      "Content-Type": "application/json",
+                    },
+                  };
+                  fetchStudentTable(con);
+                }
+                else if(result.status === 404) {
+                  toast.warning('User Not Found',{
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                  });
+                }
+              }
+            })
           }}>
           {original.reg_fees_status}
         </button>)
@@ -195,8 +213,6 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
   ];
 
 
-
-////////
   async function getData(data,loginUrl) {
     var url = `${baseUrl}${loginUrl}`;
     console.log(url);
@@ -213,12 +229,7 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
       return err;
     }
   }
-  const columns = useMemo(() => StudentTableHeader, []);
-  
-  console.log("====================================");
-  console.log(table_data);
-  console.log("====================================");
-
+  const columns = useMemo(() => StudentTableHeader,[]);
   React.useEffect(() => {
     var config = {
       method: "GET",
@@ -232,7 +243,7 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
     // setTableData(table_data.table_data);
 
     // eslint-disable-next-line
-  }, []);
+  },[]);
 
 
   const {
@@ -266,10 +277,10 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
         return [
           {
             id: 'selection',
-            header: ({ getToggleAllRowsSelectedProps }) => (
+            header: ({getToggleAllRowsSelectedProps}) => (
               <TableCheckbox {...getToggleAllRowsSelectedProps()} />
             ),
-            Cell: ({ row }) => (
+            Cell: ({row}) => (
               <TableCheckbox {...row.getToggleRowSelectedProps()} />
             )
           },
@@ -279,8 +290,8 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
     }
   );
 
-  const { globalFilter } = state;
-  const { pageIndex, pageSize } = state;
+  const {globalFilter} = state;
+  const {pageIndex,pageSize} = state;
 
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
@@ -289,24 +300,24 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
   ) : (
     //   return (
     <>
-          <ToastContainer
-            position="top-center"
-            autoClose={2500}
-            hideProgressBar={true}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-          <div style={{backgroundColor: "#F4F7FC",height: "auto",width: "auto"}}>
+      <ToastContainer
+        position="top-center"
+        autoClose={2500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <div style={{backgroundColor: "#F4F7FC",height: "auto",width: "auto"}}>
         <div className="d-flex">
           <div className="ms-4">
             <div className='ms-4'>
-              <select style={{ height: "auto", width: "auto", outline: "none", border: "none", borderRadius: "10px", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+              <select style={{height: "auto",width: "auto",outline: "none",border: "none",borderRadius: "10px",padding: "5px"}} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                 {
-                  [10, 25, 50, 100].map(pageSize => (
+                  [10,25,50,100].map(pageSize => (
                     <option value={pageSize} key={pageSize}>Show Entrie {pageSize}</option>
                   ))
                 }
@@ -363,7 +374,7 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
             })}
           </tbody>
         </table>
-        <div style={{ border: "rgb(246 249 252)" }} className="d-flex mb-4">
+        <div style={{border: "rgb(246 249 252)"}} className="d-flex mb-4">
           <div className="mx-4">
             <span>
               {/* Page{' '}
@@ -374,10 +385,10 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
           <div className='ml-auto me-3' >
             {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
             <button style={{outline: "none",border: "1px solid gray",borderRadius: "10px 0 0 10px"}} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-                {canNextPage ? <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button> : ''}
-          {canNextPage ?  <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>2</button>:''}
-           {canNextPage ?<button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 2)} disabled={!canNextPage}>3</button>:' '}
-                {canNextPage?<button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 3)} disabled={!canNextPage}>4</button>:''}
+            {canNextPage ? <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button> : ''}
+            {canNextPage ? <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>2</button> : ''}
+            {canNextPage ? <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 2)} disabled={!canNextPage}>3</button> : ' '}
+            {canNextPage ? <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 3)} disabled={!canNextPage}>4</button> : ''}
             <button style={{outline: "none",border: "1px solid gray",borderRadius: "0 10px  10px 0"}} onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
             {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button> */}
           </div>
@@ -390,7 +401,7 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent }) {
 const mapStateToProps = (state) => {
   return {
     table_data: state.studentTableData,
-    
+
 
   };
 };
@@ -402,4 +413,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentTable);
+export default connect(mapStateToProps,mapDispatchToProps)(StudentTable);

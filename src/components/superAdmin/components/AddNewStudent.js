@@ -222,71 +222,85 @@ function AddNewStudent() {
                 >
                     <div className='row m-1'>
                         <div className="col">
-                            <label htmlFor="">First Name</label>  <input
-                                name="firstName"
+                            <label htmlFor="">12<sup>th</sup> School Name</label>  <input
+                                name="schoolName"
                                 type="text"
                                 className="form-control"
-                                placeholder="First name"
+                                placeholder="School Name"
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="">First Name</label>  <input
-                                name="lastName"
+                            <label htmlFor="">12<sup>th</sup> Subject</label> <input
+                                name="subject12"
                                 type="text"
                                 className="form-control"
                                 placeholder="Last name"
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="">DOB</label>  <input
-                                name="dob"
-                                type="date"
+                            <label htmlFor="">Stream Name</label>  <input
+                                name="streamName"
+                                type="text"
                                 className="form-control"
-                                placeholder="DOB"
+                                placeholder="Stream Name"
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="">Contact Number</label>  <input
-                                name="contactNumber"
+                            <label htmlFor="">Year</label>  <input
+                                name="year"
                                 type="number"
                                 className="form-control"
-                                placeholder="Contact Number"
+                                placeholder="year"
                             />
                         </div>
                     </div>
                     <div className='row m-1'>
                         <div className="col">
-                            <label htmlFor="">First Name</label>  <input
-                                name="firstName"
+                            <label htmlFor="">12<sup>th</sup> Roll Number</label>  <input
+                                name="rollNumber12"
                                 type="text"
                                 className="form-control"
-                                placeholder="First name"
+                                placeholder="Roll Number"
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="">First Name</label>  <input
-                                name="lastName"
+                            <label htmlFor="">12<sup>th</sup> Percent</label>  <input
+                                name="percent12"
                                 type="text"
                                 className="form-control"
-                                placeholder="Last name"
+                                placeholder=" 12 percent"
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="">DOB</label>  <input
-                                name="dob"
-                                type="date"
+                            <label htmlFor="">Join Branch</label>  <input
+                                name="joinBranch"
+                                type="text"
                                 className="form-control"
-                                placeholder="DOB"
+                                placeholder="Join Branch"
                             />
                         </div>
-                        <div className="col">
-                            <label htmlFor="">Contact Number</label>  <input
-                                name="contactNumber"
-                                type="number"
+                        <div className="col"></div>
+                     
+                    </div>
+                    <div className='row m-1'>
+                        <div className="col-3">
+                            <label htmlFor="">10<sup>th</sup> Roll Number</label>  <input
+                                name="rollNumber10"
+                                type="text"
                                 className="form-control"
-                                placeholder="Contact Number"
+                                placeholder="Roll Number"
                             />
                         </div>
+                        <div className="col-3">
+                            <label htmlFor="">10<sup>th</sup> Percent</label>  <input
+                                name="percent10"
+                                type="text"
+                                className="form-control"
+                                placeholder=" 10 percent"
+                            />
+                        </div>
+                       
+
                     </div>
                 </div>
 
@@ -312,7 +326,164 @@ function AddNewStudent() {
                     className="dropdown-menu add_student_dropdown_menu"
                     aria-labelledby="dropdownMenuLink"
                 >
-                    <h1>hellow</h1>
+                    <div className='row m-1'>
+                        <div className="col">
+                            <label htmlFor="">Registration Fees</label>  <input
+                                name="registrationFees"
+                                type="text"
+                                className="form-control"
+                                placeholder="Registration Fees"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">Course Fees</label> <input
+                                name="courseFees"
+                                type="text"
+                                className="form-control"
+                                placeholder="Course Fees"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">First Installment</label>  <input
+                                name="firstInstallment"
+                                type="text"
+                                className="form-control"
+                                placeholder="First Installment"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">First Installment Date</label>  <input
+                                name="firstInstallmentDate"
+                                type="date"
+                                className="form-control"
+                                placeholder="First Installment Date"
+                            />
+                        </div>
+                    </div>
+                    <div className='row m-1'>
+                        <div className="col">
+                            <label htmlFor="">Fees Scheme</label>  <input
+                                name="feesScheme"
+                                type="text"
+                                className="form-control"
+                                placeholder="Fees Scheme"
+                            />
+                        </div>
+                        <div className="col">
+                            {/* <label htmlFor="">Course Fees</label> <input
+                                name="courseFees"
+                                type="text"
+                                className="form-control"
+                                placeholder="Course Fees"
+                            /> */}
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">Second Installment</label>  <input
+                                name="secondInstallment"
+                                type="text"
+                                className="form-control"
+                                placeholder="Second Installment"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">Second Installment Date</label>  <input
+                                name="secondInstallmentDate"
+                                type="date"
+                                className="form-control"
+                                placeholder="Second Installment Date"
+                            />
+                        </div>
+                    </div>
+                    
+                    <div className='row m-1'>
+                        <div className="col">
+                            <label htmlFor="">Postmatric ScolarShip</label>  <input
+                                name="registrationFees"
+                                type="text"
+                                className="form-control"
+                                placeholder="Registration Fees"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">GKB ScolarShip</label> <input
+                                name="courseFees"
+                                type="text"
+                                className="form-control"
+                                placeholder="Course Fees"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">Third Installment</label>  <input
+                                name="thirdInstallment"
+                                type="text"
+                                className="form-control"
+                                placeholder="Third Installment"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">Third Installment Date</label>  <input
+                                name="thirdInstallmentDate"
+                                type="date"
+                                className="form-control"
+                                placeholder="Third Installment Date"
+                            />
+                        </div>
+                    </div>
+
+                    <div className='row m-1'>
+                        <div className="col">
+                            <label htmlFor="">Postmatric Owner</label>  <input
+                                name="registrationFees"
+                                type="text"
+                                className="form-control"
+                                placeholder="Registration Fees"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">GKB Owner</label> <input
+                                name="courseFees"
+                                type="text"
+                                className="form-control"
+                                placeholder="Course Fees"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">Payable Ammount</label>  <input
+                                name="payableAmmount"
+                                type="text"
+                                className="form-control"
+                                placeholder="Payable Ammount"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">Remark</label>  <input
+                                name="remark"
+                                type="text"
+                                className="form-control"
+                                placeholder="Remark"
+                            />
+                        </div>
+                    </div>
+
+                    <div className='row m-1'>
+                        <div className="col-3">
+                            <label htmlFor="">Postmatric Amount</label>  <input
+                                name="postmatricAmount"
+                                type="text"
+                                className="form-control"
+                                placeholder="Postmatric Amount"
+                            />
+                        </div>
+                        <div className="col-3">
+                            <label htmlFor="">GKB Amount</label> <input
+                                name="GKBAmount"
+                                type="text"
+                                className="form-control"
+                                placeholder="GKB Amount"
+                            />
+                        </div>
+                       
+                    </div>
                 </div>
 
             </div>
@@ -339,7 +510,7 @@ function AddNewStudent() {
                     aria-labelledby="dropdownMenuLink"
                 >
                     <div className='row m-1'>
-                        <div className="col">
+                        <div className="col-3">
                             <label htmlFor="">Bus Fees</label>  <input
                                 name="busFees"
                                 type="text"
@@ -347,7 +518,7 @@ function AddNewStudent() {
                                 placeholder="Bus Fees"
                             />
                         </div>
-                        <div className="col">
+                        <div className="col-3">
                             <label htmlFor="">Trace Name</label>  <input
                                 name="trackName"
                                 type="text"
