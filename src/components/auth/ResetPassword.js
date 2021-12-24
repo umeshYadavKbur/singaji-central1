@@ -56,7 +56,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   });
   return (
     <>
-      <div style={{ height: "100vh", width: "100vw", background: "#f3eded" }}>
+      <div style={{ height: "100vh", width: "100vw", background: "white" }}>
       <ToastContainer
           position="top-center"
           autoClose={2500}
