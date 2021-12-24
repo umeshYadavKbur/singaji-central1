@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 function AddNewStudent() {
 
     const initialValues = {
-        firstName: "",lastName: "",dob: "",contactNumber: "",fatherName: "",fatherOccupation: "",fatherIncome: "",FatherContactNumber: "",address: "",village: "",pincode: "",tehsil: "",district: "",email: "",aadharNumber: "",category: "",
+        firstName: "",lastName: "",dob: "",contactNumber: "",fatherName: "",fatherOccupation: "",fatherIncome: "",FatherContactNumber: "",address: "",village: "",pincode: "",tehsil: "",district: "",email: "",aadharNumber: "",category: "",gender:"",
         percent10: '',rollNumber10: '',joinBranch: '',percent12: '',rollNumber12: '',year: '',streamName: '',subject12: '',schoolName:'',
         GKBAmount: '',postmatricAmount: '',thirdInstallmentDate: '',thirdInstallment: '',secondInstallmentDate: '',secondInstallment: '',feesScheme: '',firstInstallmentDate: '',firstInstallment: '',courseFees: '',regisrationFees:'',
         postmatricScolarship: '',gkbScolarship: '',gkbOwner: '',postmatricOwner:'',
@@ -14,11 +14,53 @@ function AddNewStudent() {
     }
 
     const validationSchema = Yup.object({
-        firstName:Yup.string().required("Required!"),lastName:Yup.string().required("Required!"),dob:Yup.string().required("Required!"),contactNumber:Yup.string().required("Required!"),fatherName:Yup.string().required("Required!"),fatherOccupation:Yup.string().required("Required!"),fatherIncome:Yup.string().required("Required!"),FatherContactNumber:Yup.string().required("Required!"),address:Yup.string().required("Required!"),village:Yup.string().required("Required!"),pincode:Yup.string().required("Required!"),tehsil:Yup.string().required("Required!"),district:Yup.string().required("Required!"),email:Yup.string().required("Required!"),aadharNumber:Yup.string().required("Required!"),category:Yup.string().required("Required!"),
-        percent10:Yup.string().required("Required!"),rollNumber10:Yup.string().required("Required!"),joinBranch:Yup.string().required("Required!"),percent12:Yup.string().required("Required!"),rollNumber12:Yup.string().required("Required!"),year:Yup.string().required("Required!"),streamName:Yup.string().required("Required!"),subject12:Yup.string().required("Required!"),schoolName:Yup.string().required("Required!"),
-        GKBAmount:Yup.string().required("Required!"),postmatricAmount:Yup.string().required("Required!"),thirdInstallmentDate:Yup.string().required("Required!"),thirdInstallment:Yup.string().required("Required!"),secondInstallmentDate:Yup.string().required("Required!"),secondInstallment:Yup.string().required("Required!"),feesScheme:Yup.string().required("Required!"),firstInstallmentDate:Yup.string().required("Required!"),firstInstallment:Yup.string().required("Required!"),courseFees:Yup.string().required("Required!"),regisrationFees:Yup.string().required("Required!"),
-        postmatricScolarship:Yup.string().required("Required!"),gkbScolarship:Yup.string().required("Required!"),gkbOwner:Yup.string().required("Required!"),postmatricOwner:Yup.string().required("Required!"),
-        trackName:Yup.string().required("Required!"),busFees:Yup.string().required("Required!"),
+        firstName:Yup.string().required("Required!"),
+        lastName:Yup.string().required("Required!"),
+        dob:Yup.string().required("Required!"),
+        contactNumber:Yup.string().required("Required!"),
+        fatherName:Yup.string().required("Required!"),
+        fatherOccupation:Yup.string().required("Required!"),
+        fatherIncome:Yup.string().required("Required!"),
+        FatherContactNumber:Yup.string().required("Required!"),
+        address:Yup.string().required("Required!"),
+        village:Yup.string().required("Required!"),
+        pincode:Yup.string().required("Required!"),
+        tehsil:Yup.string().required("Required!"),
+        district:Yup.string().required("Required!"),
+        email:Yup.string().required("Required!"),
+        aadharNumber:Yup.string().required("Required!"),
+        category:Yup.string().required("Required!"),
+
+        percent10:Yup.string().required("Required!"),
+        rollNumber10:Yup.string().required("Required!"),
+        joinBranch:Yup.string().required("Required!"),
+        percent12:Yup.string().required("Required!"),
+        rollNumber12:Yup.string().required("Required!"),
+        year:Yup.string().required("Required!"),
+        streamName:Yup.string().required("Required!"),
+        subject12:Yup.string().required("Required!"),
+        schoolName:Yup.string().required("Required!"),
+
+        GKBAmount:Yup.string().required("Required!"),
+        postmatricAmount:Yup.string().required("Required!"),
+        thirdInstallmentDate:Yup.string().required("Required!"),
+        thirdInstallment:Yup.string().required("Required!"),
+        secondInstallmentDate:Yup.string().required("Required!"),
+        secondInstallment:Yup.string().required("Required!"),
+        feesScheme:Yup.string().required("Required!"),
+        firstInstallmentDate:Yup.string().required("Required!"),
+        firstInstallment:Yup.string().required("Required!"),
+        courseFees:Yup.string().required("Required!"),
+        regisrationFees:Yup.string().required("Required!"),
+
+        postmatricScolarship:Yup.string().required("Required!"),
+        gkbScolarship:Yup.string().required("Required!"),
+        gkbOwner:Yup.string().required("Required!"),
+        postmatricOwner:Yup.string().required("Required!"),
+
+        trackName:Yup.string().required("Required!"),
+        busFees:Yup.string().required("Required!"),
+
     })
     const formik = useFormik({
         initialValues,
@@ -44,7 +86,7 @@ function AddNewStudent() {
                     aria-expanded="false"
                 >
                     <b> Personal Details</b>
-                    <i class="fas fa-chevron-down m-2"></i>
+                    <i className="fas fa-chevron-down m-2"></i>
                 </a>
 
 
@@ -352,13 +394,13 @@ function AddNewStudent() {
                             <label className="radio-inline mx-2">
                                 <input
                                  onChange={formik.handleChange}
-                                 value={formik.values.firstName} type="radio" name="optradio" defaultChecked />{"  "}
+                                 value={formik.values.gender} type="radio" name="gender" defaultChecked />{"  "}
                                 Male
                             </label>
                             <label className="radio-inline mx-2">
                                 <input
                                  onChange={formik.handleChange}
-                                 value={formik.values.firstName} type="radio" name="optradio" /> Female
+                                 value={formik.values.gender} type="radio" name="gender" /> Female
                             </label>
                         </div>
                     </div>
@@ -380,7 +422,7 @@ function AddNewStudent() {
                     aria-expanded="false"
                 >
                     <b>Acadmic Details </b>
-                    <i class="fas fa-chevron-down m-2"></i>
+                    <i className="fas fa-chevron-down m-2"></i>
                 </a>
 
 
@@ -504,7 +546,7 @@ function AddNewStudent() {
                     aria-expanded="false"
                 >
                     <b> Fees Details </b>
-                    <i class="fas fa-chevron-down m-2"></i>
+                    <i className="fas fa-chevron-down m-2"></i>
                 </a>
 
 
@@ -720,7 +762,7 @@ function AddNewStudent() {
                     aria-expanded="false"
                 >
                     <b>Bus Details </b>
-                    <i class="fas fa-chevron-down m-2"></i>
+                    <i className="fas fa-chevron-down m-2"></i>
                 </a>
 
 
@@ -759,7 +801,7 @@ function AddNewStudent() {
             {/* Bus Details */}
 
 <div className="row">
-            <div class="col-4">
+            <div className="col-4">
                 <button
                     type="submit"
                     className="btn btn-warning text-light fw-bolder btn-lg"

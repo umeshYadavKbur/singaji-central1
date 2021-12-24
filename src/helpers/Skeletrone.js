@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Skeleton from '@mui/material/Skeleton';
-import { array } from 'yup/lib/locale';
+// import { array } from 'yup/lib/locale';
 
 export default function SkeletonColor() {
     let arr = [1, 1, 1, 1, 1, 1, 1];
