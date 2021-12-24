@@ -6,7 +6,7 @@ import {
 } from "../constants/actions";
 import getData from "../../services/agent";
 import { loginUrl } from "../constants/url";
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 // import swal from "sweetalert";
 // import swal from "sweetalert";
 // import Swal from 'sweetalert2';
@@ -54,7 +54,7 @@ export const fetchUsers = (data) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          });
+        });
       } else {
         let value = JSON.stringify(userResData.request.status);
         dispatch(loginFailure(value));
@@ -66,7 +66,7 @@ export const fetchUsers = (data) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          });
+        });
       }
       return userResData.request.status;
     } catch (error) {
@@ -81,7 +81,7 @@ export const fetchUsers = (data) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+      });
     }
   };
 };

@@ -7,7 +7,7 @@ import {
   FEES_STRUCTURE_CHANGE_SUCCESS,
   FEES_STRUCTURE_CHANGE_FAIL,
 } from "../constants/actions";
-// import swal from "sweetalert";
+import { baseUrl } from "../constants/url";
 
 export const fetchFeesTableData = (data) => {
   return (dispatch) => {
@@ -31,23 +31,30 @@ export const fetchFeesTableData = (data) => {
 };
 
 export const changeFeesStructureStatus = (data) => {
-  return (dispatch) => {
-    dispatch(feesStructureStatusChange());
-    try {
-      axios(data)
-        .then(function (response) {
-          console.log(response);
-          if (response.status === 200) {
-            dispatch(feesStructureStatusSuccess());
-          }
-        })
-        .catch(function (error) {
-          feesStructureStatusFailed(error);
-        });
-    } catch (error) {
-      feesStructureStatusFailed(error);
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    const getUpdatedTableData = async () => {
+      var config = {
+        method: "GET",
+        url: `${baseUrl}/api/list_schema`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      var response = await axios(config);
+      dispatch(fetchSuccessTableData(response.data));
     }
-  };
+    dispatch(feesStructureStatusChange());
+    var response = await axios(data);
+    console.log(response);
+    if (response.status === 200) {
+      dispatch(feesStructureStatusSuccess());
+      getUpdatedTableData();
+    } else {
+      dispatch(feesStructureStatusFailed(response))
+    }
+  }
 };
 
 const fetchTableData = () => {
