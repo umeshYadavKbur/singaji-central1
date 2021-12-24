@@ -1,6 +1,6 @@
 import React ,{ useEffect }  from "react";
 import { Routes, Route } from "react-router-dom";
-import AddStudent from "./components/AddStudent";
+// import AddStudent from "./components/AddStudent";
 // import Sidebar from "./components/Sidebar";
 import Dashboard from "./components/Dashboard";
 import "./components/styles/adminDashboard.css";
@@ -65,7 +65,7 @@ pauseOnHover
             <Route path="studenttable" element={<StudentTable />} />
             <Route path="admintable" element={<AdminTable />} />
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
-            <Route path="addstudent" element={<AddStudent />} />
+            {/* <Route path="addstudent" element={<AddStudent />} /> */}
             <Route path="addnewstudent" element={<AddNewStudent />} />
           </Routes>
         </div>

@@ -62,12 +62,12 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
     <div>
       <CButton
         style={{
-          backgroundColor: "#ffc107",
+          backgroundColor: "#F7922A",
           color: "white",
           outline: "none",
           border: "none",
           fontWeight: "bold",
-          marginLeft: "30px",
+          marginLeft: "15px",
         }}
         onClick={() => setVisible(!visible)}
       >

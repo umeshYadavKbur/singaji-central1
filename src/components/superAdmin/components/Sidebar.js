@@ -180,8 +180,8 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                    {tabName1 !== "Students" &&
                   dLink2("Students", "", "ok")}
                 {tabName1 !== "Add students" &&
-                dLink2("Add students", "admintable", "ok")}
-                {tabName1 !== "Eduction" && dLink2("Education", "", "ok")}
+                dLink2("Add students", "addnewstudent", "ok")}
+                {tabName1 !== "Education" && dLink2("Education", "", "ok")}
               </div>
             }
           </div>
