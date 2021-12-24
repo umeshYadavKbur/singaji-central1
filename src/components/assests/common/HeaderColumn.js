@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import { changeFeesStructureStatus } from "../../../redux/actionDispatcher/feesStructureTableDataDispatcher";
 // import { fetchFeesTableDataConfig } from "../../../redux/constants/config";
 import { baseUrl } from "../../../redux/constants/url";
-import LoaderButton from "./LoaderButton";
 function HeaderColumn({ original, table_data, changeFeesStatus }) {
   const changeStatus = (data) => {
     const token = localStorage.getItem("token");
@@ -60,7 +59,7 @@ function HeaderColumn({ original, table_data, changeFeesStatus }) {
           cancelButtonColor: `${original.active === 1 ? "#8585ed" : "#3f58fc"}`,
           confirmButtonColor: "gray",
         }).then((result) => {
-          if (result.isConfirmed === false) {
+          if (result.isConfirmed) {
             var data = JSON.stringify({
               branch_schema_code: original.branch_name + original.starting_year,
               is_active: `${original.active === 1 ? "0" : "1"}`,
@@ -70,12 +69,7 @@ function HeaderColumn({ original, table_data, changeFeesStatus }) {
         });
       }}
     >
-      {
-        // table_data.second_loading ? (
-        //   <LoaderButton />
-        // ) :
-        original.active === 1 ? "Active" : "Deactive"
-      }
+      {original.active === 1 ? "Active" : "Deactive"}
     </button>
   );
 }
