@@ -67,15 +67,11 @@ function FeesStructure({ adminData, createFees }) {
     <>
       <CButton
         style={{
-          borderWidth: "1px solid #ffc107 ",
+          borderWidth: "1px solid #F7922A ",
           backgroundColor: "white",
-          color: "orange",
-          outline: "orange",
-          // border:"orange",
-          borderColor: "orange",
-          marginRight: "10px",
-          padding:"5px 15px",
-          // border: "none",
+          color: "#F7922A",
+          outline: "none",
+          borderColor: "#F7922A",
           fontWeight: "bold",
         }}
         onClick={() => setVisible(!visible)}

@@ -81,6 +81,7 @@ body{
  margin: 10px;
   border-radius: 4px;
   z-index: 100;
+  
   /* border: 1px solid black; */
   /* box-shadow: 5px 5px 5px 5px rgba(3, 0, 0, 0.061); */
   /* margin-top: 70px; */
@@ -96,7 +97,7 @@ body{
 }
 
 .sidebar .profile_image1 {
-  width: 200px;
+  width: 195px;
   height: 70px;
   /* margin-top: 10px; */
   margin-bottom: 0px;
