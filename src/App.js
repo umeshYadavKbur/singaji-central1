@@ -22,15 +22,15 @@ import Offline from '../src/components/auth/Offline_page';
 
 function App() {
   // const navigate = useNavigate()
-  window.addEventListener("online", function() {
-    console.log("internet is ok!👍")
-  });
+  // window.addEventListener("online", function() {
+  //   console.log("internet is ok!👍")
+  // });
   
-  window.addEventListener("offline", function() {
-    alert("Oops! You are offline now!");
-    // navigate("/offline")
-    //  return  <Offline></Offline>
-  });
+  // window.addEventListener("offline", function() {
+  //   alert("Oops! You are offline now!");
+  //   // navigate("/offline")
+  //   //  return  <Offline></Offline>
+  // });
   return (
 
     <Provider store={store}>

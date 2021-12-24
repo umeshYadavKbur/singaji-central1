@@ -801,7 +801,7 @@ function AddNewStudent() {
             {/* Bus Details */}
 
 <div className="row">
-            <div className="col-4">
+            <div className="ml-auto col-3">
                 <button
                     type="submit"
                     className="btn btn-warning text-light fw-bolder btn-lg"
