@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import { fetchFeesTableData } from "../../../redux/actionDispatcher/feesStructureTableDataDispatcher";
 import { baseUrl } from "../../../redux/constants/url";
 import SkeletonColor from "../../../helpers/Skeletrone";
+// import LoaderButton from "../../assests/common/LoaderButton";
 
 function FeesStructure({ table_data, fetchFeesTable }) {
   const token = localStorage.getItem("token");
@@ -102,6 +103,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
     <h2>{table_data.error}</h2>
   ) : (
     <>
+      {/* {table_data.second_loading && <LoaderButton />} */}
       <div
         style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}
       >
