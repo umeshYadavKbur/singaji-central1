@@ -36,7 +36,7 @@ function Navbar() {
   return (
     <div className="container_navbar">
       <div className="navbar_container_start_side">
-        <h3 className="text-secondary fw-bolder ml-4" >{location}</h3>
+        <h3 className="text-secondary fw-bold ml-4" >Dashboard</h3>
       </div>
       <div className="navbar_container_end_side">
         {

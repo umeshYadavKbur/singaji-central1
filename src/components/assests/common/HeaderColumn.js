@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { changeFeesStructureStatus } from "../../../redux/actionDispatcher/feesStructureTableDataDispatcher";
 // import { fetchFeesTableDataConfig } from "../../../redux/constants/config";
 import { baseUrl } from "../../../redux/constants/url";
-function HeaderColumn({ original, changeFeesStatus }) {
+function HeaderColumn({ original, table_data, changeFeesStatus }) {
   const changeStatus = (data) => {
     const token = localStorage.getItem("token");
     var config = {
