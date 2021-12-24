@@ -1,6 +1,7 @@
 import { ADD_STUDENT_FAIL, ADD_STUDENT_REQUEST, ADD_STUDENT_SUCCESS } from "../constants/actions";
 import getData from "../../services/agent";
-import swal from "sweetalert";
+// import swal from "sweetalert";
+import Swal from 'sweetalert2'
 
 const AddNewStudent = (data) => {
     return async (dispatch) => {
@@ -28,9 +29,12 @@ const AddNewStudent = (data) => {
                 dispatch(AddNewStudentFailure(userResData.data));
             }
             else if (userResData.request.status === 400) {
-                swal({
-                    title: "Invalid Credential",
-                    icon: "warning",
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'warning',
+                    title: 'This fees structure is Already createrd!',
+                    showConfirmButton: false,
+                    timer: 2500
                 })
                 dispatch(AddNewStudentFailure(userResData.data));
             }

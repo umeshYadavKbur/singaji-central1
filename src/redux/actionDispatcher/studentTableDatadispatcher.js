@@ -4,7 +4,7 @@ import {
   STUDENT_TABLE_DATA_FAIL,
   STUDENT_TABLE_DATA_SUCCESS,
 } from "../constants/actions";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 export const fetchStudentTable = (data) => {
   return (dispatch) => {
@@ -24,24 +24,30 @@ export const fetchStudentTable = (data) => {
           console.log((response));
           if (response.status === 200) {
             dispatch(fetchSuccessTableData(response.data));
-            // swal({
-            //   title: "Table data successfully fatched",
-            //   icon: "success",
-            // });
-          }if(response.status===404){
+            // Swal.fire({
+            //   title: "Successfully data getting table data",
+            //   icon: 'success',
+            //   showConfirmButton: false,
+            //   timer: 2500,
+            // })
+          } if (response.status === 404) {
             dispatch(fetchSuccessTableData(response.data));
-            swal({
-              title: "No Data Found",
-              icon: "success",
+            Swal.fire({
+              title: "No data found",
+              icon: "warning",
+              showConfirmButton: false,
+              timer: 2500
             });
           }
         })
         .catch(function (error) {
           //   console.log(error);
           fetchFailTableData(error);
-          swal({
-            title: "something problem",
-            icon: "error",
+          Swal.fire({
+            title: "Some Problem Occurred",
+            icon: "warning",
+            showConfirmButton: false,
+            timer: 2500
           });
         });
     } catch (error) {

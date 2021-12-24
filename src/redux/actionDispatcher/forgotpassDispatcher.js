@@ -6,21 +6,16 @@ import {
 import getData from "../../services/agent";
 import Swal from "sweetalert2";
 // import {history} from '../../helpers/history'
-import swal from "sweetalert";
 import { forgetPass } from "../constants/url";
 export const fetchUserEmail = (data) => {
   return async (dispatch) => {
-    console.log(data);
+    // console.log(data);
     const forgotPasswordUrl = forgetPass;
     dispatch(forgotPasswordRequest());
     var forgetPasswordData = await getData(data, forgotPasswordUrl);
-    console.log("Working  :::: ", forgetPasswordData);
+    // console.log("Working  :::: ", forgetPasswordData);
     if (forgetPasswordData.status === 200) {
-      // swal({
-      //     title: "Mail Send Successfully",
-      //     text:"Check your mail and click on link and reset password before link expire",
-      //     icon: "success",
-      // })
+
       Swal.fire({
         title: 'Mail sent successfully',
         icon: 'success',

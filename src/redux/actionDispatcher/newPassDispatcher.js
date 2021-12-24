@@ -3,11 +3,14 @@ import {
   NEW_PASS_REQUEST,
   NEW_PASS_SUCCESS,
 } from "../constants/actions";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
+
 import getData from "../../services/agent";
+// import { useNavigate } from "react-router-dom";
 // import {baseUrl} from "../constants/url";
 // import { useHistory } from "react-router";
 // const history = useHistory()
+// const navigate = useNavigate()
 
 export const newPasswordRequest = (data) => {
   return async (dispatch) => {
@@ -17,15 +20,20 @@ export const newPasswordRequest = (data) => {
     try {
       if (newPasswordData.status === 200) {
         dispatch(passReqSuccess());
-        // swal({
-        //   title: "Password Reset Success",
-        //   icon: "success",
-        // })
-        // history.push('/login')
+        Swal.fire({
+          title: "Password Reset Success",
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2500,
+
+        })
+        // navigate('/login')
       } else if (newPasswordData.request.status === 406) {
-        swal({
-          title: "Oops ! link expire",
+        Swal.fire({
+          title: "Oops! link expired",
           icon: "warning",
+          showConfirmButton: false,
+          timer: 2500
         });
         dispatch(passReqFail(newPasswordData));
       } else {

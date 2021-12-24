@@ -1,5 +1,4 @@
 import axios from "axios";
-// import swal from "sweetalert";
 import Swal from 'sweetalert2'
 // import getData from "../../services/agent";
 import {
@@ -51,10 +50,6 @@ export const createFeesStructure = (data) => {
         })
         .catch(function (error) {
           dispatch(feesReqFail(error));
-          // swal({
-          //   title: "Request failed",
-          //   icon: "error",
-          // });
           Swal.fire({
             position: 'top-center',
             icon: 'error',

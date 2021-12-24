@@ -1,5 +1,4 @@
 import axios from "axios";
-// import swal from "sweetalert";
 import Swal from "sweetalert2";
 // import getData from "../../services/agent";
 
@@ -26,7 +25,7 @@ export const createNewAdmin = (data) => {
               showConfirmButton: false,
               timer: 2500
             })
-            
+
           } else if (response.status === 208) {
             dispatch(newAdminReqSuccess());
             Swal.fire({
@@ -45,7 +44,7 @@ export const createNewAdmin = (data) => {
               showConfirmButton: false,
               timer: 2500
             })
-        
+
           }
         })
         .catch(function (error) {
@@ -58,7 +57,7 @@ export const createNewAdmin = (data) => {
             showConfirmButton: false,
             timer: 2500
           })
-      
+
         });
     } catch (error) {
       console.log(error);

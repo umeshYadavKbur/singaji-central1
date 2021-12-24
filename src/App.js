@@ -25,7 +25,7 @@ function App() {
   // window.addEventListener("online", function() {
   //   console.log("internet is ok!👍")
   // });
-  
+
   // window.addEventListener("offline", function() {
   //   alert("Oops! You are offline now!");
   //   // navigate("/offline")
@@ -45,12 +45,8 @@ function App() {
           />
           <Route path="/admindashboard/*" element={<AdminDashboard />} />
           <Route path="*" element={<Navigate replace to="/login" />} />
-          {/* <Route path="/offline" element={<Offline/>} /> */}
         </Routes>
       </Router>
-      {
-        
-      }
     </Provider>
   );
 }

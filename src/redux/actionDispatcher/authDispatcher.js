@@ -7,9 +7,6 @@ import {
 import getData from "../../services/agent";
 import { loginUrl } from "../constants/url";
 import { toast } from 'react-toastify'
-// import swal from "sweetalert";
-// import swal from "sweetalert";
-// import Swal from 'sweetalert2';
 
 
 

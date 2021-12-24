@@ -6,7 +6,8 @@ import {
 } from "../constants/actions";
 // import getData from "../../services/agent";
 import axios from "axios";
-import swal from "sweetalert";
+import Swal from 'sweetalert2'
+
 
 export const changeStatus = (data) => {
   // const token = localStorage.getItem("token");
@@ -22,19 +23,26 @@ export const changeStatus = (data) => {
           console.log(("Response is  :::", response));
 
           if (response.status === 208) {
-            // dispatch(newAdminReqSuccess());
-            swal({
-              title: "Changed status",
-              icon: "info",
-            });
+            dispatch(newAdminReqSuccess());
+            Swal.fire({
+              position: 'top-center',
+              icon: 'warning',
+              title: 'Changed Status !',
+              showConfirmButton: false,
+              timer: 2500
+            })
+
           }
         })
         .catch(function (error) {
           console.log(error);
-          swal({
-            title: "something problem",
-            icon: "error",
-          });
+          Swal.fire({
+            position: 'top-center',
+            icon: 'error',
+            title: 'Request failed!',
+            showConfirmButton: false,
+            timer: 2500
+          })
         });
     } catch (error) {
       console.log(error);
