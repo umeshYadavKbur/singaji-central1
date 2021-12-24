@@ -156,7 +156,6 @@ function FeesStructure({ adminData, createFees, edit, original }) {
                       MEG Diploma
                     </option>
                   </select>
-
                   <input
                     value={formik.values.startYear}
                     onChange={formik.handleChange}
