@@ -34,6 +34,9 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
     {
       header: "S No",
       accessor: "Srno",
+      Cell: ({row: {original,index}}) =>{
+        return(index+1)
+      }
     },
     {
       header: "Name",
@@ -85,7 +88,7 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
           disabled={original.reg_fees_status === "Paid"}
           onClick={() => {
             Swal.fire({
-              title: '',
+              title: 'Payment Confermation',
 
               html:
                 '<hr>' +
@@ -309,6 +312,7 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        
       />
       <div style={{backgroundColor: "#F4F7FC",height: "auto",width: "auto"}}>
         <div className="d-flex">

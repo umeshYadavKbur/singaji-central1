@@ -24,8 +24,11 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
 
     const Column = [
         {
-            header: 'S.No',
-            accessor: 'sno'
+            header: "S No",
+            accessor: "Srno",
+            Cell: ({row: {original,index}}) => {
+                return (index + 1)
+            }
         },
         {
             header: 'Email',
