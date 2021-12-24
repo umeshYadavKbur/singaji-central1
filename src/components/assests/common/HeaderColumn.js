@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { changeFeesStructureStatus } from "../../../redux/actionDispatcher/feesStructureTableDataDispatcher";
 // import { fetchFeesTableDataConfig } from "../../../redux/constants/config";
 import { baseUrl } from "../../../redux/constants/url";
+import LoaderButton from "./LoaderButton";
 function HeaderColumn({ original, table_data, changeFeesStatus }) {
   const changeStatus = (data) => {
     const token = localStorage.getItem("token");
@@ -69,7 +70,12 @@ function HeaderColumn({ original, table_data, changeFeesStatus }) {
         });
       }}
     >
-      {original.active === 1 ? "Active" : "Deactive"}
+      {
+        // table_data.second_loading ? (
+        //   <LoaderButton />
+        // ) :
+        original.active === 1 ? "Active" : "Deactive"
+      }
     </button>
   );
 }
