@@ -3,7 +3,7 @@ import {
   CModal,
   CModalBody,
   CModalHeader,
-  // CModalTitle,
+  CModalTitle,
 } from "@coreui/react";
 import React, { useState } from "react";
 import { connect } from "react-redux";
@@ -17,10 +17,9 @@ import "./styles/createAdmin.css";
 // import { baseUrl } from "../../../url/baseUrl";
 import { baseUrl } from "../../../redux/constants/url";
 // import swal from 'sweetalert';
+import Edit_icon from "../../assests/image/Edit_icon.svg";
 
-function FeesStructure({ adminData, createFees }) {
-  console.log(adminData);
-
+function FeesStructure({ adminData, createFees, edit, original }) {
   const token = localStorage.getItem("token");
   const [visible, setVisible] = useState(false);
   const validationSchema = Yup.object({
@@ -40,9 +39,6 @@ function FeesStructure({ adminData, createFees }) {
     validationSchema,
 
     onSubmit: async (values) => {
-      // console.log("====================================");
-      // console.log(values);
-      // console.log("====================================");
       var data = JSON.stringify({
         branch_name: formik.values.stream,
         starting_year: formik.values.startYear,
@@ -62,24 +58,40 @@ function FeesStructure({ adminData, createFees }) {
       createFees(config);
     },
   });
+  // if (original) {
+  //   formik.values.totalFees = original.total_fees;
+  //   formik.values.startYear = original.starting_year;
+  //   formik.values.endYear = original.ending_year;
+  //   formik.values.stream = original.branch_name;
+  // }
 
   return (
     <>
-      <CButton
-        style={{
-          borderWidth: "1px solid #F7922A ",
-          backgroundColor: "white",
-          color: "#F7922A",
-          outline: "none",
-          borderColor: "#F7922A",
-          fontWeight: "bold",
-        }}
-        onClick={() => setVisible(!visible)}
-      >
-         Create Fees Structure <i class="fas fa-plus pl-3"></i>
-      </CButton>
+      {original ? (
+        <img
+          style={{ cursor: "pointer" }}
+          src={Edit_icon}
+          alt="Edit"
+          onClick={() => setVisible(!visible)}
+        />
+      ) : (
+        <CButton
+          style={{
+            borderWidth: "1px solid #ffc107 ",
+            backgroundColor: "white",
+            color: "orange",
+            outline: "orange",
+            borderColor: "orange",
+            marginRight: "10px",
+            padding: "5px 15px",
+            fontWeight: "bold",
+          }}
+          onClick={() => setVisible(!visible)}
+        >
+          Create Fees Structure <i class="fas fa-plus pl-3"></i>
+        </CButton>
+      )}
       <CModal
-        // size="md"
         alignment="center"
         visible={visible}
         onClose={() => {
@@ -87,7 +99,11 @@ function FeesStructure({ adminData, createFees }) {
           setVisible(false);
         }}
       >
-        <CModalHeader></CModalHeader>
+        <CModalHeader>
+          <CModalTitle>
+            {original ? "Update Fees Structure" : "Create Fees Structure"}
+          </CModalTitle>
+        </CModalHeader>
 
         <CModalBody>
           <div className="first_div createAdmin">
@@ -140,7 +156,6 @@ function FeesStructure({ adminData, createFees }) {
                       MEG Diploma
                     </option>
                   </select>
-
                   <input
                     value={formik.values.startYear}
                     onChange={formik.handleChange}
@@ -184,7 +199,7 @@ function FeesStructure({ adminData, createFees }) {
                   className="submit_btn mt-2 w-100 btn-md font-weight-bold text-light"
                   type="submit"
                 >
-                  Create
+                  {original ? "Update" : "Create"}
                 </button>
               </form>
             </div>

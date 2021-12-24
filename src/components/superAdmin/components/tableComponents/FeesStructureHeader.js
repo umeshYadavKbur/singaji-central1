@@ -1,6 +1,6 @@
 import HeaderColumn from "../../../assests/common/HeaderColumn";
 import Edit_icon from "../../../assests/image/Edit_icon.svg";
-
+import FeesStructure from "../FeesStructure";
 const FeesStructureColumn = [
 {
   header: "S No",
@@ -28,18 +28,13 @@ const FeesStructureColumn = [
   {
     header: "Status",
     accessor: "active",
-    Cell: ({ row: { original } }) => (
-      <HeaderColumn
-        original={original}
-      />
-    ),
+    Cell: ({ row: { original } }) => <HeaderColumn original={original} />,
   },
   {
     header: "Edit",
     accessor: "icon",
     Cell: ({ row: { original } }) => (
-      // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
-      <img src={Edit_icon} alt="Edit" />
+      <FeesStructure edit="edit" original={original} />
     ),
   },
 ];

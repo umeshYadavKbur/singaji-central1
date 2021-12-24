@@ -20,7 +20,6 @@ import SkeletonColor from "../../../helpers/Skeletrone";
 
 function FeesStructure({ table_data, fetchFeesTable }) {
   const token = localStorage.getItem("token");
-
   React.useEffect(() => {
     var config = {
       method: "GET",
@@ -103,7 +102,26 @@ function FeesStructure({ table_data, fetchFeesTable }) {
     <h2>{table_data.error}</h2>
   ) : (
     <>
-      {/* {table_data.second_loading && <LoaderButton />} */}
+      {table_data.second_loading && (
+        <div
+          className="lds-roller"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            zindex: "-1",
+          }}
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      )}
       <div
         style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}
       >
