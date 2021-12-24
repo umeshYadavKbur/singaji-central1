@@ -57,7 +57,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   });
   return (
     <>
-      <div className="bg-login">
+      <div style={{ height: "100vh", width: "100vw", background: "white" }}>
       <ToastContainer
           position="top-center"
           autoClose={2500}

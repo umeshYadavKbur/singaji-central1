@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import logo from "../../assests/image/ssism_si.svg";
+import logo from "../../assests/image/User.svg";
 import "./styles/createAdmin.css";
 import { createNewAdmin } from "../../../redux/actionDispatcher/createNewAdminDispatcher";
 import { useNavigate } from "react-router-dom";
@@ -89,11 +89,12 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
             <div className="second_div ">
               <form onSubmit={formik.handleSubmit}>
                 <div>
+                <h4 className=" text-aligns-center createAdminhead">Create Admin</h4>
                   <img src={logo} alt="logo ssism" className="logo_img" />{" "}
                   <br />
                 </div>
-                <div className=" mb-3 ">
-                <label for="gmail" className="labels mbn-3">gmail</label>
+                <div >
+                <label for="gmail" className="labels mb-1">gmail</label>
                   <input
                     value={formik.values.email}
                     onChange={formik.handleChange}
@@ -113,18 +114,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     ""
                   )}
 
-                  {/* <input
-                    value={formik.values.name}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    className="inputs"
-                    name="name"
-                    type="text"
-                    eslint-disable-next-line
-                    className="mt-2 mb-2"
-                    placeholder="Name"
-                  /> */}
-                  <label for="role" className="labels">Role</label>
+                  <label for="role" className="labels mb-1">Role</label>
                   <select
                     name="role"
                     className="form-select text-secondary  border-secondary "

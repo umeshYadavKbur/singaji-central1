@@ -99,10 +99,8 @@ function FeesStructure({ adminData, createFees, edit, original }) {
           setVisible(false);
         }}
       >
-        <CModalHeader>
-          <CModalTitle>
-            {original ? "Update Fees Structure" : "Create Fees Structure"}
-          </CModalTitle>
+        <CModalHeader >
+          <h2 className=" feestructurehead fs-3 ">{original ? "Update Fees Structure" : "Create Fees Structure"}</h2>
         </CModalHeader>
 
         <CModalBody>
@@ -110,9 +108,11 @@ function FeesStructure({ adminData, createFees, edit, original }) {
             <div className="second_div ">
               <form onSubmit={formik.handleSubmit}>
                 <div className=" mb-3 ">
+                <label for="stream" className="labels">Stream</label>
                   <select
                     name="stream"
-                    className="fields form-select "
+                    id="stream"
+                    className=" mt-2 form-select input-lg text-secondary  border-secondary  "
                     value={formik.values.stream}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -156,33 +156,38 @@ function FeesStructure({ adminData, createFees, edit, original }) {
                       MEG Diploma
                     </option>
                   </select>
+                  <label for="startyear"  className="labels">Start year</label>
                   <input
                     value={formik.values.startYear}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     // className="inputs"
                     name="startYear"
-                    type="text"
+                    id="startyear"
+                    type="datetime-local"
                     // eslint-disable-next-line
-                    className="form-control input-lg"
+                    className="form-control input-lg fields"
                     placeholder="Starting year"
                   />
+                  <label for="endyear"  className="labels">End year</label>
                   <input
                     value={formik.values.endYear}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     // className="inputs"
                     name="endYear"
-                    type="text"
+                    type="datetime-local"
+                    id="endyear"
                     // eslint-disable-next-line
-                    className="form-control input-lg"
+                    className="form-control input-lg fields"
                     placeholder="Ending year"
                   />
+                  <label for="totalfees"  className="labels">total fees</label>
                   <input
                     value={formik.values.totalFees}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className="form-control input-lg"
+                    className="form-control input-lg fields"
                     name="totalFees"
                     type="text"
                     placeholder="Total-fees"
