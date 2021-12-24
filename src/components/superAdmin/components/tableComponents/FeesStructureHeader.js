@@ -2,10 +2,13 @@ import HeaderColumn from "../../../assests/common/HeaderColumn";
 import Edit_icon from "../../../assests/image/Edit_icon.svg";
 
 const FeesStructureColumn = [
-  {
-    header: "S.No",
-    accessor: "sno",
-  },
+{
+  header: "S No",
+  accessor: "Srno",
+  Cell: ({row: {original,index}}) => {
+      return (index + 1)
+  }
+},
   {
     header: "Branch Name",
     accessor: "branch_name",

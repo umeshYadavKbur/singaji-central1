@@ -24,8 +24,11 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
 
     const Column = [
         {
-            header: 'S.No',
-            accessor: 'sno'
+            header: "S No",
+            accessor: "Srno",
+            Cell: ({row: {original,index}}) => {
+                return (index + 1)
+            }
         },
         {
             header: 'Email',
@@ -85,15 +88,16 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
                             // icon: 'warning',
                             showCancelButton: true,
                             // showCancelButton: true,
-                            cancelButtonText: `${original.is_active === 0 ? 'Active' : 'Deactive'}`,
-                            confirmButtonText: 'Cancel',
+                            cancelButtonText:'Cancel',
+                            confirmButtonText:  `${original.is_active === 0 ? 'Active' : 'Deactive'}`,
                             showCloseButton: true,
-                            cancelButtonColor: 'blue',
-                            confirmButtonColor: "gray",
-                            showLoaderOnDeny:true
+                            cancelButtonColor: 'gray',
+                            confirmButtonColor: "blue",
+                            showLoaderOnDeny:true,
+                            reverseButtons:true
 
                         }).then(async(result) => {
-                            if(result.isConfirmed === false) {
+                            if(result.isConfirmed) {
                                let res =await AdminStatusChange(original);
                                if(res === 200)
                                {

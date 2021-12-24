@@ -25,15 +25,20 @@ import {VerifyStudent} from "../../../redux/actionDispatcher/studentVerifyTableD
 import axios from "axios";
 import AllUrl from "../../../redux/constants/url";
 import {toast} from "react-toastify";
-
+import AddNewStudent from "./AddNewStudent";
 
 function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
   const token = localStorage.getItem("token");
+
+
 
   const StudentTableHeader = [
     {
       header: "S No",
       accessor: "Srno",
+      Cell: ({row: {original,index}}) => {
+        return (index + 1)
+      }
     },
     {
       header: "Name",
@@ -50,6 +55,7 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
     {
       header: "Year",
       accessor: "year",
+     
     },
     {
       header: "Village",
@@ -73,7 +79,7 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
                 color: "white",
                 fontWeight: "bold",
                 border: '1px #FFC700',
-               
+
               } : {
                 width: "80px",
                 backgroundColor: "#FFC700",
@@ -85,23 +91,25 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
           disabled={original.reg_fees_status === "Paid"}
           onClick={() => {
             Swal.fire({
-              title: '',
+              title: 'Payment Confermation',
 
               html:
                 '<hr>' +
                 'Are you sure?' + '<br>' +
-                `You want to confirm this payment `,
+                'You want to confirm this payment ',
               // icon: 'warning',
               showCancelButton: true,
               // showCancelButton: true,
-              cancelButtonText: 'Payment',
-              confirmButtonText: 'Cancel',
+              cancelButtonText: 'Cancel',
+              confirmButtonText: 'Payment',
               showCloseButton: true,
-              cancelButtonColor: 'orange',
-              confirmButtonColor: "gray",
+              cancelButtonColor: 'gray',
+              confirmButtonColor: "orange",
+              reverseButtons: true
+
 
             }).then(async (result) => {
-              if(result.isConfirmed === false) {
+              if(result.isConfirmed) {
                 var body = JSON.stringify({
                   email: original.email
                 });
@@ -147,6 +155,9 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
+
+
+
                   });
                 }
               }
@@ -172,25 +183,28 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
           }
           onClick={() => {
             // setData(original.status)
+
             console.log(original.email)
             Swal.fire({
               title: 'Active',
 
               html:
                 '<hr>' +
-                'Are you sure?' + '<br>' +
-                `You want to active ${original.firstName} ${original.lastName} `,
+                'Are you sure?' +
+                '<br>'
+                  `You want to active ${original.firstName} ${original.lastName} `,
               // icon: 'warning',
               showCancelButton: true,
               // showCancelButton: true,
-              cancelButtonText: 'Active',
-              confirmButtonText: 'Cancel',
+              cancelButtonText: 'Cancel',
+              confirmButtonText: 'Active',
               showCloseButton: true,
-              cancelButtonColor: 'blue',
-              confirmButtonColor: "gray",
+              cancelButtonColor: 'gray',
+              confirmButtonColor: "blue",
+              reverseButtons: true
 
             }).then((result) => {
-              if(result.isConfirmed === false) {
+              if(result.isConfirmed) {
                 VerifyStudent(original);
               }
             })
@@ -206,29 +220,29 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
       accessor: 'icon',
       Cell: ({row: {original}}) => (
         // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
-        <img src={Edit_icon} alt="Edit" />
+        <img src={Edit_icon} alt="Edit" onClick={<AddNewStudent></AddNewStudent>} />
 
       )
     }
   ];
 
 
-  async function getData(data,loginUrl) {
-    var url = `${baseUrl}${loginUrl}`;
-    console.log(url);
-    try {
-      var res = await axios.post(url,data);
-      console.log("The response of dat is :: ",res);
-      if(res.status === 200) {
-        //here i change the return data so the response object coming from an api is directly return
-        return res;
-      }
-      // Don't forget to return something
-      return res;
-    } catch(err) {
-      return err;
-    }
-  }
+  // async function getData(data,loginUrl) {
+  //   var url = `${baseUrl}${loginUrl}`;
+  //   console.log(url);
+  //   try {
+  //     var res = await axios.post(url,data);
+  //     console.log("The response of dat is :: ",res);
+  //     if(res.status === 200) {
+  //       //here i change the return data so the response object coming from an api is directly return
+  //       return res;
+  //     }
+  //     // Don't forget to return something
+  //     return res;
+  //   } catch(err) {
+  //     return err;
+  //   }
+  // }
   const columns = useMemo(() => StudentTableHeader,[]);
   React.useEffect(() => {
     var config = {
@@ -310,6 +324,7 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+
       />
       <div style={{backgroundColor: "#F4F7FC",height: "auto",width: "auto"}}>
         <div className="d-flex">
