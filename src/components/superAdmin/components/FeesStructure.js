@@ -3,21 +3,18 @@ import {
   CModal,
   CModalBody,
   CModalHeader,
-  CModalTitle,
+  // CModalTitle,
 } from "@coreui/react";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-// import logo from "../../assests/image/ssism_si.svg";
 import { createFeesStructure } from "../../../redux/actionDispatcher/createFeesStrucDispather";
 import "./styles/createAdmin.css";
-// import { useParams } from "react-router-dom";
-// import axios from "axios";
-// import { baseUrl } from "../../../url/baseUrl";
 import { baseUrl } from "../../../redux/constants/url";
-// import swal from 'sweetalert';
 import Edit_icon from "../../assests/image/Edit_icon.svg";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function FeesStructure({ adminData, createFees, edit, original }) {
   const token = localStorage.getItem("token");
@@ -28,6 +25,11 @@ function FeesStructure({ adminData, createFees, edit, original }) {
     startYear: Yup.string().required("Required*"),
     endYear: Yup.string().required("Required*"),
   });
+
+  const [fieldData, setFieldData] = useState([{
+    "id": 0,
+    "subjects": "Loading...",
+  }])
 
   const formik = useFormik({
     initialValues: {
@@ -58,12 +60,38 @@ function FeesStructure({ adminData, createFees, edit, original }) {
       createFees(config);
     },
   });
-  // if (original) {
-  //   formik.values.totalFees = original.total_fees;
-  //   formik.values.startYear = original.starting_year;
-  //   formik.values.endYear = original.ending_year;
-  //   formik.values.stream = original.branch_name;
-  // }
+
+  if (original) {
+    formik.values.totalFees = original.total_fees;
+    formik.values.startYear = original.starting_year;
+    formik.values.endYear = original.ending_year;
+    formik.values.stream = original.branch_name;
+  }
+
+  const getData = async () => {
+    setVisible(!visible)
+    if (!visible) {
+      let url = `${baseUrl}/api/list_branch`
+      var dropdownData = await axios(url)
+      if (dropdownData.status === 200) {
+        var data = dropdownData.data
+        setFieldData(data)
+        // for (let [key, value] of Object.entries(data)) {
+        //   console.log(key, value.subjects);
+        // }
+      } else {
+        Swal.fire({
+          position: 'top-center',
+          icon: 'warning',
+          title: 'Network problem ! ',
+          showConfirmButton: false,
+          timer: 2500
+        })
+      }
+    }
+
+
+  }
 
   return (
     <>
@@ -72,7 +100,7 @@ function FeesStructure({ adminData, createFees, edit, original }) {
           style={{ cursor: "pointer" }}
           src={Edit_icon}
           alt="Edit"
-          onClick={() => setVisible(!visible)}
+          onClick={() => { getData() }}
         />
       ) : (
         <CButton
@@ -86,7 +114,7 @@ function FeesStructure({ adminData, createFees, edit, original }) {
             padding: "5px 15px",
             fontWeight: "bold",
           }}
-          onClick={() => setVisible(!visible)}
+          onClick={() => { getData() }}
         >
           Create Fees Structure <i class="fas fa-plus pl-3"></i>
         </CButton>
@@ -99,8 +127,10 @@ function FeesStructure({ adminData, createFees, edit, original }) {
           setVisible(false);
         }}
       >
-        <CModalHeader >
-          <h2 className=" feestructurehead fs-3 ">{original ? "Update Fees Structure" : "Create Fees Structure"}</h2>
+        <CModalHeader>
+          <h2 className=" feestructurehead fs-3 ">
+            {original ? "Update Fees Structure" : "Create Fees Structure"}
+          </h2>
         </CModalHeader>
 
         <CModalBody>
@@ -108,7 +138,9 @@ function FeesStructure({ adminData, createFees, edit, original }) {
             <div className="second_div ">
               <form onSubmit={formik.handleSubmit}>
                 <div className=" mb-3 ">
-                <label for="stream" className="labels">Stream</label>
+                  <label for="stream" className="labels">
+                    Stream
+                  </label>
                   <select
                     name="stream"
                     id="stream"
@@ -122,41 +154,23 @@ function FeesStructure({ adminData, createFees, edit, original }) {
                     <option selected className="fields form-select">
                       Stream
                     </option>
-                    <option className="fields form-select" value={"BCA"}>
-                      BCA
-                    </option>
-                    <option className="fields form-select" value={"BBA"}>
-                      BBA
-                    </option>
-                    <option className="fields form-select" value={"BA(CA)"}>
-                      BA(CA)
-                    </option>
-                    <option className="fields form-select" value={"BSC(CS)"}>
-                      BSC(CS)
-                    </option>
-                    <option className="fields form-select" value={"BSC(BT)"}>
-                      BSC(BT)
-                    </option>
-                    <option className="fields form-select" value={"BSC(Micro)"}>
-                      BSC(Micro)
-                    </option>
-                    <option className="fields form-select" value={"B.com(CA)"}>
-                      B.com(CA)
-                    </option>
-                    <option
-                      className="fields form-select"
-                      value={"BEG Diploma"}
-                    >
-                      BEG Diploma
-                    </option>
-                    <option
-                      className="fields form-select"
-                      value={"MEG Diploma"}
-                    >
-                      MEG Diploma
-                    </option>
+                    {
+                      fieldData.map((data) => {
+
+                        return (
+
+                          <option key={data.id} className="fields form-select" value={data.subjects}>
+                            {data.subjects}
+                          </option>
+                        )
+
+                      })
+                    }
+
                   </select>
-                  <label for="startyear"  className="labels">Start year</label>
+                  <label for="startyear" className="labels">
+                    Start year
+                  </label>
                   <input
                     value={formik.values.startYear}
                     onChange={formik.handleChange}
@@ -164,25 +178,33 @@ function FeesStructure({ adminData, createFees, edit, original }) {
                     // className="inputs"
                     name="startYear"
                     id="startyear"
-                    type="datetime-local"
+                    type="number"
+                    min="1900"
+                    max="2099"
                     // eslint-disable-next-line
                     className="form-control input-lg fields"
                     placeholder="Starting year"
                   />
-                  <label for="endyear"  className="labels">End year</label>
+                  <label for="endyear" className="labels">
+                    End year
+                  </label>
                   <input
                     value={formik.values.endYear}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     // className="inputs"
                     name="endYear"
-                    type="datetime-local"
+                    type="number"
+                    min="1900"
+                    max="2099"
                     id="endyear"
                     // eslint-disable-next-line
                     className="form-control input-lg fields"
                     placeholder="Ending year"
                   />
-                  <label for="totalfees"  className="labels">total fees</label>
+                  <label for="totalfees" className="labels">
+                    total fees
+                  </label>
                   <input
                     value={formik.values.totalFees}
                     onChange={formik.handleChange}
