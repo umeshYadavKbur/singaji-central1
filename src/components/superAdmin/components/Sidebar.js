@@ -66,6 +66,20 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
       </Link>
     );
   };
+  var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
 
   // getSelectValue();
   return (
@@ -116,6 +130,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
               href="#!"
               className="data-toggle sidebar_options d-flex justify-content-between"
               role="button"
+              // data-toggle="collapse"
               id="dropdownMenuLink"
               data-toggle="dropdown"
               aria-haspopup="true"
@@ -124,7 +139,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
               <div>
                 <img
                   src={Dashboard_svg}
-                  className=" Sidebar_text  sidebar_icons"
+                  className="  Sidebar_text  sidebar_icons"
                   alt=""
                 />
                 <span className="text-dark ">{tabName}</span>
@@ -205,7 +220,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
             />
             <span className="text-dark ">Accounts</span>
           </Link>
-
+            
           <Link className="sidebar_options" to="#!">
             <img
               src={Alumini_svg}

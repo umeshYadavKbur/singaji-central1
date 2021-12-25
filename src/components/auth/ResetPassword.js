@@ -57,7 +57,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
   });
   return (
     <>
-      <div style={{ height: "100vh", width: "100vw", background: "white" }}>
+      <div className="bg-login">
       <ToastContainer
           position="top-center"
           autoClose={2500}
@@ -71,16 +71,9 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
         />
         <div
           className="position-absolute top-50 start-50 translate-middle login-card "
-          style={{
-            width: "100%",
-            maxWidth: "400px",
-            padding: "25px 45px 45px 45px",
-            margin: "auto",
-            background: "white",
-            borderRadius: "10px",
-          }}
+         
         >
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit} className="login-form">
             <div className="d-flex justify-content-center">
               <img
                 onClick={() => {
@@ -98,7 +91,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
             <div className="d-flex justify-content-center">
               <h4 className="h4 mb-3 text-secondary">Enter New Password</h4>
             </div>
-            <div className="mb-3 input-login-box button-color">
+            <div className="mb-3 input-login-box ">
               <input
                 value={formik.values.password}
                 onChange={formik.handleChange}
@@ -124,7 +117,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
             </div>
             <button
               style={{ color: "white", fontWeight: "500" }}
-              className="w-100 btn btn-md btn-warning"
+              className="w-100 btn btn-md btn-warning button-color"
              type="submit"
               disabled={newPassword.loading}
             >
