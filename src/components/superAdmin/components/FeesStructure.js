@@ -11,7 +11,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { createFeesStructure } from "../../../redux/actionDispatcher/createFeesStrucDispather";
 import "./styles/createAdmin.css";
-import AllUrl, { baseUrl } from "../../../redux/constants/url";
+import { baseUrl } from "../../../redux/constants/url";
 import Edit_icon from "../../assests/image/Edit_icon.svg";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -25,13 +25,6 @@ function FeesStructure({ adminData, createFees, original }) {
     startYear: Yup.string().required("Required*"),
     endYear: Yup.string().required("Required*"),
   });
-
-  // if (original) {
-  //   formik.values.totalFees = original.total_fees;
-  //   formik.values.startYear = original.starting_year;
-  //   formik.values.endYear = original.ending_year;
-  //   formik.values.stream = original.branch_name;
-  // }
 
   const [fieldData, setFieldData] = useState([
     {
@@ -52,21 +45,28 @@ function FeesStructure({ adminData, createFees, original }) {
     onSubmit: async (values) => {
       if (original) {
         var update = JSON.stringify({
-          branch_schema_code: formik.values.stream + formik.values.starting_year,
-          total_fees: formik.values.total_fees,
+          branch_schema_code: formik.values.stream + formik.values.startYear,
+          total_fees: `${formik.values.totalFees}`,
         })
 
-        var config = {
+        console.log('====================================');
+        console.log(update);
+        console.log('====================================');
+        var updateSchema = {
           method: 'post',
-          url: AllUrl.updateSchema,
+          url: `${baseUrl}/api/update_schema`,
           headers: {
-            'Content-Type': 'application/json'
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
           data: update
         };
 
-        axios(config)
+        axios(updateSchema)
           .then(function (response) {
+            console.log('====================================');
+            console.log(response);
+            console.log('====================================');
             console.log(JSON.stringify(response.data));
           })
           .catch(function (error) {
@@ -168,9 +168,7 @@ function FeesStructure({ adminData, createFees, original }) {
               <form onSubmit={formik.handleSubmit}>
                 <div className=" mb-3 ">
                   <label for="stream" className="labels">
-
                     Stream
-
                   </label>
                   <select
                     name="stream"
