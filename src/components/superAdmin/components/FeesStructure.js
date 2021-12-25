@@ -11,12 +11,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { createFeesStructure } from "../../../redux/actionDispatcher/createFeesStrucDispather";
 import "./styles/createAdmin.css";
-import { baseUrl } from "../../../redux/constants/url";
+import AllUrl, { baseUrl } from "../../../redux/constants/url";
 import Edit_icon from "../../assests/image/Edit_icon.svg";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-function FeesStructure({ adminData, createFees, edit, original }) {
+function FeesStructure({ adminData, createFees, original }) {
   const token = localStorage.getItem("token");
   const [visible, setVisible] = useState(false);
   const validationSchema = Yup.object({
@@ -26,47 +26,78 @@ function FeesStructure({ adminData, createFees, edit, original }) {
     endYear: Yup.string().required("Required*"),
   });
 
-  const [fieldData, setFieldData] = useState([{
-    "id": 0,
-    "subjects": "Loading...",
-  }])
+  // if (original) {
+  //   formik.values.totalFees = original.total_fees;
+  //   formik.values.startYear = original.starting_year;
+  //   formik.values.endYear = original.ending_year;
+  //   formik.values.stream = original.branch_name;
+  // }
+
+  const [fieldData, setFieldData] = useState([
+    {
+      "id": 0,
+      "subjects": "Loading..."
+    }
+  ])
 
   const formik = useFormik({
     initialValues: {
-      totalFees: "",
-      startYear: "",
-      endYear: "",
-      stream: null,
+      totalFees: original ? original.total_fees : "",
+      startYear: original ? original.starting_year : "",
+      endYear: original ? original.ending_year : "",
+      stream: original ? original.branch_name : "",
     },
     validationSchema,
 
     onSubmit: async (values) => {
-      var data = JSON.stringify({
-        branch_name: formik.values.stream,
-        starting_year: formik.values.startYear,
-        ending_year: formik.values.endYear,
-        total_fees: formik.values.totalFees,
-      });
-      var config = {
-        method: "post",
-        url: `${baseUrl}/api/create_schema`,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
-      console.log(config.data);
-      createFees(config);
+      if (original) {
+        var update = JSON.stringify({
+          branch_schema_code: formik.values.stream + formik.values.starting_year,
+          total_fees: formik.values.total_fees,
+        })
+
+        var config = {
+          method: 'post',
+          url: AllUrl.updateSchema,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: update
+        };
+
+        axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+
+      }
+      else {
+        var data = JSON.stringify({
+          branch_name: formik.values.stream,
+          starting_year: formik.values.startYear,
+          ending_year: formik.values.endYear,
+          total_fees: formik.values.totalFees,
+        });
+        var config = {
+          method: "post",
+          url: `${baseUrl}/api/create_schema`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          data: data,
+        };
+        // console.log(config.data);
+        createFees(config);
+      }
     },
   });
 
-  if (original) {
-    formik.values.totalFees = original.total_fees;
-    formik.values.startYear = original.starting_year;
-    formik.values.endYear = original.ending_year;
-    formik.values.stream = original.branch_name;
-  }
+
 
   const getData = async () => {
     setVisible(!visible)
@@ -76,9 +107,7 @@ function FeesStructure({ adminData, createFees, edit, original }) {
       if (dropdownData.status === 200) {
         var data = dropdownData.data
         setFieldData(data)
-        // for (let [key, value] of Object.entries(data)) {
-        //   console.log(key, value.subjects);
-        // }
+
       } else {
         Swal.fire({
           position: 'top-center',
@@ -139,7 +168,9 @@ function FeesStructure({ adminData, createFees, edit, original }) {
               <form onSubmit={formik.handleSubmit}>
                 <div className=" mb-3 ">
                   <label for="stream" className="labels">
+
                     Stream
+
                   </label>
                   <select
                     name="stream"
@@ -152,13 +183,13 @@ function FeesStructure({ adminData, createFees, edit, original }) {
                     type="text"
                   >
                     <option selected className="fields form-select">
-                      Stream
+                      {
+                        original ? `${original.branch_name}` : "Stream"
+                      }
                     </option>
                     {
                       fieldData.map((data) => {
-
                         return (
-
                           <option key={data.id} className="fields form-select" value={data.subjects}>
                             {data.subjects}
                           </option>
