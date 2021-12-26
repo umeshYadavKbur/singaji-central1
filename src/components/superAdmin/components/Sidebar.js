@@ -4,7 +4,7 @@ import logoimage from "../../assests/image/logoimage.png";
 import logo from "../../assests/image/logo.png";
 import david from "../../assests/image/david.png";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   hideSideBar,
   showSideBar,
@@ -33,53 +33,73 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
       showSideBar();
     }
   };
-  // function getSelectValue() { 
-  //   var selectedValue = document.getElementById("list").value;
-  //   console.log(selectedValue);
-  // }
 
+  const remove_active_tab = () => {
+    const tags = document.getElementsByClassName('sidebar_options')
+    for (let i = 0; i < tags.length; i++) {
+
+      tags.item(i).classList.remove('active_tab');
+    }
+  }
+
+  const add_active_tab = (id) => {
+    console.log(id)
+    document.getElementById(id).classList.add('active_tab');
+
+  }
   const dLink1 = (name, url, icon) => {
     return (
-      <Link
+      <NavLink
         className="sidebar_options_link"
         to={url}
         onClick={() => {
-          setTabName(name);
+          setTabName(name)
+          setTabName1('Education')
+          document.getElementById('dashboard-collapse-btn').click();
+
+          let x = document.getElementById('education-collapse');
+          if (x.classList.contains('show'))
+            document.getElementById('education-collapse-btn').click();
+
+          document.getElementById('dashboard-collapse-btn')?.classList.add('active_tab');
+
+
         }}
+
+        onClickCapture={remove_active_tab}
+
       >
-        <img src={icon} className=" Sidebar_text  sidebar_icons" alt="" />
+        <img src={icon} className=" Sidebar_text sidebar_icons" alt="" />
         <span className="text-dark ">{name}</span>
-      </Link>
+      </NavLink>
     );
   };
   const dLink2 = (name, url, icon) => {
     return (
-      <Link
+      <NavLink
         className="dropdown-item  sidebar_options_link"
         to={url}
+
         onClick={() => {
+
           setTabName1(name);
+          setTabName('Dashboard')
+          document.getElementById('education-collapse-btn').click();
+          // 
+          let x = document.getElementById('dashboard-collapse');
+          if (x.classList.contains('show'))
+            document.getElementById('dashboard-collapse-btn').click();
+
+          document.getElementById('education-collapse-btn')?.classList.add('active_tab');
         }}
+        onClickCapture={remove_active_tab}
       >
         <img src={icon} className=" Sidebar_text  sidebar_icons" alt="" />
         <span className="text-dark ">{name}</span>
-      </Link>
+      </NavLink>
     );
   };
-  var coll = document.getElementsByClassName("collapsible");
-  var i;
 
-  for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function () {
-      this.classList.toggle("active");
-      var content = this.nextElementSibling;
-      if (content.style.display === "block") {
-        content.style.display = "none";
-      } else {
-        content.style.display = "block";
-      }
-    });
-  }
 
   // getSelectValue();
   return (
@@ -133,8 +153,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                 href="#!"
                 className="data-toggle sidebar_options d-flex justify-content-between"
                 role="button"
-                // data-toggle="collapse"
-                id="dropdownMenuLink"
+                id="dashboard-collapse-btn"
                 data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true"
               >
                 <div>
@@ -143,14 +162,14 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                     className="  Sidebar_text  sidebar_icons"
                     alt=""
                   />
-                  <span className="text-dark ">Dashboard</span>
+                  <span className="text-dark ">{tabName}</span>
                 </div>
                 {!toggle && <i className="fas fa-chevron-down mr-3"></i>}
               </a>
 
-              <div className="collapse " id="dashboard-collapse">
+              <div className="collapse collapse_superadmin" id="dashboard-collapse">
                 <ul className="btn-toggle-nav list-unstyled ">
-                  <li className="dropdown_items_div ml-3">
+                  <li className="dropdown_items_div ml-1">
                     {dLink1("Fees Stucture", "feesstructuretable", "ok")}
                     {dLink1("My Admin", "admintable", "ok")}
 
@@ -169,7 +188,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                 className="data-toggle sidebar_options d-flex justify-content-between"
                 role="button"
                 // data-toggle="collapse"
-                id="dropdownMenuLink"
+                id="education-collapse-btn"
                 data-bs-toggle="collapse" data-bs-target="#education-collapse" aria-expanded="true"
               >
                 <div>
@@ -178,12 +197,12 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                     className="  Sidebar_text  sidebar_icons"
                     alt=""
                   />
-                  <span className="text-dark ">Education</span>
+                  <span className="text-dark ">{tabName1}</span>
                 </div>
                 {!toggle && <i className="fas fa-chevron-down mr-3"></i>}
               </a>
 
-              <div className="collapse " id="education-collapse">
+              <div className="collapse collapse_superadmin" id="education-collapse">
                 <ul className="btn-toggle-nav list-unstyled ">
                   <li className="dropdown_items_div ml-3">
                     {dLink2("Applied Students", "studenttable", "ok")}
@@ -196,7 +215,6 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
             </ul>
           </div>
 
-         
 
 
 
@@ -204,7 +222,12 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
 
 
 
-          <Link className="sidebar_options" to="#!">
+
+          <Link className="sidebar_options" to="#!"
+            onClickCapture={remove_active_tab}
+            onClick={() => { add_active_tab('Accounts') }}
+            id="Accounts"
+          >
             <img
               src={Accounts_svg}
               className=" Sidebar_text  sidebar_icons"
@@ -213,7 +236,11 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
             <span className="text-dark ">Accounts</span>
           </Link>
 
-          <Link className="sidebar_options" to="#!">
+          <Link className="sidebar_options" to="#!"
+            onClickCapture={remove_active_tab}
+            onClick={() => { add_active_tab('Alumini') }}
+            id="Alumini"
+          >
             <img
               src={Alumini_svg}
               className=" Sidebar_text  sidebar_icons"
@@ -221,7 +248,11 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
             />
             <span className="text-dark">Alumini</span>
           </Link>
-          <Link className="sidebar_options" to="#!">
+          <Link className="sidebar_options" to="#!"
+            onClickCapture={remove_active_tab}
+            onClick={() => { add_active_tab('External_Companies') }}
+            id='External_Companies'
+          >
             <img
               src={External_company_svg}
               className=" Sidebar_text  sidebar_icons"
@@ -229,7 +260,10 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
             />
             <span className="text-dark">External Companies</span>
           </Link>
-          <Link className="sidebar_options" to="#!">
+          <Link className="sidebar_options" to="#!"
+            onClickCapture={remove_active_tab}
+            onClick={() => { add_active_tab('donation') }}
+            id='donation'>
             <img
               src={Donation_svg}
               className=" Sidebar_text  sidebar_icons"
@@ -237,7 +271,10 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
             />
             <span className="text-dark">Donation</span>
           </Link>
-          <Link className="sidebar_options" to="#">
+          <Link className="sidebar_options" to="#"
+            onClickCapture={remove_active_tab}
+            onClick={() => { add_active_tab('others') }}
+            id='others'>
             <img
               src={Others_svg}
               className=" Sidebar_text  sidebar_icons"
