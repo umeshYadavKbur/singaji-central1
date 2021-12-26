@@ -60,8 +60,8 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
           },
           data: update
         };
-        changeFeesStatus(updateSchema)
-        setVisible(!visible)
+        changeFeesStatus(updateSchema, setVisible, visible)
+        // setVisible(!visible)
 
       }
       else {
@@ -80,7 +80,7 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
           },
           data: data,
         };
-        createFees(config);
+        createFees(config, setVisible, visible);
       }
     },
   });
@@ -216,8 +216,8 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
                     name="startYear"
                     id="startyear"
                     type="number"
-                    min="1900"
-                    max="2099"
+                    min="2000"
+                    max="9999"
                     // eslint-disable-next-line
                     className="form-control input-lg fields"
                     placeholder="Starting year"
@@ -232,8 +232,8 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
                     // className="inputs"
                     name="endYear"
                     type="number"
-                    min="1900"
-                    max="2099"
+                    min="2000"
+                    max="9999"
                     id="endyear"
                     // eslint-disable-next-line
                     className="form-control input-lg fields"
@@ -286,7 +286,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createFees: (data) => dispatch(createFeesStructure(data)),
-    changeFeesStatus: (data) => dispatch(changeFeesStructureStatus(data)),
+    changeFeesStatus: (data, setVisible, visible) => dispatch(changeFeesStructureStatus(data, setVisible, visible)),
   };
 };
 

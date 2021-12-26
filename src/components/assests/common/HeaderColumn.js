@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
@@ -82,7 +82,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeFeesStatus: (data) => dispatch(changeFeesStructureStatus(data)),
+    changeFeesStatus: (data, setVisible, visible) => dispatch(changeFeesStructureStatus(data)),
   };
 };
 
