@@ -77,7 +77,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
   const dLink2 = (name, url, icon) => {
     return (
       <NavLink
-        className="dropdown-item  sidebar_options_link"
+        className="sidebar_options_link"
         to={url}
 
         onClick={() => {
@@ -170,9 +170,9 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
               <div className="collapse collapse_superadmin" id="dashboard-collapse">
                 <ul className="btn-toggle-nav list-unstyled ">
                   <li className="dropdown_items_div ml-1">
-                    {dLink1("Fees Stucture", "feesstructuretable", "ok")}
-                    {dLink1("My Admin", "admintable", "ok")}
-
+                    {tabName !== "Fees Stucture" && dLink1("Fees Stucture", "feesstructuretable", "ok")}
+                    {tabName !== "My Admin" && dLink1("My Admin", "admintable", "ok")}
+                    {tabName !== "Dashboard" && dLink1("Dashboard", "", "ok")}
                   </li>
                 </ul>
               </div>
@@ -204,11 +204,11 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
 
               <div className="collapse collapse_superadmin" id="education-collapse">
                 <ul className="btn-toggle-nav list-unstyled ">
-                  <li className="dropdown_items_div ml-3">
-                    {dLink2("Applied Students", "studenttable", "ok")}
-                    {dLink2("Students", "", "ok")}
-                    {dLink2("Add students", "addnewstudent", "ok")}
-
+                  <li className="dropdown_items_div ml-1">
+                    {tabName1 !== "Applied Students" && dLink2("Applied Students", "studenttable", "ok")}
+                    {tabName1 !== "Students" && dLink2("Students", "", "ok")}
+                    {tabName1 !== "Add students" && dLink2("Add students", "addnewstudent", "ok")}
+                    {/* {tabName1 !== "Education" && dLink2("Education", "", "ok")} */}
                   </li>
                 </ul>
               </div>

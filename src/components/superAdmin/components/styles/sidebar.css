@@ -369,6 +369,8 @@ label #sidebar_btn:hover {
   background-color: #E6E9F4;
   width: 243px;
   margin-left: 15px;
+  border-radius:6px !important;
+  
 }
 
 .active_tab{
