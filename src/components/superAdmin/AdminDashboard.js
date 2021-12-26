@@ -1,4 +1,4 @@
-import React ,{ useEffect }  from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 // import AddStudent from "./components/AddStudent";
 // import Sidebar from "./components/Sidebar";
@@ -11,20 +11,14 @@ import AdminTable from "./components/AdminTable";
 import Sidebar from "./components/Sidebar";
 import StudentTable from "./components/StudentsTable";
 import { useAnimate } from "react-simple-animate";
-import AddNewStudent from "./components/AddNewStudent"
+import AddNewStudent from "./components/AddNewStudent";
 // import { ToastContainer, toast } from 'react-toastify';
 function AdminDashboard() {
-
-
-
-
   useEffect(() => {
     // const notify = () => toast.success("Login Successfull");
     // notify();
-    return () => {
-    }
-  }, [])
-
+    return () => {};
+  }, []);
   const { play, style, isPlaying } = useAnimate({
     start: {
       width: "281px",
@@ -38,7 +32,7 @@ function AdminDashboard() {
 
   return (
     <div className="main_container_dashboard">
-     {/* <ToastContainer
+      {/* <ToastContainer
 position="top-center"
 autoClose={2500}
 hideProgressBar={true}
@@ -49,10 +43,7 @@ pauseOnFocusLoss
 draggable
 pauseOnHover
 /> */}
-      <div
-        className="side_bar_content"
-        style={style}
-      >
+      <div className="side_bar_content" style={style}>
         <Sidebar play={play} isPlaying={isPlaying} />
       </div>
       <div className="header_table">

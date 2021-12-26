@@ -111,6 +111,8 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
             )} */}
             {/* </> */}
           </center>
+
+
           <div className="dropdown show">
             <a
               href="#!"
@@ -147,6 +149,9 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
               </div>
             }
           </div>
+
+
+
           {/* ---- second dropdown---- */}
           <div className="dropdown show">
             <a
@@ -186,8 +191,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
             }
           </div>
           
-{/* 
-          <Link className="sidebar_options" to="addstudent">
+{/*  <Link className="sidebar_options" to="addstudent">
             <img
               src={Education_svg}
               className=" Sidebar_text  sidebar_icons"

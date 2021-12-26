@@ -30,9 +30,10 @@ export const fetchFeesTableData = (data) => {
   };
 };
 
-export const changeFeesStructureStatus = (data) => {
+export const changeFeesStructureStatus = (data, setVisible, visible) => {
   const token = localStorage.getItem("token");
   return async (dispatch) => {
+
     const getUpdatedTableData = async () => {
       var config = {
         method: "GET",
@@ -45,10 +46,14 @@ export const changeFeesStructureStatus = (data) => {
       var response = await axios(config);
       dispatch(fetchSuccessTableData(response.data));
     }
+
     dispatch(feesStructureStatusChange());
     var response = await axios(data);
     console.log(response);
     if (response.status === 200) {
+      if (visible) {
+        setVisible(!visible)
+      }
       dispatch(feesStructureStatusSuccess());
       getUpdatedTableData();
     } else {

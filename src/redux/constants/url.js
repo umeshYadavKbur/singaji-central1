@@ -5,11 +5,11 @@ export const loginUrl = "/api/login";
 
 export const forgetPass = "/api/resetPasswordEmail";
 
-const AllUrl ={
+const AllUrl = {
     verifyStudent: `${baseUrl}/api/varify_student`,
     verifyStudentPaidUnpaid: `${baseUrl}/api/reg_fees_status`,
-    adminStatusChange: `${baseUrl}/api/deactive_or_activate_admin`
+    adminStatusChange: `${baseUrl}/api/deactive_or_activate_admin`,
+    updateSchema: `${baseUrl}/api/update_schema`,
 }
 export default AllUrl
 
-// export const newPasswordUrl = "/api/resetPasswordLink/";

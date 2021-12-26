@@ -3,6 +3,7 @@ import {
   CModal,
   CModalBody,
   CModalHeader,
+  CModalTitle,
   // CModalTitle,
 } from "@coreui/react";
 import React, { useState } from "react";
@@ -82,19 +83,37 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         }}
       >
         <CModalHeader>
-          {/* <CModalTitle>Create new admin  </CModalTitle> */}
+          <CModalTitle>Create new admin </CModalTitle>
         </CModalHeader>
         <CModalBody>
           <div className="first_div createAdmin">
             <div className="second_div ">
               <form onSubmit={formik.handleSubmit}>
                 <div>
-                <h4 className=" text-aligns-center createAdminhead">Create Admin</h4>
+                  {/* <h4 className=" text-aligns-center createAdminhead">
+                    Create Admin
+                  </h4> */}
                   <img src={logo} alt="logo ssism" className="logo_img" />{" "}
                   <br />
                 </div>
-                <div >
-                <label for="gmail" className="labels mb-1">gmail</label>
+                <div>
+                  <label for="gmail" className="labels mb-1">
+                    Username
+                  </label>
+                  <input
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="inputs mb-2"
+                    // aria-label="email"
+                    name="name"
+                    type="text"
+                    id="name"
+                    placeholder="Enter name "
+                  />
+                  <label for="gmail" className="labels mb-1">
+                    Email
+                  </label>
                   <input
                     value={formik.values.email}
                     onChange={formik.handleChange}
@@ -114,7 +133,9 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     ""
                   )}
 
-                  <label for="role" className="labels mb-1">Role</label>
+                  <label for="role" className="labels mb-1">
+                    Role
+                  </label>
                   <select
                     name="role"
                     className="form-select text-secondary  border-secondary "
