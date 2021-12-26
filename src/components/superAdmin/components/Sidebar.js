@@ -127,7 +127,7 @@ for (i = 0; i < coll.length; i++) {
           </center>
 
 
-          <div className="dropdown show">
+          <div className="dropdown show active">
             <a
               href="#!"
               className="data-toggle sidebar_options d-flex justify-content-between"
@@ -144,7 +144,7 @@ for (i = 0; i < coll.length; i++) {
                   className="  Sidebar_text  sidebar_icons"
                   alt=""
                 />
-                <span className="text-dark ">{tabName}</span>
+                <span className="text-dark   ">{tabName}</span>
               </div>
               {!toggle && <i className="fas fa-chevron-down mr-3"></i>}
             </a>

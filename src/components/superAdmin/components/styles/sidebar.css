@@ -362,3 +362,9 @@ label #sidebar_btn:hover {
 }
 
 /* --------------------------------------------------------*/ 
+
+.dropdown .active{
+
+ background-color: lavender;
+ 
+}
