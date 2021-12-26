@@ -15,8 +15,10 @@ import { baseUrl } from "../../../redux/constants/url";
 import Edit_icon from "../../assests/image/Edit_icon.svg";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { changeFeesStructureStatus } from "../../../redux/actionDispatcher/feesStructureTableDataDispatcher";
+import './styles/Table.css'
 
-function FeesStructure({ adminData, createFees, original }) {
+function FeesStructure({ adminData, createFees, original, changeFeesStatus, table_data }) {
   const token = localStorage.getItem("token");
   const [visible, setVisible] = useState(false);
   const validationSchema = Yup.object({
@@ -49,9 +51,6 @@ function FeesStructure({ adminData, createFees, original }) {
           total_fees: `${formik.values.totalFees}`,
         })
 
-        console.log('====================================');
-        console.log(update);
-        console.log('====================================');
         var updateSchema = {
           method: 'post',
           url: `${baseUrl}/api/update_schema`,
@@ -61,18 +60,8 @@ function FeesStructure({ adminData, createFees, original }) {
           },
           data: update
         };
-
-        axios(updateSchema)
-          .then(function (response) {
-            console.log('====================================');
-            console.log(response);
-            console.log('====================================');
-            console.log(JSON.stringify(response.data));
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-
+        changeFeesStatus(updateSchema)
+        setVisible(!visible)
 
       }
       else {
@@ -91,7 +80,6 @@ function FeesStructure({ adminData, createFees, original }) {
           },
           data: data,
         };
-        // console.log(config.data);
         createFees(config);
       }
     },
@@ -147,6 +135,26 @@ function FeesStructure({ adminData, createFees, original }) {
         >
           Create Fees Structure <i class="fas fa-plus pl-3"></i>
         </CButton>
+      )}
+      {table_data.second_loading && (
+        <div
+          className="lds-roller"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            zindex: "-1",
+          }}
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       )}
       <CModal
         alignment="center"
@@ -270,6 +278,7 @@ function FeesStructure({ adminData, createFees, original }) {
 const mapStateToProps = (state) => {
   return {
     adminData: state.createAdmin,
+    table_data: state.feesStructTableData,
   };
 };
 
@@ -277,6 +286,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createFees: (data) => dispatch(createFeesStructure(data)),
+    changeFeesStatus: (data) => dispatch(changeFeesStructureStatus(data)),
   };
 };
 
