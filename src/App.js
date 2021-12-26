@@ -31,6 +31,8 @@ function App() {
   //   // navigate("/offline")
   //   //  return  <Offline></Offline>
   // });
+
+
   return (
 
     <Provider store={store}>
