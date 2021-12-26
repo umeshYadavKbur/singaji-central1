@@ -89,17 +89,17 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
               // <>
               <>
                 <img src={logoimage} className="profile_image1" alt="" />
-                <img src={david} className="profile_image2" alt="" />
+                {/* <img src={david} className="profile_image2" alt="" /> */}
               </>
             ) : (
               <>
-                <img src={david} className="small_logo_avtar" alt="" />
+                {/* <img src={david} className="small_logo_avtar" alt="" /> */}
                 <img src={david} className="profile_image2" alt="" />
                 <img src={logo} className="small_logo" alt="" />
               </>
             )}
-            <h6 className="sidebar_david">David</h6>
-            {!toggle && (
+            {/* <h6 className="sidebar_david">David</h6> */}
+            {/* {!toggle && (
               <>
                 <input
                   className="input_sidebar"
@@ -108,7 +108,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                 />
                 <span class="fa fa-search errspan"></span>
               </>
-            )}
+            )} */}
             {/* </> */}
           </center>
           <div className="dropdown show">
