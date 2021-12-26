@@ -41,7 +41,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
   const dLink1 = (name, url, icon) => {
     return (
       <Link
-        className="dropdown-item  sidebar_options_link"
+        className="sidebar_options_link"
         to={url}
         onClick={() => {
           setTabName(name);
@@ -67,19 +67,19 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
     );
   };
   var coll = document.getElementsByClassName("collapsible");
-var i;
+  var i;
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-}
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
 
   // getSelectValue();
   return (
@@ -126,95 +126,83 @@ for (i = 0; i < coll.length; i++) {
             {/* </> */}
           </center>
 
-
-          <div className="dropdown show">
-            <a
-              href="#!"
-              className="data-toggle sidebar_options d-flex justify-content-between"
-              role="button"
-              // data-toggle="collapse"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <div>
-                <img
-                  src={Dashboard_svg}
-                  className="  Sidebar_text  sidebar_icons"
-                  alt=""
-                />
-                <span className="text-dark ">{tabName}</span>
-              </div>
-              {!toggle && <i className="fas fa-chevron-down mr-3"></i>}
-            </a>
-
-            {
-              <div
-                className="dropdown-menu dropdown_items_div "
-                aria-labelledby="dropdownMenuLink"
+          {/* ---- first dropdown---- */}
+          <div className="flex-shrink-0">
+            <ul className="list-unstyled m-0">
+              <a
+                href="#!"
+                className="data-toggle sidebar_options d-flex justify-content-between"
+                role="button"
+                // data-toggle="collapse"
+                id="dropdownMenuLink"
+                data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true"
               >
-                {tabName !== "Fees Stucture" &&
-                  dLink1("Fees Stucture", "feesstructuretable", "ok")}
-                {/* {tabName !== "Applied Students" &&
-                  dLink1("Applied Students", "studenttable", "ok")} */}
-                {tabName !== "My Admin" &&
-                  dLink1("My Admin", "admintable", "ok")}
-                {tabName !== "Dashboard" && dLink1("Dashboard", "", "ok")}
-              </div>
-            }
-          </div>
+                <div>
+                  <img
+                    src={Dashboard_svg}
+                    className="  Sidebar_text  sidebar_icons"
+                    alt=""
+                  />
+                  <span className="text-dark ">Dashboard</span>
+                </div>
+                {!toggle && <i className="fas fa-chevron-down mr-3"></i>}
+              </a>
 
+              <div className="collapse " id="dashboard-collapse">
+                <ul className="btn-toggle-nav list-unstyled ">
+                  <li className="dropdown_items_div ml-3">
+                    {dLink1("Fees Stucture", "feesstructuretable", "ok")}
+                    {dLink1("My Admin", "admintable", "ok")}
+
+                  </li>
+                </ul>
+              </div>
+            </ul>
+          </div>
 
 
           {/* ---- second dropdown---- */}
-          <div className="dropdown show">
-            <a
-              href="#!"
-              className="data-toggle sidebar_options d-flex justify-content-between"
-              role="button"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <div>
-                <img
-                  src={Education_svg}
-                  className=" Sidebar_text  sidebar_icons"
-                  alt=""
-                />
-                <span className="text-dark ">{tabName1}</span>
-              </div>
-              {!toggle && <i className="fas fa-chevron-down mr-3"></i>}
-            </a>
-
-            {
-              <div
-                className="dropdown-menu dropdown_items_div "
-                aria-labelledby="dropdownMenuLink"
+          <div className="flex-shrink-0">
+            <ul className="list-unstyled m-0">
+              <a
+                href="#!"
+                className="data-toggle sidebar_options d-flex justify-content-between"
+                role="button"
+                // data-toggle="collapse"
+                id="dropdownMenuLink"
+                data-bs-toggle="collapse" data-bs-target="#education-collapse" aria-expanded="true"
               >
-               
-                {tabName1 !== "Applied Students" &&
-                  dLink2("Applied Students", "studenttable", "ok")}
-                   {tabName1 !== "Students" &&
-                  dLink2("Students", "", "ok")}
-                {tabName1 !== "Add students" &&
-                dLink2("Add students", "addnewstudent", "ok")}
-                {tabName1 !== "Education" && dLink2("Education", "", "ok")}
-              </div>
-            }
-          </div>
-          
-{/*  <Link className="sidebar_options" to="addstudent">
-            <img
-              src={Education_svg}
-              className=" Sidebar_text  sidebar_icons"
-              alt=""
-            />
-            <span className="text-dark ">Education</span>
+                <div>
+                  <img
+                    src={Education_svg}
+                    className="  Sidebar_text  sidebar_icons"
+                    alt=""
+                  />
+                  <span className="text-dark ">Education</span>
+                </div>
+                {!toggle && <i className="fas fa-chevron-down mr-3"></i>}
+              </a>
 
-          </Link> */}
+              <div className="collapse " id="education-collapse">
+                <ul className="btn-toggle-nav list-unstyled ">
+                  <li className="dropdown_items_div ml-3">
+                    {dLink2("Applied Students", "studenttable", "ok")}
+                    {dLink2("Students", "", "ok")}
+                    {dLink2("Add students", "addnewstudent", "ok")}
+
+                  </li>
+                </ul>
+              </div>
+            </ul>
+          </div>
+
+         
+
+
+
+
+
+
 
           <Link className="sidebar_options" to="#!">
             <img
@@ -224,7 +212,7 @@ for (i = 0; i < coll.length; i++) {
             />
             <span className="text-dark ">Accounts</span>
           </Link>
-            
+
           <Link className="sidebar_options" to="#!">
             <img
               src={Alumini_svg}
