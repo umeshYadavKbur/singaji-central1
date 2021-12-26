@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-
 } from "react-router-dom";
 // import { useParams } from 'react-router';
 // import { Redirect } from "react-router";
@@ -31,6 +30,7 @@ function App() {
   //   // navigate("/offline")
   //   //  return  <Offline></Offline>
   // });
+
 
 
   return (

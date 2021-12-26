@@ -1,24 +1,37 @@
 import React, { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-// import AddStudent from "./components/AddStudent";
-// import Sidebar from "./components/Sidebar";
-import Dashboard from "./components/Dashboard";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useAnimate } from "react-simple-animate";
+
 import "./components/styles/adminDashboard.css";
+
+import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
-// import FeesStuctureTable from "./components/FeesStuctureTable";
 import FeesStructureTable from "./components/FeesStuctureTable";
 import AdminTable from "./components/AdminTable";
 import Sidebar from "./components/Sidebar";
 import StudentTable from "./components/StudentsTable";
-import { useAnimate } from "react-simple-animate";
 import AddNewStudent from "./components/AddNewStudent";
-// import { ToastContainer, toast } from 'react-toastify';
+
+
 function AdminDashboard() {
+  const navigate = useNavigate()
+
+  const roleRedirection = (auth) => {
+    switch (auth) {
+      case "SUPERADMIN":
+        return (
+          navigate('./admindashboard')
+        )
+    }
+  }
+
   useEffect(() => {
-    // const notify = () => toast.success("Login Successfull");
-    // notify();
-    return () => {};
+    var auth = localStorage.getItem('role')
+    roleRedirection(auth);
+    // return () => {
+    // };
   }, []);
+
   const { play, style, isPlaying } = useAnimate({
     start: {
       width: "281px",
