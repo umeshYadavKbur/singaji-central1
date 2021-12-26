@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 //import coreUireact js
 import "@coreui/coreui/dist/css/coreui.min.css";
 import AdminDashboard from "./components/superAdmin/AdminDashboard";
-import Offline from '../src/components/auth/Offline_page';
+// import Offline from '../src/components/auth/Offline_page';
 
 function App() {
   // const navigate = useNavigate()

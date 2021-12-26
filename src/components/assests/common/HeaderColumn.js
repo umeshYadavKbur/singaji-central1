@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
@@ -25,21 +25,21 @@ function HeaderColumn({ original, table_data, changeFeesStatus }) {
       style={
         original.active === 1
           ? {
-              width: "80px",
-              borderRadius: "5px",
-              backgroundColor: "#3f58fc",
-              color: "white",
-              fontWeight: "bold",
-              border: "1px #FFC700",
-            }
+            width: "80px",
+            borderRadius: "5px",
+            backgroundColor: "#3f58fc",
+            color: "white",
+            fontWeight: "bold",
+            border: "1px #FFC700",
+          }
           : {
-              width: "80px",
-              backgroundColor: "#8585ed",
-              borderRadius: "5px",
-              fontWeight: "bold",
-              color: "white",
-              border: "none",
-            }
+            width: "80px",
+            backgroundColor: "#8585ed",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            color: "white",
+            border: "none",
+          }
       }
       onClick={() => {
         // console.log(original.email);
@@ -49,8 +49,7 @@ function HeaderColumn({ original, table_data, changeFeesStatus }) {
             "<hr>" +
             "Are you sure?" +
             "<br>" +
-            `You want to  ${
-              original.active === 1 ? "Deactive" : "Active"
+            `You want to  ${original.active === 1 ? "Deactive" : "Active"
             } this ${original.branch_name}`,
           showCancelButton: true,
           cancelButtonText: "Cancel",
@@ -58,7 +57,7 @@ function HeaderColumn({ original, table_data, changeFeesStatus }) {
           showCloseButton: true,
           cancelButtonColor: "gray",
           confirmButtonColor: "blue",
-          reverseButtons:true
+          reverseButtons: true
         }).then((result) => {
           if (result.isConfirmed) {
             var data = JSON.stringify({
@@ -83,7 +82,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeFeesStatus: (data) => dispatch(changeFeesStructureStatus(data)),
+    changeFeesStatus: (data, setVisible, visible) => dispatch(changeFeesStructureStatus(data)),
   };
 };
 

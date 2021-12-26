@@ -103,17 +103,17 @@ for (i = 0; i < coll.length; i++) {
               // <>
               <>
                 <img src={logoimage} className="profile_image1" alt="" />
-                <img src={david} className="profile_image2" alt="" />
+                {/* <img src={david} className="profile_image2" alt="" /> */}
               </>
             ) : (
               <>
-                <img src={david} className="small_logo_avtar" alt="" />
+                {/* <img src={david} className="small_logo_avtar" alt="" /> */}
                 <img src={david} className="profile_image2" alt="" />
                 <img src={logo} className="small_logo" alt="" />
               </>
             )}
-            <h6 className="sidebar_david">David</h6>
-            {!toggle && (
+            {/* <h6 className="sidebar_david">David</h6> */}
+            {/* {!toggle && (
               <>
                 <input
                   className="input_sidebar"
@@ -122,9 +122,11 @@ for (i = 0; i < coll.length; i++) {
                 />
                 <span class="fa fa-search errspan"></span>
               </>
-            )}
+            )} */}
             {/* </> */}
           </center>
+
+
           <div className="dropdown show">
             <a
               href="#!"
@@ -162,6 +164,9 @@ for (i = 0; i < coll.length; i++) {
               </div>
             }
           </div>
+
+
+
           {/* ---- second dropdown---- */}
           <div className="dropdown show">
             <a
@@ -201,8 +206,7 @@ for (i = 0; i < coll.length; i++) {
             }
           </div>
           
-{/* 
-          <Link className="sidebar_options" to="addstudent">
+{/*  <Link className="sidebar_options" to="addstudent">
             <img
               src={Education_svg}
               className=" Sidebar_text  sidebar_icons"

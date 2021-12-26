@@ -97,10 +97,10 @@ body{
 }
 
 .sidebar .profile_image1 {
-  width: 195px;
+  width: 200px;
   height: 70px;
   /* margin-top: 10px; */
-  margin-bottom: 0px;
+  margin-bottom: 20px;
 }
 
 .sidebar .profile_image2 {
@@ -209,7 +209,7 @@ body{
 }
 
 .sidebar a:hover {
-  background: rgb(228, 228, 228);
+  background: #E6E9F4;
   color: black;
   text-decoration: none;
 }
@@ -342,7 +342,7 @@ label #sidebar_btn:hover {
 }
 .sidebar_options_link:hover {
   color: black;
-  background: rgb(228, 228, 228) !important;
+  background: #E6E9F4 !important;
   text-decoration: none;
 }
 

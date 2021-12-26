@@ -24,7 +24,7 @@
   height: 38px;
   width: 100%;
   outline: none;
-  border: 1px solid grey;
+  border: 1px solid #5A607F;
   background-color: rgb(255, 255, 255);
   font-size: 15px;
   color: rgb(139, 139, 139);
@@ -59,7 +59,7 @@
 }
 .labels{
   cursor: pointer;
-  color: #373957;
+  color: #5A607F;
   /* font-weight: bold; */
   font-size: 20px;
   margin-top: 0px;
@@ -70,9 +70,13 @@
 .createAdminhead{
   text-align: center;
   /* margin-left: 122px; */
-  color: #373957;
+  color: #5A607F;
 }
 .feestructurehead{
   margin-left: 110px;
-  color: #373957;
+  color: #5A607F;
 }
+
+/* ::-ms-input-placeholder{
+  color: #5A607F;
+} */

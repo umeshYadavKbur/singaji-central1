@@ -8,7 +8,7 @@ import {
 } from "../constants/actions";
 
 export const createFeesStructure = (data) => {
-  console.log("The data is ", data.data);
+  // console.log("The data is ", data.data);
   return async (dispatch) => {
     // Console the data getting from the form of create admin
     try {

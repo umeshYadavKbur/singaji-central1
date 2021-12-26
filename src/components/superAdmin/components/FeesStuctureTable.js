@@ -31,7 +31,6 @@ function FeesStructure({ table_data, fetchFeesTable }) {
     };
     fetchFeesTable(config);
     // setTableData(table_data.table_data);
-
     // eslint-disable-next-line
   }, []);
 
