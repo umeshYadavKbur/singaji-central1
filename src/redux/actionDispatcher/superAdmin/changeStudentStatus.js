@@ -3,7 +3,7 @@ import {
   DEACTIVATE_STUDENT,
   FAIL_STATUS_REQUEST,
   REQUEST_STATUS_CHANGE,
-} from "../constants/actions";
+} from "../../constants/actions";
 // import getData from "../../services/agent";
 import axios from "axios";
 import Swal from 'sweetalert2'
@@ -23,7 +23,7 @@ export const changeStatus = (data) => {
           console.log(("Response is  :::", response));
 
           if (response.status === 208) {
-            dispatch(newAdminReqSuccess());
+            // dispatch(newAdminReqSuccess());
             Swal.fire({
               position: 'top-center',
               icon: 'warning',

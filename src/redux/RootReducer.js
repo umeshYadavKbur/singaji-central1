@@ -1,16 +1,20 @@
 import { combineReducers } from "redux";
-import userReducer from "./reducers/authReducer";
-import newPassReducer from "./reducers/newPassReducer";
-import forgetPassReducer from "./reducers/forgotPasswordReducer";
-import newAdminReducer from "./reducers/createAdminReducer";
-import showSideBarReducer from "./reducers/showSideBarReducer";
-import createNewFeesStructure from "./reducers/createFeesStructureReducer";
-import changeStudentStatus from "./reducers/activeDeactiveStudentReducer";
-import addNewStudentReducer from "./reducers/studentTableReducer";
-import adminTableReducer from "./reducers/adminTableReducer"
-import feesstructureTableReducer from "./reducers/feesStuctureTableReducer"
-import VerifyStudentReducer from "./reducers/studentVerifyTableReducer";
-import AdminStatusChangeReducer from "./reducers/adminStatusChangeReducer";
+import userReducer from "./reducers/auth/authReducer";
+import newPassReducer from "./reducers/auth/newPassReducer";
+import forgetPassReducer from "./reducers/auth/forgotPasswordReducer";
+
+
+import newAdminReducer from "./reducers/superAdmin/createAdminReducer";
+import showSideBarReducer from "./reducers/superAdmin/showSideBarReducer";
+import createNewFeesStructure from "./reducers/superAdmin/createFeesStructureReducer";
+import changeStudentStatus from "./reducers/superAdmin/activeDeactiveStudentReducer";
+import addNewStudentReducer from "./reducers/superAdmin/studentTableReducer";
+import adminTableReducer from "./reducers/superAdmin/adminTableReducer"
+// import feesstructureTableReducer from "./reducers/superAdmin/feesStuctureTableReducer"
+import feesstructureTableReducer from "./reducers/superAdmin/feesStuctureTableReducer.js"
+import VerifyStudentReducer from "./reducers/superAdmin/studentVerifyTableReducer";
+import AdminStatusChangeReducer from "./reducers/superAdmin/adminStatusChangeReducer";
+
 
 //Combining the reducer's into a rootReducer
 const RootReducer = combineReducers({

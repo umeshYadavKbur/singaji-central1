@@ -4,7 +4,7 @@ import {
   ADMIN_TABLE_DATA_SUCCESS,
   FETCH_ADMIN_TABLE_DATA_SEC,
   FETCH_ADMIN_TABLE_DATA_SUCCESS,
-} from "../constants/actions";
+} from "../../constants/actions";
 
 const initialState = {
   second_loading: false,

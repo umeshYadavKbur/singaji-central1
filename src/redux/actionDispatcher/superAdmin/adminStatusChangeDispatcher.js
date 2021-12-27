@@ -1,6 +1,6 @@
-import { ADMIN_STATUS_CHANGE_REQUEST, ADMIN_STATUS_CHANGE_SUCCESS, ADMIN_STATUS_CHANGE_FAIL } from "../constants/actions";
+import { ADMIN_STATUS_CHANGE_REQUEST, ADMIN_STATUS_CHANGE_SUCCESS, ADMIN_STATUS_CHANGE_FAIL } from "../../constants/actions";
 import { toast } from "react-toastify";
-import AllUrl from "../constants/url";
+import AllUrl from "../../constants/url";
 import { fetchTableDataSec } from './adminTableDatadispatcher'
 var axios = require('axios');
 // import getData from "../../services/agent";

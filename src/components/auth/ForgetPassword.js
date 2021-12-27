@@ -2,9 +2,9 @@ import React from "react";
 
 // import './login.css'
 import Singaji_logo from '../assests/image/Singaji_logo.svg'
-import {useFormik} from 'formik';
-import {connect} from 'react-redux';
-import {fetchUserEmail} from '../../redux/actionDispatcher/forgotpassDispatcher';
+import { useFormik } from 'formik';
+import { connect } from 'react-redux';
+import { fetchUserEmail } from '../../redux/actionDispatcher/auth/forgotpassDispatcher';
 import *as Yup from 'yup';
 // import { useHistory } from 'react-router';
 import '../superAdmin/components/styles/Login.css';
@@ -42,10 +42,10 @@ function ForgotPassword({ passData, fetchUserEmail }) {
       <div className="bg-login">
         <div
           className="position-absolute  top-50 start-50 translate-middle m-auto bg-light px-5 pt-2 pb-5 shadow rounded-5 login-card"
-          
-        
+
+
         >
-          <form onSubmit={formik.handleSubmit} className="login-form"  style={{ marginTop: "30px"}} >
+          <form onSubmit={formik.handleSubmit} className="login-form" style={{ marginTop: "30px" }} >
             <div className="d-flex justify-content-center">
               <img
                 onClick={() => {
@@ -71,12 +71,12 @@ function ForgotPassword({ passData, fetchUserEmail }) {
                 className="form-control"
                 placeholder="Email"
               />
-              {formik.errors.email && formik.touched.email ? (<div className="text-danger fs-6">{formik.errors.email}</div> ) : (  ""  )}
+              {formik.errors.email && formik.touched.email ? (<div className="text-danger fs-6">{formik.errors.email}</div>) : ("")}
             </div>
 
             <button disabled={passData.loading} className="w-100 btn btn-md btn-warning fw-bold text-light button-color" type="submit">{
-                            passData.loading ? (<LoaderButton />) : "Get Link"
-                        }</button>
+              passData.loading ? (<LoaderButton />) : "Get Link"
+            }</button>
           </form>
         </div>
       </div>

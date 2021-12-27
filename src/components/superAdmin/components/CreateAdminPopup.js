@@ -12,7 +12,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import logo from "../../assests/image/User.svg";
 import "./styles/createAdmin.css";
-import { createNewAdmin } from "../../../redux/actionDispatcher/createNewAdminDispatcher";
+import { createNewAdmin } from "../../../redux/actionDispatcher/superAdmin/createNewAdminDispatcher";
 import { useNavigate } from "react-router-dom";
 import LoaderButton from "../../assests/common/LoaderButton";
 import { baseUrl } from "../../../redux/constants/url";

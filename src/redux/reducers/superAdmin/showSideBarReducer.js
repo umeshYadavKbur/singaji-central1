@@ -1,4 +1,4 @@
-import { HIDE_SIDE_BAR, SHOW_SIDE_BAR } from "../constants/actions";
+import { HIDE_SIDE_BAR, SHOW_SIDE_BAR } from "../../constants/actions";
 
 const initialState = {
   show: false,

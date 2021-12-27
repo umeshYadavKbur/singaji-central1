@@ -6,7 +6,7 @@ import {
   CREATE_NEW_ADMIN_FAIL,
   CREATE_NEW_ADMIN_REQUEST,
   CREATE_NEW_ADMIN_SUCCESS,
-} from "../constants/actions";
+} from "../../constants/actions";
 
 export const createNewAdmin = (data) => {
   return async (dispatch) => {

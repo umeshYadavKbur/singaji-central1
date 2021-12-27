@@ -5,7 +5,7 @@ import {
   FEES_STRUCTURE_CHANGE_STATUS,
   FEES_STRUCTURE_CHANGE_FAIL,
   FEES_STRUCTURE_CHANGE_SUCCESS,
-} from "../constants/actions";
+} from "../../constants/actions";
 
 const initialState = {
   second_loading: false,

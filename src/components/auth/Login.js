@@ -8,7 +8,7 @@ import LoaderButton from "../assests/common/LoaderButton";
 //importing Components
 import { ToastContainer } from 'react-toastify';
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
-import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
+import { fetchUsers } from "../../redux/actionDispatcher/auth/authDispatcher";
 import '../superAdmin/components/styles/Login.css';
 
 function Login({ userData, fetchUsers }) {

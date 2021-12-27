@@ -6,7 +6,7 @@ import {
   FETCH_ADMIN_TABLE_DATA_SEC,
   FETCH_ADMIN_TABLE_DATA_SUCCESS,
   FETCH_ADMIN_TABLE_DATA_FAIL
-} from "../constants/actions";
+} from "../../constants/actions";
 
 export const fetchAdminTableData = (data) => {
   return (dispatch) => {

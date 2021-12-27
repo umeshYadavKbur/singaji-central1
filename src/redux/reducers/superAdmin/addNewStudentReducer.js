@@ -1,4 +1,4 @@
-import {ADD_STUDENT_REQUEST,ADD_STUDENT_FAIL,ADD_STUDENT_SUCCESS } from "../constants/actions";
+import {ADD_STUDENT_REQUEST,ADD_STUDENT_FAIL,ADD_STUDENT_SUCCESS } from "../../constants/actions";
 
 const initialState = {
     loading: false,

@@ -3,13 +3,13 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGOUT,
-} from "../constants/actions";
+} from "../../constants/actions";
 
 const initialState = {
   loading: false,
   loginSucces: false,
   role: "",
-  email:'',
+  email: '',
   token: "",
   userInfo: "",
   error: "",

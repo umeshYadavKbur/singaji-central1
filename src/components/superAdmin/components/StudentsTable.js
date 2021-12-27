@@ -16,12 +16,12 @@ import {ToastContainer} from "react-toastify";
 // import StudentTableHeader from "./tableComponents/StudentTableHeader";
 import "./styles/Table.css";
 import {baseUrl} from "../../../redux/constants/url";
-import {fetchStudentTable} from "../../../redux/actionDispatcher/studentTableDatadispatcher";
+import {fetchStudentTable} from "../../../redux/actionDispatcher/superAdmin/studentTableDatadispatcher";
 import {connect} from "react-redux";
 import SkeletonColor from "../../../helpers/Skeletrone";
 import Archived_icon from "../../assests/image/Archived_icon.svg"
 import {TableCheckbox} from "./tableComponents/TableCheckbox";
-import {VerifyStudent} from "../../../redux/actionDispatcher/studentVerifyTableDataDispatcher";
+import {VerifyStudent} from "../../../redux/actionDispatcher/superAdmin/studentVerifyTableDataDispatcher";
 import axios from "axios";
 import AllUrl from "../../../redux/constants/url";
 import {toast} from "react-toastify";
@@ -29,8 +29,6 @@ import AddNewStudent from "./AddNewStudent";
 
 function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
   const token = localStorage.getItem("token");
-
-
 
   const StudentTableHeader = [
     {

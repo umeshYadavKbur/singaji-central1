@@ -5,7 +5,7 @@ import {
   CREATE_FEES_FAILED,
   CREATE_FEES_STRUCTURE,
   CREATE_FEES_SUCCESS,
-} from "../constants/actions";
+} from "../../constants/actions";
 
 export const createFeesStructure = (data) => {
   // console.log("The data is ", data.data);

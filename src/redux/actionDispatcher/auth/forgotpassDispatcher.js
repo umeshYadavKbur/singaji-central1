@@ -2,11 +2,11 @@ import {
   FORGETPASSWORD_FAIL,
   FORGETPASSWORD_REQUEST,
   FORGETPASSWORD_SUCCESS,
-} from "../constants/actions";
-import getData from "../../services/agent";
+} from "../../constants/actions";
+import getData from "../../../services/agent";
 import Swal from "sweetalert2";
 // import {history} from '../../helpers/history'
-import { forgetPass } from "../constants/url";
+import { forgetPass } from "../../constants/url";
 export const fetchUserEmail = (data) => {
   return async (dispatch) => {
     // console.log(data);
@@ -15,7 +15,6 @@ export const fetchUserEmail = (data) => {
     var forgetPasswordData = await getData(data, forgotPasswordUrl);
     // console.log("Working  :::: ", forgetPasswordData);
     if (forgetPasswordData.status === 200) {
-
       Swal.fire({
         title: 'Mail sent successfully',
         icon: 'success',

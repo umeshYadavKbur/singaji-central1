@@ -6,8 +6,8 @@ import {
   FEES_STRUCTURE_CHANGE_STATUS,
   FEES_STRUCTURE_CHANGE_SUCCESS,
   FEES_STRUCTURE_CHANGE_FAIL,
-} from "../constants/actions";
-import { baseUrl } from "../constants/url";
+} from "../../constants/actions";
+import { baseUrl } from "../../constants/url";
 import { toast } from 'react-toastify'
 
 

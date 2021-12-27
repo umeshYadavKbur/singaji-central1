@@ -2,10 +2,10 @@ import {
   NEW_PASS_FAIL,
   NEW_PASS_REQUEST,
   NEW_PASS_SUCCESS,
-} from "../constants/actions";
+} from "../../constants/actions";
 import Swal from "sweetalert2";
 
-import getData from "../../services/agent";
+import getData from "../../../services/agent";
 // import { useNavigate } from "react-router-dom";
 // import {baseUrl} from "../constants/url";
 // import { useHistory } from "react-router";
@@ -25,7 +25,6 @@ export const newPasswordRequest = (data) => {
           icon: 'success',
           showConfirmButton: false,
           timer: 2500,
-
         })
         // navigate('/login')
       } else if (newPasswordData.request.status === 406) {

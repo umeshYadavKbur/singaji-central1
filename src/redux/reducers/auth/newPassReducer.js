@@ -2,7 +2,7 @@ import {
   NEW_PASS_FAIL,
   NEW_PASS_REQUEST,
   NEW_PASS_SUCCESS,
-} from "../constants/actions";
+} from "../../constants/actions";
 
 const initialState = {
   loading: false,

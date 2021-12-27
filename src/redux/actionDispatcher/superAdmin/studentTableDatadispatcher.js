@@ -3,7 +3,7 @@ import {
   FETCH_STUDENT_TABLE_DATA,
   STUDENT_TABLE_DATA_FAIL,
   STUDENT_TABLE_DATA_SUCCESS,
-} from "../constants/actions";
+} from "../../constants/actions";
 import Swal from "sweetalert2";
 
 export const fetchStudentTable = (data) => {

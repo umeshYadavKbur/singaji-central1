@@ -3,9 +3,9 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGOUT,
-} from "../constants/actions";
-import getData from "../../services/agent";
-import { loginUrl } from "../constants/url";
+} from "../../constants/actions.js";
+import getData from "../../../services/agent";
+import { loginUrl } from "../../constants/url";
 import { toast } from 'react-toastify'
 
 
@@ -25,7 +25,7 @@ export const fetchUsers = (data) => {
         localStorage.setItem("token", userResData.data.token);
         localStorage.setItem("role", userResData.data.role);
         localStorage.setItem("email", userResData.data.email);
-        
+
         // toast.success('Login successfully !', {
         //   position: "top-right",
         //   autoClose: 3000,
@@ -35,7 +35,7 @@ export const fetchUsers = (data) => {
         //   draggable: true,
         //   progress: undefined,
         // });
-        
+
         //Redirect to the home page remaining
         // history.push('/');
         //dispatch action and store data in it

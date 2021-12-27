@@ -1,4 +1,4 @@
-import {FORGETPASSWORD_FAIL,FORGETPASSWORD_REQUEST,FORGETPASSWORD_SUCCESS} from "../constants/actions"
+import {FORGETPASSWORD_FAIL,FORGETPASSWORD_REQUEST,FORGETPASSWORD_SUCCESS} from "../../constants/actions"
 
 const initialState = {
     loading: false,

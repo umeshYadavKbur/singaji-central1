@@ -11,10 +11,10 @@ import { TableCheckbox } from './tableComponents/TableCheckbox';
 import { baseUrl } from '../../../redux/constants/url';
 // import { getDataFromApi } from '../../../services/getApi';
 // import axios from 'axios'
-import { fetchAdminTableData, getAdminTableData } from '../../../redux/actionDispatcher/adminTableDatadispatcher';
+import { fetchAdminTableData, getAdminTableData } from '../../../redux/actionDispatcher/superAdmin/adminTableDatadispatcher';
 import { connect } from 'react-redux';
 import SkeletonColor from '../../../helpers/Skeletrone';
-import { AdminStatusChange } from '../../../redux/actionDispatcher/adminStatusChangeDispatcher'
+import { AdminStatusChange } from '../../../redux/actionDispatcher/superAdmin/adminStatusChangeDispatcher'
 import Swal from 'sweetalert2';
 
 

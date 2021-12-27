@@ -8,7 +8,7 @@ import {
 import avatar8 from "../../assests/image/david.png";
 import "./styles/HeaderDropdown.css";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../../redux/actionDispatcher/authDispatcher";
+import { logout } from "../../../redux/actionDispatcher/auth/authDispatcher";
 import { connect } from "react-redux";
 import Settings from '../../assests/image/setting.svg';
 

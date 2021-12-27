@@ -2,7 +2,7 @@ import {
   CREATE_FEES_FAILED,
   CREATE_FEES_STRUCTURE,
   CREATE_FEES_SUCCESS,
-} from "../constants/actions";
+} from "../../constants/actions";
 
 const initialState = {
   loading: false,

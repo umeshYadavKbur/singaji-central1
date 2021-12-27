@@ -3,7 +3,7 @@ import {
     ADMIN_STATUS_CHANGE_REQUEST,
     ADMIN_STATUS_CHANGE_SUCCESS,
     ADMIN_STATUS_CHANGE_FAIL
-} from "../constants/actions";
+} from "../../constants/actions";
 
 const initialState = {
     error: "",

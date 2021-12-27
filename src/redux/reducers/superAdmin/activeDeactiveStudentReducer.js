@@ -3,7 +3,7 @@ import {
   DEACTIVATE_STUDENT,
   FAIL_STATUS_REQUEST,
   REQUEST_STATUS_CHANGE,
-} from "../constants/actions";
+} from "../../constants/actions";
 
 const initialState = {
   loading: false,

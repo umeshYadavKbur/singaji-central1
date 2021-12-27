@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
-import { changeFeesStructureStatus } from "../../../redux/actionDispatcher/feesStructureTableDataDispatcher";
+import { changeFeesStructureStatus } from "../../../redux/actionDispatcher/superAdmin/feesStructureTableDataDispatcher";
 // import { fetchFeesTableDataConfig } from "../../../redux/constants/config";
 import { baseUrl } from "../../../redux/constants/url";
 function HeaderColumn({ original, table_data, changeFeesStatus }) {

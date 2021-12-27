@@ -8,7 +8,7 @@ import { Link, NavLink } from "react-router-dom";
 import {
   hideSideBar,
   showSideBar,
-} from "../../../redux/actionDispatcher/showSideBarDispather";
+} from "../../../redux/actionDispatcher/superAdmin/showSideBarDispather";
 import back_btn from "../../assests/image/sidebarIcons/back_btn.svg";
 import toggle_btn_icon from "../../assests/image/sidebarIcons/toggle_btn_sidebar.png";
 import Dashboard_svg from "../../assests/image/sidebarIcons/Dashboard.svg";
