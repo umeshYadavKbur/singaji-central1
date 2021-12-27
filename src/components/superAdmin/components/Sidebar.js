@@ -167,6 +167,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                 {!toggle && <i className="fas fa-chevron-down mr-3"></i>}
               </a>
 
+
               <div className="collapse collapse_superadmin" id="dashboard-collapse">
                 <ul className="btn-toggle-nav list-unstyled ">
                   <li className="dropdown_items_div ml-1">
@@ -174,6 +175,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
                     {tabName !== "Fees Stucture" && dLink1("Fees Stucture", "feesstructuretable", "ok")}
                     {tabName !== "My Admin" && dLink1("My Admin", "admintable", "ok")}
                     {tabName !== "Dashboard" && dLink1("Dashboard", "", "ok")}
+
 
                   </li>
                 </ul>

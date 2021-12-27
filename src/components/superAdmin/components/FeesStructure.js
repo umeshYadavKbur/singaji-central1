@@ -263,7 +263,7 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
                   className="submit_btn mt-2 w-100 btn-md font-weight-bold text-light"
                   type="submit"
                 >
-                  {original ? "Update" : "Create"}
+                  {original ? "Update" : "Save"}
                 </button>
               </form>
             </div>

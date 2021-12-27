@@ -83,18 +83,23 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         }}
       >
         <CModalHeader>
-          <CModalTitle>Create new admin </CModalTitle>
+       
+          <h2 style={{ marginLeft: "129px" , color:"#5A607F"}}>
+           Create Admin
+          </h2>
+        
+          
         </CModalHeader>
         <CModalBody>
           <div className="first_div createAdmin">
-            <div className="second_div ">
+            <div className="second_div " style={{ marginTop: "0px"}}>
               <form onSubmit={formik.handleSubmit}>
                 <div>
                   {/* <h4 className=" text-aligns-center createAdminhead">
                     Create Admin
                   </h4> */}
                   <img src={logo} alt="logo ssism" className="logo_img" />{" "}
-                  <br />
+                  {/* <br /> */}
                 </div>
                 <div>
                   <label for="gmail" className="labels mb-1">
