@@ -11,6 +11,7 @@ import AdminTable from "./components/AdminTable";
 import Sidebar from "./components/Sidebar";
 import StudentTable from "./components/StudentsTable";
 import AddNewStudent from "./components/AddNewStudent";
+import { ToastContainer } from "react-toastify";
 
 
 function AdminDashboard() {
@@ -48,17 +49,17 @@ function AdminDashboard() {
 
   return (
     <div className="main_container_dashboard">
-      {/* <ToastContainer
-position="top-center"
-autoClose={2500}
-hideProgressBar={true}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-/> */}
+      <ToastContainer
+        position="top-center"
+        autoClose={2500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="side_bar_content" style={style}>
         <Sidebar play={play} isPlaying={isPlaying} />
       </div>

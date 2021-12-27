@@ -1,32 +1,31 @@
 import * as React from 'react';
-import {useMemo} from 'react';
-import {GlobalFilter} from './tableComponents/GlobalFilter';
-import {useTable,useSortBy,useGlobalFilter,usePagination,useRowSelect} from 'react-table';
+import { useMemo } from 'react';
+import { GlobalFilter } from './tableComponents/GlobalFilter';
+import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
 // import MockData from './tableComponents/mockData.json'
 import Column from './tableComponents/AdminTableColumn'
 import './styles/Table.css'
-import {ToastContainer} from "react-toastify";
-import {TableCheckbox} from './tableComponents/TableCheckbox';
+import { ToastContainer } from "react-toastify";
+import { TableCheckbox } from './tableComponents/TableCheckbox';
 // import { useEffect } from 'react';
-import {baseUrl} from '../../../redux/constants/url';
+import { baseUrl } from '../../../redux/constants/url';
 // import { getDataFromApi } from '../../../services/getApi';
 // import axios from 'axios'
-import {fetchAdminTableData} from '../../../redux/actionDispatcher/adminTableDatadispatcher';
-import {connect} from 'react-redux';
+import { fetchAdminTableData, getAdminTableData } from '../../../redux/actionDispatcher/adminTableDatadispatcher';
+import { connect } from 'react-redux';
 import SkeletonColor from '../../../helpers/Skeletrone';
-import {AdminStatusChange} from '../../../redux/actionDispatcher/adminStatusChangeDispatcher'
+import { AdminStatusChange } from '../../../redux/actionDispatcher/adminStatusChangeDispatcher'
 import Swal from 'sweetalert2';
 
 
-function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
+function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTableData }) {
     const token = localStorage.getItem("token");
-    // ////////////////////
 
     const Column = [
         {
             header: "S No",
             accessor: "Srno",
-            Cell: ({row: {original,index}}) => {
+            Cell: ({ row: { original, index } }) => {
                 return (index + 1)
             }
         },
@@ -53,7 +52,7 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
         {
             header: 'Status',
             accessor: 'is_active',
-            Cell: ({row: {original}}) => (
+            Cell: ({ row: { original } }) => (
                 <button
                     style={
                         original.is_active === 1
@@ -76,7 +75,7 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
                             }}
                     onClick={() => {
                         // setData(original.status)
-                        console.log(original.email)
+                        // console.log(original.email)
                         // alert("Do you want to change status of  : " + original.name)
                         Swal.fire({
                             title: `${original.is_active === 0 ? 'Active' : 'Deactive'}`,
@@ -88,30 +87,29 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
                             // icon: 'warning',
                             showCancelButton: true,
                             // showCancelButton: true,
-                            cancelButtonText:'Cancel',
-                            confirmButtonText:  `${original.is_active === 0 ? 'Active' : 'Deactive'}`,
+                            cancelButtonText: 'Cancel',
+                            confirmButtonText: `${original.is_active === 0 ? 'Active' : 'Deactive'}`,
                             showCloseButton: true,
                             cancelButtonColor: 'gray',
                             confirmButtonColor: "blue",
-                            showLoaderOnDeny:true,
-                            reverseButtons:true
+                            showLoaderOnDeny: true,
+                            reverseButtons: true
 
-                        }).then(async(result) => {
-                            if(result.isConfirmed) {
-                               let res =await AdminStatusChange(original);
-                               if(res === 200)
-                               {
-                                   var config = {
-                                       method: "GET",
-                                       url: `${baseUrl}/api/infoOfAdmins`,
-                                       headers: {
-                                           Authorization: `Bearer ${token}`,
-                                           "Content-Type": "application/json",
-                                       },
-                                   };
-                                   fetchAdminTable(config);
-                               }
-                            //    console.log("admin status change",res);
+                        }).then(async (result) => {
+                            if (result.isConfirmed) {
+                                let res = await AdminStatusChange(original);
+                                if (res === 200) {
+                                    var config = {
+                                        method: "GET",
+                                        url: `${baseUrl}/api/infoOfAdmins`,
+                                        headers: {
+                                            Authorization: `Bearer ${token}`,
+                                            "Content-Type": "application/json",
+                                        },
+                                    };
+                                    getAdminTableData(config);
+                                }
+                                //console.log("admin status change",res);
                             }
                         })
 
@@ -120,14 +118,8 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
                 </button>
             )
         }
-
     ]
 
-    // ////////////////////
-
-    console.log("====================================");
-    console.log(table_data);
-    console.log("====================================");
 
     React.useEffect(() => {
         var config = {
@@ -141,9 +133,9 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
         fetchAdminTable(config);
         // settable_data(table_data.table_data);
         // eslint-disable-next-line
-    },[]);
+    }, []);
 
-    const columns = useMemo(() => Column,[])
+    const columns = useMemo(() => Column, [])
     // const data = useMemo(() => MockData, [])
 
     const {
@@ -168,17 +160,17 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
         data: table_data.table_data,
     },
 
-        useGlobalFilter,useSortBy,
-        usePagination,useRowSelect,
+        useGlobalFilter, useSortBy,
+        usePagination, useRowSelect,
         (hooks) => {
             hooks.visibleColumns.push((columns) => {
                 return [
                     {
                         id: 'selection',
-                        header: ({getToggleAllRowsSelectedProps}) => (
+                        header: ({ getToggleAllRowsSelectedProps }) => (
                             <TableCheckbox {...getToggleAllRowsSelectedProps()} />
                         ),
-                        Cell: ({row}) => (
+                        Cell: ({ row }) => (
                             <TableCheckbox {...row.getToggleRowSelectedProps()} />
                         )
                     },
@@ -186,12 +178,10 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
                 ]
             })
         }
-
     )
-
-
-    const {globalFilter} = state
-    const {pageIndex,pageSize,selectedRowIds} = state
+    
+    const { globalFilter } = state
+    const { pageIndex, pageSize, selectedRowIds } = state
 
 
     const checkboxData =
@@ -213,6 +203,26 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
         <h2>{table_data.error}</h2>
     ) : (
         <>
+            {table_data.second_loading && (
+                <div
+                    className="lds-roller"
+                    style={{
+                        position: "absolute",
+                        left: "50%",
+                        top: "50%",
+                        zindex: "-1",
+                    }}
+                >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            )}
             <ToastContainer
                 position="top-center"
                 autoClose={2500}
@@ -225,13 +235,13 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
                 pauseOnHover
             />
 
-            <div style={{backgroundColor: "#F4F7FC",height: "auto",width: "auto"}}>
+            <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
 
                 <div className="d-flex">
                     <div className='ms-4'>
-                        <select style={{height: "auto",width: "auto",outline: "none",border: "none",borderRadius: "10px",padding: "5px"}} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                        <select style={{ height: "auto", width: "auto", outline: "none", border: "none", borderRadius: "10px", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                             {
-                                [10,25,50].map(pageSize => (
+                                [10, 25, 50].map(pageSize => (
                                     <option value={pageSize} key={pageSize}>show Entrie {pageSize}</option>
                                 ))
                             }
@@ -284,7 +294,7 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
 
                     </tbody>
                 </table>
-                <div style={{border: "rgb(246 249 252)"}} className='d-flex mb-4'>
+                <div style={{ border: "rgb(246 249 252)" }} className='d-flex mb-4'>
                     <div className='mx-4'>
                         <span>
                             {/* Page{' '}
@@ -295,12 +305,12 @@ function DataTable({table_data,fetchAdminTable,AdminStatusChange}) {
 
                     <div className='ml-auto me-3' >
                         {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
-                        <button style={{outline: "none",border: "1px solid gray",borderRadius: "10px 0 0 10px"}} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-                        <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button>
-                        <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>2</button>
-                        <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 2)} disabled={!canNextPage}>3</button>
-                        <button style={{outline: "none",border: "1px solid gray"}} onClick={() => gotoPage(pageIndex + 3)} disabled={!canNextPage}>4</button>
-                        <button style={{outline: "none",border: "1px solid gray",borderRadius: "0 10px  10px 0"}} onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                        <button style={{ outline: "none", border: "1px solid gray", borderRadius: "10px 0 0 10px" }} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>1</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 1)} disabled={!canNextPage}>2</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 2)} disabled={!canNextPage}>3</button>
+                        <button style={{ outline: "none", border: "1px solid gray" }} onClick={() => gotoPage(pageIndex + 3)} disabled={!canNextPage}>4</button>
+                        <button style={{ outline: "none", border: "1px solid gray", borderRadius: "0 10px  10px 0" }} onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
                         {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button> */}
                     </div>
                 </div>
@@ -321,10 +331,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchAdminTable: (data) => dispatch(fetchAdminTableData(data)),
         AdminStatusChange: (data) => dispatch(AdminStatusChange(data)),
+        getAdminTableData: (data) => dispatch(getAdminTableData(data))
     };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(DataTable);
+export default connect(mapStateToProps, mapDispatchToProps)(DataTable);
 
 
 

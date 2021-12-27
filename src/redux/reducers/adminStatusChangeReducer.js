@@ -9,7 +9,6 @@ const initialState = {
     error: "",
     AdminStatusChangeData: [],
     loading: false
-
 };
 
 const AdminStatusChangeReducer = (state = initialState, action) => {

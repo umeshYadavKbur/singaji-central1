@@ -10,19 +10,16 @@ import { ToastContainer } from 'react-toastify';
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
 import '../superAdmin/components/styles/Login.css';
-// import { ToastContainer, toast } from 'react-toastify';
+
 function Login({ userData, fetchUsers }) {
-  // import { useHistory } from "react-router";
 
 
   // setInterval(async () => {
   //   const result = await checkOnlineStatus();
   //   result ?console.log("online"):console.log("offline");
   // },300);
-
-  // const history = useHistory();
   var navigate = useNavigate();
-
+  
   // useEffect(() => {
   //   if (localStorage.getItem('role') === 'SUPERADMIN') {
   //     history.push('/home')
@@ -70,13 +67,13 @@ function Login({ userData, fetchUsers }) {
   });
 
 
-  useEffect(() => {
-    if (userData.error === "400") {
-      // toast.error("Login unsuccessfull");
-    }
-    return () => {
-    }
-  }, [userData.error])
+  // useEffect(() => {
+  //   if (userData.error === "400") {
+  //     toast.error("Login unsuccessfull");
+  //   }
+  //   return () => {
+  //   }
+  // }, [userData.error])
 
 
   return (

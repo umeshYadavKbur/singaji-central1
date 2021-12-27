@@ -191,7 +191,7 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
               html:
                 '<hr>' +
                 'Are you sure?' +
-                '<br>'
+                '<br>' +
                   `You want to active ${original.firstName} ${original.lastName} `,
               // icon: 'warning',
               showCancelButton: true,
@@ -225,8 +225,6 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
       )
     }
   ];
-
-
   // async function getData(data,loginUrl) {
   //   var url = `${baseUrl}${loginUrl}`;
   //   console.log(url);
@@ -255,7 +253,6 @@ function StudentTable({table_data,fetchStudentTable,VerifyStudent}) {
     };
     fetchStudentTable(config);
     // setTableData(table_data.table_data);
-
     // eslint-disable-next-line
   },[]);
 

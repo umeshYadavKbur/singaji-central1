@@ -25,6 +25,17 @@ export const fetchUsers = (data) => {
         localStorage.setItem("token", userResData.data.token);
         localStorage.setItem("role", userResData.data.role);
         localStorage.setItem("email", userResData.data.email);
+        
+        // toast.success('Login successfully !', {
+        //   position: "top-right",
+        //   autoClose: 3000,
+        //   hideProgressBar: true,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        // });
+        
         //Redirect to the home page remaining
         // history.push('/');
         //dispatch action and store data in it

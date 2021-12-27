@@ -16,6 +16,8 @@ import { connect } from "react-redux";
 import { fetchFeesTableData } from "../../../redux/actionDispatcher/feesStructureTableDataDispatcher";
 import { baseUrl } from "../../../redux/constants/url";
 import SkeletonColor from "../../../helpers/Skeletrone";
+import { ToastContainer } from "react-toastify";
+
 // import LoaderButton from "../../assests/common/LoaderButton";
 
 function FeesStructure({ table_data, fetchFeesTable }) {
@@ -101,6 +103,17 @@ function FeesStructure({ table_data, fetchFeesTable }) {
     <h2>{table_data.error}</h2>
   ) : (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={2500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {table_data.second_loading && (
         <div
           className="lds-roller"

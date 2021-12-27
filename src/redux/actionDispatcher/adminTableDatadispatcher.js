@@ -3,6 +3,9 @@ import {
   FETCH_ADMIN_TABLE_DATA,
   ADMIN_TABLE_DATA_FAIL,
   ADMIN_TABLE_DATA_SUCCESS,
+  FETCH_ADMIN_TABLE_DATA_SEC,
+  FETCH_ADMIN_TABLE_DATA_SUCCESS,
+  FETCH_ADMIN_TABLE_DATA_FAIL
 } from "../constants/actions";
 
 export const fetchAdminTableData = (data) => {
@@ -34,9 +37,45 @@ export const fetchAdminTableData = (data) => {
   };
 };
 
+export const getAdminTableData = (data) => {
+  return (dispatch) => {
+    dispatch(fetchTableDataSec());
+    try {
+      axios(data)
+        .then(function (response) {
+          console.log((response));
+          if (response.status === 200) {
+            dispatch(fetchSuccessSecTableData(response.data));
+          }
+        })
+        .catch(function (error) {
+          fetchSuccessfailTableData()
+        });
+    } catch (error) {
+      fetchSuccessfailTableData()
+    }
+  }
+}
+
 const fetchTableData = () => {
   return {
     type: FETCH_ADMIN_TABLE_DATA,
+  };
+};
+export const fetchTableDataSec = () => {
+  return {
+    type: FETCH_ADMIN_TABLE_DATA_SEC,
+  };
+};
+const fetchSuccessSecTableData = (data) => {
+  return {
+    type: FETCH_ADMIN_TABLE_DATA_SUCCESS,
+    payload: data
+  };
+};
+const fetchSuccessfailTableData = () => {
+  return {
+    type: FETCH_ADMIN_TABLE_DATA_FAIL,
   };
 };
 

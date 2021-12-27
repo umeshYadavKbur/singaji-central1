@@ -8,6 +8,8 @@ import {
   FEES_STRUCTURE_CHANGE_FAIL,
 } from "../constants/actions";
 import { baseUrl } from "../constants/url";
+import { toast } from 'react-toastify'
+
 
 export const fetchFeesTableData = (data) => {
   return (dispatch) => {
@@ -48,18 +50,69 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
     }
 
     dispatch(feesStructureStatusChange());
+
     var response = await axios(data);
     console.log(response);
     if (response.status === 200) {
       if (visible) {
         setVisible(!visible)
       }
+      toast.success('Update successfully !', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       dispatch(feesStructureStatusSuccess());
       getUpdatedTableData();
-    } else {
+    } else if (response.status === 400) {
       if (visible) {
         setVisible(!visible)
       }
+      let value = JSON.stringify(response.status);
+      dispatch(feesStructureStatusFailed(value));
+      toast.warn('Internal Server Error', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    else if (response.status === 500) {
+      if (visible) {
+        setVisible(!visible)
+      }
+      let value = JSON.stringify(response.status);
+      dispatch(feesStructureStatusFailed(value));
+      toast.error("Internal Server Error", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    else {
+      if (visible) {
+        setVisible(!visible)
+      }
+      toast.error("Internal Server Error", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       dispatch(feesStructureStatusFailed(response))
     }
   }

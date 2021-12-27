@@ -17,6 +17,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { changeFeesStructureStatus } from "../../../redux/actionDispatcher/feesStructureTableDataDispatcher";
 import './styles/Table.css'
+import LoaderButton from "../../assests/common/LoaderButton";
 
 function FeesStructure({ adminData, createFees, original, changeFeesStatus, table_data }) {
   const token = localStorage.getItem("token");
@@ -46,24 +47,26 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
     validationSchema,
 
     onSubmit: async (values) => {
+
       if (original) {
-        var update = JSON.stringify({
-          branch_schema_code: formik.values.stream + formik.values.startYear,
-          total_fees: `${formik.values.totalFees}`,
-        })
+      if (formik.values.totalFees > 1000) {
+          var update = JSON.stringify({
+            branch_schema_code: formik.values.stream + formik.values.startYear,
+            total_fees: `${formik.values.totalFees}`,
+          })
 
-        var updateSchema = {
-          method: 'post',
-          url: `${baseUrl}/api/update_schema`,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          data: update
-        };
-        changeFeesStatus(updateSchema, setVisible, visible)
-        // setVisible(!visible)
-
+          var updateSchema = {
+            method: 'post',
+            url: `${baseUrl}/api/update_schema`,
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            data: update
+          };
+          changeFeesStatus(updateSchema, setVisible, visible)
+          // setVisible(!visible)
+        }
       }
       else {
         var data = JSON.stringify({
@@ -108,11 +111,12 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
       }
     }
   }
-  // if (original) {
-  //   formik.values.stream = original.branch_name;
-  //   formik.startYear = original.starting_year;
-  //   formik.endYear = original.ending_year;
-  // }
+
+  if (original) {
+    formik.values.stream = original.branch_name;
+    formik.values.startYear = original.starting_year;
+    formik.values.endYear = original.ending_year;
+  }
 
   return (
     <>
@@ -252,7 +256,8 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
                     onBlur={formik.handleBlur}
                     className="form-control input-lg fields"
                     name="totalFees"
-                    type="text"
+                    type="number"
+                    minLength={4}
                     placeholder="Total-fees"
                   />
                   {formik.errors.totalFees && formik.touched.totalFees ? (
@@ -267,7 +272,9 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
                   className="submit_btn mt-2 w-100 btn-md font-weight-bold text-light"
                   type="submit"
                 >
-                  {original ? "Update" : "Save"}
+                  {
+                    table_data.second_loading ? (<LoaderButton />) : (original ? "Update" : "Save")
+                  }
                 </button>
               </form>
             </div>
