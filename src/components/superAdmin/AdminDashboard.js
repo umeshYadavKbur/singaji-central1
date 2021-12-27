@@ -17,19 +17,22 @@ function AdminDashboard() {
   const navigate = useNavigate()
 
   const roleRedirection = (auth) => {
-    switch (auth) {
-      case "SUPERADMIN":
-        return (
-          navigate('./admindashboard')
-        )
+    if (auth === "SUPERADMIN") {
+      navigate('/admindashboard')
+    } else {
+      navigate('/home')
     }
   }
 
   useEffect(() => {
     var auth = localStorage.getItem('role')
+    console.log('====================================');
+    console.log(auth);
+    console.log('====================================');
     roleRedirection(auth);
-    // return () => {
-    // };
+    return () => {
+      localStorage.clear();
+    };
   }, []);
 
   const { play, style, isPlaying } = useAnimate({

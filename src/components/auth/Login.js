@@ -12,7 +12,7 @@ import { fetchUsers } from "../../redux/actionDispatcher/authDispatcher";
 import '../superAdmin/components/styles/Login.css';
 // import { ToastContainer, toast } from 'react-toastify';
 function Login({ userData, fetchUsers }) {
-// import { useHistory } from "react-router";
+  // import { useHistory } from "react-router";
 
 
   // setInterval(async () => {
@@ -38,9 +38,9 @@ function Login({ userData, fetchUsers }) {
 
 
   if (userData.role === "SUPERADMIN") {
-
     navigate("/admindashboard");
-
+  } else if (userData.role === "ACCOUNTADMIN") {
+    navigate("/admindashboard");
   }
 
   const validationSchema = Yup.object({
@@ -55,6 +55,7 @@ function Login({ userData, fetchUsers }) {
     },
     validationSchema,
 
+
     onSubmit: (values) => {
       console.log(values);
       const data = {
@@ -68,7 +69,7 @@ function Login({ userData, fetchUsers }) {
     },
   });
 
-  
+
   useEffect(() => {
     if (userData.error === "400") {
       // toast.error("Login unsuccessfull");
@@ -94,7 +95,6 @@ function Login({ userData, fetchUsers }) {
         />
         <div
           className="position-absolute top-50 start-50 translate-middle login-card "
-         
         >
 
           <form onSubmit={formik.handleSubmit} className="login-form">
@@ -109,7 +109,7 @@ function Login({ userData, fetchUsers }) {
               <br />
             </div>
             <div className="d-flex justify-content-center fw-bold">
-              <h4 className="h4 mb-3 " style={{color: "black"}}>Login</h4>
+              <h4 className="h4 mb-3 " style={{ color: "black" }}>Login</h4>
             </div>
             <div className="mb-3 input-login-box">
               <input
@@ -128,7 +128,7 @@ function Login({ userData, fetchUsers }) {
                 ""
               )}
               <input
-              
+
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}

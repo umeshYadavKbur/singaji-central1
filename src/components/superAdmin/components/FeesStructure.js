@@ -21,6 +21,7 @@ import './styles/Table.css'
 function FeesStructure({ adminData, createFees, original, changeFeesStatus, table_data }) {
   const token = localStorage.getItem("token");
   const [visible, setVisible] = useState(false);
+
   const validationSchema = Yup.object({
     totalFees: Yup.string().required("Required*"),
     stream: Yup.string().required("Required*"),
@@ -37,10 +38,10 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
 
   const formik = useFormik({
     initialValues: {
-      totalFees: original ? original.total_fees : "",
-      startYear: original ? original.starting_year : "",
-      endYear: original ? original.ending_year : "",
-      stream: original ? original.branch_name : "",
+      stream: "",
+      startYear: "",
+      endYear: "",
+      totalFees: "",
     },
     validationSchema,
 
@@ -106,9 +107,12 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
         })
       }
     }
-
-
   }
+  // if (original) {
+  //   formik.values.stream = original.branch_name;
+  //   formik.startYear = original.starting_year;
+  //   formik.endYear = original.ending_year;
+  // }
 
   return (
     <>

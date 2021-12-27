@@ -39,6 +39,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/home" element={<Home />} />
           <Route exact path="/forgetpassword" element={<ForgotPassword />} />
           <Route
             exact
@@ -54,3 +55,13 @@ function App() {
 }
 
 export default App;
+
+function Home() {
+  return (
+
+    <div>
+      hi
+    </div>
+
+  )
+}
