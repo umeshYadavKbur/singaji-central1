@@ -57,6 +57,9 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
       dispatch(feesStructureStatusSuccess());
       getUpdatedTableData();
     } else {
+      if (visible) {
+        setVisible(!visible)
+      }
       dispatch(feesStructureStatusFailed(response))
     }
   }

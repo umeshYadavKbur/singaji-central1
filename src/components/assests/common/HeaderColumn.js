@@ -82,7 +82,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeFeesStatus: (data, setVisible, visible) => dispatch(changeFeesStructureStatus(data)),
+    changeFeesStatus: (data) => dispatch(changeFeesStructureStatus(data)),
   };
 };
 

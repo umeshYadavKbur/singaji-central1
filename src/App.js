@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-
 } from "react-router-dom";
 // import { useParams } from 'react-router';
 // import { Redirect } from "react-router";
@@ -31,12 +30,16 @@ function App() {
   //   // navigate("/offline")
   //   //  return  <Offline></Offline>
   // });
+
+
+
   return (
 
     <Provider store={store}>
       <Router>
         <Routes>
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/home" element={<Home />} />
           <Route exact path="/forgetpassword" element={<ForgotPassword />} />
           <Route
             exact
@@ -52,3 +55,13 @@ function App() {
 }
 
 export default App;
+
+function Home() {
+  return (
+
+    <div>
+      hi
+    </div>
+
+  )
+}
