@@ -170,9 +170,11 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
               <div className="collapse collapse_superadmin" id="dashboard-collapse">
                 <ul className="btn-toggle-nav list-unstyled ">
                   <li className="dropdown_items_div ml-1">
+                    {tabName1 !== 'Education' && dLink1("Dashboard", "", "ok")}
                     {tabName !== "Fees Stucture" && dLink1("Fees Stucture", "feesstructuretable", "ok")}
                     {tabName !== "My Admin" && dLink1("My Admin", "admintable", "ok")}
                     {tabName !== "Dashboard" && dLink1("Dashboard", "", "ok")}
+
                   </li>
                 </ul>
               </div>
