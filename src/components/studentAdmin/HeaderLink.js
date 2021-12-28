@@ -18,8 +18,8 @@ const HeaderLink = () => {
             return "Fees Structure";
         } else if (currentLocation === "/student_admin_dashboard/studenttable") {
             return "Applied Student";
-        } else if (currentLocation === "/student_admin_dashboard/admintable") {
-            return "My Admin";
+        } else if (currentLocation === "/student_admin_dashboard/addnewstudent") {
+            return "Add Student";
         } else {
             return "Dashboard";
         }

@@ -53,8 +53,6 @@ function AdminDashboard() {
         <div className="table_dashboard">
           <Routes>
             <Route path="" element={<Dashboard />} />
-            <Route path="studenttable" element={<StudentTable />} />
-            <Route path="feesstructuretable" element={<FeesStructureTable />} />
             <Route path="addnewstudent" element={<AddStudent />} />
           </Routes>
         </div>
