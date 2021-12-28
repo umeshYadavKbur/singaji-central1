@@ -9,7 +9,7 @@ import LoaderButton from "../assests/common/LoaderButton";
 import { ToastContainer } from 'react-toastify';
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from "../../redux/actionDispatcher/auth/authDispatcher";
-import '../superAdmin/components/styles/Login.css';
+import '../components/styles/Login.css';
 
 function Login({ userData, fetchUsers }) {
 
@@ -34,11 +34,11 @@ function Login({ userData, fetchUsers }) {
   // console.log(userData)
 
 
-  if (userData.role === "SUPERADMIN") {
-    navigate("/admindashboard");
-  } else if (userData.role === "ACCOUNTADMIN") {
-    navigate("/admindashboard");
-  }
+  // if (userData.role === "SUPERADMIN") {
+  //   navigate("/admindashboard");
+  // } else if (userData.role === "ACCOUNTADMIN") {
+  //   navigate("/admindashboard");
+  // }
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Please Enter Email"),
@@ -62,7 +62,7 @@ function Login({ userData, fetchUsers }) {
 
       //passing the data in fetchUsers which contain the dispatch method
       //Add new lines and response in fetchUsers function
-      fetchUsers(data);
+      fetchUsers(data,navigate);
     },
   });
 
@@ -179,7 +179,7 @@ const mapStateToProps = (state) => {
 //passing the userData in fetchUsers function and also dispatch method
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUsers: (data) => dispatch(fetchUsers(data)),
+    fetchUsers: (data,navigate) => dispatch(fetchUsers(data,navigate)),
   };
 };
 

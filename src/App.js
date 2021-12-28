@@ -17,6 +17,13 @@ import 'react-toastify/dist/ReactToastify.css';
 //import coreUireact js
 import "@coreui/coreui/dist/css/coreui.min.css";
 import AdminDashboard from "./components/superAdmin/AdminDashboard";
+import StudentAdminDashboard from './components/studentAdmin/StudentAdminDashboard';
+import AccountAdminDashboard from './components/accountAdmin/AccountAdminDashboard';
+import SuperAdmin from "./helpers/SuperAdmin";
+import AccountAdmin from "./helpers/AccountAdmin";
+import StudentAdmin from "./helpers/StudentAdmin";
+
+
 // import Offline from '../src/components/auth/Offline_page';
 
 function App() {
@@ -46,7 +53,15 @@ function App() {
             path="/create_new_password/:token"
             element={<ResetPassword />}
           />
-          <Route path="/admindashboard/*" element={<AdminDashboard />} />
+          <Route element={<SuperAdmin />}>
+            <Route path="/admin_dashboard/*" element={<AdminDashboard />} />
+          </Route>
+          <Route element={<AccountAdmin />}>
+            <Route path="/account_admin_dashboard" element={<AccountAdminDashboard />} />
+          </Route>
+          <Route element={<StudentAdmin />}>
+            <Route path="/student_admin_dashboard" element={<StudentAdminDashboard />} />
+          </Route>
           <Route path="*" element={<Navigate replace to="/login" />} />
         </Routes>
       </Router>

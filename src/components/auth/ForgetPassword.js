@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { fetchUserEmail } from '../../redux/actionDispatcher/auth/forgotpassDispatcher';
 import *as Yup from 'yup';
 // import { useHistory } from 'react-router';
-import '../superAdmin/components/styles/Login.css';
+import '../components/styles/Login.css';
 import LoaderButton from '../assests/common/LoaderButton';
 import { useNavigate } from "react-router-dom";
 

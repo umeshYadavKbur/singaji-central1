@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useMemo} from "react";
 
-import Edit_icon from '../../assests/image/Edit_icon.svg'
+import Edit_icon from '../assests/image/Edit_icon.svg'
 import Swal from 'sweetalert2'
 import {GlobalFilter} from "./tableComponents/GlobalFilter";
 import {
@@ -15,15 +15,15 @@ import {ToastContainer} from "react-toastify";
 // import MockData from "./tableComponents/studentTable.json";
 // import StudentTableHeader from "./tableComponents/StudentTableHeader";
 import "./styles/Table.css";
-import {baseUrl} from "../../../redux/constants/url";
-import {fetchStudentTable} from "../../../redux/actionDispatcher/superAdmin/studentTableDatadispatcher";
+import {baseUrl} from "../../redux/constants/url";
+import {fetchStudentTable} from "../../redux/actionDispatcher/superAdmin/studentTableDatadispatcher";
 import {connect} from "react-redux";
-import SkeletonColor from "../../../helpers/Skeletrone";
-import Archived_icon from "../../assests/image/Archived_icon.svg"
+import SkeletonColor from "../../helpers/Skeletrone";
+import Archived_icon from "../assests/image/Archived_icon.svg"
 import {TableCheckbox} from "./tableComponents/TableCheckbox";
-import {VerifyStudent} from "../../../redux/actionDispatcher/superAdmin/studentVerifyTableDataDispatcher";
+import {VerifyStudent} from "../../redux/actionDispatcher/superAdmin/studentVerifyTableDataDispatcher";
 import axios from "axios";
-import AllUrl from "../../../redux/constants/url";
+import AllUrl from "../../redux/constants/url";
 import {toast} from "react-toastify";
 import AddNewStudent from "./AddNewStudent";
 

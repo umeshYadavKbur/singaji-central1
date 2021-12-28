@@ -1,5 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
+import {toast} from 'react-toastify'
 // import getData from "../../services/agent";
 
 import {
@@ -18,14 +19,22 @@ export const createNewAdmin = (data) => {
         .then(function (response) {
           if (response.status === 200) {
             dispatch(newAdminReqSuccess());
-            Swal.fire({
-              position: 'top-center',
-              icon: 'success',
-              title: 'New admin has been successfully created!',
-              showConfirmButton: false,
-              timer: 2500
-            })
-
+            // Swal.fire({
+            //   position: 'top-center',
+            //   icon: 'success',
+            //   title: 'New admin has been successfully created!',
+            //   showConfirmButton: false,
+            //   timer: 2500
+            // })
+            toast('admin has been successfully created!', {
+              position: "bottom-center",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
           } else if (response.status === 208) {
             dispatch(newAdminReqSuccess());
             Swal.fire({

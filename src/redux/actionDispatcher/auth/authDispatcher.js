@@ -6,11 +6,13 @@ import {
 } from "../../constants/actions.js";
 import getData from "../../../services/agent";
 import { loginUrl } from "../../constants/url";
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 
 
-export const fetchUsers = (data) => {
+export const fetchUsers = (data, navigate) => {
+  // const navigate = useNavigate();
   return async (dispatch) => {
     const url = loginUrl;
     // wait untill the data not received so getData function take data and url part
@@ -26,19 +28,20 @@ export const fetchUsers = (data) => {
         localStorage.setItem("role", userResData.data.role);
         localStorage.setItem("email", userResData.data.email);
 
-        // toast.success('Login successfully !', {
-        //   position: "top-right",
-        //   autoClose: 3000,
-        //   hideProgressBar: true,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        // });
+        console.log(userResData.data.role)
+        if (userResData.data.role === "SUPERADMIN") {
+          navigate('/admin_dashboard');
+        } else if (userResData.data.role === "STUDENTADMIN") {
+          navigate('/student_admin_dashboard');
 
-        //Redirect to the home page remaining
-        // history.push('/');
-        //dispatch action and store data in it
+
+        } else if (userResData.data.role === "ACCOUNTADMIN") {
+
+          navigate('/account_admin_dashboard');
+        }
+
+
+
         dispatch(loginSuccess(userResData.data));
       } else if (userResData.request.status === 404) {
         toast.error('User not found', {
@@ -79,6 +82,7 @@ export const fetchUsers = (data) => {
       return userResData.request.status;
     } catch (error) {
       //if crudential fails than Login fail action dispatch
+      console.log(error)
       let value = JSON.stringify(userResData.request.status);
       dispatch(loginFailure(value));
       toast.error('Internal server error', {

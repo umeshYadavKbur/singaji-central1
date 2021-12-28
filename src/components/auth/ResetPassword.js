@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import React from "react";
-import '../superAdmin/components/styles/Login.css'
+import '../components/styles/Login.css'
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { newPasswordRequest } from "../../redux/actionDispatcher/auth/newPassDispatcher";
 import {useNavigate} from 'react-router-dom';

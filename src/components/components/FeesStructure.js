@@ -9,15 +9,15 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { createFeesStructure } from "../../../redux/actionDispatcher/superAdmin/createFeesStrucDispather";
+import { createFeesStructure } from "../../redux/actionDispatcher/superAdmin/createFeesStrucDispather";
 import "./styles/createAdmin.css";
-import { baseUrl } from "../../../redux/constants/url";
-import Edit_icon from "../../assests/image/Edit_icon.svg";
+import { baseUrl } from "../../redux/constants/url";
+import Edit_icon from "../assests/image/Edit_icon.svg";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { changeFeesStructureStatus } from "../../../redux/actionDispatcher/superAdmin/feesStructureTableDataDispatcher";
+import { changeFeesStructureStatus } from "../../redux/actionDispatcher/superAdmin/feesStructureTableDataDispatcher";
 import './styles/Table.css'
-import LoaderButton from "../../assests/common/LoaderButton";
+import LoaderButton from "../assests/common/LoaderButton";
 
 function FeesStructure({ adminData, createFees, original, changeFeesStatus, table_data }) {
   const token = localStorage.getItem("token");

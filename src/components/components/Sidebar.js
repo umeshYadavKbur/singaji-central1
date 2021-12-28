@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import "./styles/sidebar.css";
-import logoimage from "../../assests/image/logoimage.png";
-import logo from "../../assests/image/logo.png";
-import david from "../../assests/image/david.png";
+import logoimage from "../assests/image/logoimage.png";
+import logo from "../assests/image/logo.png";
+import david from "../assests/image/david.png";
 import { connect } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import {
   hideSideBar,
   showSideBar,
-} from "../../../redux/actionDispatcher/superAdmin/showSideBarDispather";
-import back_btn from "../../assests/image/sidebarIcons/back_btn.svg";
-import toggle_btn_icon from "../../assests/image/sidebarIcons/toggle_btn_sidebar.png";
-import Dashboard_svg from "../../assests/image/sidebarIcons/Dashboard.svg";
-import Alumini_svg from "../../assests/image/sidebarIcons/Alumini.svg";
-import Accounts_svg from "../../assests/image/sidebarIcons/Accounts.svg";
-import External_company_svg from "../../assests/image/sidebarIcons/External_company.svg";
-import Donation_svg from "../../assests/image/sidebarIcons/Donation.svg";
-import Education_svg from "../../assests/image/sidebarIcons/Education.svg";
-import Others_svg from "../../assests/image/sidebarIcons/Others.svg";
+} from "../../redux/actionDispatcher/superAdmin/showSideBarDispather";
+import back_btn from "../assests/image/sidebarIcons/back_btn.svg";
+import toggle_btn_icon from "../assests/image/sidebarIcons/toggle_btn_sidebar.png";
+import Dashboard_svg from "../assests/image/sidebarIcons/Dashboard.svg";
+import Alumini_svg from "../assests/image/sidebarIcons/Alumini.svg";
+import Accounts_svg from "../assests/image/sidebarIcons/Accounts.svg";
+import External_company_svg from "../assests/image/sidebarIcons/External_company.svg";
+import Donation_svg from "../assests/image/sidebarIcons/Donation.svg";
+import Education_svg from "../assests/image/sidebarIcons/Education.svg";
+import Others_svg from "../assests/image/sidebarIcons/Others.svg";
 
 const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play }) => {
   const [toggle, setToggle] = useState(false);

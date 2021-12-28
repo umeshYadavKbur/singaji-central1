@@ -8,13 +8,13 @@ import './styles/Table.css'
 import { ToastContainer } from "react-toastify";
 import { TableCheckbox } from './tableComponents/TableCheckbox';
 // import { useEffect } from 'react';
-import { baseUrl } from '../../../redux/constants/url';
+import { baseUrl } from '../../redux/constants/url';
 // import { getDataFromApi } from '../../../services/getApi';
 // import axios from 'axios'
-import { fetchAdminTableData, getAdminTableData } from '../../../redux/actionDispatcher/superAdmin/adminTableDatadispatcher';
+import { fetchAdminTableData, getAdminTableData } from '../../redux/actionDispatcher/superAdmin/adminTableDatadispatcher';
 import { connect } from 'react-redux';
-import SkeletonColor from '../../../helpers/Skeletrone';
-import { AdminStatusChange } from '../../../redux/actionDispatcher/superAdmin/adminStatusChangeDispatcher'
+import SkeletonColor from '../../helpers/Skeletrone';
+import { AdminStatusChange } from '../../redux/actionDispatcher/superAdmin/adminStatusChangeDispatcher'
 import Swal from 'sweetalert2';
 
 

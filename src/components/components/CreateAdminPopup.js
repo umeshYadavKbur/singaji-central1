@@ -10,12 +10,12 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import logo from "../../assests/image/User.svg";
+import logo from "../assests/image/User.svg";
 import "./styles/createAdmin.css";
-import { createNewAdmin } from "../../../redux/actionDispatcher/superAdmin/createNewAdminDispatcher";
+import { createNewAdmin } from "../../redux/actionDispatcher/superAdmin/createNewAdminDispatcher";
 import { useNavigate } from "react-router-dom";
-import LoaderButton from "../../assests/common/LoaderButton";
-import { baseUrl } from "../../../redux/constants/url";
+import LoaderButton from "../assests/common/LoaderButton";
+import { baseUrl } from "../../redux/constants/url";
 
 function CreateAdminPopup({ adminData, createNewAdmin }) {
   const token = localStorage.getItem("token");

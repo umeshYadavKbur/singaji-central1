@@ -1,4 +1,4 @@
-import HeaderColumn from "../../../assests/common/HeaderColumn";
+import HeaderColumn from "../../assests/common/HeaderColumn";
 // import Edit_icon from "../../../assests/image/Edit_icon.svg";
 import FeesStructure from "../FeesStructure";
 const FeesStructureColumn = [
