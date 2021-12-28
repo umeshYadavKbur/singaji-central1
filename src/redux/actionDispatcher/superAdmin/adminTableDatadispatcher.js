@@ -11,14 +11,6 @@ import {
 export const fetchAdminTableData = (data) => {
   return (dispatch) => {
     dispatch(fetchTableData());
-    // console.log("getting table data", data);
-    // axios(data)
-    //   .then(function (response) {
-    //     console.log(response)
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
     try {
       axios(data)
         .then(function (response) {

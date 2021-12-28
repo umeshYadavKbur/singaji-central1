@@ -6,7 +6,7 @@ var axios = require('axios');
 
 
 export const VerifyStudent = (data) => {
-    console.log("data dispatch", data);
+    // console.log("data dispatch", data);
     return async (dispatch) => {
         // const url = loginUrl;
         // wait untill the data not received so getData function take data and url part

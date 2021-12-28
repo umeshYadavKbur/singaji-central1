@@ -4,19 +4,16 @@ import {
   NEW_PASS_SUCCESS,
 } from "../../constants/actions";
 import Swal from "sweetalert2";
-
 import getData from "../../../services/agent";
-// import { useNavigate } from "react-router-dom";
-// import {baseUrl} from "../constants/url";
-// import { useHistory } from "react-router";
-// const history = useHistory()
-// const navigate = useNavigate()
+import AllUrl from "../../constants/url";
+
 
 export const newPasswordRequest = (data) => {
   return async (dispatch) => {
-    const newPassUrl = `/api/resetPasswordLink/${data.token}`;
+
+    const url = `${AllUrl.forgotPassword}${data.token}`;
     dispatch(newPassRequest());
-    var newPasswordData = await getData(data, newPassUrl);
+    var newPasswordData = await getData(data, url);
     try {
       if (newPasswordData.status === 200) {
         dispatch(passReqSuccess());

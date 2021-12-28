@@ -15,7 +15,7 @@ import "./styles/createAdmin.css";
 import { createNewAdmin } from "../../redux/actionDispatcher/superAdmin/createNewAdminDispatcher";
 import { useNavigate } from "react-router-dom";
 import LoaderButton from "../assests/common/LoaderButton";
-import { baseUrl } from "../../redux/constants/url";
+import AllUrl, { baseUrl } from "../../redux/constants/url";
 
 function CreateAdminPopup({ adminData, createNewAdmin }) {
   const token = localStorage.getItem("token");
@@ -48,7 +48,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
       });
       var config = {
         method: "post",
-        url: `${baseUrl}/api/createNewAdmin`,
+        url: AllUrl.createNewAdmin,
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -83,16 +83,16 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         }}
       >
         <CModalHeader>
-       
-          <h2 style={{ marginLeft: "129px" , color:"#5A607F"}}>
-           Create Admin
+
+          <h2 style={{ marginLeft: "129px", color: "#5A607F" }}>
+            Create Admin
           </h2>
-        
-          
+
+
         </CModalHeader>
         <CModalBody>
           <div className="first_div createAdmin">
-            <div className="second_div " style={{ marginTop: "0px"}}>
+            <div className="second_div " style={{ marginTop: "0px" }}>
               <form onSubmit={formik.handleSubmit}>
                 <div>
                   {/* <h4 className=" text-aligns-center createAdminhead">

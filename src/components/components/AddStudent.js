@@ -25,7 +25,7 @@ function AddStudent() {
     aadharNumber: Yup.string().required("Required!"),
     fatherOccupation: Yup.string().required("Required!"),
     fatherIncome: Yup.string().required("Required!"),
-    category: Yup.string().required("Required!"), 
+    category: Yup.string().required("Required!"),
     village: Yup.string().required("Required!"),
     tehsil: Yup.string().required("Required!"),
     district: Yup.string().required("Required!"),
@@ -185,7 +185,7 @@ function AddStudent() {
                           placeholder="Father name"
                         />{" "}
                         {formik.errors.fatherName &&
-                        formik.touched.fatherName ? (
+                          formik.touched.fatherName ? (
                           <div className="text-danger fs-6">
                             {formik.errors.fatherName}
                           </div>
@@ -242,7 +242,7 @@ function AddStudent() {
                           placeholder="Aadhar Number"
                         />
                         {formik.errors.aadharNumber &&
-                        formik.touched.aadharNumber ? (
+                          formik.touched.aadharNumber ? (
                           <div className="text-danger fs-6">
                             {formik.errors.aadharNumber}
                           </div>
@@ -281,7 +281,7 @@ function AddStudent() {
                           placeholder="School name"
                         />
                         {formik.errors.schoolName &&
-                        formik.touched.schoolName ? (
+                          formik.touched.schoolName ? (
                           <div className="text-danger fs-6">
                             {formik.errors.schoolName}
                           </div>
@@ -311,7 +311,7 @@ function AddStudent() {
                           <option value="Art">Art</option>
                         </select>
                         {formik.errors.school12Subject &&
-                        formik.touched.school12Subject ? (
+                          formik.touched.school12Subject ? (
                           <div className="text-danger fs-6">
                             {formik.errors.school12Subject}
                           </div>
@@ -332,7 +332,7 @@ function AddStudent() {
                           placeholder="School name"
                         />
                         {formik.errors.schoolName &&
-                        formik.touched.schoolName ? (
+                          formik.touched.schoolName ? (
                           <div className="text-danger fs-6">
                             {formik.errors.schoolName}
                           </div>
@@ -355,7 +355,7 @@ function AddStudent() {
                           placeholder="12 percentage"
                         />
                         {formik.errors.percentage12 &&
-                        formik.touched.percentage12 ? (
+                          formik.touched.percentage12 ? (
                           <div className="text-danger fs-6">
                             {formik.errors.percentage12}
                           </div>
@@ -376,7 +376,7 @@ function AddStudent() {
                           placeholder="10 percentage"
                         />
                         {formik.errors.percentage10 &&
-                        formik.touched.percentage10 ? (
+                          formik.touched.percentage10 ? (
                           <div className="text-danger fs-6">
                             {formik.errors.percentage10}
                           </div>
@@ -404,7 +404,7 @@ function AddStudent() {
                           <option value="Bcom">Bcom</option>
                         </select>
                         {formik.errors.branchName &&
-                        formik.touched.branchName ? (
+                          formik.touched.branchName ? (
                           <div className="text-danger fs-6">
                             {formik.errors.branchName}
                           </div>
@@ -449,7 +449,7 @@ function AddStudent() {
                           placeholder="Father Occupation"
                         />
                         {formik.errors.fatherOccupation &&
-                        formik.touched.fatherOccupation ? (
+                          formik.touched.fatherOccupation ? (
                           <div className="text-danger fs-6">
                             {formik.errors.fatherOccupation}
                           </div>
@@ -468,7 +468,7 @@ function AddStudent() {
                           placeholder="Father Income"
                         />
                         {formik.errors.fatherIncome &&
-                        formik.touched.fatherIncome ? (
+                          formik.touched.fatherIncome ? (
                           <div className="text-danger fs-6">
                             {formik.errors.fatherIncome}
                           </div>
@@ -596,7 +596,7 @@ function AddStudent() {
                           placeholder="Registration Fees"
                         />
                         {formik.errors.registrationFees &&
-                        formik.touched.registrationFees ? (
+                          formik.touched.registrationFees ? (
                           <div className="text-danger fs-6">
                             {formik.errors.registrationFees}
                           </div>
@@ -649,7 +649,7 @@ function AddStudent() {
                           <option value="Full Fess">Full Fees</option>
                         </select>
                         {formik.errors.schemeFees &&
-                        formik.touched.schemeFees ? (
+                          formik.touched.schemeFees ? (
                           <div className="text-danger fs-6">
                             {formik.errors.schemeFees}
                           </div>

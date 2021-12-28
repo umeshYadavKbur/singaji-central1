@@ -10,34 +10,12 @@ import FeesStructureTable from "../components/FeesStuctureTable";
 import AdminTable from "../components/AdminTable";
 import Sidebar from "../components/Sidebar";
 import StudentTable from "../components/StudentsTable";
-import AddNewStudent from "../components/AddNewStudent";
-import AddStudent from "../components/AddStudent";
 import { ToastContainer } from "react-toastify";
 import SidebarLinks from "./SidebarLinks";
+import HeaderLink from "./HeaderLink";
 
 
 function AdminDashboard() {
-  // const navigate = useNavigate()
-
-  // const roleRedirection = (auth) => {
-  //   if (auth === "SUPERADMIN") {
-  //     navigate('/admindashboard')
-  //   } else {
-  //     navigate('/home')
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   var auth = localStorage.getItem('role')
-  //   console.log('====================================');
-  //   console.log(auth);
-  //   console.log('====================================');
-  //   roleRedirection(auth);
-  //   return () => {
-  //     localStorage.clear();
-  //   };
-  // }, []);
-
   const { play, style, isPlaying } = useAnimate({
     start: {
       width: "281px",
@@ -63,11 +41,11 @@ function AdminDashboard() {
         pauseOnHover
       />
       <div className="side_bar_content" style={style}>
-        <Sidebar play={play} isPlaying={isPlaying} Options={SidebarLinks}/>
+        <Sidebar play={play} isPlaying={isPlaying} Options={SidebarLinks} />
       </div>
       <div className="header_table">
         <div className="header_dashboard">
-          <Navbar />
+          <Navbar Options={HeaderLink} />
         </div>
         <div className="table_dashboard">
           <Routes>
@@ -75,8 +53,6 @@ function AdminDashboard() {
             <Route path="studenttable" element={<StudentTable />} />
             <Route path="admintable" element={<AdminTable />} />
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
-            {/* <Route path="addstudent" element={<AddStudent />} /> */}
-            <Route path="addnewstudent" element={<AddStudent />} />
           </Routes>
         </div>
       </div>

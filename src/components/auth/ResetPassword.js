@@ -1,18 +1,19 @@
-import {  useParams } from "react-router";
+import { useNavigate } from 'react-router-dom';
+import { useParams } from "react-router";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import React from "react";
+
+//components
 import '../components/styles/Login.css'
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { newPasswordRequest } from "../../redux/actionDispatcher/auth/newPassDispatcher";
-import {useNavigate} from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 
 
 
 function ResetPassword({ newPassword, newPasswordRequest }) {
-  console.log(newPassword);
+  // console.log(newPassword);
   const { token } = useParams();
   // const history = useHistory();
   const navigate = useNavigate();
@@ -20,12 +21,8 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
 
   console.log(newPassword);
 
-  // const isBigScreen = useMediaQuery({query: '(min-width: 1824px)'})
-  // const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'})
-  // const redirection = () => {
-  //   history.push('./login')
-  // }
-  if(newPassword.newPass) {
+
+  if (newPassword.newPass) {
     // toast.error("Login unsuccessfull");
     navigate('/login');
   }
@@ -34,7 +31,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
     confirm: Yup.string().required("Required*"),
   })
 
- 
+
   const formik = useFormik({
     initialValues: {
       confirm: "",
@@ -42,23 +39,23 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
     },
     validationSchema,
     onSubmit: (values) => {
-      
-      if(formik.values.confirm === formik.values.password){
-      const data = {
-        password: formik.values.password,
-        token:token
-      }
-// console.log(values);
-      // //passing the data in fetchUsers which contain the dispatch method
-      // //Add new lines and response in fetchUsers function
+
+      if (formik.values.confirm === formik.values.password) {
+        const data = {
+          password: formik.values.password,
+          token: token
+        }
+        // console.log(values);
+        // //passing the data in fetchUsers which contain the dispatch method
+        // //Add new lines and response in fetchUsers function
         newPasswordRequest(data)
-    }
+      }
     },
   });
   return (
     <>
       <div className="bg-login">
-      {/* <ToastContainer
+        {/* <ToastContainer
           position="top-center"
           autoClose={2500}
           hideProgressBar={true}
@@ -71,7 +68,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
         /> */}
         <div
           className="position-absolute top-50 start-50 translate-middle login-card "
-         
+
         >
           <form onSubmit={formik.handleSubmit} className="login-form">
             <div className="d-flex justify-content-center">
@@ -118,7 +115,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
             <button
               style={{ color: "white", fontWeight: "500" }}
               className="w-100 btn btn-md btn-warning button-color"
-             type="submit"
+              type="submit"
               disabled={newPassword.loading}
             >
               {newPassword.loading ? "loading..." : "Submit"}

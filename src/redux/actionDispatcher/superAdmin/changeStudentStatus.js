@@ -20,7 +20,7 @@ export const changeStatus = (data) => {
       axios(data)
         .then(function (response) {
           //Printing the response of the data
-          console.log(("Response is  :::", response));
+          // console.log(("Response is  :::", response));
 
           if (response.status === 208) {
             // dispatch(newAdminReqSuccess());

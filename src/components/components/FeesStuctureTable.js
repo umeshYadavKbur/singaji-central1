@@ -14,7 +14,7 @@ import "./styles/Table.css";
 import { TableCheckbox } from "./tableComponents/TableCheckbox";
 import { connect } from "react-redux";
 import { fetchFeesTableData } from "../../redux/actionDispatcher/superAdmin/feesStructureTableDataDispatcher";
-import { baseUrl } from "../../redux/constants/url";
+import AllUrl from "../../redux/constants/url";
 import SkeletonColor from "../../helpers/Skeletrone";
 import { ToastContainer } from "react-toastify";
 
@@ -25,7 +25,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
   React.useEffect(() => {
     var config = {
       method: "GET",
-      url: `${baseUrl}/api/list_schema`,
+      url: AllUrl.allSchemaList,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",

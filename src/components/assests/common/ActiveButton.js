@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { changeStatus } from "../../../redux/actionDispatcher/changeStudentStatus";
-import { baseUrl } from "../../../redux/constants/url";
+import AllUrl from "../../../redux/constants/url";
 
 function activeButton({ original, changeStatus }) {
   const token = localStorage.getItem("token");
@@ -16,7 +16,7 @@ function activeButton({ original, changeStatus }) {
     });
     var config = {
       method: "post",
-      url: `${baseUrl}/api/varify_student`,
+      url: AllUrl.verifyStudent,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -32,21 +32,21 @@ function activeButton({ original, changeStatus }) {
         style={
           original.status === "Active"
             ? {
-                width: "80px",
-                borderRadius: "5px",
-                backgroundColor: "#FFC700",
-                color: "white",
-                fontWeight: "bold",
-                border: "1px #FFC700",
-              }
+              width: "80px",
+              borderRadius: "5px",
+              backgroundColor: "#FFC700",
+              color: "white",
+              fontWeight: "bold",
+              border: "1px #FFC700",
+            }
             : {
-                width: "80px",
-                backgroundColor: "#FBC775",
-                borderRadius: "5px",
-                fontWeight: "bold",
-                color: "white",
-                border: "none",
-              }
+              width: "80px",
+              backgroundColor: "#FBC775",
+              borderRadius: "5px",
+              fontWeight: "bold",
+              color: "white",
+              border: "none",
+            }
         }
         onClick={() =>
           // console.log("====================================");

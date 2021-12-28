@@ -8,11 +8,9 @@ import Donation_svg from "../assests/image/sidebarIcons/Donation.svg";
 import Education_svg from "../assests/image/sidebarIcons/Education.svg";
 import Others_svg from "../assests/image/sidebarIcons/Others.svg";
 
-const SidebarLinks = ({Toggle}) => {
+const SidebarLinks = ({ Toggle }) => {
     const [tabName, setTabName] = useState("Dashboard");
     const [tabName1, setTabName1] = useState("Education");
-
-
 
     const remove_active_tab = () => {
         const tags = document.getElementsByClassName('sidebar_options')
@@ -23,7 +21,7 @@ const SidebarLinks = ({Toggle}) => {
     }
 
     const add_active_tab = (id) => {
-        console.log(id)
+        // console.log(id)
         document.getElementById(id).classList.add('active_tab');
 
     }
@@ -40,14 +38,9 @@ const SidebarLinks = ({Toggle}) => {
                     let x = document.getElementById('education-collapse');
                     if (x.classList.contains('show'))
                         document.getElementById('education-collapse-btn').click();
-
                     document.getElementById('dashboard-collapse-btn')?.classList.add('active_tab');
-
-
                 }}
-
                 onClickCapture={remove_active_tab}
-
             >
                 <img src={icon} className=" Sidebar_text sidebar_icons" alt="" />
                 <span className="text-dark ">{name}</span>
@@ -154,15 +147,6 @@ const SidebarLinks = ({Toggle}) => {
                     </div>
                 </ul>
             </div>
-
-
-
-
-
-
-
-
-
             <Link className="sidebar_options" to="#!"
                 onClickCapture={remove_active_tab}
                 onClick={() => { add_active_tab('Accounts') }}

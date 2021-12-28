@@ -1,5 +1,5 @@
-import {Fragment} from "react";
-import ActiveButton from "../../../assests/common/ActiveButton";
+// import {Fragment} from "react";
+// import ActiveButton from "../../../assests/common/ActiveButton";
 import Edit_icon from '../../../assests/image/Edit_icon.svg'
 import {VerifyStudent} from "../../../../redux/actionDispatcher/studentVerifyTableDataDispatcher";
 import Swal from 'sweetalert2'

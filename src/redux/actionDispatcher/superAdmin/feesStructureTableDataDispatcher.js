@@ -7,7 +7,7 @@ import {
   FEES_STRUCTURE_CHANGE_SUCCESS,
   FEES_STRUCTURE_CHANGE_FAIL,
 } from "../../constants/actions";
-import { baseUrl } from "../../constants/url";
+import AllUrl, { baseUrl } from "../../constants/url";
 import { toast } from 'react-toastify'
 
 
@@ -39,7 +39,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
     const getUpdatedTableData = async () => {
       var config = {
         method: "GET",
-        url: `${baseUrl}/api/list_schema`,
+        url: AllUrl.allSchemaList,
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

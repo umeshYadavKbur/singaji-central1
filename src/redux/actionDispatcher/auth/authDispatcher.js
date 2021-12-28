@@ -5,16 +5,14 @@ import {
   LOGOUT,
 } from "../../constants/actions.js";
 import getData from "../../../services/agent";
-import { loginUrl } from "../../constants/url";
 import { toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
+import AllUrl from "../../constants/url.js";
 
 
 
 export const fetchUsers = (data, navigate) => {
-  // const navigate = useNavigate();
   return async (dispatch) => {
-    const url = loginUrl;
+    const url = AllUrl.login;
     // wait untill the data not received so getData function take data and url part
     dispatch(loginRequest());
     var userResData = await getData(data, url);
@@ -33,15 +31,9 @@ export const fetchUsers = (data, navigate) => {
           navigate('/admin_dashboard');
         } else if (userResData.data.role === "STUDENTADMIN") {
           navigate('/student_admin_dashboard');
-
-
         } else if (userResData.data.role === "ACCOUNTADMIN") {
-
           navigate('/account_admin_dashboard');
         }
-
-
-
         dispatch(loginSuccess(userResData.data));
       } else if (userResData.request.status === 404) {
         toast.error('User not found', {

@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 export const fetchStudentTable = (data) => {
   return (dispatch) => {
     dispatch(fetchTableData());
-    console.log("getting table data", data);
+    // console.log("getting table data", data);
     // axios(data)
     //   .then(function (response) {
     //     console.log(response)
@@ -21,7 +21,7 @@ export const fetchStudentTable = (data) => {
       axios(data)
         .then(function (response) {
           //Printing the response of the data
-          console.log((response));
+          // console.log((response));
           if (response.status === 200) {
             dispatch(fetchSuccessTableData(response.data));
             // Swal.fire({

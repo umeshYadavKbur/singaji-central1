@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const useAuth = () => {
     const role = localStorage.getItem("role");
-    console.log('checking role in localStorage')
+    // console.log('checking role in localStorage')
     if (role === 'SUPERADMIN') {
         return true;
     }

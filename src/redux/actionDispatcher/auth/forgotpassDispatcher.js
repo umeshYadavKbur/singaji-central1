@@ -5,15 +5,14 @@ import {
 } from "../../constants/actions";
 import getData from "../../../services/agent";
 import Swal from "sweetalert2";
+import AllUrl from "../../constants/url";
+
 // import {history} from '../../helpers/history'
-import { forgetPass } from "../../constants/url";
 export const fetchUserEmail = (data) => {
   return async (dispatch) => {
-    // console.log(data);
-    const forgotPasswordUrl = forgetPass;
+    const url = AllUrl.resetPassword;
     dispatch(forgotPasswordRequest());
-    var forgetPasswordData = await getData(data, forgotPasswordUrl);
-    // console.log("Working  :::: ", forgetPasswordData);
+    var forgetPasswordData = await getData(data, url);
     if (forgetPasswordData.status === 200) {
       Swal.fire({
         title: 'Mail sent successfully',

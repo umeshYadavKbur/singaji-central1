@@ -18,6 +18,7 @@ import Swal from "sweetalert2";
 import { changeFeesStructureStatus } from "../../redux/actionDispatcher/superAdmin/feesStructureTableDataDispatcher";
 import './styles/Table.css'
 import LoaderButton from "../assests/common/LoaderButton";
+import AllUrl from "../../redux/constants/url"
 
 function FeesStructure({ adminData, createFees, original, changeFeesStatus, table_data }) {
   const token = localStorage.getItem("token");
@@ -49,7 +50,7 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
     onSubmit: async (values) => {
 
       if (original) {
-      if (formik.values.totalFees > 1000) {
+        if (formik.values.totalFees > 1000) {
           var update = JSON.stringify({
             branch_schema_code: formik.values.stream + formik.values.startYear,
             total_fees: `${formik.values.totalFees}`,
@@ -57,7 +58,7 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
 
           var updateSchema = {
             method: 'post',
-            url: `${baseUrl}/api/update_schema`,
+            url: AllUrl.updateSchema,
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",

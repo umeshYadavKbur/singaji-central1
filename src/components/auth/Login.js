@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,33 +12,11 @@ import { fetchUsers } from "../../redux/actionDispatcher/auth/authDispatcher";
 import '../components/styles/Login.css';
 
 function Login({ userData, fetchUsers }) {
-
-
   // setInterval(async () => {
   //   const result = await checkOnlineStatus();
   //   result ?console.log("online"):console.log("offline");
   // },300);
   var navigate = useNavigate();
-  
-  // useEffect(() => {
-  //   if (localStorage.getItem('role') === 'SUPERADMIN') {
-  //     history.push('/home')
-  //   }
-  //   else if (localStorage.getItem('role') === 'STUDENT') {
-  //     history.push('/student')
-  //   }
-  //   else if (localStorage.getItem('role') === 'ADMIN') {
-  //     history.push('/admin')
-  //   }
-  // })
-  // console.log(userData)
-
-
-  // if (userData.role === "SUPERADMIN") {
-  //   navigate("/admindashboard");
-  // } else if (userData.role === "ACCOUNTADMIN") {
-  //   navigate("/admindashboard");
-  // }
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Please Enter Email"),
@@ -65,15 +43,6 @@ function Login({ userData, fetchUsers }) {
       fetchUsers(data,navigate);
     },
   });
-
-
-  // useEffect(() => {
-  //   if (userData.error === "400") {
-  //     toast.error("Login unsuccessfull");
-  //   }
-  //   return () => {
-  //   }
-  // }, [userData.error])
 
 
   return (

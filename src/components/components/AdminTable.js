@@ -2,15 +2,10 @@ import * as React from 'react';
 import { useMemo } from 'react';
 import { GlobalFilter } from './tableComponents/GlobalFilter';
 import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
-// import MockData from './tableComponents/mockData.json'
-import Column from './tableComponents/AdminTableColumn'
 import './styles/Table.css'
 import { ToastContainer } from "react-toastify";
 import { TableCheckbox } from './tableComponents/TableCheckbox';
-// import { useEffect } from 'react';
-import { baseUrl } from '../../redux/constants/url';
-// import { getDataFromApi } from '../../../services/getApi';
-// import axios from 'axios'
+import AllUrl, { baseUrl } from '../../redux/constants/url';
 import { fetchAdminTableData, getAdminTableData } from '../../redux/actionDispatcher/superAdmin/adminTableDatadispatcher';
 import { connect } from 'react-redux';
 import SkeletonColor from '../../helpers/Skeletrone';
@@ -74,9 +69,6 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                                 border: 'none'
                             }}
                     onClick={() => {
-                        // setData(original.status)
-                        // console.log(original.email)
-                        // alert("Do you want to change status of  : " + original.name)
                         Swal.fire({
                             title: `${original.is_active === 0 ? 'Active' : 'Deactive'}`,
 
@@ -101,7 +93,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                                 if (res === 200) {
                                     var config = {
                                         method: "GET",
-                                        url: `${baseUrl}/api/infoOfAdmins`,
+                                        url: AllUrl.infoAllAdmin,
                                         headers: {
                                             Authorization: `Bearer ${token}`,
                                             "Content-Type": "application/json",
@@ -109,7 +101,6 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                                     };
                                     getAdminTableData(config);
                                 }
-                                //console.log("admin status change",res);
                             }
                         })
 
@@ -124,7 +115,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
     React.useEffect(() => {
         var config = {
             method: "GET",
-            url: `${baseUrl}/api/infoOfAdmins`,
+            url: AllUrl.infoAllAdmin,
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
@@ -179,7 +170,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             })
         }
     )
-    
+
     const { globalFilter } = state
     const { pageIndex, pageSize, selectedRowIds } = state
 
