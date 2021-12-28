@@ -57,10 +57,10 @@ function App() {
             <Route path="/admin_dashboard/*" element={<AdminDashboard />} />
           </Route>
           <Route element={<AccountAdmin />}>
-            <Route path="/account_admin_dashboard" element={<AccountAdminDashboard />} />
+            <Route path="/account_admin_dashboard/*" element={<AccountAdminDashboard />} />
           </Route>
           <Route element={<StudentAdmin />}>
-            <Route path="/student_admin_dashboard" element={<StudentAdminDashboard />} />
+            <Route path="/student_admin_dashboard/*" element={<StudentAdminDashboard />} />
           </Route>
           <Route path="*" element={<Navigate replace to="/login" />} />
         </Routes>

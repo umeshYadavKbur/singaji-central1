@@ -13,6 +13,7 @@ import StudentTable from "../components/StudentsTable";
 import AddNewStudent from "../components/AddNewStudent";
 import AddStudent from "../components/AddStudent";
 import { ToastContainer } from "react-toastify";
+import SidebarLinks from "./SidebarLinks";
 
 
 function AdminDashboard() {
@@ -62,7 +63,7 @@ function AdminDashboard() {
         pauseOnHover
       />
       <div className="side_bar_content" style={style}>
-        <Sidebar play={play} isPlaying={isPlaying} />
+        <Sidebar play={play} isPlaying={isPlaying} Options={SidebarLinks}/>
       </div>
       <div className="header_table">
         <div className="header_dashboard">
