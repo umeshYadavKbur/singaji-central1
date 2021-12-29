@@ -56,16 +56,18 @@ const SidebarLinks = ({ Toggle }) => {
                 className="sidebar_options_link"
                 to={url}
 
-                onClick={() => {
+                onClick={(e) => {
+                  
                     setTabName1(name);
                     setTabName('Dashboard')
-                    document.getElementById('education-collapse-btn').click();
-                    // 
-                    let x = document.getElementById('dashboard-collapse');
-                    if (x.classList.contains('show'))
-                        document.getElementById('dashboard-collapse-btn').click();
+                    // document.getElementById('education-collapse-btn').click();
+                    // // 
+                    // let x = document.getElementById('dashboard-collapse');
+                    // if (x.classList.contains('show'))
+                    //     document.getElementById('dashboard-collapse-btn').click();
 
                     document.getElementById('education-collapse-btn')?.classList.add('active_tab');
+                    
                 }}
                 onClickCapture={remove_active_tab}
             >

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route,  } from "react-router-dom";
 import { useAnimate } from "react-simple-animate";
 
 import "../components/styles/adminDashboard.css";
@@ -53,6 +53,7 @@ function AdminDashboard() {
         <div className="table_dashboard">
           <Routes>
             <Route path="" element={<Dashboard />} />
+            <Route path="studenttable" element={<StudentTable />} />
             <Route path="addnewstudent" element={<AddStudent />} />
           </Routes>
         </div>
