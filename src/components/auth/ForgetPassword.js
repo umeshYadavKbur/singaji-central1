@@ -10,12 +10,11 @@ import Singaji_logo from '../assests/image/Singaji_logo.svg'
 import { fetchUserEmail } from '../../redux/actionDispatcher/auth/forgotpassDispatcher';
 import '../components/styles/Login.css';
 import LoaderButton from '../assests/common/LoaderButton';
+import { ToastContainer } from "react-toastify";
 
 function ForgotPassword({ passData, fetchUserEmail }) {
   const navigate = useNavigate();
-  if (passData.success) {
-    navigate("/login");
-  }
+
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Enter the Email!"),
   });
@@ -27,7 +26,7 @@ function ForgotPassword({ passData, fetchUserEmail }) {
     onSubmit: (values) => {
       const email = { email: formik.values.email };
       // console.log("Email", email);
-      fetchUserEmail(email);
+      fetchUserEmail(email, navigate);
     },
   });
   // const isBigScreen = useMediaQuery({query: '(min-width: 1824px)'})
@@ -35,6 +34,17 @@ function ForgotPassword({ passData, fetchUserEmail }) {
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={2500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="bg-login">
         <div
           className="position-absolute  top-50 start-50 translate-middle m-auto bg-light px-5 pt-2 pb-5 shadow rounded-5 login-card"
@@ -87,7 +97,7 @@ const mapStateToProps = (state) => {
 //passing the userData in fetchUsers function and also dispatch method
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUserEmail: (email) => dispatch(fetchUserEmail(email)),
+    fetchUserEmail: (email, navigate) => dispatch(fetchUserEmail(email, navigate)),
   };
 };
 

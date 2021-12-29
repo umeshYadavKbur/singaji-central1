@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
+// import { ToastContainer } from 'react-toastify';
 import * as Yup from "yup";
 import React from "react";
 
@@ -9,23 +10,15 @@ import React from "react";
 import '../components/styles/Login.css'
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { newPasswordRequest } from "../../redux/actionDispatcher/auth/newPassDispatcher";
-
+import { ToastContainer } from 'react-toastify';
 
 
 function ResetPassword({ newPassword, newPasswordRequest }) {
-  // console.log(newPassword);
   const { token } = useParams();
   // const history = useHistory();
   const navigate = useNavigate();
 
-
-  console.log(newPassword);
-
-
-  if (newPassword.newPass) {
-    // toast.error("Login unsuccessfull");
-    navigate('/login');
-  }
+  // console.log(newPassword);
   const validationSchema = Yup.object({
     password: Yup.string().required("Required*"),
     confirm: Yup.string().required("Required*"),
@@ -48,14 +41,14 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
         // console.log(values);
         // //passing the data in fetchUsers which contain the dispatch method
         // //Add new lines and response in fetchUsers function
-        newPasswordRequest(data)
+        newPasswordRequest(data , navigate)
       }
     },
   });
   return (
     <>
       <div className="bg-login">
-        {/* <ToastContainer
+        <ToastContainer
           position="top-center"
           autoClose={2500}
           hideProgressBar={true}
@@ -65,7 +58,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-        /> */}
+        />
         <div
           className="position-absolute top-50 start-50 translate-middle login-card "
 
@@ -136,7 +129,7 @@ const mapStateToProps = (state) => {
 //passing the userData in fetchUsers function and also dispatch method
 const mapDispatchToProps = (dispatch) => {
   return {
-    newPasswordRequest: (data) => dispatch(newPasswordRequest(data)),
+    newPasswordRequest: (data , navigate) => dispatch(newPasswordRequest(data , navigate)),
   };
 };
 

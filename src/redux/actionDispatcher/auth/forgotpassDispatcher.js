@@ -6,9 +6,10 @@ import {
 import getData from "../../../services/agent";
 import Swal from "sweetalert2";
 import AllUrl from "../../constants/url";
+import { toast } from "react-toastify";
 
 // import {history} from '../../helpers/history'
-export const fetchUserEmail = (data) => {
+export const fetchUserEmail = (data, navigate) => {
   return async (dispatch) => {
     const url = AllUrl.resetPassword;
     dispatch(forgotPasswordRequest());
@@ -19,19 +20,36 @@ export const fetchUserEmail = (data) => {
         icon: 'success',
         showConfirmButton: false,
         timer: 2500,
-
       })
+      navigate('./login');
       dispatch(forgotPasswordSuccess(forgetPasswordData));
     } else if (forgetPasswordData.request.status === 404) {
-      Swal.fire({
-        title: "Email not Found",
-        icon: "warning",
-        showConfirmButton: false,
-        timer: 2500
+      // Swal.fire({
+      //   title: "Email not Found",
+      //   icon: "warning",
+      //   showConfirmButton: false,
+      //   timer: 2500
+      // });
+      toast.warn('Email not found', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
       dispatch(forgotPasswordFailure(forgetPasswordData.data));
     } else {
-      console.log("Catch block");
+      toast.error('Internal server error', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       dispatch(forgotPasswordFailure(forgetPasswordData));
     }
   };

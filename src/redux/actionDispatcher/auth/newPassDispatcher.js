@@ -6,9 +6,10 @@ import {
 import Swal from "sweetalert2";
 import getData from "../../../services/agent";
 import AllUrl from "../../constants/url";
+import { toast } from "react-toastify";
 
 
-export const newPasswordRequest = (data) => {
+export const newPasswordRequest = (data, navigate) => {
   return async (dispatch) => {
 
     const url = `${AllUrl.forgotPassword}${data.token}`;
@@ -23,20 +24,47 @@ export const newPasswordRequest = (data) => {
           showConfirmButton: false,
           timer: 2500,
         })
-        // navigate('/login')
+        navigate('/login')
       } else if (newPasswordData.request.status === 406) {
-        Swal.fire({
-          title: "Oops! link expired",
-          icon: "warning",
-          showConfirmButton: false,
-          timer: 2500
+        // Swal.fire({
+        //   title: "Oops! link expired",
+        //   icon: "warning",
+        //   showConfirmButton: false,
+        //   timer: 2500
+        // });
+        toast.warn('Oops! link expired', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
         });
         dispatch(passReqFail(newPasswordData));
       } else {
+        toast.warn('Oops! link expired', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         dispatch(passReqFail(newPasswordData));
       }
     } catch (error) {
       // dispatch(passReqFail(error));
+      toast.error('Internal server error', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       console.log(error);
     }
   };
