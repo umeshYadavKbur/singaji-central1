@@ -30,7 +30,7 @@ const RootReducer = combineReducers({
     feesStructTableData: feesstructureTableReducer,
     VerifyStudent: VerifyStudentReducer,
     AdminStatusChangeData: AdminStatusChangeReducer,
-    // addStudent: addNewStudentReducer,
+    addStudent: addNewStudentReducer,
 });
 
 export default RootReducer;

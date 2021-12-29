@@ -11,7 +11,7 @@ import AdminTable from "../components/AdminTable";
 import Sidebar from "../components/Sidebar";
 import StudentTable from "../components/StudentsTable";
 import AddNewStudent from "../components/AddNewStudent";
-import AddStudent from "../components/AddStudent";
+// import AddStudent from "../components/AddStudent";
 import { ToastContainer } from "react-toastify";
 import SidebarLinks from "./SidebarLinks";
 import HeaderLink from "./HeaderLink";
@@ -54,7 +54,7 @@ function AdminDashboard() {
           <Routes>
             <Route path="" element={<Dashboard />} />
             <Route path="studenttable" element={<StudentTable />} />
-            <Route path="addnewstudent" element={<AddStudent />} />
+            <Route path="addnewstudent" element={<AddNewStudent />} />
           </Routes>
         </div>
       </div>

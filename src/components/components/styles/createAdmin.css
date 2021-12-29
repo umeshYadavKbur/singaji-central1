@@ -7,24 +7,26 @@
 .second_div {
   width: 100%;
   max-width: 400px;
-  padding: 0px 45px 45px 45px;
+  padding: 25px 45px 45px 45px;
   margin: auto;
   background: "white";
   border-radius: 10px;
 }
+
 .logo_img {
   /* border-radius: 40px; */
   width: 200px;
   height: 60px;
   display: flex;
   align-content: center;
-  margin-left: 45px;
+  margin-left: 40px;
 }
+
 .createAdmin input {
   height: 38px;
   width: 100%;
   outline: none;
-  border: 1px solid #5A607F;
+  border: 1px solid grey;
   background-color: rgb(255, 255, 255);
   font-size: 15px;
   color: rgb(139, 139, 139);
@@ -43,40 +45,35 @@
   border-radius: 4px;
   padding-left: 10px;
 }
+
 .submit_btn {
-  background-color: rgb(247, 146, 42);
+  background-color: orange;
   outline: none;
   border-width: 0px;
   height: 35px;
   border-radius: 4px;
 }
 
-.form-control {
-  margin-top: 10px;
-}
 .inputs {
   margin-top: 2px;
 }
-.labels{
+
+.labels {
   cursor: pointer;
-  color: #5A607F;
+  color: #373957;
   /* font-weight: bold; */
   font-size: 20px;
   margin-top: 0px;
   margin-bottom: -3px;
-
 }
 
-.createAdminhead{
+.createAdminhead {
   text-align: center;
   /* margin-left: 122px; */
-  color: #5A607F;
-}
-.feestructurehead{
-  margin-left: 95px;
-  color: #5A607F;
+  color: #373957;
 }
 
-/* ::-ms-input-placeholder{
-  color: #5A607F;
-} */
+.feestructurehead {
+  margin-left: 110px;
+  color: #373957;
+}

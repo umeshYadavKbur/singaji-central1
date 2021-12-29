@@ -30,6 +30,7 @@ const AllUrl = {
     deleteStudent: `${baseUrl}/api/delete_cancel_student`,
     verifyStudent: `${baseUrl}/api/varify_student`,
     verifyStudentPaidUnpaid: `${baseUrl}/api/reg_fees_status`,
+    addNewStudent: `${baseUrl}/api/register`,
     //_____________________________________
 
     //landing pages urls 

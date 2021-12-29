@@ -7,6 +7,7 @@ import "../components/styles/adminDashboard.css";
 import Dashboard from "../components/Dashboard";
 import Navbar from "../components/Navbar";
 import FeesStructureTable from "../components/FeesStuctureTable";
+import AddNewStudent from "../components/AddNewStudent";
 import AdminTable from "../components/AdminTable";
 import Sidebar from "../components/Sidebar";
 import StudentTable from "../components/StudentsTable";
@@ -52,6 +53,7 @@ function AdminDashboard() {
             <Route path="" element={<Dashboard />} />
             <Route path="studenttable" element={<StudentTable />} />
             <Route path="admintable" element={<AdminTable />} />
+            <Route path="addnewstudent" element={<AddNewStudent />} />
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
           </Routes>
         </div>
