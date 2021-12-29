@@ -9,7 +9,7 @@ import Navbar from "../components/Navbar";
 import FeesStructureTable from "../components/FeesStuctureTable";
 import AdminTable from "../components/AdminTable";
 import Sidebar from "../components/Sidebar";
-import StudentTable from "../components/StudentsTable";
+import StudentAccount from "./components/StudentAccount";
 import AddNewStudent from "../components/AddNewStudent";
 import AddStudent from "../components/AddStudent";
 import { ToastContainer } from "react-toastify";
@@ -43,7 +43,7 @@ function AdminDashboard() {
         pauseOnHover
       />
       <div className="side_bar_content" style={style}>
-        <Sidebar play={play} isPlaying={isPlaying} Options={SidebarLinks}/>
+        <Sidebar play={play} isPlaying={isPlaying} Options={SidebarLinks} />
       </div>
       <div className="header_table">
         <div className="header_dashboard">
@@ -52,7 +52,7 @@ function AdminDashboard() {
         <div className="table_dashboard">
           <Routes>
             <Route path="" element={<Dashboard />} />
-            <Route path="studenttable" element={<StudentTable />} />
+            <Route path="studenttable" element={<StudentAccount />} />
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
             <Route path="addnewstudent" element={<AddStudent />} />
           </Routes>

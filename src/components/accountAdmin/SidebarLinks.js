@@ -78,7 +78,7 @@ const SidebarLinks = ({ Toggle }) => {
 
     return (
         <>
-            <Link className="sidebar_options" to="#!"
+            <Link className="sidebar_options" to="studenttable"
                 onClickCapture={remove_active_tab}
                 onClick={() => { add_active_tab('Accounts') }}
                 id="Accounts"
