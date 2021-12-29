@@ -7,6 +7,7 @@ import {
 import getData from "../../../services/agent";
 import { toast } from 'react-toastify';
 import AllUrl from "../../constants/url.js";
+import storage from "../../../helpers/Crypto.js";
 
 
 
@@ -23,10 +24,11 @@ export const fetchUsers = (data, navigate) => {
         //setting the Items in localStorage
         localStorage.setItem("user", userResData.data.user);
         localStorage.setItem("token", userResData.data.token);
-        localStorage.setItem("role", userResData.data.role);
         localStorage.setItem("email", userResData.data.email);
+        storage.setItem("role", userResData.data.role);
 
-        console.log(userResData.data.role)
+
+        // console.log(userResData.data.role)
         if (userResData.data.role === "SUPERADMIN") {
           navigate('/admin_dashboard');
         } else if (userResData.data.role === "STUDENTADMIN") {

@@ -1,8 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
+import storage from "./Crypto";
 
 
 const useAuth = () => {
-    const role = localStorage.getItem("role");
+    const role = storage.getItem("role");
     // console.log('checking role in localStorage')
     if (role === 'SUPERADMIN') {
         return true;
