@@ -74,14 +74,14 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               ? {
                 width: "80px",
                 borderRadius: "5px",
-                backgroundColor: "#FFC700",
+                backgroundColor: "rgb(255 202 39 / 81%)",
                 color: "white",
                 fontWeight: "bold",
-                border: '1px #FFC700',
+                border: '1px rgb(255 202 39 / 81%)',
 
               } : {
                 width: "80px",
-                backgroundColor: "#FFC700",
+                backgroundColor: "rgb(255 171 0)",
                 borderRadius: "5px",
                 fontWeight: "bold",
                 color: "white",
@@ -182,7 +182,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           }
           onClick={() => {
             // setData(original.status)
-
+            if(original.reg_fees_status === "Paid"){
             console.log(original.email)
             Swal.fire({
               title: 'Active',
@@ -202,14 +202,38 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               confirmButtonColor: "blue",
               reverseButtons: true
 
-            }).then((result) => {
+            }).then(async(result) => {
               if (result.isConfirmed) {
-                VerifyStudent(original);
+                const resultofverify = await VerifyStudent(original);
+                // console.log(resultofverify);
+                if(resultofverify === 200)
+                {
+                  var config = {
+                    method: "GET",
+                    url: AllUrl.allRegistratedStudent,
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                      "Content-Type": "application/json",
+                    },
+                  };
+                  fetchStudentTable(config);
+                }
               }
             })
             // alert("Do you want to change this   : " + original.email)
             // VerifyStudent(original.email);
-          }}>
+           }
+           else{
+              toast.warning('Firstly Pay Registration Fee',{
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+           } }}>
           Deactive
         </button>
       )
@@ -340,9 +364,9 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
             <div className='me-4'>
               <button type="button" class="btn btn-outline-secondary fw-bold ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
             </div>
-            <div className='me-4'>
+            {/* <div className='me-4'>
               <button type="button" class="btn btn-outline-primary fw-bold ">Active</button>
-            </div>
+            </div> */}
             <div className='me-4'>
               <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
             </div></div>
@@ -393,6 +417,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               Showing {(page.length * (pageIndex + 1) - (page.length - 1))} to  {page.length * (pageIndex + 1)} of  {pageCount * pageSize}{' '} Entries {"  "}
             </span>
           </div>
+          
           <div className='ml-auto me-3' >
             {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
             <button style={{ outline: "none", border: "1px solid gray", borderRadius: "10px 0 0 10px" }} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>

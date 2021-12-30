@@ -11,12 +11,12 @@ import {useFormik} from 'formik';
 import axios from 'axios';
 import AddNewStudent from '../../redux/actionDispatcher/superAdmin/addNewStudentDispatcher'
 import { connect } from 'react-redux';
-
+import NumberFormat from 'react-number-format';
 
 function AddNewStudentPage({AddNewStudent}) {
 
-     const [branchNames,setBranchNames] = useState([{subjects: 'loding...',id: 0}])
-     const [trackNames,setTrackNames] = useState([{trackName: 'loding...',trackId: 0}])
+     const [branchNames,setBranchNames] = useState([{subjects: 'loading...',id: 0}])
+     const [trackNames,setTrackNames] = useState([{trackName: 'loading...',trackId: 0}])
 
      useEffect( async() => {
          
@@ -45,14 +45,14 @@ function AddNewStudentPage({AddNewStudent}) {
 
    
 
-   
+     
       
 
     const initialValues = {
         firstName: "",lastName: "",dob: "",contactNumber: "",fatherName: "",fatherOccupation: "",fatherIncome: "",FatherContactNumber: "",address: "",village: "",pincode: "",tehsil: "",district: "",email: "",aadharNumber: "",category: "",gender: "male",
         percent10: '',rollNumber10: '',joinBatch: '',percent12: '',rollNumber12: '',year: '',streamName: '',subject12: '',schoolName: '',
-        GKBAmount: '',postmatricAmount: '',thirdInstallmentDate: '',thirdInstallment: '',secondInstallmentDate: '',secondInstallment: '',feesScheme: '',firstInstallmentDate: '',firstInstallment: '',courseFees: '',regisrationFees: '',
-        postmatricScolarship: '',gkbScolarship: '',gkbOwner: '',postmatricOwner: '',payableAmmount: '',remark: '',
+        GKBAmount: '0',postmatricAmount: '0',thirdInstallmentDate: '',thirdInstallment: '',secondInstallmentDate: '',secondInstallment: '',feesScheme: '',firstInstallmentDate: '',firstInstallment: '',courseFees: '',regisrationFees: '1500',
+        postmatricScolarship: 'No',gkbScolarship: 'No',gkbOwner: 'Self',postmatricOwner: 'Self',payableAmmount: '',remark: '',
         trackName: "",busFees: "",
     }
 
@@ -60,7 +60,7 @@ function AddNewStudentPage({AddNewStudent}) {
         firstName: Yup.string().required("Required!"),
         lastName: Yup.string().required("Required!"),
         dob: Yup.string().required("Required!"),
-        contactNumber: Yup.string().required("Required!"),
+        contactNumber: Yup.string().min(10,"Invalid Number").max(10,"Number must be less then 10 digit").required("Required!"),
         fatherName: Yup.string().required("Required!"),
         fatherOccupation: Yup.string().required("Required!"),
         fatherIncome: Yup.string().required("Required!"),
@@ -111,29 +111,31 @@ function AddNewStudentPage({AddNewStudent}) {
         onSubmit: (values) => {
             console.log(formik.values);
 
-            AddNewStudent(values)
+            // AddNewStudent(values)
         }
     });
-
-    if(formik.values.streamName !== ' '&& formik.values.joinBatch !== ' '){
+  const getCourseFees= async()=>{
+      
+    if(formik.values.joinBatch != '' && formik.values.streamName !=''){
         console.log("api calling");
        
-      var data = ' ';
-        var config = {
-            method: 'get',
-            url: `https://singaji-central-server.herokuapp.com/api/show_fees/${formik.values.streamName + formik.values.joinBatch}`,
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem("token")}`
-            },
-            data: data
-        };
-        axios(config)
-            .then(function(response) {
-                console.log(JSON.stringify(response.data));
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+      var data = '';
+
+      var config = {
+          method: 'get',
+          url: 'https://singaji-central-server.herokuapp.com/api/show_fees/bca2021',
+          headers: {
+              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHNzaXNtLm9yZyIsInJvbGUiOiJTVVBFUkFETUlOIiwidGlkIjoia2xhZHNmcm93aXVpajQ1NzR3ZTk4cjc4OXNkN2YiLCJleHAiOjE2NDA4NjM3MzEsImlhdCI6MTY0MDg2MDEzMX0.uzhTHUfZvfOVIsG-cGIYFRpq1_Hh_U05euaB5Yb55u8'
+          },
+          data: data
+      };
+
+        const StudentCourseFees =await axios(config)
+        if(StudentCourseFees.status ===200){
+            formik.values.courseFees = StudentCourseFees.data[0].total_fees;
+        }
+        console.log(StudentCourseFees);
+    }      
     }
     return (
         <>
@@ -159,6 +161,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">First Name</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.firstName}
                                         name="firstName"
                                         type="text"
@@ -176,6 +179,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Last Name</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.lastName}
                                         name="lastName"
                                         type="text"
@@ -192,6 +196,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">DOB</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.dob}
                                         name="dob"
                                         type="date"
@@ -207,14 +212,11 @@ function AddNewStudentPage({AddNewStudent}) {
                                     )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Contact Number</label>  <input
-                                        onChange={formik.handleChange}
-                                        value={formik.values.contactNumber}
-                                        name="contactNumber"
-                                        type="number"
-                                        className="form-control"
-                                        placeholder="Contact Number"
-                                    />
+                                    <label htmlFor="">Contact Number</label>
+                                        <NumberFormat onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            value={formik.values.contactNumber}
+                                            name="contactNumber" placeholder="Contact Number" className="form-control" format="##########" />
                                     {formik.errors.contactNumber && formik.touched.contactNumber ? (
                                         <div className="text-danger fs-6">
                                             {formik.errors.contactNumber}
@@ -230,6 +232,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Father Name</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.fatherName}
                                         name="fatherName"
                                         type="text"
@@ -247,6 +250,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Father Occupation</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.fatherOccupation}
                                         name="fatherOccupation"
                                         type="text"
@@ -262,14 +266,14 @@ function AddNewStudentPage({AddNewStudent}) {
                                     )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Father Annual Income</label>  <input
-                                        onChange={formik.handleChange}
-                                        value={formik.values.fatherIncome}
-                                        name="fatherIncome"
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Father Annual Income"
-                                    />
+                                    <label htmlFor="">Father Annual Income</label>
+                                        <input onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            type="number"
+                                            value={formik.values.fatherIncome}
+                                            name="fatherIncome" placeholder="Father Annual Income" className="form-control"
+                                             />
+
                                     {formik.errors.fatherIncome && formik.touched.fatherIncome ? (
                                         <div className="text-danger fs-6">
                                             {formik.errors.fatherIncome}
@@ -279,14 +283,11 @@ function AddNewStudentPage({AddNewStudent}) {
                                     )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Father Contact</label>  <input
-                                        onChange={formik.handleChange}
-                                        value={formik.values.FatherContactNumber}
-                                        name="FatherContactNumber"
-                                        type="number"
-                                        className="form-control"
-                                        placeholder="Father Contact"
-                                    />
+                                    <label htmlFor="">Father Contact</label> 
+                                        <NumberFormat onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            value={formik.values.FatherContactNumber}
+                                            name="FatherContactNumber" placeholder="Father Contact" className="form-control" format="##########" />
                                     {formik.errors.FatherContactNumber && formik.touched.FatherContactNumber ? (
                                         <div className="text-danger fs-6">
                                             {formik.errors.FatherContactNumber}
@@ -299,23 +300,12 @@ function AddNewStudentPage({AddNewStudent}) {
                             </div>
                             {/* Addres Input feild */}
                             <div className="row m-1">
-                                <div className="col-3">
-                                    <label >Track Name</label>
-                                    <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange} className="form-select" id="inputGroupSelect02" placeholder="select">
-                                        <option value='0'>Select Track</option>
-                                        {trackNames.map((ele) => {
-                                            return (
-                                                <option value={ele.trackid}>{ele.trackname}</option>
-                                            )
-                                        })}
-
-                                    </select>
-                                      </div>
                                    
-                                <div className="col-9">
+                                <div className="col">
                                     <label htmlFor="">Address</label>
                                     <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.address}
                                         name="address"
                                         type="text"
@@ -335,6 +325,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Pincode</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.pincode}
                                         name="pincode"
                                         type="text"
@@ -353,6 +344,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Village</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.village}
                                         name="village"
                                         type="text"
@@ -371,6 +363,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Tehsil</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.tehsil}
                                         name="tehsil"
                                         type="text"
@@ -388,6 +381,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">District</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.district}
                                         name="district"
                                         type="text"
@@ -408,6 +402,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Email</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.email}
                                         name="email"
                                         type="text"
@@ -423,14 +418,11 @@ function AddNewStudentPage({AddNewStudent}) {
                                     )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Aadhar Number</label>  <input
-                                        onChange={formik.handleChange}
-                                        value={formik.values.aadharNumber}
-                                        name="aadharNumber"
-                                        type="number"
-                                        className="form-control"
-                                        placeholder="Aadhar Number"
-                                    />
+                                    <label htmlFor="">Aadhar Number</label> 
+                                        <NumberFormat onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            value={formik.values.aadharNumber}
+                                            name="aadharNumber" placeholder="Aadhar Number" className="form-control" format="#### #### ####" />
                                     {formik.errors.aadharNumber && formik.touched.aadharNumber ? (
                                         <div className="text-danger fs-6">
                                             {formik.errors.aadharNumber}
@@ -444,6 +436,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <select
                                         name="category"
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.category}
                                         className="form-select"
                                         id="inputGroupSelect02"
@@ -469,11 +462,13 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <label >Gender</label>
                                     <div>
                                         <label>
-                                            <input type="radio" onChange={formik.handleChange} name="gender" value="male" defaultChecked/>
+                                            <input type="radio" onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur} name="gender" value="male" defaultChecked/>
                                            {' '} Male
                                         </label>{ ' '}
                                         <label>
-                                            <input type="radio" onChange={formik.handleChange} name="gender" value="female" />
+                                            <input type="radio" onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur} name="gender" value="female" />
                                           {' '} Female
                                         </label>
                                     </div>
@@ -499,63 +494,23 @@ function AddNewStudentPage({AddNewStudent}) {
                     </AccordionSummary>
                     <AccordionDetails style={{backgroundColor: '#F4F7FC',padding: '15px'}}>
                         <Typography>
+                            
                             <div className='row m-1'>
-                                <div className="col">
-                                    <label htmlFor="">12<sup>th</sup> School Name</label>  <input
-                                        onChange={formik.handleChange}
-                                        value={formik.values.schoolName}
-                                        name="schoolName"
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="School Name"
-                                    />
-                                </div>
-                                <div className="col">
-                                    <label htmlFor="">12<sup>th</sup> Subject</label>
-                                    <select onChange={formik.handleChange} name="subject12" value={formik.values.subject12} className="form-select" id="inputGroupSelect02" placeholder="select">
-                                      <option value="0">Select Subject</option>  
-                                      <option value="Maths">Maths</option>  
-                                      <option value="BIO">BIO</option>  
-                                      <option value="Art">Art</option>  
-                                      <option value="Commerce">Commerce</option>  
-                                    </select>
-                                </div>
-                                <div className="col">
-                                    <label htmlFor="">Stream Name</label>
-
-                                    <select name="streamName" value={formik.values.streamName} onChange={formik.handleChange} className="form-select" id="inputGroupSelect02" placeholder="select">
-                                        <option value='0'>Select branch</option>
-                                        {branchNames.map((ele) => {
-                                            return (
-                                                <option value={ele.subjects}>{ele.subjects}</option>
-                                            )
-                                        })}
-
-                                    </select>
-
-                                </div>
-                                <div className="col">
-                                    <label htmlFor="">Year</label> 
-                                    <select name="year" value={formik.values.year} onChange={formik.handleChange} className="form-select" id="inputGroupSelect02" placeholder="select">
-                                        <option value='0'>Select Year</option>
-                                        <option value='I'>I Year</option>
-                                        <option value='II'>II Year</option>
-                                        <option value='III'>III Year</option>
-                                        </select>
-                                     {/* <input
-                                        onChange={formik.handleChange}
-                                        value={formik.values.year}
-                                        name="year"
-                                        type="number"
-                                        className="form-control"
-                                        placeholder="year"
-                                    /> */}
-                                </div>
-                            </div>
-                            <div className='row m-1'>
+                                    <div className="col">
+                                        <label htmlFor="">12<sup>th</sup> School Name</label>  <input
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            value={formik.values.schoolName}
+                                            name="schoolName"
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="School Name"
+                                        />
+                                    </div>
                                 <div className="col">
                                     <label htmlFor="">12<sup>th</sup> Roll Number</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.rollNumber12}
                                         name="rollNumber12"
                                         type="text"
@@ -564,33 +519,76 @@ function AddNewStudentPage({AddNewStudent}) {
                                     />
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">12<sup>th</sup> Percent</label>  <input
+                                    <label htmlFor="">12<sup>th</sup> Percentage</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.percent12}
                                         name="percent12"
                                         type="text"
                                         className="form-control"
-                                        placeholder=" 12 percent"
+                                        placeholder=" 12 percentage"
                                     />
                                 </div>
-                                <div className="col">
-                                    <label htmlFor="">Join Batch</label>
-                                      <input
-                                        onChange={formik.handleChange}
-                                        value={formik.values.joinBatch}
-                                        name="joinBatch"
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Join Batch"
-                                    />
-                                </div>
-                                <div className="col"></div>
+                                    <div className="col">
+                                        <label htmlFor="">12<sup>th</sup> Subject</label>
+                                        <select onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur} name="subject12" value={formik.values.subject12} className="form-select" id="inputGroupSelect02" placeholder="select">
+                                            <option value="0">Select Subject</option>
+                                            <option value="Maths">Maths</option>
+                                            <option value="BIO">BIO</option>
+                                            <option value="Art">Art</option>
+                                            <option value="Commerce">Commerce</option>
+                                        </select>
+                                    </div>
 
                             </div>
+                                <div className='row m-1'>
+
+                                    <div className="col-3">
+                                        <label htmlFor="">Year</label>
+                                        <select name="year" value={formik.values.year} onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur} className="form-select" id="inputGroupSelect02" placeholder="select">
+                                            <option value='0'>Select Year</option>
+                                            <option value='I'>I Year</option>
+                                            <option value='II'>II Year</option>
+                                            <option value='III'>III Year</option>
+                                        </select>
+                                       
+                                    </div>
+                                    <div className="col-3">
+                                        <label htmlFor="">Stream Name</label>
+
+                                        <select name="streamName" value={formik.values.streamName} onBlur={formik.handleBlur = () => {getCourseFees()}} 
+                                            onChange={formik.handleChange}className="form-select" id="inputGroupSelect02" placeholder="select">
+                                            <option value='0'>Select branch</option>
+                                            {branchNames.map((ele) => {
+                                                return (
+                                                    <option value={ele.subjects}>{ele.subjects}</option>
+                                                )
+                                            })}
+
+                                        </select>
+
+                                    </div>
+                                    <div className="col-3">
+                                        <label htmlFor="">Join Batch</label>
+                                        <input
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur =()=>{getCourseFees() }}
+                                            value={formik.values.joinBatch}
+                                            name="joinBatch"
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Join Batch"
+                                        />
+                                    </div>
+
+                                </div>
                             <div className='row m-1'>
                                 <div className="col-3">
                                     <label htmlFor="">10<sup>th</sup> Roll Number</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.rollNumber10}
                                         name="rollNumber10"
                                         type="text"
@@ -599,13 +597,14 @@ function AddNewStudentPage({AddNewStudent}) {
                                     />
                                 </div>
                                 <div className="col-3">
-                                    <label htmlFor="">10<sup>th</sup> Percent</label>  <input
+                                    <label htmlFor="">10<sup>th</sup> Percentage</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.percent10}
                                         name="percent10"
                                         type="text"
                                         className="form-control"
-                                        placeholder=" 10 percent"
+                                        placeholder=" 10 percentage"
                                     />
                                 </div>
 
@@ -634,24 +633,29 @@ function AddNewStudentPage({AddNewStudent}) {
                                         name="regisrationFees"
                                         value={formik.values.regisrationFees}
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         type="text"
                                         className="form-control"
                                         placeholder="Registration Fees"
+                                        disabled={true}
                                     />
                                 </div>
                                 <div className="col">
                                     <label htmlFor="">Course Fees</label> <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.courseFees}
                                         name="courseFees"
                                         type="text"
                                         className="form-control"
                                         placeholder="Course Fees"
+                                        disabled={true}
                                     />
                                 </div>
                                 <div className="col">
                                     <label htmlFor="">First Installment</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.firstInstallment}
                                         name="firstInstallment"
                                         type="text"
@@ -662,6 +666,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">First Installment Date</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.firstInstallmentDate}
                                         name="firstInstallmentDate"
                                         type="date"
@@ -673,7 +678,8 @@ function AddNewStudentPage({AddNewStudent}) {
                             <div className='row m-1'>
                                 <div className="col">
                                     <label htmlFor="">Scheme Fees</label>  
-                                        <select name="feesScheme" value={formik.values.feesScheme} onChange={formik.handleChange} className="form-select" id="inputGroupSelect02" placeholder="select">
+                                        <select name="feesScheme" value={formik.values.feesScheme} onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur} className="form-select" id="inputGroupSelect02" placeholder="select">
                                             <option value='0'>Scheme Fees</option>
                                             <option value='SVS'>SVS</option>
                                             <option value='SNS'>SNS</option>
@@ -686,6 +692,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     {/* <label htmlFor="">Course Fees</label> <input
                              onChange={formik.handleChange}
+                             onBlur={formik.handleBlur}
                              value={formik.values.firstName}
                                 name="courseFees"
                                 type="text"
@@ -696,6 +703,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Second Installment</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.secondInstallment}
                                         name="secondInstallment"
                                         type="text"
@@ -706,6 +714,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Second Installment Date</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.secondInstallmentDate}
                                         name="secondInstallmentDate"
                                         type="date"
@@ -722,8 +731,10 @@ function AddNewStudentPage({AddNewStudent}) {
                                         name="postmatricScolarship"
                                         value={formik.values.postmatricScolarship}
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         className="form-select"
                                         id="inputGroupSelect02"
+                                            disabled={formik.values.category === 'Gen' ? true : false}
                                     >
                                         <option defaultValue="no">Postmatric scholarship</option>
                                         <option value="yes">Yes</option>
@@ -735,7 +746,9 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <label htmlFor="">GKB ScolarShip</label>
                                     <select name="gkbScolarship" className="form-select" id="inputGroupSelect02"
                                         value={formik.values.gkbScolarship}
-                                        onChange={formik.handleChange}>
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur} 
+                                        disabled={formik.values.gender === 'male'?true:false}>
                                         <option defaultValue="no">GKB ScolarShip</option>
                                         <option value="yes">Yes</option>
                                         <option value="no">No</option>
@@ -744,6 +757,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Third Installment</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.thirdInstallment}
                                         name="thirdInstallment"
                                         type="text"
@@ -754,6 +768,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Third Installment Date</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.thirdInstallmentDate}
                                         name="thirdInstallmentDate"
                                         type="date"
@@ -768,7 +783,9 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <label htmlFor="">Postmatric Owner</label>
                                     <select name="postmatricOwner" className="form-select" id="inputGroupSelect02"
                                         value={formik.values.postmatricOwner}
-                                        onChange={formik.handleChange}>
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                            disabled={formik.values.category === 'Gen' ? true : false}>
                                         <option defaultValue="self">Postmatric Owner</option>
                                         <option value="self">Self</option>
                                         <option value="ssism">SSISM</option>
@@ -778,15 +795,18 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <label htmlFor="">GKB Owner</label>
                                     <select name="gkbOwner" className="form-select" id="inputGroupSelect02"
                                         value={formik.values.gkbOwner}
-                                        onChange={formik.handleChange}>
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                            disabled={formik.values.gender === 'male' ? true : false}>
                                         <option defaultValue="self">GKB Owner</option>
-                                        <option value="college">College</option>
+                                        <option value="SSISM">SSISM</option>
                                         <option value="self">Self</option>
                                     </select>
                                 </div>
                                 <div className="col">
                                     <label htmlFor="">Payable Ammount</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.payableAmmount}
                                         name="payableAmmount"
                                         type="text"
@@ -797,6 +817,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col">
                                     <label htmlFor="">Remark</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.remark}
                                         name="remark"
                                         type="text"
@@ -810,21 +831,25 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col-3">
                                     <label htmlFor="">Postmatric Amount</label>  <input
                                         onChange={formik.handleChange}
-                                        value={formik.values.postmatricAmount}
+                                        onBlur={formik.handleBlur}
+                                            value={formik.values.category === "Gen" ? formik.values.postmatricAmount='0':formik.values.postmatricAmount}
                                         name="postmatricAmount"
                                         type="text"
                                         className="form-control"
                                         placeholder="Postmatric Amount"
+                                            disabled={formik.values.category === 'Gen' ? true : false}
                                     />
                                 </div>
                                 <div className="col-3">
                                     <label htmlFor="">GKB Amount</label> <input
                                         onChange={formik.handleChange}
-                                        value={formik.values.GKBAmount}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.gender ==='male'?formik.values.GKBAmount ='0':formik.values.GKBAmount}
                                         name="GKBAmount"
                                         type="text"
                                         className="form-control"
                                         placeholder="GKB Amount"
+                                       disabled={formik.values.gender === 'male' ? true : false}
                                     />
                                 </div>
 
@@ -850,6 +875,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                 <div className="col-3">
                                     <label htmlFor="">Bus Fees</label>  <input
                                         onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.busFees}
                                         name="busFees"
                                         type="text"
@@ -857,16 +883,19 @@ function AddNewStudentPage({AddNewStudent}) {
                                         placeholder="Bus Fees"
                                     />
                                 </div>
-                                <div className="col-3">
-                                    <label htmlFor="">Trace Name</label>  <input
-                                        onChange={formik.handleChange}
-                                        value={formik.values.trackName}
-                                        name="trackName"
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Trace Name"
-                                    />
-                                </div>
+                                    <div className="col-3">
+                                        <label >Track Name</label>
+                                        <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur} className="form-select" id="inputGroupSelect02" placeholder="select">
+                                            <option value='0'>Select Track</option>
+                                            {trackNames.map((ele) => {
+                                                return (
+                                                    <option value={ele.trackname}>{ele.trackname}</option>
+                                                )
+                                            })}
+
+                                        </select>
+                                    </div>
                                 {/* <div className="col"></div>
                  <div className="col"></div> */}
 
@@ -889,6 +918,7 @@ function AddNewStudentPage({AddNewStudent}) {
 
                         <button className="btn btn-sm btn-warning text-light fw-bold  " style={{width: "200px"}} type="submit">Submit</button>
                     </div>
+                        
                 </div>
 
 
