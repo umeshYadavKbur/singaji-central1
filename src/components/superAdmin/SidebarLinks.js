@@ -9,19 +9,15 @@ import Education_svg from "../assests/image/sidebarIcons/Education.svg";
 import Others_svg from "../assests/image/sidebarIcons/Others.svg";
 
 const SidebarLinks = ({ Toggle }) => {
-    const [active_dropdown, setActiveDropdown] = useState('');
-    const [active_tab, setActiveTab] = useState('');
+    const [active_dropdown, setActiveDropdown] = useState('Dashboard');
+    const [active_tab, setActiveTab] = useState('dashboard-collapse-btn');
+    const [active_menu, setActiveMenu] = useState({ dashboard: false, education: false });
 
     const changeTab = (id) => {
 
         setActiveDropdown('');
         setActiveTab(id);
-        let arr = document.getElementsByClassName('collapse_superadmin');
-        console.log(arr);
-        // arr.forEach((element) => {
-        //     // element.classList.remove('show')
-        //     console.log(element)
-        // })
+        // setActiveMenu({})
 
     }
 
@@ -47,11 +43,17 @@ const SidebarLinks = ({ Toggle }) => {
                 <ul className="list-unstyled m-0">
                     <a
                         onClick={() => {
+                            setActiveMenu((pre) => {
 
-                            document.getElementById('dashboard-collapse-btn').classList.add('active_tab');
+                                return {
+                                    ...pre,
+                                    dashboard: !active_menu.dashboard
+                                }
+                            })
+                            // document.getElementById('dashboard-collapse-btn').classList.add('active_tab');
                         }}
                         href="#!"
-                        className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'dashboard-collapse-btn' ? 'active_tab' : ''} `}
+                        className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'dashboard-collapse-btn' ? 'active_tab' : ''} ${active_menu.dashboard === true ? 'active_tab' : ''} `}
                         role="button"
                         id="dashboard-collapse-btn"
                         data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true"
@@ -72,6 +74,7 @@ const SidebarLinks = ({ Toggle }) => {
                         <ul className="btn-toggle-nav list-unstyled ">
                             <li className="dropdown_items_div ml-1">
 
+                                {dLink1("Dashboard", "", "ok", 'Dashboard', 'dashboard-collapse-btn')}
                                 {dLink1("Fees Stucture", "feesstructuretable", "ok", 'Fees_Stucture', 'dashboard-collapse-btn')}
                                 {dLink1("My Admin", "admintable", "ok", 'My_Admin', 'dashboard-collapse-btn')}
 
@@ -88,12 +91,9 @@ const SidebarLinks = ({ Toggle }) => {
             <div className="flex-shrink-0">
                 <ul className="list-unstyled m-0">
                     <a
-                        // onClick={() => {
-
-                        //     document.getElementById('education-collapse-btn').classList.toggle('active_tab');
-                        // }}
+                        onClick={() => { setActiveMenu((pre) => { return { ...pre, education: !active_menu.education } }) }}
                         href="#!"
-                        className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'education-collapse-btn' ? 'active_tab' : ''} `}
+                        className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'education-collapse-btn' ? 'active_tab' : ''} ${active_menu.education === true ? 'active_tab' : ''} `}
                         role="button"
                         // data-toggle="collapse"
                         id="education-collapse-btn"
