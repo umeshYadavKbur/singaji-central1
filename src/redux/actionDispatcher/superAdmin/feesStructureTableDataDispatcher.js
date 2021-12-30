@@ -22,12 +22,15 @@ export const fetchFeesTableData = (data) => {
           if (response.status === 200) {
             dispatch(fetchSuccessTableData(response.data));
           }
+          if (response.status === 400) {
+            dispatch(fetchFailTableData(response.data));
+          }
         })
         .catch(function (error) {
-          fetchFailTableData(error);
+          dispatch(fetchFailTableData(error));
         });
     } catch (error) {
-      fetchFailTableData(error);
+      dispatch(fetchFailTableData(error));
     }
   };
 };

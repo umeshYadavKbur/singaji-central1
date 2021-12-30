@@ -7,7 +7,7 @@ import {
   CREATE_FEES_SUCCESS,
 } from "../../constants/actions";
 
-export const createFeesStructure = (data) => {
+export const createFeesStructure = (data, navigate, setVisible, visible) => {
   // console.log("The data is ", data.data);
   return async (dispatch) => {
     // Console the data getting from the form of create admin
@@ -20,12 +20,6 @@ export const createFeesStructure = (data) => {
           // console.log(("The response code is ::", response.status));
 
           if (response.status === 208) {
-            // Swal.fire({
-            //  icon:'warning',
-            //  text: 'This fees structure is Already createrd!',
-
-            //  timer: 2000,
-            // });
             Swal.fire({
               position: 'top-center',
               icon: 'warning',
@@ -33,9 +27,10 @@ export const createFeesStructure = (data) => {
               showConfirmButton: false,
               timer: 2500
             })
-          } else if (response.status === 200) {
             dispatch(feesReqSuccess());
-
+          } else if (response.status === 200) {
+            navigate('feesstructuretable')
+            setVisible(!visible)
             Swal.fire({
               position: 'top-center',
               icon: 'success',
@@ -43,9 +38,10 @@ export const createFeesStructure = (data) => {
               showConfirmButton: false,
               timer: 2500
             })
+            dispatch(feesReqSuccess());
           } else if (response.status === 401) {
             dispatch(feesReqSuccess());
-
+            // dispatch(feesReqFail(error));
           }
         })
         .catch(function (error) {
@@ -59,7 +55,16 @@ export const createFeesStructure = (data) => {
           })
         });
     } catch (error) {
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: 'Internal server error',
+        showConfirmButton: false,
+        timer: 2500
+      })
       console.log(error);
+      dispatch(feesReqFail(error));
+
     }
   };
 };

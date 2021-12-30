@@ -19,10 +19,12 @@ import { changeFeesStructureStatus } from "../../redux/actionDispatcher/superAdm
 import './styles/Table.css'
 import LoaderButton from "../assests/common/LoaderButton";
 import AllUrl from "../../redux/constants/url"
+import { useNavigate } from "react-router-dom";
 
-function FeesStructure({ adminData, createFees, original, changeFeesStatus, table_data }) {
+function FeesStructure({ statusData, adminData, createFees, original, changeFeesStatus, table_data }) {
   const token = localStorage.getItem("token");
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object({
     totalFees: Yup.string().required("Required*"),
@@ -85,7 +87,7 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
           },
           data: data,
         };
-        createFees(config, setVisible, visible);
+        createFees(config, navigate, setVisible, visible);
       }
     },
   });
@@ -274,7 +276,8 @@ function FeesStructure({ adminData, createFees, original, changeFeesStatus, tabl
                   type="submit"
                 >
                   {
-                    table_data.second_loading ? (<LoaderButton />) : (original ? "Update" : "Save")
+                    statusData.second_loading ? (<LoaderButton />) :
+                      table_data.second_loading ? (<LoaderButton />) : (original ? "Update" : "Save")
                   }
                 </button>
               </form>
@@ -291,13 +294,14 @@ const mapStateToProps = (state) => {
   return {
     adminData: state.createAdmin,
     table_data: state.feesStructTableData,
+    statusData: state.feeStructure,
   };
 };
 
 //passing the userData in createNewAdmin function and also dispatch method
 const mapDispatchToProps = (dispatch) => {
   return {
-    createFees: (data) => dispatch(createFeesStructure(data)),
+    createFees: (data, navigate, setVisible, visible) => dispatch(createFeesStructure(data, navigate, setVisible, visible)),
     changeFeesStatus: (data, setVisible, visible) => dispatch(changeFeesStructureStatus(data, setVisible, visible)),
   };
 };
