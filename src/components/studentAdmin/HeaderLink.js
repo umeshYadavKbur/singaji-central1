@@ -13,7 +13,7 @@ const HeaderLink = () => {
 
     function getLocation() {
         if (currentLocation === "/student_admin_dashboard") {
-            return "Dashboard";
+            return "Students";
         } else if (currentLocation === "/student_admin_dashboard/feesstructuretable") {
             return "Fees Structure";
         } else if (currentLocation === "/student_admin_dashboard/studenttable") {

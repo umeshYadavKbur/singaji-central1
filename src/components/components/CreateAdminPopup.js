@@ -15,13 +15,13 @@ import "./styles/createAdmin.css";
 import { createNewAdmin } from "../../redux/actionDispatcher/superAdmin/createNewAdminDispatcher";
 import { useNavigate } from "react-router-dom";
 import LoaderButton from "../assests/common/LoaderButton";
-import AllUrl, { baseUrl } from "../../redux/constants/url";
+import AllUrl from "../../redux/constants/url";
 
 function CreateAdminPopup({ adminData, createNewAdmin }) {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
-  console.log(adminData);
+  // console.log(adminData);
 
   const [visible, setVisible] = useState(false);
   const validationSchema = Yup.object({
@@ -55,7 +55,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         },
         data: data,
       };
-      createNewAdmin(config);
+      createNewAdmin(config , navigate);
     },
   });
 
@@ -189,7 +189,7 @@ const mapStateToProps = (state) => {
 //passing the userData in createNewAdmin function and also dispatch method
 const mapDispatchToProps = (dispatch) => {
   return {
-    createNewAdmin: (config) => dispatch(createNewAdmin(config)),
+    createNewAdmin: (config , navigate) => dispatch(createNewAdmin(config , navigate)),
   };
 };
 

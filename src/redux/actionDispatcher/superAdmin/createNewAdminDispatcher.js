@@ -1,6 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 // import getData from "../../services/agent";
 
 import {
@@ -9,7 +9,7 @@ import {
   CREATE_NEW_ADMIN_SUCCESS,
 } from "../../constants/actions";
 
-export const createNewAdmin = (data) => {
+export const createNewAdmin = (data, navigate) => {
   return async (dispatch) => {
     // Console the data getting from the form of create admin
     // console.log("The data is ", data);
@@ -26,6 +26,7 @@ export const createNewAdmin = (data) => {
             //   showConfirmButton: false,
             //   timer: 2500
             // })
+            navigate('admintable')
             toast('admin has been successfully created!', {
               position: "bottom-center",
               autoClose: 5000,

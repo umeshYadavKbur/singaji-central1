@@ -21,7 +21,7 @@ import LoaderButton from "../assests/common/LoaderButton";
 import AllUrl from "../../redux/constants/url"
 import { useNavigate } from "react-router-dom";
 
-function FeesStructure({ statusData, adminData, createFees, original, changeFeesStatus, table_data }) {
+function FeesStructure({ statusData, createFees, original, changeFeesStatus, table_data }) {
   const token = localStorage.getItem("token");
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
@@ -78,6 +78,8 @@ function FeesStructure({ statusData, adminData, createFees, original, changeFees
           ending_year: formik.values.endYear,
           total_fees: formik.values.totalFees,
         });
+        
+
         var config = {
           method: "post",
           url: `${baseUrl}/api/create_schema`,
@@ -292,7 +294,6 @@ function FeesStructure({ statusData, adminData, createFees, original, changeFees
 //Getting the state from the store
 const mapStateToProps = (state) => {
   return {
-    adminData: state.createAdmin,
     table_data: state.feesStructTableData,
     statusData: state.feeStructure,
   };
