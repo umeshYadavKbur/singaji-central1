@@ -59,7 +59,7 @@ const HeaderLink = () => {
                                 borderRadius: "4px",
                             }}
                             onClick={() => {
-                                navigate("addstudent");
+                                navigate("addnewstudent");
                             }}
                         >
                             Add Student <i class="fas fa-plus pl-3"></i>
