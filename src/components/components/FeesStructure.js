@@ -78,11 +78,11 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
           ending_year: formik.values.endYear,
           total_fees: formik.values.totalFees,
         });
-        
+
 
         var config = {
           method: "post",
-          url: `${baseUrl}/api/create_schema`,
+          url: AllUrl.createSchema,
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
