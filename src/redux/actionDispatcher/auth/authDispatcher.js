@@ -8,6 +8,7 @@ import getData from "../../../services/agent";
 import { toast } from 'react-toastify';
 import AllUrl from "../../constants/url.js";
 import storage from "../../../helpers/Crypto.js";
+import Swal from "sweetalert2";
 
 
 
@@ -37,7 +38,8 @@ export const fetchUsers = (data, navigate) => {
           navigate('/account_admin_dashboard');
         }
         dispatch(loginSuccess(userResData.data));
-      } else if (userResData.request.status === 404) {
+      }
+      else if (userResData.request.status === 404) {
         toast.error('User not found', {
           position: "top-center",
           autoClose: 3000,
@@ -48,7 +50,19 @@ export const fetchUsers = (data, navigate) => {
           progress: undefined,
         });
         dispatch(loginFailure(userResData.data));
-      } else if (userResData.request.status === 400) {
+      }
+      else if (userResData.request.status === 403) {
+        Swal.fire({
+          title: 'User are deactivated please contact Your Admin !',
+          icon: 'warn',
+          showConfirmButton: false,
+          timer: 2500,
+        })
+        dispatch(loginFailure(userResData.data));
+      }
+
+
+      else if (userResData.request.status === 400) {
         let value = JSON.stringify(userResData.request.status);
         dispatch(loginFailure(value));
         toast.warn('Invalid credentials', {
