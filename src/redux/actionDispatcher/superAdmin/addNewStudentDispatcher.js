@@ -3,33 +3,44 @@ import { ADD_STUDENT_FAIL, ADD_STUDENT_REQUEST, ADD_STUDENT_SUCCESS } from "../.
 import getData from '../../../services/agent'
 // import swal from "sweetalert";
 import Swal from 'sweetalert2'
+import AllUrl from "../../constants/url";
+import axios from "axios";
 
 const AddNewStudent = (data) => {
+    var dataOfAddStudent = {
+        method: 'post',
+        url: AllUrl.newRegistraionUrl,
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'application/json'
+        },
+        data: data
+    };
     return async (dispatch) => {
         // Sending the additional url to be attached on baseUrl in other function
-        const loginUrl = "/api/login";
+        // const registrationUrl = AllUrl.newRegistraionUrl;
 
         // wait untill the data not received so getData function take data and url part
         dispatch(AddNewStudentRequest());
-        var userResData = await getData(data, loginUrl);
+        let userResData= await axios(dataOfAddStudent);
         console.log("the response is ::", userResData.request.status);
         // changing the userResData if we need token so userResData.data.toke will be used
         try {
             if (userResData.request.status === 200) {
                 dispatch(AddNewStudentSuccess(userResData.data));
-                // swal({
-                //     title: "Login Success",
-                //     icon: "success",
-                // })
+                Swal.fire({
+                    title: "Registration Success",
+                    icon: "success",
+                })
             }
-            else if (userResData.request.status === 404) {
-                // swal({
-                //     title: "User not Found",
-                //     icon: "warning",
-                // })
+            else if (userResData.request.status === 406) {
+                Swal.fire({
+                    title: "Email Already found",
+                    icon: "warning",
+                })
                 dispatch(AddNewStudentFailure(userResData.data));
             }
-            else if (userResData.request.status === 400) {
+            else if (userResData.request.status === 404) {
                 Swal.fire({
                     position: 'top-center',
                     icon: 'warning',

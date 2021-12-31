@@ -12,7 +12,7 @@ import axios from 'axios';
 import AddNewStudent from '../../redux/actionDispatcher/superAdmin/addNewStudentDispatcher'
 import {connect} from 'react-redux';
 import NumberFormat from 'react-number-format';
-import {number} from 'yup';
+// import {number} from 'yup';
 
 function AddNewStudentPage({AddNewStudent}) {
 
@@ -111,6 +111,11 @@ function AddNewStudentPage({AddNewStudent}) {
         busFees: Yup.string().required("Required!"),
 
     })
+    // let len=formik.values.aadharNumber;
+    // if(len.length <12)
+    // {
+    //     formik.errors.aadharNumber ="Invalid Aadhar Number"
+    // }
     const formik = useFormik({
         initialValues,
         validationSchema,
@@ -165,12 +170,14 @@ function AddNewStudentPage({AddNewStudent}) {
                 "remark": formik.values.remark
             }
             AddNewStudent(bodyData)
-            console.log(bodyData);
+            // console.log(bodyData);
         }
     });
+    const [getCourseFee,setGetCourseFee] = useState(true)
+
     const getCourseFees = async () => {
 
-        if(formik.values.joinBatch != '' && formik.values.streamName != '') {
+        if(formik.values.joinBatch != '' && formik.values.streamName != '' && getCourseFee === true) {
             console.log("api calling");
 
             var data = '';
@@ -187,6 +194,7 @@ function AddNewStudentPage({AddNewStudent}) {
             const StudentCourseFees = await axios(config)
             if(StudentCourseFees.status === 200) {
                 formik.setFieldValue('courseFees',StudentCourseFees.data[0].total_fees);
+                setGetCourseFee(false)
             }
             console.log(StudentCourseFees);
         }
@@ -1225,7 +1233,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 //Connecting the component to our store
-export default connect(mapDispatchToProps,mapStateToProps)(AddNewStudentPage);
+export default connect(mapStateToProps,mapDispatchToProps)(AddNewStudentPage);
 
 // Busfee: 0
 // Firstinstallment: 8500

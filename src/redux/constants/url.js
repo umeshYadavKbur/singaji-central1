@@ -8,6 +8,9 @@ export const loginUrl = "/api/login";
 export const forgetPass = "/api/resetPasswordEmail";
 
 const AllUrl = {
+    // Register New student url
+    newRegistraionUrl: `${baseUrl}/api/register`,
+
     // Fess structure related url 
     updateSchema: `${baseUrl}/api/update_schema`,
     createSchema: `${baseUrl}/api/create_schema`,
