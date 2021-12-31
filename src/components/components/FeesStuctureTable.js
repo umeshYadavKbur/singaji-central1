@@ -50,7 +50,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
     previousPage,
     canNextPage,
     canPreviousPage,
-    pageOptions,
+    // pageOptions,
     gotoPage,
     pageCount,
     setPageSize,

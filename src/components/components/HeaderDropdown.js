@@ -25,7 +25,6 @@ const AppHeaderDropdown = ({ userData, logout }) => {
 
 
   return (
-
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
         <CAvatar src={avatar8} size="lg" />
@@ -40,7 +39,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
               width: "82px",
             }}
           />
-          <p style={{ textAlign: 'center', color: 'white', fontSize: '11px' }}><span style={{ color: 'white', fontSize: '13px' }}>{userData.userInfo}</span><br /> {userData.email}</p>
+          <p style={{ textAlign: 'center', color: 'white', fontSize: '11px' }}><span style={{ color: 'white', fontSize: '13px', fontWeight: 'bold' }}>{userData.userInfo}</span><br /> {userData.email}</p>
           <button
             style={{
               outline: "1px solid white",
@@ -65,6 +64,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
           <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />
           <button
             style={{
+              marginTop: '15px',
               outline: "1px solid white",
               color: "white",
               backgroundColor: "#7e84a3",
@@ -76,7 +76,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
             }}
             onClick={logoutfunction}
           >
-            Logout
+            Log out
           </button>
         </div>
       </CDropdownMenu>

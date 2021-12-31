@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import { Routes, Route,  } from "react-router-dom";
+import React from "react";
+import { Routes, Route, } from "react-router-dom";
 import { useAnimate } from "react-simple-animate";
 
 import "../components/styles/adminDashboard.css";
 
 import Dashboard from "../components/Dashboard";
 import Navbar from "../components/Navbar";
-import FeesStructureTable from "../components/FeesStuctureTable";
-import AdminTable from "../components/AdminTable";
+// import FeesStructureTable from "../components/FeesStuctureTable";
+// import AdminTable from "../components/AdminTable";
 import Sidebar from "../components/Sidebar";
 import StudentTable from "../components/StudentsTable";
 import AddNewStudent from "../components/AddNewStudent";

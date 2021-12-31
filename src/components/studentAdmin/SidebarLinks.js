@@ -57,7 +57,7 @@ const SidebarLinks = ({ Toggle }) => {
                 to={url}
 
                 onClick={(e) => {
-                  
+
                     setTabName1(name);
                     setTabName('Dashboard')
                     // document.getElementById('education-collapse-btn').click();
@@ -67,7 +67,7 @@ const SidebarLinks = ({ Toggle }) => {
                     //     document.getElementById('dashboard-collapse-btn').click();
 
                     document.getElementById('education-collapse-btn')?.classList.add('active_tab');
-                    
+
                 }}
                 onClickCapture={remove_active_tab}
             >

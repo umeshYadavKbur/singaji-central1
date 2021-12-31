@@ -2,7 +2,7 @@ import {
   CButton,
   CModal,
   CModalBody,
-  CModalHeader,
+  // CModalHeader,
   // CModalTitle,
   // CModalTitle,
 } from "@coreui/react";
@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import logo from "../assests/image/User.svg";
+import crossButton from "../assests/image/crossButton.svg";
 import "./styles/createAdmin.css";
 import { createNewAdmin } from "../../redux/actionDispatcher/superAdmin/createNewAdminDispatcher";
 import { useNavigate } from "react-router-dom";
@@ -55,7 +56,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         },
         data: data,
       };
-      createNewAdmin(config , navigate);
+      createNewAdmin(config, navigate);
     },
   });
 
@@ -82,24 +83,17 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
           setVisible(false);
         }}
       >
-        <CModalHeader>
-
-          <h2 style={{ marginLeft: "129px", color: "#5A607F" }}>
-            Create Admin
-          </h2>
-
-
-        </CModalHeader>
         <CModalBody>
           <div className="first_div createAdmin">
             <div className="second_div " style={{ marginTop: "0px" }}>
               <form onSubmit={formik.handleSubmit}>
                 <div>
-                  {/* <h4 className=" text-aligns-center createAdminhead">
+                  <img onClick={() => setVisible(!visible)}
+                    style={{ height: "20px", width: "20px", marginLeft: '95%', marginTop: "-10px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
+                  <h4 className=" text-aligns-center createAdminhead" style={{ marginRight: "30px", fontWeight: 'bold' }}>
                     Create Admin
-                  </h4> */}
+                  </h4>
                   <img src={logo} alt="logo ssism" className="logo_img" />{" "}
-                  {/* <br /> */}
                 </div>
                 <div>
                   <label for="gmail" className="labels mb-1">
@@ -189,7 +183,7 @@ const mapStateToProps = (state) => {
 //passing the userData in createNewAdmin function and also dispatch method
 const mapDispatchToProps = (dispatch) => {
   return {
-    createNewAdmin: (config , navigate) => dispatch(createNewAdmin(config , navigate)),
+    createNewAdmin: (config, navigate) => dispatch(createNewAdmin(config, navigate)),
   };
 };
 
