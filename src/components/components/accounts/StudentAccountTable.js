@@ -2,7 +2,7 @@ import React from 'react';
 import StuAccmockdata from './StuAccmockData.json';
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table';
 import { useMemo } from 'react';
-import './StudentAccount.css';
+import './StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
 

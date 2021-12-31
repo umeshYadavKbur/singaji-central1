@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from "react-router-dom";
-import Dashboard_svg from "../assests/image/sidebarIcons/Dashboard.svg";
+// import Dashboard_svg from "../assests/image/sidebarIcons/Dashboard.svg";
 import Alumini_svg from "../assests/image/sidebarIcons/Alumini.svg";
 import Accounts_svg from "../assests/image/sidebarIcons/Accounts.svg";
 import External_company_svg from "../assests/image/sidebarIcons/External_company.svg";
 import Donation_svg from "../assests/image/sidebarIcons/Donation.svg";
-import Education_svg from "../assests/image/sidebarIcons/Education.svg";
+// import Education_svg from "../assests/image/sidebarIcons/Education.svg";
 import Others_svg from "../assests/image/sidebarIcons/Others.svg";
 
 const SidebarLinks = ({ Toggle }) => {
     const [active_dropdown, setActiveDropdown] = useState('Dashboard');
     const [active_tab, setActiveTab] = useState('dashboard-collapse-btn');
-    const [active_menu, setActiveMenu] = useState({ dashboard: false, education: false });
+    // const [active_menu, setActiveMenu] = useState({ dashboard: false, education: false });
 
     const changeTab = (id) => {
 
@@ -39,7 +39,8 @@ const SidebarLinks = ({ Toggle }) => {
     return (
         <>
      
-            <Link className={`sidebar_options ${active_tab === 'Accounts' ? 'active_tab' : ''}`} to="#!"
+            <Link className={`sidebar_options ${active_tab === 'Accounts' ? 'active_tab' : ''}`} 
+            to="studentaccounttable"
 
                 id="Accounts"
                 onClick={() => { changeTab("Accounts") }}

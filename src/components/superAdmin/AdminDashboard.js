@@ -11,6 +11,7 @@ import AddNewStudent from "../components/AddNewStudent";
 import AdminTable from "../components/AdminTable";
 import Sidebar from "../components/Sidebar";
 import StudentTable from "../components/StudentsTable";
+import StudentAccountTable from '../components/accounts/StudentAccountTable'
 import { ToastContainer } from "react-toastify";
 import SidebarLinks from "./SidebarLinks";
 import HeaderLink from "./HeaderLink";
@@ -52,6 +53,7 @@ function AdminDashboard() {
           <Routes>
             <Route path="" element={<Dashboard />} />
             <Route path="studenttable" element={<StudentTable />} />
+            <Route path="studentaccounttable" element={<StudentAccountTable />} />
             <Route path="admintable" element={<AdminTable />} />
             <Route path="addnewstudent" element={<AddNewStudent />} />
             <Route path="feesstructuretable" element={<FeesStructureTable />} />

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import { useAnimate } from "react-simple-animate";
 
 import "../components/styles/adminDashboard.css";
@@ -7,10 +7,10 @@ import "../components/styles/adminDashboard.css";
 import Dashboard from "../components/Dashboard";
 import Navbar from "../components/Navbar";
 import FeesStructureTable from "../components/FeesStuctureTable";
-import AdminTable from "../components/AdminTable";
+// import AdminTable from "../components/AdminTable";
 import Sidebar from "../components/Sidebar";
-import StudentAccount from "./components/StudentAccount";
-import AddNewStudent from "../components/AddNewStudent";
+// import StudentAccount from "./components/StudentAccount";
+import StudentAccountTable from '../components/accounts/StudentAccountTable';
 import AddStudent from "../components/AddStudent";
 import { ToastContainer } from "react-toastify";
 import SidebarLinks from "./SidebarLinks";
@@ -52,7 +52,7 @@ function AdminDashboard() {
         <div className="table_dashboard">
           <Routes>
             <Route path="" element={<Dashboard />} />
-            <Route path="studenttable" element={<StudentAccount />} />
+            <Route path="studentaccounttable" element={<StudentAccountTable />} />
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
             <Route path="addnewstudent" element={<AddStudent />} />
           </Routes>
