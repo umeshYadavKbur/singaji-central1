@@ -7,7 +7,7 @@ import {
   FEES_STRUCTURE_CHANGE_SUCCESS,
   FEES_STRUCTURE_CHANGE_FAIL,
 } from "../../constants/actions";
-import AllUrl, { baseUrl } from "../../constants/url";
+import AllUrl from "../../constants/url";
 import { toast } from 'react-toastify'
 
 

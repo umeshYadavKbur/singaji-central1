@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import { createFeesStructure } from "../../redux/actionDispatcher/superAdmin/createFeesStrucDispather";
 import "./styles/createAdmin.css";
 import { baseUrl } from "../../redux/constants/url";
+import crossButton from "../assests/image/crossButton.svg";
 import Edit_icon from "../assests/image/Edit_icon.svg";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -180,18 +181,23 @@ if(formik.values.startYear>=formik.values.endYear)
           setVisible(false);
         }}
       >
-        <CModalHeader>
+        {/* <CModalHeader>
           <h2 className=" feestructurehead fs-3 ">
             {original ? "Update Fees Structure" : "Create Fees Structure"}
           </h2>
-        </CModalHeader>
+        </CModalHeader> */}
 
         <CModalBody>
           <div className="first_div createAdmin">
             <div className="second_div ">
               <form onSubmit={formik.handleSubmit}>
-                <div className=" mb-3 ">
-                  <label for="stream" className="labels">
+                <img onClick={() => setVisible(!visible)}
+                  style={{ height: "20px", width: "20px", marginLeft: '95%', marginTop: "-10px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
+                <h4 className=" text-aligns-center createAdminhead" style={{ marginRight: "30px", fontWeight: 'bold' }}>
+                  {original ? "Update Fees Structure" : "Create Fees Structure"}
+                </h4>
+                <div className=" mb-3 mt-3">
+                  <label for="stream" className="labels" style={{ color: '#5A607F' }}>
                     Stream
                   </label>
                   <select
@@ -228,8 +234,9 @@ if(formik.values.startYear>=formik.values.endYear)
                   ) : (
                     ""
                   )}
-                  <label for="startyear" className="labels">
-                    Start year
+                 
+                  <label for="startyear" className="labels" style={{ color: '#5A607F' }}>
+                    Start Year
                   </label>
                   <input
                     value={formik.values.startYear}
@@ -252,8 +259,9 @@ if(formik.values.startYear>=formik.values.endYear)
                   ) : (
                     ""
                   )}
-                  <label for="endyear" className="labels">
-                    End year
+               
+                  <label for="endyear" className="labels" style={{ color: '#5A607F' }}>
+                    End Year
                   </label>
                   <input
                     value={formik.values.endYear}
@@ -276,8 +284,9 @@ if(formik.values.startYear>=formik.values.endYear)
                   ) : (
                     ""
                   )}
-                  <label for="totalfees" className="labels">
-                    total fees
+              
+                  <label for="totalfees" className="labels" style={{ color: '#5A607F' }}>
+                    Total Fees
                   </label>
                   <input
                     value={formik.values.totalFees}
