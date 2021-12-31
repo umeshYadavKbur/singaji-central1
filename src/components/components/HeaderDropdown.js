@@ -64,7 +64,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
           <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />
           <button
             style={{
-              marginTop: '15px',
+              marginTop: '10px',
               outline: "1px solid white",
               color: "white",
               backgroundColor: "#7e84a3",

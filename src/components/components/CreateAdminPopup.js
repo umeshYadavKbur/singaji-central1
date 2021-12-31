@@ -90,7 +90,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                 <div>
                   <img onClick={() => setVisible(!visible)}
                     style={{ height: "20px", width: "20px", marginLeft: '95%', marginTop: "-10px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
-                  <h4 className=" text-aligns-center createAdminhead" style={{ marginRight: "30px", fontWeight: 'bold' }}>
+                  <h4 className=" text-aligns-center createAdminhead" style={{ color: '#5A607F', marginRight: "30px", fontWeight: 'bold' }}>
                     Create Admin
                   </h4>
                   <img src={logo} alt="logo ssism" className="logo_img" />{" "}
@@ -110,7 +110,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     id="name"
                     placeholder="Enter name "
                   />
-                  <label for="gmail" className="labels mb-1">
+                  <label for="gmail" className="labels mb-1" style={{ color: '#5A607F' }}>
                     Email
                   </label>
                   <input
@@ -146,7 +146,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     id="role"
                     type="text"
                   >
-                    <option selected className="form-select">
+                    <option selected className="form-select" style={{ color: '#5A607F' }}>
                       Role
                     </option>
                     <option className="form-select" value={1}>
@@ -159,7 +159,8 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                 </div>
                 <button
                   disabled={adminData.loading}
-                  className=" submit_btn mt-2 w-100  btn-md text-light font-weight-bold"
+                  style={{ marginTop: '40px' }}
+                  className=" submit_btn mt-8 w-100  btn-md text-light font-weight-bold"
                   type="submit"
                 >
                   {adminData.loading ? <LoaderButton /> : "Create"}
