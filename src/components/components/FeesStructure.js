@@ -29,8 +29,8 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
   const validationSchema = Yup.object({
     totalFees: Yup.string().required("Required*"),
     stream: Yup.string().required("Required*"),
-    startYear: Yup.string().required("Required*"),
-    endYear: Yup.string().required("Required*"),
+    startYear: Yup.number().required("Required*"),
+    endYear: Yup.number().required("Required*"),
   });
 
   const [fieldData, setFieldData] = useState([
@@ -94,7 +94,10 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
     },
   });
 
-
+if(formik.values.startYear>=formik.values.endYear)
+{
+  formik.errors.endYear ="End year always greater then start year"
+}
 
   const getData = async () => {
     setVisible(!visible)
@@ -218,6 +221,13 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     }
 
                   </select>
+                  {formik.errors.stream && formik.touched.stream ? (
+                    <div className="text-danger fs-6">
+                      {formik.errors.stream}
+                    </div>
+                  ) : (
+                    ""
+                  )}
                   <label for="startyear" className="labels">
                     Start year
                   </label>
@@ -235,6 +245,13 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     className="form-control input-lg fields"
                     placeholder="Starting year"
                   />
+                  {formik.errors.startYear && formik.touched.startYear ? (
+                    <div className="text-danger fs-6">
+                      {formik.errors.startYear}
+                    </div>
+                  ) : (
+                    ""
+                  )}
                   <label for="endyear" className="labels">
                     End year
                   </label>
@@ -252,6 +269,13 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     className="form-control input-lg fields"
                     placeholder="Ending year"
                   />
+                  {formik.errors.endYear && formik.touched.endYear ? (
+                    <div className="text-danger fs-6">
+                      {formik.errors.endYear}
+                    </div>
+                  ) : (
+                    ""
+                  )}
                   <label for="totalfees" className="labels">
                     total fees
                   </label>

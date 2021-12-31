@@ -36,7 +36,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
     initialValues: {
       email: "",
       name: "",
-      role: null,
+      role: '',
     },
     validationSchema,
 
@@ -116,6 +116,13 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     id="name"
                     placeholder="Enter name "
                   />
+                  {formik.errors.name && formik.touched.name ? (
+                    <div className="text-danger fs-6">
+                      {formik.errors.name}
+                    </div>
+                  ) : (
+                    ""
+                  )}
                   <label for="gmail" className="labels mb-1">
                     Email
                   </label>
@@ -162,6 +169,13 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                       Admin
                     </option>
                   </select>
+                  {formik.errors.role && formik.touched.role ? (
+                    <div className="text-danger fs-6">
+                      {formik.errors.role}
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <button
                   disabled={adminData.loading}
