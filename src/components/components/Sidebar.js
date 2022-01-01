@@ -68,7 +68,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play, Options }) => {
                   type="search"
                   placeholder="search.."
                 />
-                <span class="fa fa-search errspan"></span>
+                <span className="fa fa-search errspan"></span>
               </>
             )} */}
             {/* </> */}

@@ -156,7 +156,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
           }}
           onClick={() => { getData() }}
         >
-          Create Fees Structure <i class="fas fa-plus pl-3"></i>
+          Create Fees Structure <i className="fas fa-plus pl-3"></i>
         </CButton>
       )}
       {table_data.second_loading && (

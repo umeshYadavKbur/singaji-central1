@@ -363,7 +363,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           <div className='d-flex ml-auto me-3'>
 
             <div className='me-4'>
-              <button type="button" class="btn btn-outline-secondary fw-bold ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
+              <button type="button" className="btn btn-outline-secondary fw-bold ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
             </div>
             {/* <div className='me-4'>
               <button type="button" class="btn btn-outline-primary fw-bold ">Active</button>
@@ -382,9 +382,9 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                     <span>
                       {column.isSorted ? (
                         column.isSortedDesc ? (
-                          <i class="fas fa-chevron-down ms-2"></i>
+                          <i className="fas fa-chevron-down ms-2"></i>
                         ) : (
-                          <i class="fas fa-chevron-up ms-2"></i>
+                          <i className="fas fa-chevron-up ms-2"></i>
                         )
                       ) : (
                         ""

@@ -159,7 +159,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
           </div>
           <div className="d-flex ml-auto me-3">
             <div className="me-4">
-              <button type="button" class="btn btn-outline-primary fw-bold ">
+              <button type="button" className="btn btn-outline-primary fw-bold ">
                 Active
               </button>
             </div>
@@ -181,9 +181,9 @@ function FeesStructure({ table_data, fetchFeesTable }) {
                     <span>
                       {column.isSorted ? (
                         column.isSortedDesc ? (
-                          <i class="fas fa-chevron-down ms-2"></i>
+                          <i className="fas fa-chevron-down ms-2"></i>
                         ) : (
-                          <i class="fas fa-chevron-up ms-2"></i>
+                          <i className="fas fa-chevron-up ms-2"></i>
                         )
                       ) : (
                         ""

@@ -23,7 +23,7 @@ const AllUrl = {
     createNewAdmin: `${baseUrl}/api/createNewAdmin`,
     infoAllAdmin: `${baseUrl}/api/infoOfAdmins`,
     allActiveStudent: `${baseUrl}/api/infoOfAllActiveStudents`,
-    showFees: `${baseUrl}/api/show_fees/bca2021`, // not in used currently
+    showFees: `${baseUrl}/api/show_fees/`,
     adminStatusChange: `${baseUrl}/api/deactive_or_activate_admin`,
     //_____________________________________
 

@@ -13,6 +13,7 @@ import axios from 'axios';
 import AddNewStudent from '../../redux/actionDispatcher/superAdmin/addNewStudentDispatcher'
 import { connect } from 'react-redux';
 import NumberFormat from 'react-number-format';
+import allUrls from '../../redux/constants/url'
 // import {number} from 'yup';
 
 function AddNewStudentPage({ AddNewStudent }) {
@@ -27,20 +28,20 @@ function AddNewStudentPage({ AddNewStudent }) {
 
 
             ///////////////////////////////
-            const branchName = await axios('https://singaji-central-server.herokuapp.com/api/list_branch')
+            const branchName = await axios(allUrls.branchList)
             console.log(branchName.data);
             console.log("branch Name ", branchName.data);
             setBranchNames(branchName.data)
 
             /////////////////////////
-            const villageNamesRes = await axios('https://singaji-central-server.herokuapp.com/api/village_name')
+            const villageNamesRes = await axios(allUrls.villageNameList)
             let newVillageName = [];
             villageNamesRes.data.forEach((ele) => { newVillageName.push({ 'label': ele.villagename, 'value': ele.villagename }) })
             console.log(newVillageName);
             setVillageNames(newVillageName);
 
             /////////////////////////////
-            const trackNamesRes = await axios('https://singaji-central-server.herokuapp.com/api/track_list')
+            const trackNamesRes = await axios(allUrls.trackList)
             console.log(trackNamesRes.data);
             setTrackNames(trackNamesRes.data);
         }
@@ -187,7 +188,7 @@ function AddNewStudentPage({ AddNewStudent }) {
 
             var config = {
                 method: 'get',
-                url: `https://singaji-central-server.herokuapp.com/api/show_fees/${formik.values.streamName + formik.values.joinBatch}`,
+                url: `${allUrls.showFees}${formik.values.streamName + formik.values.joinBatch}`,
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem("token")}`
                 },
