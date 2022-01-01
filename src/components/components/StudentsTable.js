@@ -31,7 +31,7 @@ import AllUrl from "../../redux/constants/url"
 function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
   const token = localStorage.getItem("token");
 
-  const columns = [
+  const [columns ]= React.useState([
     {
       header: "S No",
       accessor: "Srno",
@@ -248,7 +248,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 
       )
     }
-  ];
+  ]);
   // async function getData(data,loginUrl) {
   //   var url = `${baseUrl}${loginUrl}`;
   //   console.log(url);

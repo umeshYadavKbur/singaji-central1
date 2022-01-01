@@ -16,7 +16,24 @@ import Swal from 'sweetalert2';
 function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTableData }) {
     const token = localStorage.getItem("token");
 
-    const columns = [
+
+
+
+    React.useEffect(() => {
+        var config = {
+            method: "GET",
+            url: AllUrl.infoAllAdmin,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        };
+        fetchAdminTable(config);
+        // settable_data(table_data.table_data);
+        // eslint-disable-next-line
+    }, []);
+
+    const [columns] = React.useState([
         {
             header: "S No",
             accessor: "Srno",
@@ -110,24 +127,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                 </button>
             )
         }
-    ]
-
-
-    React.useEffect(() => {
-        var config = {
-            method: "GET",
-            url: AllUrl.infoAllAdmin,
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-        };
-        fetchAdminTable(config);
-        // settable_data(table_data.table_data);
-        // eslint-disable-next-line
-    }, []);
-
-    // const columns = useMemo(() => Column, [])
+    ])
     // const data = useMemo(() => MockData, [])
 
     const {
