@@ -1164,7 +1164,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                     <div className="col-3">
 
                                         <label htmlFor="">Remark</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1"
+                                        <textarea className="form-control" id="exampleFormControlTextarea1"
                                             placeholder="Remark" onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.remark}
