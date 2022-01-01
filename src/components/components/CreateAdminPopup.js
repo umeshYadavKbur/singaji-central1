@@ -76,6 +76,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         Create Admin <i className="fas fa-plus"></i>
       </CButton>
       <CModal
+      
         alignment="center"
         visible={visible}
         onClose={() => {
@@ -96,7 +97,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   <img src={logo} alt="logo ssism" className="logo_img" />{" "}
                 </div>
                 <div>
-                  <label for="gmail" className="labels mb-1">
+                  <label htmlFor="gmail" className="labels mb-1">
                     Username
                   </label>
                   <input
@@ -118,7 +119,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     ""
                   )}
           
-                  <label for="gmail" className="labels mb-1" style={{ color: '#5A607F' }}>
+                  <label htmlFor="gmail" className="labels mb-1" style={{ color: '#5A607F' }}>
                     Email
                   </label>
                   <input
@@ -140,7 +141,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     ""
                   )}
 
-                  <label for="role" className="labels mb-1">
+                  <label htmlFor="role" className="labels mb-1">
                     Role
                   </label>
                   <select
@@ -154,7 +155,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     id="role"
                     type="text"
                   >
-                    <option selected className="form-select" style={{ color: '#5A607F' }}>
+                    <option value='' className="form-select" style={{ color: '#5A607F' }}>
                       Role
                     </option>
                     <option className="form-select" value={1}>

@@ -70,7 +70,7 @@ const HeaderLink = () => {
                                 navigate("addnewstudent");
                             }}
                         >
-                            Add Student <i class="fas fa-plus pl-3"></i>
+                            Add Student <i className="fas fa-plus pl-3"></i>
                         </button>
                     </div>
                 )}

@@ -30,8 +30,8 @@ const AppHeaderDropdown = ({ userData, logout }) => {
         <CAvatar src={avatar8} size="lg" />
       </CDropdownToggle>
 
-      <CDropdownMenu className="pt-0" placement="bottom-end">
-        <div style={{ flexDirection: 'column', height: '369px', width: '294px', alignItems: 'center', paddingTop: '49px', display: 'flex', flex: 'basis' }}>
+      <CDropdownMenu component={'div'}  className="pt-0 " placement="bottom-end"  >
+        <div style={{ flexDirection: 'column', height: '369px', width: '294px', alignItems: 'center', paddingTop: '49px',  display: 'flex', flex: 'basis' }}>
           <CAvatar
             src={avatar8}
             style={{

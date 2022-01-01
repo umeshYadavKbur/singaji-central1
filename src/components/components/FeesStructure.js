@@ -203,7 +203,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                   {original ? "Update Fees Structure" : "Create Fees Structure"}
                 </h4>
                 <div className=" mb-3 mt-3">
-                  <label for="stream" className="labels" style={{ color: '#5A607F' }}>
+                  <label htmlFor="stream" className="labels" style={{ color: '#5A607F' }}>
                     Stream
                   </label>
                   <select
@@ -216,7 +216,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     // eslint-disable-next-line
                     type="text"
                   >
-                    <option selected className="fields form-select">
+                    <option value='' className="fields form-select">
                       {
                         original ? `${original.branch_name}` : "Stream"
                       }
@@ -241,7 +241,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     ""
                   )}
 
-                  <label for="startyear" className="labels" style={{ color: '#5A607F' }}>
+                  <label htmlFor="startyear" className="labels" style={{ color: '#5A607F' }}>
                     Start Year
                   </label>
                   <input
@@ -266,7 +266,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     ""
                   )}
 
-                  <label for="endyear" className="labels" style={{ color: '#5A607F' }}>
+                  <label htmlFor="endyear" className="labels" style={{ color: '#5A607F' }}>
                     End Year
                   </label>
                   <input
@@ -291,7 +291,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     ""
                   )}
 
-                  <label for="totalfees" className="labels" style={{ color: '#5A607F' }}>
+                  <label htmlFor="totalfees" className="labels" style={{ color: '#5A607F' }}>
                     Total Fees
                   </label>
                   <input

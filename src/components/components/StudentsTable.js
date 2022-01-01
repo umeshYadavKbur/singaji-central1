@@ -23,7 +23,7 @@ import SkeletonColor from "../../helpers/Skeletrone";
 import Archived_icon from "../assests/image/Archived_icon.svg"
 import { TableCheckbox } from "./tableComponents/TableCheckbox";
 import { VerifyStudent } from "../../redux/actionDispatcher/superAdmin/studentVerifyTableDataDispatcher";
-import AddNewStudent from "./AddNewStudent";
+// import AddNewStudent from "./AddNewStudent";
 import AllUrl from "../../redux/constants/url"
 // import { baseUrl } from "../../redux/constants/url";
 
@@ -244,7 +244,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: 'icon',
       Cell: ({ row: { original } }) => (
         // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
-        <img src={Edit_icon} alt="Edit" onClick={<AddNewStudent></AddNewStudent>} />
+        <img src={Edit_icon} alt="Edit" onClick={()=>{console.log("edit student icon")}} />
 
       )
     }
@@ -280,6 +280,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     // eslint-disable-next-line
   }, []);
 
+ 
 
   const {
     getTableProps,
