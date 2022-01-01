@@ -6,6 +6,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./styles/AddNewStudent.css"
+import Select from 'react-select'
 import * as Yup from "yup";
 import { useFormik } from 'formik';
 import axios from 'axios';
@@ -18,28 +19,25 @@ function AddNewStudentPage({ AddNewStudent }) {
 
     const [branchNames, setBranchNames] = useState([{ subjects: 'loading...', id: 0 }])
     const [trackNames, setTrackNames] = useState([{ trackName: 'loading...', trackId: 0 }])
+    const [villageNames, setVillageNames] = useState([{ label: 'loading...', villageId: 0 }])
 
     useEffect(async () => {
 
-        var config = {
-            method: 'get',
-            url: 'https://singaji-central-server.herokuapp.com/api/list_branch',
-
-        };
-
-        const branchName = await axios(config)
+        ///////////////////////////////
+        const branchName = await axios('https://singaji-central-server.herokuapp.com/api/list_branch')
         console.log(branchName.data);
-        setBranchNames(branchName.data)
         console.log("branch Name ", branchNames);
+        setBranchNames(branchName.data)
 
+        /////////////////////////
+        const villageNamesRes = await axios('https://singaji-central-server.herokuapp.com/api/village_name')
+        let newVillageName = [];
+        villageNamesRes.data.forEach((ele) => { newVillageName.push({ 'label': ele.villagename, 'value': ele.villagename }) })
+        console.log(newVillageName);
+        setVillageNames(newVillageName);
 
-
-        var configForTrack = {
-            method: 'get',
-            url: 'https://singaji-central-server.herokuapp.com/api/track_list',
-
-        }
-        const trackNamesRes = await axios(configForTrack)
+        /////////////////////////////
+        const trackNamesRes = await axios('https://singaji-central-server.herokuapp.com/api/track_list')
         console.log(trackNamesRes.data);
         setTrackNames(trackNamesRes.data);
 
@@ -64,7 +62,7 @@ function AddNewStudentPage({ AddNewStudent }) {
         lastName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates').required("Required!"),
         dob: Yup.string().required("Required!"),
         contactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
-        fatherName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates').required("Required!"),
+        fatherName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!"),
         fatherOccupation: Yup.string().required("Required!"),
         fatherIncome: Yup.string().required("Required!").min(4, 'Must be exactly 4 digits'),
         FatherContactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
@@ -440,13 +438,23 @@ function AddNewStudentPage({ AddNewStudent }) {
                                     </div>
 
                                     <div className="col">
-                                        <label htmlFor="">Village</label>  <input
+                                        <label htmlFor="">Village</label>
+                                        {/* <input
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.village}
                                             name="village"
                                             type="text"
                                             className="form-control"
+                                            placeholder="Village"
+                                        /> */}
+                                        <Select 
+                                        options={villageNames}
+                                            onChange={({value})=>{formik.setFieldValue('village', value)}}
+                                            onBlur={formik.handleBlur}
+                                            // value={formik.values.village}
+                                            name="village"
+                                            // className="form-control"
                                             placeholder="Village"
                                         />
                                         {formik.errors.village && formik.touched.village ? (
@@ -1241,7 +1249,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                     <div className="row my-5 ">
                         <div className='col-9'>
 
-                            <div className="text-danger fw-bold   d-flex justify-content-around">{formik.errors ? "Please Fill the form" : ''}</div>
+                            {/* <div className="text-danger fw-bold   d-flex justify-content-around">{formik.errors ? "Please Fill the form" : ''}</div> */}
                         </div>
 
                         <div className=' col-3 d-flex justify-content-end'>
