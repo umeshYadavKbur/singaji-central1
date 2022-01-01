@@ -53,6 +53,7 @@ const SidebarLinks = ({ Toggle }) => {
                             // document.getElementById('dashboard-collapse-btn').classList.add('active_tab');
                         }}
                         href="#!"
+                        style={{borderBottomRightRadius:`${active_menu.dashboard === true ? '0px' : ''}`}}
                         className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'dashboard-collapse-btn' ? 'active_tab' : ''} ${active_menu.dashboard === true ? 'active_tab' : ''} `}
                         role="button"
                         id="dashboard-collapse-btn"
@@ -93,6 +94,7 @@ const SidebarLinks = ({ Toggle }) => {
                     <a
                         onClick={() => { setActiveMenu((pre) => { return { ...pre, education: !active_menu.education } }) }}
                         href="#!"
+                        style={{borderBottomRightRadius:`${active_menu.education === true ? '0px' : ''}`}}
                         className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'education-collapse-btn' ? 'active_tab' : ''} ${active_menu.education === true ? 'active_tab' : ''} `}
                         role="button"
                         // data-toggle="collapse"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import StuAccmockdata from './StuAccmockData.json';
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table';
 import { useMemo } from 'react';
@@ -8,7 +8,7 @@ import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
 
 
 const StudentAccount = () => {
-    const columns = [
+    const [columns] = useState([
         {
             Header: 'S.no',
             accessor: "Srno",
@@ -48,7 +48,7 @@ const StudentAccount = () => {
             Header: 'Action',
             accessor: ''
         }
-    ]
+    ])
 
     // -----------------------------------------------------------------------------------------------
 
