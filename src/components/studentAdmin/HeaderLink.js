@@ -13,14 +13,15 @@ const HeaderLink = () => {
 
     function getLocation() {
         if (currentLocation === "/student_admin_dashboard") {
-            return "Students";
-        } else if (currentLocation === "/student_admin_dashboard/feesstructuretable") {
-            return "Fees Structure";
-        } else if (currentLocation === "/student_admin_dashboard/studenttable") {
+            return "Dashboard";
+        }
+        else if (currentLocation === "/student_admin_dashboard/studenttable") {
             return "Applied Student";
-        } else if (currentLocation === "/student_admin_dashboard/addnewstudent") {
+        }
+        else if (currentLocation === "/student_admin_dashboard/addnewstudent") {
             return "Add Student";
-        } else {
+        }
+        else {
             return "Dashboard";
         }
     }
