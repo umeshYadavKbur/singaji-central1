@@ -121,8 +121,8 @@ const SidebarLinks = ({ Toggle }) => {
                     </div>
                 </ul>
             </div>
-            <Link className={`sidebar_options ${active_tab === 'Accounts' ? 'active_tab' : ''}`} 
-            to="studentaccounttable"
+            <Link className={`sidebar_options ${active_tab === 'Accounts' ? 'active_tab' : ''}`}
+                to="studentaccounttable"
 
                 id="Accounts"
                 onClick={() => { changeTab("Accounts") }}

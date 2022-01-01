@@ -14,15 +14,23 @@ const HeaderLink = () => {
     function getLocation() {
         if (currentLocation === "/admin_dashboard") {
             return "Dashboard";
-        } else if (currentLocation === "/admin_dashboard/feesstructuretable") {
-            return "Fees Structure";
-        } else if (currentLocation === "/admin_dashboard/studenttable") {
+        }
+        else if (currentLocation === "/admin_dashboard/studenttable") {
             return "Applied Student";
-        } else if (currentLocation === "/admin_dashboard/admintable") {
+        }
+        else if (currentLocation === "/admin_dashboard/studentaccounttable") {
+            return "Total Student";
+        }
+        else if (currentLocation === "/admin_dashboard/admintable") {
             return "My Admin";
-        } else if (currentLocation === "/admin_dashboard/addnewstudent") {
+        }
+        else if (currentLocation === "/admin_dashboard/addnewstudent") {
             return "Add Student";
-        } else {
+        }
+        else if (currentLocation === "/admin_dashboard/feesstructuretable") {
+            return "Fees Structure";
+        }
+        else {
             return "Dashboard";
         }
     }
