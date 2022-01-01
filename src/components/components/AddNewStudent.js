@@ -1035,143 +1035,149 @@ function AddNewStudentPage({ AddNewStudent }) {
                                     </div>
                                 </div>
 
-                                <div className='row m-1'>
-                                    <div className="col">
-                                        <label htmlFor="">Postmatric Owner</label>
-                                        <select name="postmatricOwner" className="form-select" id="inputGroupSelect02"
-                                            value={formik.values.postmatricScolarship === "no" ? formik.values.postmatricOwner = "self" : formik.values.postmatricOwner}
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            disabled={formik.values.category === 'Gen' ? true : false || formik.values.postmatricScolarship === "no" ? true : false}>
-                                            <option defaultValue="self">Postmatric Owner</option>
-                                            <option value="self">Self</option>
-                                            <option value="ssism">SSISM</option>
-                                        </select>
-                                        {formik.errors.postmatricOwner && formik.touched.postmatricOwner ? (
-                                            <div className="text-danger fs-6">
-                                                {formik.errors.postmatricOwner}
+                                <div className="row m-1">
+                                    <div className="col-9">
+                                        <div className='row'>
+                                            <div className="col">
+                                                <label htmlFor="">Postmatric Owner</label>
+                                                <select name="postmatricOwner" className="form-select" id="inputGroupSelect02"
+                                                    value={formik.values.postmatricScolarship === "no" ? formik.values.postmatricOwner = "self" : formik.values.postmatricOwner}
+                                                    onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    disabled={formik.values.category === 'Gen' ? true : false || formik.values.postmatricScolarship === "no" ? true : false}>
+                                                    <option defaultValue="self">Postmatric Owner</option>
+                                                    <option value="self">Self</option>
+                                                    <option value="ssism">SSISM</option>
+                                                </select>
+                                                {formik.errors.postmatricOwner && formik.touched.postmatricOwner ? (
+                                                    <div className="text-danger fs-6">
+                                                        {formik.errors.postmatricOwner}
+                                                    </div>
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
-                                        ) : (
-                                            ""
-                                        )}
-                                    </div>
-                                    <div className="col">
-                                        <label htmlFor="">GKB Owner</label>
-                                        <select name="gkbOwner" className="form-select" id="inputGroupSelect02"
-                                            value={formik.values.gkbScolarship === "no" ? formik.values.gkbOwner = "self" : formik.values.gkbOwner}
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            disabled={formik.values.gender === 'male' ? true : false || formik.values.gkbScolarship === "no" ? true : false}>
-                                            <option defaultValue="">GKB Owner</option>
-                                            <option value="SSISM">SSISM</option>
-                                            <option value="self">Self</option>
-                                        </select>
-                                        {formik.errors.gkbOwner && formik.touched.gkbOwner ? (
-                                            <div className="text-danger fs-6">
-                                                {formik.errors.gkbOwner}
+                                            <div className="col">
+                                                <label htmlFor="">GKB Owner</label>
+                                                <select name="gkbOwner" className="form-select" id="inputGroupSelect02"
+                                                    value={formik.values.gkbScolarship === "no" ? formik.values.gkbOwner = "self" : formik.values.gkbOwner}
+                                                    onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    disabled={formik.values.gender === 'male' ? true : false || formik.values.gkbScolarship === "no" ? true : false}>
+                                                    <option defaultValue="">GKB Owner</option>
+                                                    <option value="SSISM">SSISM</option>
+                                                    <option value="self">Self</option>
+                                                </select>
+                                                {formik.errors.gkbOwner && formik.touched.gkbOwner ? (
+                                                    <div className="text-danger fs-6">
+                                                        {formik.errors.gkbOwner}
+                                                    </div>
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
-                                        ) : (
-                                            ""
-                                        )}
-                                    </div>
-                                    <div className="col">
-                                        <label htmlFor="">Payable Ammount</label>  <input
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={formik.values.payableAmmount}
-                                            name="payableAmmount"
-                                            type="number"
-                                            className="form-control"
-                                            placeholder="Payable Ammount"
-                                        />
-                                        {formik.errors.payableAmmount && formik.touched.payableAmmount ? (
-                                            <div className="text-danger fs-6">
-                                                {formik.errors.payableAmmount}
+                                            <div className="col">
+                                                <label htmlFor="">Payable Ammount</label>  <input
+                                                    onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    value={formik.values.payableAmmount}
+                                                    name="payableAmmount"
+                                                    type="number"
+                                                    className="form-control"
+                                                    placeholder="Payable Ammount"
+                                                />
+                                                {formik.errors.payableAmmount && formik.touched.payableAmmount ? (
+                                                    <div className="text-danger fs-6">
+                                                        {formik.errors.payableAmmount}
+                                                    </div>
+                                                ) : (
+                                                    ""
+                                                )}
                                             </div>
-                                        ) : (
-                                            ""
-                                        )}
+                                           
+                                        </div>
+                                        <div className='row '>
+                                            <div className="col">
+                                                <label htmlFor="">Postmatric Amount</label>  <input
+                                                    onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    value={formik.values.category === "Gen" ? formik.values.postmatricAmount = 0 : formik.values.postmatricOwner === "self" ? formik.values.postmatricAmount = 0 : formik.values.postmatricAmount}
+                                                    name="postmatricAmount"
+                                                    type="number"
+                                                    className="form-control"
+                                                    placeholder="Postmatric Amount"
+                                                    disabled={formik.values.category === 'Gen' ? true : false || formik.values.postmatricOwner === "self" ? true : false}
+                                                />
+                                                {formik.errors.postmatricAmount && formik.touched.postmatricAmount ? (
+                                                    <div className="text-danger fs-6">
+                                                        {formik.errors.postmatricAmount}
+                                                    </div>
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </div>
+                                            <div className="col">
+                                                <label htmlFor="">GKB Amount</label> <input
+                                                    onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    value={formik.values.gender === 'male' ? formik.values.GKBAmount = 0 : formik.values.gkbOwner === "self" ? formik.values.GKBAmount = 0 : formik.values.GKBAmount}
+                                                    name="GKBAmount"
+                                                    type="number"
+                                                    className="form-control"
+                                                    placeholder="GKB Amount"
+                                                    disabled={formik.values.gender === 'male' ? true : false || formik.values.gkbOwner === "self" ? true : false}
+                                                />
+                                                {formik.errors.GKBAmount && formik.touched.GKBAmount ? (
+                                                    <div className="text-danger fs-6">
+                                                        {formik.errors.GKBAmount}
+                                                    </div>
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </div>
+                                            <div className="col">
+                                                <label htmlFor="">Scholarship Amount</label> <input
+                                                    onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    value={parseInt(formik.values.GKBAmount) + parseInt(formik.values.postmatricAmount)}
+                                                    name="ScholarshipAmount"
+                                                    type="number"
+                                                    className="form-control"
+                                                    placeholder="Scholarship Amount"
+                                                    disabled={true}
+                                                />
+                                                {formik.errors.ScholarshipAmount && formik.touched.ScholarshipAmount ? (
+                                                    <div className="text-danger fs-6">
+                                                        {formik.errors.ScholarshipAmount}
+                                                    </div>
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </div>
+
+                                        </div>
                                     </div>
-                                    <div className="col">
-                                        <label htmlFor="">Remark</label>  <input
-                                            onChange={formik.handleChange}
+                                    <div className="col-3">
+                                        
+                                            <label htmlFor="">Remark</label> 
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" 
+                                            placeholder="Remark" onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.remark}
                                             name="remark"
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Remark"
-                                        />
-                                        {formik.errors.remark && formik.touched.remark ? (
-                                            <div className="text-danger fs-6">
-                                                {formik.errors.remark}
-                                            </div>
-                                        ) : (
-                                            ""
-                                        )}
-                                    </div>
+                                            rows="4"></textarea>
+                                            {formik.errors.remark && formik.touched.remark ? (
+                                                <div className="text-danger fs-6">
+                                                    {formik.errors.remark}
+                                                </div>
+                                            ) : (
+                                                ""
+                                            )}
+                                        </div>
                                 </div>
 
-                                <div className='row m-1'>
-                                    <div className="col-3">
-                                        <label htmlFor="">Postmatric Amount</label>  <input
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={formik.values.category === "Gen" ? formik.values.postmatricAmount = 0 : formik.values.postmatricOwner === "self" ? formik.values.postmatricAmount = 0 : formik.values.postmatricAmount}
-                                            name="postmatricAmount"
-                                            type="number"
-                                            className="form-control"
-                                            placeholder="Postmatric Amount"
-                                            disabled={formik.values.category === 'Gen' ? true : false || formik.values.postmatricOwner === "self" ? true : false}
-                                        />
-                                        {formik.errors.postmatricAmount && formik.touched.postmatricAmount ? (
-                                            <div className="text-danger fs-6">
-                                                {formik.errors.postmatricAmount}
-                                            </div>
-                                        ) : (
-                                            ""
-                                        )}
-                                    </div>
-                                    <div className="col-3">
-                                        <label htmlFor="">GKB Amount</label> <input
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={formik.values.gender === 'male' ? formik.values.GKBAmount = 0 : formik.values.gkbOwner === "self" ? formik.values.GKBAmount = 0 : formik.values.GKBAmount}
-                                            name="GKBAmount"
-                                            type="number"
-                                            className="form-control"
-                                            placeholder="GKB Amount"
-                                            disabled={formik.values.gender === 'male' ? true : false || formik.values.gkbOwner === "self" ? true : false}
-                                        />
-                                        {formik.errors.GKBAmount && formik.touched.GKBAmount ? (
-                                            <div className="text-danger fs-6">
-                                                {formik.errors.GKBAmount}
-                                            </div>
-                                        ) : (
-                                            ""
-                                        )}
-                                    </div>
-                                    <div className="col-3">
-                                        <label htmlFor="">Scholarship Amount</label> <input
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            value={parseInt(formik.values.GKBAmount) + parseInt(formik.values.postmatricAmount)}
-                                            name="ScholarshipAmount"
-                                            type="number"
-                                            className="form-control"
-                                            placeholder="Scholarship Amount"
-                                            disabled={true}
-                                        />
-                                        {formik.errors.ScholarshipAmount && formik.touched.ScholarshipAmount ? (
-                                            <div className="text-danger fs-6">
-                                                {formik.errors.ScholarshipAmount}
-                                            </div>
-                                        ) : (
-                                            ""
-                                        )}
-                                    </div>
-
-                                </div>
+                                
+                                
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
