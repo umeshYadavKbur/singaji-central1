@@ -1,8 +1,8 @@
 import React from "react";
 import "../components/styles/Navbar.css";
 import AppHeaderDropdown from "../components/HeaderDropdown";
-import CreateAdminPopup from "../components/CreateAdminPopup";
-import FeesStructure from "../components/FeesStructure";
+// import CreateAdminPopup from "../components/CreateAdminPopup";
+// import FeesStructure from "../components/FeesStructure";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const HeaderLink = () => {

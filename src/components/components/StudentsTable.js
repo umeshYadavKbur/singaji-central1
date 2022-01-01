@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useMemo } from "react";
+// import { useMemo } from "react";
 
 import Edit_icon from '../assests/image/Edit_icon.svg'
 import Swal from 'sweetalert2'
@@ -31,7 +31,7 @@ import AllUrl from "../../redux/constants/url"
 function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
   const token = localStorage.getItem("token");
 
-  const StudentTableHeader = [
+  const columns = [
     {
       header: "S No",
       accessor: "Srno",
@@ -94,7 +94,8 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 
               html:
                 '<hr>' +
-                'Are you sure?' + '<br>' +
+                'Are you sure?' +
+                '<br>' +
                 'You want to confirm this payment ',
               // icon: 'warning',
               showCancelButton: true,
@@ -182,49 +183,48 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           }
           onClick={() => {
             // setData(original.status)
-            if(original.reg_fees_status === "Paid"){
-            console.log(original.email)
-            Swal.fire({
-              title: 'Active',
+            if (original.reg_fees_status === "Paid") {
+              console.log(original.email)
+              Swal.fire({
+                title: 'Active',
 
-              html:
-                '<hr>' +
-                'Are you sure?' +
-                '<br>' +
-                `You want to active ${original.firstName} ${original.lastName} `,
-              // icon: 'warning',
-              showCancelButton: true,
-              // showCancelButton: true,
-              cancelButtonText: 'Cancel',
-              confirmButtonText: 'Active',
-              showCloseButton: true,
-              cancelButtonColor: 'gray',
-              confirmButtonColor: "blue",
-              reverseButtons: true
+                html:
+                  '<hr>' +
+                  'Are you sure?' +
+                  '<br>' +
+                  `You want to active ${original.firstName} ${original.lastName} `,
+                // icon: 'warning',
+                showCancelButton: true,
+                // showCancelButton: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Active',
+                showCloseButton: true,
+                cancelButtonColor: 'gray',
+                confirmButtonColor: "blue",
+                reverseButtons: true
 
-            }).then(async(result) => {
-              if (result.isConfirmed) {
-                const resultofverify = await VerifyStudent(original);
-                // console.log(resultofverify);
-                if(resultofverify === 200)
-                {
-                  var config = {
-                    method: "GET",
-                    url: AllUrl.allRegistratedStudent,
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                      "Content-Type": "application/json",
-                    },
-                  };
-                  fetchStudentTable(config);
+              }).then(async (result) => {
+                if (result.isConfirmed) {
+                  const resultofverify = await VerifyStudent(original);
+                  // console.log(resultofverify);
+                  if (resultofverify === 200) {
+                    var config = {
+                      method: "GET",
+                      url: AllUrl.allRegistratedStudent,
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                      },
+                    };
+                    fetchStudentTable(config);
+                  }
                 }
-              }
-            })
-            // alert("Do you want to change this   : " + original.email)
-            // VerifyStudent(original.email);
-           }
-           else{
-              toast.warning('Firstly Pay Registration Fee',{
+              })
+              // alert("Do you want to change this   : " + original.email)
+              // VerifyStudent(original.email);
+            }
+            else {
+              toast.warning('Firstly Pay Registration Fee', {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -233,7 +233,8 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                 draggable: true,
                 progress: undefined,
               });
-           } }}>
+            }
+          }}>
           Deactive
         </button>
       )
@@ -264,7 +265,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
   //     return err;
   //   }
   // }
-  const columns = useMemo(() => StudentTableHeader, []);
+  // const columns = useMemo(() => StudentTableHeader, []);
   React.useEffect(() => {
     var config = {
       method: "GET",
@@ -417,7 +418,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               Showing {(page.length * (pageIndex + 1) - (page.length - 1))} to  {page.length * (pageIndex + 1)} of  {pageCount * pageSize}{' '} Entries {"  "}
             </span>
           </div>
-          
+
           <div className='ml-auto me-3' >
             {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
             <button style={{ outline: "none", border: "1px solid gray", borderRadius: "10px 0 0 10px" }} onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>

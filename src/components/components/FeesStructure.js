@@ -2,7 +2,7 @@ import {
   CButton,
   CModal,
   CModalBody,
-  CModalHeader,
+  // CModalHeader,
   // CModalTitle,
 } from "@coreui/react";
 import React, { useState } from "react";

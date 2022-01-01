@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import Dashboard_svg from "../assests/image/sidebarIcons/Dashboard.svg";
 import Alumini_svg from "../assests/image/sidebarIcons/Alumini.svg";
 import Accounts_svg from "../assests/image/sidebarIcons/Accounts.svg";
@@ -9,32 +9,32 @@ import Donation_svg from "../assests/image/sidebarIcons/Donation.svg";
 import Others_svg from "../assests/image/sidebarIcons/Others.svg";
 
 const SidebarLinks = ({ Toggle }) => {
-    const [active_dropdown, setActiveDropdown] = useState('Dashboard');
+    // const [active_dropdown, setActiveDropdown] = useState('Dashboard');
     const [active_tab, setActiveTab] = useState('dashboard-collapse-btn');
     // const [active_menu, setActiveMenu] = useState({ dashboard: false, education: false });
 
     const changeTab = (id) => {
 
-        setActiveDropdown('');
+        // setActiveDropdown('');
         setActiveTab(id);
         // setActiveMenu({})
 
     }
 
-    const dLink1 = (name, url, icon, id, parentId) => {
-        return (
-            <NavLink
+    // const dLink1 = (name, url, icon, id, parentId) => {
+    //     return (
+    //         <NavLink
 
-                to={url}
-                id={id}
-                className={`sidebar_options_link ${active_dropdown === id ? "sidebar_options_active" : ""}`}
-                onClick={() => { setActiveDropdown(id); setActiveTab(parentId) }}
-            >
-                <img src={icon} className=" Sidebar_text sidebar_icons" alt="" />
-                <span className="text-dark ">{name}</span>
-            </NavLink>
-        );
-    };
+    //             to={url}
+    //             id={id}
+    //             className={`sidebar_options_link ${active_dropdown === id ? "sidebar_options_active" : ""}`}
+    //             onClick={() => { setActiveDropdown(id); setActiveTab(parentId) }}
+    //         >
+    //             <img src={icon} className=" Sidebar_text sidebar_icons" alt="" />
+    //             <span className="text-dark ">{name}</span>
+    //         </NavLink>
+    //     );
+    // };
 
     return (
         <>

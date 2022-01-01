@@ -21,26 +21,30 @@ function AddNewStudentPage({ AddNewStudent }) {
     const [trackNames, setTrackNames] = useState([{ trackName: 'loading...', trackId: 0 }])
     const [villageNames, setVillageNames] = useState([{ label: 'loading...', villageId: 0 }])
 
-    useEffect(async () => {
 
-        ///////////////////////////////
-        const branchName = await axios('https://singaji-central-server.herokuapp.com/api/list_branch')
-        console.log(branchName.data);
-        console.log("branch Name ", branchNames);
-        setBranchNames(branchName.data)
+    useEffect(() => {
+        const fn = async () => {
 
-        /////////////////////////
-        const villageNamesRes = await axios('https://singaji-central-server.herokuapp.com/api/village_name')
-        let newVillageName = [];
-        villageNamesRes.data.forEach((ele) => { newVillageName.push({ 'label': ele.villagename, 'value': ele.villagename }) })
-        console.log(newVillageName);
-        setVillageNames(newVillageName);
 
-        /////////////////////////////
-        const trackNamesRes = await axios('https://singaji-central-server.herokuapp.com/api/track_list')
-        console.log(trackNamesRes.data);
-        setTrackNames(trackNamesRes.data);
+            ///////////////////////////////
+            const branchName = await axios('https://singaji-central-server.herokuapp.com/api/list_branch')
+            console.log(branchName.data);
+            console.log("branch Name ", branchName.data);
+            setBranchNames(branchName.data)
 
+            /////////////////////////
+            const villageNamesRes = await axios('https://singaji-central-server.herokuapp.com/api/village_name')
+            let newVillageName = [];
+            villageNamesRes.data.forEach((ele) => { newVillageName.push({ 'label': ele.villagename, 'value': ele.villagename }) })
+            console.log(newVillageName);
+            setVillageNames(newVillageName);
+
+            /////////////////////////////
+            const trackNamesRes = await axios('https://singaji-central-server.herokuapp.com/api/track_list')
+            console.log(trackNamesRes.data);
+            setTrackNames(trackNamesRes.data);
+        }
+        fn();
     }, []);
 
 
@@ -103,8 +107,8 @@ function AddNewStudentPage({ AddNewStudent }) {
         postmatricOwner: Yup.string().required("Required!"),
         remark: Yup.string().required("Required!"),
         payableAmmount: Yup.string().required("Required!"),
-        postmatricAmount: Yup.string().required("Required!"),
-        GKBAmount: Yup.string().required("Required!"),
+        // postmatricAmount: Yup.string().required("Required!"),
+        // GKBAmount: Yup.string().required("Required!"),
 
         trackName: Yup.string().required("Required!"),
         busFees: Yup.string().required("Required!"),
@@ -448,9 +452,9 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             className="form-control"
                                             placeholder="Village"
                                         /> */}
-                                        <Select 
-                                        options={villageNames}
-                                            onChange={({value})=>{formik.setFieldValue('village', value)}}
+                                        <Select
+                                            options={villageNames}
+                                            onChange={({ value }) => { formik.setFieldValue('village', value) }}
                                             onBlur={formik.handleBlur}
                                             // value={formik.values.village}
                                             name="village"
@@ -1094,7 +1098,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                                     ""
                                                 )}
                                             </div>
-                                           
+
                                         </div>
                                         <div className='row '>
                                             <div className="col">
@@ -1158,26 +1162,26 @@ function AddNewStudentPage({ AddNewStudent }) {
                                         </div>
                                     </div>
                                     <div className="col-3">
-                                        
-                                            <label htmlFor="">Remark</label> 
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" 
+
+                                        <label htmlFor="">Remark</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1"
                                             placeholder="Remark" onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.remark}
                                             name="remark"
                                             rows="4"></textarea>
-                                            {formik.errors.remark && formik.touched.remark ? (
-                                                <div className="text-danger fs-6">
-                                                    {formik.errors.remark}
-                                                </div>
-                                            ) : (
-                                                ""
-                                            )}
-                                        </div>
+                                        {formik.errors.remark && formik.touched.remark ? (
+                                            <div className="text-danger fs-6">
+                                                {formik.errors.remark}
+                                            </div>
+                                        ) : (
+                                            ""
+                                        )}
+                                    </div>
                                 </div>
 
-                                
-                                
+
+
                             </Typography>
                         </AccordionDetails>
                     </Accordion>

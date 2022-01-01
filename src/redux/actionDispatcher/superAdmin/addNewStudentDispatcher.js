@@ -1,6 +1,6 @@
 import { ADD_STUDENT_FAIL, ADD_STUDENT_REQUEST, ADD_STUDENT_SUCCESS } from "../../constants/actions";
 // import getData from "../services/agent";
-import getData from '../../../services/agent'
+// import getData from '../../../services/agent'
 // import swal from "sweetalert";
 import Swal from 'sweetalert2'
 import AllUrl from "../../constants/url";

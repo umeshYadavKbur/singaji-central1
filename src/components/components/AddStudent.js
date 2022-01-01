@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Formik, useFormik } from "formik";
-import * as Yup from "yup";
+import {  useFormik } from "formik";
+// import * as Yup from "yup";
 import { connect } from "react-redux";
 import AddNewStudent from "../../redux/actionDispatcher/superAdmin/addNewStudentDispatcher";
 import axios from "axios";
@@ -8,30 +8,30 @@ import axios from "axios";
 function AddStudent() {
   const [tehsil, setTehsil] = useState();
 
-  const validationSchema = Yup.object({
-    firstName: Yup.string().required("Required!"),
-    lastName: Yup.string().required("Required!"),
-    branchName: Yup.string().required("Required!"),
-    fatherName: Yup.string().required("Required!"),
-    dob: Yup.string().required("Required!"),
-    mobileNo: Yup.string().required("Required!"),
-    email: Yup.string().required("Required!"),
-    traceName: Yup.string().required("Required!"),
-    schoolName: Yup.string().required("Required!"),
-    school12Subject: Yup.string().required("Required!"),
-    percentage12: Yup.string().required("Required!"),
-    percentage11: Yup.string().required("Required!"),
-    percentage10: Yup.string().required("Required!"),
-    aadharNumber: Yup.string().required("Required!"),
-    fatherOccupation: Yup.string().required("Required!"),
-    fatherIncome: Yup.string().required("Required!"),
-    category: Yup.string().required("Required!"),
-    village: Yup.string().required("Required!"),
-    tehsil: Yup.string().required("Required!"),
-    district: Yup.string().required("Required!"),
-    registrationFees: Yup.string().required("Required!"),
-    gender: Yup.string().required("Required!"),
-    schemeFees: Yup.string().required("Required!"),
+  // const validationSchema = Yup.object({
+  //   firstName: Yup.string().required("Required!"),
+  //   lastName: Yup.string().required("Required!"),
+  //   branchName: Yup.string().required("Required!"),
+  //   fatherName: Yup.string().required("Required!"),
+  //   dob: Yup.string().required("Required!"),
+  //   mobileNo: Yup.string().required("Required!"),
+  //   email: Yup.string().required("Required!"),
+  //   traceName: Yup.string().required("Required!"),
+  //   schoolName: Yup.string().required("Required!"),
+  //   school12Subject: Yup.string().required("Required!"),
+  //   percentage12: Yup.string().required("Required!"),
+  //   percentage11: Yup.string().required("Required!"),
+  //   percentage10: Yup.string().required("Required!"),
+  //   aadharNumber: Yup.string().required("Required!"),
+  //   fatherOccupation: Yup.string().required("Required!"),
+  //   fatherIncome: Yup.string().required("Required!"),
+  //   category: Yup.string().required("Required!"),
+  //   village: Yup.string().required("Required!"),
+  //   tehsil: Yup.string().required("Required!"),
+  //   district: Yup.string().required("Required!"),
+  //   registrationFees: Yup.string().required("Required!"),
+  //   gender: Yup.string().required("Required!"),
+  //   schemeFees: Yup.string().required("Required!"),
     //  courseFees: Yup.string().required("Required!"),
     //  postmatricScholarship: Yup.string().required("Required!"),
     //  postmatricScholarshipOwner: Yup.string().required("Required!"),
@@ -44,7 +44,7 @@ function AddStudent() {
     //  thirdInstallment: Yup.string().required("Required!"),
     //  thirdInstallmentDate: Yup.string().required("Required!"),
     //  totalFees: Yup.string().required("Required!"),
-  });
+  // });
 
   const initialValues = {
     firstName: "",
@@ -109,7 +109,7 @@ function AddStudent() {
     }
     console.log("villageName", villageName);
 
-    return formik.values.district, formik.values.tehsil;
+    return (formik.values.district, formik.values.tehsil);
   };
 
   const formik = useFormik({
@@ -119,7 +119,7 @@ function AddStudent() {
       console.log(formik.values);
 
       AddNewStudent(values);
-    },
+    }
   });
 
   return (

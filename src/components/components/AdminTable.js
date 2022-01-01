@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 import { GlobalFilter } from './tableComponents/GlobalFilter';
 import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
 import './styles/Table.css'
 import { ToastContainer } from "react-toastify";
 import { TableCheckbox } from './tableComponents/TableCheckbox';
-import AllUrl, { baseUrl } from '../../redux/constants/url';
+import AllUrl from '../../redux/constants/url';
 import { fetchAdminTableData, getAdminTableData } from '../../redux/actionDispatcher/superAdmin/adminTableDatadispatcher';
 import { connect } from 'react-redux';
 import SkeletonColor from '../../helpers/Skeletrone';
@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTableData }) {
     const token = localStorage.getItem("token");
 
-    const Column = [
+    const columns = [
         {
             header: "S No",
             accessor: "Srno",
@@ -74,7 +74,8 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
 
                             html:
                                 '<hr>' +
-                                'Are you sure?' + '<br>' +
+                                'Are you sure?' +
+                                '<br>' +
                                 `You want to ${original.is_active === 0 ? 'Active' : 'Deactive'} this admin`,
                             // icon: 'warning',
                             showCancelButton: true,
@@ -126,7 +127,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
         // eslint-disable-next-line
     }, []);
 
-    const columns = useMemo(() => Column, [])
+    // const columns = useMemo(() => Column, [])
     // const data = useMemo(() => MockData, [])
 
     const {
@@ -140,7 +141,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
         previousPage,
         canNextPage,
         canPreviousPage,
-        pageOptions,
+        // pageOptions,
         gotoPage,
         pageCount,
         setPageSize,

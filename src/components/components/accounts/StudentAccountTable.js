@@ -8,7 +8,7 @@ import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
 
 
 const StudentAccount = () => {
-    const COLUMNS = [
+    const columns = [
         {
             Header: 'S.no',
             accessor: "Srno",
@@ -52,7 +52,7 @@ const StudentAccount = () => {
 
     // -----------------------------------------------------------------------------------------------
 
-    const columns = useMemo(() => COLUMNS, [])
+    // const columns = useMemo(() => COLUMNS, [])
     const data = useMemo(() => StuAccmockdata, [])
 
     const tableInstance = useTable({
