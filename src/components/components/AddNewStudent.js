@@ -191,13 +191,25 @@ function AddNewStudentPage({ AddNewStudent }) {
                 },
                 data: data
             };
+            try {
 
-            const StudentCourseFees = await axios(config)
-            if (StudentCourseFees.status === 200) {
-                formik.setFieldValue('courseFees', StudentCourseFees.data[0].total_fees);
+
+                const StudentCourseFees = await axios(config)
+                if (StudentCourseFees.status === 200) {
+                    formik.setFieldValue('courseFees', StudentCourseFees.data[0].total_fees);
+
+                } else {
+                    formik.setFieldValue('courseFees', '');
+
+                }
+
+                console.log(StudentCourseFees);
+            } catch (error) {
+                console.log(error);
+                formik.setFieldValue('courseFees', '');
 
             }
-            console.log(StudentCourseFees);
+
         }
     }
 
