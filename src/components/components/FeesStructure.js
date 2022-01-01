@@ -95,10 +95,16 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
     },
   });
 
-if(formik.values.startYear>=formik.values.endYear)
-{
-  formik.errors.endYear ="End year always greater then start year"
-}
+  // console.log("_____________________________________");
+  // console.log(formik.values.startYear);
+  // console.log(formik.values.endYear);
+  // console.log("_____________________________________");
+
+  if (!original) {
+    if (formik.values.startYear > formik.values.endYear) {
+      formik.errors.endYear = "End year always greater then start year"
+    }
+  }
 
   const getData = async () => {
     setVisible(!visible)
@@ -234,7 +240,7 @@ if(formik.values.startYear>=formik.values.endYear)
                   ) : (
                     ""
                   )}
-                 
+
                   <label for="startyear" className="labels" style={{ color: '#5A607F' }}>
                     Start Year
                   </label>
@@ -259,7 +265,7 @@ if(formik.values.startYear>=formik.values.endYear)
                   ) : (
                     ""
                   )}
-               
+
                   <label for="endyear" className="labels" style={{ color: '#5A607F' }}>
                     End Year
                   </label>
@@ -284,7 +290,7 @@ if(formik.values.startYear>=formik.values.endYear)
                   ) : (
                     ""
                   )}
-              
+
                   <label for="totalfees" className="labels" style={{ color: '#5A607F' }}>
                     Total Fees
                   </label>
