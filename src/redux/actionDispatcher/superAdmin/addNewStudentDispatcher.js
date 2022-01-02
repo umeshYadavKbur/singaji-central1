@@ -29,8 +29,15 @@ const AddNewStudent = (data) => {
             if (userResData.request.status === 200) {
                 dispatch(AddNewStudentSuccess(userResData.data));
                 Swal.fire({
-                    title: "Registration Success",
-                    icon: "success",
+
+                    title: '<i class="far fa-check-circle"></i> Success',
+                    html:
+                        '<hr/>' +
+                        'You form is Successfully submited ',
+                    showConfirmButton: false,
+                    // showCloseButton:true,
+                    timer: 2500,
+
                 })
             }
             else if (userResData.request.status === 406) {
