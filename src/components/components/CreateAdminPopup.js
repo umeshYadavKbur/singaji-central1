@@ -6,7 +6,7 @@ import {
   // CModalTitle,
   // CModalTitle,
 } from "@coreui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -17,6 +17,7 @@ import { createNewAdmin } from "../../redux/actionDispatcher/superAdmin/createNe
 import { useNavigate } from "react-router-dom";
 import LoaderButton from "../assests/common/LoaderButton";
 import AllUrl from "../../redux/constants/url";
+import axios from 'axios'
 
 function CreateAdminPopup({ adminData, createNewAdmin }) {
   const token = localStorage.getItem("token");
@@ -25,6 +26,25 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
   // console.log(adminData);
 
   const [visible, setVisible] = useState(false);
+  const [roles, setRoles] = useState([{ roleId: '3', roleName: 'Loading...' }]);
+
+  useEffect(() => {
+    const fn = async () => {
+
+
+      ///////////////////////////////
+      const roles = await axios(AllUrl.roleList)
+      console.log(roles.data);
+      console.log("roles ", roles.data);
+      setRoles(roles.data)
+    }
+    fn();
+  }, []);
+
+
+
+
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Invalid Email Format*")
@@ -76,7 +96,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         Create Admin <i className="fas fa-plus"></i>
       </CButton>
       <CModal
-      
+
         alignment="center"
         visible={visible}
         onClose={() => {
@@ -118,7 +138,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   ) : (
                     ""
                   )}
-          
+
                   <label htmlFor="gmail" className="labels mb-1" style={{ color: '#5A607F' }}>
                     Email
                   </label>
@@ -158,12 +178,13 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     <option value='' className="form-select" style={{ color: '#5A607F' }}>
                       Role
                     </option>
-                    <option className="form-select" value={1}>
-                      Super Admin
-                    </option>
-                    <option className="form-select" value={2}>
-                      Admin
-                    </option>
+                    {roles.map((role) => {
+                      return (<option value={role.roleId} className="form-select" style={{ color: '#5A607F' }}> {role.roleName}</option>)
+                    }
+
+
+
+                    )}
                   </select>
                   {formik.errors.role && formik.touched.role ? (
                     <div className="text-danger fs-6">
