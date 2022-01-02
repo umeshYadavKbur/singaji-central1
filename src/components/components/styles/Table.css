@@ -113,3 +113,21 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+
+
+
+/* ------------------------------------------------------------------------------- */
+.fees-structure-active-button{
+  border: 1px solid #7979792b !important;
+  color: rgba(90, 96, 127, 0.7) !important;
+  /* margin-top: 1px ; */
+  margin-bottom: 0px !important;
+  height: 40px !important;
+  
+}
+.fees-structure-active-button:hover{
+  background-color:#79797911 !important ;
+}

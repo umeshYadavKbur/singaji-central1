@@ -141,25 +141,27 @@ function FeesStructure({ table_data, fetchFeesTable }) {
           <div className="ms-4">
             <select
               style={{
-                height: "auto",
-                width: "auto",
+                height: "41px",
+                width: "159px",
                 outline: "none",
                 border: "none",
                 padding: "5px",
+                textAlign: "center",
+                fontWeight: "normal"
               }}
               value={pageSize}
               onChange={(e) => setPageSize(Number(e.target.value))}
             >
               {[10, 25, 50].map((pageSize) => (
                 <option value={pageSize} key={pageSize}>
-                  show Entrie {pageSize}
+                  show Entries {pageSize}
                 </option>
               ))}
             </select>
           </div>
           <div className="d-flex ml-auto me-3">
             <div className="me-4">
-              <button type="button" className="btn btn-outline-primary fw-bold ">
+              <button type="button" className="btn btn-outline-primary fw-bold fees-structure-active-button ">
                 Active
               </button>
             </div>

@@ -98,7 +98,7 @@ const StudentAccount = () => {
                     </div>
                 </div>
                 <div className="row d-flex justify-content-end">
-                    <div className="col-2" style={{ marginRight: "16px" }} >
+                    <div className="col-3" style={{ marginRight: "16px" }} >
                         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
                     </div>
                 </div>
