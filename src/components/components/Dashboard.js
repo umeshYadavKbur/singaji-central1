@@ -2,8 +2,8 @@ import React from "react";
 
 function Dashboard() {
   return (
-    <div className="position-absolute top-50 start-50 translate-middle text-secondary fw-bolder">
-      <h1 className="fw-bold " style={{color: '#5A607F'}}>Coming Soon...</h1>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%' }}>
+      <h1 className="fw-bold " style={{ color: '#5A607F', fontSize: '55px' }}>Coming Soon...</h1>
     </div>
   );
 }
