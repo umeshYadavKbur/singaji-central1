@@ -27,7 +27,7 @@
 }
 
 .addnewstudent .invalid:focus,
-select:focus {
+.addnewstudent select:focus {
     color: #212529;
     background-color: #fff;
     border-color: rgba(220, 53, 70, 0.61);

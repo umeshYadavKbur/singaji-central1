@@ -12,7 +12,7 @@ export  const TableCheckbox = React.forwardRef(
 
         return (
             <>
-                <input type="checkbox" ref={resolvedRef} {...rest} />
+                <input type="checkbox"  ref={resolvedRef} {...rest} />
             </>
         )
     }

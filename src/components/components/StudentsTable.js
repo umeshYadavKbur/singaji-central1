@@ -352,7 +352,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
         <div className="d-flex">
           <div className="ms-4">
             <div className='ms-4'>
-              <select style={{ height: "auto", width: "auto", outline: "none", border: "none", borderRadius: "10px", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+              <select style={{ height: "41px", width: "150px", outline: "none", border: "none", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                 {
                   [10, 25, 50, 100].map(pageSize => (
                     <option value={pageSize} key={pageSize}>Show Entrie {pageSize}</option>
@@ -364,7 +364,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           <div className='d-flex ml-auto me-3'>
 
             <div className='me-4'>
-              <button type="button" className="btn btn-outline-secondary fw-bold ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
+              <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
             </div>
             {/* <div className='me-4'>
               <button type="button" class="btn btn-outline-primary fw-bold ">Active</button>

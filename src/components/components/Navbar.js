@@ -2,7 +2,7 @@ import React from 'react'
 
 function Navbar({ Options }) {
   return (
-    <div>
+    <div >
       <Options />
     </div>
   )
