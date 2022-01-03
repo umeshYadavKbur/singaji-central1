@@ -262,7 +262,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.firstName}
                                             name="firstName"
                                             type="text"
-                                            className={formik.touched.firstName ? `form-control ${formik.errors.firstName ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.firstName ? `form-control ${formik.errors.firstName ? "invalid" : ""}` :'form-control'}
                                             placeholder="First name"
                                         />
                                         {formik.errors.firstName && formik.touched.firstName ? (
@@ -280,7 +280,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.lastName}
                                             name="lastName"
                                             type="text"
-                                            className={formik.touched.lastName ? `form-control ${formik.errors.lastName ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.lastName ? `form-control ${formik.errors.lastName ? "invalid" : ""}` :'form-control'}
                                             placeholder="Last name"
                                         />  {formik.errors.lastName && formik.touched.lastName ? (
                                             <div className="text-danger fs-6">
@@ -297,7 +297,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.dob}
                                             name="dob"
                                             type="date"
-                                            className={formik.touched.dob ? `form-control ${formik.errors.dob ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.dob ? `form-control ${formik.errors.dob ? "invalid" : ""}` :'form-control'}
                                             placeholder="DOB"
                                         />
                                         {formik.errors.dob && formik.touched.dob ? (
@@ -313,7 +313,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                         <NumberFormat onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.contactNumber}
-                                            name="contactNumber" placeholder="Contact Number" className={formik.touched.contactNumber ? `form-control ${formik.errors.contactNumber ? "invalid" : "valid"}` :'form-control'} format="##########" />
+                                            name="contactNumber" placeholder="Contact Number" className={formik.touched.contactNumber ? `form-control ${formik.errors.contactNumber ? "invalid" : ""}` :'form-control'} format="##########" />
                                         {formik.errors.contactNumber && formik.touched.contactNumber ? (
                                             <div className="text-danger fs-6">
                                                 {formik.errors.contactNumber}
@@ -333,7 +333,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.fatherName}
                                             name="fatherName"
                                             type="text"
-                                            className={formik.touched.fatherName ? `form-control ${formik.errors.fatherName ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.fatherName ? `form-control ${formik.errors.fatherName ? "invalid" : ""}` :'form-control'}
                                             placeholder="Father Name"
                                         />
                                         {formik.errors.fatherName && formik.touched.fatherName ? (
@@ -351,7 +351,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.fatherOccupation}
                                             name="fatherOccupation"
                                             type="text"
-                                            className={formik.touched.fatherOccupation ? `form-control ${formik.errors.fatherOccupation ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.fatherOccupation ? `form-control ${formik.errors.fatherOccupation ? "invalid" : ""}` :'form-control'}
                                             placeholder="Father Occupation"
                                         />
                                         {formik.errors.fatherOccupation && formik.touched.fatherOccupation ? (
@@ -368,7 +368,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             onBlur={formik.handleBlur}
                                             type="number"
                                             value={formik.values.fatherIncome}
-                                            name="fatherIncome" placeholder="Father Annual Income" className={formik.touched.fatherIncome ? `form-control ${formik.errors.fatherIncome ? "invalid" : "valid"}` :'form-control'}
+                                            name="fatherIncome" placeholder="Father Annual Income" className={formik.touched.fatherIncome ? `form-control ${formik.errors.fatherIncome ? "invalid" : ""}` :'form-control'}
                                         />
 
                                         {formik.errors.fatherIncome && formik.touched.fatherIncome ? (
@@ -385,7 +385,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             onBlur={formik.handleBlur}
                                             value={formik.values.FatherContactNumber}
                                             name="FatherContactNumber" placeholder="Father Contact"
-                                            className={formik.touched.FatherContactNumber ? `form-control ${formik.errors.FatherContactNumber ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.FatherContactNumber ? `form-control ${formik.errors.FatherContactNumber ? "invalid" : ""}` :'form-control'}
                                             format="##########" />
                                         {formik.errors.FatherContactNumber && formik.touched.FatherContactNumber ? (
                                             <div className="text-danger fs-6">
@@ -408,7 +408,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.address}
                                             name="address"
                                             type="text"
-                                            className={formik.touched.address ? `form-control ${formik.errors.address ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.address ? `form-control ${formik.errors.address ? "invalid" : ""}` :'form-control'}
                                             placeholder="Enter your Address"
                                         />
                                         {formik.errors.address && formik.touched.address ? (
@@ -428,7 +428,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.pincode}
                                             name="pincode"
                                             type="text"
-                                            className={formik.touched.pincode ? `form-control ${formik.errors.pincode ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.pincode ? `form-control ${formik.errors.pincode ? "invalid" : ""}` :'form-control'}
                                             format="######"
                                             mask={'X'}
                                             placeholder="EX:- 455336"
@@ -450,7 +450,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.village}
                                             name="village"
                                             type="text"
-                                            className={formik.touched.firstName ? `form-control ${formik.errors.firstName ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.firstName ? `form-control ${formik.errors.firstName ? "invalid" : ""}` :'form-control'}
                                             placeholder="Village"
                                         /> */}
                                         <Select
@@ -459,7 +459,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             onBlur={formik.handleBlur}
                                             // value={formik.values.village}
                                             name="village"
-                                            className={formik.touched.village ? ` ${formik.errors.village ? "invalid" : "valid"}` :''}
+                                            className={formik.touched.village ? ` ${formik.errors.village ? "invalid" : ""}` :''}
                                             placeholder="Village"
                                         />
                                         {formik.errors.village && formik.touched.village ? (
@@ -478,7 +478,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.tehsil}
                                             name="tehsil"
                                             type="text"
-                                            className={formik.touched.tehsil ? `form-control ${formik.errors.tehsil ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.tehsil ? `form-control ${formik.errors.tehsil ? "invalid" : ""}` :'form-control'}
                                             placeholder="Tehsil"
                                         />
                                         {formik.errors.tehsil && formik.touched.tehsil ? (
@@ -496,7 +496,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.district}
                                             name="district"
                                             type="text"
-                                            className={formik.touched.district ? `form-control ${formik.errors.district ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.district ? `form-control ${formik.errors.district ? "invalid" : ""}` :'form-control'}
                                             placeholder="District"
                                         />
                                         {formik.errors.district && formik.touched.district ? (
@@ -517,7 +517,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.email}
                                             name="email"
                                             type="text"
-                                            className={formik.touched.email ? `form-control ${formik.errors.email ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.email ? `form-control ${formik.errors.email ? "invalid" : ""}` :'form-control'}
                                             placeholder="Email"
                                         />
                                         {formik.errors.email && formik.touched.email ? (
@@ -535,7 +535,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.aadharNumber}
                                             name="aadharNumber"
                                             // placeholder="Aadhar Number" 
-                                            className={formik.touched.aadharNumber ? `form-control ${formik.errors.aadharNumber ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.aadharNumber ? `form-control ${formik.errors.aadharNumber ? "invalid" : ""}` :'form-control'}
                                             format="#### #### ####"
                                             mask={'X'}
                                             placeholder="EX:- 436175370721"
@@ -555,7 +555,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.category}
-                                            className={formik.touched.category ? `form-control ${formik.errors.category ? "invalid" : "valid"}` : 'form-control'}
+                                            className={formik.touched.category ? `form-control ${formik.errors.category ? "invalid" : ""}` : 'form-control'}
                                             id="inputGroupSelect02"
                                         >
                                             <option value="">
@@ -620,7 +620,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.schoolName}
                                             name="schoolName"
                                             type="text"
-                                            className={formik.touched.schoolName ? `form-control ${formik.errors.schoolName ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.schoolName ? `form-control ${formik.errors.schoolName ? "invalid" : ""}` :'form-control'}
                                             placeholder="School Name"
                                         />
                                         {formik.errors.schoolName && formik.touched.schoolName ? (
@@ -635,7 +635,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <div className="col">
                                         <label className="addStdLable" htmlFor="">12<sup>th</sup> Subject</label>
                                         <select onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur} name="subject12" value={formik.values.subject12} className={formik.touched.subject12 ? `form-control ${formik.errors.subject12 ? "invalid" : "valid"}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
+                                            onBlur={formik.handleBlur} name="subject12" value={formik.values.subject12} className={formik.touched.subject12 ? `form-control ${formik.errors.subject12 ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
                                             <option value="">Select Subject</option>
                                             <option value="Maths">Maths</option>
                                             <option value="BIO">BIO</option>
@@ -655,7 +655,7 @@ function AddNewStudentPage({AddNewStudent}) {
 
                                         <select name="streamName" value={formik.values.streamName} onBlur={formik.handleBlur}
                                             onBlurCapture={getCourseFees}
-                                            onChange={formik.handleChange} className={formik.touched.streamName ? `form-control ${formik.errors.streamName ? "invalid" : "valid"}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
+                                            onChange={formik.handleChange} className={formik.touched.streamName ? `form-control ${formik.errors.streamName ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
                                             <option value=''>Select branch</option>
                                             {branchNames.map((ele,i) => {
                                                 return (
@@ -682,7 +682,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.joinBatch}
                                             name="joinBatch"
                                             // type="text"
-                                            className={formik.touched.joinBatch ? `form-control ${formik.errors.joinBatch ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.joinBatch ? `form-control ${formik.errors.joinBatch ? "invalid" : ""}` :'form-control'}
                                             format="####"
                                             mask={'X'}
                                             placeholder="EX:-2022"
@@ -706,7 +706,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.rollNumber12}
                                             name="rollNumber12"
                                             type="text"
-                                            className={formik.touched.rollNumber12 ? `form-control ${formik.errors.rollNumber12 ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.rollNumber12 ? `form-control ${formik.errors.rollNumber12 ? "invalid" : ""}` :'form-control'}
                                             placeholder="Roll Number"
                                         /> {formik.errors.rollNumber12 && formik.touched.rollNumber12 ? (
                                             <div className="text-danger fs-6">
@@ -727,7 +727,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             mask={['X','X','%']}
                                             placeholder="XX%"
 
-                                            className={formik.touched.percent12 ? `form-control ${formik.errors.percent12 ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.percent12 ? `form-control ${formik.errors.percent12 ? "invalid" : ""}` :'form-control'}
                                         /> {formik.errors.percent12 && formik.touched.percent12 ? (
                                             <div className="text-danger fs-6">
                                                 {formik.errors.percent12}
@@ -739,7 +739,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <div className="col-3">
                                         <label className="addStdLable" htmlFor="">Year</label>
                                         <select name="year" value={formik.values.year} onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur} className={formik.touched.year ? `form-control ${formik.errors.year ? "invalid" : "valid"}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
+                                            onBlur={formik.handleBlur} className={formik.touched.year ? `form-control ${formik.errors.year ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
                                             <option value=''>Select Year</option>
                                             <option value='I'>I Year</option>
                                             <option value='II'>II Year</option>
@@ -763,7 +763,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.rollNumber10}
                                             name="rollNumber10"
                                             type="text"
-                                            className={formik.touched.rollNumber10 ? `form-control ${formik.errors.rollNumber10 ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.rollNumber10 ? `form-control ${formik.errors.rollNumber10 ? "invalid" : ""}` :'form-control'}
                                             placeholder="Roll Number"
                                         />
                                         {formik.errors.rollNumber10 && formik.touched.rollNumber10 ? (
@@ -781,7 +781,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.percent10}
                                             name="percent10"
                                             type="text"
-                                            className={formik.touched.percent10 ? `form-control ${formik.errors.percent10 ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.percent10 ? `form-control ${formik.errors.percent10 ? "invalid" : ""}` :'form-control'}
                                             format="##%"
                                             mask={['X','X','%']}
                                             placeholder="XX%"
@@ -823,7 +823,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             type="text"
-                                            className={formik.touched.regisrationFees ? `form-control ${formik.errors.regisrationFees ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.regisrationFees ? `form-control ${formik.errors.regisrationFees ? "invalid" : ""}` :'form-control'}
                                             placeholder="Registration Fees"
                                             disabled={true}
                                         />
@@ -842,7 +842,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.courseFees}
                                             name="courseFees"
                                             type="text"
-                                            className={formik.touched.courseFees ? `form-control ${formik.errors.courseFees ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.courseFees ? `form-control ${formik.errors.courseFees ? "invalid" : ""}` :'form-control'}
                                             placeholder="Course Fees"
                                             disabled={true}
                                         />
@@ -860,7 +860,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             onBlur={formik.handleBlur}
                                             value={formik.values.firstInstallment}
                                             name="firstInstallment"
-                                            className={formik.touched.firstInstallment ? `form-control ${formik.errors.firstInstallment ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.firstInstallment ? `form-control ${formik.errors.firstInstallment ? "invalid" : ""}` :'form-control'}
                                             placeholder="First Installment"
                                             thousandSeparator={true}
                                             thousandsGroupStyle='lakh'
@@ -881,7 +881,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.firstInstallmentDate}
                                             name="firstInstallmentDate"
                                             type="date"
-                                            className={formik.touched.firstInstallmentDate ? `form-control ${formik.errors.firstInstallmentDate ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.firstInstallmentDate ? `form-control ${formik.errors.firstInstallmentDate ? "invalid" : ""}` :'form-control'}
                                             placeholder="First Installment Date"
                                         />
                                         {formik.errors.firstInstallmentDate && formik.touched.firstInstallmentDate ? (
@@ -897,7 +897,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <div className="col">
                                         <label className="addStdLable" htmlFor="">Scheme Fees</label>
                                         <select name="feesScheme" value={formik.values.feesScheme} onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur} className={formik.touched.feesScheme ? `form-control ${formik.errors.feesScheme ? "invalid" : "valid"}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
+                                            onBlur={formik.handleBlur} className={formik.touched.feesScheme ? `form-control ${formik.errors.feesScheme ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
                                             <option value=''>Scheme Fees</option>
                                             <option value='SVS'>SVS</option>
                                             <option value='SNS'>SNS</option>
@@ -921,7 +921,7 @@ function AddNewStudentPage({AddNewStudent}) {
                              value={formik.values.firstName}
                                 name="courseFees"
                                 type="text"
-                                className={formik.touched.firstName ? `form-control ${formik.errors.firstName ? "invalid" : "valid"}` :'form-control'}
+                                className={formik.touched.firstName ? `form-control ${formik.errors.firstName ? "invalid" : ""}` :'form-control'}
                                 placeholder="Course Fees"
                             /> */}
                                     </div>
@@ -931,7 +931,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             onBlur={formik.handleBlur}
                                             value={formik.values.feesScheme === "oneShot" ? formik.values.secondInstallment = 0 : formik.values.secondInstallment}
                                             name="secondInstallment"
-                                            className={formik.touched.secondInstallment ? `form-control ${formik.errors.secondInstallment ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.secondInstallment ? `form-control ${formik.errors.secondInstallment ? "invalid" : ""}` :'form-control'}
                                             placeholder="Second Installment"
                                             thousandSeparator={true}
                                             thousandsGroupStyle='lakh'
@@ -953,7 +953,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.secondInstallment === 0 ? formik.values.secondInstallmentDate = formik.values.firstInstallmentDate : formik.values.secondInstallmentDate}
                                             name="secondInstallmentDate"
                                             type="date"
-                                            className={formik.touched.secondInstallmentDate ? `form-control ${formik.errors.secondInstallmentDate ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.secondInstallmentDate ? `form-control ${formik.errors.secondInstallmentDate ? "invalid" : ""}` :'form-control'}
                                             placeholder="Second Installment Date"
                                             disabled={formik.values.feesScheme === "oneShot" ? true : false}
                                         />
@@ -975,7 +975,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.postmatricScolarship}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            className={formik.touched.postmatricScolarship ? `form-control ${formik.errors.postmatricScolarship ? "invalid" : "valid"}` : 'form-control'}
+                                            className={formik.touched.postmatricScolarship ? `form-control ${formik.errors.postmatricScolarship ? "invalid" : ""}` : 'form-control'}
                                             id="inputGroupSelect02"
                                             disabled={formik.values.category === 'Gen' ? true : false}
                                         >
@@ -993,7 +993,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                     </div>
                                     <div className="col">
                                         <label className="addStdLable" htmlFor="">GKB ScolarShip</label>
-                                        <select name="gkbScolarship" className={formik.touched.gkbScolarship ? `form-control ${formik.errors.gkbScolarship ? "invalid" : "valid"}` : 'form-control'} id="inputGroupSelect02"
+                                        <select name="gkbScolarship" className={formik.touched.gkbScolarship ? `form-control ${formik.errors.gkbScolarship ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02"
                                             value={formik.values.gender === "male" ? formik.values.gkbScolarship = "no" : formik.values.gkbScolarship}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
@@ -1015,7 +1015,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             onBlur={formik.handleBlur}
                                             value={formik.values.feesScheme === "oneShot" ? formik.values.thirdInstallment = 0 : formik.values.thirdInstallment}
                                             name="thirdInstallment"
-                                            className={formik.touched.thirdInstallment ? `form-control ${formik.errors.thirdInstallment ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.thirdInstallment ? `form-control ${formik.errors.thirdInstallment ? "invalid" : ""}` :'form-control'}
                                             placeholder="Third Installment"
                                             thousandSeparator={true}
                                             thousandsGroupStyle='lakh'
@@ -1037,7 +1037,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.thirdInstallment === 0 ? formik.values.thirdInstallmentDate = formik.values.secondInstallmentDate : formik.values.thirdInstallmentDate}
                                             name="thirdInstallmentDate"
                                             type="date"
-                                            className={formik.touched.thirdInstallmentDate ? `form-control ${formik.errors.thirdInstallmentDate ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.thirdInstallmentDate ? `form-control ${formik.errors.thirdInstallmentDate ? "invalid" : ""}` :'form-control'}
                                             placeholder="Third Installment Date"
                                             disabled={formik.values.feesScheme === "oneShot" ? true : false}
                                         />
@@ -1056,7 +1056,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                         <div className='row'>
                                             <div className="col">
                                                 <label className="addStdLable" htmlFor="">Postmatric Owner</label>
-                                                <select name="postmatricOwner" className={formik.touched.postmatricOwner ? `form-control ${formik.errors.postmatricOwner ? "invalid" : "valid"}` : 'form-control'} id="inputGroupSelect02"
+                                                <select name="postmatricOwner" className={formik.touched.postmatricOwner ? `form-control ${formik.errors.postmatricOwner ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02"
                                                     value={formik.values.postmatricScolarship === "no" ? formik.values.postmatricOwner = "self" : formik.values.postmatricOwner}
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
@@ -1075,7 +1075,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             </div>
                                             <div className="col">
                                                 <label className="addStdLable" htmlFor="">GKB Owner</label>
-                                                <select name="gkbOwner" className={formik.touched.gkbOwner ? `form-control ${formik.errors.gkbOwner ? "invalid" : "valid"}` : 'form-control'} id="inputGroupSelect02"
+                                                <select name="gkbOwner" className={formik.touched.gkbOwner ? `form-control ${formik.errors.gkbOwner ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02"
                                                     value={formik.values.gkbScolarship === "no" ? formik.values.gkbOwner = "self" : formik.values.gkbOwner}
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
@@ -1098,7 +1098,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                                     onBlur={formik.handleBlur}
                                                     value={parseInt(formik.values.firstInstallment?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.secondInstallment?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.thirdInstallment?.toString().replace(/,/g,'').replace('₹',''))}
                                                     name="payableAmmount"
-                                                    className={formik.touched.payableAmmount ? `form-control ${formik.errors.payableAmmount ? "invalid" : "valid"}` :'form-control'}
+                                                    className={formik.touched.payableAmmount ? `form-control ${formik.errors.payableAmmount ? "invalid" : ""}` :'form-control'}
                                                     placeholder="Payable Ammount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
@@ -1124,7 +1124,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                                     name="postmatricAmount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
-                                                    prefix='₹' className={formik.touched.postmatricAmount ? `form-control ${formik.errors.postmatricAmount ? "invalid" : "valid"}` :'form-control'}
+                                                    prefix='₹' className={formik.touched.postmatricAmount ? `form-control ${formik.errors.postmatricAmount ? "invalid" : ""}` :'form-control'}
                                                     placeholder="Postmatric Amount"
                                                     disabled={formik.values.category === 'Gen' ? true : false || formik.values.postmatricOwner === "self" ? true : false}
                                                 />
@@ -1145,7 +1145,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
                                                     prefix='₹'
-                                                    className={formik.touched.GKBAmount ? `form-control ${formik.errors.GKBAmount ? "invalid" : "valid"}` :'form-control'}
+                                                    className={formik.touched.GKBAmount ? `form-control ${formik.errors.GKBAmount ? "invalid" : ""}` :'form-control'}
                                                     placeholder="GKB Amount"
                                                     disabled={formik.values.gender === 'male' ? true : false || formik.values.gkbOwner === "self" ? true : false}
                                                 />
@@ -1165,7 +1165,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                                     name="ScholarshipAmount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
-                                                    prefix='₹' className={formik.touched.ScholarshipAmount ? `form-control ${formik.errors.ScholarshipAmount ? "invalid" : "valid"}` :'form-control'}
+                                                    prefix='₹' className={formik.touched.ScholarshipAmount ? `form-control ${formik.errors.ScholarshipAmount ? "invalid" : ""}` :'form-control'}
                                                     placeholder="Scholarship Amount"
                                                     disabled={true}
                                                 />
@@ -1183,7 +1183,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <div className="col-3">
 
                                         <label className="addStdLable" htmlFor="">Remark</label>
-                                        <textarea className={formik.touched.remark ? `form-control ${formik.errors.remark ? "invalid" : "valid"}` :'form-control'} id="exampleFormControlTextarea1"
+                                        <textarea className={formik.touched.remark ? `form-control ${formik.errors.remark ? "invalid" : ""}` :'form-control'} id="exampleFormControlTextarea1"
                                             placeholder="Remark" onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.remark}
@@ -1226,7 +1226,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.busFees}
                                             name="busFees"
                                             type="number"
-                                            className={formik.touched.busFees ? `form-control ${formik.errors.busFees ? "invalid" : "valid"}` :'form-control'}
+                                            className={formik.touched.busFees ? `form-control ${formik.errors.busFees ? "invalid" : ""}` :'form-control'}
                                             placeholder="Bus Fees"
                                         />
                                         {formik.errors.busFees && formik.touched.busFees ? (
@@ -1240,7 +1240,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <div className="col-3">
                                         <label className="addStdLable" >Track Name</label>
                                         <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur} className={formik.touched.trackName ? `form-control ${formik.errors.trackName ? "invalid" : "valid"}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
+                                            onBlur={formik.handleBlur} className={formik.touched.trackName ? `form-control ${formik.errors.trackName ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
                                             <option value='0'>Select Track</option>
                                             {trackNames.map((ele,i) => {
                                                 return (
