@@ -198,7 +198,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
             <div className="second_div ">
               <form onSubmit={formik.handleSubmit}>
                 <img onClick={() => setVisible(!visible)}
-                  style={{ height: "20px", width: "20px", marginLeft: '95%', marginTop: "-10px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
+                  style={{ height: "20px", width: "20px", marginLeft: '110%', marginTop: "-10px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
                 <h4 className=" text-aligns-center createAdminhead" style={{ marginRight: "30px", fontWeight: 'bold' }}>
                   {original ? "Update Fees Structure" : "Create Fees Structure"}
                 </h4>

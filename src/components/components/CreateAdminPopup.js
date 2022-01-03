@@ -110,14 +110,14 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
               <form onSubmit={formik.handleSubmit}>
                 <div>
                   <img onClick={() => setVisible(!visible)}
-                    style={{ height: "20px", width: "20px", marginLeft: '95%', marginTop: "-10px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
+                    style={{ height: "20px", width: "20px", marginLeft: '110%', marginTop: "-10px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
                   <h4 className=" text-aligns-center createAdminhead" style={{ color: '#5A607F', marginRight: "30px", fontWeight: 'bold' }}>
                     Create Admin
                   </h4>
                   <img src={logo} alt="logo ssism" className="logo_img" />{" "}
                 </div>
                 <div>
-                  <label htmlFor="gmail" className="labels mb-1">
+                  <label htmlFor="gmail" className="labels mb-1" style={{ color: 'rgb(90 96 127)' }}>
                     Username
                   </label>
                   <input
@@ -139,7 +139,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     ""
                   )}
 
-                  <label htmlFor="gmail" className="labels mb-1" style={{ color: '#5A607F' }}>
+                  <label htmlFor="gmail" className="labels mb-1" style={{ color: 'rgb(90 96 127)' }}>
                     Email
                   </label>
                   <input
@@ -161,7 +161,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     ""
                   )}
 
-                  <label htmlFor="role" className="labels mb-1">
+                  <label htmlFor="role" className="labels mb-1" style={{ color: 'rgb(90 96 127)' }}>
                     Role
                   </label>
                   <select
@@ -175,7 +175,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     id="role"
                     type="text"
                   >
-                    <option value='' className="form-select" style={{ color: '#5A607F' }}>
+                    <option value='' className="form-select" style={{ color: 'rgb(90 96 127)' }}>
                       Role
                     </option>
                     {roles.map((role) => {
