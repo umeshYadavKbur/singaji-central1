@@ -1,5 +1,6 @@
 //main url in the application
 export const baseUrl = "https://singaji-central-server.herokuapp.com";
+// export const baseUrl = "http://localhost:5000";
 
 
 
@@ -25,6 +26,7 @@ const AllUrl = {
     allActiveStudent: `${baseUrl}/api/infoOfAllActiveStudents`,
     showFees: `${baseUrl}/api/show_fees/`,
     adminStatusChange: `${baseUrl}/api/deactive_or_activate_admin`,
+    roleList: `${baseUrl}/api/role_list`,
     //_____________________________________
 
 

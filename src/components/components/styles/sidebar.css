@@ -172,6 +172,7 @@ body {
   position: relative;
   display: flex;
   align-items: center;
+  margin-bottom: 3px;
   height: 37px;
   border-radius: 6px;
   /* line-height: 60px; */
@@ -193,6 +194,7 @@ body {
   display: flex;
   align-items: center;
   height: 37px;
+  margin-top: 3px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   text-decoration: none;
@@ -249,6 +251,7 @@ body {
   background: #E6E9F4;
   color: black;
   text-decoration: none;
+  border-radius: 6px;
 }
 
 
@@ -410,6 +413,7 @@ label #sidebar_btn:hover {
   background: #E6E9F4;
   color: black;
   text-decoration: none;
+  border-radius: 6px;
 }
 
 .active_tab::before {
