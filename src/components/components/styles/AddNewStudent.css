@@ -18,6 +18,24 @@
     margin-top: 0 !important;
 }
 
+.addnewstudent .addStdLable {
+    margin: 1px !important;
+}
+
+.valid {
+    border: 2px solid rgb(71, 221, 71) !important;
+}
+
+.addnewstudent input:focus,
+select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.invalid {
+    border: 2px solid red !important;
+}
+
 
 /* .add_student_dropdown_menu.css-15v22id-MuiAccordionDetails-root {
     padding: 0;
