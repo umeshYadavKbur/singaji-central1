@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import './StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
+import { toast } from 'react-toastify';
 
 
 const StudentAccount = () => {
@@ -16,10 +17,25 @@ const StudentAccount = () => {
                 return (index + 1)
             }
         },
-        {
-            Header: 'Name',
-            accessor: 'name'
-        },
+         {
+            Header: "Name",
+            accessor: "name",
+      
+            Cell: ({ row: { original, index } }) => (
+              <div className="d-flex m-0 flex-column justify-content-start">
+                <img
+                  alt="kpkp"
+                  style={{cursor: "pointer"}} onClick={()=>{toast(`${original.stdId} is ${original.name}`)}}
+                  className="mx-auto"
+                  src={original.photo}
+                  width={50}
+                  textColor="#fff"
+                  text="Image"
+                />
+                <p className="mx-auto"> {original.name}</p>
+              </div>
+            ),
+          },
         {
             Header: 'Father name',
             accessor: 'fathersName'
