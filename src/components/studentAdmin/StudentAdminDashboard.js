@@ -46,6 +46,7 @@ function AdminDashboard() {
       <div className="side_bar_content" style={style}>
         <Sidebar play={play} isPlaying={isPlaying} Options={SidebarLinks} />
       </div>
+      
       <div className="header_table">
         <div className="header_dashboard">
           <Navbar Options={HeaderLink} />

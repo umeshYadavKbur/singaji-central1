@@ -10,7 +10,7 @@ export default function SkeletonColor() {
 
 
                 <Skeleton className='ml-4'
-                    sx={{ bgcolor: "rgb(190, 190, 190)" }}
+                    sx={{ bgcolor: "rgb(222, 222, 222)" }}
                     variant="rectangular"
                     style={{ height: "30px", width: "120px", borderRadius: '3px' }}
                 />
@@ -19,13 +19,13 @@ export default function SkeletonColor() {
 
 
                 <Skeleton className='mr-5'
-                    sx={{ bgcolor: "rgb(190, 190, 190)" }}
+                    sx={{ bgcolor: "rgb(222, 222, 222)" }}
                     variant="rectangular"
                     style={{ height: "30px", width: "200px", borderRadius: '3px' }}
                 />
             </div>
             <Skeleton className='ml-3 '
-                sx={{ bgcolor: "rgb(190, 190, 190)" }}
+                sx={{ bgcolor: "rgb(222, 222, 222)" }}
                 variant="rectangular"
                 style={{ width: '97%', height: "7%", borderRadius: '3px', marginTop: '15px' }}
             />
@@ -34,7 +34,7 @@ export default function SkeletonColor() {
 
                     return (
                         <Skeleton key={i} className='ml-3 mt-3'
-                            sx={{ bgcolor: "rgb(190, 190, 190)" }}
+                            sx={{ bgcolor: "rgb(222, 222, 222)" }}
                             variant="rectangular"
                             style={{ width: '97%', height: "7%", borderRadius: '3px' }}
                         />
@@ -47,7 +47,7 @@ export default function SkeletonColor() {
 
 
                 <Skeleton className='ml-4 mt-3'
-                    sx={{ bgcolor: "rgb(190, 190, 190)" }}
+                    sx={{ bgcolor: "rgb(222, 222, 222)" }}
                     variant="rectangular"
                     style={{ height: "25px", width: "200px", borderRadius: '3px' }}
                 />
@@ -56,7 +56,7 @@ export default function SkeletonColor() {
 
 
                 <Skeleton className='mr-3 mt-3'
-                    sx={{ bgcolor: "rgb(190, 190, 190)" }}
+                    sx={{ bgcolor: "rgb(222, 222, 222)" }}
                     variant="rectangular"
                     style={{ height: "30px", width: "200px", borderRadius: '3px' }}
                 />
