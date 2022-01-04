@@ -30,12 +30,10 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
 
   useEffect(() => {
     const fn = async () => {
-
-
-      ///////////////////////////////
       const roles = await axios(AllUrl.roleList)
+      console.log('====================================');
       console.log(roles.data);
-      console.log("roles ", roles.data);
+      console.log('====================================');
       setRoles(roles.data)
     }
     fn();
@@ -179,10 +177,9 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                       Role
                     </option>
                     {roles.map((role) => {
-                      return (<option value={role.roleId} className="form-select" style={{ color: '#5A607F' }}> {role.roleName}</option>)
+                      var data2 = role.roleName.charAt(0).toUpperCase() + role.roleName.slice(1).toLowerCase()
+                      return (<option value={role.roleId} className="form-select" style={{ color: '#5A607F' }}> {data2}</option>)
                     }
-
-
 
                     )}
                   </select>
