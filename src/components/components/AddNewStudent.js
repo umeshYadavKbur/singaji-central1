@@ -65,7 +65,7 @@ function AddNewStudentPage({AddNewStudent}) {
     const validationSchema = Yup.object({
         firstName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!"),
         lastName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates').required("Required!"),
-        dob: Yup.string().required("Required!").test('doc_check','Minimum age must be 12-14 years',val => val.slice(0,4) <= (new Date().getFullYear()) - 13),
+        dob: Yup.string().required("Required!").test('doc_check','Minimum age must be 12-14 years',val => val?.slice(0,4) <= (new Date().getFullYear()) - 13),
         contactNumber: Yup.string().trim().min(10,'Must be exactly 10 digits').required("Required!"),
         fatherName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!"),
         fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates'),
