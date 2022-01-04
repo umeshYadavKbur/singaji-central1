@@ -15,7 +15,7 @@ import StudentAccountTable from '../components/accounts/StudentAccountTable'
 import { ToastContainer } from "react-toastify";
 import SidebarLinks from "./SidebarLinks";
 import HeaderLink from "./HeaderLink";
-
+import StudentProfile from "../components/accounts/StudentProfile";
 
 function AdminDashboard() {
   const { play, style, isPlaying } = useAnimate({
@@ -57,6 +57,7 @@ function AdminDashboard() {
             <Route path="admintable" element={<AdminTable />} />
             <Route path="addnewstudent" element={<AddNewStudent />} />
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
+            <Route path="studentprofile" element={<StudentProfile/>} />
           </Routes>
         </div>
       </div>
