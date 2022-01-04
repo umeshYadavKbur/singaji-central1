@@ -73,11 +73,11 @@ function AddNewStudentPage({ AddNewStudent }) {
     const validationSchema = Yup.object({
         firstName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!"),
         lastName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates').required("Required!"),
-        dob: Yup.string().required("Required!"),
+        dob: Yup.string().required("Required!").test('doc_check', 'Minimum age must be 12-14 years', val => val?.slice(0, 4) <= (new Date().getFullYear()) - 13),
         contactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
         fatherName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!"),
-        fatherOccupation: Yup.string().required("Required!"),
-        fatherIncome: Yup.string().required("Required!").min(4, 'Must be exactly 4 digits'),
+        fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates'),
+        fatherIncome: Yup.string().required("Required!").min(4, 'Must be exactly 4 digits').test('Is positive', 'must be positive', val => val > 0),
         FatherContactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
         address: Yup.string().trim().min(10, 'minimum 10 characters required').required("Required!"),
         village: Yup.string().required("Required!").trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates'),
@@ -98,29 +98,29 @@ function AddNewStudentPage({ AddNewStudent }) {
         subject12: Yup.string().required("Required!"),
         schoolName: Yup.string().required("Required!"),
 
-        GKBAmount: Yup.string().required("Required!"),
-        postmatricAmount: Yup.string().required("Required!"),
+        GKBAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        postmatricAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
         thirdInstallmentDate: Yup.string().required("Required!"),
-        thirdInstallment: Yup.string().required("Required!"),
+        thirdInstallment: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
         secondInstallmentDate: Yup.string().required("Required!"),
-        secondInstallment: Yup.string().required("Required!"),
+        secondInstallment: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
         feesScheme: Yup.string().required("Required!"),
         firstInstallmentDate: Yup.string().required("Required!"),
-        firstInstallment: Yup.string().required("Required!"),
-        courseFees: Yup.string().required("Required!"),
-        regisrationFees: Yup.string().required("Required!"),
+        firstInstallment: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        courseFees: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        regisrationFees: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
 
         postmatricScolarship: Yup.string().required("Required!"),
         gkbScolarship: Yup.string().required("Required!"),
         gkbOwner: Yup.string().required("Required!"),
         postmatricOwner: Yup.string().required("Required!"),
         remark: Yup.string().required("Required!"),
-        payableAmmount: Yup.string().required("Required!"),
+        payableAmmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
         // postmatricAmount: Yup.string().required("Required!"),
         // GKBAmount: Yup.string().required("Required!"),
 
         trackName: Yup.string().required("Required!"),
-        busFees: Yup.string().required("Required!"),
+        busFees: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
 
     })
     // let len=formik.values.aadharNumber;
@@ -248,13 +248,13 @@ function AddNewStudentPage({ AddNewStudent }) {
             <div className='addnewstudent mx-auto px-3'>
                 <form onSubmit={formik.handleSubmit}>
                     {/* Personal Details */}
-                    <Accordion className="my-2" expanded={expanded.panel1 === true} onChange={handleChange('panel1')}>
+                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel1 === true} onChange={handleChange('panel1')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             style={{
-                                backgroundColor: 'rgb(199 204 209 / 31%)', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px"
+                                backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px"
                             }}
                         >
                             <Typography style={{ color: "#414c97", margin: "0px" }}><b> Personal Details</b></Typography>
@@ -610,12 +610,12 @@ function AddNewStudentPage({ AddNewStudent }) {
                     {/* Personal Details */}
 
                     {/* Acadmic Details */}
-                    <Accordion className="my-2" expanded={expanded.panel2 === true} onChange={handleChange('panel2')} >
+                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel2 === true} onChange={handleChange('panel2')} >
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{ backgroundColor: 'rgb(199 204 209 / 31%)', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
+                            style={{ backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
                         >
                             <Typography style={{ color: "#414c97" }}><b>Acadmic Details </b></Typography>
                         </AccordionSummary>
@@ -814,12 +814,12 @@ function AddNewStudentPage({ AddNewStudent }) {
                     {/* Acadmic Details */}
 
                     {/* Fees Details */}
-                    <Accordion className="my-2" expanded={expanded.panel3 === true} onChange={handleChange('panel3')}>
+                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel3 === true} onChange={handleChange('panel3')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{ backgroundColor: 'rgb(199 204 209 / 31%)', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
+                            style={{ backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
                         >
                             <Typography style={{ color: "#414c97" }}><b>Fees Details </b></Typography>
                         </AccordionSummary>
@@ -908,7 +908,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                         <label className="addStdLable" htmlFor="">Scheme Fees</label>
                                         <select name="feesScheme" value={formik.values.feesScheme} onChange={formik.handleChange}
                                             onBlur={formik.handleBlur} className={formik.touched.feesScheme ? `form-select ${formik.errors.feesScheme ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
-                                            <option Value='fullFees'>Full Fees</option>
+                                            <option value='fullFees'>Full Fees</option>
                                             <option value='SNS_SVS'>SNS_SVS</option>
                                             <option value='oneShot'>One Shot</option>
                                             <option value='Rewa'>Rewa</option>
@@ -1214,12 +1214,12 @@ function AddNewStudentPage({ AddNewStudent }) {
                     {/* Fees Details */}
 
                     {/* Bus Details */}
-                    <Accordion className="my-2" expanded={expanded.panel4 === true} onChange={handleChange('panel4')}>
+                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel4 === true} onChange={handleChange('panel4')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{ backgroundColor: 'rgb(199 204 209 / 31%)', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
+                            style={{ backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
                         >
                             <Typography style={{ color: "#414c97" }}><b>Bus Details</b></Typography>
                         </AccordionSummary>

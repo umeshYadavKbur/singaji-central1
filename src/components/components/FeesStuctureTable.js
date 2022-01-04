@@ -17,6 +17,7 @@ import { fetchFeesTableData } from "../../redux/actionDispatcher/superAdmin/fees
 import AllUrl from "../../redux/constants/url";
 import SkeletonColor from "../../helpers/Skeletrone";
 import { ToastContainer } from "react-toastify";
+import updown_sort from '../assests/image/updown_sort.svg'
 
 // import LoaderButton from "../../assests/common/LoaderButton";
 
@@ -138,28 +139,19 @@ function FeesStructure({ table_data, fetchFeesTable }) {
         style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}
       >
         <div className="d-flex">
-          <div className="ms-4">
+          <div className="">
             <select
-              style={{
-                height: "41px",
-                width: "159px",
-                outline: "none",
-                border: "none",
-                padding: "5px",
-                textAlign: "center",
-                fontWeight: "normal"
-              }}
+              className="form-select table_select_row_options"
               value={pageSize}
               onChange={(e) => setPageSize(Number(e.target.value))}
             >
-              {[10, 25, 50].map((pageSize) => (
-                <option value={pageSize} key={pageSize}>
-                  show Entries {pageSize}
+              {[10, 25, 50,100].map((pageSize) => (
+                <option value={pageSize} key={pageSize}>Show Entries {pageSize}
                 </option>
               ))}
             </select>
           </div>
-          <div className="d-flex ml-auto me-3">
+          <div className="d-flex ml-auto me-1">
             <div className="me-4">
               <button type="button" className="btn  fw-bold fees-structure-active-button ">
                 Active
@@ -183,12 +175,16 @@ function FeesStructure({ table_data, fetchFeesTable }) {
                     <span>
                       {column.isSorted ? (
                         column.isSortedDesc ? (
-                          <i className="fas fa-chevron-down ms-2"></i>
+                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
                         ) : (
-                          <i className="fas fa-chevron-up ms-2"></i>
+                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
+                          // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
                         )
                       ) : (
-                        ""
+
+                        column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+
+
                       )}
                     </span>
                   </th>
