@@ -13,7 +13,7 @@ export  const TableCheckbox = React.forwardRef(
         var test = {
 
             accentColor:'rgb(212 128 59)',
-            marginLeft: "10px"
+            // marginLeft: "10px"
           
           }
         return (

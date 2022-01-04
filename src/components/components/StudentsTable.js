@@ -25,13 +25,14 @@ import { TableCheckbox } from "./tableComponents/TableCheckbox";
 import { VerifyStudent } from "../../redux/actionDispatcher/superAdmin/studentVerifyTableDataDispatcher";
 // import AddNewStudent from "./AddNewStudent";
 import AllUrl from "../../redux/constants/url"
+import updown_sort from '../assests/image/updown_sort.svg'
 // import { baseUrl } from "../../redux/constants/url";
 
 
 function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
   const token = localStorage.getItem("token");
 
-  const [columns ]= React.useState([
+  const [columns] = React.useState([
     {
       header: "S No",
       accessor: "Srno",
@@ -244,7 +245,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: 'icon',
       Cell: ({ row: { original } }) => (
         // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
-        <img src={Edit_icon} alt="Edit" onClick={()=>{console.log("edit student icon")}} />
+        <img src={Edit_icon} alt="Edit" onClick={() => { console.log("edit student icon") }} />
 
       )
     }
@@ -280,7 +281,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     // eslint-disable-next-line
   }, []);
 
- 
+
 
   const {
     getTableProps,
@@ -350,18 +351,18 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       />
       <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
         <div className="d-flex">
-          <div className="ms-4">
-            <div className='ms-4'>
-              <select style={{ height: "41px", width: "150px", outline: "none", border: "none", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-                {
-                  [10, 25, 50, 100].map(pageSize => (
-                    <option value={pageSize} key={pageSize}>Show Entrie {pageSize}</option>
-                  ))
-                }
-              </select>
-            </div>
+
+          <div className=''>
+            <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+              {
+                [10, 25, 50, 100].map(pageSize => (
+                  <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
+                ))
+              }
+            </select>
           </div>
-          <div className='d-flex ml-auto me-3'>
+
+          <div className='d-flex ml-auto me-1'>
 
             <div className='me-4'>
               <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
@@ -381,14 +382,19 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                   <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                     {column.render("header")}
                     <span>
+
                       {column.isSorted ? (
                         column.isSortedDesc ? (
-                          <i className="fas fa-chevron-down ms-2"></i>
+                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
                         ) : (
-                          <i className="fas fa-chevron-up ms-2"></i>
+                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
+                          // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
                         )
                       ) : (
-                        ""
+
+                        column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+
+
                       )}
                     </span>
                   </th>

@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import SkeletonColor from '../../helpers/Skeletrone';
 import { AdminStatusChange } from '../../redux/actionDispatcher/superAdmin/adminStatusChangeDispatcher'
 import Swal from 'sweetalert2';
+import updown_sort from '../assests/image/updown_sort.svg'
 
 
 function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTableData }) {
@@ -229,17 +230,19 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
 
                 <div className="d-flex">
-                    <div className='ms-4'>
-                        <select style={{ height: "auto", width: "auto", outline: "none", border: "none", borderRadius: "10px", padding: "5px" }} value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                    <div className=''>
+                        <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                             {
-                                [10, 25, 50].map(pageSize => (
-                                    <option value={pageSize} key={pageSize}>show Entrie {pageSize}</option>
+                                [10, 25, 50,100].map(pageSize => (
+                                    <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
                                 ))
                             }
                         </select>
                     </div>
-                    <div className='ml-auto me-5'>
-                        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
+                    <div className='d-flex ml-auto me-1'>
+                        <div className='ml-auto me-4'>
+                            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
+                        </div>
                     </div>
 
                 </div>
@@ -252,7 +255,19 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                                         headerGroup.headers.map((column) => (
                                             <th  {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render('header')}
                                                 <span>
-                                                    {column.isSorted ? (column.isSortedDesc ? <i className="fas fa-chevron-down ms-2"></i> : <i className="fas fa-chevron-up ms-2"></i>) : ''}
+                                                    {column.isSorted ? (
+                                                        column.isSortedDesc ? (
+                                                            <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
+                                                        ) : (
+                                                            <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
+                                                            // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                                                        )
+                                                    ) : (
+
+                                                        column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+
+
+                                                    )}
                                                 </span></th>
                                         ))
                                     }

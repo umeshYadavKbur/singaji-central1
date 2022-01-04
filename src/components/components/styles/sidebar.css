@@ -223,6 +223,7 @@ body {
 
 }
 
+
 .sidebar .small_logo {
   color: rgb(12, 1, 1);
   position: absolute;
@@ -339,6 +340,8 @@ label #sidebar_btn:hover {
   display: flex;
   margin-left: 17px;
   margin-right: 17px;
+  margin-top: 3px;
+  margin-bottom: 3px;
   align-items: center;
   height: 30px;
   border-radius: 6px;
@@ -347,6 +350,11 @@ label #sidebar_btn:hover {
   text-decoration: none;
 }
 
+.btn-toggle-nav{
+
+  padding-top: 3px ;
+  padding-bottom: 3px ;
+}
 
 /* .sidebar_options_link:hover::before {
   content: "";
