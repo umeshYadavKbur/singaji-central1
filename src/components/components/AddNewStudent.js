@@ -240,13 +240,13 @@ function AddNewStudentPage({AddNewStudent}) {
             <div className='addnewstudent mx-auto px-3'>
                 <form onSubmit={formik.handleSubmit}>
                     {/* Personal Details */}
-                    <Accordion className="my-2" expanded={expanded.panel1 === true} onChange={handleChange('panel1')}>
+                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel1 === true}  onChange={handleChange('panel1')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             style={{
-                                backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"
+                                backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"
                             }}
                         >
                             <Typography style={{color: "#414c97",margin: "0px"}}><b> Personal Details</b></Typography>
@@ -602,12 +602,12 @@ function AddNewStudentPage({AddNewStudent}) {
                     {/* Personal Details */}
 
                     {/* Acadmic Details */}
-                    <Accordion className="my-2" expanded={expanded.panel2 === true} onChange={handleChange('panel2')} >
+                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel2 === true} onChange={handleChange('panel2')} >
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
+                            style={{backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
                         >
                             <Typography style={{color: "#414c97"}}><b>Acadmic Details </b></Typography>
                         </AccordionSummary>
@@ -806,12 +806,12 @@ function AddNewStudentPage({AddNewStudent}) {
                     {/* Acadmic Details */}
 
                     {/* Fees Details */}
-                    <Accordion className="my-2" expanded={expanded.panel3 === true} onChange={handleChange('panel3')}>
+                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel3 === true} onChange={handleChange('panel3')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
+                            style={{backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
                         >
                             <Typography style={{color: "#414c97"}}><b>Fees Details </b></Typography>
                         </AccordionSummary>
@@ -1206,12 +1206,12 @@ function AddNewStudentPage({AddNewStudent}) {
                     {/* Fees Details */}
 
                     {/* Bus Details */}
-                    <Accordion className="my-2" expanded={expanded.panel4 === true} onChange={handleChange('panel4')}>
+                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel4 === true} onChange={handleChange('panel4')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
+                            style={{backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
                         >
                             <Typography style={{color: "#414c97"}}><b>Bus Details</b></Typography>
                         </AccordionSummary>
