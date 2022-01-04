@@ -5,13 +5,11 @@ import { useMemo } from 'react';
 import './StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
-import { NavLink, Route, Routes } from 'react-router-dom';
-import AddNewStudent from '../AddNewStudent';
-import { toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const StudentAccount = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [columns] = useState([
         {
             Header: 'S.no',
@@ -26,7 +24,7 @@ const StudentAccount = () => {
 
             Cell: ({ row: { original, index } }) => (
                 <div className="d-flex m-0 flex-column justify-content-start">
-                    <NavLink to="editstudentdata" >
+                    <Link to={'/admin_dashboard/addnewstudent'}>
                         <img
                             alt="profile"
                             style={{ cursor: "pointer" }}
@@ -39,7 +37,7 @@ const StudentAccount = () => {
                             textColor="#fff"
                             text="Image"
                         />
-                    </NavLink>
+                    </Link>
                     <p className="mx-auto"> {original.name}</p>
                 </div>
             ),
@@ -102,9 +100,6 @@ const StudentAccount = () => {
     const { pageIndex } = state;
     return (
         <>
-            <Routes>
-                <Route exact path="editstudentdata" element={<AddNewStudent />} />
-            </Routes>
             <div className="container-fluid">
                 <div className="row Stu-Acc-info" >
                     <div className="col-2 info-col">

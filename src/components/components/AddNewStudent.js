@@ -24,34 +24,36 @@ function AddNewStudentPage({ AddNewStudent }) {
 
 
     useEffect(() => {
-        const fn = async () => {
+        const callingFun = async () => {
 
 
             ///////////////////////////////
             const branchName = await axios(allUrls.branchList)
-            console.log(branchName.data);
-            console.log("branch Name ", branchName.data);
+            // console.log(branchName.data);
+            // console.log("branch Name ", branchName.data);
             setBranchNames(branchName.data)
 
             /////////////////////////
             const villageNamesRes = await axios(allUrls.villageNameList)
             let newVillageName = [];
             villageNamesRes.data.forEach((ele) => { newVillageName.push({ 'label': ele.villagename, 'value': ele.villagename }) })
-            console.log(newVillageName);
+            // console.log(newVillageName);
             setVillageNames(newVillageName);
 
             /////////////////////////////
             const trackNamesRes = await axios(allUrls.trackList)
-            console.log(trackNamesRes.data);
+            // console.log(trackNamesRes.data);
             setTrackNames(trackNamesRes.data);
         }
-        fn();
+        callingFun();
     }, []);
 
     useEffect(() => {
-        // effect
+        var editData = localStorage.getItem('userEdit')
+        console.log(editData);
         return () => {
-            console.log("going back to home page...");
+            // console.log("going back to home page...");
+            localStorage.removeItem('userEdit')
         }
     }, [])
 
@@ -62,12 +64,49 @@ function AddNewStudentPage({ AddNewStudent }) {
 
 
     const initialValues = {
-        firstName: "", lastName: "", dob: "", contactNumber: "", fatherName: "", fatherOccupation: "", fatherIncome: '', FatherContactNumber: "", address: "", village: "", pincode: "", tehsil: "", district: "", email: "", aadharNumber: "", category: "", gender: "male",
-        percent10: '', rollNumber10: '', joinBatch: '', percent12: '', rollNumber12: '', year: '', streamName: '', subject12: '', schoolName: '',
-        GKBAmount: 0, postmatricAmount: 0, thirdInstallmentDate: '', thirdInstallment: 0, secondInstallmentDate: '', secondInstallment: 0, feesScheme: 'fullFees', firstInstallmentDate: '', firstInstallment: 0, courseFees: '', regisrationFees: '1500',
-        postmatricScolarship: 'no', gkbScolarship: 'no', gkbOwner: 'self', postmatricOwner: 'self', payableAmmount: '', remark: '',
+        firstName: "",
+        lastName: "",
+        dob: "",
+        contactNumber: "",
+        fatherName: "",
+        fatherOccupation: "",
+        fatherIncome: '',
+        FatherContactNumber: "",
+        address: "",
+        village: "",
+        pincode: "",
+        tehsil: "",
+        district: "",
+        email: "",
+        aadharNumber: "",
+        category: "",
+        gender: "male",
+        percent10: '',
+        rollNumber10: '',
+        joinBatch: '',
+        percent12: '',
+        rollNumber12: '',
+        year: '',
+        streamName: '',
+        subject12: '',
+        schoolName: '',
+        GKBAmount: 0,
+        postmatricAmount: 0,
+        thirdInstallmentDate: '',
+        thirdInstallment: 0,
+        secondInstallmentDate: '',
+        secondInstallment: 0,
+        feesScheme: 'fullFees',
+        firstInstallmentDate: '', firstInstallment: 0, courseFees: '', regisrationFees: '1500',
+        postmatricScolarship: 'no',
+        gkbScolarship: 'no',
+        gkbOwner: 'self',
+        postmatricOwner: 'self',
+        payableAmmount: '',
+        remark: '',
         ScholarshipAmount: 0,
-        trackName: "", busFees: "",
+        trackName: "",
+        busFees: "",
     }
 
     const validationSchema = Yup.object({
