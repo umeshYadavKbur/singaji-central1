@@ -30,12 +30,10 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
 
   useEffect(() => {
     const fn = async () => {
-
-
-      ///////////////////////////////
       const roles = await axios(AllUrl.roleList)
+      console.log('====================================');
       console.log(roles.data);
-      console.log("roles ", roles.data);
+      console.log('====================================');
       setRoles(roles.data)
     }
     fn();
@@ -117,14 +115,14 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   <img src={logo} alt="logo ssism" className="logo_img" />{" "}
                 </div>
                 <div>
-                  <label htmlFor="gmail" className="labels mb-1" style={{ color: 'rgb(90 96 127)' }}>
+                  <label htmlFor="gmail" className="labels" >
                     Username
                   </label>
                   <input
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className="inputs mb-2"
+                    className="inputs"
                     // aria-label="email"
                     name="name"
                     type="text"
@@ -139,14 +137,14 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     ""
                   )}
 
-                  <label htmlFor="gmail" className="labels mb-1" style={{ color: 'rgb(90 96 127)' }}>
+                  <label htmlFor="gmail" className="labels    " >
                     Email
                   </label>
                   <input
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className="inputs mb-2"
+                    className="inputs"
                     // aria-label="email"
                     name="email"
                     type="text"
@@ -161,7 +159,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     ""
                   )}
 
-                  <label htmlFor="role" className="labels mb-1" style={{ color: 'rgb(90 96 127)' }}>
+                  <label htmlFor="role" className="labels "   >
                     Role
                   </label>
                   <select
@@ -175,14 +173,14 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     id="role"
                     type="text"
                   >
-                    <option value='' className="form-select" style={{ color: 'rgb(90 96 127)' }}>
+                    <option value='' className="form-select"   >
                       Role
                     </option>
                     {roles.map((role) => {
-                      return (<option value={role.roleId} className="form-select" style={{ color: '#5A607F' }}> {role.roleName}</option>)
+                      var data2 = role.roleName.charAt(0).toUpperCase() + role.roleName.slice(1).toLowerCase();
+                      data2 = data2.replace('admin', ' Admin');
+                      return (<option value={role.roleId} className="form-select" style={{ color: '#5A607F' }}> {data2}</option>)
                     }
-
-
 
                     )}
                   </select>
@@ -196,8 +194,8 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                 </div>
                 <button
                   disabled={adminData.loading}
-                  style={{ marginTop: '40px' }}
-                  className=" submit_btn mt-8 w-100  btn-md text-light font-weight-bold"
+                  style={{ marginTop: '35px' }}
+                  className=" submit_btn w-100  btn-md text-light font-weight-bold"
                   type="submit"
                 >
                   {adminData.loading ? <LoaderButton /> : "Create"}
