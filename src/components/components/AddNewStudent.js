@@ -14,10 +14,14 @@ import AddNewStudent from '../../redux/actionDispatcher/superAdmin/addNewStudent
 import { connect } from 'react-redux';
 import NumberFormat from 'react-number-format';
 import allUrls from '../../redux/constants/url'
-// import {number} from 'yup';
+
+
 
 function AddNewStudentPage({ AddNewStudent }) {
+    var editData = JSON.parse(localStorage.getItem('userEdit'))
 
+
+    // const [editData, setEditData] = useState("")
     const [branchNames, setBranchNames] = useState([{ subjects: 'loading...', id: 0 }])
     const [trackNames, setTrackNames] = useState([{ trackName: 'loading...', trackId: 0 }])
     const [villageNames, setVillageNames] = useState([{ label: 'loading...', villageId: 0 }])
@@ -46,34 +50,38 @@ function AddNewStudentPage({ AddNewStudent }) {
             setTrackNames(trackNamesRes.data);
         }
         callingFun();
-    }, []);
-
-    useEffect(() => {
-        var editData = localStorage.getItem('userEdit')
-        console.log(editData);
         return () => {
-            // console.log("going back to home page...");
+            console.log("going back to home page...");
             localStorage.removeItem('userEdit')
         }
-    }, [])
+    }, []);
 
 
 
 
+    // mobile: 1233455
+    //fathersName: "rajesh"
+    // village: "khategaon"
+    // stream: "bca ( II )"
+    // total_Fees: 31500
+    // remain_Amount: 31500
 
-
+    // name: "Akanksha parmar"
+    // photo: "https://ssism.s3.us-east-2.amazonaws.com/avtar.jpg"
+    // received_Amount: 0
+    // stdId: "88fe042d-b7c4-4b3d-878d-a3b9dc0aecba"
 
     const initialValues = {
         firstName: "",
         lastName: "",
         dob: "",
-        contactNumber: "",
-        fatherName: "",
+        contactNumber: editData ? editData.mobile : "",
+        fatherName: editData ? editData.fathersName : "",
+        village: editData ? editData.village : "",
         fatherOccupation: "",
         fatherIncome: '',
         FatherContactNumber: "",
         address: "",
-        village: "",
         pincode: "",
         tehsil: "",
         district: "",
@@ -87,7 +95,7 @@ function AddNewStudentPage({ AddNewStudent }) {
         percent12: '',
         rollNumber12: '',
         year: '',
-        streamName: '',
+        streamName: editData ? editData.stream : "",
         subject12: '',
         schoolName: '',
         GKBAmount: 0,
@@ -97,12 +105,15 @@ function AddNewStudentPage({ AddNewStudent }) {
         secondInstallmentDate: '',
         secondInstallment: 0,
         feesScheme: 'fullFees',
-        firstInstallmentDate: '', firstInstallment: 0, courseFees: '', regisrationFees: '1500',
+        firstInstallmentDate: '',
+        firstInstallment: 0,
+        courseFees: editData ? editData.total_Fees : "",
+        regisrationFees: '1500',
         postmatricScolarship: 'no',
         gkbScolarship: 'no',
         gkbOwner: 'self',
         postmatricOwner: 'self',
-        payableAmmount: '',
+        payableAmmount: editData ? editData.remain_Amount : "",
         remark: '',
         ScholarshipAmount: 0,
         trackName: "",

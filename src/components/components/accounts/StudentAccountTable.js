@@ -5,11 +5,24 @@ import { useMemo } from 'react';
 import './StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { isSuperAdmin } from '../../../helpers/SuperAdmin';
+import { isAccountAdmin } from '../../../helpers/AccountAdmin';
+import { isStudentAdmin } from '../../../helpers/StudentAdmin';
 
 
 const StudentAccount = () => {
-    const navigate = useNavigate();
+
+    const getRoutesRoleWise = () => {
+        if (isStudentAdmin()) {
+            return '/student_admin_dashboard/addnewstudent';
+        } else if (isAccountAdmin()) {
+            return '/account_admin_dashboard/addnewstudent';
+        }
+        else if (isSuperAdmin()) {
+            return '/admin_dashboard/addnewstudent';
+        }
+    }
     const [columns] = useState([
         {
             Header: 'S.no',
@@ -24,7 +37,7 @@ const StudentAccount = () => {
 
             Cell: ({ row: { original, index } }) => (
                 <div className="d-flex m-0 flex-column justify-content-start">
-                    <Link to={'/admin_dashboard/addnewstudent'}>
+                    <Link to={getRoutesRoleWise()}>
                         <img
                             alt="profile"
                             style={{ cursor: "pointer" }}

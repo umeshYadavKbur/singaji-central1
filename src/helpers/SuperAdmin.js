@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import storage from "./Crypto";
 
 
-const useAuth = () => {
+export const isSuperAdmin = () => {
     const role = storage.getItem("role");
     // console.log('checking role in localStorage')
     if (role === 'SUPERADMIN') {
@@ -12,7 +12,7 @@ const useAuth = () => {
 };
 
 const SuperAdmin = () => {
-    const isAuth = useAuth();
+    const isAuth = isSuperAdmin();
     console.log(isAuth)
     return isAuth ? <Outlet /> : <Navigate to="/login" />;
 };

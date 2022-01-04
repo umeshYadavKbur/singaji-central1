@@ -6,6 +6,10 @@ import FeesStructure from "../components/FeesStructure";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const HeaderLink = () => {
+    if (localStorage.getItem('userEdit')) {
+        var editData = JSON.parse(localStorage.getItem('userEdit'))
+    }
+
     const currentLocation = useLocation().pathname;
     var location = getLocation();
 
@@ -24,6 +28,9 @@ const HeaderLink = () => {
         else if (currentLocation === "/admin_dashboard/admintable") {
             return "My Admin";
         }
+        else if (editData) {
+            return editData.name + "  " + editData.stream;
+        }
         else if (currentLocation === "/admin_dashboard/addnewstudent") {
             return "Add Student";
         }
@@ -34,6 +41,22 @@ const HeaderLink = () => {
             return "Dashboard";
         }
     }
+
+    // switch (error.code) {
+    //     case 'auth/wrong-password':
+    //         setErrorMsg("invalid password !")
+    //         updateError('invalid password', setPasswordError)
+    //         break;
+    //     case 'auth/too-many-requests':
+    //         Alert("Account has been locked try again later")
+    //         // updateError('invalid password', setPasswordError)
+    //         break;
+    //     case 'auth/user-not-found':
+    //         setErrorMsg("User not found")
+    //         updateError('invalid password', setPasswordError)
+    //         updateError('invalid email', setEmailError)
+    //         break;
+    // }
 
     return (
         <div className="container_navbar">

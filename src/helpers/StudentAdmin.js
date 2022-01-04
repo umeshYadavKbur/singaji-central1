@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import storage from "./Crypto";
 
 
-const useAuth = () => {
+export const isStudentAdmin = () => {
     const role = storage.getItem("role")
     if (role === 'STUDENTADMIN') {
         return true;
@@ -11,7 +11,7 @@ const useAuth = () => {
 };
 
 const StudentAdmin = () => {
-    const isAuth = useAuth();
+    const isAuth = isStudentAdmin();
     return isAuth ? <Outlet /> : <Navigate to="/login" />;
 };
 

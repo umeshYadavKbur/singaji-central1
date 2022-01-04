@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import storage from "./Crypto";
 
-const useAuth = () => {
+export const isAccountAdmin = () => {
     const role = storage.getItem("role");
     if (role === 'ACCOUNTADMIN') {
         return true;
@@ -10,7 +10,7 @@ const useAuth = () => {
 };
 
 const AccountAdmin = () => {
-    const isAuth = useAuth();
+    const isAuth = isAccountAdmin();
     return isAuth ? <Outlet /> : <Navigate to="/login" />;
 };
 
