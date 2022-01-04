@@ -72,7 +72,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
           {
             id: "selection",
             header: ({ getToggleAllRowsSelectedProps }) => (
-              <TableCheckbox {...getToggleAllRowsSelectedProps()} />
+              < TableCheckbox {...getToggleAllRowsSelectedProps()} />
             ),
             Cell: ({ row }) => (
               <TableCheckbox {...row.getToggleRowSelectedProps()} />

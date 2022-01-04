@@ -118,7 +118,6 @@
 
 
 
-
 /* ------------------------------------------------------------------------------- */
 .fees-structure-active-button{
   border: 1px solid #797979a8 !important;
@@ -134,3 +133,30 @@
   background-color: green ;
 } */
 
+/* ----------------------------------------------------------------------------------------------/ */
+
+
+/* input[type=checkbox]:before {
+  content: "\2714";
+  
+ 
+  /* vertical-align: bottom; */
+  /* color: transparent;
+  transition: .2s;
+} */
+
+/* input[type=checkbox]:active:before {
+  /* transform: scale(0); */
+/* }
+
+input[type=checkbox]:checked:before {
+  background-color: rgb(255, 123, 0);
+  border-color: grey;
+  color: #fff;
+} */
+ /* :root{
+  --blue: rgb(212 128 59)
+ }
+ input[type="checkbox"]{
+  accent-color: var(--blue);
+} */

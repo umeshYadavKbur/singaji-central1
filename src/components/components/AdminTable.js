@@ -59,8 +59,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             //  Cell: ({row: {original}}) => (
             //      original.roleId === 1 ? "Super Admin" : original.roleId === 2 ? "Admin" : original.roleId === 1 ? "Student" : ''   
             //  )
-        }
-        ,
+        },
         {
             header: 'Status',
             accessor: 'is_active',

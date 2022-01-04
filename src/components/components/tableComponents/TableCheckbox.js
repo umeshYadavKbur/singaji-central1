@@ -10,9 +10,20 @@ export  const TableCheckbox = React.forwardRef(
             resolvedRef.current.indeterminate = indeterminate
         },[resolvedRef,indeterminate])
 
+        var test = {
+
+            accentColor:'rgb(212 128 59)',
+            marginLeft: "10px"
+          
+          }
         return (
             <>
-                <input type="checkbox"  ref={resolvedRef} {...rest} />
+            <div style={test}>
+            <input type="checkbox"  ref={resolvedRef} {...rest} />
+            {/* <input type="checkbox" id="fruit1" name="fruit-1" value="Apple"/> */}
+  {/* <label for="fruit1"></label> */}
+
+            </div>
             </>
         )
     }
