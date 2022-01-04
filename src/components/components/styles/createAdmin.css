@@ -60,11 +60,12 @@
 
 .labels {
   cursor: pointer;
-  color: #373957;
-  /* font-weight: bold; */
-  font-size: 20px;
-  margin-top: 0px;
-  margin-bottom: -3px;
+  /* color: #373957; */
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 7px;
+  margin-block-end: auto;
+  color: #5a607f;
 }
 
 .createAdminhead {

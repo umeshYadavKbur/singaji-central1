@@ -159,26 +159,27 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
           Create Fees Structure <i className="fas fa-plus pl-3"></i>
         </CButton>
       )}
-      {table_data.second_loading && (
-        <div
-          className="lds-roller"
-          style={{
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            zindex: "-1",
-          }}
-        >
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      )}
+      {/* {
+        table_data.second_loading && (
+          <div
+            className="lds-roller"
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              zindex: "-1",
+            }}
+          >
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        )} */}
       <CModal
         alignment="center"
         visible={visible}
@@ -199,11 +200,11 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
               <form onSubmit={formik.handleSubmit}>
                 <img onClick={() => setVisible(!visible)}
                   style={{ height: "20px", width: "20px", marginLeft: '110%', marginTop: "-10px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
-                <h4 className=" text-aligns-center createAdminhead" style={{ marginRight: "30px", fontWeight: 'bold' }}>
+                <h4 className=" text-aligns-center createAdminhead" style={{ marginRight: "30px", fontWeight: 'bold', color: '#5A607F' }}>
                   {original ? "Update Fees Structure" : "Create Fees Structure"}
                 </h4>
                 <div className=" mb-3 mt-3">
-                  <label htmlFor="stream" className="labels" style={{ color: '#5A607F' }}>
+                  <label htmlFor="stream" className="labels"  >
                     Stream
                   </label>
                   <select
@@ -216,7 +217,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     // eslint-disable-next-line
                     type="text"
                   >
-                    <option value='' className="fields form-select">
+                    <option value='' className="fields form-select"   >
                       {
                         original ? `${original.branch_name}` : "Stream"
                       }
@@ -241,7 +242,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     ""
                   )}
 
-                  <label htmlFor="startyear" className="labels" style={{ color: '#5A607F' }}>
+                  <label htmlFor="startyear" className="labels"  >
                     Start Year
                   </label>
                   <input
@@ -266,7 +267,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     ""
                   )}
 
-                  <label htmlFor="endyear" className="labels" style={{ color: '#5A607F' }}>
+                  <label htmlFor="endyear" className="labels"  >
                     End Year
                   </label>
                   <input
@@ -291,7 +292,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     ""
                   )}
 
-                  <label htmlFor="totalfees" className="labels" style={{ color: '#5A607F' }}>
+                  <label htmlFor="totalfees" className="labels"  >
                     Total Fees
                   </label>
                   <input
