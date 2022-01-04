@@ -57,8 +57,8 @@ const AppHeaderDropdown = ({ userData, logout }) => {
           <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />
           <div style={{ cursor: 'pointer' }}>
             <img style={{ height: '18px', width: '18px', marginLeft: '-50px' }} src={Settings} alt="Settings" />
-            <span style={{ color: 'white', fontWeight: '4px' }}>
-              _Settings
+            <span style={{ color: 'white', fontWeight: '4px',marginLeft:'8px'}}>
+              Settings
             </span>
           </div>
           <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />

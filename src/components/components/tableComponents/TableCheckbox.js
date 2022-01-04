@@ -1,5 +1,5 @@
 import React from "react"
-
+import '../styles/AddNewStudent.css'
 
 export  const TableCheckbox = React.forwardRef(
     ({indeterminate,...rest},ref) => {

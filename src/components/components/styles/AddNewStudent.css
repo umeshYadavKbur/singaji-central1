@@ -39,6 +39,34 @@
     border: 1.5px solid rgba(220, 53, 70, 0.822) !important;
 }
 
+.addnewstudent .addStdLable input[type='radio']:after {
+    width: 13px;
+    height: 13px;
+    border-radius: 15px;
+    top: -5px;
+    left: -1px;
+    position: relative;
+    background-color: #ffffff;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid #696969;
+}
+
+.addnewstudent .addStdLable input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -4px;
+    left: -1px;
+    position: relative;
+    background-color: #ffa500;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
 
 /* .add_student_dropdown_menu.css-15v22id-MuiAccordionDetails-root {
     padding: 0;

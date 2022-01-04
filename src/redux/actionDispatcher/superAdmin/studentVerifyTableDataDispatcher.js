@@ -33,7 +33,7 @@ export const VerifyStudent = (data) => {
             console.log(userResData)
             if (userResData.status === 200) {
                 dispatch(VerifyStudentSuccess(userResData.data));
-                toast.success(`student ${data.firstName} ${data.lastName} is shifted to accounts`, {
+                toast.dark(`student ${data.firstName} ${data.lastName} is shifted to accounts`, {
                     position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
