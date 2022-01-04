@@ -31,9 +31,9 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
   useEffect(() => {
     const fn = async () => {
       const roles = await axios(AllUrl.roleList)
-      console.log('====================================');
-      console.log(roles.data);
-      console.log('====================================');
+      // console.log('====================================');
+      // console.log(roles.data);
+      // console.log('====================================');
       setRoles(roles.data)
     }
     fn();
