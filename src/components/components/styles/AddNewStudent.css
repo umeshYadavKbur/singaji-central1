@@ -26,8 +26,7 @@
     border: 2px solid rgb(71, 221, 71) !important;
 }
 
-.addnewstudent .invalid:focus,
-.addnewstudent select:focus {
+.addnewstudent .invalid:focus {
     color: #212529;
     background-color: #fff;
     border-color: rgba(220, 53, 70, 0.61);

@@ -30,7 +30,7 @@ const AddNewStudent = (data) => {
                 dispatch(AddNewStudentSuccess(userResData.data));
                 Swal.fire({
 
-                    title: '<i class="far fa-check-circle"></i> Success',
+                    title: '<i class="far fa-check-circle" ></i> Success',
                     html:
                         '<hr/>' +
                         'You form is Successfully submited ',

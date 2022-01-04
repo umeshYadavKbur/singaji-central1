@@ -56,7 +56,7 @@ function AddNewStudentPage({AddNewStudent}) {
     const initialValues = {
         firstName: "",lastName: "",dob: "",contactNumber: "",fatherName: "",fatherOccupation: "",fatherIncome: '',FatherContactNumber: "",address: "",village: "",pincode: "",tehsil: "",district: "",email: "",aadharNumber: "",category: "",gender: "male",
         percent10: '',rollNumber10: '',joinBatch: '',percent12: '',rollNumber12: '',year: '',streamName: '',subject12: '',schoolName: '',
-        GKBAmount: 0,postmatricAmount: 0,thirdInstallmentDate: '',thirdInstallment: '0',secondInstallmentDate: '',secondInstallment: '0',feesScheme: '',firstInstallmentDate: '',firstInstallment: '0',courseFees: '',regisrationFees: '1500',
+        GKBAmount: 0,postmatricAmount: 0,thirdInstallmentDate: '',thirdInstallment: 0,secondInstallmentDate: '',secondInstallment: 0,feesScheme: 'fullFees',firstInstallmentDate: '',firstInstallment: 0,courseFees: '',regisrationFees: '1500',
         postmatricScolarship: 'no',gkbScolarship: 'no',gkbOwner: 'self',postmatricOwner: 'self',payableAmmount: '',remark: '',
         ScholarshipAmount: 0,
         trackName: "",busFees: "",
@@ -245,9 +245,10 @@ function AddNewStudentPage({AddNewStudent}) {
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
-                            style={{backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange'}}
+                            style={{
+                                backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
                         >
-                            <Typography style={{color: "#414c97"}}><b> Personal Details</b></Typography>
+                            <Typography style={{color: "#414c97",margin:"0px"}}><b> Personal Details</b></Typography>
                         </AccordionSummary>
                         <AccordionDetails style={{backgroundColor: '#F4F7FC',padding: '15px'}}>
                             <Typography component={'div'} className='add_student_dropdown_menu' >
@@ -555,7 +556,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.category}
-                                            className={formik.touched.category ? `form-control ${formik.errors.category ? "invalid" : ""}` : 'form-control'}
+                                            className={formik.touched.category ? `form-select ${formik.errors.category ? "invalid" : ""}` : 'form-select'}
                                             id="inputGroupSelect02"
                                         >
                                             <option value="">
@@ -605,7 +606,7 @@ function AddNewStudentPage({AddNewStudent}) {
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange'}}
+                            style={{backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
                         >
                             <Typography style={{color: "#414c97"}}><b>Acadmic Details </b></Typography>
                         </AccordionSummary>
@@ -635,7 +636,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <div className="col">
                                         <label className="addStdLable" htmlFor="">12<sup>th</sup> Subject</label>
                                         <select onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur} name="subject12" value={formik.values.subject12} className={formik.touched.subject12 ? `form-control ${formik.errors.subject12 ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
+                                            onBlur={formik.handleBlur} name="subject12" value={formik.values.subject12} className={formik.touched.subject12 ? `form-select ${formik.errors.subject12 ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
                                             <option value="">Select Subject</option>
                                             <option value="Maths">Maths</option>
                                             <option value="BIO">BIO</option>
@@ -655,7 +656,7 @@ function AddNewStudentPage({AddNewStudent}) {
 
                                         <select name="streamName" value={formik.values.streamName} onBlur={formik.handleBlur}
                                             onBlurCapture={getCourseFees}
-                                            onChange={formik.handleChange} className={formik.touched.streamName ? `form-control ${formik.errors.streamName ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
+                                            onChange={formik.handleChange} className={formik.touched.streamName ? `form-select ${formik.errors.streamName ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
                                             <option value=''>Select branch</option>
                                             {branchNames.map((ele,i) => {
                                                 return (
@@ -739,7 +740,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <div className="col-3">
                                         <label className="addStdLable" htmlFor="">Year</label>
                                         <select name="year" value={formik.values.year} onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur} className={formik.touched.year ? `form-control ${formik.errors.year ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
+                                            onBlur={formik.handleBlur} className={formik.touched.year ? `form-select ${formik.errors.year ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
                                             <option value=''>Select Year</option>
                                             <option value='I'>I Year</option>
                                             <option value='II'>II Year</option>
@@ -809,7 +810,7 @@ function AddNewStudentPage({AddNewStudent}) {
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange'}}
+                            style={{backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
                         >
                             <Typography style={{color: "#414c97"}}><b>Fees Details </b></Typography>
                         </AccordionSummary>
@@ -858,7 +859,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                         <label className="addStdLable" htmlFor="">First Installment</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.firstInstallment}
+                                            value={formik.values.firstInstallment = parseInt(formik.values.firstInstallment?.toString().replace(/,/g,'').replace('₹',''))}
                                             name="firstInstallment"
                                             className={formik.touched.firstInstallment ? `form-control ${formik.errors.firstInstallment ? "invalid" : ""}` :'form-control'}
                                             placeholder="First Installment"
@@ -897,11 +898,9 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <div className="col">
                                         <label className="addStdLable" htmlFor="">Scheme Fees</label>
                                         <select name="feesScheme" value={formik.values.feesScheme} onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur} className={formik.touched.feesScheme ? `form-control ${formik.errors.feesScheme ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
-                                            <option value=''>Scheme Fees</option>
-                                            <option value='SVS'>SVS</option>
-                                            <option value='SNS'>SNS</option>
-                                            <option value='fullFees'>Full Fees</option>
+                                            onBlur={formik.handleBlur} className={formik.touched.feesScheme ? `form-select ${formik.errors.feesScheme ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
+                                            <option Value='fullFees'>Full Fees</option>
+                                            <option value='SNS_SVS'>SNS_SVS</option>
                                             <option value='oneShot'>One Shot</option>
                                             <option value='Rewa'>Rewa</option>
                                             <option value='OnlyScholarShip'>OnlyScholarShip</option>
@@ -929,7 +928,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                         <label className="addStdLable" htmlFor="">Second Installment</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.feesScheme === "oneShot" ? formik.values.secondInstallment = 0 : formik.values.secondInstallment}
+                                            value={formik.values.feesScheme === "oneShot" ? formik.values.secondInstallment = 0 : formik.values.secondInstallment = parseInt(formik.values.secondInstallment?.toString().replace(/,/g,'').replace('₹',''))}
                                             name="secondInstallment"
                                             className={formik.touched.secondInstallment ? `form-control ${formik.errors.secondInstallment ? "invalid" : ""}` :'form-control'}
                                             placeholder="Second Installment"
@@ -975,7 +974,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             value={formik.values.postmatricScolarship}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            className={formik.touched.postmatricScolarship ? `form-control ${formik.errors.postmatricScolarship ? "invalid" : ""}` : 'form-control'}
+                                            className={formik.touched.postmatricScolarship ? `form-select ${formik.errors.postmatricScolarship ? "invalid" : ""}` : 'form-select'}
                                             id="inputGroupSelect02"
                                             disabled={formik.values.category === 'Gen' ? true : false}
                                         >
@@ -993,7 +992,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                     </div>
                                     <div className="col">
                                         <label className="addStdLable" htmlFor="">GKB ScolarShip</label>
-                                        <select name="gkbScolarship" className={formik.touched.gkbScolarship ? `form-control ${formik.errors.gkbScolarship ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02"
+                                        <select name="gkbScolarship" className={formik.touched.gkbScolarship ? `form-select ${formik.errors.gkbScolarship ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02"
                                             value={formik.values.gender === "male" ? formik.values.gkbScolarship = "no" : formik.values.gkbScolarship}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
@@ -1013,7 +1012,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                         <label className="addStdLable" htmlFor="">Third Installment</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.feesScheme === "oneShot" ? formik.values.thirdInstallment = 0 : formik.values.thirdInstallment}
+                                            value={formik.values.feesScheme === "oneShot" ? formik.values.thirdInstallment = 0 : formik.values.thirdInstallment = parseInt(formik.values.thirdInstallment?.toString().replace(/,/g,'').replace('₹',''))}
                                             name="thirdInstallment"
                                             className={formik.touched.thirdInstallment ? `form-control ${formik.errors.thirdInstallment ? "invalid" : ""}` :'form-control'}
                                             placeholder="Third Installment"
@@ -1056,12 +1055,11 @@ function AddNewStudentPage({AddNewStudent}) {
                                         <div className='row'>
                                             <div className="col">
                                                 <label className="addStdLable" htmlFor="">Postmatric Owner</label>
-                                                <select name="postmatricOwner" className={formik.touched.postmatricOwner ? `form-control ${formik.errors.postmatricOwner ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02"
+                                                <select name="postmatricOwner" className={formik.touched.postmatricOwner ? `form-select ${formik.errors.postmatricOwner ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02"
                                                     value={formik.values.postmatricScolarship === "no" ? formik.values.postmatricOwner = "self" : formik.values.postmatricOwner}
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
                                                     disabled={formik.values.category === 'Gen' ? true : false || formik.values.postmatricScolarship === "no" ? true : false}>
-                                                    <option defaultValue="self">Postmatric Owner</option>
                                                     <option value="self">Self</option>
                                                     <option value="ssism">SSISM</option>
                                                 </select>
@@ -1075,14 +1073,13 @@ function AddNewStudentPage({AddNewStudent}) {
                                             </div>
                                             <div className="col">
                                                 <label className="addStdLable" htmlFor="">GKB Owner</label>
-                                                <select name="gkbOwner" className={formik.touched.gkbOwner ? `form-control ${formik.errors.gkbOwner ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02"
+                                                <select name="gkbOwner" className={formik.touched.gkbOwner ? `form-select ${formik.errors.gkbOwner ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02"
                                                     value={formik.values.gkbScolarship === "no" ? formik.values.gkbOwner = "self" : formik.values.gkbOwner}
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
                                                     disabled={formik.values.gender === 'male' ? true : false || formik.values.gkbScolarship === "no" ? true : false}>
-                                                    <option defaultValue="">GKB Owner</option>
-                                                    <option value="SSISM">SSISM</option>
                                                     <option value="self">Self</option>
+                                                    <option value="SSISM">SSISM</option>
                                                 </select>
                                                 {formik.errors.gkbOwner && formik.touched.gkbOwner ? (
                                                     <div className="text-danger fs-6">
@@ -1093,13 +1090,14 @@ function AddNewStudentPage({AddNewStudent}) {
                                                 )}
                                             </div>
                                             <div className="col">
-                                                <label className="addStdLable" htmlFor="">Payable Ammount</label>  <NumberFormat
+                                                <label className="addStdLable" htmlFor="">Total Payable Amount</label>  <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={parseInt(formik.values.firstInstallment?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.secondInstallment?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.thirdInstallment?.toString().replace(/,/g,'').replace('₹',''))}
+                                                    value={formik.values.payableAmmount=parseInt(formik.values.firstInstallment?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.secondInstallment?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.thirdInstallment?.toString().replace(/,/g,'').replace('₹',''))
+                                                        + parseInt(formik.values.ScholarshipAmount?.toString().replace(/,/g,'').replace('₹',''))}
                                                     name="payableAmmount"
                                                     className={formik.touched.payableAmmount ? `form-control ${formik.errors.payableAmmount ? "invalid" : ""}` :'form-control'}
-                                                    placeholder="Payable Ammount"
+                                                    placeholder="Payable Amount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
                                                     prefix='₹'
@@ -1120,7 +1118,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                                 <label className="addStdLable" htmlFor="">Postmatric Amount</label>  <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={formik.values.category === "Gen" ? formik.values.postmatricAmount = 0 : formik.values.postmatricOwner === "self" ? formik.values.postmatricAmount = 0 : formik.values.postmatricAmount}
+                                                    value={formik.values.category === "Gen" ? formik.values.postmatricAmount = 0 : formik.values.postmatricOwner === "self" ? formik.values.postmatricAmount = 0 : formik.values.postmatricAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g,'').replace('₹',''))}
                                                     name="postmatricAmount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
@@ -1140,7 +1138,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                                 <label className="addStdLable" htmlFor="">GKB Amount</label> <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={formik.values.gender === 'male' ? formik.values.GKBAmount = 0 : formik.values.gkbOwner === "self" ? formik.values.GKBAmount = 0 : formik.values.GKBAmount}
+                                                    value={formik.values.gender === 'male' ? formik.values.GKBAmount = 0 : formik.values.gkbOwner === "self" ? formik.values.GKBAmount = 0 : formik.values.GKBAmount = parseInt(formik.values.GKBAmount?.toString().replace(/,/g,'').replace('₹',''))}
                                                     name="GKBAmount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
@@ -1161,7 +1159,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                                 <label className="addStdLable" htmlFor="">Scholarship Amount</label> <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={parseInt(formik.values.postmatricAmount?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.GKBAmount?.toString().replace(/,/g,'').replace('₹',''))}
+                                                    value={formik.values.ScholarshipAmount=parseInt(formik.values.postmatricAmount?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.GKBAmount?.toString().replace(/,/g,'').replace('₹',''))}
                                                     name="ScholarshipAmount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
@@ -1212,7 +1210,7 @@ function AddNewStudentPage({AddNewStudent}) {
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange'}}
+                            style={{backgroundColor: 'rgb(199 204 209 / 31%)',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
                         >
                             <Typography style={{color: "#414c97"}}><b>Bus Details</b></Typography>
                         </AccordionSummary>
@@ -1240,7 +1238,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                     <div className="col-3">
                                         <label className="addStdLable" >Track Name</label>
                                         <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur} className={formik.touched.trackName ? `form-control ${formik.errors.trackName ? "invalid" : ""}` : 'form-control'} id="inputGroupSelect02" placeholder="select">
+                                            onBlur={formik.handleBlur} className={formik.touched.trackName ? `form-select ${formik.errors.trackName ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
                                             <option value='0'>Select Track</option>
                                             {trackNames.map((ele,i) => {
                                                 return (
