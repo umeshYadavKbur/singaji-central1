@@ -25,6 +25,11 @@
     font-weight: bold;
     font-size: 17px;
   }
+  .select-acc-student{
+      border: none !important;
+      outline: none;
+      height: 41px;
+  }
   
   .info-div{
     width: 100px;

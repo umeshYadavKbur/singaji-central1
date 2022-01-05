@@ -6,8 +6,8 @@ import './StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
 import { toast } from 'react-toastify';
-import { DateRangePicker } from 'rsuite';
-import 'rsuite/dist/rsuite-default.css';
+// import { DateRangePicker } from 'rsuite';
+// import 'rsuite/dist/rsuite-default.css';
 
 
 const StudentAccount = () => {
@@ -92,12 +92,13 @@ const StudentAccount = () => {
         previousPage,
         canPreviousPage,
         canNextPage,
+        setPageSize, 
         pageOptions,
         prepareRow,
         state,
         setGlobalFilter } = tableInstance
 
-    const { globalFilter } = state;
+    const { globalFilter, pageSize } = state;
     const { pageIndex } = state;
     return (
         <>
@@ -120,8 +121,21 @@ const StudentAccount = () => {
                     </div>
                 </div>
                 <div className="row d-flex justify-content-end mt-4">
+                    <div className="col-2">
+                        <select className='select-acc-student' value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                            {
+                                [10,25 ,50].map(pageSize => (
+                                    <option value={pageSize} key={pageSize} >
+                                        Show {pageSize}
+                                    </option>
+                                )
+
+                                )
+                            }
+                        </select>
+                    </div>
                   <div className="col-3">
-                    <DateRangePicker/>
+                    {/* <DateRangePicker/> */}
                   </div>
                     <div className="col-3" style={{ marginRight: "16px" }} >
                         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
