@@ -15,13 +15,9 @@ import { connect } from 'react-redux';
 import NumberFormat from 'react-number-format';
 import allUrls from '../../redux/constants/url'
 
-
 function AddNewStudentPage({ AddNewStudent }) {
-
     var editData = JSON.parse(localStorage.getItem('userEdit'))
-    console.log("____________");
     console.log(editData);
-    console.log("____________");
 
     const [branchNames, setBranchNames] = useState([{ subjects: 'loading...', id: 0 }])
     const [trackNames, setTrackNames] = useState([{ trackName: 'loading...', trackId: 0 }])
@@ -62,12 +58,13 @@ function AddNewStudentPage({ AddNewStudent }) {
 
 
     const initialValues = {
-        //editData.accountInfo.email
+        //not working
+        // Date of birth , village name  , category name , 12 subject , scheme fees  , GKB scholarship , track name 
 
         // Personal Detail start here
         firstName: editData ? editData.accountInfo.firstName : "",
         lastName: editData ? editData.accountInfo.lastName : "",
-        dob: editData ? editData.accountInfo.dob : "",
+        dob: editData ? editData.accountInfo.dob : "", // not working properly
         contactNumber: editData ? editData.accountInfo.mobile : "",
         fatherName: editData ? editData.accountInfo.fathersName : "",
         fatherOccupation: editData ? editData.accountInfo.fatherOccupation : "",
@@ -75,7 +72,7 @@ function AddNewStudentPage({ AddNewStudent }) {
         FatherContactNumber: editData ? editData.accountInfo.fatherContactNumber : "",
         address: editData ? editData.accountInfo.address : "",
         pincode: editData ? editData.accountInfo.pincode : "",
-        village: editData ? editData.accountInfo.village : "",
+        village: editData ? editData.accountInfo.village : "",// not working
         tehsil: editData ? editData.accountInfo.tehsil : "",
         district: editData ? editData.accountInfo.district : "",
         email: editData ? editData.accountInfo.email : "",
@@ -90,9 +87,9 @@ function AddNewStudentPage({ AddNewStudent }) {
         streamName: editData ? editData.accountInfo.branch : "",
         joinBatch: editData ? editData.accountInfo.joinBatch : "",
         rollNumber12: editData ? editData.accountInfo.rollNumber12 : "",
-        percent12: editData ? editData.accountInfo.percentage12 : "",
+        percent12: editData ? editData.accountInfo.persentage12 : "",
         year: editData ? editData.accountInfo.year : "",
-        percent10: editData ? editData.accountInfo.percentage10 : "",
+        percent10: editData ? editData.accountInfo.persentage10 : "",
         rollNumber10: editData ? editData.accountInfo.rollNumber10 : "",
         //Acadmic Details end  here
 
@@ -114,7 +111,7 @@ function AddNewStudentPage({ AddNewStudent }) {
         postmatricScolarship: editData ? editData.accountInfo.Is_Postmetric : "",
 
         //remaining
-        gkbScolarship: editData ? editData.Is_GKB : "",
+        gkbScolarship: editData ? editData.Is_GKB : "",//not working
         gkbOwner: editData ? editData.GaonKiBeti : "",
         postmatricOwner: editData ? editData.Postmetric : "",
         payableAmmount: editData ? editData.remain_Amount : "",
@@ -288,7 +285,7 @@ function AddNewStudentPage({ AddNewStudent }) {
     });
 
     const handleChange = (id) => () => {
-        console.log(expanded)
+        // console.log(expanded)
         setExpanded((pre) => {
             return {
                 ...pre,
