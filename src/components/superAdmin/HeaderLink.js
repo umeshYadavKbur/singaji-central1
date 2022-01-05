@@ -28,10 +28,10 @@ const HeaderLink = () => {
         else if (currentLocation === "/admin_dashboard/admintable") {
             return "My Admin";
         }
-        else if (editData) {
-            return editData.accountInfo.firstName + "  " + editData.accountInfo.lastName + "  " + editData.accountInfo.branch + " (" + editData.accountInfo.joinBatch + ")";
-        }
         else if (currentLocation === "/admin_dashboard/addnewstudent") {
+            if (editData) {
+                return editData.accountInfo.firstName + "  " + editData.accountInfo.lastName + "  " + editData.accountInfo.branch + " (" + editData.accountInfo.joinBatch + ")";
+            }
             return "Add Student";
         }
         else if (currentLocation === "/admin_dashboard/feesstructuretable") {
