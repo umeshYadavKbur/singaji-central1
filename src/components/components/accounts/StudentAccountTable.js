@@ -95,25 +95,25 @@ const StudentAccount = () => {
     const { pageIndex } = state;
     return (
         <>
-            <div className="container-fluid">
-                <div className="row Stu-Acc-info" >
-                    <div className="col-2 info-col">
-                        <h5>1900 <br /> <p style={{ color: "rgb(247, 146, 42)", marginBottom: "0px" }}>Total Students</p> </h5>
+            <div className="container">
+                <div className="row Stu-Acc-info" style={{color:"rgb(90, 96, 127)" , margin: "Auto", height: "70px" ,backgroundColor: "#fff"}} >
+                    <div className="col info-col"style={{ borderRight: "2px solid rgb(90, 96, 127)"}} >
+                        <h5>1900 <br /> <p >Total Students</p> </h5>
                     </div>
-                    <div className="col-2 info-col">
-                        <h5>2000000 <br /> <p style={{ color: "rgb(247, 146, 42)", marginBottom: "0px" }}>Total Amount</p> </h5>
+                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)"}}>
+                        <h5>2000000 <br /> <p>Total Amount</p> </h5>
                     </div>
-                    <div className="col-2 info-col">
-                        <h5>208000 <br /> <p style={{ color: "rgb(247, 146, 42)", marginBottom: "0px" }}>Total Paid Amount</p> </h5>
+                    <div className="col info-col"style={{ borderRight: "2px solid rgb(90, 96, 127)"}}>
+                        <h5>208000 <br /> <p >Total Paid Amount</p> </h5>
                     </div>
-                    <div className="col-2 info-col">
-                        <h5>10000 <br /> <p style={{ color: "rgb(247, 146, 42)", marginBottom: "0px" }}>Remaining Amount</p> </h5>
+                    <div className="col info-col"style={{ borderRight: "2px solid rgb(90, 96, 127)"}}>
+                        <h5>10000 <br /> <p >Remaining Amount</p> </h5>
                     </div>
-                    <div className="col-2 info-col">
-                        <h5>1000 <br /> <p style={{ color: "rgb(247, 146, 42)", marginBottom: "0px" }}>Waive Off</p> </h5>
+                    <div className="col info-col">
+                        <h5>1000 <br /> <p >Waive Off</p> </h5>
                     </div>
                 </div>
-                <div className="row d-flex justify-content-end">
+                <div className="row d-flex justify-content-end mt-4">
                     <div className="col-3" style={{ marginRight: "16px" }} >
                         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
                     </div>
