@@ -14,9 +14,11 @@ import { useNavigate } from 'react-router-dom';
 
 const StudentAccount = () => {
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
     const token = localStorage.getItem("token");
 
     const getAllInfoOfStudent = async (original) => {
+        setLoading(true)
         // set data or original table to localStorage we need it later
         localStorage.setItem('userEdit', JSON.stringify(original))
         let data = JSON.stringify({
@@ -39,6 +41,7 @@ const StudentAccount = () => {
 
         const response = await axios(config)
         localStorage.setItem('userEdit', JSON.stringify(response.data))
+        setLoading(false)
 
         if (isStudentAdmin()) {
             console.log("Navigated ");
@@ -143,6 +146,26 @@ const StudentAccount = () => {
     const { pageIndex } = state;
     return (
         <>
+            {loading && (
+                <div
+                    className="lds-roller"
+                    style={{
+                        position: "absolute",
+                        left: "50%",
+                        top: "50%",
+                        zindex: "-1",
+                    }}
+                >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            )}
             <div className="container-fluid">
                 <div className="row Stu-Acc-info" >
                     <div className="col-2 info-col">

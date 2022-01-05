@@ -1301,7 +1301,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                         <label className="addStdLable" >Track Name</label>
                                         <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
                                             onBlur={formik.handleBlur} className={formik.touched.trackName ? `form-select ${formik.errors.trackName ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
-                                            <option value='0'>Select Track</option>
+                                            <option value={formik.values.trackName}>Select Track</option>
                                             {trackNames.map((ele, i) => {
                                                 return (
                                                     <option key={i} value={ele.trackname}>{ele.trackname}</option>

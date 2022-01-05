@@ -29,7 +29,7 @@ const HeaderLink = () => {
             return "My Admin";
         }
         else if (editData) {
-            return editData.accountInfo.firstName + "  " + editData.accountInfo.branch + " (" + editData.accountInfo.joinBatch + ")";
+            return editData.accountInfo.firstName + "  " + editData.accountInfo.lastName + "  " + editData.accountInfo.branch + " (" + editData.accountInfo.joinBatch + ")";
         }
         else if (currentLocation === "/admin_dashboard/addnewstudent") {
             return "Add Student";
