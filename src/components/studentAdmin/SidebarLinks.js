@@ -59,11 +59,11 @@ const SidebarLinks = ({ Toggle }) => {
                         {!Toggle && <i className="fas fa-chevron-down mr-3"></i>}
                     </a>
 
-                    <div className="collapse collapse_superadmin py-2" id="education-collapse">
+                    <div className="collapse collapse_superadmin p-0" id="education-collapse">
                         <ul className="btn-toggle-nav list-unstyled ">
                             <li className="dropdown_items_div ml-1">
                                 {dLink1("Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
-                                {dLink1("Students", "", "ok", "Students")}
+                                {dLink1("Students", "", "ok", "Students","education-collapse-btn")}
                                 {dLink1("Add students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}
                             </li>
                         </ul>
