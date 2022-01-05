@@ -6,6 +6,8 @@ import './StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
 import { toast } from 'react-toastify';
+import { DateRangePicker } from 'rsuite';
+import 'rsuite/dist/rsuite-default.css';
 
 
 const StudentAccount = () => {
@@ -18,8 +20,8 @@ const StudentAccount = () => {
             }
         },
          {
-            Header: "Name",
-            accessor: "name",
+            Header: "Photo",
+            accessor: "photo",
       
             Cell: ({ row: { original, index } }) => (
               <div className="d-flex m-0 flex-column justify-content-start">
@@ -32,10 +34,14 @@ const StudentAccount = () => {
                   textColor="#fff"
                   text="Image"
                 />
-                <p className="mx-auto"> {original.name}</p>
+                {/* <p className="mx-auto"> {original.name}</p> */}
               </div>
             ),
           },
+        {
+            Header: 'Name',
+            accessor: 'name'
+        },
         {
             Header: 'Father name',
             accessor: 'fathersName'
@@ -95,7 +101,7 @@ const StudentAccount = () => {
     const { pageIndex } = state;
     return (
         <>
-            <div className="container">
+            <div className="container-fluid">
                 <div className="row Stu-Acc-info" style={{color:"rgb(90, 96, 127)" , margin: "Auto", height: "70px" ,backgroundColor: "#fff"}} >
                     <div className="col info-col"style={{ borderRight: "2px solid rgb(90, 96, 127)"}} >
                         <h5>1900 <br /> <p >Total Students</p> </h5>
@@ -114,6 +120,9 @@ const StudentAccount = () => {
                     </div>
                 </div>
                 <div className="row d-flex justify-content-end mt-4">
+                  <div className="col-3">
+                    <DateRangePicker/>
+                  </div>
                     <div className="col-3" style={{ marginRight: "16px" }} >
                         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
                     </div>
