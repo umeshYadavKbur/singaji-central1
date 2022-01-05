@@ -7,8 +7,9 @@ import updown_sort from '../../assests/image/updown_sort.svg';
 import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
 import { toast } from 'react-toastify';
 // import { DateRangePicker } from 'rsuite';
-// import 'rsuite/dist/rsuite-default.css';
-
+import { DateRangePicker } from 'rsuite';
+// import 'rsuite/styles/index.less';
+import "rsuite/dist/rsuite.min.css";
 
 const StudentAccount = () => {
     const [columns] = useState([
@@ -120,8 +121,8 @@ const StudentAccount = () => {
                         <h5>1000 <br /> <p >Waive Off</p> </h5>
                     </div>
                 </div>
-                <div className="row d-flex justify-content-end mt-4">
-                    <div className="col-2">
+                <div className="row  mx-0 mt-3" style={{ width: "98%"}}>
+                    <div className="col">
                         <select className='select-acc-student' value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                             {
                                 [10,25 ,50].map(pageSize => (
@@ -134,10 +135,10 @@ const StudentAccount = () => {
                             }
                         </select>
                     </div>
-                  <div className="col-3">
-                    {/* <DateRangePicker/> */}
+                  <div className="col">
+                    <DateRangePicker/>
                   </div>
-                    <div className="col-3" style={{ marginRight: "16px" }} >
+                    <div className="col" style={{ marginRight: "16px" }} >
                         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
                     </div>
                 </div>

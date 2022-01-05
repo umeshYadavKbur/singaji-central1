@@ -29,6 +29,10 @@
       border: none !important;
       outline: none;
       height: 41px;
+      width: 144px;
+      text-align: center;
+      /* padding: 10px;
+      -webkit-appearance: none; */
   }
   
   .info-div{
