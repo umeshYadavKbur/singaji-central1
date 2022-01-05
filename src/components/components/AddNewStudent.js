@@ -50,7 +50,7 @@ function AddNewStudentPage({ AddNewStudent }) {
         callingFun();
 
         return () => {
-            // localStorage.removeItem('userEdit')
+            localStorage.removeItem('userEdit')
         }
     }, []);
 
