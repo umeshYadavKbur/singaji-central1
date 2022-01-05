@@ -16,20 +16,22 @@ import NumberFormat from 'react-number-format';
 import allUrls from '../../redux/constants/url'
 
 
-
 function AddNewStudentPage({ AddNewStudent }) {
+
     var editData = JSON.parse(localStorage.getItem('userEdit'))
+    console.log("____________");
+    console.log(editData);
+    console.log("____________");
 
-
-    // const [editData, setEditData] = useState("")
     const [branchNames, setBranchNames] = useState([{ subjects: 'loading...', id: 0 }])
     const [trackNames, setTrackNames] = useState([{ trackName: 'loading...', trackId: 0 }])
     const [villageNames, setVillageNames] = useState([{ label: 'loading...', villageId: 0 }])
 
 
     useEffect(() => {
-        const callingFun = async () => {
 
+
+        const callingFun = async () => {
 
             ///////////////////////////////
             const branchName = await axios(allUrls.branchList)
@@ -50,74 +52,78 @@ function AddNewStudentPage({ AddNewStudent }) {
             setTrackNames(trackNamesRes.data);
         }
         callingFun();
+
         return () => {
-            console.log("going back to home page...");
-            localStorage.removeItem('userEdit')
+            // localStorage.removeItem('userEdit')
         }
     }, []);
 
 
 
 
-    // mobile: 1233455
-    //fathersName: "rajesh"
-    // village: "khategaon"
-    // stream: "bca ( II )"
-    // total_Fees: 31500
-    // remain_Amount: 31500
-
-    // name: "Akanksha parmar"
-    // photo: "https://ssism.s3.us-east-2.amazonaws.com/avtar.jpg"
-    // received_Amount: 0
-    // stdId: "88fe042d-b7c4-4b3d-878d-a3b9dc0aecba"
-
     const initialValues = {
-        firstName: "",
-        lastName: "",
-        dob: "",
-        contactNumber: editData ? editData.mobile : "",
-        fatherName: editData ? editData.fathersName : "",
-        village: editData ? editData.village : "",
-        fatherOccupation: "",
-        fatherIncome: '',
-        FatherContactNumber: "",
-        address: "",
-        pincode: "",
-        tehsil: "",
-        district: "",
-        email: "",
-        aadharNumber: "",
-        category: "",
-        gender: "male",
-        percent10: '',
-        rollNumber10: '',
-        joinBatch: '',
-        percent12: '',
-        rollNumber12: '',
-        year: '',
-        streamName: editData ? editData.stream : "",
-        subject12: '',
-        schoolName: '',
-        GKBAmount: 0,
-        postmatricAmount: 0,
-        thirdInstallmentDate: '',
-        thirdInstallment: 0,
-        secondInstallmentDate: '',
-        secondInstallment: 0,
-        feesScheme: 'fullFees',
-        firstInstallmentDate: '',
-        firstInstallment: 0,
-        courseFees: editData ? editData.total_Fees : "",
-        regisrationFees: '1500',
-        postmatricScolarship: 'no',
-        gkbScolarship: 'no',
-        gkbOwner: 'self',
-        postmatricOwner: 'self',
+        //editData.accountInfo.email
+
+        // Personal Detail start here
+        firstName: editData ? editData.accountInfo.firstName : "",
+        lastName: editData ? editData.accountInfo.lastName : "",
+        dob: editData ? editData.accountInfo.dob : "",
+        contactNumber: editData ? editData.accountInfo.mobile : "",
+        fatherName: editData ? editData.accountInfo.fathersName : "",
+        fatherOccupation: editData ? editData.accountInfo.fatherOccupation : "",
+        fatherIncome: editData ? editData.accountInfo.fatherIncome : "",
+        FatherContactNumber: editData ? editData.accountInfo.fatherContactNumber : "",
+        address: editData ? editData.accountInfo.address : "",
+        pincode: editData ? editData.accountInfo.pincode : "",
+        village: editData ? editData.accountInfo.village : "",
+        tehsil: editData ? editData.accountInfo.tehsil : "",
+        district: editData ? editData.accountInfo.district : "",
+        email: editData ? editData.accountInfo.email : "",
+        aadharNumber: editData ? editData.accountInfo.aadarNo : "",
+        category: editData ? editData.accountInfo.category : "",
+        gender: editData ? editData.accountInfo.gender : "",
+        // Personal information end here 
+
+        //Acadmic Details stated from here
+        schoolName: editData ? editData.accountInfo.schoolName : "",
+        subject12: editData ? editData.accountInfo.school12sub : "",
+        streamName: editData ? editData.accountInfo.branch : "",
+        joinBatch: editData ? editData.accountInfo.joinBatch : "",
+        rollNumber12: editData ? editData.accountInfo.rollNumber12 : "",
+        percent12: editData ? editData.accountInfo.percentage12 : "",
+        year: editData ? editData.accountInfo.year : "",
+        percent10: editData ? editData.accountInfo.percentage10 : "",
+        rollNumber10: editData ? editData.accountInfo.rollNumber10 : "",
+        //Acadmic Details end  here
+
+        // Fees detail start from here 
+        GKBAmount: editData ? editData.accountInfo.GKB_Amount : "",
+        postmatricAmount: editData ? editData.accountInfo.Postmetric_Amount : "",
+
+        // editData.pendingFee[0].PendingFees
+        firstInstallmentDate: editData ? editData.accountInfo.FirstinstallmentDate : "",
+        firstInstallment: editData ? editData.accountInfo.Firstinstallment : "",
+        secondInstallmentDate: editData ? editData.accountInfo.SecondinstallmentDate : "",
+        secondInstallment: editData ? editData.accountInfo.Secondinstallment : "",
+        thirdInstallmentDate: editData ? editData.accountInfo.ThirdinstallmentDate : "",
+        thirdInstallment: editData ? editData.accountInfo.Thirdinstallment : "",
+
+        feesScheme: editData ? editData.accountInfo.feesScheme : "",
+        courseFees: editData ? editData.accountInfo.Totalfee : "",
+        regisrationFees: editData ? editData.accountInfo.reg_Fees : "",
+        postmatricScolarship: editData ? editData.accountInfo.Is_Postmetric : "",
+
+        //remaining
+        gkbScolarship: editData ? editData.Is_GKB : "",
+        gkbOwner: editData ? editData.GaonKiBeti : "",
+        postmatricOwner: editData ? editData.Postmetric : "",
         payableAmmount: editData ? editData.remain_Amount : "",
-        remark: '',
-        ScholarshipAmount: 0,
-        trackName: "",
-        busFees: "",
+        remark: editData ? editData.accountInfo.remark : "",
+        ScholarshipAmount: editData ? editData.accountInfo.ScholarshipAmount : "",
+        trackName: editData ? editData.accountInfo.trackName : "",
+        busFees: editData ? editData.accountInfo.Busfee : "",
+        // Fees detail end from here 
+
     }
 
     const validationSchema = Yup.object({

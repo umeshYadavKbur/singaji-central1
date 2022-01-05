@@ -5,24 +5,52 @@ import { useMemo } from 'react';
 import './StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
-import { Link } from 'react-router-dom';
 import { isSuperAdmin } from '../../../helpers/SuperAdmin';
 import { isAccountAdmin } from '../../../helpers/AccountAdmin';
 import { isStudentAdmin } from '../../../helpers/StudentAdmin';
-
+import allUrls from '../../../redux/constants/url'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const StudentAccount = () => {
+    const navigate = useNavigate()
+    const token = localStorage.getItem("token");
 
-    const getRoutesRoleWise = () => {
+    const getAllInfoOfStudent = async (original) => {
+        // set data or original table to localStorage we need it later
+        // localStorage.setItem('userEdit', JSON.stringify(original))  
+        let data = JSON.stringify({
+            "stdId": "353c55ed-1e67-48a3-9ed2-fa1dfaecec73"
+            // "stdId": localData.stdId,
+        });
+        let config = {
+            method: 'post',
+            url: allUrls.allInfoOfActiveStudent,
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        const response = await axios(config)
+        localStorage.setItem('userEdit', JSON.stringify(response.data))
+
         if (isStudentAdmin()) {
-            return '/student_admin_dashboard/addnewstudent';
-        } else if (isAccountAdmin()) {
-            return '/account_admin_dashboard/addnewstudent';
+            console.log("Navigated ");
+            navigate('/student_admin_dashboard/addnewstudent');
+        }
+        else if (isAccountAdmin()) {
+            console.log("Navigated ");
+            navigate('/account_admin_dashboard/addnewstudent');
         }
         else if (isSuperAdmin()) {
-            return '/admin_dashboard/addnewstudent';
+            console.log("Navigated ");
+            navigate('/admin_dashboard/addnewstudent');
         }
     }
+
+
     const [columns] = useState([
         {
             Header: 'S.no',
@@ -37,22 +65,20 @@ const StudentAccount = () => {
 
             Cell: ({ row: { original, index } }) => (
                 <div className="d-flex m-0 flex-column justify-content-start">
-                    <Link to={getRoutesRoleWise()}>
-                        <img
-                            alt="profile"
-                            style={{ cursor: "pointer" }}
-                            onClick={() => {
-                                localStorage.setItem('userEdit', JSON.stringify(original))
-                            }}
-                            className="mx-auto"
-                            src={original.photo}
-                            width={50}
-                            textColor="#fff"
-                            text="Image"
-                        />
-                    </Link>
+                    <img
+                        alt="profile"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                            getAllInfoOfStudent(original)
+                        }}
+                        className="mx-auto"
+                        src={original.photo}
+                        width={50}
+                        textColor="#fff"
+                        text="Image"
+                    />
                     <p className="mx-auto"> {original.name}</p>
-                </div>
+                </div >
             ),
         },
         {
