@@ -244,21 +244,21 @@ const StudentAccount = () => {
                 </div>
             )}
             <div className="container-fluid">
-                <div className="row Stu-Acc-info" style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px", backgroundColor: "#fff" }} >
-                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }} >
-                        <h5>1900 <br /> <p >Total Students</p> </h5>
+                <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
+                    <div className=" info-col"  >
+                        <h5 style={{marginTop : "12px"}}>1900 <br /> <p >Total Students</p> </h5>
                     </div>
-                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }}>
-                        <h5>2000000 <br /> <p>Total Amount</p> </h5>
+                    <div className=" info-col" >
+                        <h5 style={{marginTop : "12px"}}>2000000 <br /> <p>Total Amount</p> </h5>
                     </div>
-                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }}>
-                        <h5>208000 <br /> <p >Total Paid Amount</p> </h5>
+                    <div className=" info-col" >
+                        <h5 style={{marginTop : "12px"}}>208000 <br /> <p >Total Paid Amount</p> </h5>
                     </div>
-                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }}>
-                        <h5>10000 <br /> <p >Remaining Amount</p> </h5>
+                    <div className=" info-col" >
+                        <h5 style={{marginTop : "12px"}}>10000 <br /> <p >Remaining Amount</p> </h5>
                     </div>
-                    <div className="col info-col">
-                        <h5>1000 <br /> <p >Waive Off</p> </h5>
+                    <div className=" info-col">
+                        <h5 style={{marginTop : "12px"}}>1000 <br /> <p >Waive Off</p> </h5>
                     </div>
                 </div>
                 <div className="row  mx-0 mt-3" style={{ width: "98%" }}>
