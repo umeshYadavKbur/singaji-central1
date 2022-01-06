@@ -1,6 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="176" height="196" viewBox="0 0 176 196">
-  <g id="Rectangle_1755" data-name="Rectangle 1755" fill="#fff" stroke="#7e84a3" stroke-width="2">
-    <rect width="176" height="196" rx="4" stroke="none"/>
-    <rect x="1" y="1" width="174" height="194" rx="3" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43">
+  <g id="Group_2165" data-name="Group 2165" transform="translate(0 -0.4)">
+    <g id="Rectangle_1756" data-name="Rectangle 1756" transform="translate(0 0.4)" fill="#fff" stroke="#d5d7e3" stroke-linecap="round" stroke-width="2">
+      <rect width="43" height="43" rx="4" stroke="none"/>
+      <rect x="1" y="1" width="41" height="41" rx="3" fill="none"/>
+    </g>
+    <path id="Icon_ionic-md-arrow-round-back" data-name="Icon ionic-md-arrow-round-back" d="M21.044,8.772H7.032l5.435-5.2a2.166,2.166,0,0,0,0-2.96,1.936,1.936,0,0,0-2.829,0L.589,9.388A1.994,1.994,0,0,0,0,10.854v.026a1.994,1.994,0,0,0,.589,1.467l9.042,8.774a1.936,1.936,0,0,0,2.829,0,2.166,2.166,0,0,0,0-2.96l-5.435-5.2H21.037a2.05,2.05,0,0,0,2-2.1A2.028,2.028,0,0,0,21.044,8.772Z" transform="translate(32.026 10.741) rotate(90)" fill="#d5d7e3"/>
   </g>
 </svg>
