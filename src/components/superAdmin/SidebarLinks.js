@@ -71,7 +71,7 @@ const SidebarLinks = ({ Toggle }) => {
 
 
                     <div className="collapse collapse_superadmin p-0" id="dashboard-collapse">
-                        <ul className="btn-toggle-nav list-unstyled ">
+                        <ul className={`${Toggle ?'btn-toggle-nav-hide':'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
 
                                 {dLink1("Dashboard", "", "ok", 'Dashboard', 'dashboard-collapse-btn')}
@@ -110,7 +110,7 @@ const SidebarLinks = ({ Toggle }) => {
                     </a>
 
                     <div className="collapse collapse_superadmin" id="education-collapse">
-                        <ul className="btn-toggle-nav list-unstyled ">
+                        <ul className={`${Toggle ?'btn-toggle-nav-hide':'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
                                 {dLink1("Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
                                 {dLink1("Students", "", "ok", "Students", "education-collapse-btn")}
@@ -146,7 +146,7 @@ const SidebarLinks = ({ Toggle }) => {
                     </a>
 
                     <div className="collapse collapse_superadmin" id="account-collapse">
-                        <ul className="btn-toggle-nav list-unstyled ">
+                        <ul className={`${Toggle ?'btn-toggle-nav-hide':'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
                                 {dLink1("Student Account", "studentaccounttable", "ok", "Student_Account", 'account-collapse-btn')}
                                 {/* {dLink1("Students", "", "ok", "Students", "account-collapse-btn")}

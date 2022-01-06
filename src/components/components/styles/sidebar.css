@@ -344,7 +344,11 @@ label #sidebar_btn:hover {
 
 .btn-toggle-nav {
   padding-top: 3px;
-  padding-bottom: 3px;
+  padding-bottom: 4px;
+}
+.btn-toggle-nav-hide {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
 }
 
 /* .sidebar_options_link:hover::before {
@@ -384,6 +388,8 @@ label #sidebar_btn:hover {
 #check:checked ~ .sidebar .dropdown-menu .sidebar_options_link span {
   display: block;
 }
+
+
 
 /* --------------------------------------------------------*/
 
