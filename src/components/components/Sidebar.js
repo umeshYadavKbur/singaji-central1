@@ -15,7 +15,7 @@ import toggle_btn_icon from "../assests/image/sidebarIcons/toggle_btn_sidebar.pn
 
 const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play, Options }) => {
   const [toggle, setToggle] = useState(false);
- 
+
   const handleClick = () => {
     play(!isPlaying);
     if (toggle) {
@@ -27,7 +27,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play, Options }) => {
     }
   };
 
- 
+
 
   // getSelectValue();
   return (

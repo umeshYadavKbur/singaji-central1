@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect,useState} from 'react';
+import { useEffect, useState } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -8,81 +8,142 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./styles/AddNewStudent.css"
 import Select from 'react-select'
 import * as Yup from "yup";
-import {useFormik} from 'formik';
+import { useFormik } from 'formik';
 import axios from 'axios';
 import AddNewStudent from '../../redux/actionDispatcher/superAdmin/addNewStudentDispatcher'
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import NumberFormat from 'react-number-format';
 import allUrls from '../../redux/constants/url'
-// import {number} from 'yup';
 
-function AddNewStudentPage({AddNewStudent}) {
+function AddNewStudentPage({ AddNewStudent }) {
+    var editData = JSON.parse(localStorage.getItem('userEdit'))
+    console.log(editData);
 
-    const [branchNames,setBranchNames] = useState([{subjects: 'loading...',id: 0}])
-    const [trackNames,setTrackNames] = useState([{trackName: 'loading...',trackId: 0}])
-    const [villageNames,setVillageNames] = useState([{label: 'loading...',villageId: 0}])
+    const [branchNames, setBranchNames] = useState([{ subjects: 'loading...', id: 0 }])
+    const [trackNames, setTrackNames] = useState([{ trackName: 'loading...', trackId: 0 }])
+    const [villageNames, setVillageNames] = useState([{ label: 'loading...', villageId: 0 }])
 
 
     useEffect(() => {
-        const fn = async () => {
 
+
+        const callingFun = async () => {
 
             ///////////////////////////////
             const branchName = await axios(allUrls.branchList)
-            console.log(branchName.data);
-            console.log("branch Name ",branchName.data);
+            // console.log(branchName.data);
+            // console.log("branch Name ", branchName.data);
             setBranchNames(branchName.data)
 
             /////////////////////////
             const villageNamesRes = await axios(allUrls.villageNameList)
             let newVillageName = [];
-            villageNamesRes.data.forEach((ele) => {newVillageName.push({'label': ele.villagename,'value': ele.villagename})})
-            console.log(newVillageName);
+            villageNamesRes.data.forEach((ele) => { newVillageName.push({ 'label': ele.villagename, 'value': ele.villagename }) })
+            // console.log(newVillageName);
             setVillageNames(newVillageName);
 
             /////////////////////////////
             const trackNamesRes = await axios(allUrls.trackList)
-            console.log(trackNamesRes.data);
+            // console.log(trackNamesRes.data);
             setTrackNames(trackNamesRes.data);
         }
-        fn();
-    },[]);
+        callingFun();
 
-
+        return () => {
+            localStorage.removeItem('userEdit')
+        }
+    }, []);
 
 
 
 
     const initialValues = {
-        firstName: "",lastName: "",dob: "",contactNumber: "",fatherName: "",fatherOccupation: "",fatherIncome: '',FatherContactNumber: "",address: "",village: "",pincode: "",tehsil: "",district: "",email: "",aadharNumber: "",category: "",gender: "male",
-        percent10: '',rollNumber10: '',joinBatch: '',percent12: '',rollNumber12: '',year: '',streamName: '',subject12: '',schoolName: '',
-        GKBAmount: 0,postmatricAmount: 0,thirdInstallmentDate: '',thirdInstallment: 0,secondInstallmentDate: '',secondInstallment: 0,feesScheme: 'fullFees',firstInstallmentDate: '',firstInstallment: 0,courseFees: '',regisrationFees: '1500',
-        postmatricScolarship: 'no',gkbScolarship: 'no',gkbOwner: 'self',postmatricOwner: 'self',payableAmmount: '',remark: '',
-        ScholarshipAmount: 0,
-        trackName: "",busFees: "",
+        //not working
+        // Date of birth , village name  , category name , 12 subject , scheme fees  , GKB scholarship , track name 
+
+        // Personal Detail start here
+        firstName: editData ? editData.accountInfo.firstName : "",
+        lastName: editData ? editData.accountInfo.lastName : "",
+        dob: editData ? editData.accountInfo.dob : "", // not working properly
+        contactNumber: editData ? editData.accountInfo.mobile : "",
+        fatherName: editData ? editData.accountInfo.fathersName : "",
+        fatherOccupation: editData ? editData.accountInfo.fatherOccupation : "",
+        fatherIncome: editData ? editData.accountInfo.fatherIncome : "",
+        FatherContactNumber: editData ? editData.accountInfo.fatherContactNumber : "",
+        address: editData ? editData.accountInfo.address : "",
+        pincode: editData ? editData.accountInfo.pincode : "",
+        village: editData ? editData.accountInfo.village : "",// not working
+        tehsil: editData ? editData.accountInfo.tehsil : "",
+        district: editData ? editData.accountInfo.district : "",
+        email: editData ? editData.accountInfo.email : "",
+        aadharNumber: editData ? editData.accountInfo.aadarNo : "",
+        category: editData ? editData.accountInfo.category : "",
+        gender: editData ? editData.accountInfo.gender : "",
+        // Personal information end here 
+
+        //Acadmic Details stated from here
+        schoolName: editData ? editData.accountInfo.schoolName : "",
+        subject12: editData ? editData.accountInfo.school12sub : "",
+        streamName: editData ? editData.accountInfo.branch : "",
+        joinBatch: editData ? editData.accountInfo.joinBatch : "",
+        rollNumber12: editData ? editData.accountInfo.rollNumber12 : "",
+        percent12: editData ? editData.accountInfo.persentage12 : "",
+        year: editData ? editData.accountInfo.year : "",
+        percent10: editData ? editData.accountInfo.persentage10 : "",
+        rollNumber10: editData ? editData.accountInfo.rollNumber10 : "",
+        //Acadmic Details end  here
+
+        // Fees detail start from here 
+        GKBAmount: editData ? editData.accountInfo.GKB_Amount : "",
+        postmatricAmount: editData ? editData.accountInfo.Postmetric_Amount : "",
+
+        // editData.pendingFee[0].PendingFees
+        firstInstallmentDate: editData ? editData.accountInfo.FirstinstallmentDate : "",
+        firstInstallment: editData ? editData.accountInfo.Firstinstallment : "",
+        secondInstallmentDate: editData ? editData.accountInfo.SecondinstallmentDate : "",
+        secondInstallment: editData ? editData.accountInfo.Secondinstallment : "",
+        thirdInstallmentDate: editData ? editData.accountInfo.ThirdinstallmentDate : "",
+        thirdInstallment: editData ? editData.accountInfo.Thirdinstallment : "",
+
+        feesScheme: editData ? editData.accountInfo.feesScheme : "",
+        courseFees: editData ? editData.accountInfo.Totalfee : "",
+        regisrationFees: editData ? editData.accountInfo.reg_Fees : "",
+        postmatricScolarship: editData ? editData.accountInfo.Is_Postmetric : "",
+
+        //remaining
+        gkbScolarship: editData ? editData.Is_GKB : "",//not working
+        gkbOwner: editData ? editData.GaonKiBeti : "",
+        postmatricOwner: editData ? editData.Postmetric : "",
+        payableAmmount: editData ? editData.remain_Amount : "",
+        remark: editData ? editData.accountInfo.remark : "",
+        ScholarshipAmount: editData ? editData.accountInfo.ScholarshipAmount : "",
+        trackName: editData ? editData.accountInfo.trackName : "",
+        busFees: editData ? editData.accountInfo.Busfee : "",
+        // Fees detail end from here 
+
     }
 
     const validationSchema = Yup.object({
-        firstName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!"),
-        lastName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates').required("Required!"),
-        dob: Yup.string().required("Required!").test('doc_check','Minimum age must be 12-14 years',val => val?.slice(0,4) <= (new Date().getFullYear()) - 13),
-        contactNumber: Yup.string().trim().min(10,'Must be exactly 10 digits').required("Required!"),
-        fatherName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!"),
-        fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates'),
-        fatherIncome: Yup.string().required("Required!").min(4,'Must be exactly 4 digits').test('Is positive','must be positive',val => val > 0),
-        FatherContactNumber: Yup.string().trim().min(10,'Must be exactly 10 digits').required("Required!"),
-        address: Yup.string().trim().min(10,'minimum 10 characters required').required("Required!"),
-        village: Yup.string().required("Required!").trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates'),
-        pincode: Yup.string().trim().required("Required!").test('len','Must be exactly 6 digits',val => val?.replace('X','').length === 6),
-        tehsil: Yup.string().trim().min(3,'minimum 3 characters required').required("Required!").matches(/^[a-zA-Z]+$/,'must be alphabates'),
-        district: Yup.string().trim().min(3,'minimum 3 characters required').required("Required!").matches(/^[a-zA-Z]+$/,'must be alphabates'),
+        firstName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!"),
+        lastName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates').required("Required!"),
+        dob: Yup.string().required("Required!").test('doc_check', 'Minimum age must be 12-14 years', val => val?.slice(0, 4) <= (new Date().getFullYear()) - 13),
+        contactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
+        fatherName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!"),
+        fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates'),
+        fatherIncome: Yup.string().required("Required!").min(4, 'Must be exactly 4 digits').test('Is positive', 'must be positive', val => val > 0),
+        FatherContactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
+        address: Yup.string().trim().min(10, 'minimum 10 characters required').required("Required!"),
+        village: Yup.string().required("Required!").trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates'),
+        pincode: Yup.string().trim().required("Required!").test('len', 'Must be exactly 6 digits', val => val?.replace('X', '').length === 6),
+        tehsil: Yup.string().trim().min(3, 'minimum 3 characters required').required("Required!").matches(/^[a-zA-Z]+$/, 'must be alphabates'),
+        district: Yup.string().trim().min(3, 'minimum 3 characters required').required("Required!").matches(/^[a-zA-Z]+$/, 'must be alphabates'),
         email: Yup.string().email("Invalid Email Format ").required("Required!"),
-        aadharNumber: Yup.string().trim().required("Required!").test('len','Must be exactly 12 digits',val => val?.replace('X','').length === 14),
+        aadharNumber: Yup.string().trim().required("Required!").test('len', 'Must be exactly 12 digits', val => val?.replace('X', '').length === 14),
         category: Yup.string().required("Required!"),
 
         percent10: Yup.string().required("Required!"),
         rollNumber10: Yup.string().required("Required!"),
-        joinBatch: Yup.string().trim().required("Required!").test('len','Must be exactly 4 digits',val => val?.replace('X','').length === 4),
+        joinBatch: Yup.string().trim().required("Required!").test('len', 'Must be exactly 4 digits', val => val?.replace('X', '').length === 4),
         percent12: Yup.string().required("Required!"),
         rollNumber12: Yup.string().required("Required!"),
         year: Yup.string().required("Required!"),
@@ -90,29 +151,29 @@ function AddNewStudentPage({AddNewStudent}) {
         subject12: Yup.string().required("Required!"),
         schoolName: Yup.string().required("Required!"),
 
-        GKBAmount: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
-        postmatricAmount: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
+        GKBAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        postmatricAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
         thirdInstallmentDate: Yup.string().required("Required!"),
-        thirdInstallment: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
+        thirdInstallment: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
         secondInstallmentDate: Yup.string().required("Required!"),
-        secondInstallment: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
+        secondInstallment: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
         feesScheme: Yup.string().required("Required!"),
         firstInstallmentDate: Yup.string().required("Required!"),
-        firstInstallment: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
-        courseFees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
-        regisrationFees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
+        firstInstallment: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        courseFees: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        regisrationFees: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
 
         postmatricScolarship: Yup.string().required("Required!"),
         gkbScolarship: Yup.string().required("Required!"),
         gkbOwner: Yup.string().required("Required!"),
         postmatricOwner: Yup.string().required("Required!"),
         remark: Yup.string().required("Required!"),
-        payableAmmount: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
+        payableAmmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
         // postmatricAmount: Yup.string().required("Required!"),
         // GKBAmount: Yup.string().required("Required!"),
 
         trackName: Yup.string().required("Required!"),
-        busFees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
+        busFees: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
 
     })
     // let len=formik.values.aadharNumber;
@@ -181,7 +242,7 @@ function AddNewStudentPage({AddNewStudent}) {
 
     const getCourseFees = async () => {
 
-        if(formik.values.joinBatch !== '' && formik.values.joinBatch.replace('X','').length === 4 && formik.values.streamName !== '') {
+        if (formik.values.joinBatch !== '' && formik.values.joinBatch.replace('X', '').length === 4 && formik.values.streamName !== '') {
             console.log("api calling");
 
             var data = '';
@@ -198,25 +259,25 @@ function AddNewStudentPage({AddNewStudent}) {
 
 
                 const StudentCourseFees = await axios(config)
-                if(StudentCourseFees.status === 200) {
-                    formik.setFieldValue('courseFees',StudentCourseFees.data[0].total_fees);
+                if (StudentCourseFees.status === 200) {
+                    formik.setFieldValue('courseFees', StudentCourseFees.data[0].total_fees);
 
                 } else {
-                    formik.setFieldValue('courseFees','');
+                    formik.setFieldValue('courseFees', '');
 
                 }
 
                 console.log(StudentCourseFees);
-            } catch(error) {
+            } catch (error) {
                 console.log(error);
-                formik.setFieldValue('courseFees','');
+                formik.setFieldValue('courseFees', '');
 
             }
 
         }
     }
 
-    const [expanded,setExpanded] = React.useState({
+    const [expanded, setExpanded] = React.useState({
         panel1: true,
         panel2: true,
         panel3: true,
@@ -224,7 +285,7 @@ function AddNewStudentPage({AddNewStudent}) {
     });
 
     const handleChange = (id) => () => {
-        console.log(expanded)
+        // console.log(expanded)
         setExpanded((pre) => {
             return {
                 ...pre,
@@ -240,18 +301,18 @@ function AddNewStudentPage({AddNewStudent}) {
             <div className='addnewstudent mx-auto px-3'>
                 <form onSubmit={formik.handleSubmit}>
                     {/* Personal Details */}
-                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel1 === true}  onChange={handleChange('panel1')}>
+                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel1 === true} onChange={handleChange('panel1')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             style={{
-                                backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"
+                                backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px"
                             }}
                         >
-                            <Typography style={{color: "#414c97",margin: "0px"}}><b> Personal Details</b></Typography>
+                            <Typography style={{ color: "#414c97", margin: "0px" }}><b> Personal Details</b></Typography>
                         </AccordionSummary>
-                        <AccordionDetails style={{backgroundColor: '#F4F7FC',padding: '15px'}}>
+                        <AccordionDetails style={{ backgroundColor: '#F4F7FC', padding: '15px' }}>
                             <Typography component={'div'} className='add_student_dropdown_menu' >
                                 {/* Personal Details */}
 
@@ -457,7 +518,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                         /> */}
                                         <Select
                                             options={villageNames}
-                                            onChange={({value}) => {formik.setFieldValue('village',value)}}
+                                            onChange={({ value }) => { formik.setFieldValue('village', value) }}
                                             onBlur={formik.handleBlur}
                                             // value={formik.values.village}
                                             name="village"
@@ -602,16 +663,16 @@ function AddNewStudentPage({AddNewStudent}) {
                     {/* Personal Details */}
 
                     {/* Acadmic Details */}
-                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel2 === true} onChange={handleChange('panel2')} >
+                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel2 === true} onChange={handleChange('panel2')} >
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
+                            style={{ backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
                         >
-                            <Typography style={{color: "#414c97"}}><b>Acadmic Details </b></Typography>
+                            <Typography style={{ color: "#414c97" }}><b>Acadmic Details </b></Typography>
                         </AccordionSummary>
-                        <AccordionDetails style={{backgroundColor: '#F4F7FC',padding: '15px'}}>
+                        <AccordionDetails style={{ backgroundColor: '#F4F7FC', padding: '15px' }}>
                             <Typography component={'div'}>
 
                                 <div className='row m-1'>
@@ -659,7 +720,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             onBlurCapture={getCourseFees}
                                             onChange={formik.handleChange} className={formik.touched.streamName ? `form-select ${formik.errors.streamName ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
                                             <option value=''>Select branch</option>
-                                            {branchNames.map((ele,i) => {
+                                            {branchNames.map((ele, i) => {
                                                 return (
                                                     <option key={i} value={ele.subjects}>{ele.subjects}</option>
                                                 )
@@ -726,7 +787,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             name="percent12"
                                             type="text"
                                             format="##%"
-                                            mask={['X','X','%']}
+                                            mask={['X', 'X', '%']}
                                             placeholder="XX%"
 
                                             className={formik.touched.percent12 ? `form-control ${formik.errors.percent12 ? "invalid" : ""}` : 'form-control'}
@@ -785,7 +846,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             type="text"
                                             className={formik.touched.percent10 ? `form-control ${formik.errors.percent10 ? "invalid" : ""}` : 'form-control'}
                                             format="##%"
-                                            mask={['X','X','%']}
+                                            mask={['X', 'X', '%']}
                                             placeholder="XX%"
 
                                         />
@@ -806,16 +867,16 @@ function AddNewStudentPage({AddNewStudent}) {
                     {/* Acadmic Details */}
 
                     {/* Fees Details */}
-                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel3 === true} onChange={handleChange('panel3')}>
+                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel3 === true} onChange={handleChange('panel3')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
+                            style={{ backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
                         >
-                            <Typography style={{color: "#414c97"}}><b>Fees Details </b></Typography>
+                            <Typography style={{ color: "#414c97" }}><b>Fees Details </b></Typography>
                         </AccordionSummary>
-                        <AccordionDetails style={{backgroundColor: '#F4F7FC',padding: '15px'}}>
+                        <AccordionDetails style={{ backgroundColor: '#F4F7FC', padding: '15px' }}>
                             <Typography component={'div'}>
                                 <div className='row m-1'>
                                     <div className="col">
@@ -860,7 +921,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                         <label className="addStdLable" htmlFor="">First Installment</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.firstInstallment = parseInt(formik.values.firstInstallment?.toString().replace(/,/g,'').replace('₹',''))}
+                                            value={formik.values.firstInstallment = parseInt(formik.values.firstInstallment?.toString().replace(/,/g, '').replace('₹', ''))}
                                             name="firstInstallment"
                                             className={formik.touched.firstInstallment ? `form-control ${formik.errors.firstInstallment ? "invalid" : ""}` : 'form-control'}
                                             placeholder="First Installment"
@@ -929,7 +990,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                         <label className="addStdLable" htmlFor="">Second Installment</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.feesScheme === "oneShot" ? formik.values.secondInstallment = 0 : formik.values.secondInstallment = parseInt(formik.values.secondInstallment?.toString().replace(/,/g,'').replace('₹',''))}
+                                            value={formik.values.feesScheme === "oneShot" ? formik.values.secondInstallment = 0 : formik.values.secondInstallment = parseInt(formik.values.secondInstallment?.toString().replace(/,/g, '').replace('₹', ''))}
                                             name="secondInstallment"
                                             className={formik.touched.secondInstallment ? `form-control ${formik.errors.secondInstallment ? "invalid" : ""}` : 'form-control'}
                                             placeholder="Second Installment"
@@ -1013,7 +1074,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                         <label className="addStdLable" htmlFor="">Third Installment</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.feesScheme === "oneShot" ? formik.values.thirdInstallment = 0 : formik.values.thirdInstallment = parseInt(formik.values.thirdInstallment?.toString().replace(/,/g,'').replace('₹',''))}
+                                            value={formik.values.feesScheme === "oneShot" ? formik.values.thirdInstallment = 0 : formik.values.thirdInstallment = parseInt(formik.values.thirdInstallment?.toString().replace(/,/g, '').replace('₹', ''))}
                                             name="thirdInstallment"
                                             className={formik.touched.thirdInstallment ? `form-control ${formik.errors.thirdInstallment ? "invalid" : ""}` : 'form-control'}
                                             placeholder="Third Installment"
@@ -1094,8 +1155,8 @@ function AddNewStudentPage({AddNewStudent}) {
                                                 <label className="addStdLable" htmlFor="">Total Payable Amount</label>  <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={formik.values.payableAmmount = parseInt(formik.values.firstInstallment?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.secondInstallment?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.thirdInstallment?.toString().replace(/,/g,'').replace('₹',''))
-                                                        + parseInt(formik.values.ScholarshipAmount?.toString().replace(/,/g,'').replace('₹',''))}
+                                                    value={formik.values.payableAmmount = parseInt(formik.values.firstInstallment?.toString().replace(/,/g, '').replace('₹', '')) + parseInt(formik.values.secondInstallment?.toString().replace(/,/g, '').replace('₹', '')) + parseInt(formik.values.thirdInstallment?.toString().replace(/,/g, '').replace('₹', ''))
+                                                        + parseInt(formik.values.ScholarshipAmount?.toString().replace(/,/g, '').replace('₹', ''))}
                                                     name="payableAmmount"
                                                     className={formik.touched.payableAmmount ? `form-control ${formik.errors.payableAmmount ? "invalid" : ""}` : 'form-control'}
                                                     placeholder="Payable Amount"
@@ -1119,7 +1180,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                                 <label className="addStdLable" htmlFor="">Postmatric Amount</label>  <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={formik.values.category === "Gen" ? formik.values.postmatricAmount = 0 : formik.values.postmatricOwner === "self" ? formik.values.postmatricAmount = 0 : formik.values.postmatricAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g,'').replace('₹',''))}
+                                                    value={formik.values.category === "Gen" ? formik.values.postmatricAmount = 0 : formik.values.postmatricOwner === "self" ? formik.values.postmatricAmount = 0 : formik.values.postmatricAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g, '').replace('₹', ''))}
                                                     name="postmatricAmount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
@@ -1139,7 +1200,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                                 <label className="addStdLable" htmlFor="">GKB Amount</label> <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={formik.values.gender === 'male' ? formik.values.GKBAmount = 0 : formik.values.gkbOwner === "self" ? formik.values.GKBAmount = 0 : formik.values.GKBAmount = parseInt(formik.values.GKBAmount?.toString().replace(/,/g,'').replace('₹',''))}
+                                                    value={formik.values.gender === 'male' ? formik.values.GKBAmount = 0 : formik.values.gkbOwner === "self" ? formik.values.GKBAmount = 0 : formik.values.GKBAmount = parseInt(formik.values.GKBAmount?.toString().replace(/,/g, '').replace('₹', ''))}
                                                     name="GKBAmount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
@@ -1160,7 +1221,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                                 <label className="addStdLable" htmlFor="">Scholarship Amount</label> <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={formik.values.ScholarshipAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.GKBAmount?.toString().replace(/,/g,'').replace('₹',''))}
+                                                    value={formik.values.ScholarshipAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g, '').replace('₹', '')) + parseInt(formik.values.GKBAmount?.toString().replace(/,/g, '').replace('₹', ''))}
                                                     name="ScholarshipAmount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
@@ -1206,16 +1267,16 @@ function AddNewStudentPage({AddNewStudent}) {
                     {/* Fees Details */}
 
                     {/* Bus Details */}
-                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel4 === true} onChange={handleChange('panel4')}>
+                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel4 === true} onChange={handleChange('panel4')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
+                            style={{ backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
                         >
-                            <Typography style={{color: "#414c97"}}><b>Bus Details</b></Typography>
+                            <Typography style={{ color: "#414c97" }}><b>Bus Details</b></Typography>
                         </AccordionSummary>
-                        <AccordionDetails style={{backgroundColor: '#F4F7FC',padding: '15px'}}>
+                        <AccordionDetails style={{ backgroundColor: '#F4F7FC', padding: '15px' }}>
                             <Typography component={'div'}>
                                 <div className='row m-1'>
                                     <div className="col-3">
@@ -1240,8 +1301,8 @@ function AddNewStudentPage({AddNewStudent}) {
                                         <label className="addStdLable" >Track Name</label>
                                         <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
                                             onBlur={formik.handleBlur} className={formik.touched.trackName ? `form-select ${formik.errors.trackName ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
-                                            <option value='0'>Select Track</option>
-                                            {trackNames.map((ele,i) => {
+                                            <option value={formik.values.trackName}>Select Track</option>
+                                            {trackNames.map((ele, i) => {
                                                 return (
                                                     <option key={i} value={ele.trackname}>{ele.trackname}</option>
                                                 )
@@ -1276,7 +1337,7 @@ function AddNewStudentPage({AddNewStudent}) {
 
                         <div className=' col-3 d-flex justify-content-end'>
 
-                            <button className="btn btn-sm btn-warning text-light fw-bold  " style={{width: "200px"}} type="submit">Submit</button>
+                            <button className="btn btn-sm btn-warning text-light fw-bold  " style={{ width: "200px" }} type="submit">Submit</button>
                         </div>
 
                     </div>
@@ -1302,7 +1363,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 //Connecting the component to our store
-export default connect(mapStateToProps,mapDispatchToProps)(AddNewStudentPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewStudentPage);
 
 // Busfee: 0
 // Firstinstallment: 8500

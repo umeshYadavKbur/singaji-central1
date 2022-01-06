@@ -55,7 +55,9 @@ function AdminDashboard() {
           <Routes>
             <Route path="" element={<Dashboard />} />
             <Route path="studenttable" element={<StudentTable />} />
+            {/* Nested routes  */}
             <Route path="studentaccounttable" element={<StudentAccountTable />} />
+            {/* Nested routes  */}
             <Route path="admintable" element={<AdminTable />} />
             <Route path="addnewstudent" element={<AddNewStudent />} />
             <Route path="feesstructuretable" element={<FeesStructureTable />} />

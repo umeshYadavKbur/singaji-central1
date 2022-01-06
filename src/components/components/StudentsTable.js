@@ -157,8 +157,6 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                     draggable: true,
                     progress: undefined,
 
-
-
                   });
                 }
               }

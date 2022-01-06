@@ -95,11 +95,6 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
     },
   });
 
-  // console.log("_____________________________________");
-  // console.log(formik.values.startYear);
-  // console.log(formik.values.endYear);
-  // console.log("_____________________________________");
-
   if (!original) {
     if (formik.values.startYear > formik.values.endYear) {
       formik.errors.endYear = "End year always greater then start year"

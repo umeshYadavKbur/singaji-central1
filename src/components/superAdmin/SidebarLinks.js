@@ -24,7 +24,6 @@ const SidebarLinks = ({ Toggle }) => {
     const dLink1 = (name, url, icon, id, parentId) => {
         return (
             <NavLink
-
                 to={url}
                 id={id}
                 className={`sidebar_options_link ${active_dropdown === id ? "sidebar_options_active" : ""}`}
@@ -53,7 +52,7 @@ const SidebarLinks = ({ Toggle }) => {
                             // document.getElementById('dashboard-collapse-btn').classList.add('active_tab');
                         }}
                         href="#!"
-                        style={{borderBottomRightRadius:`${active_menu.dashboard === true ? '0px' : ''}`}}
+                        style={{ borderBottomRightRadius: `${active_menu.dashboard === true ? '0px' : ''}` }}
                         className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'dashboard-collapse-btn' ? 'active_tab' : ''} ${active_menu.dashboard === true ? 'active_tab' : ''} `}
                         role="button"
                         id="dashboard-collapse-btn"
@@ -79,8 +78,6 @@ const SidebarLinks = ({ Toggle }) => {
                                 {dLink1("Fees Stucture", "feesstructuretable", "ok", 'Fees_Stucture', 'dashboard-collapse-btn')}
                                 {dLink1("My Admin", "admintable", "ok", 'My_Admin', 'dashboard-collapse-btn')}
 
-
-
                             </li>
                         </ul>
                     </div>
@@ -94,7 +91,7 @@ const SidebarLinks = ({ Toggle }) => {
                     <a
                         onClick={() => { setActiveMenu((pre) => { return { ...pre, education: !active_menu.education } }) }}
                         href="#!"
-                        style={{borderBottomRightRadius:`${active_menu.education === true ? '0px' : ''}`}}
+                        style={{ borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }}
                         className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'education-collapse-btn' ? 'active_tab' : ''} ${active_menu.education === true ? 'active_tab' : ''} `}
                         role="button"
                         // data-toggle="collapse"
@@ -116,7 +113,7 @@ const SidebarLinks = ({ Toggle }) => {
                         <ul className="btn-toggle-nav list-unstyled ">
                             <li className="dropdown_items_div ml-1">
                                 {dLink1("Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
-                                {dLink1("Students", "", "ok", "Students","education-collapse-btn")}
+                                {dLink1("Students", "", "ok", "Students", "education-collapse-btn")}
                                 {dLink1("Add students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}
                             </li>
                         </ul>
