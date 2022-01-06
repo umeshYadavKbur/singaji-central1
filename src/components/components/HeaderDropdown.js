@@ -30,8 +30,8 @@ const AppHeaderDropdown = ({ userData, logout }) => {
         <CAvatar src={avatar8} size="lg" />
       </CDropdownToggle>
 
-      <CDropdownMenu component={'div'}  className="pt-0 " placement="bottom-end"  >
-        <div style={{ flexDirection: 'column', height: '369px', width: '294px', alignItems: 'center', paddingTop: '49px',  display: 'flex', flex: 'basis' }}>
+      <CDropdownMenu component={'div'} className="pt-0 " placement="bottom-end"  >
+        <div style={{ flexDirection: 'column', height: '369px', width: '294px', alignItems: 'center', paddingTop: '49px', display: 'flex', flex: 'basis' }}>
           <CAvatar
             src={avatar8}
             style={{
@@ -57,7 +57,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
           <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />
           <div style={{ cursor: 'pointer' }}>
             <img style={{ height: '18px', width: '18px', marginLeft: '-50px' }} src={Settings} alt="Settings" />
-            <span style={{ color: 'white', fontWeight: '4px',marginLeft:'8px'}}>
+            <span style={{ color: 'white', fontWeight: '4px', marginLeft: '8px' }}>
               Settings
             </span>
           </div>

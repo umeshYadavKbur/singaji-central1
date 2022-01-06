@@ -39,6 +39,7 @@ const AllUrl = {
     updatePersonalInformation: `${baseUrl}/api/update_personal_info`,// update the personal information of a particular student 
     updateAccountInformation: `${baseUrl}/api/update_account_info`,// update the Account information of a particular student 
     allInfoOfActiveStudent: `${baseUrl}/api/all_info_of_active_student`,// get the all data about student related
+    pendingFeesReport: `${baseUrl}/api/get_scholarship_pending_list`,// pending fees report
     //_____________________________________
 
     //landing pages urls 

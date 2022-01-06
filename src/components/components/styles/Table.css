@@ -3,6 +3,10 @@
   border-spacing: 0 15px;
 }
 
+.download_data {
+  background-color: "red";
+}
+
 #customers th {
   padding-top: 12px;
   width: auto;
@@ -134,10 +138,6 @@
   }
 }
 
-
-
-
-
 /* ------------------------------------------------------------------------------- */
 .fees-structure-active-button {
   border: 1px solid #797979a8 !important;
@@ -152,7 +152,6 @@
 }
 
 .table_select_row_options {
-
   margin-left: 12px;
   height: 41px;
   width: 159px;
@@ -162,25 +161,19 @@
   /* padding: 5px; */
   text-align: center;
   font-weight: normal;
-
-
 }
 
 .table_select_row_options:hover {
-
   cursor: pointer;
 }
 
 .table_select_row_options:focus {
-
   color: #212529;
   background-color: #fff;
   /* border-color: ; */
   outline: 0;
   box-shadow: none !important;
   border: none !important;
-
-
 }
 
 /* .myinput[type="checkbox"]:hover {
@@ -188,7 +181,6 @@
 } */
 
 /* ----------------------------------------------------------------------------------------------/ */
-
 
 /* input[type=checkbox]:before {
   content: "\2714";

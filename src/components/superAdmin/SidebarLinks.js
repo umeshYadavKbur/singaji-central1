@@ -11,7 +11,7 @@ import Others_svg from "../assests/image/sidebarIcons/Others.svg";
 const SidebarLinks = ({ Toggle }) => {
     const [active_dropdown, setActiveDropdown] = useState('Dashboard');
     const [active_tab, setActiveTab] = useState('dashboard-collapse-btn');
-    const [active_menu, setActiveMenu] = useState({ dashboard: false, education: false,account:false });
+    const [active_menu, setActiveMenu] = useState({ dashboard: false, education: false, account: false });
 
     const changeTab = (id) => {
 
@@ -121,8 +121,8 @@ const SidebarLinks = ({ Toggle }) => {
                 </ul>
             </div>
 
-              {/* ---- third dropdown---- */}
-              <div className="flex-shrink-0">
+            {/* ---- third dropdown---- */}
+            <div className="flex-shrink-0">
                 <ul className="list-unstyled m-0">
                     <a
                         onClick={() => { setActiveMenu((pre) => { return { ...pre, account: !active_menu.account } }) }}
@@ -149,8 +149,8 @@ const SidebarLinks = ({ Toggle }) => {
                         <ul className="btn-toggle-nav list-unstyled ">
                             <li className="dropdown_items_div ml-1">
                                 {dLink1("Student Account", "studentaccounttable", "ok", "Student_Account", 'account-collapse-btn')}
-                                {/* {dLink1("Students", "", "ok", "Students", "account-collapse-btn")}
-                                {dLink1("Add students", "addnewstudent", "ok", "Add_students", 'account-collapse-btn')} */}
+                                {dLink1("Pending scholarship", "pendingscholarship", "ok", "Students", "account-collapse-btn")}
+                                {/* {dLink1("Add students", "addnewstudent", "ok", "Add_students", 'account-collapse-btn')}  */}
                             </li>
                         </ul>
                     </div>
