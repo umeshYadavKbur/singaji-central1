@@ -7,18 +7,60 @@
     width: 100%;
   }
   .Stu-Acc-info{
-    width: 100%;
+    width: 98%;
     /* background-color: khaki; */
-    height: 75px;
+    /* height: 75px; */
     display: flex;
     justify-content: space-around;
+    /* justify-content: center; */
+    /* justify-content: space-between; */
+    
     align-content: center;
+    flex-wrap: nowrap;
+
     text-align: center;
     
   }
+  .info-col p{
+    font-weight: bold;
+    font-size: 17px;
+  }
+  .select-acc-student{
+      border: none !important;
+      outline: none;
+      height: 41px;
+      width: 144px !important;
+      background-color: #fff;
+      text-align: center;
+    -webkit-appearance: none;
+      /* padding: 10px;
+      -webkit-appearance: none; */
+  }
+  .select-acc-student:focus{
+
+    outline: none;
+    outline: 0;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  /* .select-acc-student select{
+ 
+  } */
+  .dropdown-arrow{
+    background: url("../../assests/image/AccountIcons/dropdownarrow.svg") no-repeat right;
+
+  }
+  .info-div{
+    width: 100px;
+    height: 50px;
+  }
+  /* .info-div{
+    margin: 20px;
+  } */
   .info-col{
     /* background-color: lavender; */
     /* border: 1px solid black; */
+    height: 50px;
     
     
   }
@@ -39,3 +81,44 @@
     background-color: #04AA6D;
     color: white;
   } */
+
+  /* -------------------------------------------- */
+  /* .stu-acc-table{
+    /* color: blanchedalmond; */
+
+  /* }  */ 
+  .rs-picker-default .rs-picker-toggle.rs-btn{
+    border: 2px solid #FFC107 !important;
+    border-top-right-radius: 0;
+    border-right: 2px solid #F99300 !important;
+    margin-bottom: 3px;
+    height: 41px;
+    border-bottom-right-radius: 0;
+  }
+  .rs-picker-default .rs-picker-toggle.rs-btn:hover{
+    border: 2px solid #d68c468e !important;
+  }
+  .rs-picker-has-value .rs-btn .rs-picker-toggle-value, .rs-picker-has-value .rs-picker-toggle .rs-picker-toggle-value {
+    /* color: #1675e0; */
+    color: #00000086 !important;
+    /* font-weight: bold; */
+}
+  .date-range-button{
+    height: 41px;
+    
+    width: 116px;
+    margin-top: 1px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+padding-bottom: 3px;
+color: whitesmoke;
+    background-color: #F99300;
+  }
+  .rs-picker-toggle .rs-picker-toggle-placeholder{
+      /* margin: auto !important; */
+      /* color: blue !important; */
+      /* text-align: center;
+      
+      justify-self: center; */
+      margin-left: 50%;
+  }
