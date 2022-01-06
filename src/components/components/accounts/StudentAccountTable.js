@@ -45,15 +45,15 @@ const StudentAccount = () => {
 
         if (isStudentAdmin()) {
             console.log("Navigated ");
-            navigate('/student_admin_dashboard/addnewstudent');
+            navigate('/student_admin_dashboard/studentprofile');
         }
         else if (isAccountAdmin()) {
             console.log("Navigated ");
-            navigate('/account_admin_dashboard/addnewstudent');
+            navigate('/account_admin_dashboard/studentprofile');
         }
         else if (isSuperAdmin()) {
             console.log("Navigated ");
-            navigate('/admin_dashboard/addnewstudent');
+            navigate('/admin_dashboard/studentprofile');
         }
     }
 
