@@ -12,7 +12,75 @@ import { DateRangePicker } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
 
 const StudentAccount = () => {
-    const [columns] = useState([
+  
+    const [is_dailyReport,setis_DailyReport] = useState(false);
+
+
+    
+const mainColoumns = [
+    {
+        Header: 'S.no',
+        accessor: "Srno",
+        Cell: ({ row: { original, index } }) => {
+            return (index + 1)
+        }
+    },
+    {
+       
+        Header: "Photo",
+        accessor: "photo",
+
+        Cell: ({ row: { original, index } }) => (
+            <div className="d-flex m-0 flex-column justify-content-start">
+                <img
+                    alt="kpkp"
+                    style={{ cursor: "pointer" }} onClick={() => { toast(`${original.stdId} is ${original.name}`) }}
+                    className="mx-auto"
+                    src={original.photo}
+                    width={50}
+                    textColor="#fff"
+                    text="Image"
+                />
+                {/* <p className="mx-auto"> {original.name}</p> */}
+            </div>
+        ),
+    },
+    
+    {
+        Header: 'Name',
+        accessor: 'name'
+    },
+    {
+        Header: 'Father name',
+        accessor: 'fathersName'
+    },
+    {
+        Header: 'Mobile No.',
+        accessor: 'mobile'
+    },
+    {
+        Header: 'Stream',
+        accessor: 'stream'
+    },
+    {
+        Header: 'Village',
+        accessor: 'village'
+    },
+    {
+        Header: 'Received Fee',
+        accessor: 'received_Amount'
+    },
+    {
+        Header: 'Pending Fee',
+        accessor: 'remain_Amount'
+    },
+    {
+        Header: 'Action',
+        accessor: ''
+    }
+]
+
+    const dailyReportColumn = [
         {
             Header: 'S.no',
             accessor: "Srno",
@@ -20,25 +88,27 @@ const StudentAccount = () => {
                 return (index + 1)
             }
         },
-         {
+        {
+           
             Header: "Photo",
             accessor: "photo",
-      
+
             Cell: ({ row: { original, index } }) => (
-              <div className="d-flex m-0 flex-column justify-content-start">
-                <img
-                  alt="kpkp"
-                  style={{cursor: "pointer"}} onClick={()=>{toast(`${original.stdId} is ${original.name}`)}}
-                  className="mx-auto"
-                  src={original.photo}
-                  width={50}
-                  textColor="#fff"
-                  text="Image"
-                />
-                {/* <p className="mx-auto"> {original.name}</p> */}
-              </div>
+                <div className="d-flex m-0 flex-column justify-content-start">
+                    <img
+                        alt="kpkp"
+                        style={{ cursor: "pointer" }} onClick={() => { toast(`${original.stdId} is ${original.name}`) }}
+                        className="mx-auto"
+                        src={original.photo}
+                        width={50}
+                        textColor="#fff"
+                        text="Image"
+                    />
+                    {/* <p className="mx-auto"> {original.name}</p> */}
+                </div>
             ),
-          },
+        },
+        
         {
             Header: 'Name',
             accessor: 'name'
@@ -46,33 +116,19 @@ const StudentAccount = () => {
         {
             Header: 'Father name',
             accessor: 'fathersName'
-        },
-        {
-            Header: 'Mobile No.',
-            accessor: 'mobile'
-        },
-        {
-            Header: 'Stream',
-            accessor: 'stream'
-        },
-        {
-            Header: 'Village',
-            accessor: 'village'
-        },
-        {
-            Header: 'Received Fee',
-            accessor: 'received_Amount'
-        },
-        {
-            Header: 'Pending Fee',
-            accessor: 'remain_Amount'
-        },
-        {
-            Header: 'Action',
-            accessor: ''
         }
-    ])
+    ]
 
+    const [columns,setColoumns] = useState(mainColoumns)
+
+    const showDailyReport = ()=>{
+
+      setColoumns(dailyReportColumn)
+
+
+
+
+    }
     // -----------------------------------------------------------------------------------------------
 
     // const columns = useMemo(() => COLUMNS, [])
@@ -93,7 +149,7 @@ const StudentAccount = () => {
         previousPage,
         canPreviousPage,
         canNextPage,
-        setPageSize, 
+        setPageSize,
         pageOptions,
         prepareRow,
         state,
@@ -104,28 +160,28 @@ const StudentAccount = () => {
     return (
         <>
             <div className="container-fluid">
-                <div className="row Stu-Acc-info" style={{color:"rgb(90, 96, 127)" , margin: "Auto", height: "70px" ,backgroundColor: "#fff"}} >
-                    <div className="col info-col"style={{ borderRight: "2px solid rgb(90, 96, 127)"}} >
+                <div className="row Stu-Acc-info" style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px", backgroundColor: "#fff" }} >
+                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }} >
                         <h5>1900 <br /> <p >Total Students</p> </h5>
                     </div>
-                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)"}}>
+                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }}>
                         <h5>2000000 <br /> <p>Total Amount</p> </h5>
                     </div>
-                    <div className="col info-col"style={{ borderRight: "2px solid rgb(90, 96, 127)"}}>
+                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }}>
                         <h5>208000 <br /> <p >Total Paid Amount</p> </h5>
                     </div>
-                    <div className="col info-col"style={{ borderRight: "2px solid rgb(90, 96, 127)"}}>
+                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }}>
                         <h5>10000 <br /> <p >Remaining Amount</p> </h5>
                     </div>
                     <div className="col info-col">
                         <h5>1000 <br /> <p >Waive Off</p> </h5>
                     </div>
                 </div>
-                <div className="row  mx-0 mt-3" style={{ width: "98%"}}>
-                    <div className="col">
-                        <select className='select-acc-student' value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                <div className="row  mx-0 mt-3" style={{ width: "98%" }}>
+                    <div className="col d-flex">
+                        <select className='form-select select-acc-student' value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                             {
-                                [10,25 ,50].map(pageSize => (
+                                [10, 25, 50].map(pageSize => (
                                     <option value={pageSize} key={pageSize} >
                                         Show {pageSize}
                                     </option>
@@ -134,12 +190,17 @@ const StudentAccount = () => {
                                 )
                             }
                         </select>
+                        <div className="col">
+                            <DateRangePicker onExit={()=>{setColoumns(mainColoumns)}} onChange={(val)=>{console.log(val)}} appearance="default"  className='stu-acc-table' placeholder="to" style={{ width: 230 }} />
+                            <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
+                        </div>
                     </div>
-                  <div className="col">
-                    <DateRangePicker/>
-                  </div>
-                    <div className="col" style={{ marginRight: "16px" }} >
-                        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+
+                    <div className="col-6 d-flex justify-content-end " >
+                        <div style={{marginRight:'-9px'}}>
+
+                            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+                        </div>
                     </div>
                 </div>
 
