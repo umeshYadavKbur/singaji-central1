@@ -47,7 +47,8 @@
  
   } */
   .dropdown-arrow{
-    background: url("../../assests/image/AccountIcons/dropdownarrow.svg") no-repeat right;
+    background: url("../../../assests/image/AccountIcons/dropdownarrow.svg") no-repeat right;
+    /* background: url("../../assests/image/AccountIcons/dropdownarrow.svg") no-repeat right; */
 
   }
   .info-div{

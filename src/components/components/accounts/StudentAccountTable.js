@@ -90,17 +90,20 @@ const StudentAccount = () => {
             Cell: ({ row: { original, index } }) => (
                 <div className="d-flex m-0 flex-column justify-content-start">
                     <img
-                        alt="kpkp"
-                        style={{ cursor: "pointer" }} onClick={() => { toast(`${original.stdId} is ${original.name}`) }}
+                        alt="profile"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                            getAllInfoOfStudent(original)
+                        }}
                         className="mx-auto"
                         src={original.photo}
                         width={50}
                         textColor="#fff"
                         text="Image"
                     />
-                    {/* <p className="mx-auto"> {original.name}</p> */}
-                </div>
+                </div >
             ),
+            
         },
 
         {
