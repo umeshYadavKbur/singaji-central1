@@ -79,6 +79,8 @@ export default class Lightbox extends React.Component {
             case "prev":
                 current = this.state.current - 1;
                 break;
+            default:
+                break;
         }
         if (current >= this.props.images.length) current = 0;
         else if (current < 0) current = this.props.images.length - 1;
@@ -120,6 +122,8 @@ export default class Lightbox extends React.Component {
             case "reset":
                 this.resetZoom();
                 break;
+            default:
+                break;
         }
     }
     applyRotate = (type) => {
@@ -129,6 +133,8 @@ export default class Lightbox extends React.Component {
                 break;
             case "acw":
                 this.setState({ rotate: this.state.rotate - 90 });
+                break;
+            default:
                 break;
         }
     }
@@ -172,6 +178,8 @@ export default class Lightbox extends React.Component {
             case "Escape":
                 if (allowReset && this.shouldShowReset()) this.reset(e);
                 else this.exit(e);
+                break;
+            default:
                 break;
         }
     }
@@ -252,7 +260,7 @@ export default class Lightbox extends React.Component {
                                     console.log(JSON.stringify(response.data));
                                     // const imageBlog = await imageRes.blob()
                                     // const imageURL = URL.createObjectURL(imageBlog)
-        
+
                                     // const link = document.createElement('a')
                                     // link.href = imageURL;
                                     // link.download = `${title.toString()}`;
@@ -264,7 +272,7 @@ export default class Lightbox extends React.Component {
                                 .catch(function (error) {
                                     console.log(error);
                                 });
-                    
+
 
                         }}></div>
 
