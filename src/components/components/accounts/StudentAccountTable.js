@@ -152,7 +152,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
             Cell: ({ row: { original } }) => (
                 <div className='row d-flex d-inline-flex'>
                     <div className="col">
-                        <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(153, 248, 126)" }}></span>
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000" }}></span>
 
                     </div>
                     <div className="col">
@@ -169,7 +169,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
             Cell: ({ row: { original } }) => (
                 <div className='row d-flex d-inline-flex'>
                     <div className="col">
-                        <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(255, 214, 78)" }}></span>
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A" }}></span>
 
                     </div>
                     <div className="col">
@@ -353,7 +353,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                             }
                         </select>
                         <div className="col">
-                            <DateRangePicker onExit={() => { setColoumns(mainColoumns) }} onChange={(val) => { console.log(val) }} appearance="default" className='stu-acc-table' placeholder="to" style={{ width: 230 }} />
+                            <DateRangePicker onExit={() => { setColoumns(mainColoumns) }} onChange={(val) => { console.log(val) }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
                             <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
                         </div>
                     </div>
