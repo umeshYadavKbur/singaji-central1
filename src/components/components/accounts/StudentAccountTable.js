@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import StuAccmockdata from './StuAccmockData.json';
-import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table';
+import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
 import { useMemo } from 'react';
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { DateRangePicker } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
+import { TableCheckbox } from '../tableComponents/TableCheckbox';
 
 
 
@@ -103,7 +104,7 @@ const StudentAccount = () => {
                     />
                 </div >
             ),
-            
+
         },
 
         {
@@ -204,7 +205,25 @@ const StudentAccount = () => {
     },
         useGlobalFilter,
         useSortBy,
-        usePagination
+        usePagination,
+        useRowSelect,
+        (hooks) => {
+            hooks.visibleColumns.push((columns) => {
+                return [
+                    {
+                      id: "selection",
+                      Header: ({ getToggleAllRowsSelectedProps }) => (
+                        < TableCheckbox {...getToggleAllRowsSelectedProps()} />
+                      ),
+                      Cell: ({ row }) => (
+                        <TableCheckbox {...row.getToggleRowSelectedProps()} />
+                      ),
+                    },
+                    ...columns,
+                  ];
+            });
+        }
+
     )
 
     const { getTableProps, getTableBodyProps, headerGroups,
@@ -215,12 +234,21 @@ const StudentAccount = () => {
         canNextPage,
         setPageSize,
         pageOptions,
+        selectedFlatRows,
         prepareRow,
         state,
         setGlobalFilter } = tableInstance
 
     const { globalFilter, pageSize } = state;
     const { pageIndex } = state;
+    const checkboxData = JSON.stringify(
+        {
+            selectedFlatRows: selectedFlatRows.map((row) => row.original)
+        },
+        null,
+        2
+    );
+    console.log(checkboxData)
     return (
         <>
             {loading && (
@@ -246,19 +274,19 @@ const StudentAccount = () => {
             <div className="container-fluid">
                 <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
                     <div className=" info-col"  >
-                        <h5 style={{marginTop : "12px"}}>1900 <br /> <p >Total Students</p> </h5>
+                        <h5 style={{ marginTop: "12px" }}>1900 <br /> <p >Total Students</p> </h5>
                     </div>
                     <div className=" info-col" >
-                        <h5 style={{marginTop : "12px"}}>2000000 <br /> <p>Total Amount</p> </h5>
+                        <h5 style={{ marginTop: "12px" }}>2000000 <br /> <p>Total Amount</p> </h5>
                     </div>
                     <div className=" info-col" >
-                        <h5 style={{marginTop : "12px"}}>208000 <br /> <p >Total Paid Amount</p> </h5>
+                        <h5 style={{ marginTop: "12px" }}>208000 <br /> <p >Total Paid Amount</p> </h5>
                     </div>
                     <div className=" info-col" >
-                        <h5 style={{marginTop : "12px"}}>10000 <br /> <p >Remaining Amount</p> </h5>
+                        <h5 style={{ marginTop: "12px" }}>10000 <br /> <p >Remaining Amount</p> </h5>
                     </div>
                     <div className=" info-col">
-                        <h5 style={{marginTop : "12px"}}>1000 <br /> <p >Waive Off</p> </h5>
+                        <h5 style={{ marginTop: "12px" }}>1000 <br /> <p >Waive Off</p> </h5>
                     </div>
                 </div>
                 <div className="row  mx-0 mt-3" style={{ width: "98%" }}>
@@ -300,8 +328,8 @@ const StudentAccount = () => {
                                         {column.render("Header")}
                                         <span>
                                             {/* {column.isSorted ? (column.isSortedDesc ? <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> : <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />) : ''} */}
-                                            {column.isSorted ? (column.isSortedDesc ? '' : '') : ''}
-                                            <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                                            {/* {column.isSorted ? (column.isSortedDesc ? '' : '') : ''} */}
+                                            {/* <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> */}
                                         </span>
                                     </th>
                                 ))}
