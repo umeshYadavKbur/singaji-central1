@@ -332,11 +332,11 @@ label #sidebar_btn:hover {
   display: flex;
   margin-left: 17px;
   margin-right: 17px;
-  margin-top: 3px;
-  margin-bottom: 3px;
+  margin-top: 7px;
+  margin-bottom: 7px;
   align-items: center;
-  height: 30px;
-  border-radius: 6px;
+  height: 38px;
+  border-radius: 2px;
   background-color: transparent !important;
   padding: 0 !important;
   text-decoration: none;
@@ -363,12 +363,12 @@ label #sidebar_btn:hover {
   text-decoration: none;
   transition: 0.5s;
   transition-property: all;
-  border-radius: 6px;
-
+  
 } */
 
 .sidebar_options_link:hover {
   color: black;
+  border-radius: 2px !important;
   background: #d5daef !important;
   text-decoration: none;
   cursor: pointer !important;
