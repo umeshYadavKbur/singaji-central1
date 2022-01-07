@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import StuAccmockdata from './StuAccmockData.json';
 import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
-import { useMemo } from 'react';
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
@@ -11,7 +9,6 @@ import { isStudentAdmin } from '../../../helpers/StudentAdmin';
 import allUrls from '../../../redux/constants/url'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { DateRangePicker } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
 import { TableCheckbox } from '../tableComponents/TableCheckbox';
@@ -20,7 +17,7 @@ import { connect } from 'react-redux';
 import { fetchStudentAccountData } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
 import SkeletonColor from '../../../helpers/Skeletrone';
 
-
+// import { TablePagination } from 'react-pagination-table';
 
 
 const StudentAccount = ({ fetchUsers, studentData }) => {
@@ -280,6 +277,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
         canNextPage,
         setPageSize,
         pageOptions,
+        pageCount,
         selectedFlatRows,
         prepareRow,
         state,
@@ -379,7 +377,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                                         <span>
                                             {/* {column.isSorted ? (column.isSortedDesc ? <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> : <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />) : ''} */}
                                             {/* {column.isSorted ? (column.isSortedDesc ? '' : '') : ''} */}
-                                            {/* <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> */}
+                                            <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
                                         </span>
                                     </th>
                                 ))}
@@ -410,11 +408,11 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                 </table>
                 <div>
                     <span>
-                        Page{' '}
-                        <strong>
-                            {pageIndex + 1} of {pageOptions.length}
-                        </strong>{' '}
+                    Showing {page.length * (pageIndex + 1) - (page.length - 1)} to{" "}
+                    {page.length * (pageIndex + 1)} of {pageCount * pageSize} Entries{" "}
+                    {"  "}
                     </span>
+                   
                     <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
                     <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
                 </div>
