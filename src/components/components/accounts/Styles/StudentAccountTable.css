@@ -137,3 +137,17 @@ color: whitesmoke;
     /* display: none; */
     background: url("/src/components/assests/image/AccountIcons/calender_icon") !important;
   }
+  /* ------------------------------------------ table columns csss ---------------------------------- */
+  .recieved-fee-circle{
+    /* max-height: 5px;
+    max-width: 5px; */
+    /* padding: 5px;
+    border-radius: 50%;
+    color: green;
+    background-color: green; */
+    height: 16px;
+  width: 16px;
+  /* background-color: rgb(255, 214, 78); */
+  border-radius: 50%;
+  display: inline-block;
+  }

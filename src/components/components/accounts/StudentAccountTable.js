@@ -129,11 +129,37 @@ const StudentAccount = () => {
         },
         {
             Header: 'Received Fee',
-            accessor: 'received_Amount'
+            accessor: 'received_Amount',
+             Cell: ({ row: { original } }) => (
+                 <div className='row d-flex d-inline-flex'>
+                     <div className="col">
+                    <span className='recieved-fee-circle' style={{backgroundColor: "rgb(153, 248, 126)"}}></span>
+
+                     </div>
+                    <div className="col">
+                    <span className='' >
+                     {original.received_Amount}
+                         </span>
+                    </div>
+                 </div>
+              ),
         },
         {
             Header: 'Pending Fee',
-            accessor: 'remain_Amount'
+            accessor: 'remain_Amount',
+            Cell: ({ row: { original } }) => (
+                <div className='row d-flex d-inline-flex'>
+                    <div className="col">
+                   <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(255, 214, 78)"}}></span>
+
+                    </div>
+                   <div className="col">
+                   <span className='' >
+                    {original.remain_Amount}
+                        </span>
+                   </div>
+                </div>
+             ),
         },
         {
             Header: 'Action',
