@@ -15,11 +15,30 @@ import { toast } from 'react-toastify';
 import { DateRangePicker } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
 import { TableCheckbox } from '../tableComponents/TableCheckbox';
+import AllUrl from '../../../redux/constants/url';
+import { connect } from 'react-redux';
+import { fetchStudentAccountData } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
+import SkeletonColor from '../../../helpers/Skeletrone';
 
 
 
 
-const StudentAccount = () => {
+const StudentAccount = ({ fetchUsers, studentData }) => {
+
+    React.useEffect(() => {
+        var config = {
+            method: "GET",
+            url: AllUrl.accountStudent,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        };
+
+        fetchUsers(config);
+        // settable_data(table_data.table_data);
+        // eslint-disable-next-line
+    }, []);
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const token = localStorage.getItem("token");
@@ -130,19 +149,19 @@ const StudentAccount = () => {
         {
             Header: 'Received Fee',
             accessor: 'received_Amount',
-             Cell: ({ row: { original } }) => (
-                 <div className='row d-flex d-inline-flex'>
-                     <div className="col">
-                    <span className='recieved-fee-circle' style={{backgroundColor: "rgb(153, 248, 126)"}}></span>
-
-                     </div>
+            Cell: ({ row: { original } }) => (
+                <div className='row d-flex d-inline-flex'>
                     <div className="col">
-                    <span className='' >
-                     {original.received_Amount}
-                         </span>
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(153, 248, 126)" }}></span>
+
                     </div>
-                 </div>
-              ),
+                    <div className="col">
+                        <span className='' >
+                            {original.received_Amount}
+                        </span>
+                    </div>
+                </div>
+            ),
         },
         {
             Header: 'Pending Fee',
@@ -150,16 +169,16 @@ const StudentAccount = () => {
             Cell: ({ row: { original } }) => (
                 <div className='row d-flex d-inline-flex'>
                     <div className="col">
-                   <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(255, 214, 78)"}}></span>
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(255, 214, 78)" }}></span>
 
                     </div>
-                   <div className="col">
-                   <span className='' >
-                    {original.remain_Amount}
+                    <div className="col">
+                        <span className='' >
+                            {original.remain_Amount}
                         </span>
-                   </div>
+                    </div>
                 </div>
-             ),
+            ),
         },
         {
             Header: 'Action',
@@ -223,11 +242,12 @@ const StudentAccount = () => {
     }
     // -----------------------------------------------------------------------------------------------
     // const columns = useMemo(() => COLUMNS, [])
-    const data = useMemo(() => StuAccmockdata, [])
+    // const data = useMemo(() => StuAccmockdata, [])
+    // studentData
 
     const tableInstance = useTable({
         columns,
-        data
+        data: studentData.table_data
     },
         useGlobalFilter,
         useSortBy,
@@ -237,16 +257,16 @@ const StudentAccount = () => {
             hooks.visibleColumns.push((columns) => {
                 return [
                     {
-                      id: "selection",
-                      Header: ({ getToggleAllRowsSelectedProps }) => (
-                        < TableCheckbox {...getToggleAllRowsSelectedProps()} />
-                      ),
-                      Cell: ({ row }) => (
-                        <TableCheckbox {...row.getToggleRowSelectedProps()} />
-                      ),
+                        id: "selection",
+                        Header: ({ getToggleAllRowsSelectedProps }) => (
+                            < TableCheckbox {...getToggleAllRowsSelectedProps()} />
+                        ),
+                        Cell: ({ row }) => (
+                            <TableCheckbox {...row.getToggleRowSelectedProps()} />
+                        ),
                     },
                     ...columns,
-                  ];
+                ];
             });
         }
 
@@ -275,7 +295,11 @@ const StudentAccount = () => {
         2
     );
     console.log(checkboxData)
-    return (
+    return studentData.loading ? (
+        <SkeletonColor></SkeletonColor>
+    ) : studentData.error ? (
+        <h2>{studentData.error}</h2>
+    ) : (
         <>
             {loading && (
                 <div
@@ -399,5 +423,20 @@ const StudentAccount = () => {
         </>
     )
 }
+//Getting the state from the store
+const mapStateToProps = (state) => {
+    return {
+        studentData: state.accountStudentTableData,
+    };
+};
 
-export default StudentAccount
+//passing the userData in fetchUsers function and also dispatch method
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchUsers: (data) => dispatch(fetchStudentAccountData(data)),
+    };
+};
+
+//Connecting the component to our store
+export default connect(mapStateToProps, mapDispatchToProps)(StudentAccount);
+

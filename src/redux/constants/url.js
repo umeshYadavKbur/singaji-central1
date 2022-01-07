@@ -58,6 +58,9 @@ const AllUrl = {
     uploadFile: `${baseUrl}/api/uploadFile`,
     //_____________________________________
 
+    accountStudent: `${baseUrl}/api/get_students_account_list`,
+
+
 }
 export default AllUrl
 

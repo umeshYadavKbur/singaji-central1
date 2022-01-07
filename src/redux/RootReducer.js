@@ -14,8 +14,7 @@ import adminTableReducer from "./reducers/superAdmin/adminTableReducer"
 import feesstructureTableReducer from "./reducers/superAdmin/feesStuctureTableReducer.js"
 import VerifyStudentReducer from "./reducers/superAdmin/studentVerifyTableReducer";
 import AdminStatusChangeReducer from "./reducers/superAdmin/adminStatusChangeReducer";
-
-
+import fetchStudentAccountData from "./reducers/superAdmin/StudentAccountTableReducer";
 //Combining the reducer's into a rootReducer
 const RootReducer = combineReducers({
     auth: userReducer,
@@ -31,6 +30,7 @@ const RootReducer = combineReducers({
     VerifyStudent: VerifyStudentReducer,
     AdminStatusChangeData: AdminStatusChangeReducer,
     addStudent: addNewStudentReducer,
+    accountStudentTableData: fetchStudentAccountData,
 });
 
 export default RootReducer;
