@@ -22,7 +22,10 @@ function FeesRecipt() {
         feesAmount:'',
         recieptdate:'',
         installmentNo:'1',
-        Remark:''
+        Remark:'',
+        LateFeeAmount:'',
+        BankName:'',
+
         
     }
 
@@ -33,16 +36,16 @@ function FeesRecipt() {
 
             var data = {
                 "stdId": "353c55ed-1e67-48a3-9ed2-fa1dfaecec73",
-                "year": "III",
-                "ReceivedAmount": 7500,
-                "LateFeeAmount": 500,
-                "waiveOf": 3000,
-                "InstallmentNo": 1,
-                "ReceivedType": "Cash",
-                "ChequeNo": "654654",
-                "ChequeDate": "2021-12-24",
-                "BankName": "BOI",
-                "Remark": "check by"
+                "year": formik.values.studentClassYear,
+                "ReceivedAmount": formik.values.feesAmount,
+                "LateFeeAmount": formik.values.LateFeeAmount,
+                "waiveOf": formik.values.waiveOff,
+                "InstallmentNo": formik.values.installmentNo,
+                "ReceivedType": formik.values.payBy,
+                "ChequeNo": formik.values.ChequeNo,
+                "ChequeDate": formik.values.chequeDate,
+                "BankName": formik.values.BankName,
+                "Remark": formik.values.Remark
             }
         }
     })
