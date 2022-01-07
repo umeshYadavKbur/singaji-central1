@@ -49,8 +49,8 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
         // set data or original table to localStorage we need it later
         localStorage.setItem('userEdit', JSON.stringify(original))
         let data = JSON.stringify({
-            "stdId": "353c55ed-1e67-48a3-9ed2-fa1dfaecec73" // trmporary true condition for chenking information
-            // "stdId": original.stdId,
+            // "stdId": "353c55ed-1e67-48a3-9ed2-fa1dfaecec73" // trmporary true condition for chenking information
+            "stdId": original.stdId,
         });
         console.log("_______");
         console.log(data);
