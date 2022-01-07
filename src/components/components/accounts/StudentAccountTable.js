@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import StuAccmockdata from './StuAccmockData.json';
-import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table';
+import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
 import { useMemo } from 'react';
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
@@ -14,11 +14,31 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { DateRangePicker } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
+import { TableCheckbox } from '../tableComponents/TableCheckbox';
+import AllUrl from '../../../redux/constants/url';
+import { connect } from 'react-redux';
+import { fetchStudentAccountData } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
+import SkeletonColor from '../../../helpers/Skeletrone';
 
 
 
 
-const StudentAccount = () => {
+const StudentAccount = ({ fetchUsers, studentData }) => {
+
+    React.useEffect(() => {
+        var config = {
+            method: "GET",
+            url: AllUrl.accountStudent,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        };
+
+        fetchUsers(config);
+        // settable_data(table_data.table_data);
+        // eslint-disable-next-line
+    }, []);
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const token = localStorage.getItem("token");
@@ -103,7 +123,7 @@ const StudentAccount = () => {
                     />
                 </div >
             ),
-            
+
         },
 
         {
@@ -128,11 +148,37 @@ const StudentAccount = () => {
         },
         {
             Header: 'Received Fee',
-            accessor: 'received_Amount'
+            accessor: 'received_Amount',
+            Cell: ({ row: { original } }) => (
+                <div className='row d-flex d-inline-flex'>
+                    <div className="col">
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(153, 248, 126)" }}></span>
+
+                    </div>
+                    <div className="col">
+                        <span className='' >
+                            {original.received_Amount}
+                        </span>
+                    </div>
+                </div>
+            ),
         },
         {
             Header: 'Pending Fee',
-            accessor: 'remain_Amount'
+            accessor: 'remain_Amount',
+            Cell: ({ row: { original } }) => (
+                <div className='row d-flex d-inline-flex'>
+                    <div className="col">
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(255, 214, 78)" }}></span>
+
+                    </div>
+                    <div className="col">
+                        <span className='' >
+                            {original.remain_Amount}
+                        </span>
+                    </div>
+                </div>
+            ),
         },
         {
             Header: 'Action',
@@ -196,15 +242,34 @@ const StudentAccount = () => {
     }
     // -----------------------------------------------------------------------------------------------
     // const columns = useMemo(() => COLUMNS, [])
-    const data = useMemo(() => StuAccmockdata, [])
+    // const data = useMemo(() => StuAccmockdata, [])
+    // studentData
 
     const tableInstance = useTable({
         columns,
-        data
+        data: studentData.table_data
     },
         useGlobalFilter,
         useSortBy,
-        usePagination
+        usePagination,
+        useRowSelect,
+        (hooks) => {
+            hooks.visibleColumns.push((columns) => {
+                return [
+                    {
+                        id: "selection",
+                        Header: ({ getToggleAllRowsSelectedProps }) => (
+                            < TableCheckbox {...getToggleAllRowsSelectedProps()} />
+                        ),
+                        Cell: ({ row }) => (
+                            <TableCheckbox {...row.getToggleRowSelectedProps()} />
+                        ),
+                    },
+                    ...columns,
+                ];
+            });
+        }
+
     )
 
     const { getTableProps, getTableBodyProps, headerGroups,
@@ -215,13 +280,26 @@ const StudentAccount = () => {
         canNextPage,
         setPageSize,
         pageOptions,
+        selectedFlatRows,
         prepareRow,
         state,
         setGlobalFilter } = tableInstance
 
     const { globalFilter, pageSize } = state;
     const { pageIndex } = state;
-    return (
+    const checkboxData = JSON.stringify(
+        {
+            selectedFlatRows: selectedFlatRows.map((row) => row.original)
+        },
+        null,
+        2
+    );
+    console.log(checkboxData)
+    return studentData.loading ? (
+        <SkeletonColor></SkeletonColor>
+    ) : studentData.error ? (
+        <h2>{studentData.error}</h2>
+    ) : (
         <>
             {loading && (
                 <div
@@ -244,21 +322,21 @@ const StudentAccount = () => {
                 </div>
             )}
             <div className="container-fluid">
-                <div className="row Stu-Acc-info" style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px", backgroundColor: "#fff" }} >
-                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }} >
-                        <h5>1900 <br /> <p >Total Students</p> </h5>
+                <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
+                    <div className=" info-col"  >
+                        <h5 style={{ marginTop: "12px" }}>1900 <br /> <p >Total Students</p> </h5>
                     </div>
-                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }}>
-                        <h5>2000000 <br /> <p>Total Amount</p> </h5>
+                    <div className=" info-col" >
+                        <h5 style={{ marginTop: "12px" }}>2000000 <br /> <p>Total Amount</p> </h5>
                     </div>
-                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }}>
-                        <h5>208000 <br /> <p >Total Paid Amount</p> </h5>
+                    <div className=" info-col" >
+                        <h5 style={{ marginTop: "12px" }}>208000 <br /> <p >Total Paid Amount</p> </h5>
                     </div>
-                    <div className="col info-col" style={{ borderRight: "2px solid rgb(90, 96, 127)" }}>
-                        <h5>10000 <br /> <p >Remaining Amount</p> </h5>
+                    <div className=" info-col" >
+                        <h5 style={{ marginTop: "12px" }}>10000 <br /> <p >Remaining Amount</p> </h5>
                     </div>
-                    <div className="col info-col">
-                        <h5>1000 <br /> <p >Waive Off</p> </h5>
+                    <div className=" info-col">
+                        <h5 style={{ marginTop: "12px" }}>1000 <br /> <p >Waive Off</p> </h5>
                     </div>
                 </div>
                 <div className="row  mx-0 mt-3" style={{ width: "98%" }}>
@@ -300,8 +378,8 @@ const StudentAccount = () => {
                                         {column.render("Header")}
                                         <span>
                                             {/* {column.isSorted ? (column.isSortedDesc ? <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> : <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />) : ''} */}
-                                            {column.isSorted ? (column.isSortedDesc ? '' : '') : ''}
-                                            <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                                            {/* {column.isSorted ? (column.isSortedDesc ? '' : '') : ''} */}
+                                            {/* <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> */}
                                         </span>
                                     </th>
                                 ))}
@@ -345,5 +423,20 @@ const StudentAccount = () => {
         </>
     )
 }
+//Getting the state from the store
+const mapStateToProps = (state) => {
+    return {
+        studentData: state.accountStudentTableData,
+    };
+};
 
-export default StudentAccount
+//passing the userData in fetchUsers function and also dispatch method
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchUsers: (data) => dispatch(fetchStudentAccountData(data)),
+    };
+};
+
+//Connecting the component to our store
+export default connect(mapStateToProps, mapDispatchToProps)(StudentAccount);
+

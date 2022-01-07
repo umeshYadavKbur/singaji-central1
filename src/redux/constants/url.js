@@ -42,6 +42,7 @@ const AllUrl = {
     pendingFeesReport: `${baseUrl}/api/get_scholarship_pending_list`,// pending fees report
     GetDocumentsOfStudents:`${baseUrl}/api/get_documents`, // get documents of particular student
     UploadDocument:`${baseUrl}/api/upload_document`, // get documents of particular student
+    accountStudent: `${baseUrl}/api/get_students_account_list`,
     //_____________________________________
 
     //landing pages urls 
