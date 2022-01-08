@@ -5,7 +5,9 @@ import { useTable, useFilters, useSortBy, useGlobalFilter, usePagination, useRow
 import updown_sort from '../../assests/image/updown_sort.svg'
 import { TableCheckbox } from '../tableComponents/TableCheckbox';
 import { GlobalFilter } from "../tableComponents/GlobalFilter";
-import tableData from './pending_fees.json'
+import tableData from './fees_receipt.json'
+
+// installment required 
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -72,7 +74,7 @@ function SelectColumnFilter({
     );
 }
 
-export default function PendingScholarshipTable() {
+export default function FeesReceiptTable() {
     const data = React.useMemo(
         () => tableData,
         []
@@ -82,12 +84,24 @@ export default function PendingScholarshipTable() {
         () => [
             {
                 header: "S No",
-                accessor: "Srno",
+                accessor: "S.N",
                 Cell: ({ row: { original, index } }) => {
                     return (index + 1)
                 },
                 Filter: "",
                 filter: "",
+            },
+            {
+                header: "Data",
+                accessor: "AccountsReceiptDate",
+                Filter: "",
+                filter: ""
+            },
+            {
+                header: "Receipt No",
+                accessor: "AccountsReceiptNo",
+                Filter: "",
+                filter: ""
             },
             {
                 header: "Name",
@@ -102,57 +116,38 @@ export default function PendingScholarshipTable() {
                 filter: ""
             },
             {
-                header: "Mobile no",
-                accessor: "mobile",
-                Filter: "",
-                filter: ""
-            },
-            {
                 header: "Stream",
-                accessor: "stream",
+                accessor: "branch",
                 Filter: SelectColumnFilter,
                 filter: MultipleFilter,
             },
             {
-                header: "Category",
-                accessor: "category",
+                header: "Installment",
+                accessor: "InstallmentNo",
                 Filter: SelectColumnFilter,
                 filter: MultipleFilter,
             },
             {
-                header: "Scheme",
-                accessor: "feesScheme",
-                Filter: SelectColumnFilter,
-                filter: MultipleFilter,
-            },
-            {
-                header: "Total fees",
-                accessor: "total_fees",
-                Filter: "",
-                filter: ""
-            },
-            {
-                header: "Total scholarship fees",
-                accessor: "total_scholarship",
-                Filter: "",
-                filter: ""
-            },
-            {
-                header: "Pending amount",
-                accessor: "pending_Amount",
+                header: "Received Fee",
+                accessor: "ReceivedAmount",
                 Cell: ({ row: { original } }) => (
                     <div className='row d-flex d-inline-flex'>
                         <div className="col">
-                            <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(255, 214, 78)" }}></span>
-
+                            <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(153, 248, 126)" }}></span>
                         </div>
                         <div className="col">
                             <span className='' >
-                                {original.pending_Amount}
+                                {original.ReceivedAmount}
                             </span>
                         </div>
                     </div>
                 ),
+                Filter: "",
+                filter: ""
+            },
+            {
+                header: "Waive Off",
+                accessor: "waiveOf",
                 Filter: "",
                 filter: ""
             },

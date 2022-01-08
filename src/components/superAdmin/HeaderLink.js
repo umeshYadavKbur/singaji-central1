@@ -23,7 +23,7 @@ const HeaderLink = () => {
             return "Applied Student";
         }
         else if (currentLocation === "/admin_dashboard/studentaccounttable") {
-            return "Total Student";
+            return "Student Account";
         }
         else if (currentLocation === "/admin_dashboard/admintable") {
             return "My Admin";
@@ -36,6 +36,12 @@ const HeaderLink = () => {
         }
         else if (currentLocation === "/admin_dashboard/feesstructuretable") {
             return "Fees Structure";
+        }
+        else if (currentLocation === "/admin_dashboard/pendingscholarship") {
+            return "Pending Scholarship";
+        }
+        else if (currentLocation === "/admin_dashboard/feesreceiptlist") {
+            return "Fees Receipt List";
         }
         else {
             return "Dashboard";

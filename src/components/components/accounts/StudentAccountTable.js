@@ -269,10 +269,12 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                 ];
             });
         }
-
     )
 
-    const { getTableProps, getTableBodyProps, headerGroups,
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
         page,
         nextPage,
         previousPage,
@@ -283,7 +285,8 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
         selectedFlatRows,
         prepareRow,
         state,
-        setGlobalFilter } = tableInstance
+        setGlobalFilter
+    } = tableInstance
 
     const { globalFilter, pageSize } = state;
     const { pageIndex } = state;
@@ -383,8 +386,6 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                                         </span>
                                     </th>
                                 ))}
-
-
                             </tr>
                         ))}
 
@@ -397,7 +398,11 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                                     <tr {...row.getRowProps()} >
                                         {
                                             row.cells.map(cell => {
-                                                return <td{...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                                return (
+                                                    <td{...cell.getCellProps()}>
+                                                        {cell.render('Cell')}
+                                                    </td>
+                                                )
                                             })
                                         }
 
@@ -419,7 +424,6 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                     <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
                 </div>
             </div>
-
         </>
     )
 }
