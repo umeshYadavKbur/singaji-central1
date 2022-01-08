@@ -256,17 +256,17 @@ export default class Lightbox extends React.Component {
                             };
 
                             axios(config)
-                                .then(function (response) {
+                                .then(async function (response) {
                                     console.log(JSON.stringify(response.data));
-                                    // const imageBlog = await imageRes.blob()
-                                    // const imageURL = URL.createObjectURL(imageBlog)
+                                    const imageBlog = await response.data.blob()
+                                    const imageURL = URL.createObjectURL(imageBlog)
 
-                                    // const link = document.createElement('a')
-                                    // link.href = imageURL;
-                                    // link.download = `${title.toString()}`;
-                                    // document.body.appendChild(link)
-                                    // link.click()
-                                    // document.body.removeChild(link)
+                                    const link = document.createElement('a')
+                                    link.href = imageURL;
+                                    link.download = `${title.toString()}`;
+                                    document.body.appendChild(link)
+                                    link.click()
+                                    document.body.removeChild(link)
 
                                 })
                                 .catch(function (error) {
