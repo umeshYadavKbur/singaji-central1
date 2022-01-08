@@ -101,7 +101,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
         },
         {
 
-            Header: "Photo",
+            Header: "Profile",
             accessor: "photo",
 
             Cell: ({ row: { original, index } }) => (
@@ -377,7 +377,20 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                                         <span>
                                             {/* {column.isSorted ? (column.isSortedDesc ? <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> : <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />) : ''} */}
                                             {/* {column.isSorted ? (column.isSortedDesc ? '' : '') : ''} */}
-                                            <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                                            {/* <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> */}
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
+                                                ) : (
+                                                    <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
+                                                    // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                                                )
+                                            ) : (
+
+                                                column.id !== 'Srno' && column.id !== 'selection' && column.id !== 'photo' && column.id !== 'mobile' && column.id !== 'action' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+
+
+                                            )}
                                         </span>
                                     </th>
                                 ))}
@@ -408,11 +421,11 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                 </table>
                 <div>
                     <span>
-                    Showing {page.length * (pageIndex + 1) - (page.length - 1)} to{" "}
-                    {page.length * (pageIndex + 1)} of {pageCount * pageSize} Entries{" "}
-                    {"  "}
+                        Showing {page.length * (pageIndex + 1) - (page.length - 1)} to{" "}
+                        {page.length * (pageIndex + 1)} of {pageCount * pageSize} Entries{" "}
+                        {"  "}
                     </span>
-                   
+
                     <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
                     <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
                 </div>
