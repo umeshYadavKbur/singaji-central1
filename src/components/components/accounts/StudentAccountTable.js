@@ -106,7 +106,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                         className="mx-auto"
                         src={original.photo}
                         width={50}
-                        textColor="#fff"
+                        // textColor="#fff"
                         text="Image"
                     />
                 </div >
@@ -197,7 +197,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                         className="mx-auto"
                         src={original.photo}
                         width={50}
-                        textColor="#fff"
+                        // textColor="#fff"
                         text="Image"
                     />
                     <p className="mx-auto"> {original.name}</p>
@@ -284,19 +284,19 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
     const checkboxData = JSON.stringify(
         {
             selectedFlatRows: selectedFlatRows.map((row) => {
-                exportData.push(
-                    row.original
-                )
-                for (let i = 0; i < exportData.length; i++) {
-                    const element = exportData[i];
-                    // console.log(element.photo);
-                    if (element.photo) {
-                        continue
-                    }
-                    exportCsv.push(element)
-                }
+                let data = Object.assign({}, row.original);
+                console.log(data);
+                delete data.photo
+                // console.log(data);
+
+                console.log(data);
+                exportData.push(data)
+                // console.log(selectedData);
+                exportCsv.push(data)
+
             }
             )
+            // console.log);
         },
         null,
         2
