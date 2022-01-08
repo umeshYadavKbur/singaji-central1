@@ -16,6 +16,7 @@ import AllUrl from '../../../redux/constants/url';
 import { connect } from 'react-redux';
 import { fetchStudentAccountData } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
 import SkeletonColor from '../../../helpers/Skeletrone';
+import { CSVDownload, CSVLink } from 'react-csv';
 
 // import { TablePagination } from 'react-pagination-table';
 
@@ -80,16 +81,6 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
             navigate('/admin_dashboard/studentprofile');
         }
     }
-
-
-
-
-
-
-
-
-
-
 
     const mainColoumns = [
         {
@@ -276,7 +267,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
         canPreviousPage,
         canNextPage,
         setPageSize,
-        pageOptions,
+
         pageCount,
         selectedFlatRows,
         prepareRow,
@@ -285,9 +276,24 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
 
     const { globalFilter, pageSize } = state;
     const { pageIndex } = state;
+    var exportData = [];
+    var exportCsv = [];
     const checkboxData = JSON.stringify(
         {
-            selectedFlatRows: selectedFlatRows.map((row) => row.original)
+            selectedFlatRows: selectedFlatRows.map((row) => {
+                exportData.push(
+                    row.original
+                )
+                for (let i = 0; i < exportData.length; i++) {
+                    const element = exportData[i];
+                    // console.log(element.photo);
+                    if (element.photo) {
+                        continue
+                    }
+                    exportCsv.push(element)
+                }
+            }
+            )
         },
         null,
         2
@@ -350,13 +356,17 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                                 )
                             }
                         </select>
+                        <div className="col-2">
+                            <CSVLink className='btn btn-primary' data={exportCsv}>Download</CSVLink>
+                        </div>
                         <div className="col">
                             <DateRangePicker onExit={() => { setColoumns(mainColoumns) }} onChange={(val) => { console.log(val) }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
                             <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
                         </div>
                     </div>
 
-                    <div className="col-6 d-flex justify-content-end " >
+
+                    <div className="col-4 d-flex justify-content-end " >
                         <div style={{ marginRight: '-9px' }}>
 
                             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
@@ -387,7 +397,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                                                 )
                                             ) : (
 
-                                                column.id !== 'Srno' && column.id !== 'selection' && column.id !== 'photo' && column.id !== 'mobile' && column.id !== 'action' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                                                column.id !== 'Srno' && column.id !== 'selection' && column.id !== 'photo' && column.id !== 'mobile' && column.id !== '' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
 
 
                                             )}
@@ -419,15 +429,19 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
 
                     </tbody>
                 </table>
-                <div>
-                    <span>
-                        Showing {page.length * (pageIndex + 1) - (page.length - 1)} to{" "}
-                        {page.length * (pageIndex + 1)} of {pageCount * pageSize} Entries{" "}
-                        {"  "}
-                    </span>
+                <div className='row pagination-div'>
+                    <div className="col">
+                        <span>
+                            Showing {page.length * (pageIndex + 1) - (page.length - 1)} to{" "}
+                            {page.length * (pageIndex + 1)} of {pageCount * pageSize} Entries{" "}
+                            {"  "}
+                        </span>
+                    </div>
+                    <div className="col d-flex justify-content-md-end" style={{ height: "15px", marginBottom: "10px" }}>
 
-                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-                    <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                        <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+                        <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                    </div>
                 </div>
             </div>
 

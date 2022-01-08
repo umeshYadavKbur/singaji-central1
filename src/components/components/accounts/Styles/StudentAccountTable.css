@@ -165,3 +165,11 @@ font-weight: bold;
   border-radius: 50%;
   display: inline-block;
   }
+
+  .pagination-div{
+    width: 98% !important;
+    margin-bottom: 16px !important;
+    height: 20px;
+    justify-content: center;
+
+  }
