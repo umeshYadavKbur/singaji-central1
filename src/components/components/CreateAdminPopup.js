@@ -176,7 +176,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     <option value='' className="form-select"   >
                       Role
                     </option>
-                    {roles.map((role) => {
+                    {roles.map((role, id) => {
                       var data2 = role.roleName.charAt(0).toUpperCase() + role.roleName.slice(1).toLowerCase();
                       data2 = data2.replace('admin', ' Admin');
                       return (<option value={role.roleId} className="form-select" style={{ color: '#5A607F' }}> {data2}</option>)

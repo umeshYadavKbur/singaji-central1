@@ -1,13 +1,14 @@
 import React from "react";
 import '../styles/Table.css'
+import '../styles/HeaderDropdown.css'
 import { Fragment, useMemo } from "react";
-import { useTable, useFilters, useSortBy, useGlobalFilter, usePagination, useRowSelect } from "react-table";
+import { useTable, useFilters, useSortBy, useGlobalFilter, usePagination, useRowSelect, useAsyncDebounce } from "react-table";
 import updown_sort from '../../assests/image/updown_sort.svg'
 import { TableCheckbox } from '../tableComponents/TableCheckbox';
-import { GlobalFilter } from "../tableComponents/GlobalFilter";
 import tableData from './fees_receipt.json'
+import filtericon from '../../assests/image/AccountIcons/filter.svg'
+import { CAvatar, CDropdown, CDropdownMenu, CDropdownToggle } from "@coreui/react";
 
-// installment required 
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -51,7 +52,6 @@ function SelectColumnFilter({
                                 {id}
                             </button>
                         </h2>
-
                     </div>
                 </div>
                 {/* eslint-disable-next-line */}
@@ -69,6 +69,7 @@ function SelectColumnFilter({
                                         setFilter(setFilteredParams(filterValue, e.target.value));
                                     }}
                                 ></input>
+
                                 <label
                                     htmlFor={option}
                                     className="ml-1.5 font-medium text-gray-700"
@@ -83,6 +84,33 @@ function SelectColumnFilter({
             </div>
         </Fragment>
     );
+}
+
+// Define a default UI for filtering
+function GlobalFilter({
+    filter, setFilter, preGlobalFilteredRows
+}) {
+    const count = preGlobalFilteredRows.length
+    const [value, setValue] = React.useState(filter)
+    const onChange = useAsyncDebounce(value => {
+        setFilter(value || undefined)
+    }, 200)
+
+    return (
+        <>
+            <input
+                style=
+                {{ width: "270px", height: "41px", outline: "none", border: "1px solid #7979792b", padding: "5px", borderRadius: "4px" }} type="search" value={filter || ''}
+                onChange={e => {
+                    setValue(e.target.value)
+                    onChange(e.target.value)
+                }}
+                placeholder={`Search ${count} records...`} />
+            <i style={{ marginLeft: "-31px", color: "rgb(90, 96, 127,0.7)" }}
+                className="fas fa-search" >
+            </i>
+        </>
+    )
 }
 
 export default function FeesReceiptTable() {
@@ -135,8 +163,8 @@ export default function FeesReceiptTable() {
             {
                 header: "Installment",
                 accessor: "InstallmentNo",
-                Filter: SelectColumnFilter,
-                filter: MultipleFilter,
+                Filter: "",
+                filter: ""
             },
             {
                 header: "Received Fee",
@@ -181,11 +209,12 @@ export default function FeesReceiptTable() {
         state,
         setGlobalFilter,
         rows,
+        preGlobalFilteredRows,
         prepareRow,
     } = useTable(
         { columns, data },
-        useFilters,
         useGlobalFilter,
+        useFilters,
         useSortBy,
         usePagination,
         useRowSelect,
@@ -221,7 +250,7 @@ export default function FeesReceiptTable() {
     return (
         <Fragment>
             <div className="container-fluid">
-                <div className="d-flex">
+                <div className="d-flex" style={{ maxHeight: '41px' }}>
                     <div className=''>
 
                         <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
@@ -231,13 +260,8 @@ export default function FeesReceiptTable() {
                                 ))
                             }
                         </select>
-                        
+
                     </div>
-                    {/* <div className='d-flex ml-auto me-1'>
-                        <div className='ml-auto me-4'>
-                            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
-                        </div>
-                    </div> */}
                     {/* Filter section start  */}
                     {headerGroups.map((headerGroup) => (
                         <div style={{ display: "flex" }} {...headerGroup.getHeaderGroupProps()}>
@@ -249,6 +273,39 @@ export default function FeesReceiptTable() {
                         </div>
                     ))}
                     {/* filter selection end   */}
+
+
+                    <div className='d-flex ml-auto me-1'>
+                        {/* <img src={filtericon} alt='' style={{ cursor: 'pointer', borderRadius: '1px', backgroundColor: 'white', height: '30px', width: '30px', marginRight: '10px', marginTop: '5px' }} /> */}
+
+
+
+
+                        <CDropdown variant="nav-item" >
+                            <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
+                                <CAvatar src={filtericon} alt='' style={{ cursor: 'pointer', borderRadius: '1px', backgroundColor: '#f4f7fc', height: '30px', width: '30px', marginRight: '10px', marginTop: '-9px' }} size="lg" />
+                            </CDropdownToggle>
+
+                            <CDropdownMenu component={'div'} className="pt-0 " placement="bottom-end" style={{ borderRadius: '3px', border: '1px solid black', backgroundColor: 'white', marginLeft: '-223px', height: '-webkit - fill - available', marginTop: '10px' }} >
+                                <div style={{ flexDirection: 'column', backgroundColor: 'white', minHeight: '150px', width: '270px', alignItems: 'center', display: 'flex', flex: 'basis' }}>
+                                    sfasfdsaf
+                                </div>
+                            </CDropdownMenu>
+                        </CDropdown >
+
+
+
+
+
+
+                        <div className='ml-auto me-4'>
+                            <GlobalFilter
+                                preGlobalFilteredRows={preGlobalFilteredRows}
+                                filter={globalFilter}
+                                setFilter={setGlobalFilter}
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 <table {...getTableProps()} id='customers' >

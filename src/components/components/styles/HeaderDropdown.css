@@ -1,35 +1,25 @@
-.dropdown-menu.show {
-  /* margin-right: 50px; */
-  width: 296px !important;
-  height: 369px !important;
-  background-color: #7e84a3 !important;
-}
-
-/* .dropdown-menu.show li{
-  background-color: red !important;
-} */
-
-.dropdown_profile_pic {
+/* .dropdown_profile_pic {
   background-color: #7e7e7e !important;
   color: #fff;
-}
+} */
 
-.dropdown-item {
+/* .dropdown-item {
   background-color: #7e7e7e !important;
   cursor: pointer;
-}
+} */
+
 .avatar-img {
   width: 100%;
   height: auto;
   border-radius: 50em;
   margin-block-end: 26px;
 }
+
 .header-name {
   margin-top: 20px;
   margin-left: 70px;
   width: 320%;
   font-size: 12px;
   text-align: center;
-
   color: white;
 }
