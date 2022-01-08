@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1003" height="187" viewBox="0 0 1003 187">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_1785" data-name="Rectangle 1785" width="1003" height="187" rx="14" transform="translate(343 94)" fill="#e6e9f4"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_59" data-name="Mask Group 59" transform="translate(-343 -94)" clip-path="url(#clip-path)">
+    <g id="Group_2406" data-name="Group 2406" transform="translate(-7255.975 -3237)">
+      <g id="Group_2405" data-name="Group 2405" transform="translate(8513.368 3356.612)">
+        <path id="Path_42846" data-name="Path 42846" d="M99.324,15.985C92.295,11.923,78.9,4.567,73.4,2.634,65.543-.13,56.709,2.08,56.291,2.748c-.252.4,1.268,10.693,7.026,15.974,4.21,3.861,16.462,12.358,24.28,16.658,0,0,4.366-1.317,8.859-8.5S99.324,15.985,99.324,15.985Z" transform="translate(-56.265 -0.734)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <path id="Path_42847" data-name="Path 42847" d="M77.1,33.965c-.068,2.513.051,7.531.157,11.116a8.35,8.35,0,0,0,3.424,6.5c4.447,3.25,12.313,8.981,16.623,12-1.717-8.558-4.267-19.3-4.267-19.3" transform="translate(-62.023 -9.775)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <path id="Path_42848" data-name="Path 42848" d="M92.317,6.419C94.6,5.233,99.588,2.9,103.08,1.293a8.359,8.359,0,0,1,7.41.2c4.876,2.58,13.435,7.125,18.026,9.668-8.445,2.2-19.218,4.613-19.218,4.613" transform="translate(-66.237 -0.525)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <path id="Path_42849" data-name="Path 42849" d="M105.359,40.153c3.16,5.211,10.954,10.221,17.079,9.46a30.218,30.218,0,0,1-2.511-3.277c4.421,2.867,9.76,3.689,12.529,2.956-1.246-4.167-3.931-7.182-9.044-11a6.217,6.217,0,0,0,5.313-.524s-7.359-7.529-15.749-9.8" transform="translate(-69.845 -8.117)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <path id="Path_42850" data-name="Path 42850" d="M96.555,39.486c1.36-.455,11.6-7.986,12.149-19.427" transform="translate(-67.41 -5.929)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <path id="Path_42851" data-name="Path 42851" d="M77.712,10.871a4.063,4.063,0,1,1-5.6,1.291A4.064,4.064,0,0,1,77.712,10.871Z" transform="translate(-60.477 -3.216)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <path id="Path_42852" data-name="Path 42852" d="M77.475,12.848a2.457,2.457,0,1,1-3.385.781A2.457,2.457,0,0,1,77.475,12.848Z" transform="translate(-61.092 -3.831)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <path id="Path_42853" data-name="Path 42853" d="M94.211,21.188a4.063,4.063,0,1,1-5.6,1.291A4.063,4.063,0,0,1,94.211,21.188Z" transform="translate(-65.041 -6.07)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <path id="Path_42854" data-name="Path 42854" d="M93.974,23.165a2.457,2.457,0,1,1-3.385.781A2.457,2.457,0,0,1,93.974,23.165Z" transform="translate(-65.656 -6.684)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <line id="Line_63" data-name="Line 63" y1="6.973" x2="14.303" transform="translate(29.949 0.971)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <line id="Line_64" data-name="Line 64" x1="18.877" y2="4.745" transform="translate(39.646 8.873)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <line id="Line_65" data-name="Line 65" x2="0.758" y2="15.894" transform="translate(17.928 26.225)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <line id="Line_66" data-name="Line 66" x1="3.507" y1="18.052" transform="translate(27.886 32.908)" fill="none" stroke="#f99300" stroke-width="1.051"/>
+        <path id="Path_42855" data-name="Path 42855" d="M142.977,56.879c14.732,7.775,20.87,25.781,9,34.784" transform="translate(-80.251 -16.114)" fill="none" stroke="#f99300" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke-dasharray="10 10"/>
+      </g>
+      <path id="Path_42856" data-name="Path 42856" d="M1,210.195c35.6,13.914,99.878,20.637,137.09-19.233,28.645-30.692,9.462-72.152-18.4-73.961-19.5-1.266-23.026,27.05-17.026,36.55S128.032,184.2,161.128,166.2s40.75-29.418,40.75-29.418" transform="translate(8386.308 3292.45)" fill="none" stroke="#f99300" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke-dasharray="10 10"/>
+    </g>
+  </g>
+</svg>
