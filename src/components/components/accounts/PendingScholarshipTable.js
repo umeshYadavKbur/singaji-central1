@@ -4,7 +4,6 @@ import { Fragment, useMemo } from "react";
 import { useTable, useFilters, useSortBy, useGlobalFilter, usePagination, useRowSelect } from "react-table";
 import updown_sort from '../../assests/image/updown_sort.svg'
 import { TableCheckbox } from '../tableComponents/TableCheckbox';
-import { GlobalFilter } from "../tableComponents/GlobalFilter";
 import tableData from './pending_fees.json'
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
@@ -43,6 +42,7 @@ function SelectColumnFilter({
             <div className="block">
                 <span className="block capitalize mb-4">{id}</span>
                 {/* eslint-disable-next-line */}
+
                 {options.map((option: string, i) => {
                     return (
                         <Fragment key={i}>
@@ -143,8 +143,7 @@ export default function PendingScholarshipTable() {
                 Cell: ({ row: { original } }) => (
                     <div className='row d-flex d-inline-flex'>
                         <div className="col">
-                            <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(255, 214, 78)" }}></span>
-
+                            <span className='recieved-fee-circle' style={{ backgroundColor: "#ffc107" }}></span>
                         </div>
                         <div className="col">
                             <span className='' >
@@ -202,8 +201,7 @@ export default function PendingScholarshipTable() {
 
     );
 
-    const { globalFilter, pageSize } = state;
-    const { pageIndex } = state;
+    const { globalFilter, pageSize, pageIndex, selectedRowIds, } = state;
     const checkboxData = JSON.stringify(
         {
             selectedFlatRows: selectedFlatRows.map((row) => row.original)
@@ -216,7 +214,7 @@ export default function PendingScholarshipTable() {
     return (
         <Fragment>
             <div className="container-fluid">
-                {/* <div className="d-flex">
+                <div className="d-flex">
                     <div className=''>
                         <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                             {
@@ -226,12 +224,12 @@ export default function PendingScholarshipTable() {
                             }
                         </select>
                     </div>
-                    <div className='d-flex ml-auto me-1'>
+                    {/* <div className='d-flex ml-auto me-1'>
                         <div className='ml-auto me-4'>
                             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
                         </div>
-                    </div>
-                </div> */}
+                    </div> */}
+                </div>
                 {/* Filter section start  */}
                 {headerGroups.map((headerGroup) => (
                     <div style={{ display: "flex" }} {...headerGroup.getHeaderGroupProps()}>
@@ -263,7 +261,7 @@ export default function PendingScholarshipTable() {
                         ))}
                     </thead>
                     <tbody {...getTableBodyProps()}>
-                        {rows.map((row) => {
+                        {page.map((row) => {
                             prepareRow(row);
                             return (
                                 <tr {...row.getRowProps()}>

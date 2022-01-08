@@ -197,8 +197,7 @@ export default function FeesReceiptTable() {
 
     );
 
-    const { globalFilter, pageSize } = state;
-    const { pageIndex } = state;
+    const { globalFilter, pageSize, pageIndex } = state;
     const checkboxData = JSON.stringify(
         {
             selectedFlatRows: selectedFlatRows.map((row) => row.original)
@@ -211,7 +210,7 @@ export default function FeesReceiptTable() {
     return (
         <Fragment>
             <div className="container-fluid">
-                {/* <div className="d-flex">
+                <div className="d-flex">
                     <div className=''>
                         <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                             {
@@ -221,12 +220,12 @@ export default function FeesReceiptTable() {
                             }
                         </select>
                     </div>
-                    <div className='d-flex ml-auto me-1'>
+                    {/* <div className='d-flex ml-auto me-1'>
                         <div className='ml-auto me-4'>
                             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
                         </div>
-                    </div>
-                </div> */}
+                    </div> */}
+                </div>
                 {/* Filter section start  */}
                 {headerGroups.map((headerGroup) => (
                     <div style={{ display: "flex" }} {...headerGroup.getHeaderGroupProps()}>
