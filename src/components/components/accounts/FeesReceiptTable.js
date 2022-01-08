@@ -43,12 +43,22 @@ function SelectColumnFilter({
     return (
         <Fragment>
             <div className="block">
-                <span className="block capitalize mb-4">{id}</span>
+                {/* <span className="block capitalize mb-4">{id}</span> */}
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${id}`} aria-expanded="false" aria-controls={`${id}`}>
+                                {id}
+                            </button>
+                        </h2>
+
+                    </div>
+                </div>
                 {/* eslint-disable-next-line */}
-                {options.map((option: string, i) => {
+                {options.map((option, i) => {
                     return (
                         <Fragment key={i}>
-                            <div className="flex items-center">
+                            <div id={`${id}`} class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <input
                                     type="checkbox"
                                     className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
@@ -65,6 +75,7 @@ function SelectColumnFilter({
                                 >
                                     {option}
                                 </label>
+
                             </div>
                         </Fragment>
                     );
@@ -212,6 +223,7 @@ export default function FeesReceiptTable() {
             <div className="container-fluid">
                 <div className="d-flex">
                     <div className=''>
+
                         <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                             {
                                 [10, 25, 50, 100].map(pageSize => (
@@ -219,24 +231,25 @@ export default function FeesReceiptTable() {
                                 ))
                             }
                         </select>
+                        
                     </div>
                     {/* <div className='d-flex ml-auto me-1'>
                         <div className='ml-auto me-4'>
                             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
                         </div>
                     </div> */}
+                    {/* Filter section start  */}
+                    {headerGroups.map((headerGroup) => (
+                        <div style={{ display: "flex" }} {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map((column, i) => (
+                                <div key={i}>
+                                    {column.canFilter ? column.render("Filter") : null}
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                    {/* filter selection end   */}
                 </div>
-                {/* Filter section start  */}
-                {headerGroups.map((headerGroup) => (
-                    <div style={{ display: "flex" }} {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map((column, i) => (
-                            <div key={i}>
-                                {column.canFilter ? column.render("Filter") : null}
-                            </div>
-                        ))}
-                    </div>
-                ))}
-                {/* filter selection end   */}
 
                 <table {...getTableProps()} id='customers' >
                     <thead>
