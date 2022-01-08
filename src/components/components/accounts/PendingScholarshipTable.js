@@ -40,13 +40,22 @@ function SelectColumnFilter({
     return (
         <Fragment>
             <div className="block">
-                <span className="block capitalize mb-4">{id}</span>
-                {/* eslint-disable-next-line */}
+                {/* <span className="block capitalize mb-4">{id}</span> */}
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${id}`} aria-expanded="false" aria-controls={`${id}`}>
+                                {id}
+                            </button>
+                        </h2>
 
-                {options.map((option: string, i) => {
+                    </div>
+                </div>
+                {/* eslint-disable-next-line */}
+                {options.map((option, i) => {
                     return (
                         <Fragment key={i}>
-                            <div className="flex items-center">
+                            <div id={`${id}`} class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <input
                                     type="checkbox"
                                     className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
@@ -63,6 +72,7 @@ function SelectColumnFilter({
                                 >
                                     {option}
                                 </label>
+
                             </div>
                         </Fragment>
                     );
@@ -71,7 +81,6 @@ function SelectColumnFilter({
         </Fragment>
     );
 }
-
 export default function PendingScholarshipTable() {
     const data = React.useMemo(
         () => tableData,
@@ -229,17 +238,17 @@ export default function PendingScholarshipTable() {
                             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
                         </div>
                     </div> */}
+                    {/* Filter section start  */}
+                    {headerGroups.map((headerGroup) => (
+                        <div style={{ display: "flex" }} {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map((column, i) => (
+                                <div key={i}>
+                                    {column.canFilter ? column.render("Filter") : null}
+                                </div>
+                            ))}
+                        </div>
+                    ))}
                 </div>
-                {/* Filter section start  */}
-                {headerGroups.map((headerGroup) => (
-                    <div style={{ display: "flex" }} {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map((column, i) => (
-                            <div key={i}>
-                                {column.canFilter ? column.render("Filter") : null}
-                            </div>
-                        ))}
-                    </div>
-                ))}
                 {/* filter selection end   */}
 
                 <table {...getTableProps()} id='customers' >
