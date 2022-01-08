@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import StuAccmockdata from './StuAccmockData.json';
 import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
-import { useMemo } from 'react';
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
@@ -11,7 +9,6 @@ import { isStudentAdmin } from '../../../helpers/StudentAdmin';
 import allUrls from '../../../redux/constants/url'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { DateRangePicker } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
 import { TableCheckbox } from '../tableComponents/TableCheckbox';
@@ -19,8 +16,9 @@ import AllUrl from '../../../redux/constants/url';
 import { connect } from 'react-redux';
 import { fetchStudentAccountData } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
 import SkeletonColor from '../../../helpers/Skeletrone';
+import { CSVDownload, CSVLink } from 'react-csv';
 
-
+// import { TablePagination } from 'react-pagination-table';
 
 
 const StudentAccount = ({ fetchUsers, studentData }) => {
@@ -84,16 +82,6 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
     const mainColoumns = [
         {
             Header: 'S.no',
@@ -104,7 +92,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
         },
         {
 
-            Header: "Photo",
+            Header: "Profile",
             accessor: "photo",
 
             Cell: ({ row: { original, index } }) => (
@@ -152,7 +140,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
             Cell: ({ row: { original } }) => (
                 <div className='row d-flex d-inline-flex'>
                     <div className="col">
-                        <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(153, 248, 126)" }}></span>
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000" }}></span>
 
                     </div>
                     <div className="col">
@@ -169,7 +157,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
             Cell: ({ row: { original } }) => (
                 <div className='row d-flex d-inline-flex'>
                     <div className="col">
-                        <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(255, 214, 78)" }}></span>
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A" }}></span>
 
                     </div>
                     <div className="col">
@@ -281,7 +269,8 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
         canPreviousPage,
         canNextPage,
         setPageSize,
-        pageOptions,
+
+        pageCount,
         selectedFlatRows,
         prepareRow,
         state,
@@ -290,9 +279,24 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
 
     const { globalFilter, pageSize } = state;
     const { pageIndex } = state;
+    var exportData = [];
+    var exportCsv = [];
     const checkboxData = JSON.stringify(
         {
-            selectedFlatRows: selectedFlatRows.map((row) => row.original)
+            selectedFlatRows: selectedFlatRows.map((row) => {
+                exportData.push(
+                    row.original
+                )
+                for (let i = 0; i < exportData.length; i++) {
+                    const element = exportData[i];
+                    // console.log(element.photo);
+                    if (element.photo) {
+                        continue
+                    }
+                    exportCsv.push(element)
+                }
+            }
+            )
         },
         null,
         2
@@ -355,13 +359,17 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                                 )
                             }
                         </select>
+                        <div className="col-2">
+                            <CSVLink className='btn  download-btn' data={exportCsv}>Download</CSVLink>
+                        </div>
                         <div className="col">
-                            <DateRangePicker onExit={() => { setColoumns(mainColoumns) }} onChange={(val) => { console.log(val) }} appearance="default" className='stu-acc-table' placeholder="to" style={{ width: 230 }} />
+                            <DateRangePicker onExit={() => { setColoumns(mainColoumns) }} onChange={(val) => { console.log(val) }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
                             <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
                         </div>
                     </div>
 
-                    <div className="col-6 d-flex justify-content-end " >
+
+                    <div className="col-4 d-flex justify-content-end " >
                         <div style={{ marginRight: '-9px' }}>
 
                             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
@@ -383,6 +391,19 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                                             {/* {column.isSorted ? (column.isSortedDesc ? <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> : <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />) : ''} */}
                                             {/* {column.isSorted ? (column.isSortedDesc ? '' : '') : ''} */}
                                             {/* <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> */}
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
+                                                ) : (
+                                                    <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
+                                                    // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                                                )
+                                            ) : (
+
+                                                column.id !== 'Srno' && column.id !== 'selection' && column.id !== 'photo' && column.id !== 'mobile' && column.id !== '' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+
+
+                                            )}
                                         </span>
                                     </th>
                                 ))}
@@ -413,15 +434,19 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
 
                     </tbody>
                 </table>
-                <div>
-                    <span>
-                        Page{' '}
-                        <strong>
-                            {pageIndex + 1} of {pageOptions.length}
-                        </strong>{' '}
-                    </span>
-                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-                    <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                <div className='row pagination-div'>
+                    <div className="col">
+                        <span>
+                            Showing {page.length * (pageIndex + 1) - (page.length - 1)} to{" "}
+                            {page.length * (pageIndex + 1)} of {pageCount * pageSize} Entries{" "}
+                            {"  "}
+                        </span>
+                    </div>
+                    <div className="col d-flex justify-content-md-end" style={{ height: "15px", marginBottom: "10px" }}>
+
+                        <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+                        <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                    </div>
                 </div>
             </div>
         </>
