@@ -173,3 +173,9 @@ font-weight: bold;
     justify-content: center;
 
   }
+
+  .download-btn {
+    background-color: #4F83DF !important;
+    color: white !important;
+    height: 41px !important;
+  }

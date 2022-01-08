@@ -357,7 +357,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                             }
                         </select>
                         <div className="col-2">
-                            <CSVLink className='btn btn-primary' data={exportCsv}>Download</CSVLink>
+                            <CSVLink className='btn  download-btn' data={exportCsv}>Download</CSVLink>
                         </div>
                         <div className="col">
                             <DateRangePicker onExit={() => { setColoumns(mainColoumns) }} onChange={(val) => { console.log(val) }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
