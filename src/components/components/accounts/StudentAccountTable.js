@@ -247,7 +247,7 @@ function StudentAccountTable({ fetchUsers, studentData }) {
                             alt="profile"
                             style={{ cursor: "pointer" }}
                             onClick={() => {
-                                // getAllInfoOfStudent(original)
+                                getAllInfoOfStudent(original)
                             }}
                             className="mx-auto"
                             src={original.photo}
@@ -533,63 +533,69 @@ function StudentAccountTable({ fetchUsers, studentData }) {
                                 ))}
                             </select>
                         </div>
+                        <CSVLink className='btn  download-btn ml-3' data={exportCsv}>Download</CSVLink>
 
-                        <div className="d-flex ml-auto me-1">
-                            <CSVLink className='btn  download-btn' data={exportCsv}>Download</CSVLink>
+                        <div className="d-flex ml-1">
                             <DateRangePicker onExit={() => { setColoumns(mainColoumns) }} onChange={(val) => { console.log(val) }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
                             <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
-                            <CDropdown variant="nav-item">
-                                <CDropdownToggle
-                                    placement="bottom-end"
-                                    className="py-0"
-                                    caret={false}
-                                >
-                                    <img
-                                        src={filtericon}
-                                        alt=""
-                                        style={{
-                                            height: "35px",
-                                            width: "35px",
-                                            marginTop: "-34px",
-                                            marginRight: "5px",
-                                        }}
-                                    />
-                                </CDropdownToggle>
-
-                                <CDropdownMenu
-                                    component={"div"}
-                                    className="pt-0 "
-                                    placement="bottom-end"
-
-                                >
-                                    <div>
-                                        {headerGroups.map((headerGroup) => (
-                                            <div
-                                                style={{ display: "flex flex-column" }}
-                                                {...headerGroup.getHeaderGroupProps()}
-                                            >
-                                                {headerGroup.headers.map((column, i) => (
-                                                    <div
-                                                        key={i}
-                                                        style={{ display: "block", justifyContent: "center" }}
-                                                    >
-                                                        {column.canFilter ? column.render("Filter") : null}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </CDropdownMenu>
-                            </CDropdown>
-
-                            <div className="ml-auto me-4">
-                                <GlobalFilter
-                                    preGlobalFilteredRows={preGlobalFilteredRows}
-                                    filter={globalFilter}
-                                    setFilter={setGlobalFilter}
-                                />
-                            </div>
                         </div>
+
+
+                        <div className="d-flex ml-auto me-4">
+                            <div className="">
+
+                                <CDropdown variant="nav-item">
+                                    <CDropdownToggle
+                                        placement="bottom-end"
+                                        className="py-0"
+                                        caret={false}
+                                    >
+                                        <img
+                                            src={filtericon}
+                                            alt=""
+                                            style={{
+                                                height: "35px",
+                                                width: "35px",
+                                                marginTop: "-34px",
+                                                marginRight: "5px",
+                                            }}
+                                        />
+                                    </CDropdownToggle>
+
+                                    <CDropdownMenu
+                                        component={"div"}
+                                        className="pt-0 "
+                                        placement="bottom-end"
+
+                                    >
+                                        <div>
+                                            {headerGroups.map((headerGroup) => (
+                                                <div
+                                                    style={{ display: "flex flex-column" }}
+                                                    {...headerGroup.getHeaderGroupProps()}
+                                                >
+                                                    {headerGroup.headers.map((column, i) => (
+                                                        <div
+                                                            key={i}
+                                                            style={{ display: "block", justifyContent: "center" }}
+                                                        >
+                                                            {column.canFilter ? column.render("Filter") : null}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </CDropdownMenu>
+                                </CDropdown>
+
+                            </div>
+                            <GlobalFilter
+                                preGlobalFilteredRows={preGlobalFilteredRows}
+                                filter={globalFilter}
+                                setFilter={setGlobalFilter}
+                            />
+                        </div>
+
                     </div>
 
                     <table {...getTableProps()} id="customers">
