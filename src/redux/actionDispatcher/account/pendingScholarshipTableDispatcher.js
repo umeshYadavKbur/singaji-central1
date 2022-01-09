@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
     PENDING_SCHOLARSHIP_TABLE_FAIL,
     PENDING_SCHOLARSHIP_TABLE_REQ,
@@ -18,9 +19,27 @@ const pendingScholarship = (data) => {
                 })
                 .catch(function (error) {
                     fetchFailTableData(error);
+                    toast.warning('Something went wrong', {
+                        position: "bottom-center",
+                        autoClose: 3000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 });
         } catch (error) {
             fetchFailTableData(error);
+            toast.warning('Internal server error', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             //   console.log(error);
         }
     };

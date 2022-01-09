@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Edit_icon from '../../assests/image/Edit_icon.svg'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import '../styles/AddNewStudent.css'
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import student_Profile__RocketImg from '../../assests/image/AccountIcons/studentProfileRocketImg.svg'
 
 
@@ -27,29 +27,29 @@ function StudentProfile() {
         <div>
 
 
-            <div className="row my-3 me-3 ms-2" style={{backgroundColor: '#DDDDDD',borderRadius: '8px'}}>
+            <div className="row my-3 me-3 ms-2" style={{ backgroundColor: '#DDDDDD', borderRadius: '8px' }}>
                 <div className="col-3 my-5">
-                    {StudentPhoto === ' ' ? <img style={{borderRadius: "50px",height: "100px",width: '100px',marginLeft: '50px',backgroundColor: '#DDDDDD'}} src="https://ssism.s3.us-east-2.amazonaws.com/avtar.jpg" alt="avtar_photo" /> : <img style={{borderRadius: "50px",height: "100px",width: '100px',marginLeft: '50px',backgroundColor: '#DDDDDD'}} src={StudentPhoto} alt="avtar_photo" />
-                 }
+                    {StudentPhoto === ' ' ? <img style={{ borderRadius: "50px", height: "100px", width: '100px', marginLeft: '50px', backgroundColor: '#DDDDDD' }} src="https://ssism.s3.us-east-2.amazonaws.com/avtar.jpg" alt="avtar_photo" /> : <img style={{ borderRadius: "50px", height: "100px", width: '100px', marginLeft: '50px', backgroundColor: '#DDDDDD' }} src={StudentPhoto} alt="avtar_photo" />
+                    }
 
-                    <img src={Edit_icon} alt='edit_icon' className='mt-5' style={{marginLeft: "-10px",height: '20px',width: '20px'}} />
+                    <img src={Edit_icon} alt='edit_icon' className='mt-5' style={{ marginLeft: "-10px", height: '20px', width: '20px' }} />
 
                 </div>
                 <div className="col-3">
-                    <div className='mt-3' style={{color: '#5A607F'}}>
-                        <span className='fw-bold' style={{fontSize: '22px'}}>{StudentName}</span>
+                    <div className='mt-3' style={{ color: '#5A607F' }}>
+                        <span className='fw-bold' style={{ fontSize: '22px' }}>{StudentName}</span>
                         <br />
                         {StudentClassName + '  ' + `(${StudentProfileData.accountInfo.joinBatch + '-' + (parseInt(StudentProfileData.accountInfo.joinBatch) + 3)})`}
                     </div>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button onClick={() => {navigate("feesrecipt");}} className="btn  btn-warning text-light fw-bold" type="submit">Reciept</button>
+                    <div className="btn-group" role="group" aria-label="Basic example">
+                        <button onClick={() => { navigate("feesrecipt"); }} className="btn  btn-warning text-light fw-bold" type="submit">Reciept</button>
 
-                        <button className="btn btn-outline-info fw-bold" type="submit" onClick={() => {navigate("uploaddocument");}}>Upload Document</button>
+                        <button className="btn btn-outline-info fw-bold" type="submit" onClick={() => { navigate("uploaddocument"); }}>Upload Document</button>
                     </div>
                 </div>
                 <div className="col-6 d-flex justify-content-end">
-                <img src={student_Profile__RocketImg} className='mt-4 ' alt="rocket"  />
-                    <img src={Edit_icon} className='mb-1 ' alt="rocket" style={{height: '40px',width: '40px',alignSelf:'self-end'}} />
+                    <img src={student_Profile__RocketImg} className='mt-4 ' alt="rocket" />
+                    <img src={Edit_icon} className='mb-1 ' alt="rocket" style={{ height: '40px', width: '40px', alignSelf: 'self-end' }} />
                     {/* <img src={Edit_icon} alt='edit_icon'  /> */}
                 </div>
             </div>
@@ -62,12 +62,12 @@ function StudentProfile() {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                     style={{
-                        backgroundColor: '#E6E9F4 ',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"
+                        backgroundColor: '#E6E9F4 ', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px"
                     }}
                 >
-                    <Typography style={{color: "#414c97",margin: "0px"}}><b> Fees Details</b></Typography>
+                    <Typography style={{ color: "#414c97", margin: "0px" }}><b> Fees Details</b></Typography>
                 </AccordionSummary>
-                <AccordionDetails style={{backgroundColor: '#F4F7FC',padding: '15px'}}>
+                <AccordionDetails style={{ backgroundColor: '#F4F7FC', padding: '15px' }}>
                     <Typography component={'div'} >
                         {/* Personal Details */}
 
@@ -145,7 +145,7 @@ function StudentProfile() {
                             </div>
                             <div className="col-3  my-4 p-1 ps-2">
                                 <div>
-                                    <button className="btn btn-sm btn-primary text-light fw-bold m-1 " style={{width: "250px",height: "40px"}} type="submit">Update</button></div>
+                                    <button className="btn btn-sm btn-primary text-light fw-bold m-1 " style={{ width: "250px", height: "40px" }} type="submit">Update</button></div>
                             </div>
                         </div>
 

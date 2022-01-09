@@ -104,10 +104,10 @@ function SelectColumnFilter({
                     }
                     placement="right"
                 >
-                    <div class="btn-group dropright">
+                    <div className="btn-group dropright">
                         <button
                             type="button"
-                            class="btn  dropdown-toggle"
+                            className="btn  dropdown-toggle"
                             data-bs-toggle="collapse"
                         >
                             {id}

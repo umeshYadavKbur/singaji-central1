@@ -23,6 +23,7 @@ import pendingScholarship from '../../../redux/actionDispatcher/account/pendingS
 import AllUrl from "../../../redux/constants/url";
 import { connect } from "react-redux";
 import SkeletonColor from "../../../helpers/Skeletrone";
+import { ToastContainer } from "react-toastify";
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
   const arr = [];
@@ -95,10 +96,10 @@ function SelectColumnFilter({
           }
           placement="right"
         >
-          <div class="btn-group dropright">
+          <div className="btn-group dropright">
             <button
               type="button"
-              class="btn  dropdown-toggle"
+              className="btn  dropdown-toggle"
               data-bs-toggle="collapse"
             >
               {id}
@@ -304,6 +305,17 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
     <h2>{scholarData.error}</h2>
   ) : (
     <Fragment>
+      <ToastContainer
+        position="top-center"
+        autoClose={2500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="container-fluid">
         <div className="d-flex">
           <div className="">

@@ -49,10 +49,10 @@ function SelectColumnFilter({
         <Fragment>
             <div className="block">
                 {/* <span className="block capitalize mb-4">{id}</span> */}
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${id}`} aria-expanded="false" aria-controls={`${id}`}>
+                <div className="accordion accordion-flush" id="accordionFlushExample">
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="flush-headingOne">
+                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${id}`} aria-expanded="false" aria-controls={`${id}`}>
                                 {id}
                             </button>
                         </h2>
@@ -62,7 +62,7 @@ function SelectColumnFilter({
                 {options.map((option, i) => {
                     return (
                         <Fragment key={i}>
-                            <div id={`${id}`} class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div id={`${id}`} className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <input
                                     checked={filterValue.includes(option)}
                                     type="checkbox"

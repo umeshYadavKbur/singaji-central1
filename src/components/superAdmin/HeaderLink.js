@@ -32,12 +32,10 @@ const HeaderLink = () => {
             if (editData) {
                 return (
                     <div className='d-flex flex-column'>
-                        <span className="m-0 p-0">{editData.accountInfo.firstName + "  " + editData.accountInfo.lastName} <span className="recieved-fee-circle" style={{backgroundColor: 'rgb(153, 248, 126)'}}></span></span>
-                        <span className="ml-3" style={{fontSize:'15px'}}>{`${editData.accountInfo.branch}-${editData.accountInfo.year} (${editData.accountInfo.joinBatch}-${editData.accountInfo.joinBatch+3})`}</span>
+                        <span className="m-0 p-0">{editData.accountInfo.firstName + "  " + editData.accountInfo.lastName} <span className="recieved-fee-circle" style={{ backgroundColor: 'rgb(153, 248, 126)' }}></span></span>
+                        <span className="ml-3" style={{ fontSize: '15px' }}>{`${editData.accountInfo.branch}-${editData.accountInfo.year} (${editData.accountInfo.joinBatch}-${editData.accountInfo.joinBatch + 3})`}</span>
                     </div>
-
                 )
-
             }
             return "Add Student";
         }
