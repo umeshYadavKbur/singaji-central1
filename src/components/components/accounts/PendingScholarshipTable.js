@@ -296,8 +296,8 @@ export default function PendingScholarshipTable() {
             </select>
           </div>
 
-          <div className="ml-auto me-1">
-            <CDropdown variant="d-flex justify-content-end">
+          <div className="d-flex ml-auto me-1">
+            <CDropdown variant="nav-item">
               <CDropdownToggle
                 placement="bottom-end"
                 className="py-0"
@@ -319,6 +319,7 @@ export default function PendingScholarshipTable() {
                 component={"div"}
                 className="pt-0 "
                 placement="bottom-end"
+              
               >
                 <div>
                   {headerGroups.map((headerGroup) => (
