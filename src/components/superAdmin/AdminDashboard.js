@@ -20,6 +20,7 @@ import UploadDocumentFrom from "../components/accounts/UploadDocumentFrom";
 import FeesRecipt from "../components/accounts/FeesRecipt";
 import PendingScholarshipTable from "../components/accounts/PendingScholarshipTable";
 import FeesReceiptTable from "../components/accounts/FeesReceiptTable";
+import UpdatePersonalDetialOfStudent from "../components/accounts/UpdatePersonalDetialOfStudent";
 
 function AdminDashboard() {
   const { play, style, isPlaying } = useAnimate({
@@ -68,6 +69,7 @@ function AdminDashboard() {
             <Route path="studentprofile/feesrecipt" element={<FeesRecipt />} />
             <Route path="pendingscholarship" element={<PendingScholarshipTable />} />
             <Route path="feesreceiptlist" element={<FeesReceiptTable />} />
+            <Route path="studentprofile/updatepersonaldetial" element={<UpdatePersonalDetialOfStudent />} />
           </Routes>
         </div>
       </div>
