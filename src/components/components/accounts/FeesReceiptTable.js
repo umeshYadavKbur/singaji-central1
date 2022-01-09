@@ -5,12 +5,16 @@ import { Fragment, useMemo } from "react";
 import { useTable, useFilters, useSortBy, useGlobalFilter, usePagination, useRowSelect, useAsyncDebounce } from "react-table";
 import updown_sort from '../../assests/image/updown_sort.svg'
 import { TableCheckbox } from '../tableComponents/TableCheckbox';
-import tableData from './fees_receipt.json'
+// import tableData from './fees_receipt.json'
 import filtericon from '../../assests/image/AccountIcons/filter.svg'
 
-import { CPopover } from '@coreui/react'
+import { CDropdown, CDropdownMenu, CDropdownToggle } from '@coreui/react'
+import feesReceiptTableData from "../../../redux/actionDispatcher/account/feesReceiptTableDispather";
+import AllUrl from "../../../redux/constants/url";
+import { connect } from "react-redux";
 
-export const MultipleFilter = (rows, accessor, filterValue) => {
+
+const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
     rows.forEach((val) => {
         if (filterValue.includes(val.original[accessor])) arr.push(val);
@@ -60,6 +64,7 @@ function SelectColumnFilter({
                         <Fragment key={i}>
                             <div id={`${id}`} class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <input
+                                    checked={filterValue.includes(option)}
                                     type="checkbox"
                                     className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
                                     id={option}
@@ -113,11 +118,29 @@ function GlobalFilter({
     )
 }
 
-export default function FeesReceiptTable() {
-    const data = React.useMemo(
-        () => tableData,
-        []
-    );
+
+function FeesReceiptTable({ feesReceipt, fetchData }) {
+
+    const token = localStorage.getItem("token");
+    React.useEffect(() => {
+        var config = {
+            method: "GET",
+            url: AllUrl.feesReceiptTable,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        };
+
+        fetchData(config);
+        // settable_data(table_data.table_data);
+        // eslint-disable-next-line
+    }, []);
+
+    // const data = React.useMemo(
+    //     () => tableData,
+    //     []
+    // );
 
     const columns = React.useMemo(
         () => [
@@ -208,11 +231,12 @@ export default function FeesReceiptTable() {
         selectedFlatRows,
         state,
         setGlobalFilter,
-        rows,
+        // rows,
         preGlobalFilteredRows,
         prepareRow,
     } = useTable(
-        { columns, data },
+        { columns, data: feesReceipt.table_data },
+
         useGlobalFilter,
         useFilters,
         useSortBy,
@@ -250,48 +274,67 @@ export default function FeesReceiptTable() {
     return (
         <Fragment>
             <div className="container-fluid">
-                <div className="d-flex" style={{ maxHeight: '41px' }}>
-                    <div className=''>
-
-                        <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-                            {
-                                [10, 25, 50, 100].map(pageSize => (
-                                    <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
-                                ))
-                            }
-                        </select>
-
-                    </div>
-                    {/* Filter section start  */}
-                    {headerGroups.map((headerGroup) => (
-                        <div style={{ display: "flex" }} {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column, i) => (
-                                <div key={i}>
-                                    {column.canFilter ? column.render("Filter") : null}
-                                </div>
+                <div className="d-flex">
+                    <div className="">
+                        <select
+                            className="form-select table_select_row_options"
+                            value={pageSize}
+                            onChange={(e) => setPageSize(Number(e.target.value))}
+                        >
+                            {[10, 25, 50, 100].map((pageSize) => (
+                                <option value={pageSize} key={pageSize}>
+                                    Show Entries {pageSize}
+                                </option>
                             ))}
-                        </div>
-                    ))}
-                    {/* filter selection end   */}
+                        </select>
+                    </div>
 
-
-                    <div className='d-flex ml-auto me-1'>
-                        <div className='ml-auto me-4' style={{ flexDirection: 'basis' }}>
-                            <CPopover
-                                content={
-                                    <div className='ml-auto me-4'>
-                                        <GlobalFilter
-                                            preGlobalFilteredRows={preGlobalFilteredRows}
-                                            filter={globalFilter}
-                                            setFilter={setGlobalFilter}
-                                        />
-                                    </div>
-                                }
-                                placement="bottom"
+                    <div className="d-flex ml-auto me-1">
+                        <CDropdown variant="nav-item">
+                            <CDropdownToggle
+                                placement="bottom-end"
+                                className="py-0"
+                                caret={false}
                             >
-                                <img src={filtericon} alt='' style={{ cursor: 'pointer', borderRadius: '1px', backgroundColor: '#f4f7fc', height: '30px', width: '30px', marginRight: '10px', marginTop: '-9px' }} size="lg" />
-                            </CPopover>
+                                <img
+                                    src={filtericon}
+                                    alt=""
+                                    style={{
+                                        height: "35px",
+                                        width: "35px",
+                                        marginTop: "-34px",
+                                        marginRight: "5px",
+                                    }}
+                                />
+                            </CDropdownToggle>
 
+                            <CDropdownMenu
+                                component={"div"}
+                                className="pt-0 "
+                                placement="bottom-end"
+
+                            >
+                                <div>
+                                    {headerGroups.map((headerGroup) => (
+                                        <div
+                                            style={{ display: "flex flex-column" }}
+                                            {...headerGroup.getHeaderGroupProps()}
+                                        >
+                                            {headerGroup.headers.map((column, i) => (
+                                                <div
+                                                    key={i}
+                                                    style={{ display: "block", justifyContent: "center" }}
+                                                >
+                                                    {column.canFilter ? column.render("Filter") : null}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ))}
+                                </div>
+                            </CDropdownMenu>
+                        </CDropdown>
+
+                        <div className="ml-auto me-4">
                             <GlobalFilter
                                 preGlobalFilteredRows={preGlobalFilteredRows}
                                 filter={globalFilter}
@@ -301,18 +344,32 @@ export default function FeesReceiptTable() {
                     </div>
                 </div>
 
-                <table {...getTableProps()} id='customers' >
+                <table {...getTableProps()} id="customers">
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
-                                    <th
-                                        {...column.getHeaderProps(column.getSortByToggleProps())}
-                                    >
+                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                         {column.render("header")}
                                         <span>
-                                            {column.isSorted ? (column.isSortedDesc ? <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> : <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />) : ''}
-                                            {column.isSorted ? (column.isSortedDesc ? '' : '') : ''}
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    <img
+                                                        src={updown_sort}
+                                                        style={{ marginLeft: "5px" }}
+                                                        alt=""
+                                                    />
+                                                ) : (
+                                                    <img
+                                                        src={updown_sort}
+                                                        style={{ marginLeft: "5px" }}
+                                                        alt=""
+                                                    />
+                                                )
+                                            ) : (
+                                                ""
+                                            )}
+                                            {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
                                         </span>
                                     </th>
                                 ))}
@@ -320,17 +377,13 @@ export default function FeesReceiptTable() {
                         ))}
                     </thead>
                     <tbody {...getTableBodyProps()}>
-                        {rows.map((row) => {
+                        {page.map((row) => {
                             prepareRow(row);
                             return (
                                 <tr {...row.getRowProps()}>
                                     {row.cells.map((cell) => {
                                         return (
-                                            <td
-                                                {...cell.getCellProps()}
-                                            >
-                                                {cell.render("Cell")}
-                                            </td>
+                                            <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                                         );
                                     })}
                                 </tr>
@@ -340,15 +393,37 @@ export default function FeesReceiptTable() {
                 </table>
                 <div>
                     <span>
-                        Page{' '}
+                        Page{" "}
                         <strong>
                             {pageIndex + 1} of {pageOptions.length}
-                        </strong>{' '}
+                        </strong>{" "}
                     </span>
-                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-                    <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                        Previous
+                    </button>
+                    <button onClick={() => nextPage()} disabled={!canNextPage}>
+                        Next
+                    </button>
                 </div>
             </div>
         </Fragment>
     );
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        feesReceipt: state.feesReceiptData,
+    };
+};
+
+//passing the userData in fetchData function and also dispatch method
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchData: (data) => dispatch(feesReceiptTableData(data)),
+    };
+};
+
+//Connecting the component to our store
+export default connect(mapStateToProps, mapDispatchToProps)(FeesReceiptTable);
+

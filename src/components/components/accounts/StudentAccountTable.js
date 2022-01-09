@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "../styles/Table.css";
 import { Fragment, useMemo } from "react";
 import {
     useTable,
@@ -10,9 +9,7 @@ import {
     useRowSelect,
     useAsyncDebounce,
 } from "react-table";
-// import updown_sort from "../../assests/image/updown_sort.svg";
 import { TableCheckbox } from "../tableComponents/TableCheckbox";
-// import tableData from "./pending_fees.json";
 import {
     CDropdown,
     CDropdownMenu,
@@ -22,25 +19,19 @@ import {
 import filtericon from "../../assests/image/AccountIcons/filter.svg";
 import { CSVLink } from "react-csv";
 import { DateRangePicker } from "rsuite";
-// import React, { useState } from 'react';
-// import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
-// import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
 import { isSuperAdmin } from '../../../helpers/SuperAdmin';
 import { isAccountAdmin } from '../../../helpers/AccountAdmin';
 import { isStudentAdmin } from '../../../helpers/StudentAdmin';
 import allUrls from '../../../redux/constants/url'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import { DateRangePicker } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
-// import { TableCheckbox } from '../tableComponents/TableCheckbox';
 import AllUrl from '../../../redux/constants/url';
 import { connect } from 'react-redux';
 import { fetchStudentAccountData } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
 import SkeletonColor from '../../../helpers/Skeletrone';
-// import { CSVDownload, CSVLink } from 'react-csv';
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -87,6 +78,7 @@ function SelectColumnFilter({
                                     <Fragment key={i}>
                                         <div id={`${id}`}>
                                             <input
+                                                checked={filterValue.includes(option)}
                                                 type="checkbox"
                                                 className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
                                                 id={option}

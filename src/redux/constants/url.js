@@ -40,8 +40,8 @@ const AllUrl = {
     updateAccountInformation: `${baseUrl}/api/update_account_info`,// update the Account information of a particular student 
     allInfoOfActiveStudent: `${baseUrl}/api/all_info_of_active_student`,// get the all data about student related
     pendingFeesReport: `${baseUrl}/api/get_scholarship_pending_list`,// pending fees report
-    GetDocumentsOfStudents:`${baseUrl}/api/get_documents`, // get documents of particular student
-    UploadDocument:`${baseUrl}/api/upload_document`, // get documents of particular student
+    GetDocumentsOfStudents: `${baseUrl}/api/get_documents`, // get documents of particular student
+    UploadDocument: `${baseUrl}/api/upload_document`, // get documents of particular student
     accountStudent: `${baseUrl}/api/get_students_account_list`,
     //_____________________________________
 
@@ -61,6 +61,9 @@ const AllUrl = {
     uploadFile: `${baseUrl}/api/uploadFile`,
     //_____________________________________
 
+    //Account admin tables url 
+    pendingScholarship: `${baseUrl}/api/get_scholarship_pending_list`,
+    feesReceiptTable: `${baseUrl}/api/fees_receipt_list/3&2`, // 3&2 are dynamic
 }
 export default AllUrl
 

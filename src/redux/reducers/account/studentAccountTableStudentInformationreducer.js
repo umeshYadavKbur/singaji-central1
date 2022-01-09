@@ -1,6 +1,8 @@
-import {GET_INFO_OF_STUDENT_TABLE_FAIL,
+import {
+    GET_INFO_OF_STUDENT_TABLE_FAIL,
     GET_INFO_OF_STUDENT_TABLE_REQUEST,
-    GET_INFO_OF_STUDENT_TABLE_SUCCESS } from '../../constants/actions'
+    GET_INFO_OF_STUDENT_TABLE_SUCCESS
+} from '../../constants/actions'
 
 
 
@@ -10,8 +12,8 @@ const initialState = {
     error: "",
 };
 
-const studentAccountTableStudentInformation = (state = initialState,action) => {
-    switch(action.type) {
+const studentAccountTableStudentInformation = (state = initialState, action) => {
+    switch (action.type) {
         case GET_INFO_OF_STUDENT_TABLE_FAIL:
             return {
                 ...state,
@@ -20,7 +22,7 @@ const studentAccountTableStudentInformation = (state = initialState,action) => {
         case GET_INFO_OF_STUDENT_TABLE_REQUEST:
             return {
                 loading: false,
-                statusChanged: action.payload ,
+                statusChanged: action.payload,
                 error: "",
             };
         case GET_INFO_OF_STUDENT_TABLE_SUCCESS:
@@ -29,7 +31,7 @@ const studentAccountTableStudentInformation = (state = initialState,action) => {
                 statusChanged: false,
                 error: action.payload,
             };
-        
+
         default:
             return state;
     }

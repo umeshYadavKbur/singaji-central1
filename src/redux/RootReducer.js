@@ -16,7 +16,8 @@ import VerifyStudentReducer from "./reducers/superAdmin/studentVerifyTableReduce
 import AdminStatusChangeReducer from "./reducers/superAdmin/adminStatusChangeReducer";
 import fetchStudentAccountData from "./reducers/superAdmin/StudentAccountTableReducer";
 import studentAccountTableStudentInformation from "./reducers/account/studentAccountTableStudentInformationreducer";
-
+import pendingScholarshipTable from './reducers/account/pendingScholarshipTable'
+import feesReceiptTable from './reducers/account/feesRecieptTable'
 
 //Combining the reducer's into a rootReducer
 const RootReducer = combineReducers({
@@ -35,7 +36,8 @@ const RootReducer = combineReducers({
     addStudent: addNewStudentReducer,
     accountStudentTableData: fetchStudentAccountData,
     studentAccountTableStudentInformation: studentAccountTableStudentInformation,
-
+    pendingScholarship: pendingScholarshipTable,
+    feesReceiptData: feesReceiptTable,
 });
 
 export default RootReducer;

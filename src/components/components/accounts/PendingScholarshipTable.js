@@ -12,7 +12,6 @@ import {
 } from "react-table";
 import updown_sort from "../../assests/image/updown_sort.svg";
 import { TableCheckbox } from "../tableComponents/TableCheckbox";
-import tableData from "./pending_fees.json";
 import {
   CDropdown,
   CDropdownMenu,
@@ -20,6 +19,10 @@ import {
   CPopover,
 } from "@coreui/react";
 import filtericon from "../../assests/image/AccountIcons/filter.svg";
+import pendingScholarship from '../../../redux/actionDispatcher/account/pendingScholarshipTableDispatcher'
+import AllUrl from "../../../redux/constants/url";
+import { connect } from "react-redux";
+import SkeletonColor from "../../../helpers/Skeletrone";
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
   const arr = [];
@@ -66,6 +69,7 @@ function SelectColumnFilter({
                   <Fragment key={i}>
                     <div id={`${id}`}>
                       <input
+                        checked={filterValue.includes(option)}
                         type="checkbox"
                         className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
                         id={option}
@@ -141,8 +145,24 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
   );
 }
 
-export default function PendingScholarshipTable() {
-  const data = React.useMemo(() => tableData, []);
+function PendingScholarshipTable({ scholarData, fetchData }) {
+  const token = localStorage.getItem("token");
+  React.useEffect(() => {
+    var config = {
+      method: "GET",
+      url: AllUrl.pendingScholarship,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    fetchData(config);
+    // settable_data(table_data.table_data);
+    // eslint-disable-next-line
+  }, []);
+
+  // const data = React.useMemo(() => tableData, []);
 
   const columns = React.useMemo(
     () => [
@@ -244,7 +264,7 @@ export default function PendingScholarshipTable() {
     preGlobalFilteredRows,
     prepareRow,
   } = useTable(
-    { columns, data },
+    { columns, data: scholarData.table_data },
     useGlobalFilter,
     useFilters,
     useSortBy,
@@ -278,7 +298,11 @@ export default function PendingScholarshipTable() {
   );
   console.log(checkboxData);
 
-  return (
+  return scholarData.loading ? (
+    <SkeletonColor></SkeletonColor>
+  ) : scholarData.error ? (
+    <h2>{scholarData.error}</h2>
+  ) : (
     <Fragment>
       <div className="container-fluid">
         <div className="d-flex">
@@ -319,7 +343,7 @@ export default function PendingScholarshipTable() {
                 component={"div"}
                 className="pt-0 "
                 placement="bottom-end"
-              
+
               >
                 <div>
                   {headerGroups.map((headerGroup) => (
@@ -416,3 +440,20 @@ export default function PendingScholarshipTable() {
     </Fragment>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    scholarData: state.pendingScholarship,
+  };
+};
+
+//passing the userData in fetchData function and also dispatch method
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: (data) => dispatch(pendingScholarship(data)),
+  };
+};
+
+//Connecting the component to our store
+export default connect(mapStateToProps, mapDispatchToProps)(PendingScholarshipTable);
+
