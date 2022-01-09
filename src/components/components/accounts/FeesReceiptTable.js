@@ -7,8 +7,8 @@ import updown_sort from '../../assests/image/updown_sort.svg'
 import { TableCheckbox } from '../tableComponents/TableCheckbox';
 import tableData from './fees_receipt.json'
 import filtericon from '../../assests/image/AccountIcons/filter.svg'
-import { CAvatar, CDropdown, CDropdownMenu, CDropdownToggle } from "@coreui/react";
 
+import { CPopover } from '@coreui/react'
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -276,29 +276,22 @@ export default function FeesReceiptTable() {
 
 
                     <div className='d-flex ml-auto me-1'>
-                        {/* <img src={filtericon} alt='' style={{ cursor: 'pointer', borderRadius: '1px', backgroundColor: 'white', height: '30px', width: '30px', marginRight: '10px', marginTop: '5px' }} /> */}
+                        <div className='ml-auto me-4' style={{ flexDirection: 'basis' }}>
+                            <CPopover
+                                content={
+                                    <div className='ml-auto me-4'>
+                                        <GlobalFilter
+                                            preGlobalFilteredRows={preGlobalFilteredRows}
+                                            filter={globalFilter}
+                                            setFilter={setGlobalFilter}
+                                        />
+                                    </div>
+                                }
+                                placement="bottom"
+                            >
+                                <img src={filtericon} alt='' style={{ cursor: 'pointer', borderRadius: '1px', backgroundColor: '#f4f7fc', height: '30px', width: '30px', marginRight: '10px', marginTop: '-9px' }} size="lg" />
+                            </CPopover>
 
-
-
-
-                        <CDropdown variant="nav-item" >
-                            <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-                                <CAvatar src={filtericon} alt='' style={{ cursor: 'pointer', borderRadius: '1px', backgroundColor: '#f4f7fc', height: '30px', width: '30px', marginRight: '10px', marginTop: '-9px' }} size="lg" />
-                            </CDropdownToggle>
-
-                            <CDropdownMenu component={'div'} className="pt-0 " placement="bottom-end" style={{ borderRadius: '3px', border: '1px solid black', backgroundColor: 'white', marginLeft: '-223px', height: '-webkit - fill - available', marginTop: '10px' }} >
-                                <div style={{ flexDirection: 'column', backgroundColor: 'white', minHeight: '150px', width: '270px', alignItems: 'center', display: 'flex', flex: 'basis' }}>
-                                    sfasfdsaf
-                                </div>
-                            </CDropdownMenu>
-                        </CDropdown >
-
-
-
-
-
-
-                        <div className='ml-auto me-4'>
                             <GlobalFilter
                                 preGlobalFilteredRows={preGlobalFilteredRows}
                                 filter={globalFilter}

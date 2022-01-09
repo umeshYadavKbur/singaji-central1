@@ -14,6 +14,10 @@ export const MultipleFilter = (rows, accessor, filterValue) => {
     return arr;
 };
 
+
+
+
+
 function setFilteredParams(filterArr, val) {
     if (filterArr.includes(val)) {
         filterArr = filterArr.filter((n) => {
@@ -24,7 +28,6 @@ function setFilteredParams(filterArr, val) {
     if (filterArr.length === 0) filterArr = undefined;
     return filterArr;
 }
-
 function SelectColumnFilter({
     column: { filterValue = [], setFilter, preFilteredRows, id }
 }) {
@@ -41,10 +44,10 @@ function SelectColumnFilter({
         <Fragment>
             <div className="block">
                 {/* <span className="block capitalize mb-4">{id}</span> */}
-                <div className="accordion accordion-flush" id="accordionFlushExample">
-                    <div className="accordion-item">
-                        <h2 className="accordion-header" id="flush-headingOne">
-                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${id}`} aria-expanded="false" aria-controls={`${id}`}>
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${id}`} aria-expanded="false" aria-controls={`${id}`}>
                                 {id}
                             </button>
                         </h2>
@@ -55,7 +58,7 @@ function SelectColumnFilter({
                 {options.map((option, i) => {
                     return (
                         <Fragment key={i}>
-                            <div id={`${id}`} className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div id={`${id}`} class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <input
                                     type="checkbox"
                                     className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
@@ -66,7 +69,6 @@ function SelectColumnFilter({
                                         setFilter(setFilteredParams(filterValue, e.target.value));
                                     }}
                                 ></input>
-
                                 <label
                                     htmlFor={option}
                                     className="ml-1.5 font-medium text-gray-700"
