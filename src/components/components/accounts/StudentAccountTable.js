@@ -62,70 +62,76 @@ function setFilteredParams(filterArr, val) {
 }
 function SelectColumnFilter({
     column: { filterValue = [], setFilter, preFilteredRows, id },
-}) {
+  }) {
     const options = useMemo(() => {
-        const options = new Set();
-
-        preFilteredRows.forEach((row) => {
-            options.add(row.values[id]);
-        });
-        return [...options.values()];
+      const options = new Set();
+  
+      preFilteredRows.forEach((row) => {
+        options.add(row.values[id]);
+      });
+      return [...options.values()];
     }, [id, preFilteredRows]);
-
+  
     return (
-        <Fragment>
-            <div className="block">
-                {/* <span className="block capitalize mb-4">{id}</span> */}
-
-                <CPopover
-                    content={
-                        <div className="ml-auto me-4">
-                            {/* Content  */}
-                            {/* eslint-disable-next-line */}
-                            {options.map((option, i) => {
-                                return (
-                                    <Fragment key={i}>
-                                        <div id={`${id}`}>
-                                            <input
-                                                type="checkbox"
-                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                                                id={option}
-                                                name={option}
-                                                value={option}
-                                                onChange={(e) => {
-                                                    setFilter(
-                                                        setFilteredParams(filterValue, e.target.value)
-                                                    );
-                                                }}
-                                            ></input>
-                                            <label
-                                                htmlFor={option}
-                                                className="ml-1.5 font-medium text-gray-700"
-                                            >
-                                                {option}
-                                            </label>
-                                        </div>
-                                    </Fragment>
-                                );
-                            })}
-                        </div>
-                    }
-                    placement="right"
-                >
-                    <div class="btn-group dropright">
-                        <button
-                            type="button"
-                            class="btn  dropdown-toggle"
-                            data-bs-toggle="collapse"
+      <Fragment>
+        <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
+          {/* <span className="block capitalize mb-4">{id}</span> */}
+  
+          <CPopover
+           
+         
+            content={
+              <div className="">
+  
+                {options.map((option, i) => {
+                  return (
+  
+                    <Fragment key={i}>
+                      <div id={`${id}`}>
+                        <input
+                          type="checkbox"
+                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                          id={option}
+                          name={option}
+                          value={option}
+                          style={{ cursor: 'pointer' }}
+                          onChange={(e) => {
+  
+                            setFilter(
+                              setFilteredParams(filterValue, e.target.value)
+                            );
+                          }}
+                          onClick={(e) => { e.stopPropagation() }}
+                        ></input>
+                        <label
+                          htmlFor={option}
+                          className="ml-1.5 font-medium text-gray-700"
                         >
-                            {id}
-                        </button>
-                    </div>
-                </CPopover>
+                          {option}
+                        </label>
+                      </div>
+                    </Fragment>
+                  );
+                })}
+              </div>
+            }
+            placement="right"
+          >
+            <div className="btn-group dropright">
+              <button
+  
+                onClick={(e) => { e.preventDefault() }}
+                className="btn  dropdown-toggle"
+  
+              >
+                {id}
+              </button>
             </div>
-        </Fragment>
+          </CPopover>
+        </div>
+      </Fragment>
     );
-}
+  }
 
 // Define a default UI for filtering
 function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
@@ -564,6 +570,7 @@ function StudentAccountTable({ fetchUsers, studentData }) {
 
                                     <CDropdownMenu
                                         component={"div"}
+                                        style={{ width: 'auto' }}
                                         className="pt-0 "
                                         placement="bottom-end"
 
