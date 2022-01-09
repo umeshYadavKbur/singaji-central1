@@ -19,6 +19,7 @@ import StudentProfile from "../components/accounts/StudentProfile";
 import UploadDocumentFrom from "../components/accounts/UploadDocumentFrom";
 import FeesRecipt from "../components/accounts/FeesRecipt";
 import PendingScholarshipTable from "../components/accounts/PendingScholarshipTable";
+//Test 
 import FeesReceiptTable from "../components/accounts/FeesReceiptTable";
 
 function AdminDashboard() {

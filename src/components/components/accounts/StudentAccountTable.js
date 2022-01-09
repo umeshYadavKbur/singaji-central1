@@ -1,27 +1,168 @@
-import React, { useState } from 'react';
-import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
+import React, { useState } from "react";
+// import "../styles/Table.css";
+import { Fragment, useMemo } from "react";
+import {
+    useTable,
+    useFilters,
+    useSortBy,
+    useGlobalFilter,
+    usePagination,
+    useRowSelect,
+    useAsyncDebounce,
+} from "react-table";
+// import updown_sort from "../../assests/image/updown_sort.svg";
+import { TableCheckbox } from "../tableComponents/TableCheckbox";
+// import tableData from "./pending_fees.json";
+import {
+    CDropdown,
+    CDropdownMenu,
+    CDropdownToggle,
+    CPopover,
+} from "@coreui/react";
+import filtericon from "../../assests/image/AccountIcons/filter.svg";
+import { CSVLink } from "react-csv";
+import { DateRangePicker } from "rsuite";
+// import React, { useState } from 'react';
+// import { useTable, useSortBy, useGlobalFilter, usePagination, useRowSelect } from 'react-table';
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
-import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
+// import { GlobalFilter } from '../../components/tableComponents/GlobalFilter';
 import { isSuperAdmin } from '../../../helpers/SuperAdmin';
 import { isAccountAdmin } from '../../../helpers/AccountAdmin';
 import { isStudentAdmin } from '../../../helpers/StudentAdmin';
 import allUrls from '../../../redux/constants/url'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { DateRangePicker } from 'rsuite';
+// import { DateRangePicker } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
-import { TableCheckbox } from '../tableComponents/TableCheckbox';
+// import { TableCheckbox } from '../tableComponents/TableCheckbox';
 import AllUrl from '../../../redux/constants/url';
 import { connect } from 'react-redux';
 import { fetchStudentAccountData } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
 import SkeletonColor from '../../../helpers/Skeletrone';
-import { CSVDownload, CSVLink } from 'react-csv';
+// import { CSVDownload, CSVLink } from 'react-csv';
 
-// import { TablePagination } from 'react-pagination-table';
+export const MultipleFilter = (rows, accessor, filterValue) => {
+    const arr = [];
+    rows.forEach((val) => {
+        if (filterValue.includes(val.original[accessor])) arr.push(val);
+    });
+    return arr;
+};
 
+function setFilteredParams(filterArr, val) {
+    if (filterArr.includes(val)) {
+        filterArr = filterArr.filter((n) => {
+            return n !== val;
+        });
+    } else filterArr.push(val);
 
-const StudentAccount = ({ fetchUsers, studentData }) => {
+    if (filterArr.length === 0) filterArr = undefined;
+    return filterArr;
+}
+function SelectColumnFilter({
+    column: { filterValue = [], setFilter, preFilteredRows, id },
+}) {
+    const options = useMemo(() => {
+        const options = new Set();
+
+        preFilteredRows.forEach((row) => {
+            options.add(row.values[id]);
+        });
+        return [...options.values()];
+    }, [id, preFilteredRows]);
+
+    return (
+        <Fragment>
+            <div className="block">
+                {/* <span className="block capitalize mb-4">{id}</span> */}
+
+                <CPopover
+                    content={
+                        <div className="ml-auto me-4">
+                            {/* Content  */}
+                            {/* eslint-disable-next-line */}
+                            {options.map((option, i) => {
+                                return (
+                                    <Fragment key={i}>
+                                        <div id={`${id}`}>
+                                            <input
+                                                type="checkbox"
+                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                                                id={option}
+                                                name={option}
+                                                value={option}
+                                                onChange={(e) => {
+                                                    setFilter(
+                                                        setFilteredParams(filterValue, e.target.value)
+                                                    );
+                                                }}
+                                            ></input>
+                                            <label
+                                                htmlFor={option}
+                                                className="ml-1.5 font-medium text-gray-700"
+                                            >
+                                                {option}
+                                            </label>
+                                        </div>
+                                    </Fragment>
+                                );
+                            })}
+                        </div>
+                    }
+                    placement="right"
+                >
+                    <div class="btn-group dropright">
+                        <button
+                            type="button"
+                            class="btn  dropdown-toggle"
+                            data-bs-toggle="collapse"
+                        >
+                            {id}
+                        </button>
+                    </div>
+                </CPopover>
+            </div>
+        </Fragment>
+    );
+}
+
+// Define a default UI for filtering
+function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
+    const count = preGlobalFilteredRows.length;
+    const [value, setValue] = React.useState(filter);
+    const onChange = useAsyncDebounce((value) => {
+        setFilter(value || undefined);
+    }, 200);
+
+    return (
+        <>
+            <input
+                style={{
+                    width: "270px",
+                    height: "41px",
+                    outline: "none",
+                    border: "1px solid #7979792b",
+                    padding: "5px",
+                    borderRadius: "4px",
+                }}
+                type="search"
+                value={filter || ""}
+                onChange={(e) => {
+                    setValue(e.target.value);
+                    onChange(e.target.value);
+                }}
+                placeholder={`Search ${count} records...`}
+            />
+            <i
+                style={{ marginLeft: "-31px", color: "rgb(90, 96, 127,0.7)" }}
+                className="fas fa-search"
+            ></i>
+        </>
+    );
+}
+
+function StudentAccountTable({ fetchUsers, studentData }) {
 
     React.useEffect(() => {
         var config = {
@@ -82,108 +223,135 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
         }
     }
 
-    const mainColoumns = [
-        {
-            Header: 'S.no',
-            accessor: "Srno",
-            Cell: ({ row: { original, index } }) => {
-                return (index + 1)
-            }
-        },
-        {
 
-            Header: "Profile",
-            accessor: "photo",
+    // const data = React.useMemo(() => tableData, []);
 
-            Cell: ({ row: { original, index } }) => (
-                <div className="d-flex m-0 flex-column justify-content-start">
-                    <img
-                        alt="profile"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                            getAllInfoOfStudent(original)
-                        }}
-                        className="mx-auto"
-                        src={original.photo}
-                        width={50}
-                        textColor="#fff"
-                        text="Image"
-                    />
-                </div >
-            ),
+    const mainColoumns = React.useMemo(
+        () => [
+            {
+                header: "S No",
+                accessor: "Srno",
+                Cell: ({ row: { original, index } }) => {
+                    return index + 1;
+                },
+                Filter: "",
+                filter: "",
+            },
+            {
+                header: "Profile",
+                accessor: "photo",
 
-        },
+                Cell: ({ row: { original, index } }) => (
+                    <div className="d-flex m-0 flex-column justify-content-start">
+                        <img
+                            alt="profile"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => {
+                                // getAllInfoOfStudent(original)
+                            }}
+                            className="mx-auto"
+                            src={original.photo}
+                            width={50}
+                            textColor="#fff"
+                            text="Image"
+                        />
+                    </div >
+                ),
+                Filter: "",
+                filter: "",
+            },
+            {
+                header: 'Name',
+                accessor: 'name',
+                Filter: "",
+                filter: "",
+            },
+            {
+                header: 'Father name',
+                accessor: 'fathersName',
+                Filter: "",
+                filter: "",
+            },
+            {
+                header: "Mobile no",
+                accessor: "mobile",
+                Filter: "",
+                filter: "",
+            },
+            {
+                header: "Stream",
+                accessor: "stream",
+                Filter: SelectColumnFilter,
+                filter: MultipleFilter,
+            },
+            {
+                header: 'Village',
+                accessor: 'village',
+                Filter: SelectColumnFilter,
+                filter: MultipleFilter,
+            },
+            {
+                header: 'Received Fee',
+                accessor: 'received_Amount',
+                Cell: ({ row: { original } }) => (
+                    <div className='row d-flex d-inline-flex'>
+                        <div className="col">
+                            <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000" }}></span>
 
-        {
-            Header: 'Name',
-            accessor: 'name'
-        },
-        {
-            Header: 'Father name',
-            accessor: 'fathersName'
-        },
-        {
-            Header: 'Mobile No.',
-            accessor: 'mobile'
-        },
-        {
-            Header: 'Stream',
-            accessor: 'stream'
-        },
-        {
-            Header: 'Village',
-            accessor: 'village'
-        },
-        {
-            Header: 'Received Fee',
-            accessor: 'received_Amount',
-            Cell: ({ row: { original } }) => (
-                <div className='row d-flex d-inline-flex'>
-                    <div className="col">
-                        <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000" }}></span>
-
+                        </div>
+                        <div className="col">
+                            <span className='' >
+                                {original.received_Amount}
+                            </span>
+                        </div>
                     </div>
-                    <div className="col">
-                        <span className='' >
-                            {original.received_Amount}
-                        </span>
-                    </div>
-                </div>
-            ),
-        },
-        {
-            Header: 'Pending Fee',
-            accessor: 'remain_Amount',
-            Cell: ({ row: { original } }) => (
-                <div className='row d-flex d-inline-flex'>
-                    <div className="col">
-                        <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A" }}></span>
+                ),
+                Filter: SelectColumnFilter,
+                filter: MultipleFilter,
+            },
+            {
+                header: 'Pending Fee',
+                accessor: 'remain_Amount',
+                Cell: ({ row: { original } }) => (
+                    <div className='row d-flex d-inline-flex'>
+                        <div className="col">
+                            <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A" }}></span>
 
+                        </div>
+                        <div className="col">
+                            <span className='' >
+                                {original.remain_Amount}
+                            </span>
+                        </div>
                     </div>
-                    <div className="col">
-                        <span className='' >
-                            {original.remain_Amount}
-                        </span>
-                    </div>
-                </div>
-            ),
-        },
-        {
-            Header: 'Action',
-            accessor: ''
-        }
-    ]
+                ),
+                Filter: "",
+                filter: "",
+            },
+            // {
+            //     header: 'Action',
+            //     accessor: "",
+            //     Filter: "",
+            //     filter: "",
+            // },
+        ],
+        []
+    );
+
+
 
     const dailyReportColumn = [
         {
-            Header: 'S.no',
+            header: 'S.no',
             accessor: "Srno",
             Cell: ({ row: { original, index } }) => {
                 return (index + 1)
-            }
+            },
+            Filter: "",
+            filter: "",
         },
         {
-            Header: "Name",
+            header: "Name",
             accessor: "name",
 
             Cell: ({ row: { original, index } }) => (
@@ -192,7 +360,7 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                         alt="profile"
                         style={{ cursor: "pointer" }}
                         onClick={() => {
-                            getAllInfoOfStudent(original)
+                            // getAllInfoOfStudent(original)
                         }}
                         className="mx-auto"
                         src={original.photo}
@@ -203,22 +371,31 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                     <p className="mx-auto"> {original.name}</p>
                 </div >
             ),
+            Filter: "",
+            filter: "",
         },
         {
-            Header: 'Father name',
-            accessor: 'fathersName'
+            header: 'Father name',
+            accessor: 'fathersName',
+            Filter: "",
+            filter: "",
         },
         {
-            Header: 'Mobile No.',
-            accessor: 'mobile'
+            header: 'Mobile No.',
+            accessor: 'mobile',
+            Filter: "",
+            filter: "",
         },
         {
-            Header: 'Stream',
-            accessor: 'stream'
+            header: 'Stream',
+            accessor: 'stream',
+            Filter: "",
+            filter: "",
         }
     ]
 
     const [columns, setColoumns] = useState(mainColoumns)
+
 
     const showDailyReport = () => {
 
@@ -228,36 +405,6 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
 
 
     }
-    // -----------------------------------------------------------------------------------------------
-    // const columns = useMemo(() => COLUMNS, [])
-    // const data = useMemo(() => StuAccmockdata, [])
-    // studentData
-
-    const tableInstance = useTable({
-        columns,
-        data: studentData.table_data
-    },
-        useGlobalFilter,
-        useSortBy,
-        usePagination,
-        useRowSelect,
-        (hooks) => {
-            hooks.visibleColumns.push((columns) => {
-                return [
-                    {
-                        id: "selection",
-                        Header: ({ getToggleAllRowsSelectedProps }) => (
-                            < TableCheckbox {...getToggleAllRowsSelectedProps()} />
-                        ),
-                        Cell: ({ row }) => (
-                            <TableCheckbox {...row.getToggleRowSelectedProps()} />
-                        ),
-                    },
-                    ...columns,
-                ];
-            });
-        }
-    )
 
     const {
         getTableProps,
@@ -269,16 +416,39 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
         canPreviousPage,
         canNextPage,
         setPageSize,
-
-        pageCount,
+        pageOptions,
         selectedFlatRows,
-        prepareRow,
         state,
-        setGlobalFilter
-    } = tableInstance
+        setGlobalFilter,
+        rows,
+        preGlobalFilteredRows,
+        prepareRow,
+    } = useTable(
+        { columns, data: studentData.table_data },
+        useGlobalFilter,
+        useFilters,
+        useSortBy,
+        usePagination,
+        useRowSelect,
+        (hooks) => {
+            hooks.visibleColumns.push((columns) => {
+                return [
+                    {
+                        id: "selection",
+                        header: ({ getToggleAllRowsSelectedProps }) => (
+                            <TableCheckbox {...getToggleAllRowsSelectedProps()} />
+                        ),
+                        Cell: ({ row }) => (
+                            <TableCheckbox {...row.getToggleRowSelectedProps()} />
+                        ),
+                    },
+                    ...columns,
+                ];
+            });
+        }
+    );
 
-    const { globalFilter, pageSize } = state;
-    const { pageIndex } = state;
+    const { globalFilter, pageSize, pageIndex, selectedRowIds } = state;
     var exportData = [];
     var exportCsv = [];
     const checkboxData = JSON.stringify(
@@ -302,12 +472,13 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
         2
     );
     console.log(checkboxData)
+
     return studentData.loading ? (
         <SkeletonColor></SkeletonColor>
     ) : studentData.error ? (
         <h2>{studentData.error}</h2>
     ) : (
-        <>
+        <Fragment>
             {loading && (
                 <div
                     className="lds-roller"
@@ -347,112 +518,148 @@ const StudentAccount = ({ fetchUsers, studentData }) => {
                     </div>
                 </div>
                 <div className="row  mx-0 mt-3" style={{ width: "98%" }}>
-                    <div className="col d-flex">
-                        <select className='form-select select-acc-student' value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-                            {
-                                [10, 25, 50].map(pageSize => (
-                                    <option value={pageSize} key={pageSize} >
-                                        Show {pageSize}
-                                    </option>
-                                )
 
-                                )
-                            }
-                        </select>
-                        <div className="col-2">
-                            <CSVLink className='btn  download-btn' data={exportCsv}>Download</CSVLink>
+                    <div className="d-flex">
+                        <div className="">
+                            <select
+                                className="form-select table_select_row_options"
+                                value={pageSize}
+                                onChange={(e) => setPageSize(Number(e.target.value))}
+                            >
+                                {[10, 25, 50, 100].map((pageSize) => (
+                                    <option value={pageSize} key={pageSize}>
+                                        Show Entries {pageSize}
+                                    </option>
+                                ))}
+                                <CSVLink className='btn  download-btn' data={exportCsv}>Download</CSVLink>
+                            </select>
                         </div>
-                        <div className="col">
+
+                        <div className="d-flex ml-auto me-1">
                             <DateRangePicker onExit={() => { setColoumns(mainColoumns) }} onChange={(val) => { console.log(val) }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
                             <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
+                            <CDropdown variant="nav-item">
+                                <CDropdownToggle
+                                    placement="bottom-end"
+                                    className="py-0"
+                                    caret={false}
+                                >
+                                    <img
+                                        src={filtericon}
+                                        alt=""
+                                        style={{
+                                            height: "35px",
+                                            width: "35px",
+                                            marginTop: "-34px",
+                                            marginRight: "5px",
+                                        }}
+                                    />
+                                </CDropdownToggle>
+
+                                <CDropdownMenu
+                                    component={"div"}
+                                    className="pt-0 "
+                                    placement="bottom-end"
+
+                                >
+                                    <div>
+                                        {headerGroups.map((headerGroup) => (
+                                            <div
+                                                style={{ display: "flex flex-column" }}
+                                                {...headerGroup.getHeaderGroupProps()}
+                                            >
+                                                {headerGroup.headers.map((column, i) => (
+                                                    <div
+                                                        key={i}
+                                                        style={{ display: "block", justifyContent: "center" }}
+                                                    >
+                                                        {column.canFilter ? column.render("Filter") : null}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </CDropdownMenu>
+                            </CDropdown>
+
+                            <div className="ml-auto me-4">
+                                <GlobalFilter
+                                    preGlobalFilteredRows={preGlobalFilteredRows}
+                                    filter={globalFilter}
+                                    setFilter={setGlobalFilter}
+                                />
+                            </div>
                         </div>
                     </div>
 
-
-                    <div className="col-4 d-flex justify-content-end " >
-                        <div style={{ marginRight: '-9px' }}>
-
-                            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-                        </div>
-                    </div>
-                </div>
-
-
-                {/* <GlobalFilter/> */}
-                <table id='customers' {...getTableProps()} >
-                    <thead>
-                        {headerGroups.map((headerGroups) => (
-                            <tr {...headerGroups.getHeaderGroupProps()}>
-
-                                {headerGroups.headers.map(column => (
-                                    <th{...column.getHeaderProps(column.getSortByToggleProps())}>
-                                        {column.render("Header")}
-                                        <span>
-                                            {/* {column.isSorted ? (column.isSortedDesc ? <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> : <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />) : ''} */}
-                                            {/* {column.isSorted ? (column.isSortedDesc ? '' : '') : ''} */}
-                                            {/* <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" /> */}
-                                            {column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
+                    <table {...getTableProps()} id="customers">
+                        <thead>
+                            {headerGroups.map((headerGroup) => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map((column) => (
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render("header")}
+                                            <span>
+                                                {column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <img
+                                                            src={updown_sort}
+                                                            style={{ marginLeft: "5px" }}
+                                                            alt=""
+                                                        />
+                                                    ) : (
+                                                        <img
+                                                            src={updown_sort}
+                                                            style={{ marginLeft: "5px" }}
+                                                            alt=""
+                                                        />
+                                                    )
                                                 ) : (
-                                                    <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
-                                                    // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
-                                                )
-                                            ) : (
-
-                                                column.id !== 'Srno' && column.id !== 'selection' && column.id !== 'photo' && column.id !== 'mobile' && column.id !== '' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
-
-
-                                            )}
-                                        </span>
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {
-                            page.map(row => {
-                                prepareRow(row)
+                                                    ""
+                                                )}
+                                                {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
+                                            </span>
+                                        </th>
+                                    ))}
+                                </tr>
+                            ))}
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {page.map((row) => {
+                                prepareRow(row);
                                 return (
-                                    <tr {...row.getRowProps()} >
-                                        {
-                                            row.cells.map(cell => {
-                                                return (
-                                                    <td{...cell.getCellProps()}>
-                                                        {cell.render('Cell')}
-                                                    </td>
-                                                )
-                                            })
-                                        }
-
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map((cell) => {
+                                            return (
+                                                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                            );
+                                        })}
                                     </tr>
-                                )
-                            })
-                        }
-
-                    </tbody>
-                </table>
-                <div className='row pagination-div'>
-                    <div className="col">
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                    <div>
                         <span>
-                            Showing {page.length * (pageIndex + 1) - (page.length - 1)} to{" "}
-                            {page.length * (pageIndex + 1)} of {pageCount * pageSize} Entries{" "}
-                            {"  "}
+                            Page{" "}
+                            <strong>
+                                {pageIndex + 1} of {pageOptions.length}
+                            </strong>{" "}
                         </span>
-                    </div>
-                    <div className="col d-flex justify-content-md-end" style={{ height: "15px", marginBottom: "10px" }}>
-
-                        <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
-                        <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                            Previous
+                        </button>
+                        <button onClick={() => nextPage()} disabled={!canNextPage}>
+                            Next
+                        </button>
                     </div>
                 </div>
             </div>
-        </>
-    )
+
+        </Fragment>
+    );
 }
-//Getting the state from the store
+
 const mapStateToProps = (state) => {
     return {
         studentData: state.accountStudentTableData,
@@ -467,5 +674,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 //Connecting the component to our store
-export default connect(mapStateToProps, mapDispatchToProps)(StudentAccount);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentAccountTable);
 
