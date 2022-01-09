@@ -531,11 +531,11 @@ function StudentAccountTable({ fetchUsers, studentData }) {
                                         Show Entries {pageSize}
                                     </option>
                                 ))}
-                                <CSVLink className='btn  download-btn' data={exportCsv}>Download</CSVLink>
                             </select>
                         </div>
 
                         <div className="d-flex ml-auto me-1">
+                            <CSVLink className='btn  download-btn' data={exportCsv}>Download</CSVLink>
                             <DateRangePicker onExit={() => { setColoumns(mainColoumns) }} onChange={(val) => { console.log(val) }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
                             <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
                             <CDropdown variant="nav-item">
