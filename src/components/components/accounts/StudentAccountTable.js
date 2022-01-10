@@ -386,11 +386,18 @@ function StudentAccountTable({ fetchUsers, studentData }) {
 
     const [columns, setColoumns] = useState(mainColoumns)
     const showDailyReport = async () => {
+        function convert(str) {
+            var date = new Date(str),
+                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                day = ("0" + date.getDate()).slice(-2);
+            return [date.getFullYear(), mnth, day].join("-");
+        }
 
-        var first = JSON.stringify(date.a)
-        var last = JSON.stringify(date.b)
-        first = first.slice(0, 12 - 1)
-        last = last.slice(0, 12 - 1)
+        var first = convert(date.a)
+        var last = convert(date.b)
+        console.log(first, last);
+        // first = first.slice(0, 12 - 1)
+        // last = last.slice(0, 12 - 1)
 
 
         var config = {
