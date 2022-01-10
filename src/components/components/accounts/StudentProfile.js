@@ -16,6 +16,8 @@ import Select from 'react-select'
 import axios from 'axios'
 import {styled,Box} from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
+import * as Yup from "yup";
+
 
 
 const StyledModal = styled(ModalUnstyled)`
@@ -101,14 +103,70 @@ function StudentProfile() {
         streamName: StudentProfileData.accountInfo.branch,
         aadharNumber: StudentProfileData.accountInfo.aadarNo,
         year: StudentProfileData.accountInfo.year,
+        EnrollmentNumber:'',
 
     }
-  
+    const validationSchema=Yup.object({
+        studentName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!"),
+        fatherName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!"),
+        dob: Yup.string().required("Required!").test('doc_check','Minimum age must be 12-14 years',val => val?.slice(0,4) <= (new Date().getFullYear()) - 13),
+        contactNumber: Yup.string().trim().min(10,'Must be exactly 10 digits').required("Required!"),
+        FatherContactNumber: Yup.string().trim().min(10,'Must be exactly 10 digits').required("Required!"),
+        year: Yup.string().required("Required!"),
+        aadharNumber: Yup.string().trim().required("Required!").test('len','Must be exactly 12 digits',val => val?.replace('X','').length === 14),
+        village: Yup.string().required("Required!").trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates'),
+        EnrollmentNumber: Yup.string().required("Required!").trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates'),
+        streamName: Yup.string().required("Required!"),
+
+       
+    })
 
     const formik = useFormik({
         initialValues,
+        validationSchema,
         onSubmit: (values) => {
             console.log(values);
+            const UpdatePersonalInfoData = {
+                "stdId": StudentProfileData.accountInfo.stdId,
+                "firstName": "sandhya",
+                "lastName": "jaiswal",
+                "photo": null,
+                "branch": formik.values.streamName,
+                "fathersName": formik.values.fatherName,
+                "dob": formik.values.dob,
+                "mobile": formik.values.contactNumber,
+                "fatherContactNumber":formik.values.FatherContactNumber,
+                "email": "sandhya123@gmail.com",
+                "schoolName": "fifth mountain academy",
+                "school12sub": "pcm",
+                "persentage12": "84",
+                "rollNumber12": "1234568765",
+                "persentage10": "84",
+                "rollNumber10": "123456756",
+                "aadarNo": formik.values.aadharNumber,
+                "fatherOccupation": "farmer",
+                "fatherIncome": "10000",
+                "category": "obc",
+                "gender": "male",
+                "pincode": "4553356",
+                "trackName": "khategaon",
+                "address": "gram-agarda",
+                "village": formik.values.village,
+                "tehsil": "khategaon",
+                "district": "dewas"
+            }
+            var config = {
+                method: 'post',
+                url: allUrls.updatePersonalInformation,
+                headers: {
+                    'Authorization': `Bearer  ${localStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
+                },
+                // data: UpdatePersonalInfoData
+            };
+
+            // const response = await axios(config)
+            // console.log(response);
         }
     })
     // formik.setFieldValue('village',StudentProfileData.accountInfo.village)
@@ -131,7 +189,7 @@ function StudentProfile() {
                         <br />
                         {StudentClassName + '  ' + `(${StudentProfileData.accountInfo.joinBatch + '-' + (parseInt(StudentProfileData.accountInfo.joinBatch) + 3)})`}
                     </div>
-                    <div class="btn-group" role="group" aria-label="Basic example">
+                    <div className="btn-group" role="group" aria-label="Basic example">
                         <button onClick={() => {navigate("feesrecipt");}} className="btn  btn-warning text-light fw-bold" type="submit">Reciept</button>
 
                         <button className="btn btn-outline-info fw-bold" type="submit" onClick={() => {navigate("uploaddocument");}}>Upload Document</button>
@@ -152,6 +210,8 @@ function StudentProfile() {
                 BackdropComponent={Backdrop}
             >
                 <Box sx={style}  >
+                    <form onSubmit={formik.handleSubmit}> 
+                
                     <div style={{borderRadius: '5px'}}>
 
                         <div className='d-flex fw-bold text-light p-2' style={{
@@ -376,11 +436,12 @@ function StudentProfile() {
                                     <div className="col"></div>
                                     <div className="col">
                                         <button type='submit' onClick={handleClose} className='btn btn-lg btn-light'>Cancel</button>
-                                   <button type='submit' className='btn btn-lg btn-primary'>Update</button>
+                                   <button type='submit' className='btn btn-lg btn-primary' >Update</button>
                                 </div></div>
                             </div>
                         </div>
                     </div>
+</form> 
                 </Box>
             </StyledModal>
 
