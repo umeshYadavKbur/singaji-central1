@@ -65,7 +65,7 @@ const AllUrl = {
 
     dailyReport: `${baseUrl}/api/daily_account_report/`,// these are date
     pendingScholarship: `${baseUrl}/api/get_scholarship_pending_list`,
-    feesReceiptTable: `${baseUrl}/api/fees_receipt_list/3&2`, // 3&2 are dynamic
+    feesReceiptTable: `${baseUrl}/api/fees_receipt_list/1&100`, // 3&2 are dynamic
 }
 export default AllUrl
 
