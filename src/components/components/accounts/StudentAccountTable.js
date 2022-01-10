@@ -65,58 +65,64 @@ function SelectColumnFilter({
     }, [id, preFilteredRows]);
 
     return (
-        <Fragment>
-            <div className="block">
-                {/* <span className="block capitalize mb-4">{id}</span> */}
+      <Fragment>
+        <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
+          {/* <span className="block capitalize mb-4">{id}</span> */}
 
-                <CPopover
-                    content={
-                        <div className="ml-auto me-4">
-                            {/* Content  */}
-                            {/* eslint-disable-next-line */}
-                            {options.map((option, i) => {
-                                return (
-                                    <Fragment key={i}>
-                                        <div id={`${id}`}>
-                                            <input
-                                                checked={filterValue.includes(option)}
-                                                type="checkbox"
-                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                                                id={option}
-                                                name={option}
-                                                value={option}
-                                                onChange={(e) => {
-                                                    setFilter(
-                                                        setFilteredParams(filterValue, e.target.value)
-                                                    );
-                                                }}
-                                            ></input>
-                                            <label
-                                                htmlFor={option}
-                                                className="ml-1.5 font-medium text-gray-700"
-                                            >
-                                                {option}
-                                            </label>
-                                        </div>
-                                    </Fragment>
-                                );
-                            })}
-                        </div>
-                    }
-                    placement="right"
-                >
-                    <div className="btn-group dropright">
-                        <button
-                            type="button"
-                            className="btn  dropdown-toggle"
-                            data-bs-toggle="collapse"
+          <CPopover
+
+
+            content={
+              <div className="">
+
+                {options.map((option, i) => {
+                  return (
+
+                    <Fragment key={i}>
+                      <div id={`${id}`}>
+                        <input
+                         checked={filterValue.includes(option)}
+                          type="checkbox"
+                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                          id={option}
+                          name={option}
+                          value={option}
+                          style={{ cursor: 'pointer' }}
+                          onChange={(e) => {
+
+                            setFilter(
+                              setFilteredParams(filterValue, e.target.value)
+                            );
+                          }}
+                          onClick={(e) => { e.stopPropagation() }}
+                        ></input>
+                        <label
+                          htmlFor={option}
+                          className="ml-1.5 font-medium text-gray-700"
                         >
-                            {id}
-                        </button>
+                            {option}
+                        </label>
                     </div>
-                </CPopover>
+                </Fragment>
+                );
+                })}
             </div>
-        </Fragment>
+            }
+            placement="right"
+          >
+            <div className="btn-group dropright">
+                <button
+
+                    onClick={(e) => { e.preventDefault() }}
+                    className="btn  dropdown-toggle"
+
+                >
+                    {id}
+                </button>
+            </div>
+        </CPopover>
+        </div >
+      </Fragment >
     );
 }
 
@@ -355,7 +361,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                         className="mx-auto"
                         src={original.photo}
                         width={50}
-                        textColor="#fff"
+                        // textColor="#fff"
                         text="Image"
                     />
                     <p className="mx-auto"> {original.name}</p>
@@ -467,19 +473,19 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
     const checkboxData = JSON.stringify(
         {
             selectedFlatRows: selectedFlatRows.map((row) => {
-                exportData.push(
-                    row.original
-                )
-                for (let i = 0; i < exportData.length; i++) {
-                    const element = exportData[i];
-                    // console.log(element.photo);
-                    if (element.photo) {
-                        continue
-                    }
-                    exportCsv.push(element)
-                }
+                let data = Object.assign({}, row.original);
+                console.log(data);
+                delete data.photo
+                // console.log(data);
+
+                console.log(data);
+                exportData.push(data)
+                // console.log(selectedData);
+                exportCsv.push(data)
+
             }
             )
+            // console.log);
         },
         null,
         2
@@ -592,6 +598,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
 
                                     <CDropdownMenu
                                         component={"div"}
+                                        style={{ width: 'auto' }}
                                         className="pt-0 "
                                         placement="bottom-end"
 

@@ -57,16 +57,18 @@ function SelectColumnFilter({
 
   return (
     <Fragment>
-      <div className="block">
+      <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
         {/* <span className="block capitalize mb-4">{id}</span> */}
 
         <CPopover
+         
+       
           content={
-            <div className="ml-auto me-4">
-              {/* Content  */}
-              {/* eslint-disable-next-line */}
+            <div className="">
+
               {options.map((option, i) => {
                 return (
+
                   <Fragment key={i}>
                     <div id={`${id}`}>
                       <input
@@ -76,11 +78,14 @@ function SelectColumnFilter({
                         id={option}
                         name={option}
                         value={option}
+                        style={{ cursor: 'pointer' }}
                         onChange={(e) => {
+
                           setFilter(
                             setFilteredParams(filterValue, e.target.value)
                           );
                         }}
+                        onClick={(e) => { e.stopPropagation() }}
                       ></input>
                       <label
                         htmlFor={option}
@@ -353,6 +358,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
 
               <CDropdownMenu
                 component={"div"}
+                style={{ width: 'auto' }}
                 className="pt-0 "
                 placement="bottom-end"
 
