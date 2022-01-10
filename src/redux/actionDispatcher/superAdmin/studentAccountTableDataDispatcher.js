@@ -3,9 +3,8 @@ import {
   FETCH_STUDENTACCOUNT_DATA,
   STUDENTACCOUNT_TABLE_DATA_FAIL,
   STUDENTACCOUNT_TABLE_DATA_SUCCESS,
-  // STUDENTACCOUNT_CHANGE_STATUS,
-  // STUDENTACCOUNT_TABLE_CHANGE_SUCCESS,
-  // STUDENTACCOUNT_TABLE_CHANGE_FAIL,
+  GET_DAILY_REPORT,
+  CHANGE_DAILY_REPORT,
 } from "../../constants/actions";
 // import AllUrl from "../../constants/url";
 
@@ -55,7 +54,7 @@ const fetchStuAccData = () => {
 const accStuDataSuccess = (data) => {
   return {
     type: STUDENTACCOUNT_TABLE_DATA_SUCCESS,
-    payload:data
+    payload: data
   }
 }
 
@@ -65,20 +64,15 @@ const accStuDataFail = () => {
   }
 }
 
-// const accStuDataStatusChange = () => {
-//     return {
-//         type: STUDENTACCOUNT_CHANGE_STATUS
-//     }
-// }
+export const getDailyReport = (data) => {
+  return {
+    type: GET_DAILY_REPORT,
+    payload: data
+  }
+}
+export const changeDailyReport = () => {
+  return {
+    type: CHANGE_DAILY_REPORT,
+  }
+}
 
-// const accStuDataStatusSuccess = () => {
-//     return {
-//         type: STUDENTACCOUNT_TABLE_CHANGE_SUCCESS
-//     }
-// }
-
-// const accStuDataStatusFail = () => {
-//     return {
-//         type: STUDENTACCOUNT_TABLE_CHANGE_FAIL
-//     }
-// }

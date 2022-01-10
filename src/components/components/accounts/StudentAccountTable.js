@@ -30,7 +30,7 @@ import { useNavigate } from 'react-router-dom';
 import "rsuite/dist/rsuite.min.css";
 import AllUrl from '../../../redux/constants/url';
 import { connect } from 'react-redux';
-import { fetchStudentAccountData } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
+import { fetchStudentAccountData, getDailyReport, changeDailyReport } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
 import SkeletonColor from '../../../helpers/Skeletrone';
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
@@ -155,7 +155,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
     );
 }
 
-function StudentAccountTable({ fetchUsers, studentData }) {
+function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData }) {
 
     React.useEffect(() => {
         var config = {
@@ -395,10 +395,6 @@ function StudentAccountTable({ fetchUsers, studentData }) {
 
         var first = convert(date.a)
         var last = convert(date.b)
-        console.log(first, last);
-        // first = first.slice(0, 12 - 1)
-        // last = last.slice(0, 12 - 1)
-
 
         var config = {
             method: "GET",
@@ -408,10 +404,12 @@ function StudentAccountTable({ fetchUsers, studentData }) {
                 "Content-Type": "application/json",
             },
         };
-        console.log("______________");
-        console.log(config);
+
         const result = await axios(config)
-        console.log(result);
+        //if the data is getting successfully than they set the data to upcoming data
+        if (result.status === 200) {
+            getReport(result.data)
+        }
         setColoumns(dailyReportColumn)
     }
 
@@ -482,6 +480,11 @@ function StudentAccountTable({ fetchUsers, studentData }) {
     );
     console.log(checkboxData)
 
+    const getBackPosition = () => {
+        backOriginal()
+        setColoumns(mainColoumns)
+    }
+
     return studentData.loading ? (
         <SkeletonColor></SkeletonColor>
     ) : studentData.error ? (
@@ -545,7 +548,9 @@ function StudentAccountTable({ fetchUsers, studentData }) {
                         <CSVLink className='btn  download-btn ml-3' data={exportCsv}>Download</CSVLink>
 
                         <div className="d-flex ml-1">
-                            <DateRangePicker onExit={() => { setColoumns(mainColoumns) }}
+                            <DateRangePicker onExit={() => {
+                                getBackPosition();
+                            }}
                                 onChange={(value) => {
                                     var a = value[0]
                                     var b = value[1]
@@ -693,6 +698,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchUsers: (data) => dispatch(fetchStudentAccountData(data)),
+        getReport: (data) => dispatch(getDailyReport(data)),
+        backOriginal: () => dispatch(changeDailyReport()),
+
     };
 };
 
