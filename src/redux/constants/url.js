@@ -62,6 +62,8 @@ const AllUrl = {
     //_____________________________________
 
     //Account admin tables url 
+
+    dailyReport: `${baseUrl}/api/daily_account_report/`,// these are date
     pendingScholarship: `${baseUrl}/api/get_scholarship_pending_list`,
     feesReceiptTable: `${baseUrl}/api/fees_receipt_list/3&2`, // 3&2 are dynamic
 }

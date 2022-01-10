@@ -51,6 +51,7 @@ function setFilteredParams(filterArr, val) {
     if (filterArr.length === 0) filterArr = undefined;
     return filterArr;
 }
+
 function SelectColumnFilter({
     column: { filterValue = [], setFilter, preFilteredRows, id },
 }) {
@@ -173,7 +174,7 @@ function StudentAccountTable({ fetchUsers, studentData }) {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const token = localStorage.getItem("token");
-
+    const [date, setDate] = useState({})
 
     const getAllInfoOfStudent = async (original) => {
         setLoading(true)
@@ -214,10 +215,7 @@ function StudentAccountTable({ fetchUsers, studentData }) {
             navigate('/admin_dashboard/studentprofile');
         }
     }
-
-
     // const data = React.useMemo(() => tableData, []);
-
     const mainColoumns = React.useMemo(
         () => [
             {
@@ -387,15 +385,27 @@ function StudentAccountTable({ fetchUsers, studentData }) {
     ]
 
     const [columns, setColoumns] = useState(mainColoumns)
+    const showDailyReport = async () => {
+
+        var first = JSON.stringify(date.a)
+        var last = JSON.stringify(date.b)
+        first = first.slice(0, 12 - 1)
+        last = last.slice(0, 12 - 1)
 
 
-    const showDailyReport = () => {
-
+        var config = {
+            method: "GET",
+            url: `${AllUrl.dailyReport}${first}&${last}`,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        };
+        console.log("______________");
+        console.log(config);
+        const result = await axios(config)
+        console.log(result);
         setColoumns(dailyReportColumn)
-
-
-
-
     }
 
     const {
@@ -528,7 +538,15 @@ function StudentAccountTable({ fetchUsers, studentData }) {
                         <CSVLink className='btn  download-btn ml-3' data={exportCsv}>Download</CSVLink>
 
                         <div className="d-flex ml-1">
-                            <DateRangePicker onExit={() => { setColoumns(mainColoumns) }} onChange={(val) => { console.log(val) }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
+                            <DateRangePicker onExit={() => { setColoumns(mainColoumns) }}
+                                onChange={(value) => {
+                                    var a = value[0]
+                                    var b = value[1]
+
+                                    setDate({
+                                        a, b
+                                    })
+                                }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
                             <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
                         </div>
 
