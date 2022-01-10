@@ -65,64 +65,64 @@ function SelectColumnFilter({
     }, [id, preFilteredRows]);
 
     return (
-      <Fragment>
-        <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
-          {/* <span className="block capitalize mb-4">{id}</span> */}
+        <Fragment>
+            <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
+                {/* <span className="block capitalize mb-4">{id}</span> */}
 
-          <CPopover
+                <CPopover
 
 
-            content={
-              <div className="">
+                    content={
+                        <div className="">
 
-                {options.map((option, i) => {
-                  return (
+                            {options.map((option, i) => {
+                                return (
 
-                    <Fragment key={i}>
-                      <div id={`${id}`}>
-                        <input
-                         checked={filterValue.includes(option)}
-                          type="checkbox"
-                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                          id={option}
-                          name={option}
-                          value={option}
-                          style={{ cursor: 'pointer' }}
-                          onChange={(e) => {
+                                    <Fragment key={i}>
+                                        <div id={`${id}`}>
+                                            <input
+                                                checked={filterValue.includes(option)}
+                                                type="checkbox"
+                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                                                id={option}
+                                                name={option}
+                                                value={option}
+                                                style={{ cursor: 'pointer' }}
+                                                onChange={(e) => {
 
-                            setFilter(
-                              setFilteredParams(filterValue, e.target.value)
-                            );
-                          }}
-                          onClick={(e) => { e.stopPropagation() }}
-                        ></input>
-                        <label
-                          htmlFor={option}
-                          className="ml-1.5 font-medium text-gray-700"
-                        >
-                            {option}
-                        </label>
-                    </div>
-                </Fragment>
-                );
-                })}
-            </div>
-            }
-            placement="right"
-          >
-            <div className="btn-group dropright">
-                <button
-
-                    onClick={(e) => { e.preventDefault() }}
-                    className="btn  dropdown-toggle"
-
+                                                    setFilter(
+                                                        setFilteredParams(filterValue, e.target.value)
+                                                    );
+                                                }}
+                                                onClick={(e) => { e.stopPropagation() }}
+                                            ></input>
+                                            <label
+                                                htmlFor={option}
+                                                className="ml-1.5 font-medium text-gray-700"
+                                            >
+                                                {option}
+                                            </label>
+                                        </div>
+                                    </Fragment>
+                                );
+                            })}
+                        </div>
+                    }
+                    placement="right"
                 >
-                    {id}
-                </button>
-            </div>
-        </CPopover>
-        </div >
-      </Fragment >
+                    <div className="btn-group dropright">
+                        <button
+
+                            onClick={(e) => { e.preventDefault() }}
+                            className="btn  dropdown-toggle"
+
+                        >
+                            {id}
+                        </button>
+                    </div>
+                </CPopover>
+            </div >
+        </Fragment >
     );
 }
 
@@ -350,23 +350,23 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
             header: "Name",
             accessor: "name",
 
-            Cell: ({ row: { original, index } }) => (
-                <div className="d-flex m-0 flex-column justify-content-start">
-                    <img
-                        alt="profile"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                            // getAllInfoOfStudent(original)
-                        }}
-                        className="mx-auto"
-                        src={original.photo}
-                        width={50}
-                        // textColor="#fff"
-                        text="Image"
-                    />
-                    <p className="mx-auto"> {original.name}</p>
-                </div >
-            ),
+            // Cell: ({ row: { original, index } }) => (
+            //     <div className="d-flex m-0 flex-column justify-content-start">
+            //         <img
+            //             alt="profile"
+            //             style={{ cursor: "pointer" }}
+            //             onClick={() => {
+            //                 // getAllInfoOfStudent(original)
+            //             }}
+            //             className="mx-auto"
+            //             src={original.photo}
+            //             width={50}
+            //             // textColor="#fff"
+            //             text="Image"
+            //         />
+            //         <p className="mx-auto"> {original.name}</p>
+            //     </div >
+            // ),
             Filter: "",
             filter: "",
         },
@@ -421,8 +421,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         //if the data is getting successfully than they set the data to upcoming data
         if (result.status === 200) {
             getReport(result.data)
+            setColoumns(dailyReportColumn)
         }
-        setColoumns(dailyReportColumn)
     }
 
     const {
@@ -560,10 +560,17 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                         <CSVLink className='btn  download-btn ml-3' data={exportCsv}>Download</CSVLink>
 
                         <div className="d-flex ml-1">
-                            <DateRangePicker onExit={() => {
-                                getBackPosition();
+                            <DateRangePicker onClean={(e) => {
+                                e.preventDefault();
+                                getBackPosition()
                             }}
+
                                 onChange={(value) => {
+
+                                    if (!value) {
+
+                                        return;
+                                    }
                                     var a = value[0]
                                     var b = value[1]
 
