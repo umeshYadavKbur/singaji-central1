@@ -371,17 +371,23 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
             filter: "",
         },
         {
-            header: 'Mobile No.',
-            accessor: 'mobile',
+            header: 'Stream',
+            accessor: 'stream(year)',
             Filter: "",
             filter: "",
         },
         {
-            header: 'Stream',
-            accessor: 'stream',
+            header: 'Village',
+            accessor: 'village',
             Filter: "",
             filter: "",
-        }
+        },
+        {
+            header: 'Received amount',
+            accessor: 'ReceivedAmount',
+            Filter: "",
+            filter: "",
+        },
     ]
 
     const [columns, setColoumns] = useState(mainColoumns)
