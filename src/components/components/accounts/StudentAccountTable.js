@@ -585,7 +585,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                         <div className="d-flex ml-auto me-4">
                             <div className="">
 
-                                <CDropdown variant="nav-item">
+                                <CDropdown variant="nav-item" style={{ color: 'white' }}>
                                     <CDropdownToggle
                                         placement="bottom-end"
                                         className="py-0"

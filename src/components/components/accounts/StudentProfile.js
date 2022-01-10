@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -23,6 +23,11 @@ function StudentProfile() {
     var StudentClassName = (StudentProfileData.accountInfo.branch).toUpperCase()
     var StudentPhoto = StudentProfileData.accountInfo.photo
 
+    useEffect(() => {
+        return () => {
+            localStorage.clearItem('userEdit')
+        }
+    }, [])
     return (
         <div>
 

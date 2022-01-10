@@ -28,6 +28,9 @@ const HeaderLink = () => {
         else if (currentLocation === "/admin_dashboard/admintable") {
             return "My Admin";
         }
+        else if (currentLocation === "/admin_dashboard/addnewstudent") {
+            return "Add New Student";
+        }
         else if (currentLocation.includes('admin_dashboard/studentprofile')) {
             if (editData) {
                 return (
@@ -52,22 +55,6 @@ const HeaderLink = () => {
             return "Dashboard";
         }
     }
-
-    // switch (error.code) {
-    //     case 'auth/wrong-password':
-    //         setErrorMsg("invalid password !")
-    //         updateError('invalid password', setPasswordError)
-    //         break;
-    //     case 'auth/too-many-requests':
-    //         Alert("Account has been locked try again later")
-    //         // updateError('invalid password', setPasswordError)
-    //         break;
-    //     case 'auth/user-not-found':
-    //         setErrorMsg("User not found")
-    //         updateError('invalid password', setPasswordError)
-    //         updateError('invalid email', setEmailError)
-    //         break;
-    // }
 
     return (
         <div className="container_navbar">

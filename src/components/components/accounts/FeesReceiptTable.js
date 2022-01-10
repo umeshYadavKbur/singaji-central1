@@ -12,6 +12,7 @@ import { CDropdown, CDropdownMenu, CDropdownToggle } from '@coreui/react'
 import feesReceiptTableData from "../../../redux/actionDispatcher/account/feesReceiptTableDispather";
 import AllUrl from "../../../redux/constants/url";
 import { connect } from "react-redux";
+import SkeletonColor from "../../../helpers/Skeletrone";
 
 
 const MultipleFilter = (rows, accessor, filterValue) => {
@@ -271,7 +272,11 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
     );
     console.log(checkboxData)
 
-    return (
+    return feesReceipt.loading ? (
+        <SkeletonColor></SkeletonColor>
+    ) : feesReceipt.error ? (
+        <h2>{feesReceipt.error}</h2>
+    ) : (
         <Fragment>
             <div className="container-fluid">
                 <div className="d-flex">
@@ -290,7 +295,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                     </div>
 
                     <div className="d-flex ml-auto me-1">
-                        <CDropdown variant="nav-item">
+                        <CDropdown variant="nav-item" style={{ color: 'white' }} >
                             <CDropdownToggle
                                 placement="bottom-end"
                                 className="py-0"

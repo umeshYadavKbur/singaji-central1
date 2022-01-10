@@ -59,16 +59,11 @@ function SelectColumnFilter({
     <Fragment>
       <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
         {/* <span className="block capitalize mb-4">{id}</span> */}
-
         <CPopover
-         
-       
           content={
             <div className="">
-
               {options.map((option, i) => {
                 return (
-
                   <Fragment key={i}>
                     <div id={`${id}`}>
                       <input
@@ -338,7 +333,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
           </div>
 
           <div className="d-flex ml-auto me-1">
-            <CDropdown variant="nav-item">
+            <CDropdown variant="nav-item" style={{ color: 'white' }}>
               <CDropdownToggle
                 placement="bottom-end"
                 className="py-0"
