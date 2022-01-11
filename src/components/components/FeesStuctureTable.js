@@ -52,7 +52,6 @@ function FeesStructure({ table_data, fetchFeesTable }) {
     previousPage,
     canNextPage,
     canPreviousPage,
-    // pageOptions,
     gotoPage,
     pageCount,
     setPageSize,
@@ -219,14 +218,11 @@ function FeesStructure({ table_data, fetchFeesTable }) {
           <div className="ml-auto me-3">
             {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
             <button
-              style={{
-                height: "31px",
-                fontWeight: '700',
-                outline: "none",
-                color: "gray",
-                border: "2px solid gray",
-                borderRadius: "10px 0 0 10px",
-              }}
+              style={canPreviousPage ?
+                { height: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid gray", borderRadius: " 10px 0px 0px 10px" }
+                : {
+                  backgroundColor: "#bbbbbb", height: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid white", borderRadius: " 10px 0px 0px 10px "
+                }}
               onClick={() => previousPage()}
               disabled={!canPreviousPage}
             >
@@ -234,49 +230,62 @@ function FeesStructure({ table_data, fetchFeesTable }) {
             </button>
             <button
               style={{
-                height: "31px", width: "31px",
+                height: "35px", width: "30px",
                 color: "gray",
-                fontWeight: '700', outline: "none", border: "2px solid gray", height: "35px", color: 'white', width: "30px", backgroundColor: '#898989'
+                fontWeight: '700', outline: "none", border: "2px solid gray", color: 'white', backgroundColor: '#898989'
               }}
             >
               {pageIndex + 1}
             </button>
             <button
-              style={{ height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid gray" }}
+              style={
+                pageOptions.length > pageIndex + 1 ?
+                  { height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid gray" }
+                  : {
+                    backgroundColor: "#bbbbbb", height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid white"
+                  }
+              }
               onClick={() => gotoPage(pageIndex + 1)}
-              disabled={!canNextPage}
+              disabled={pageOptions.length < pageIndex + 2}
             >
               {pageIndex + 2}
             </button>
             <button
-              style={{ height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid gray" }}
+              disabled={pageOptions.length < pageIndex + 3}
+              style={
+                pageOptions.length > pageIndex + 2 ?
+                  { height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid gray" }
+                  : {
+                    backgroundColor: "#bbbbbb", height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid white"
+                  }}
               onClick={() => {
                 gotoPage(pageIndex + 2);
               }}
-              disabled={!canNextPage}
             >
               {pageIndex + 3}
             </button>
             <button
-              style={{ height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid gray" }}
+              style={
+                pageOptions.length > pageIndex + 3 ?
+                  { height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid gray" }
+                  : {
+                    backgroundColor: "#bbbbbb", height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid white"
+                  }}
               onClick={() => gotoPage(pageIndex + 3)}
-              disabled={!canNextPage}
+              disabled={pageOptions.length < pageIndex + 4}
             >
               {pageIndex + 4}
             </button>
             <button
-              style={{
-                height: "31px",
-                color: "gray",
-                fontWeight: '700',
-                outline: "none",
-                border: "2px solid gray",
-                borderRadius: "0 10px  10px 0",
-              }}
+              style={canNextPage ?
+                { height: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid gray", borderRadius: "0px 10px 10px 0px" }
+                : {
+                  backgroundColor: "#bbbbbb", height: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid white", borderRadius: "0px 10px 10px 0px"
+                }}
               onClick={() => nextPage()}
               disabled={!canNextPage}
             >
-              Next {pageOptions.length - pageIndex - 1}
+              Next - {pageOptions.length - pageIndex - 1}
             </button>
           </div>
         </div>
