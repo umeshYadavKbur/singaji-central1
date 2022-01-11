@@ -324,12 +324,19 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                 Filter: "",
                 filter: "",
             },
-            // {
-            //     header: 'Action',
-            //     accessor: "",
-            //     Filter: "",
-            //     filter: "",
-            // },
+            {
+                header: 'Action',
+                accessor: 'accesory',
+                Cell: ({ row: { original, index } }) => {
+                    return (
+                        <div className="d-flex m-0 flex-column justify-content-start">
+                            <button style={{ backgroundColor: "#F99300", fontWeight: 'bold', color: 'white', borderRadius: '5px' }} >Receipt</button>
+                        </div >
+                    )
+                },
+                Filter: "",
+                filter: "",
+            },
         ],
         []
     );
@@ -349,24 +356,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         {
             header: "Name",
             accessor: "name",
-
-            // Cell: ({ row: { original, index } }) => (
-            //     <div className="d-flex m-0 flex-column justify-content-start">
-            //         <img
-            //             alt="profile"
-            //             style={{ cursor: "pointer" }}
-            //             onClick={() => {
-            //                 // getAllInfoOfStudent(original)
-            //             }}
-            //             className="mx-auto"
-            //             src={original.photo}
-            //             width={50}
-            //             // textColor="#fff"
-            //             text="Image"
-            //         />
-            //         <p className="mx-auto"> {original.name}</p>
-            //     </div >
-            // ),
             Filter: "",
             filter: "",
         },
@@ -394,6 +383,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
             Filter: "",
             filter: "",
         },
+
     ]
 
     const [columns, setColoumns] = useState(mainColoumns)
@@ -557,7 +547,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                                 ))}
                             </select>
                         </div>
-                        <CSVLink className='btn  download-btn ml-3' data={exportCsv}>Download</CSVLink>
+                        <CSVLink className='btn  download-btn ml-3' style={{ fontWeight: 'bold' }} data={exportCsv}>Download</CSVLink>
 
                         <div className="d-flex ml-1">
                             <DateRangePicker onClean={(e) => {
