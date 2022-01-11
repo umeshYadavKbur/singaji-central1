@@ -163,7 +163,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
 }
 
 function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData }) {
-    const [is_dailyReport ,set_is_dailyReport] = useState(false)
+    const [is_dailyReport, set_is_dailyReport] = useState(false)
 
     React.useEffect(() => {
         var config = {
@@ -390,6 +390,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
 
     const [columns, setColoumns] = useState(mainColoumns)
     const showDailyReport = async () => {
+        setLoading(true)
+
         function convert(str) {
             var date = new Date(str),
                 mnth = ("0" + (date.getMonth() + 1)).slice(-2),
@@ -415,6 +417,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
             getReport(result.data)
             setColoumns(dailyReportColumn)
             set_is_dailyReport(true)
+            setLoading(false)
         }
     }
 
