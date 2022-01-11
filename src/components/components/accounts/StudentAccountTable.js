@@ -155,7 +155,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
                 placeholder={`Search ${count} records...`}
             />
             <i
-                style={{ marginLeft: "-31px",alignSelf:'center',marginBottom:'7px', color: "rgb(90, 96, 127,0.7)" }}
+                style={{ marginLeft: "-31px", alignSelf: 'center', marginBottom: '7px', color: "rgb(90, 96, 127,0.7)" }}
                 className="fas fa-search"
             ></i>
         </>
@@ -164,6 +164,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
 
 function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData }) {
     const [is_dailyReport, set_is_dailyReport] = useState(false)
+    const [MoneyCount, setMoneyCount] = useState({ TStudent: 0, TAmount: 0, TpaidAmount: 0, RAmount: 0, WaiveOff: 0, TpaidAmountByDailyReport: 0 });
 
     React.useEffect(() => {
         var config = {
@@ -179,6 +180,48 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         // settable_data(table_data.table_data);
         // eslint-disable-next-line
     }, []);
+
+
+
+    React.useEffect(() => {
+
+        let data = studentData?.table_data;
+        console.log(data)
+
+        let RAmount = 0;
+        let TAmount = 0;
+        let TpaidAmount = 0;
+        let WaiveOff = 0;
+        let TpaidAmountByDailyReport = 0;
+        data.forEach((ele) => {
+            RAmount += ele?.remain_Amount
+            TAmount += ele?.total_Fees
+
+            TpaidAmount += ele?.received_Amount;
+            TpaidAmountByDailyReport += ele?.ReceivedAmount
+            WaiveOff += ele?.WaiveOff;
+        })
+
+        setMoneyCount((val) => {
+            return {
+
+                ['TStudent']: data.length,
+                RAmount,
+                TAmount,
+                TpaidAmount,
+                WaiveOff,
+                TpaidAmountByDailyReport
+
+            }
+        })
+
+
+        console.log(MoneyCount)
+
+
+    }, [studentData.table_data]);
+
+
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const token = localStorage.getItem("token");
@@ -487,7 +530,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         null,
         2
     );
-    // console.log(checkboxData)
+    console.log(checkboxData)
 
     /// for download pdf
 
@@ -527,25 +570,25 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
             <div className="container-fluid">
                 <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
                     <div className=" info-col"  >
-                        <h5 style={{ marginTop: "12px" }}>1900 <br /> <p >Total Students</p> </h5>
+                        <h5 style={{ marginTop: "12px" }}>{MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
                     </div>
                     <div className=" info-col" >
-                        <h5 style={{ marginTop: "12px" }}>2000000 <br /> <p>Total Amount</p> </h5>
+                        <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount?MoneyCount.TAmount:'-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
                     </div>
                     <div className=" info-col" >
-                        <h5 style={{ marginTop: "12px" }}>208000 <br /> <p >Total Paid Amount</p> </h5>
+                        <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport : MoneyCount.TpaidAmount} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
                     </div>
                     <div className=" info-col" >
-                        <h5 style={{ marginTop: "12px" }}>10000 <br /> <p >Remaining Amount</p> </h5>
+                        <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount?MoneyCount.RAmount:'-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
                     </div>
                     <div className=" info-col">
-                        <h5 style={{ marginTop: "12px" }}>1000 <br /> <p >Waive Off</p> </h5>
+                        <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff?MoneyCount.WaiveOff:'0'}<br /> <p >Waive Off</p> </h5>
                     </div>
                 </div>
                 <div className="row  mx-0 mt-3" style={{ width: "98%" }}>
 
                     <div className="d-flex">
-                        <div style={{marginLeft:'-12px'}}>
+                        <div style={{ marginLeft: '-12px' }}>
                             <select
                                 className="form-select table_select_row_options"
                                 value={pageSize}
@@ -558,7 +601,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                                 ))}
                             </select>
                         </div>
-                       
+
 
                         <div className="d-flex  ml-3">
                             <DateRangePicker onClean={(e) => {
