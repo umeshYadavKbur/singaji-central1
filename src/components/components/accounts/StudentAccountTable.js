@@ -423,11 +423,23 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
             filter: "",
         },
         {
+            header: 'Date',
+            accessor: 'AccountsReceiptDate',
+            Filter: "",
+            filter: "",
+        },
+        {
             header: 'Received amount',
             accessor: 'ReceivedAmount',
             Filter: "",
             filter: "",
         },
+        {
+            header: 'Waive Off amount',
+            accessor: 'WaiveOff',
+            Filter: "",
+            filter: "",
+        }
 
     ]
 
