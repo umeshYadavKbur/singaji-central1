@@ -46,6 +46,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
     headerGroups,
     state,
     setGlobalFilter,
+    pageOptions,
     page,
     nextPage,
     previousPage,
@@ -145,7 +146,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
               value={pageSize}
               onChange={(e) => setPageSize(Number(e.target.value))}
             >
-              {[10, 25, 50,100].map((pageSize) => (
+              {[10, 25, 50, 100].map((pageSize) => (
                 <option value={pageSize} key={pageSize}>Show Entries {pageSize}
                 </option>
               ))}
@@ -209,9 +210,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
         </table>
         <div style={{ border: "rgb(246 249 252)" }} className="d-flex mb-4">
           <div className="mx-4">
-            <span>
-              {/* Page{' '}
-                        <strong>{pageIndex + 1} of {pageOptions.length} </strong> */}
+            <span style={{ fontWeight: '700', color: "gray", }}>
               Showing {page.length * (pageIndex + 1) - (page.length - 1)} to{" "}
               {page.length * (pageIndex + 1)} of {pageCount * pageSize} Entries{" "}
               {"  "}
@@ -221,8 +220,11 @@ function FeesStructure({ table_data, fetchFeesTable }) {
             {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
             <button
               style={{
+                height: "31px",
+                fontWeight: '700',
                 outline: "none",
-                border: "1px solid gray",
+                color: "gray",
+                border: "2px solid gray",
                 borderRadius: "10px 0 0 10px",
               }}
               onClick={() => previousPage()}
@@ -231,45 +233,51 @@ function FeesStructure({ table_data, fetchFeesTable }) {
               Previous
             </button>
             <button
-              style={{ outline: "none", border: "1px solid gray" }}
+              style={{
+                height: "31px", width: "31px",
+                color: "gray",
+                fontWeight: '700', outline: "none", border: "2px solid gray", height: "35px", color: 'white', width: "30px", backgroundColor: '#898989'
+              }}
+            >
+              {pageIndex + 1}
+            </button>
+            <button
+              style={{ height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid gray" }}
               onClick={() => gotoPage(pageIndex + 1)}
               disabled={!canNextPage}
             >
-              1
+              {pageIndex + 2}
             </button>
             <button
-              style={{ outline: "none", border: "1px solid gray" }}
-              onClick={() => gotoPage(pageIndex + 1)}
+              style={{ height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid gray" }}
+              onClick={() => {
+                gotoPage(pageIndex + 2);
+              }}
               disabled={!canNextPage}
             >
-              2
+              {pageIndex + 3}
             </button>
             <button
-              style={{ outline: "none", border: "1px solid gray" }}
-              onClick={() => gotoPage(pageIndex + 2)}
-              disabled={!canNextPage}
-            >
-              3
-            </button>
-            <button
-              style={{ outline: "none", border: "1px solid gray" }}
+              style={{ height: "31px", width: "31px", color: "gray", fontWeight: '700', outline: "none", border: "2px solid gray" }}
               onClick={() => gotoPage(pageIndex + 3)}
               disabled={!canNextPage}
             >
-              4
+              {pageIndex + 4}
             </button>
             <button
               style={{
+                height: "31px",
+                color: "gray",
+                fontWeight: '700',
                 outline: "none",
-                border: "1px solid gray",
+                border: "2px solid gray",
                 borderRadius: "0 10px  10px 0",
               }}
               onClick={() => nextPage()}
               disabled={!canNextPage}
             >
-              Next
+              Next {pageOptions.length - pageIndex - 1}
             </button>
-            {/* <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button> */}
           </div>
         </div>
       </div>
