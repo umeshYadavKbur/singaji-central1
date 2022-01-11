@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Fragment, useMemo } from "react";
+import downloadPdf from "./PdfGenerator";
 import {
     useTable,
     useFilters,
@@ -162,6 +163,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
 }
 
 function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData }) {
+    const [is_dailyReport ,set_is_dailyReport] = useState(false)
 
     React.useEffect(() => {
         var config = {
@@ -412,6 +414,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         if (result.status === 200) {
             getReport(result.data)
             setColoumns(dailyReportColumn)
+            set_is_dailyReport(true)
         }
     }
 
@@ -465,8 +468,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
             selectedFlatRows: selectedFlatRows.map((row) => {
                 let data = Object.assign({}, row.original);
                 console.log(data);
-                delete data.photo
-                // console.log(data);
+                delete data.photo;
+                if (data?.ReceivedAmount)
+                    data.ReceivedAmount = (data?.ReceivedAmount)?.toString();
 
                 console.log(data);
                 exportData.push(data)
@@ -480,7 +484,11 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         null,
         2
     );
-    console.log(checkboxData)
+    // console.log(checkboxData)
+
+    /// for download pdf
+
+
 
     const getBackPosition = () => {
         backOriginal()
@@ -547,12 +555,26 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                                 ))}
                             </select>
                         </div>
-                        <CSVLink className='btn  download-btn ml-3' style={{ fontWeight: 'bold' }} data={exportCsv}>Download</CSVLink>
+                        <div class="btn-group ml-3">
+                            <button class="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Download
+                            </button>
+                            <div class="dropdown-menu mt-1">
+
+
+                                <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>
+                                {is_dailyReport &&
+                                    <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
+                                }
+
+                            </div>
+                        </div>
 
                         <div className="d-flex ml-1">
                             <DateRangePicker onClean={(e) => {
                                 e.preventDefault();
                                 getBackPosition()
+                                set_is_dailyReport(false)
                             }}
 
                                 onChange={(value) => {
