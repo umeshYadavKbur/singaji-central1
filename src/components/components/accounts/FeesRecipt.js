@@ -8,6 +8,7 @@ import '../styles/AddNewStudent.css'
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 import Icon_feather_download from '../../assests/image/AccountIcons/Icon_feather_download.svg';
+import * as Yup from "yup";
 var axios = require('axios');
 
 
@@ -47,17 +48,29 @@ function FeesRecipt() {
         chequeDate: '',
         ChequeNo: '',
         feesAmount: '',
-        recieptdate: '',
+        recieptdate: `${new Date().getFullYear() + '-' + new Date().getMonth()+1 + '-' + new Date().getDate()}`  ,
         installmentNo: '1',
         Remark: '',
         LateFeeAmount: '0',
         BankName: '',
-
-
     }
+    const validationSchema = Yup.object({
+        recieptdate: Yup.string().required("Required!").test('doc_check',`Date must be greater then ${new Date().getDate() - 8 + '-' + new Date().getMonth() + 1 + '-' + new Date().getFullYear()}`,val => val?.slice(-2) >= (new Date().getDate()) - 8).test('check',value => value?.slice(-2) <=(new Date().getDate()) ),
+        studentClassYear: Yup.string().required("Required!"),
+        feesAmount: Yup.string().required("Required!"),
+        LateFeeAmount: Yup.string().required("Required!"),
+        waiveOff: Yup.string().required("Required!"),
+        installmentNo: Yup.string().required("Required!"),
+        payBy: Yup.string().required("Required!"),
+        ChequeNo: Yup.string().required("Required!"),
+        chequeDate: Yup.string().required("Required!"),
+        BankName: Yup.string().required("Required!"),
+        Remark: Yup.string().required("Required!")
+    })
 
     const formik = useFormik({
         initialValues,
+        validationSchema,
         onSubmit: async (values) => {
             console.log(values);
 
@@ -141,6 +154,7 @@ function FeesRecipt() {
                         <div className="col">
                             <label htmlFor="">Student Name</label>
                             <input name='studentName' value={formik.values.studentName} type="text" className='form-control' placeholder='Student Name' disabled={true} />
+                            
                         </div>
                         <div className="col">
                             <label htmlFor="">Father Name</label>
@@ -149,63 +163,133 @@ function FeesRecipt() {
                         </div>
                         <div className="col">
                             <label htmlFor="">Year</label>
-                            <select name='studentClassYear' onChange={formik.handleChange} value={formik.values.studentClassYear} className='form-select'  >
+                            <select name='studentClassYear' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.studentClassYear} className='form-select'  >
                                 <option defaultValue="I">I</option>
                                 <option value="II">II</option>
                                 <option value="III">III</option>
                             </select>
+                            {formik.errors.studentClassYear && formik.touched.studentClassYear ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.studentClassYear}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                         <div className="col">
                             <label htmlFor="">Reciept Date</label>
-                            <input name='recieptdate' onChange={formik.handleChange} value={formik.values.recieptdate} type="date" className='form-control' placeholder='Date' />
+                            <input name='recieptdate' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.recieptdate} type="date" className='form-control' placeholder='Date' />
+                            {formik.errors.recieptdate && formik.touched.recieptdate ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.recieptdate}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                     </div>
                     <div className="row">
 
                         <div className="col">
                             <label htmlFor="">Installment No.</label>
-                            <select name='installmentNo' onChange={formik.handleChange} value={formik.values.installmentNo} className='form-select' >
+                            <select name='installmentNo' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.installmentNo} className='form-select' >
                                 <option defaultValue="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="Postmatric">Postmatric ScolarShip</option>
                                 <option value="GKB">GKB ScolarShip</option>
                             </select>
+                            {formik.errors.installmentNo && formik.touched.installmentNo ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.installmentNo}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                         <div className="col">
                             <label htmlFor="">Amount</label>
-                            <input name='feesAmount' onChange={formik.handleChange} value={formik.values.feesAmount} type="number" className='form-control' placeholder='Amount' />
+                            <input name='feesAmount' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.feesAmount} type="number" className='form-control' placeholder='Amount' />
+                            {formik.errors.feesAmount && formik.touched.feesAmount ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.feesAmount}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                         <div className="col">
                             <label htmlFor="">Pay By</label>
-                            <select name="payBy" onChange={formik.handleChange} value={formik.values.payBy} className='form-select'>
+                            <select name="payBy" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.payBy} className='form-select'>
                                 <option defaultValue="Case">Case</option>
                                 <option value="Online">Online</option>
                                 <option value="Cheque">Cheque</option>
                             </select>
+                            {formik.errors.payBy && formik.touched.payBy ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.payBy}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                         <div className="col">
                             <label htmlFor="">Cheque No.</label>
-                            <input name='ChequeNo' onChange={formik.handleChange} value={formik.values.ChequeNo} type="text" className='form-control' placeholder='Cheque No' />
+                            <input name='ChequeNo' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.ChequeNo} type="text" className='form-control' placeholder='Cheque No' />
+                            {formik.errors.ChequeNo && formik.touched.ChequeNo ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.ChequeNo}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                     </div>
                     <div className="row">
 
                         <div className="col">
                             <label htmlFor="">Cheque Date</label>
-                            <input name='chequeDate' onChange={formik.handleChange} value={formik.values.chequeDate} type="date" className='form-control' />
+                            <input name='chequeDate' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.chequeDate} type="date" className='form-control' />
+                            {formik.errors.chequeDate && formik.touched.chequeDate ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.chequeDate}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                         <div className="col">
                             <label htmlFor="">Bank Name</label>
-                            <input name='BankName' onChange={formik.handleChange} value={formik.values.BankName} type="text" className='form-control' placeholder='Bank Name' />
+                            <input name='BankName' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.BankName} type="text" className='form-control' placeholder='Bank Name' />
+                            {formik.errors.BankName && formik.touched.BankName ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.BankName}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                         <div className="col">
                             <label htmlFor="">Waive off</label>
-                            <input name='waiveOff' onChange={formik.handleChange} value={formik.values.waiveOff} type="number" className='form-control' placeholder='Waive off' />
+                            <input name='waiveOff' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.waiveOff} type="number" className='form-control' placeholder='Waive off' />
+                            {formik.errors.waiveOff && formik.touched.waiveOff ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.waiveOff}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                         <div className="col">
                             <label htmlFor="">Remark</label>
-                            <input name='Remark' onChange={formik.handleChange} value={formik.values.Remark} type="text" className='form-control' placeholder='Remark' />
+                            <input name='Remark' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.Remark} type="text" className='form-control' placeholder='Remark' />
+                            {formik.errors.Remark && formik.touched.Remark ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.Remark}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                     </div>
 

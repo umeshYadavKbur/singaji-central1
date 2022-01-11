@@ -22,6 +22,7 @@ import PendingScholarshipTable from "../components/accounts/PendingScholarshipTa
 import StudentTable from '../components/StudentsTable'
 import FeesReceiptTable from "../components/accounts/FeesReceiptTable";
 import StudentTableFirst from "../components/student/StudentTableFirst";
+import UpdatePersonalDetialOfStudent from "../components/accounts/UpdatePersonalDetialOfStudent";
 
 function AdminDashboard() {
   const { play, style, isPlaying } = useAnimate({
@@ -76,6 +77,7 @@ function AdminDashboard() {
             <Route path="studentprofile/feesrecipt" element={<FeesRecipt />} />
             <Route path="pendingscholarship" element={<PendingScholarshipTable />} />
             <Route path="feesreceiptlist" element={<FeesReceiptTable />} />
+            <Route path="studentprofile/updatepersonaldetial" element={<UpdatePersonalDetialOfStudent />} />
           </Routes>
         </div>
       </div>

@@ -16,7 +16,7 @@ import NumberFormat from 'react-number-format';
 import allUrls from '../../redux/constants/url'
 
 function AddNewStudentPage({ AddNewStudent }) {
-    var editData = JSON.parse(localStorage.getItem('userEdit'))
+    var editData = JSON.parse(localStorage.getItem('studentData'))
     console.log(editData);
 
     const [branchNames, setBranchNames] = useState([{ subjects: 'loading...', id: 0 }])

@@ -155,7 +155,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
                 placeholder={`Search ${count} records...`}
             />
             <i
-                style={{ marginLeft: "-31px", color: "rgb(90, 96, 127,0.7)" }}
+                style={{ marginLeft: "-31px",alignSelf:'center',marginBottom:'7px', color: "rgb(90, 96, 127,0.7)" }}
                 className="fas fa-search"
             ></i>
         </>
@@ -545,7 +545,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                 <div className="row  mx-0 mt-3" style={{ width: "98%" }}>
 
                     <div className="d-flex">
-                        <div className="">
+                        <div style={{marginLeft:'-12px'}}>
                             <select
                                 className="form-select table_select_row_options"
                                 value={pageSize}
@@ -558,22 +558,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                                 ))}
                             </select>
                         </div>
-                        <div class="btn-group ml-3">
-                            <button class="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Download
-                            </button>
-                            <div class="dropdown-menu mt-1">
+                       
 
-
-                                <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>
-                                {is_dailyReport &&
-                                    <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
-                                }
-
-                            </div>
-                        </div>
-
-                        <div className="d-flex ml-1">
+                        <div className="d-flex  ml-3">
                             <DateRangePicker onClean={(e) => {
                                 e.preventDefault();
                                 getBackPosition()
@@ -594,6 +581,20 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                                     })
                                 }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
                             <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
+                        </div>
+                        <div class="btn-group  ml-1">
+                            <button class="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Download
+                            </button>
+                            <div class="dropdown-menu mt-1">
+
+
+                                <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>
+                                {is_dailyReport &&
+                                    <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
+                                }
+
+                            </div>
                         </div>
 
 
