@@ -48,13 +48,14 @@ function FeesRecipt() {
         chequeDate: '',
         ChequeNo: '',
         feesAmount: '',
-        recieptdate: '',
+        recieptdate: `${new Date().getFullYear() + '-' + new Date().getMonth()+1 + '-' + new Date().getDate()}`  ,
         installmentNo: '1',
         Remark: '',
         LateFeeAmount: '0',
         BankName: '',
     }
     const validationSchema = Yup.object({
+        recieptdate: Yup.string().required("Required!").test('doc_check',`Date must be greater then ${new Date().getDate() - 8 + '-' + new Date().getMonth() + 1 + '-' + new Date().getFullYear()}`,val => val?.slice(-2) >= (new Date().getDate()) - 8).test('check',value => value?.slice(-2) <=(new Date().getDate()) ),
         studentClassYear: Yup.string().required("Required!"),
         feesAmount: Yup.string().required("Required!"),
         LateFeeAmount: Yup.string().required("Required!"),
