@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { changeFeesStructureStatus } from "../../../redux/actionDispatcher/superAdmin/feesStructureTableDataDispatcher";
 // import { fetchFeesTableDataConfig } from "../../../redux/constants/config";
 import { baseUrl } from "../../../redux/constants/url";
+import { ActivateButton, DeactivateButton } from "./Color";
 function HeaderColumn({ original, table_data, changeFeesStatus }) {
   const changeStatus = (data) => {
     const token = localStorage.getItem("token");
@@ -24,22 +25,8 @@ function HeaderColumn({ original, table_data, changeFeesStatus }) {
     <button
       style={
         original.active === 1
-          ? {
-            width: "80px",
-            borderRadius: "5px",
-            backgroundColor: "#3f58fc",
-            color: "white",
-            fontWeight: "bold",
-            border: "1px #FFC700",
-          }
-          : {
-            width: "80px",
-            backgroundColor: "#8585ed",
-            borderRadius: "5px",
-            fontWeight: "bold",
-            color: "white",
-            border: "none",
-          }
+          ? ActivateButton
+          : DeactivateButton
       }
       onClick={() => {
         // console.log(original.email);
@@ -56,7 +43,7 @@ function HeaderColumn({ original, table_data, changeFeesStatus }) {
           confirmButtonText: `${original.active === 1 ? "Deactive" : "Active"}`,
           showCloseButton: true,
           cancelButtonColor: "gray",
-          confirmButtonColor: "blue",
+          confirmButtonColor: "#4f83df",
           reverseButtons: true
         }).then((result) => {
           if (result.isConfirmed) {

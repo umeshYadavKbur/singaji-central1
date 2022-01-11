@@ -26,6 +26,7 @@ import { VerifyStudent } from "../../redux/actionDispatcher/superAdmin/studentVe
 // import AddNewStudent from "./AddNewStudent";
 import AllUrl from "../../redux/constants/url"
 import updown_sort from '../assests/image/updown_sort.svg'
+import { DeactivateButton, PaidButton, UnpaidButton } from "../assests/common/Color";
 // import { baseUrl } from "../../redux/constants/url";
 
 
@@ -72,22 +73,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
         <button
           style={
             original.reg_fees_status === "Paid"
-              ? {
-                width: "80px",
-                borderRadius: "5px",
-                backgroundColor: "rgb(255 202 39 / 81%)",
-                color: "white",
-                fontWeight: "bold",
-                border: '1px rgb(255 202 39 / 81%)',
-
-              } : {
-                width: "80px",
-                backgroundColor: "rgb(255 171 0)",
-                borderRadius: "5px",
-                fontWeight: "bold",
-                color: "white",
-                border: 'none',
-              }}
+              ? PaidButton : UnpaidButton}
           disabled={original.reg_fees_status === "Paid"}
           onClick={() => {
             Swal.fire({
@@ -105,7 +91,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               confirmButtonText: 'Payment',
               showCloseButton: true,
               cancelButtonColor: 'gray',
-              confirmButtonColor: "orange",
+              confirmButtonColor: "#4f83df",
               reverseButtons: true
 
 
@@ -129,12 +115,12 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                 // console.log("_____________________________________", result);
                 if (result.status === 200) {
                   toast.success('Registration Fees Paid SuccessFul', {
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
-                    draggable: true,
+                    draggable: false,
                     progress: undefined,
                   });
                   var con = {
@@ -149,14 +135,13 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                 }
                 else if (result.status === 404) {
                   toast.warning('User Not Found', {
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
-                    draggable: true,
+                    draggable: false,
                     progress: undefined,
-
                   });
                 }
               }
@@ -170,16 +155,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "status",
       Cell: ({ row: { original } }) => (
         <button
-          style={{
-            width: "80px",
-            borderRadius: "5px",
-            backgroundColor: "rgb(166 166 226)",
-            color: "white",
-            fontWeight: "bold",
-            border: '1px #FFC700',
-            // height: "15px"
-          }
-          }
+          style={DeactivateButton}
           onClick={() => {
             // setData(original.status)
             if (original.reg_fees_status === "Paid") {
@@ -199,7 +175,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                 confirmButtonText: 'Active',
                 showCloseButton: true,
                 cancelButtonColor: 'gray',
-                confirmButtonColor: "blue",
+                confirmButtonColor: "#4f83df",
                 reverseButtons: true
 
               }).then(async (result) => {
@@ -224,12 +200,12 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
             }
             else {
               toast.warning('Firstly Pay Registration Fee', {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: false,
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
-                draggable: true,
+                draggable: false,
                 progress: undefined,
               });
             }

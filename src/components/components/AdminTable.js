@@ -12,6 +12,7 @@ import SkeletonColor from '../../helpers/Skeletrone';
 import { AdminStatusChange } from '../../redux/actionDispatcher/superAdmin/adminStatusChangeDispatcher'
 import Swal from 'sweetalert2';
 import updown_sort from '../assests/image/updown_sort.svg'
+import { ActivateButton, DeactivateButton } from '../assests/common/Color';
 
 
 function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTableData }) {
@@ -68,23 +69,8 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                 <button
                     style={
                         original.is_active === 1
-                            ? {
-                                width: "80px",
-                                borderRadius: "5px",
-                                backgroundColor: "blue",
-                                color: "white",
-                                fontWeight: "bold",
-                                border: '1px #FFC700',
-                                // height: "15px"
-                            }
-                            : {
-                                width: "80px",
-                                backgroundColor: "#8585ed",
-                                borderRadius: "5px",
-                                fontWeight: "bold",
-                                color: "white",
-                                border: 'none'
-                            }}
+                            ? ActivateButton
+                            : DeactivateButton}
                     onClick={() => {
                         Swal.fire({
                             title: `${original.is_active === 0 ? 'Active' : 'Deactive'}`,
@@ -101,7 +87,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             confirmButtonText: `${original.is_active === 0 ? 'Active' : 'Deactive'}`,
                             showCloseButton: true,
                             cancelButtonColor: 'gray',
-                            confirmButtonColor: "blue",
+                            confirmButtonColor: "#4f83df",
                             showLoaderOnDeny: true,
                             reverseButtons: true
 
@@ -233,7 +219,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                     <div className=''>
                         <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                             {
-                                [10, 25, 50,100].map(pageSize => (
+                                [10, 25, 50, 100].map(pageSize => (
                                     <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
                                 ))
                             }

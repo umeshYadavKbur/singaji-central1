@@ -1,4 +1,4 @@
-import {  ADMIN_STATUS_CHANGE_SUCCESS, ADMIN_STATUS_CHANGE_FAIL } from "../../constants/actions";
+import { ADMIN_STATUS_CHANGE_SUCCESS, ADMIN_STATUS_CHANGE_FAIL } from "../../constants/actions";
 import { toast } from "react-toastify";
 import AllUrl from "../../constants/url";
 import { fetchTableDataSec } from './adminTableDatadispatcher'
@@ -59,11 +59,11 @@ export const AdminStatusChange = (data) => {
             } else if (userResData.status === 208) {
                 toast.warning('user are already available', {
                     position: "bottom-center",
-                    autoClose: 3000,
+                    autoClose: 2000,
                     hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
-                    draggable: true,
+                    draggable: false,
                     progress: undefined,
                 });
                 dispatch(AdminStatusChangeFail('user are already available'));
@@ -71,11 +71,11 @@ export const AdminStatusChange = (data) => {
             } else {
                 toast.error('Internal Server Error', {
                     position: "bottom-center",
-                    autoClose: 3000,
+                    autoClose: 2000,
                     hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
-                    draggable: true,
+                    draggable: false,
                     progress: undefined,
                 });
                 let value = JSON.stringify(userResData.status);

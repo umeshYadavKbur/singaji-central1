@@ -57,24 +57,24 @@ export const VerifyStudent = (data) => {
 
             } else if (userResData.status === 208) {
                 toast.warning('user are already available', {
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
-                    draggable: true,
+                    draggable: false,
                     progress: undefined,
                 });
                 dispatch(VerifyStudentFail('user are already available'));
 
             } else {
                 toast.error('Internal Server Error', {
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
+                    position: "bottom-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
-                    draggable: true,
+                    draggable: false,
                     progress: undefined,
                 });
                 let value = JSON.stringify(userResData.status);

@@ -23,7 +23,7 @@ export const fetchStudentTable = (data) => {
           //Printing the response of the data
           // console.log((response));
           if (response.status === 200) {
-              
+
             console.log(response.data.reverse())
 
             dispatch(fetchSuccessTableData(response.data.reverse()));
