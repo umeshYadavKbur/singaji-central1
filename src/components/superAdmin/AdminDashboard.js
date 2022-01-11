@@ -10,7 +10,6 @@ import FeesStructureTable from "../components/FeesStuctureTable";
 import AddNewStudent from "../components/AddNewStudent";
 import AdminTable from "../components/AdminTable";
 import Sidebar from "../components/Sidebar";
-import StudentTable from "../components/StudentsTable";
 import StudentAccountTable from '../components/accounts/StudentAccountTable'
 import { ToastContainer } from "react-toastify";
 import SidebarLinks from "./SidebarLinks";
@@ -19,8 +18,10 @@ import StudentProfile from "../components/accounts/StudentProfile";
 import UploadDocumentFrom from "../components/accounts/UploadDocumentFrom";
 import FeesRecipt from "../components/accounts/FeesRecipt";
 import PendingScholarshipTable from "../components/accounts/PendingScholarshipTable";
-//Test 
+//Test
+import StudentTable from '../components/StudentsTable'
 import FeesReceiptTable from "../components/accounts/FeesReceiptTable";
+import StudentTableFirst from "../components/student/StudentTableFirst";
 
 function AdminDashboard() {
   const { play, style, isPlaying } = useAnimate({
@@ -62,6 +63,12 @@ function AdminDashboard() {
             <Route path="studentaccounttable" element={<StudentAccountTable />} />
             {/* Nested routes  */}
             <Route path="admintable" element={<AdminTable />} />
+
+
+            {/* Adding student page   */}
+            <Route path="students" element={<StudentTableFirst />} />
+
+
             <Route path="addnewstudent" element={<AddNewStudent />} />
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
             <Route path="studentprofile" element={<StudentProfile />} />

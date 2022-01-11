@@ -25,6 +25,9 @@ const HeaderLink = () => {
         else if (currentLocation === "/admin_dashboard/studentaccounttable") {
             return "Student Account";
         }
+        else if (currentLocation === "/admin_dashboard/students") {
+            return "Students";
+        }
         else if (currentLocation === "/admin_dashboard/admintable") {
             return "My Admin";
         }
