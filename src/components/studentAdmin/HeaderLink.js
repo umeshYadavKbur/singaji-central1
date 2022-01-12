@@ -15,12 +15,16 @@ const HeaderLink = () => {
         if (currentLocation === "/student_admin_dashboard") {
             return "Dashboard";
         }
+        else if (currentLocation === "/student_admin_dashboard/students") {
+            return "Students";
+        }
         else if (currentLocation === "/student_admin_dashboard/studenttable") {
             return "Applied Student";
         }
         else if (currentLocation === "/student_admin_dashboard/addnewstudent") {
             return "Add Student";
         }
+
         else {
             return "Dashboard";
         }

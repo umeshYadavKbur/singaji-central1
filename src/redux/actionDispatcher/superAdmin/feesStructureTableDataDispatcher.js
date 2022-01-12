@@ -23,13 +23,52 @@ export const fetchFeesTableData = (data) => {
             dispatch(fetchSuccessTableData(response.data));
           }
           if (response.status === 400) {
+            toast.warn('No data found !', {
+              position: "bottom-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            dispatch(fetchFailTableData(response.data));
+          }
+          if (response.status === 500) {
+            toast.warn('Internal Server Error', {
+              position: "bottom-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
             dispatch(fetchFailTableData(response.data));
           }
         })
         .catch(function (error) {
+          toast.warn('Internal Server Error', {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           dispatch(fetchFailTableData(error));
         });
     } catch (error) {
+      toast.warn('Internal Server Error', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       dispatch(fetchFailTableData(error));
     }
   };

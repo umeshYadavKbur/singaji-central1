@@ -23,7 +23,7 @@ export const fetchUserEmail = (data, navigate) => {
       })
       navigate('./login');
       dispatch(forgotPasswordSuccess(forgetPasswordData));
-    } else if (forgetPasswordData.request.status === 404) {
+    } else if (forgetPasswordData.request.status === 400) {
       // Swal.fire({
       //   title: "Email not Found",
       //   icon: "warning",
@@ -40,7 +40,9 @@ export const fetchUserEmail = (data, navigate) => {
         progress: undefined,
       });
       dispatch(forgotPasswordFailure(forgetPasswordData.data));
-    } else {
+    }
+
+    else {
       toast.error('Internal server error', {
         position: "top-center",
         autoClose: 3000,

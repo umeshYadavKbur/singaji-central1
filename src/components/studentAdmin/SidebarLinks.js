@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Education_svg from "../assests/image/sidebarIcons/Education.svg";
 
 
@@ -41,7 +41,7 @@ const SidebarLinks = ({ Toggle }) => {
                     <a
                         onClick={() => { setActiveMenu((pre) => { return { ...pre, education: !active_menu.education } }) }}
                         href="#!"
-                        style={{borderBottomRightRadius:`${active_menu.education === true ? '0px' : ''}`}}
+                        style={{ borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }}
                         className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'education-collapse-btn' ? 'active_tab' : ''} ${active_menu.education === true ? 'active_tab' : ''} `}
                         role="button"
                         // data-toggle="collapse"
@@ -60,10 +60,10 @@ const SidebarLinks = ({ Toggle }) => {
                     </a>
 
                     <div className="collapse collapse_superadmin p-0" id="education-collapse">
-                        <ul className={`${Toggle ?'btn-toggle-nav-hide':'btn-toggle-nav'}  list-unstyled `}>
+                        <ul className={`${Toggle ? 'btn-toggle-nav-hide' : 'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
                                 {dLink1("Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
-                                {dLink1("Students", "", "ok", "Students","education-collapse-btn")}
+                                {dLink1("Students", "students", "ok", "Students", "education-collapse-btn")}
                                 {dLink1("Add students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}
                             </li>
                         </ul>

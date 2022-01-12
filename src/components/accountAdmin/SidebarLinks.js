@@ -11,7 +11,7 @@ import Others_svg from "../assests/image/sidebarIcons/Others.svg";
 const SidebarLinks = ({ Toggle }) => {
     const [active_dropdown, setActiveDropdown] = useState('Dashboard');
     const [active_tab, setActiveTab] = useState('dashboard-collapse-btn');
-    const [active_menu, setActiveMenu] = useState({ dashboard: false, education: false,account:false });
+    const [active_menu, setActiveMenu] = useState({ dashboard: false, education: false, account: false });
 
     const changeTab = (id) => {
 
@@ -37,8 +37,8 @@ const SidebarLinks = ({ Toggle }) => {
 
     return (
         <>
-              {/* ---- third dropdown---- */}
-              <div className="flex-shrink-0">
+            {/* ---- third dropdown---- */}
+            <div className="flex-shrink-0">
                 <ul className="list-unstyled m-0">
                     <a
                         onClick={() => { setActiveMenu((pre) => { return { ...pre, account: !active_menu.account } }) }}
@@ -62,17 +62,16 @@ const SidebarLinks = ({ Toggle }) => {
                     </a>
 
                     <div className="collapse collapse_superadmin" id="account-collapse">
-                        <ul className={`${Toggle ?'btn-toggle-nav-hide':'btn-toggle-nav'}  list-unstyled `}>
+                        <ul className={`${Toggle ? 'btn-toggle-nav-hide' : 'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
-                                {dLink1("Student Account", "studentaccounttable", "ok", "Student_Account", 'account-collapse-btn')}
-                                {/* {dLink1("Students", "", "ok", "Students", "account-collapse-btn")}
-                                {dLink1("Add students", "addnewstudent", "ok", "Add_students", 'account-collapse-btn')} */}
+                                {dLink1("Student Account", "studentaccounttable", "ok", "Student_account", 'account-collapse-btn')}
+                                {/* {dLink1("Pending Scholarship", "pendingscholarship", "ok", "Pending_students", "account-collapse-btn")} */}
+                                {dLink1("Fees Receipt List", "feesreceiptlist", "ok", "Fees_receiptlist", 'account-collapse-btn')}
                             </li>
                         </ul>
                     </div>
                 </ul>
             </div>
-
 
             {/* Thirt dropdown_items_div
             <Link className={`sidebar_options ${active_tab === 'Accounts' ? 'active_tab' : ''}`}

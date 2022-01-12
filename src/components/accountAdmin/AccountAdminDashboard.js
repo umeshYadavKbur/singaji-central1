@@ -18,7 +18,9 @@ import HeaderLink from "./HeaderLink";
 import StudentProfile from "../components/accounts/StudentProfile";
 import FeesRecipt from "../components/accounts/FeesRecipt";
 import UploadDocumentFrom from '../components/accounts/UploadDocumentFrom'
-import UpdatePersonalDetialOfStudent  from "../components/accounts/UpdatePersonalDetialOfStudent";
+import UpdatePersonalDetialOfStudent from "../components/accounts/UpdatePersonalDetialOfStudent";
+import PendingScholarshipTable from './../../redux/reducers/account/pendingScholarshipTable';
+import FeesReceiptTable from './../components/accounts/FeesReceiptTable';
 
 
 
@@ -59,6 +61,9 @@ function AdminDashboard() {
             <Route path="" element={<Dashboard />} />
             {/* Nested routes  */}
             <Route path="studentaccounttable" element={<StudentAccountTable />} />
+            <Route path="feesreceiptlist" element={<FeesReceiptTable />} />
+
+
             {/* Nested routes  */}
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
             <Route path="addnewstudent" element={<AddStudent />} />
@@ -66,7 +71,7 @@ function AdminDashboard() {
             <Route path="studentprofile/uploaddocument" element={<UploadDocumentFrom />} />
             <Route path="studentprofile/feesrecipt" element={<FeesRecipt />} />
             <Route path="studentprofile/updatepersonaldetial" element={<UpdatePersonalDetialOfStudent />} />
-            
+
           </Routes>
         </div>
       </div>

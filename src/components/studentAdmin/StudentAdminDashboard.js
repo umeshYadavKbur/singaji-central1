@@ -15,6 +15,7 @@ import AddNewStudent from "../components/AddNewStudent";
 import { ToastContainer } from "react-toastify";
 import SidebarLinks from "./SidebarLinks";
 import HeaderLink from "./HeaderLink";
+import StudentTableFirst from './../components/student/StudentTableFirst';
 
 
 function AdminDashboard() {
@@ -46,7 +47,7 @@ function AdminDashboard() {
       <div className="side_bar_content" style={style}>
         <Sidebar play={play} isPlaying={isPlaying} Options={SidebarLinks} />
       </div>
-      
+
       <div className="header_table">
         <div className="header_dashboard">
           <Navbar Options={HeaderLink} />
@@ -55,6 +56,7 @@ function AdminDashboard() {
           <Routes>
             <Route path="" element={<Dashboard />} />
             <Route path="studenttable" element={<StudentTable />} />
+            <Route path="students" element={<StudentTableFirst />} />
             <Route path="addnewstudent" element={<AddNewStudent />} />
           </Routes>
         </div>
