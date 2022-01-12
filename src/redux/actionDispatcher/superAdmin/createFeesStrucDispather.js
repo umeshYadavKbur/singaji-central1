@@ -22,7 +22,15 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
               icon: 'warning',
               title: 'This fees structure is Already createrd!',
               showConfirmButton: false,
-              timer: 2500
+              timer: 2500,
+              showClass: {
+                backdrop: 'swal2-noanimation', // disable backdrop animation
+                popup: '',                     // disable popup animation
+                icon: ''                       // disable icon animation
+              },
+              hideClass: {
+                popup: '',                     // disable popup fade-out animation
+              }
             })
             dispatch(feesReqSuccess());
           } else if (response.status === 200) {
@@ -33,7 +41,15 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
               icon: 'success',
               title: 'Fees structure created successfully!',
               showConfirmButton: false,
-              timer: 2500
+              timer: 2500,
+              showClass: {
+                backdrop: 'swal2-noanimation', // disable backdrop animation
+                popup: '',                     // disable popup animation
+                icon: ''                       // disable icon animation
+              },
+              hideClass: {
+                popup: '',                     // disable popup fade-out animation
+              }
             })
             dispatch(feesReqSuccess());
           } else if (response.status === 401) {
@@ -42,7 +58,15 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
               icon: 'error',
               title: 'Request failed!',
               showConfirmButton: false,
-              timer: 2500
+              timer: 2500,
+              showClass: {
+                backdrop: 'swal2-noanimation', // disable backdrop animation
+                popup: '',                     // disable popup animation
+                icon: ''                       // disable icon animation
+              },
+              hideClass: {
+                popup: '',                     // disable popup fade-out animation
+              }
             })
             dispatch(feesReqSuccess());
             // dispatch(feesReqFail(error));
@@ -55,7 +79,15 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
             icon: 'error',
             title: 'Request failed!',
             showConfirmButton: false,
-            timer: 2500
+            timer: 2500,
+            showClass: {
+              backdrop: 'swal2-noanimation', // disable backdrop animation
+              popup: '',                     // disable popup animation
+              icon: ''                       // disable icon animation
+            },
+            hideClass: {
+              popup: '',                     // disable popup fade-out animation
+            }
           })
         });
     } catch (error) {
@@ -64,7 +96,15 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
         icon: 'error',
         title: 'Internal server error',
         showConfirmButton: false,
-        timer: 2500
+        timer: 2500,
+        showClass: {
+          backdrop: 'swal2-noanimation', // disable backdrop animation
+          popup: '',                     // disable popup animation
+          icon: ''                       // disable icon animation
+        },
+        hideClass: {
+          popup: '',                     // disable popup fade-out animation
+        }
       })
       console.log(error);
       dispatch(feesReqFail(error));

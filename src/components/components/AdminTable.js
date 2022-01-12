@@ -59,9 +59,13 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
         {
             header: 'Role',
             accessor: 'role',
-            //  Cell: ({row: {original}}) => (
-            //      original.roleId === 1 ? "Super Admin" : original.roleId === 2 ? "Admin" : original.roleId === 1 ? "Student" : ''   
-            //  )
+             Cell: ({row: {original}}) =>{
+                var data2 = original.role.charAt(0).toUpperCase() + original.role.slice(1).toLowerCase();
+                data2 = data2.replace('admin', ' Admin');
+
+                return(data2)
+                
+             }
         },
         {
             header: 'Status',
@@ -91,7 +95,15 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             cancelButtonColor: 'gray',
                             confirmButtonColor: "#4f83df",
                             showLoaderOnDeny: true,
-                            reverseButtons: true
+                            reverseButtons: true,
+                            showClass: {
+                              backdrop: 'swal2-noanimation', // disable backdrop animation
+                              popup: '',                     // disable popup animation
+                              icon: ''                       // disable icon animation
+                            },
+                            hideClass: {
+                              popup: '',                     // disable popup fade-out animation
+                            }
 
                         }).then(async (result) => {
                             if (result.isConfirmed) {

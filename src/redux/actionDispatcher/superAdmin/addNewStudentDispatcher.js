@@ -37,6 +37,14 @@ const AddNewStudent = (data) => {
                     showConfirmButton: false,
                     // showCloseButton:true,
                     timer: 2500,
+                    showClass: {
+                      backdrop: 'swal2-noanimation', // disable backdrop animation
+                      popup: '',                     // disable popup animation
+                      icon: ''                       // disable icon animation
+                    },
+                    hideClass: {
+                      popup: '',                     // disable popup fade-out animation
+                    }
 
                 })
             }
@@ -44,6 +52,14 @@ const AddNewStudent = (data) => {
                 Swal.fire({
                     title: "Email Already found",
                     icon: "warning",
+                    showClass: {
+                      backdrop: 'swal2-noanimation', // disable backdrop animation
+                      popup: '',                     // disable popup animation
+                      icon: ''                       // disable icon animation
+                    },
+                    hideClass: {
+                      popup: '',                     // disable popup fade-out animation
+                    }
                 })
                 dispatch(AddNewStudentFailure(userResData.data));
             }
@@ -53,7 +69,15 @@ const AddNewStudent = (data) => {
                     icon: 'warning',
                     title: 'This fees structure is Already createrd!',
                     showConfirmButton: false,
-                    timer: 2500
+                    timer: 2500,
+                    showClass: {
+                      backdrop: 'swal2-noanimation', // disable backdrop animation
+                      popup: '',                     // disable popup animation
+                      icon: ''                       // disable icon animation
+                    },
+                    hideClass: {
+                      popup: '',                     // disable popup fade-out animation
+                    }
                 })
                 dispatch(AddNewStudentFailure(userResData.data));
             }

@@ -99,6 +99,14 @@ const StudentTableHeader = [
             showCloseButton:true,
             cancelButtonColor: 'blue',
             confirmButtonColor:"gray",
+            showClass: {
+              backdrop: 'swal2-noanimation', // disable backdrop animation
+              popup: '',                     // disable popup animation
+              icon: ''                       // disable icon animation
+            },
+            hideClass: {
+              popup: '',                     // disable popup fade-out animation
+            }
 
           }).then((result) => {
             if(result.isConfirmed=== false) {
