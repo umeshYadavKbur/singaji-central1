@@ -59,9 +59,14 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
         {
             header: 'Role',
             accessor: 'role',
-            //  Cell: ({row: {original}}) => (
-            //      original.roleId === 1 ? "Super Admin" : original.roleId === 2 ? "Admin" : original.roleId === 1 ? "Student" : ''   
-            //  )
+
+            Cell: ({ row: { original, index } }) => {
+                var data2 = original.role.charAt(0).toUpperCase() + original.role.slice(1).toLowerCase();
+                data2 = data2.replace('admin', ' Admin');
+                return (
+                    <>{data2}</>
+                )
+            }
         },
         {
             header: 'Status',

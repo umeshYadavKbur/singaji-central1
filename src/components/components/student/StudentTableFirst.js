@@ -7,7 +7,7 @@ import updown_sort from '../../assests/image/updown_sort.svg'
 import { TableCheckbox } from '../tableComponents/TableCheckbox';
 // import tableData from './fees_receipt.json'
 import filtericon from '../../assests/image/AccountIcons/filter.svg'
-
+import { ActivateButton, DeactivateButton } from '../../assests/common/Color'
 import { CDropdown, CDropdownMenu, CDropdownToggle, CPopover } from '@coreui/react'
 // import feesReceiptTableData from "../../../redux/actionDispatcher/account/feesReceiptTableDispather";
 // import AllUrl from "../../../redux/constants/url";
@@ -128,7 +128,7 @@ function GlobalFilter({
                     setValue(e.target.value)
                     onChange(e.target.value)
                 }}
-                placeholder={`Search ${count} records...`} />
+                placeholder="Search" />
             <i style={{ marginLeft: "-31px", color: "rgb(90, 96, 127,0.7)" }}
                 className="fas fa-search" >
             </i>
@@ -217,6 +217,20 @@ function StudentTableFirst() {
             {
                 header: "Status",
                 accessor: "status",
+                Cell: ({ row: { original, index } }) => {
+                    return (
+                        <button
+                            style={
+                                original.status
+                                    ? ActivateButton
+                                    : DeactivateButton
+                            }
+
+                        >
+                            {original.status ? "Active" : "Deactive"}
+                        </button>
+                    )
+                },
                 Filter: "",
                 filter: ""
             },

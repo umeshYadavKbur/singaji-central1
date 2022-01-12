@@ -1,8 +1,8 @@
 {
   "recommendations": [
     "steoates.autoimport",
-    "pranaygp.vscode-css-peek",
     "cweijan.vscode-mysql-client2",
-    "hookyqr.beautify"
+    "hookyqr.beautify",
+    "pranaygp.vscode-css-peek"
   ]
 }

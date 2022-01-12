@@ -137,7 +137,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        placeholder={`Search ${count} records...`}
+        placeholder={`Search...`}
       />
       <i
         style={{ marginLeft: "-31px", color: "rgb(90, 96, 127,0.7)" }}
