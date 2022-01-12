@@ -16,9 +16,33 @@ const pendingScholarship = (data) => {
                     if (response.status === 200) {
                         dispatch(fetchSuccessTableData(response.data));
                     }
+                    if (response.status === 400) {
+                        toast.warning('No data found ', {
+                            position: "bottom-center",
+                            autoClose: 3000,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        dispatch(fetchFailTableData(response.data));
+                    }
+                    if (response.status === 500) {
+                        toast.warning('Internal server error', {
+                            position: "bottom-center",
+                            autoClose: 3000,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        dispatch(fetchFailTableData(response.data));
+                    }
                 })
                 .catch(function (error) {
-                    fetchFailTableData(error);
+                    dispatch(fetchFailTableData(error));
                     toast.warning('Something went wrong', {
                         position: "bottom-center",
                         autoClose: 3000,
@@ -30,7 +54,7 @@ const pendingScholarship = (data) => {
                     });
                 });
         } catch (error) {
-            fetchFailTableData(error);
+            dispatch(fetchFailTableData(error));
             toast.warning('Internal server error', {
                 position: "bottom-center",
                 autoClose: 3000,

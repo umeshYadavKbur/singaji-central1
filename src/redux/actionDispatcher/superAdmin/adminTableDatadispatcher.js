@@ -7,6 +7,8 @@ import {
   FETCH_ADMIN_TABLE_DATA_SUCCESS,
   FETCH_ADMIN_TABLE_DATA_FAIL
 } from "../../constants/actions";
+import { toast } from 'react-toastify'
+
 
 export const fetchAdminTableData = (data) => {
   return (dispatch) => {
@@ -18,11 +20,53 @@ export const fetchAdminTableData = (data) => {
           if (response.status === 200) {
             dispatch(fetchSuccessTableData(response.data));
           }
+          if (response.status === 400) {
+            toast.warn('No data found !', {
+              position: "bottom-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            dispatch(fetchFailTableData(response.data));
+          }
+          if (response.status === 500) {
+            toast.warn('Internal Server Error', {
+              position: "bottom-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            dispatch(fetchFailTableData(response.data));
+          }
         })
         .catch(function (error) {
+          toast.warn('Internal Server Error', {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           fetchFailTableData(error);
         });
     } catch (error) {
+      toast.warn('Internal Server Error', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       fetchFailTableData(error);
       //   console.log(error);
     }

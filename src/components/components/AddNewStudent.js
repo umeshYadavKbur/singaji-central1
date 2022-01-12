@@ -243,7 +243,7 @@ function AddNewStudentPage({ AddNewStudent }) {
     const getCourseFees = async () => {
 
         if (formik.values.joinBatch !== '' && formik.values.joinBatch.replace('X', '').length === 4 && formik.values.streamName !== '') {
-            console.log("api calling");
+            // console.log("api calling");
 
             var data = '';
 
