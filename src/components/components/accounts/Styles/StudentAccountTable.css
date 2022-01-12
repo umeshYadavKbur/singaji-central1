@@ -1,5 +1,6 @@
 #customers table {
-  font-family: Arial, Helvetica, sans-serif;
+  
+  font-family: 'Poppins', sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
@@ -186,4 +187,12 @@
 button:not(:disabled) {
   cursor: pointer;
   margin-top: 0px;
+}
+
+.table_btn_size{
+
+  width: 86px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }

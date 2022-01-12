@@ -72,6 +72,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "reg_fees_status",
       Cell: ({ row: { original } }) => (
         <button
+        className="table_btn_size"
           style={
             original.reg_fees_status === "Paid"
               ? PaidButton : UnpaidButton}
@@ -89,11 +90,19 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               showCancelButton: true,
               // showCancelButton: true,
               cancelButtonText: 'Cancel',
-              confirmButtonText: 'Payment',
+              confirmButtonText: 'Paid',
               showCloseButton: true,
               cancelButtonColor: 'gray',
-              confirmButtonColor: "#4f83df",
-              reverseButtons: true
+              confirmButtonColor: "#F8A72C",
+              reverseButtons: true,
+              showClass: {
+                backdrop: 'swal2-noanimation', // disable backdrop animation
+                popup: '',                     // disable popup animation
+                icon: ''                       // disable icon animation
+              },
+              hideClass: {
+                popup: '',                     // disable popup fade-out animation
+              }
 
 
             }).then(async (result) => {
@@ -156,6 +165,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "status",
       Cell: ({ row: { original } }) => (
         <button
+        className="table_btn_size"
           style={DeactivateButton}
           onClick={() => {
             // setData(original.status)
@@ -177,7 +187,15 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                 showCloseButton: true,
                 cancelButtonColor: 'gray',
                 confirmButtonColor: "#4f83df",
-                reverseButtons: true
+                reverseButtons: true,
+                showClass: {
+                  backdrop: 'swal2-noanimation', // disable backdrop animation
+                  popup: '',                     // disable popup animation
+                  icon: ''                       // disable icon animation
+                },
+                hideClass: {
+                  popup: '',                     // disable popup fade-out animation
+                }
 
               }).then(async (result) => {
                 if (result.isConfirmed) {

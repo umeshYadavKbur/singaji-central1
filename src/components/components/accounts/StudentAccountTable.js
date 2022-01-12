@@ -348,8 +348,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                         </div>
                     </div>
                 ),
-                Filter: SelectColumnFilter,
-                filter: MultipleFilter,
+                Filter: "",
+                filter: "",
             },
             {
                 header: 'Pending Fee',
@@ -375,9 +375,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                 accessor: 'accesory',
                 Cell: ({ row: { original, index } }) => {
                     return (
-                        <div className="d-flex m-0 flex-column justify-content-start">
-                            <button style={{ backgroundColor: "#F99300", fontWeight: 'bold', color: 'white', borderRadius: '5px' }} >Receipt</button>
-                        </div >
+                        // <div className="d-flex m-0 flex-column justify-content-start">
+                            <button className="table_btn_size" style={{backgroundColor: "#F99300", fontWeight: 'bold', color: 'white', borderRadius: '5px' }} >Receipt</button>
+                        // </div >
                     )
                 },
                 Filter: "",

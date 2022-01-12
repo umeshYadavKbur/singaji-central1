@@ -22,6 +22,7 @@
   border-radius: 5px;
   text-align: center;
   padding: 8px;
+  vertical-align: middle;
 }
 
 #customers tr {
@@ -178,6 +179,14 @@
   border: none !important;
 }
 
+
+.table_btn_size{
+
+  width: 86px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
 /* .myinput[type="checkbox"]:hover {
   background-color: green ;
 } */

@@ -68,6 +68,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             accessor: 'is_active',
             Cell: ({ row: { original } }) => (
                 <button
+                className="table_btn_size"
                     style={
                         original.is_active === 1
                             ? ActivateButton

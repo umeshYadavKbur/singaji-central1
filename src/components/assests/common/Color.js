@@ -1,14 +1,16 @@
 export const DeactivateButton = {
-    width: "80px",
+    width: "86px",
+    height:'30px',
     borderRadius: "5px",
-    backgroundColor: "#accef7",
+    backgroundColor: "#CCE5FF",
     color: "#4F83DF",
     fontWeight: "700",
     border: '1px #FFC700',
 }
 
 export const ActivateButton = {
-    width: "80px",
+    width: "86px",
+    height:'30px',
     borderRadius: "5px",
     backgroundColor: "#4F83DF",
     color: "white",
@@ -17,20 +19,24 @@ export const ActivateButton = {
 }
 
 export const PaidButton = {
-    width: "80px",
+    width: "86px",
+    height:'30px',
     borderRadius: "5px",
-    backgroundColor: "orange",
+    backgroundColor: "#F99600",
     color: "white",
     fontWeight: "bold",
     border: '1px rgb(255 202 39 / 81%)',
 }
 
 export const UnpaidButton = {
-    width: "80px",
-    backgroundColor: "#edcda4",
+    width: "86px",
+    height:'30px',
+    
+    // backgroundColor: "#edcda4",
+    backgroundColor: "#FDDEB2",
     borderRadius: "5px",
     fontWeight: "bold",
-    color: "orange",
+    color: "#F99300",
     border: 'none',
 }
 

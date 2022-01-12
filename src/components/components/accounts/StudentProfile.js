@@ -196,7 +196,7 @@ function StudentProfile() {
                 </div>
                 <div className="col-6 d-flex justify-content-end">
                 <img src={student_Profile__RocketImg} className='mt-4 ' alt="rocket"  />
-                    <img src={Edit_icon} onClick={handleOpen} className='mb-1 ' alt="rocket" style={{height: '40px',width: '40px',alignSelf:'self-end'}} />
+                    <img src={Edit_icon} onClick={handleOpen} className='mb-1 ' alt="rocket" style={{height: '40px',width: '40px',alignSelf:'self-end',cursor:'pointer'}} />
                     {/* <img src={Edit_icon} alt='edit_icon'  /> */}
                 </div>
             </div>
