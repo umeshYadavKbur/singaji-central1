@@ -134,7 +134,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
     const [value, setValue] = React.useState(filter);
     const onChange = useAsyncDebounce((value) => {
         setFilter(value || undefined);
-    }, 200);
+    }, 1);
 
     return (
         <>
@@ -146,6 +146,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
                     border: "1px solid #7979792b",
                     padding: "5px",
                     borderRadius: "4px",
+                    paddingLeft:'12px'
                 }}
                 type="search"
                 value={filter || ""}
@@ -671,7 +672,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                                             style={{
                                                 height: "35px",
                                                 width: "35px",
-                                                marginTop: "-34px",
+                                                marginTop: "-25px",
                                                 marginRight: "5px",
                                             }}
                                         />
