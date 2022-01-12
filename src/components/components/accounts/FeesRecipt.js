@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Numberformat from 'react-number-format'
 import '../styles/AddNewStudent.css'
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 import Icon_feather_download from '../../assests/image/AccountIcons/Icon_feather_download.svg';
 import * as Yup from "yup";
+import AllUrl from '../../../redux/constants/url';
 var axios = require('axios');
 
 
@@ -22,6 +24,7 @@ function FeesRecipt() {
     var StudentClassName = StudentAccountData.accountInfo.branch
     // console.log((StudentAccountData.pendingFee).length);
 
+    const [loading,setLoading] = useState(false)
 
 
     var totalFeesAmount = 0;
@@ -44,42 +47,64 @@ function FeesRecipt() {
         studentName: `${StudentName}`,
         studentClassYear: 'I',
         FatherName: StudentAccountData.accountInfo.fathersName,
-        waiveOff: '',
+        waiveOff: '0',
         chequeDate: '',
         ChequeNo: '',
         feesAmount: '',
-        recieptdate: `${new Date().getFullYear() + '-' + new Date().getMonth()+1 + '-' + new Date().getDate()}`  ,
+        recieptdate: `${new Date().getFullYear() + '-' + new Date().getMonth() + 1 + '-' + new Date().getDate()}`,
         installmentNo: '1',
         Remark: '',
         LateFeeAmount: '0',
         BankName: '',
     }
     const validationSchema = Yup.object({
-        recieptdate: Yup.string().required("Required!").test('doc_check',`Date must be greater then ${new Date().getDate() - 8 + '-' + new Date().getMonth() + 1 + '-' + new Date().getFullYear()}`,val => val?.slice(-2) >= (new Date().getDate()) - 8).test('check',value => value?.slice(-2) <=(new Date().getDate()) ),
+        recieptdate: Yup.string().required("Required!").test('doc_check', `Date must be greater then ${new Date().getDate() - 8 + '-' + new Date().getMonth() + 1 + '-' + new Date().getFullYear()}`, val => val?.slice(-2) >= (new Date().getDate()) - 8).test('check', value => value?.slice(-2) <= (new Date().getDate())),
         studentClassYear: Yup.string().required("Required!"),
-        feesAmount: Yup.string().required("Required!"),
-        LateFeeAmount: Yup.string().required("Required!"),
-        waiveOff: Yup.string().required("Required!"),
+        feesAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0),
+        LateFeeAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0),
+        waiveOff: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0),
         installmentNo: Yup.string().required("Required!"),
         payBy: Yup.string().required("Required!"),
-        ChequeNo: Yup.string().required("Required!"),
-        chequeDate: Yup.string().required("Required!"),
-        BankName: Yup.string().required("Required!"),
-        Remark: Yup.string().required("Required!")
+        Remark: Yup.string().required("Required!").trim(),
+        ChequeNo: Yup.string().test('require', 'Required!', (val) => {
+            if (formik.values.payBy === 'Cheque') {
+                if (!val) return false
+                else return true
+
+            }
+            else return true
+        }),
+        chequeDate: Yup.string().test('require', 'Required!', (val) => {
+            if (formik.values.payBy === 'Cheque') {
+                if (!val) return false
+                else return true
+
+            }
+            else return true
+        }),
+        BankName: Yup.string().test('require', 'Required!', (val) => {
+            if (formik.values.payBy === 'Cheque') {
+                if (!val) return false
+                else return true
+
+            }
+            else return true
+        }).trim().matches(/^[a-zA-Z]+$/, 'must be alphabates')
     })
 
     const formik = useFormik({
         initialValues,
         validationSchema,
-        onSubmit: async (values) => {
-            console.log(values);
+        onSubmit: async () => {
+            setLoading(true)
+            // console.log(values);
 
             var submitData = JSON.stringify({
                 "stdId": StudentAccountData.accountInfo.stdId,
                 "year": formik.values.studentClassYear,
-                "ReceivedAmount": formik.values.feesAmount,
-                "LateFeeAmount": formik.values.LateFeeAmount,
-                "waiveOf": formik.values.waiveOff,
+                "ReceivedAmount": formik.values.feesAmount.split(',').join(''),
+                "LateFeeAmount": formik.values.LateFeeAmount.split(',').join(''),
+                "waiveOf": formik.values.waiveOff.split(',').join(''),
                 "InstallmentNo": formik.values.installmentNo,
                 "ReceivedType": formik.values.payBy,
                 "ChequeNo": formik.values.ChequeNo,
@@ -88,10 +113,10 @@ function FeesRecipt() {
                 "Remark": formik.values.Remark
             })
 
-
+            console.log(JSON.parse(submitData))
             var config = {
                 method: 'post',
-                url: 'https://singaji-central-server.herokuapp.com/api/generate_reciept',
+                url: AllUrl.generateReciept,
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
@@ -99,7 +124,8 @@ function FeesRecipt() {
                 data: submitData
             };
 
-            var result = await axios(config)
+            var result = await axios(config);
+            if(result) setLoading(false)
             console.log(result);
             if (result.status === 200) {
 
@@ -111,12 +137,6 @@ function FeesRecipt() {
                 document.body.appendChild(link)
                 link.click()
                 document.body.removeChild(link)
-
-
-
-
-
-
             }
 
 
@@ -146,20 +166,53 @@ function FeesRecipt() {
     // console.log(totalFeesAmount);
     return (
         <>
+         {loading && (
+                <div
+                    className="lds-roller"
+                    style={{
+                        position: "absolute",
+                        left: "50%",
+                        top: "50%",
+                        zIndex: "100000",
+                    }}
+                >
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            )}
             <div className=" p-3 m-2 me-3" style={{ backgroundColor: 'white', borderRadius: '8px' }}>
 
                 <form onSubmit={formik.handleSubmit}>
 
                     <div className="row">
                         <div className="col">
-                            <label htmlFor="">Student Name</label>
-                            <input name='studentName' value={formik.values.studentName} type="text" className='form-control' placeholder='Student Name' disabled={true} />
-                            
-                        </div>
-                        <div className="col">
                             <label htmlFor="">Father Name</label>
                             <input name='FatherName' onChange={formik.handleChange} value={formik.values.FatherName} type="text" className='form-control' placeholder='Father Name'
-                                disabled={true} />
+
+                                readOnly={true} />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="">Installment No.</label>
+                            <select name='installmentNo' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.installmentNo} className='form-select' >
+                                <option defaultValue="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="POSTMATRIC">Postmatric ScolarShip</option>
+                                <option value="GKB">GKB ScolarShip</option>
+                            </select>
+                            {formik.errors.installmentNo && formik.touched.installmentNo ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.installmentNo}
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                         <div className="col">
                             <label htmlFor="">Year</label>
@@ -190,26 +243,11 @@ function FeesRecipt() {
                     </div>
                     <div className="row">
 
-                        <div className="col">
-                            <label htmlFor="">Installment No.</label>
-                            <select name='installmentNo' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.installmentNo} className='form-select' >
-                                <option defaultValue="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="Postmatric">Postmatric ScolarShip</option>
-                                <option value="GKB">GKB ScolarShip</option>
-                            </select>
-                            {formik.errors.installmentNo && formik.touched.installmentNo ? (
-                                <div className="text-danger fs-6">
-                                    {formik.errors.installmentNo}
-                                </div>
-                            ) : (
-                                ""
-                            )}
-                        </div>
+
                         <div className="col">
                             <label htmlFor="">Amount</label>
-                            <input name='feesAmount' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.feesAmount} type="number" className='form-control' placeholder='Amount' />
+                            <Numberformat name='feesAmount' onBlur={formik.handleBlur} thousandSeparator={true}
+                                thousandsGroupStyle='lakh' onChange={formik.handleChange} value={formik.values.feesAmount} className='form-control' placeholder='Amount' />
                             {formik.errors.feesAmount && formik.touched.feesAmount ? (
                                 <div className="text-danger fs-6">
                                     {formik.errors.feesAmount}
@@ -234,22 +272,36 @@ function FeesRecipt() {
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="">Cheque No.</label>
-                            <input name='ChequeNo' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.ChequeNo} type="text" className='form-control' placeholder='Cheque No' />
-                            {formik.errors.ChequeNo && formik.touched.ChequeNo ? (
+                            <label htmlFor="">Waive off</label>
+                            <Numberformat name='waiveOff' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.waiveOff} className='form-control' placeholder='Waive off' />
+                            {formik.errors.waiveOff && formik.touched.waiveOff ? (
                                 <div className="text-danger fs-6">
-                                    {formik.errors.ChequeNo}
+                                    {formik.errors.waiveOff}
                                 </div>
                             ) : (
                                 ""
                             )}
                         </div>
+                        <div className="col">
+                            <label htmlFor="">Late Fees</label>
+                            <Numberformat name='LateFeeAmount' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.waiveOff} className='form-control' placeholder='Waive off' />
+                            {formik.errors.waiveOff && formik.touched.waiveOff ? (
+                                <div className="text-danger fs-6">
+                                    {formik.errors.LateFeeAmount}
+                                </div>
+                            ) : (
+                                ""
+                            )}
+                        </div>
+
                     </div>
                     <div className="row">
 
                         <div className="col">
                             <label htmlFor="">Cheque Date</label>
-                            <input name='chequeDate' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.chequeDate} type="date" className='form-control' />
+                            <input name='chequeDate' onBlur={formik.handleBlur}
+                                disabled={formik.values.payBy !== 'Cheque'}
+                                onChange={formik.handleChange} value={formik.values.chequeDate} type="date" className='form-control' />
                             {formik.errors.chequeDate && formik.touched.chequeDate ? (
                                 <div className="text-danger fs-6">
                                     {formik.errors.chequeDate}
@@ -260,7 +312,9 @@ function FeesRecipt() {
                         </div>
                         <div className="col">
                             <label htmlFor="">Bank Name</label>
-                            <input name='BankName' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.BankName} type="text" className='form-control' placeholder='Bank Name' />
+                            <input name='BankName' onBlur={formik.handleBlur}
+                                disabled={formik.values.payBy !== 'Cheque'}
+                                onChange={formik.handleChange} value={formik.values.BankName} type="text" className='form-control' placeholder='Bank Name' />
                             {formik.errors.BankName && formik.touched.BankName ? (
                                 <div className="text-danger fs-6">
                                     {formik.errors.BankName}
@@ -270,16 +324,19 @@ function FeesRecipt() {
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="">Waive off</label>
-                            <input name='waiveOff' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.waiveOff} type="number" className='form-control' placeholder='Waive off' />
-                            {formik.errors.waiveOff && formik.touched.waiveOff ? (
+                            <label htmlFor="">Cheque No.</label>
+                            <input name='ChequeNo' onBlur={formik.handleBlur}
+                                disabled={formik.values.payBy !== 'Cheque'}
+                                onChange={formik.handleChange} value={formik.values.ChequeNo} type="text" className='form-control' placeholder='Cheque No' />
+                            {formik.errors.ChequeNo && formik.touched.ChequeNo ? (
                                 <div className="text-danger fs-6">
-                                    {formik.errors.waiveOff}
+                                    {formik.errors.ChequeNo}
                                 </div>
                             ) : (
                                 ""
                             )}
                         </div>
+
                         <div className="col">
                             <label htmlFor="">Remark</label>
                             <input name='Remark' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.Remark} type="text" className='form-control' placeholder='Remark' />

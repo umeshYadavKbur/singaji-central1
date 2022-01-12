@@ -624,10 +624,10 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             <option value="">
                                                 Category
                                             </option>
-                                            <option value="Gen">Gen</option>
+                                            <option value="GEN">Gen</option>
                                             <option value="OBC">OBC</option>
-                                            <option value="St">St</option>
-                                            <option value="Sc">Sc</option>
+                                            <option value="ST">St</option>
+                                            <option value="SC">Sc</option>
                                         </select>
                                         {formik.errors.category && formik.touched.category ? (
                                             <div className="text-danger fs-6">
