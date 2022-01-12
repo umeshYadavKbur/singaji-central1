@@ -163,7 +163,7 @@ function UploadDocumentFrom() {
                 <p className="mx-auto fw-bold text-center mt-2" style={{ cursor: 'pointer', color: '#4f83df' }}
                     onClick={() => { document.getElementById(NAME_FOR_FILE).click() }}>
                     {DISPLAY_NAME}</p>
-                <input name={NAME_FOR_FILE} placeholder={NAME_FOR_FILE} id={NAME_FOR_FILE} type="file" onChange={(e) => {
+                <input name={NAME_FOR_FILE} placeholder={NAME_FOR_FILE} id={NAME_FOR_FILE} type="file" accept="image/*" onChange={(e) => {
                     imageToBase64(e.target.files[0], NAME_FOR_FILE);
                     
                 }} value={formik.values.NAME_FOR_FILE} hidden={true} />
