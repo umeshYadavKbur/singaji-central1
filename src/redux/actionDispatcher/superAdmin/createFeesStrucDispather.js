@@ -15,9 +15,6 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
       dispatch(feesReq());
       axios(data)
         .then(function (response) {
-          //Printing the response of the data
-          // console.log(("Response is  :::", response));
-          // console.log(("The response code is ::", response.status));
 
           if (response.status === 208) {
             Swal.fire({
@@ -40,6 +37,13 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
             })
             dispatch(feesReqSuccess());
           } else if (response.status === 401) {
+            Swal.fire({
+              position: 'top-center',
+              icon: 'error',
+              title: 'Request failed!',
+              showConfirmButton: false,
+              timer: 2500
+            })
             dispatch(feesReqSuccess());
             // dispatch(feesReqFail(error));
           }

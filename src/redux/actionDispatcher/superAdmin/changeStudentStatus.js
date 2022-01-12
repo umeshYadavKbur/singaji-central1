@@ -45,6 +45,13 @@ export const changeStatus = (data) => {
           })
         });
     } catch (error) {
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: 'Someting went wrong!',
+        showConfirmButton: false,
+        timer: 2500
+      })
       console.log(error);
     }
   };

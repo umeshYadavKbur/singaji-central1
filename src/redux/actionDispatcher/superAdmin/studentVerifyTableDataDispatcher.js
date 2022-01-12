@@ -83,6 +83,15 @@ export const VerifyStudent = (data) => {
             }
             return userResData.status;
         } catch (error) {
+            toast.error('Internal Server Error', {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+            });
             //if crudential fails than Login fail action dispatch
             let value = JSON.stringify(userResData);
             dispatch(VerifyStudentFail(value));

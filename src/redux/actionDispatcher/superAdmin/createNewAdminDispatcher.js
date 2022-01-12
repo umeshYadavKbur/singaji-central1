@@ -70,6 +70,13 @@ export const createNewAdmin = (data, navigate) => {
 
         });
     } catch (error) {
+      Swal.fire({
+        position: 'top-center',
+        icon: 'error',
+        title: 'problem occured!',
+        showConfirmButton: false,
+        timer: 2500
+      })
       console.log(error);
     }
   };

@@ -54,6 +54,12 @@ export const fetchStudentTable = (data) => {
           });
         });
     } catch (error) {
+      Swal.fire({
+        title: "Some Problem Occurred",
+        icon: "warning",
+        showConfirmButton: false,
+        timer: 2500
+      });
       fetchFailTableData(error);
       //   console.log(error);
     }
