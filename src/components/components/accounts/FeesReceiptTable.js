@@ -283,6 +283,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
     ) : (
         <Fragment>
             <div className="container-fluid">
+            <div style={{ position: 'sticky', top: '80px',width:'100%',paddingTop:'10px',paddingBottom:'10px', backgroundColor: '#f4f7fc', zIndex: '500' }}>
                 <div className="d-flex">
                     <div className="">
                         <select
@@ -299,7 +300,55 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                     </div>
 
                     <div className="d-flex ml-auto me-1">
-                        <CDropdown variant="nav-item" style={{ color: 'white' }} >
+                        <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
+
+                            <CDropdown variant="nav-item" style={{ color: 'white' }}>
+                                <CDropdownToggle
+                                    placement="bottom-end"
+                                    className="py-0"
+                                    caret={false}
+                                >
+                                    <img
+                                        src={filtericon}
+                                        alt=""
+                                        style={{
+                                            height: "35px",
+                                            width: "35px",
+                                            marginTop: "-35px",
+                                            marginLeft: "-13px",
+                                        }}
+                                    />
+                                </CDropdownToggle>
+
+                                <CDropdownMenu
+                                    component={"div"}
+                                    style={{ width: 'auto' }}
+                                    className="pt-0 "
+                                    placement="bottom-end"
+
+                                >
+                                    <div>
+                                        {headerGroups.map((headerGroup) => (
+                                            <div
+                                                style={{ display: "flex flex-column" }}
+                                                {...headerGroup.getHeaderGroupProps()}
+                                            >
+                                                {headerGroup.headers.map((column, i) => (
+                                                    <div
+                                                        key={i}
+                                                        style={{ display: "block", justifyContent: "center" }}
+                                                    >
+                                                        {column.canFilter ? column.render("Filter") : null}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </CDropdownMenu>
+                            </CDropdown>
+
+                        </div>
+                        {/* <CDropdown variant="nav-item" style={{ color: 'white' }} >
                             <CDropdownToggle
                                 placement="bottom-end"
                                 className="py-0"
@@ -341,7 +390,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                                     ))}
                                 </div>
                             </CDropdownMenu>
-                        </CDropdown>
+                        </CDropdown> */}
 
                         <div className="ml-auto me-4">
                             <GlobalFilter
@@ -352,9 +401,10 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                         </div>
                     </div>
                 </div>
+                </div>
 
                 <table {...getTableProps()} id="customers">
-                    <thead>
+                    <thead style={{ position: 'sticky', top: '135px',width:'100%', backgroundColor: '#f4f7fc', zIndex: '500' }}>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (

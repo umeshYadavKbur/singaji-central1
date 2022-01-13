@@ -136,10 +136,11 @@ function FeesStructure({ table_data, fetchFeesTable }) {
           <div></div>
         </div>
       )}
-      <div
-        style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}
-      >
-        <div className="d-flex">
+      <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
+        <div style={{ position: 'sticky', top: '80px',width:'100%',paddingTop:'10px',paddingBottom:'10px', backgroundColor: '#f4f7fc', zIndex: '500' }}>
+
+       
+        <div className="d-flex" >
           <div className="">
             <select
               className="form-select table_select_row_options"
@@ -166,8 +167,9 @@ function FeesStructure({ table_data, fetchFeesTable }) {
             </div>
           </div>
         </div>
+        </div>
         <table {...getTableProps()} id="customers" className="table table-sm">
-          <thead>
+          <thead style={{ position: 'sticky', top: '135px',width:'100%', backgroundColor: '#f4f7fc', zIndex: '500' }}>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (

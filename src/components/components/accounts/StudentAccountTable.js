@@ -146,7 +146,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
                     border: "1px solid #7979792b",
                     padding: "5px",
                     borderRadius: "4px",
-                    paddingLeft:'12px'
+                    paddingLeft: '12px'
                 }}
                 type="search"
                 value={filter || ""}
@@ -229,8 +229,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
     const token = localStorage.getItem("token");
     const [date, setDate] = useState({})
 
-    const getAllInfoOfStudent = async (original) => {
+    const getAllInfoOfStudent = async (original, is_reciptBtn) => {
         setLoading(true)
+
         // set data or original table to localStorage we need it later
         localStorage.setItem('userEdit', JSON.stringify(original))
         let data = JSON.stringify({
@@ -257,15 +258,26 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
 
         if (isStudentAdmin()) {
             console.log("Navigated ");
-            navigate('/student_admin_dashboard/studentprofile');
+            if (is_reciptBtn)
+                navigate('/student_admin_dashboard/studentprofile/feesrecipt');
+            else
+                navigate('/student_admin_dashboard/studentprofile');
         }
         else if (isAccountAdmin()) {
             console.log("Navigated ");
-            navigate('/account_admin_dashboard/studentprofile');
+            if (is_reciptBtn)
+                navigate('/account_admin_dashboard/studentprofile/feesrecipt');
+            else
+                navigate('/account_admin_dashboard/studentprofile');
+
         }
         else if (isSuperAdmin()) {
             console.log("Navigated ");
-            navigate('/admin_dashboard/studentprofile');
+            if (is_reciptBtn)
+                navigate('/admin_dashboard/studentprofile/feesrecipt');
+            else
+                navigate('/admin_dashboard/studentprofile');
+
         }
     }
     // const data = React.useMemo(() => tableData, []);
@@ -290,7 +302,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                             alt="profile"
                             style={{ cursor: "pointer" }}
                             onClick={() => {
-                                getAllInfoOfStudent(original)
+                                getAllInfoOfStudent(original, false)
                             }}
                             className="mx-auto"
                             src={original.photo}
@@ -337,7 +349,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                 header: 'Received Fee',
                 accessor: 'received_Amount',
                 Cell: ({ row: { original } }) => (
-                    <div className='row d-flex d-inline-flex'>
+                    <div className='row d-flex '>
                         <div className="col">
                             <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000" }}></span>
 
@@ -356,7 +368,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                 header: 'Pending Fee',
                 accessor: 'remain_Amount',
                 Cell: ({ row: { original } }) => (
-                    <div className='row d-flex d-inline-flex'>
+                    <div className='row d-flex '>
                         <div className="col">
                             <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A" }}></span>
 
@@ -377,7 +389,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                 Cell: ({ row: { original, index } }) => {
                     return (
                         // <div className="d-flex m-0 flex-column justify-content-start">
-                            <button className="table_btn_size" style={{backgroundColor: "#F99300", fontWeight: 'bold', color: 'white', borderRadius: '5px' }} >Receipt</button>
+                        <button className="table_btn_size" onClick={() => {
+                            getAllInfoOfStudent(original, true)
+                        }} style={{ backgroundColor: "#F99300", fontWeight: 'bold', color: 'white', borderRadius: '5px' }} >Receipt</button>
                         // </div >
                     )
                 },
@@ -584,200 +598,205 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                 </div>
             )}
             <div className="container-fluid">
-                <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
-                    <div className=" info-col"  >
-                        <h5 style={{ marginTop: "12px" }}>{MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
-                    </div>
-                    <div className=" info-col" >
-                        <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? MoneyCount.TAmount : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
-                    </div>
-                    <div className=" info-col" >
-                        <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport : MoneyCount.TpaidAmount} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
-                    </div>
-                    <div className=" info-col" >
-                        <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? MoneyCount.RAmount : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
-                    </div>
-                    <div className=" info-col">
-                        <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff : '0'}<br /> <p >Waive Off</p> </h5>
-                    </div>
-                </div>
-                <div className="row  mx-0 mt-3" style={{ width: "98%" }}>
+                <div style={{position:'sticky',top:'80px',backgroundColor:'#f4f7fc',zIndex:'500',paddingBottom:'10px'}}>
 
-                    <div className="d-flex">
-                        <div style={{ marginLeft: '-12px' }}>
-                            <select
-                                className="form-select table_select_row_options"
-                                value={pageSize}
-                                onChange={(e) => setPageSize(Number(e.target.value))}
-                            >
-                                {[10, 25, 50, 100].map((pageSize) => (
-                                    <option value={pageSize} key={pageSize}>
-                                        Show Entries {pageSize}
-                                    </option>
-                                ))}
-                            </select>
+
+                    <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
+                        <div className=" info-col"  >
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
                         </div>
-
-
-                        <div className="d-flex  ml-3">
-                            <DateRangePicker onClean={(e) => {
-                                e.preventDefault();
-                                getBackPosition()
-                                set_is_dailyReport(false)
-                            }}
-
-                                onChange={(value) => {
-
-                                    if (!value) {
-
-                                        return;
-                                    }
-                                    var a = value[0]
-                                    var b = value[1]
-
-                                    setDate({
-                                        a, b
-                                    })
-                                }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
-                            <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
+                        <div className=" info-col" >
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? MoneyCount.TAmount : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
                         </div>
-                        <div class="btn-group  ml-1">
-                            <button class="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Download
-                            </button>
-                            <div class="dropdown-menu mt-1">
-
-
-                                <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>
-                                {is_dailyReport &&
-                                    <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
-                                }
-
-                            </div>
+                        <div className=" info-col" >
+                            <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport : MoneyCount.TpaidAmount} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
                         </div>
-
-
-                        <div className="d-flex ml-auto me-4">
-                            <div className="">
-
-                                <CDropdown variant="nav-item" style={{ color: 'white' }}>
-                                    <CDropdownToggle
-                                        placement="bottom-end"
-                                        className="py-0"
-                                        caret={false}
-                                    >
-                                        <img
-                                            src={filtericon}
-                                            alt=""
-                                            style={{
-                                                height: "35px",
-                                                width: "35px",
-                                                marginTop: "-25px",
-                                                marginRight: "5px",
-                                            }}
-                                        />
-                                    </CDropdownToggle>
-
-                                    <CDropdownMenu
-                                        component={"div"}
-                                        style={{ width: 'auto' }}
-                                        className="pt-0 "
-                                        placement="bottom-end"
-
-                                    >
-                                        <div>
-                                            {headerGroups.map((headerGroup) => (
-                                                <div
-                                                    style={{ display: "flex flex-column" }}
-                                                    {...headerGroup.getHeaderGroupProps()}
-                                                >
-                                                    {headerGroup.headers.map((column, i) => (
-                                                        <div
-                                                            key={i}
-                                                            style={{ display: "block", justifyContent: "center" }}
-                                                        >
-                                                            {column.canFilter ? column.render("Filter") : null}
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </CDropdownMenu>
-                                </CDropdown>
-
-                            </div>
-                            <GlobalFilter
-                                preGlobalFilteredRows={preGlobalFilteredRows}
-                                filter={globalFilter}
-                                setFilter={setGlobalFilter}
-                            />
+                        <div className=" info-col" >
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? MoneyCount.RAmount : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
                         </div>
-
+                        <div className=" info-col">
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff : '0'}<br /> <p >Waive Off</p> </h5>
+                        </div>
                     </div>
+                    <div className="row  mx-0 mt-3" >
 
-                    <table {...getTableProps()} id="customers">
-                        <thead>
-                            {headerGroups.map((headerGroup) => (
-                                <tr {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map((column) => (
-                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                            {column.render("header")}
-                                            <span>
-                                                {column.isSorted ? (
-                                                    column.isSortedDesc ? (
-                                                        <img
-                                                            src={updown_sort}
-                                                            style={{ marginLeft: "5px" }}
-                                                            alt=""
-                                                        />
-                                                    ) : (
-                                                        <img
-                                                            src={updown_sort}
-                                                            style={{ marginLeft: "5px" }}
-                                                            alt=""
-                                                        />
-                                                    )
-                                                ) : (
-                                                    ""
-                                                )}
-                                                {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
-                                            </span>
-                                        </th>
+                        <div className="d-flex">
+                            <div style={{ marginLeft: '-12px' }}>
+                                <select
+                                    className="form-select table_select_row_options"
+                                    value={pageSize}
+                                    onChange={(e) => setPageSize(Number(e.target.value))}
+                                >
+                                    {[10, 25, 50, 100].map((pageSize) => (
+                                        <option value={pageSize} key={pageSize}>
+                                            Show Entries {pageSize}
+                                        </option>
                                     ))}
-                                </tr>
-                            ))}
-                        </thead>
-                        <tbody {...getTableBodyProps()}>
-                            {page.map((row) => {
-                                prepareRow(row);
-                                return (
-                                    <tr {...row.getRowProps()}>
-                                        {row.cells.map((cell) => {
-                                            return (
-                                                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                                            );
-                                        })}
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                    <Pagination
-                        page={page}
-                        pageIndex={pageIndex}
-                        pageCount={pageCount}
-                        pageSize={pageSize}
-                        canPreviousPage={canPreviousPage}
-                        previousPage={previousPage}
-                        pageOptions={pageOptions}
-                        gotoPage={gotoPage}
-                        canNextPage={canNextPage}
-                        nextPage={nextPage}
-                    />
+                                </select>
+                            </div>
+
+
+                            <div className="d-flex  ml-3">
+                                <DateRangePicker onClean={(e) => {
+                                    e.preventDefault();
+                                    getBackPosition()
+                                    set_is_dailyReport(false)
+                                }}
+
+                                    onChange={(value) => {
+
+                                        if (!value) {
+
+                                            return;
+                                        }
+                                        var a = value[0]
+                                        var b = value[1]
+
+                                        setDate({
+                                            a, b
+                                        })
+                                    }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
+                                <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
+                            </div>
+                            <div class="btn-group  ml-1">
+                                <button class="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Download
+                                </button>
+                                <div class="dropdown-menu mt-1">
+
+
+                                    <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>
+                                    {is_dailyReport &&
+                                        <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
+                                    }
+
+                                </div>
+                            </div>
+
+
+                            <div className="d-flex ml-auto me-3">
+                                <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
+
+                                    <CDropdown variant="nav-item" style={{ color: 'white' }}>
+                                        <CDropdownToggle
+                                            placement="bottom-end"
+                                            className="py-0"
+                                            caret={false}
+                                        >
+                                            <img
+                                                src={filtericon}
+                                                alt=""
+                                                style={{
+                                                    height: "35px",
+                                                    width: "35px",
+                                                    marginTop: "-35px",
+                                                    marginLeft: "-13px",
+                                                }}
+                                            />
+                                        </CDropdownToggle>
+
+                                        <CDropdownMenu
+                                            component={"div"}
+                                            style={{ width: 'auto' }}
+                                            className="pt-0 "
+                                            placement="bottom-end"
+
+                                        >
+                                            <div>
+                                                {headerGroups.map((headerGroup) => (
+                                                    <div
+                                                        style={{ display: "flex flex-column" }}
+                                                        {...headerGroup.getHeaderGroupProps()}
+                                                    >
+                                                        {headerGroup.headers.map((column, i) => (
+                                                            <div
+                                                                key={i}
+                                                                style={{ display: "block", justifyContent: "center" }}
+                                                            >
+                                                                {column.canFilter ? column.render("Filter") : null}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </CDropdownMenu>
+                                    </CDropdown>
+
+                                </div>
+                                <GlobalFilter
+                                    preGlobalFilteredRows={preGlobalFilteredRows}
+                                    filter={globalFilter}
+                                    setFilter={setGlobalFilter}
+                                />
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
+                <table {...getTableProps()} id="customers">
+                    
+                    <thead style={{ position: 'sticky', top: '212px',width:'100%', backgroundColor: '#f4f7fc', zIndex: '500' }}>
+                        {headerGroups.map((headerGroup) => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                        {column.render("header")}
+                                        <span>
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    <img
+                                                        src={updown_sort}
+                                                        style={{ marginLeft: "5px" }}
+                                                        alt=""
+                                                    />
+                                                ) : (
+                                                    <img
+                                                        src={updown_sort}
+                                                        style={{ marginLeft: "5px" }}
+                                                        alt=""
+                                                    />
+                                                )
+                                            ) : (
+                                                ""
+                                            )}
+                                            {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
+                                        </span>
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {page.map((row) => {
+                            prepareRow(row);
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {row.cells.map((cell) => {
+                                        return (
+                                            <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                        );
+                                    })}
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+                <Pagination
+                    page={page}
+                    pageIndex={pageIndex}
+                    pageCount={pageCount}
+                    pageSize={pageSize}
+                    canPreviousPage={canPreviousPage}
+                    previousPage={previousPage}
+                    pageOptions={pageOptions}
+                    gotoPage={gotoPage}
+                    canNextPage={canNextPage}
+                    nextPage={nextPage}
+                />
+
             </div>
 
-        </Fragment>
+        </Fragment >
     );
 }
 

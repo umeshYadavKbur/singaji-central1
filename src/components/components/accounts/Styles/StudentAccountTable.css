@@ -5,7 +5,7 @@
   width: 100%;
 }
 #customers {
-  width: 100%;
+  width: 100% !important;
 }
 .Stu-Acc-info {
   width: 98%;

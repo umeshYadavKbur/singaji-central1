@@ -59,20 +59,20 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
         {
             header: 'Role',
             accessor: 'role',
-             Cell: ({row: {original}}) =>{
+            Cell: ({ row: { original } }) => {
                 var data2 = original.role.charAt(0).toUpperCase() + original.role.slice(1).toLowerCase();
                 data2 = data2.replace('admin', ' Admin');
 
-                return(data2)
-                
-             }
+                return (data2)
+
+            }
         },
         {
             header: 'Status',
             accessor: 'is_active',
             Cell: ({ row: { original } }) => (
                 <button
-                className="table_btn_size"
+                    className="table_btn_size"
                     style={
                         original.is_active === 1
                             ? ActivateButton
@@ -97,12 +97,12 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             showLoaderOnDeny: true,
                             reverseButtons: true,
                             showClass: {
-                              backdrop: 'swal2-noanimation', // disable backdrop animation
-                              popup: '',                     // disable popup animation
-                              icon: ''                       // disable icon animation
+                                backdrop: 'swal2-noanimation', // disable backdrop animation
+                                popup: '',                     // disable popup animation
+                                icon: ''                       // disable icon animation
                             },
                             hideClass: {
-                              popup: '',                     // disable popup fade-out animation
+                                popup: '',                     // disable popup fade-out animation
                             }
 
                         }).then(async (result) => {
@@ -228,26 +228,27 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             />
 
             <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
-
-                <div className="d-flex">
-                    <div className=''>
-                        <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-                            {
-                                [10, 25, 50, 100].map(pageSize => (
-                                    <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
-                                ))
-                            }
-                        </select>
-                    </div>
-                    <div className='d-flex ml-auto me-1'>
-                        <div className='ml-auto me-4'>
-                            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
+                <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '500' }}>
+                    <div className="d-flex">
+                        <div className=''>
+                            <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                                {
+                                    [10, 25, 50, 100].map(pageSize => (
+                                        <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                        <div className='d-flex ml-auto me-1'>
+                            <div className='ml-auto me-4'>
+                                <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
+                            </div>
                         </div>
                     </div>
 
                 </div>
                 <table {...getTableProps()} id="customers" className="table table-sm" >
-                    <thead >
+                    <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '500' }}>
                         {
                             headerGroups.map((headerGroup) => (
                                 <tr {...headerGroup.getHeaderGroupProps()}>

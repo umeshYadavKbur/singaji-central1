@@ -304,78 +304,82 @@ function StudentTableFirst() {
     return (
         <Fragment>
             <div className="container-fluid">
-                <div className="d-flex">
-                    <div className="">
-                        <select
-                            className="form-select table_select_row_options"
-                            value={pageSize}
-                            onChange={(e) => setPageSize(Number(e.target.value))}
-                        >
-                            {[10, 25, 50, 100].map((pageSize) => (
-                                <option value={pageSize} key={pageSize}>
-                                    Show Entries {pageSize}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-
-                    <div className="d-flex ml-auto me-1">
-                        <CDropdown variant="nav-item" style={{ color: 'white' }} >
-                            <CDropdownToggle
-                                placement="bottom-end"
-                                className="py-0"
-                                caret={false}
+                <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '5px', backgroundColor: '#f4f7fc', zIndex: '500' }}>
+                    <div className="d-flex">
+                        <div className="">
+                            <select
+                                className="form-select table_select_row_options"
+                                value={pageSize}
+                                onChange={(e) => setPageSize(Number(e.target.value))}
                             >
-                                <img
-                                    src={filtericon}
-                                    alt=""
-                                    style={{
-                                        height: "35px",
-                                        width: "35px",
-                                        marginTop: "-34px",
-                                        marginRight: "5px",
-                                    }}
-                                />
-                            </CDropdownToggle>
+                                {[10, 25, 50, 100].map((pageSize) => (
+                                    <option value={pageSize} key={pageSize}>
+                                        Show Entries {pageSize}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
-                            <CDropdownMenu
-                                component={"div"}
-                                className="pt-0 "
-                                placement="bottom-end"
+                        <div className="d-flex ml-auto me-1">
+                            <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
+                                <CDropdown variant="nav-item" style={{ color: 'white' }} >
+                                    <CDropdownToggle
+                                        placement="bottom-end"
+                                        className="py-0"
+                                        caret={false}
+                                    >
+                                        <img
+                                            src={filtericon}
+                                            alt=""
+                                            style={{
+                                                height: "35px",
+                                                width: "35px",
+                                                marginTop: "-35px",
+                                                marginLeft: "-13px",
+                                            }}
+                                        />
+                                    </CDropdownToggle>
 
-                            >
-                                <div>
-                                    {headerGroups.map((headerGroup) => (
-                                        <div
-                                            style={{ display: "flex flex-column" }}
-                                            {...headerGroup.getHeaderGroupProps()}
-                                        >
-                                            {headerGroup.headers.map((column, i) => (
+                                    <CDropdownMenu
+                                        component={"div"}
+                                        className="pt-0 "
+                                        placement="bottom-end"
+
+                                    >
+                                        <div>
+                                            {headerGroups.map((headerGroup) => (
                                                 <div
-                                                    key={i}
-                                                    style={{ display: "block", justifyContent: "center" }}
+                                                    style={{ display: "flex flex-column" }}
+                                                    {...headerGroup.getHeaderGroupProps()}
                                                 >
-                                                    {column.canFilter ? column.render("Filter") : null}
+                                                    {headerGroup.headers.map((column, i) => (
+                                                        <div
+                                                            key={i}
+                                                            style={{ display: "block", justifyContent: "center" }}
+                                                        >
+                                                            {column.canFilter ? column.render("Filter") : null}
+                                                        </div>
+                                                    ))}
                                                 </div>
                                             ))}
                                         </div>
-                                    ))}
-                                </div>
-                            </CDropdownMenu>
-                        </CDropdown>
+                                    </CDropdownMenu>
+                                </CDropdown>
+                            </div>
 
-                        <div className="ml-auto me-4">
-                            <GlobalFilter
-                                preGlobalFilteredRows={preGlobalFilteredRows}
-                                filter={globalFilter}
-                                setFilter={setGlobalFilter}
-                            />
+                            <div className="ml-auto me-4">
+                                <GlobalFilter
+                                    preGlobalFilteredRows={preGlobalFilteredRows}
+                                    filter={globalFilter}
+                                    setFilter={setGlobalFilter}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <table {...getTableProps()} id="customers">
-                    <thead>
+                    <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '500' }}>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (

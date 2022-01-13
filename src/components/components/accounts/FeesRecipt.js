@@ -7,6 +7,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Numberformat from 'react-number-format'
 import '../styles/AddNewStudent.css'
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { isSuperAdmin } from '../../../helpers/SuperAdmin';
+import { isAccountAdmin } from '../../../helpers/AccountAdmin';
+import { isStudentAdmin } from '../../../helpers/StudentAdmin';
 import { Link } from 'react-router-dom';
 import Icon_feather_download from '../../assests/image/AccountIcons/Icon_feather_download.svg';
 import * as Yup from "yup";
@@ -16,6 +20,7 @@ var axios = require('axios');
 
 
 function FeesRecipt() {
+    const navigate = useNavigate()
 
     const data = localStorage.getItem('userEdit')
     const StudentAccountData = JSON.parse(data)
@@ -24,7 +29,7 @@ function FeesRecipt() {
     var StudentClassName = StudentAccountData.accountInfo.branch
     // console.log((StudentAccountData.pendingFee).length);
 
-    const [loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
 
     var totalFeesAmount = 0;
@@ -125,7 +130,7 @@ function FeesRecipt() {
             };
 
             var result = await axios(config);
-            if(result) setLoading(false)
+            if (result) setLoading(false)
             console.log(result);
             if (result.status === 200) {
 
@@ -158,6 +163,21 @@ function FeesRecipt() {
         });
     };
 
+    const backToProfilePage = (e) => {
+        e.preventDefault()
+        if (isStudentAdmin()) {
+            console.log("Navigated ");
+            navigate('/student_admin_dashboard/studentprofile');
+        }
+        else if (isAccountAdmin()) {
+            console.log("Navigated ");
+            navigate('/account_admin_dashboard/studentprofile');
+        }
+        else if (isSuperAdmin()) {
+            console.log("Navigated ");
+            navigate('/admin_dashboard/studentprofile');
+        }
+    }
 
 
     // console.log('total fees::',totalFeesAmount,'totalReceivedFees',totalReceivedFees,'totalpendingFees',totalpendingFees);
@@ -166,7 +186,7 @@ function FeesRecipt() {
     // console.log(totalFeesAmount);
     return (
         <>
-         {loading && (
+            {loading && (
                 <div
                     className="lds-roller"
                     style={{
@@ -356,7 +376,7 @@ function FeesRecipt() {
 
                         <div className=' col-5 d-flex justify-content-end'>
 
-                            <Link className='m-1 me-5 ' to='/admin_dashboard/studentprofile'>Go To Profile</Link>
+                            <Link className='m-1 me-5 ' onClick={backToProfilePage} to='#!'>Go To Profile</Link>
                             <button className="btn btn-md btn-outline-warning fw-bold  " style={{ width: "200px" }} type="submit">Generate Receipt</button>
                         </div>
 

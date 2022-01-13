@@ -65,7 +65,7 @@ const SidebarLinks = ({ Toggle }) => {
                         <ul className={`${Toggle ? 'btn-toggle-nav-hide' : 'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
                                 {dLink1("Student Account", "studentaccounttable", "ok", "Student_account", 'account-collapse-btn')}
-                                {/* {dLink1("Pending Scholarship", "pendingscholarship", "ok", "Pending_students", "account-collapse-btn")} */}
+                                {dLink1("Pending Scholarship", "pendingscholarship", "ok", "Pending_students", "account-collapse-btn")}
                                 {dLink1("Fees Receipt List", "feesreceiptlist", "ok", "Fees_receiptlist", 'account-collapse-btn')}
                             </li>
                         </ul>

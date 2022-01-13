@@ -72,7 +72,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "reg_fees_status",
       Cell: ({ row: { original } }) => (
         <button
-        className="table_btn_size"
+          className="table_btn_size"
           style={
             original.reg_fees_status === "Paid"
               ? PaidButton : UnpaidButton}
@@ -165,7 +165,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "status",
       Cell: ({ row: { original } }) => (
         <button
-        className="table_btn_size"
+          className="table_btn_size"
           style={DeactivateButton}
           onClick={() => {
             // setData(original.status)
@@ -343,32 +343,34 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 
       />
       <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
-        <div className="d-flex">
+        <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '500' }}>
+          <div className="d-flex">
 
-          <div className=''>
-            <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-              {
-                [10, 25, 50, 100].map(pageSize => (
-                  <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
-                ))
-              }
-            </select>
-          </div>
-
-          <div className='d-flex ml-auto me-1'>
-
-            <div className='me-4'>
-              <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
+            <div className=''>
+              <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                {
+                  [10, 25, 50, 100].map(pageSize => (
+                    <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
+                  ))
+                }
+              </select>
             </div>
-            {/* <div className='me-4'>
+
+            <div className='d-flex ml-auto me-1'>
+
+              <div className='me-4'>
+                <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
+              </div>
+              {/* <div className='me-4'>
               <button type="button" class="btn btn-outline-primary fw-bold ">Active</button>
             </div> */}
-            <div className='me-4'>
-              <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
-            </div></div>
+              <div className='me-4'>
+                <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
+              </div></div>
+          </div>
         </div>
         <table {...getTableProps()} id="customers" className="table table-sm">
-          <thead>
+          <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '500' }}>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (

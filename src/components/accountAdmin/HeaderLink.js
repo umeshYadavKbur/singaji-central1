@@ -6,6 +6,10 @@ import AppHeaderDropdown from "../components/HeaderDropdown";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const HeaderLink = () => {
+    if (localStorage.getItem('userEdit')) {
+        var editData = JSON.parse(localStorage.getItem('userEdit'))
+    }
+
     const currentLocation = useLocation().pathname;
     var location = getLocation();
 
@@ -26,6 +30,17 @@ const HeaderLink = () => {
         }
         else if (currentLocation === "/account_admin_dashboard/feesstructuretable") {
             return "Fees Structure";
+        }
+        else if (currentLocation.includes('account_admin_dashboard/studentprofile')) {
+            if (editData) {
+                return (
+                    <div className='d-flex flex-column'>
+                        <span className="m-0 p-0">{editData.accountInfo.firstName + "  " + editData.accountInfo.lastName} <span className="recieved-fee-circle" style={{ backgroundColor: 'rgb(153, 248, 126)' }}></span></span>
+                        <span className="" style={{ fontSize: '15px' }}>{`${editData.accountInfo.branch}-${editData.accountInfo.year} (${editData.accountInfo.joinBatch}-${editData.accountInfo.joinBatch + 3})`}</span>
+                    </div>
+                )
+            }
+            return "Add Student";
         }
         else if (currentLocation === "/account_admin_dashboard/addnewstudent") {
             return "Add New Student";
