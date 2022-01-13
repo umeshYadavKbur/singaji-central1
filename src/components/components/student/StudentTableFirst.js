@@ -304,7 +304,7 @@ function StudentTableFirst() {
     return (
         <Fragment>
             <div className="container-fluid">
-                <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '5px', backgroundColor: '#f4f7fc', zIndex: '500' }}>
+                <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '500' }}>
                     <div className="d-flex">
                         <div className="">
                             <select
