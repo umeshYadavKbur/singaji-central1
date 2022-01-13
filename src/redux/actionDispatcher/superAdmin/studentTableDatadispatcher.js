@@ -50,7 +50,15 @@ export const fetchStudentTable = (data) => {
             title: "Some Problem Occurred",
             icon: "warning",
             showConfirmButton: false,
-            timer: 2500
+            timer: 2500,
+            showClass: {
+              backdrop: 'swal2-noanimation', // disable backdrop animation
+              popup: '',                     // disable popup animation
+              icon: ''                       // disable icon animation
+            },
+            hideClass: {
+              popup: '',                     // disable popup fade-out animation
+            }
           });
         });
     } catch (error) {
@@ -58,7 +66,15 @@ export const fetchStudentTable = (data) => {
         title: "Some Problem Occurred",
         icon: "warning",
         showConfirmButton: false,
-        timer: 2500
+        timer: 2500,
+        showClass: {
+          backdrop: 'swal2-noanimation', // disable backdrop animation
+          popup: '',                     // disable popup animation
+          icon: ''                       // disable icon animation
+        },
+        hideClass: {
+          popup: '',                     // disable popup fade-out animation
+        }
       });
       fetchFailTableData(error);
       //   console.log(error);

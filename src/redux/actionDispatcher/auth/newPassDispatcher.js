@@ -23,6 +23,14 @@ export const newPasswordRequest = (data, navigate) => {
           icon: 'success',
           showConfirmButton: false,
           timer: 2500,
+          showClass: {
+            backdrop: 'swal2-noanimation', // disable backdrop animation
+            popup: '',                     // disable popup animation
+            icon: ''                       // disable icon animation
+          },
+          hideClass: {
+            popup: '',                     // disable popup fade-out animation
+          }
         })
         navigate('/login')
       } else if (newPasswordData.request.status === 406) {

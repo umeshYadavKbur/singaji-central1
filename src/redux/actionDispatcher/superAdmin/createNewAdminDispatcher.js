@@ -52,7 +52,15 @@ export const createNewAdmin = (data, navigate) => {
               icon: 'warning',
               title: '404 status!',
               showConfirmButton: false,
-              timer: 2500
+              timer: 2500,
+              showClass: {
+                backdrop: 'swal2-noanimation', // disable backdrop animation
+                popup: '',                     // disable popup animation
+                icon: ''                       // disable icon animation
+              },
+              hideClass: {
+                popup: '',                     // disable popup fade-out animation
+              }
             })
 
           }
@@ -65,7 +73,15 @@ export const createNewAdmin = (data, navigate) => {
             icon: 'error',
             title: 'problem occured!',
             showConfirmButton: false,
-            timer: 2500
+            timer: 2500,
+            showClass: {
+              backdrop: 'swal2-noanimation', // disable backdrop animation
+              popup: '',                     // disable popup animation
+              icon: ''                       // disable icon animation
+            },
+            hideClass: {
+              popup: '',                     // disable popup fade-out animation
+            }
           })
 
         });
@@ -75,7 +91,15 @@ export const createNewAdmin = (data, navigate) => {
         icon: 'error',
         title: 'problem occured!',
         showConfirmButton: false,
-        timer: 2500
+        timer: 2500,
+        showClass: {
+          backdrop: 'swal2-noanimation', // disable backdrop animation
+          popup: '',                     // disable popup animation
+          icon: ''                       // disable icon animation
+        },
+        hideClass: {
+          popup: '',                     // disable popup fade-out animation
+        }
       })
       console.log(error);
     }

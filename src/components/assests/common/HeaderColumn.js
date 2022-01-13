@@ -23,6 +23,7 @@ function HeaderColumn({ original, table_data, changeFeesStatus }) {
 
   return (
     <button
+    className="table_btn_size"
       style={
         original.active === 1
           ? ActivateButton

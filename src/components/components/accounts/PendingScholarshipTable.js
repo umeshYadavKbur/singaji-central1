@@ -25,6 +25,7 @@ import { connect } from "react-redux";
 import SkeletonColor from "../../../helpers/Skeletrone";
 import { ToastContainer } from "react-toastify";
 import Pagination from "../../assests/common/Pagination";
+import { GlobalFilter } from "../tableComponents/GlobalFilter";
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
   const arr = [];
@@ -113,39 +114,39 @@ function SelectColumnFilter({
 }
 
 // Define a default UI for filtering
-function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
-  const count = preGlobalFilteredRows.length;
-  const [value, setValue] = React.useState(filter);
-  const onChange = useAsyncDebounce((value) => {
-    setFilter(value || undefined);
-  }, 200);
+// function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
+//   const count = preGlobalFilteredRows.length;
+//   const [value, setValue] = React.useState(filter);
+//   const onChange = useAsyncDebounce((value) => {
+//     setFilter(value || undefined);
+//   }, 200);
 
-  return (
-    <>
-      <input
-        style={{
-          width: "270px",
-          height: "41px",
-          outline: "none",
-          border: "1px solid #7979792b",
-          padding: "5px",
-          borderRadius: "4px",
-        }}
-        type="search"
-        value={filter || ""}
-        onChange={(e) => {
-          setValue(e.target.value);
-          onChange(e.target.value);
-        }}
-        placeholder={`Search...`}
-      />
-      <i
-        style={{ marginLeft: "-31px", color: "rgb(90, 96, 127,0.7)" }}
-        className="fas fa-search"
-      ></i>
-    </>
-  );
-}
+//   return (
+//     <>
+//       <input
+//         style={{
+//           width: "270px",
+//           height: "41px",
+//           outline: "none",
+//           border: "1px solid #7979792b",
+//           padding: "5px",
+//           borderRadius: "4px",
+//         }}
+//         type="search"
+//         value={filter || ""}
+//         onChange={(e) => {
+//           setValue(e.target.value);
+//           onChange(e.target.value);
+//         }}
+//         placeholder={`Search ${count} records...`}
+//       />
+//       <i
+//         style={{ marginLeft: "-31px", color: "rgb(90, 96, 127,0.7)" }}
+//         className="fas fa-search"
+//       ></i>
+//     </>
+//   );
+// }
 
 function PendingScholarshipTable({ scholarData, fetchData }) {
   const token = localStorage.getItem("token");

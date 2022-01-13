@@ -57,6 +57,14 @@ export const fetchUsers = (data, navigate) => {
           icon: 'warn',
           showConfirmButton: false,
           timer: 2500,
+          showClass: {
+            backdrop: 'swal2-noanimation', // disable backdrop animation
+            popup: '',                     // disable popup animation
+            icon: ''                       // disable icon animation
+          },
+          hideClass: {
+            popup: '',                     // disable popup fade-out animation
+          }
         })
         dispatch(loginFailure(userResData.data));
       }
