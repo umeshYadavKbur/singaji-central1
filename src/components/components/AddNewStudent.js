@@ -78,7 +78,7 @@ function AddNewStudentPage({ AddNewStudent }) {
         email: editData ? editData.accountInfo.email : "",
         aadharNumber: editData ? editData.accountInfo.aadarNo : "",
         category: editData ? editData.accountInfo.category : "",
-        gender: editData ? editData.accountInfo.gender : "",
+        gender: editData ? editData.accountInfo.gender : "male",
         // Personal information end here 
 
         //Acadmic Details stated from here
@@ -94,29 +94,29 @@ function AddNewStudentPage({ AddNewStudent }) {
         //Acadmic Details end  here
 
         // Fees detail start from here 
-        GKBAmount: editData ? editData.accountInfo.GKB_Amount : "",
-        postmatricAmount: editData ? editData.accountInfo.Postmetric_Amount : "",
+        GKBAmount: editData ? editData.accountInfo.GKB_Amount : 0,
+        postmatricAmount: editData ? editData.accountInfo.Postmetric_Amount : 0,
 
         // editData.pendingFee[0].PendingFees
         firstInstallmentDate: editData ? editData.accountInfo.FirstinstallmentDate : "",
-        firstInstallment: editData ? editData.accountInfo.Firstinstallment : "",
+        firstInstallment: editData ? editData.accountInfo.Firstinstallment : 0,
         secondInstallmentDate: editData ? editData.accountInfo.SecondinstallmentDate : "",
-        secondInstallment: editData ? editData.accountInfo.Secondinstallment : "",
+        secondInstallment: editData ? editData.accountInfo.Secondinstallment : 0,
         thirdInstallmentDate: editData ? editData.accountInfo.ThirdinstallmentDate : "",
-        thirdInstallment: editData ? editData.accountInfo.Thirdinstallment : "",
+        thirdInstallment: editData ? editData.accountInfo.Thirdinstallment : 0,
 
-        feesScheme: editData ? editData.accountInfo.feesScheme : "",
+        feesScheme: editData ? editData.accountInfo.feesScheme : 'fullFees',
         courseFees: editData ? editData.accountInfo.Totalfee : "",
-        regisrationFees: editData ? editData.accountInfo.reg_Fees : "",
-        postmatricScolarship: editData ? editData.accountInfo.Is_Postmetric : "",
+        regisrationFees: editData ? editData.accountInfo.reg_Fees : "1500",
+        postmatricScolarship: editData ? editData.accountInfo.Is_Postmetric : "no",
 
         //remaining
-        gkbScolarship: editData ? editData.Is_GKB : "",//not working
-        gkbOwner: editData ? editData.GaonKiBeti : "",
-        postmatricOwner: editData ? editData.Postmetric : "",
+        gkbScolarship: editData ? editData.Is_GKB : "no",//not working
+        gkbOwner: editData ? editData.GaonKiBeti : "self",
+        postmatricOwner: editData ? editData.Postmetric : "self",
         payableAmmount: editData ? editData.remain_Amount : "",
         remark: editData ? editData.accountInfo.remark : "",
-        ScholarshipAmount: editData ? editData.accountInfo.ScholarshipAmount : "",
+        ScholarshipAmount: editData ? editData.accountInfo.ScholarshipAmount : 0,
         trackName: editData ? editData.accountInfo.trackName : "",
         busFees: editData ? editData.accountInfo.Busfee : "",
         // Fees detail end from here 
@@ -1305,7 +1305,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                         <label className="addStdLable" >Track Name*</label>
                                         <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
                                             onBlur={formik.handleBlur} className={formik.touched.trackName ? `form-select ${formik.errors.trackName ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
-                                            <option value={formik.values.trackName}>Select Track</option>
+                                            <option value='0'>Select Track</option>
                                             {trackNames.map((ele, i) => {
                                                 return (
                                                     <option key={i} value={ele.trackname}>{ele.trackname}</option>
