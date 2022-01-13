@@ -8,7 +8,7 @@ import {
   useGlobalFilter,
   usePagination,
   useRowSelect,
-  useAsyncDebounce,
+ 
 } from "react-table";
 import updown_sort from "../../assests/image/updown_sort.svg";
 import { TableCheckbox } from "../tableComponents/TableCheckbox";
@@ -265,7 +265,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
     selectedFlatRows,
     state,
     setGlobalFilter,
-    rows,
+   
     preGlobalFilteredRows,
     prepareRow,
   } = useTable(
@@ -293,7 +293,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
     }
   );
 
-  const { globalFilter, pageSize, pageIndex, selectedRowIds } = state;
+  const { globalFilter, pageSize, pageIndex } = state;
   const checkboxData = JSON.stringify(
     {
       selectedFlatRows: selectedFlatRows.map((row) => row.original),

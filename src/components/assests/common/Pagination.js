@@ -35,7 +35,6 @@ function Pagination(
                 <button
                     style={{
                         height: "30px", width: "28px",
-                        color: "#302E2F",
                         marginBottom:'5px',
                         fontWeight: '300', outline: "none", border: "1px solid #D5D7E3", color: '#302E2F', backgroundColor: '#D5D7E3'
                     }}

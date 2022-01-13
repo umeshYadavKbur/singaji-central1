@@ -60,7 +60,7 @@ const downloadPdf = (data) => {
     let yPosition = 200;
     let H = 60;
 
-    let page;
+ 
 
     let count = 1;
     newList.forEach((data, pageNO) => {

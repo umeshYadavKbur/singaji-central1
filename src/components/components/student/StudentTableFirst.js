@@ -112,7 +112,7 @@ function SelectColumnFilter({
 function GlobalFilter({
     filter, setFilter, preGlobalFilteredRows
 }) {
-    const count = preGlobalFilteredRows.length
+    // const count = preGlobalFilteredRows.length
     // eslint-disable-next-line
     const [value, setValue] = React.useState(filter)
     const onChange = useAsyncDebounce(value => {

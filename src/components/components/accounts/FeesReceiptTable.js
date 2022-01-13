@@ -2,7 +2,7 @@ import React from "react";
 import '../styles/Table.css'
 import '../styles/HeaderDropdown.css'
 import { Fragment, useMemo } from "react";
-import { useTable, useFilters, useSortBy, useGlobalFilter, usePagination, useRowSelect, useAsyncDebounce } from "react-table";
+import { useTable, useFilters, useSortBy, useGlobalFilter, usePagination, useRowSelect } from "react-table";
 import updown_sort from '../../assests/image/updown_sort.svg'
 import { TableCheckbox } from '../tableComponents/TableCheckbox';
 // import tableData from './fees_receipt.json'

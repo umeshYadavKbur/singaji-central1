@@ -539,7 +539,7 @@ function FeesRecipt() {
                                                         </p></div>
 
                                                     <div className="col-2">
-                                                        <a href={StudentAccountData.AccountsReceiptName} target='_blank'><img className='mt-3' src={Icon_feather_download} alt="downloadImg" /></a></div>
+                                                        <a href={StudentAccountData.AccountsReceiptName} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} alt="downloadImg" /></a></div>
                                                 </div>
                                             </div>
 

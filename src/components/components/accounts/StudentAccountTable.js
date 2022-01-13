@@ -130,8 +130,8 @@ function SelectColumnFilter({
 
 // Define a default UI for filtering
 function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
-    const count = preGlobalFilteredRows.length;
-    const [value, setValue] = React.useState(filter);
+    // const count = preGlobalFilteredRows.length;
+    // const [value, setValue] = React.useState(filter);
     const onChange = useAsyncDebounce((value) => {
         setFilter(value || undefined);
     }, 1);
@@ -151,7 +151,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
                 type="search"
                 value={filter || ""}
                 onChange={(e) => {
-                    setValue(e.target.value);
+                    // setValue(e.target.value);
                     onChange(e.target.value);
                 }}
                 placeholder="Search..."
@@ -207,7 +207,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         setMoneyCount((val) => {
             return {
 
-                ['TStudent']: data.length,
+                'TStudent': data.length,
                 RAmount,
                 TAmount,
                 TpaidAmount,
@@ -218,7 +218,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         })
 
 
-        console.log(MoneyCount)
+        // console.log(MoneyCount)
 
 
     }, [studentData.table_data]);
@@ -281,8 +281,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         }
     }
     // const data = React.useMemo(() => tableData, []);
-    const mainColoumns = React.useMemo(
-        () => [
+    const mainColoumns = [
             {
                 header: "S No",
                 accessor: "Srno",
@@ -398,9 +397,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                 Filter: "",
                 filter: "",
             },
-        ],
-        []
-    );
+        ];
 
 
 
@@ -508,7 +505,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         selectedFlatRows,
         state,
         setGlobalFilter,
-        rows,
+        
         preGlobalFilteredRows,
         prepareRow,
     } = useTable(
@@ -536,12 +533,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         }
     );
 
-    const { globalFilter, pageSize, pageIndex, selectedRowIds } = state;
+    const { globalFilter, pageSize, pageIndex,  } = state;
     var exportData = [];
     var exportCsv = [];
     const checkboxData = JSON.stringify(
         {
-            selectedFlatRows: selectedFlatRows.map((row) => {
+            selectedFlatRows: selectedFlatRows.forEach((row) => {
                 let data = Object.assign({}, row.original);
                 console.log(data);
                 delete data.photo;
@@ -636,8 +633,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                             </div>
 
 
-                            <div className="d-flex  ml-3">
-                                <DateRangePicker onClean={(e) => {
+                            <div  className="d-flex  ml-3">
+                                <DateRangePicker  onClean={(e) => {
                                     e.preventDefault();
                                     getBackPosition()
                                     set_is_dailyReport(false)
@@ -735,7 +732,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                 </div>
                 <table {...getTableProps()} id="customers">
                     
-                    <thead style={{ position: 'sticky', top: '212px',width:'100%', backgroundColor: '#f4f7fc', zIndex: '500' }}>
+                    <thead style={{ position: 'sticky', top: '212px',width:'100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
