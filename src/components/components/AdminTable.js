@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import updown_sort from '../assests/image/updown_sort.svg'
 import { ActivateButton, DeactivateButton } from '../assests/common/Color';
 import Pagination from '../assests/common/Pagination';
+import Loader from '../assests/common/Loader';
 
 
 function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTableData }) {
@@ -196,24 +197,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
     ) : (
         <>
             {table_data.second_loading && (
-                <div
-                    className="lds-roller"
-                    style={{
-                        position: "absolute",
-                        left: "50%",
-                        top: "50%",
-                        zindex: "-1",
-                    }}
-                >
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
+                <Loader />
             )}
             <ToastContainer
                 position="top-center"

@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import Icon_feather_download from '../../assests/image/AccountIcons/Icon_feather_download.svg';
 import * as Yup from "yup";
 import AllUrl from '../../../redux/constants/url';
+import Loader from '../../assests/common/Loader';
 var axios = require('axios');
 
 
@@ -187,24 +188,7 @@ function FeesRecipt() {
     return (
         <>
             {loading && (
-                <div
-                    className="lds-roller"
-                    style={{
-                        position: "absolute",
-                        left: "50%",
-                        top: "50%",
-                        zIndex: "100000",
-                    }}
-                >
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
+                <Loader />
             )}
             <div className=" p-3 m-2 me-3" style={{ backgroundColor: 'white', borderRadius: '8px' }}>
 

@@ -1,22 +1,35 @@
-import React from "react";
-import '../styles/Table.css'
-import '../styles/HeaderDropdown.css'
+import React, { useState } from "react";
 import { Fragment, useMemo } from "react";
-import { useTable, useFilters, useSortBy, useGlobalFilter, usePagination, useRowSelect, useAsyncDebounce } from "react-table";
-import updown_sort from '../../assests/image/updown_sort.svg'
-import { TableCheckbox } from '../tableComponents/TableCheckbox';
-// import tableData from './fees_receipt.json'
-import filtericon from '../../assests/image/AccountIcons/filter.svg'
-import { ActivateButton, DeactivateButton } from '../../assests/common/Color'
-import { CDropdown, CDropdownMenu, CDropdownToggle, CPopover } from '@coreui/react'
-// import feesReceiptTableData from "../../../redux/actionDispatcher/account/feesReceiptTableDispather";
-// import AllUrl from "../../../redux/constants/url";
-// import { connect } from "react-redux";
-// import SkeletonColor from "../../../helpers/Skeletrone";
-import tableData from './studentTable.json'
-import Pagination from "../../assests/common/Pagination";
+import {
+    useTable,
+    useFilters,
+    useSortBy,
+    useGlobalFilter,
+    usePagination,
+    useRowSelect,
+    useAsyncDebounce,
+} from "react-table";
+import { TableCheckbox } from "../tableComponents/TableCheckbox";
+import {
+    CDropdown,
+    CDropdownMenu,
+    CDropdownToggle,
+    CPopover,
+} from "@coreui/react";
+import filtericon from "../../assests/image/AccountIcons/filter.svg";
+// import './Styles/StudentAccountTable.css';
 
-const MultipleFilter = (rows, accessor, filterValue) => {
+import updown_sort from '../../assests/image/updown_sort.svg';
+import "rsuite/dist/rsuite.min.css";
+import AllUrl from '../../../redux/constants/url';
+import { connect } from 'react-redux';
+import { fetchStudentAccountData, changeDailyReport } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
+import SkeletonColor from '../../../helpers/Skeletrone';
+import Pagination from "../../assests/common/Pagination";
+import Loader from "../../assests/common/Loader";
+import { ActivateButton, DeactivateButton } from "../../assests/common/Color";
+
+export const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
     rows.forEach((val) => {
         if (filterValue.includes(val.original[accessor])) arr.push(val);
@@ -108,58 +121,59 @@ function SelectColumnFilter({
         </Fragment >
     );
 }
+
 // Define a default UI for filtering
-function GlobalFilter({
-    filter, setFilter, preGlobalFilteredRows
-}) {
-    // const count = preGlobalFilteredRows.length
-    // eslint-disable-next-line
-    const [value, setValue] = React.useState(filter)
-    const onChange = useAsyncDebounce(value => {
-        setFilter(value || undefined)
-    }, 200)
+function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
+    // const count = preGlobalFilteredRows.length;
+    // const [value, setValue] = React.useState(filter);
+    const onChange = useAsyncDebounce((value) => {
+        setFilter(value || undefined);
+    }, 1);
 
     return (
         <>
             <input
-                style=
-                {{ width: "270px", height: "41px", outline: "none", border: "1px solid #7979792b", padding: "5px", borderRadius: "4px" }} type="search" value={filter || ''}
-                onChange={e => {
-                    setValue(e.target.value)
-                    onChange(e.target.value)
+                style={{
+                    width: "270px",
+                    height: "41px",
+                    outline: "none",
+                    border: "1px solid #7979792b",
+                    padding: "5px",
+                    borderRadius: "4px",
+                    paddingLeft: '12px'
                 }}
-                placeholder="Search" />
-            <i style={{ marginLeft: "-31px", color: "rgb(90, 96, 127,0.7)" }}
-                className="fas fa-search" >
-            </i>
+                type="search"
+                value={filter || ""}
+                onChange={(e) => {
+                    // setValue(e.target.value);
+                    onChange(e.target.value);
+                }}
+                placeholder="Search..."
+            />
+            <i
+                style={{ marginLeft: "-31px", alignSelf: 'center', marginBottom: '7px', color: "rgb(90, 96, 127,0.7)" }}
+                className="fas fa-search"
+            ></i>
         </>
-    )
+    );
 }
 
+function StudentTableFirst({ fetchUsers, studentData }) {
+    const token = localStorage.getItem("token");
 
-function StudentTableFirst() {
+    React.useEffect(() => {
+        var config = {
+            method: "GET",
+            url: AllUrl.allRegistratedStudent,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        };
+        fetchUsers(config);
+    }, []);
 
-    // const token = localStorage.getItem("token");
-    // React.useEffect(() => {
-    //     var config = {
-    //         method: "GET",
-    //         url: AllUrl.feesReceiptTable,
-    //         headers: {
-    //             Authorization: `Bearer ${token}`,
-    //             "Content-Type": "application/json",
-    //         },
-    //     };
 
-    //     fetchData(config);
-    //     // settable_data(table_data.table_data);
-    //     // eslint-disable-next-line
-    // }, []);
-
-    const data = React.useMemo(
-        () => tableData,
-        []
-    );
-    console.log(data);
 
     const columns = React.useMemo(
         () => [
@@ -174,25 +188,25 @@ function StudentTableFirst() {
             },
             {
                 header: "Name",
-                accessor: "first_name",
+                accessor: "firstName",
                 Filter: "",
                 filter: ""
             },
             {
                 header: "Father Name",
-                accessor: "id",
+                accessor: "fathersName",
                 Filter: "",
                 filter: ""
             },
             {
                 header: "Stream",
-                accessor: "stream",
+                accessor: "branch",
                 Filter: SelectColumnFilter,
                 filter: MultipleFilter,
             },
             {
                 header: "Year",
-                accessor: "year",
+                accessor: "joinBatch",
                 Filter: SelectColumnFilter,
                 filter: MultipleFilter,
             },
@@ -204,13 +218,13 @@ function StudentTableFirst() {
             },
             {
                 header: "Mobile No",
-                accessor: "mobile",
+                accessor: "fatherContactNumber",
                 Filter: "",
                 filter: "",
             },
             {
                 header: "Registration Fee",
-                accessor: "reg_fees",
+                accessor: "reg_Fees",
                 Filter: "",
                 filter: ""
             },
@@ -246,21 +260,18 @@ function StudentTableFirst() {
         nextPage,
         previousPage,
         canPreviousPage,
-        canNextPage,
-        setPageSize,
         pageCount,
         gotoPage,
+        canNextPage,
+        setPageSize,
         pageOptions,
         selectedFlatRows,
         state,
         setGlobalFilter,
-        // rows,
         preGlobalFilteredRows,
         prepareRow,
     } = useTable(
-        // { columns, data: feesReceipt.table_data },
-        { columns, data },
-
+        { columns, data: studentData.table_data },
         useGlobalFilter,
         useFilters,
         useSortBy,
@@ -272,7 +283,7 @@ function StudentTableFirst() {
                     {
                         id: "selection",
                         header: ({ getToggleAllRowsSelectedProps }) => (
-                            < TableCheckbox {...getToggleAllRowsSelectedProps()} />
+                            <TableCheckbox {...getToggleAllRowsSelectedProps()} />
                         ),
                         Cell: ({ row }) => (
                             <TableCheckbox {...row.getToggleRowSelectedProps()} />
@@ -282,104 +293,103 @@ function StudentTableFirst() {
                 ];
             });
         }
-
     );
 
-    const { globalFilter, pageSize, pageIndex } = state;
-    const checkboxData = JSON.stringify(
-        {
-            selectedFlatRows: selectedFlatRows.map((row) => row.original)
-        },
-        null,
-        2
-    );
-    console.log(checkboxData)
+    const { globalFilter, pageSize, pageIndex, } = state;
 
-    // return
-    // feesReceipt.loading ? (
-    //     <SkeletonColor></SkeletonColor>
-    // ) : feesReceipt.error ? (
-    //     <h2>{feesReceipt.error}</h2>
-    // ) : 
-    return (
+
+
+
+    return studentData.loading ? (
+        <SkeletonColor></SkeletonColor>
+    ) : studentData.error ? (
+        <h2>{studentData.error}</h2>
+    ) : (
         <Fragment>
+            {studentData.loading && (
+                <Loader />
+            )}
             <div className="container-fluid">
-                <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '5' }}>
-                    <div className="d-flex">
-                        <div className="">
-                            <select
-                                className="form-select table_select_row_options"
-                                value={pageSize}
-                                onChange={(e) => setPageSize(Number(e.target.value))}
-                            >
-                                {[10, 25, 50, 100].map((pageSize) => (
-                                    <option value={pageSize} key={pageSize}>
-                                        Show Entries {pageSize}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px' }}>
+                    <div className="row  mx-0 mt-3" >
 
-                        <div className="d-flex ml-auto me-1">
-                            <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
-                                <CDropdown variant="nav-item" style={{ color: 'white' }} >
-                                    <CDropdownToggle
-                                        placement="bottom-end"
-                                        className="py-0"
-                                        caret={false}
-                                    >
-                                        <img
-                                            src={filtericon}
-                                            alt=""
-                                            style={{
-                                                height: "35px",
-                                                width: "35px",
-                                                marginTop: "-35px",
-                                                marginLeft: "-13px",
-                                            }}
-                                        />
-                                    </CDropdownToggle>
-
-                                    <CDropdownMenu
-                                        component={"div"}
-                                        className="pt-0 "
-                                        placement="bottom-end"
-
-                                    >
-                                        <div>
-                                            {headerGroups.map((headerGroup) => (
-                                                <div
-                                                    style={{ display: "flex flex-column" }}
-                                                    {...headerGroup.getHeaderGroupProps()}
-                                                >
-                                                    {headerGroup.headers.map((column, i) => (
-                                                        <div
-                                                            key={i}
-                                                            style={{ display: "block", justifyContent: "center" }}
-                                                        >
-                                                            {column.canFilter ? column.render("Filter") : null}
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </CDropdownMenu>
-                                </CDropdown>
+                        <div className="d-flex">
+                            <div style={{ marginLeft: '-12px' }}>
+                                <select
+                                    className="form-select table_select_row_options"
+                                    value={pageSize}
+                                    onChange={(e) => setPageSize(Number(e.target.value))}
+                                >
+                                    {[10, 25, 50, 100].map((pageSize) => (
+                                        <option value={pageSize} key={pageSize}>
+                                            Show Entries {pageSize}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
-                            <div className="ml-auto me-4">
+                            <div className="d-flex ml-auto me-3">
+                                <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
+
+                                    <CDropdown variant="nav-item" style={{ color: 'white' }}>
+                                        <CDropdownToggle
+                                            placement="bottom-end"
+                                            className="py-0"
+                                            caret={false}
+                                        >
+                                            <img
+                                                src={filtericon}
+                                                alt=""
+                                                style={{
+                                                    height: "35px",
+                                                    width: "35px",
+                                                    marginTop: "-35px",
+                                                    marginLeft: "-13px",
+                                                }}
+                                            />
+                                        </CDropdownToggle>
+
+                                        <CDropdownMenu
+                                            component={"div"}
+                                            style={{ width: 'auto' }}
+                                            className="pt-0 "
+                                            placement="bottom-end"
+
+                                        >
+                                            <div>
+                                                {headerGroups.map((headerGroup) => (
+                                                    <div
+                                                        style={{ display: "flex flex-column" }}
+                                                        {...headerGroup.getHeaderGroupProps()}
+                                                    >
+                                                        {headerGroup.headers.map((column, i) => (
+                                                            <div
+                                                                key={i}
+                                                                style={{ display: "block", justifyContent: "center" }}
+                                                            >
+                                                                {column.canFilter ? column.render("Filter") : null}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </CDropdownMenu>
+                                    </CDropdown>
+
+                                </div>
                                 <GlobalFilter
                                     preGlobalFilteredRows={preGlobalFilteredRows}
                                     filter={globalFilter}
                                     setFilter={setGlobalFilter}
                                 />
                             </div>
+
                         </div>
                     </div>
                 </div>
-
                 <table {...getTableProps()} id="customers">
-                    <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '500' }}>
+
+                    <thead style={{ position: 'sticky', top: '212px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
@@ -437,13 +447,27 @@ function StudentTableFirst() {
                     canNextPage={canNextPage}
                     nextPage={nextPage}
                 />
+
             </div>
-        </Fragment>
+
+        </Fragment >
     );
 }
 
+const mapStateToProps = (state) => {
+    return {
+        studentData: state.accountStudentTableData,
+    };
+};
 
+//passing the userData in fetchUsers function and also dispatch method
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchUsers: (data) => dispatch(fetchStudentAccountData(data)),
+        backOriginal: () => dispatch(changeDailyReport()),
+
+    };
+};
 
 //Connecting the component to our store
-export default StudentTableFirst
-
+export default connect(mapStateToProps, mapDispatchToProps)(StudentTableFirst);

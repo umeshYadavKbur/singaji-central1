@@ -162,27 +162,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
           Create Fees Structure <i className="fas fa-plus pl-3"></i>
         </CButton>
       )}
-      {/* {
-        table_data.second_loading && (
-          <div
-            className="lds-roller"
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              zindex: "-1",
-            }}
-          >
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        )} */}
+
       <CModal
         alignment="center"
         visible={visible}

@@ -12,6 +12,7 @@ import { isStudentAdmin } from '../../../helpers/StudentAdmin';
 import { toast } from 'react-toastify';
 import imageCompression from 'browser-image-compression';
 import { ToastContainer } from "react-toastify";
+import Loader from '../../assests/common/Loader';
 
 function UploadDocumentFrom() {
     const navigate = useNavigate();
@@ -165,7 +166,7 @@ function UploadDocumentFrom() {
                     {DISPLAY_NAME}</p>
                 <input name={NAME_FOR_FILE} placeholder={NAME_FOR_FILE} id={NAME_FOR_FILE} type="file" accept="image/*" onChange={(e) => {
                     imageToBase64(e.target.files[0], NAME_FOR_FILE);
-                    
+
                 }} value={formik.values.NAME_FOR_FILE} hidden={true} />
             </div>
         )
@@ -185,24 +186,7 @@ function UploadDocumentFrom() {
                 pauseOnHover
             />
             {loading && (
-                <div
-                    className="lds-roller"
-                    style={{
-                        position: "absolute",
-                        left: "50%",
-                        top: "50%",
-                        zIndex: "100000",
-                    }}
-                >
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
+                <Loader />
             )}
 
             {showLightBox && <ImageLightbox image={Lightbox.image} title={Lightbox.title} onClose={() => { setShowLightBox(false) }} />}

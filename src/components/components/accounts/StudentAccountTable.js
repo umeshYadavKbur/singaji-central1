@@ -34,6 +34,7 @@ import { connect } from 'react-redux';
 import { fetchStudentAccountData, getDailyReport, changeDailyReport } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
 import SkeletonColor from '../../../helpers/Skeletrone';
 import Pagination from "../../assests/common/Pagination";
+import Loader from "../../assests/common/Loader";
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -282,122 +283,122 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
     }
     // const data = React.useMemo(() => tableData, []);
     const mainColoumns = [
-            {
-                header: "S No",
-                accessor: "Srno",
-                Cell: ({ row: { original, index } }) => {
-                    return index + 1;
-                },
-                Filter: "",
-                filter: "",
+        {
+            header: "S No",
+            accessor: "Srno",
+            Cell: ({ row: { original, index } }) => {
+                return index + 1;
             },
-            {
-                header: "Profile",
-                accessor: "photo",
+            Filter: "",
+            filter: "",
+        },
+        {
+            header: "Profile",
+            accessor: "photo",
 
-                Cell: ({ row: { original, index } }) => (
-                    <div className="d-flex m-0 flex-column justify-content-start">
-                        <img
-                            alt="profile"
-                            style={{ cursor: "pointer" }}
-                            onClick={() => {
-                                getAllInfoOfStudent(original, false)
-                            }}
-                            className="mx-auto"
-                            src={original.photo}
-                            width={50}
-                            textColor="#fff"
-                            text="Image"
-                        />
-                    </div >
-                ),
-                Filter: "",
-                filter: "",
-            },
-            {
-                header: 'Name',
-                accessor: 'name',
-                Filter: "",
-                filter: "",
-            },
-            {
-                header: 'Father name',
-                accessor: 'fathersName',
-                Filter: "",
-                filter: "",
-            },
-            {
-                header: "Mobile no",
-                accessor: "mobile",
-                Filter: "",
-                filter: "",
-            },
-            {
-                header: "Stream",
-                accessor: "stream",
-                Filter: SelectColumnFilter,
-                filter: MultipleFilter,
-            },
-            {
-                header: 'Village',
-                accessor: 'village',
-                Filter: SelectColumnFilter,
-                filter: MultipleFilter,
-            },
-            {
-                header: 'Received Fee',
-                accessor: 'received_Amount',
-                Cell: ({ row: { original } }) => (
-                    <div className='row d-flex '>
-                        <div className="col">
-                            <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000" }}></span>
+            Cell: ({ row: { original, index } }) => (
+                <div className="d-flex m-0 flex-column justify-content-start">
+                    <img
+                        alt="profile"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                            getAllInfoOfStudent(original, false)
+                        }}
+                        className="mx-auto"
+                        src={original.photo}
+                        width={50}
+                        textColor="#fff"
+                        text="Image"
+                    />
+                </div >
+            ),
+            Filter: "",
+            filter: "",
+        },
+        {
+            header: 'Name',
+            accessor: 'name',
+            Filter: "",
+            filter: "",
+        },
+        {
+            header: 'Father name',
+            accessor: 'fathersName',
+            Filter: "",
+            filter: "",
+        },
+        {
+            header: "Mobile no",
+            accessor: "mobile",
+            Filter: "",
+            filter: "",
+        },
+        {
+            header: "Stream",
+            accessor: "stream",
+            Filter: SelectColumnFilter,
+            filter: MultipleFilter,
+        },
+        {
+            header: 'Village',
+            accessor: 'village',
+            Filter: SelectColumnFilter,
+            filter: MultipleFilter,
+        },
+        {
+            header: 'Received Fee',
+            accessor: 'received_Amount',
+            Cell: ({ row: { original } }) => (
+                <div className='row d-flex '>
+                    <div className="col">
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000" }}></span>
 
-                        </div>
-                        <div className="col">
-                            <span className='' >
-                                {original.received_Amount}
-                            </span>
-                        </div>
                     </div>
-                ),
-                Filter: "",
-                filter: "",
-            },
-            {
-                header: 'Pending Fee',
-                accessor: 'remain_Amount',
-                Cell: ({ row: { original } }) => (
-                    <div className='row d-flex '>
-                        <div className="col">
-                            <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A" }}></span>
-
-                        </div>
-                        <div className="col">
-                            <span className='' >
-                                {original.remain_Amount}
-                            </span>
-                        </div>
+                    <div className="col">
+                        <span className='' >
+                            {original.received_Amount}
+                        </span>
                     </div>
-                ),
-                Filter: "",
-                filter: "",
+                </div>
+            ),
+            Filter: "",
+            filter: "",
+        },
+        {
+            header: 'Pending Fee',
+            accessor: 'remain_Amount',
+            Cell: ({ row: { original } }) => (
+                <div className='row d-flex '>
+                    <div className="col">
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A" }}></span>
+
+                    </div>
+                    <div className="col">
+                        <span className='' >
+                            {original.remain_Amount}
+                        </span>
+                    </div>
+                </div>
+            ),
+            Filter: "",
+            filter: "",
+        },
+        {
+            header: 'Action',
+            accessor: 'accesory',
+            Cell: ({ row: { original, index } }) => {
+                return (
+                    // <div className="d-flex m-0 flex-column justify-content-start">
+                    <button className="table_btn_size" onClick={() => {
+                        getAllInfoOfStudent(original, true)
+                    }} style={{ backgroundColor: "#F99300", fontWeight: 'bold', color: 'white', borderRadius: '5px' }} >Receipt</button>
+                    // </div >
+                )
             },
-            {
-                header: 'Action',
-                accessor: 'accesory',
-                Cell: ({ row: { original, index } }) => {
-                    return (
-                        // <div className="d-flex m-0 flex-column justify-content-start">
-                        <button className="table_btn_size" onClick={() => {
-                            getAllInfoOfStudent(original, true)
-                        }} style={{ backgroundColor: "#F99300", fontWeight: 'bold', color: 'white', borderRadius: '5px' }} >Receipt</button>
-                        // </div >
-                    )
-                },
-                Filter: "",
-                filter: "",
-            },
-        ];
+            Filter: "",
+            filter: "",
+        },
+    ];
 
 
 
@@ -505,7 +506,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         selectedFlatRows,
         state,
         setGlobalFilter,
-        
+
         preGlobalFilteredRows,
         prepareRow,
     } = useTable(
@@ -533,7 +534,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         }
     );
 
-    const { globalFilter, pageSize, pageIndex,  } = state;
+    const { globalFilter, pageSize, pageIndex, } = state;
     var exportData = [];
     var exportCsv = [];
     const checkboxData = JSON.stringify(
@@ -575,27 +576,10 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
     ) : (
         <Fragment>
             {loading && (
-                <div
-                    className="lds-roller"
-                    style={{
-                        position: "absolute",
-                        left: "50%",
-                        top: "50%",
-                        zindex: "-1",
-                    }}
-                >
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
+                <Loader />
             )}
             <div className="container-fluid">
-                <div style={{position:'sticky',top:'80px',backgroundColor:'#f4f7fc',zIndex:'6',paddingBottom:'10px'}}>
+                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px' }}>
 
 
                     <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
@@ -633,8 +617,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                             </div>
 
 
-                            <div  className="d-flex  ml-3">
-                                <DateRangePicker  onClean={(e) => {
+                            <div className="d-flex  ml-3">
+                                <DateRangePicker onClean={(e) => {
                                     e.preventDefault();
                                     getBackPosition()
                                     set_is_dailyReport(false)
@@ -731,8 +715,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                     </div>
                 </div>
                 <table {...getTableProps()} id="customers">
-                    
-                    <thead style={{ position: 'sticky', top: '212px',width:'100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+
+                    <thead style={{ position: 'sticky', top: '212px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
