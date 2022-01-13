@@ -343,7 +343,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 
       />
       <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
-        <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '500' }}>
+        <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '5' }}>
           <div className="d-flex">
 
             <div className=''>
@@ -370,7 +370,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           </div>
         </div>
         <table {...getTableProps()} id="customers" className="table table-sm">
-          <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '500' }}>
+          <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (

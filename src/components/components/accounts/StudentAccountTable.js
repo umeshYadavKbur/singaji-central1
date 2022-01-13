@@ -595,7 +595,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
                 </div>
             )}
             <div className="container-fluid">
-                <div style={{position:'sticky',top:'80px',backgroundColor:'#f4f7fc',zIndex:'500',paddingBottom:'10px'}}>
+                <div style={{position:'sticky',top:'80px',backgroundColor:'#f4f7fc',zIndex:'6',paddingBottom:'10px'}}>
 
 
                     <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
