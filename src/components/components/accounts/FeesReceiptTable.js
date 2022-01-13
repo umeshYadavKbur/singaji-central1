@@ -404,7 +404,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 </div>
 
                 <table {...getTableProps()} id="customers">
-                    <thead style={{ position: 'sticky', top: '135px',width:'100%', backgroundColor: '#f4f7fc', zIndex: '500' }}>
+                    <thead style={{ position: 'sticky', top: '135px',width:'100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
