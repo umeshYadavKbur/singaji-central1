@@ -16,11 +16,14 @@ import Icon_feather_download from '../../assests/image/AccountIcons/Icon_feather
 import * as Yup from "yup";
 import AllUrl from '../../../redux/constants/url';
 import Loader from '../../assests/common/Loader';
-var axios = require('axios');
+import { connect } from 'react-redux';
+import allUrls from '../../../redux/constants/url'
+import { accountAction } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
+import axios from 'axios';
 
 
-
-function FeesRecipt() {
+function FeesRecipt({ accountAction }) {
+    const token = localStorage.getItem("token");
     const navigate = useNavigate()
 
     const data = localStorage.getItem('userEdit')
@@ -131,11 +134,26 @@ function FeesRecipt() {
             };
 
             var result = await axios(config);
-            if (result) setLoading(false)
-            console.log(result);
-            if (result.status === 200) {
+            // if (result) setLoading(false)
 
-                console.log(result.data);
+            if (result.status === 200) {
+                let backData = JSON.stringify({
+                    "stdId": StudentAccountData.accountInfo.stdId,
+                });
+                console.log("______________________________________");
+                console.log("backdata", backData);
+                console.log("______________________________________");
+                let getBackData = {
+                    method: 'post',
+                    url: allUrls.allInfoOfActiveStudent,
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    data: backData
+                };
+                accountAction(getBackData, navigate, true, setLoading)
+                // console.log(result.data);
                 const link = document.createElement('a')
                 link.href = result.data;
                 link.target = '_blank';
@@ -541,4 +559,13 @@ function FeesRecipt() {
     )
 }
 
-export default FeesRecipt
+//passing the userData in fetchUsers function and also dispatch method
+const mapDispatchToProps = (dispatch) => {
+    return {
+        accountAction: (config, navigate, is_reciptBtn, setLoading) => dispatch(accountAction(config, navigate, is_reciptBtn, setLoading)),
+    };
+};
+
+//Connecting the component to our store
+export default connect(null, mapDispatchToProps)(FeesRecipt);
+
