@@ -5,6 +5,7 @@ import {
   STUDENTACCOUNT_TABLE_DATA_SUCCESS,
   STUDENTACCOUNT_TABLE_CHANGE_SUCCESS,
   STUDENTACCOUNT_TABLE_CHANGE_FAIL,
+  ACCOUNT_TABLE_ACTION_SUCCESS,
 } from "../../constants/actions";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   loading: false,
   table_data: [],
   reportData: [],
+  personalInfo: [],
   error: "",
 };
 
@@ -48,13 +50,21 @@ const StudentAccountTableReducer = (state = initialState, action) => {
         ...state,
         table_data: action.payload,
       };
+
     case CHANGE_DAILY_REPORT:
-      console.log("______________");
-      console.log(state.reportData)
-      console.log("______________");
+      // console.log("______________");
+      // console.log(state.reportData)
+      // console.log("______________");
       return {
         ...state,
         table_data: state.reportData
+      };
+
+    // Changing the button action reducers 
+    case ACCOUNT_TABLE_ACTION_SUCCESS:
+      return {
+        ...state,
+        personalInfo: action.payload,
       };
 
     default:

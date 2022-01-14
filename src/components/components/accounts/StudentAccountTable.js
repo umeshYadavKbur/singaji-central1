@@ -22,16 +22,16 @@ import { CSVLink } from "react-csv";
 import { DateRangePicker } from "rsuite";
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
-import { isSuperAdmin } from '../../../helpers/SuperAdmin';
-import { isAccountAdmin } from '../../../helpers/AccountAdmin';
-import { isStudentAdmin } from '../../../helpers/StudentAdmin';
+// import { isSuperAdmin } from '../../../helpers/SuperAdmin';
+// import { isAccountAdmin } from '../../../helpers/AccountAdmin';
+// import { isStudentAdmin } from '../../../helpers/StudentAdmin';
 import allUrls from '../../../redux/constants/url'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "rsuite/dist/rsuite.min.css";
 import AllUrl from '../../../redux/constants/url';
 import { connect } from 'react-redux';
-import { fetchStudentAccountData, getDailyReport, changeDailyReport } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
+import { fetchStudentAccountData, getDailyReport, changeDailyReport, accountAction } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
 import SkeletonColor from '../../../helpers/Skeletrone';
 import Pagination from "../../assests/common/Pagination";
 import Loader from "../../assests/common/Loader";
@@ -165,7 +165,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
     );
 }
 
-function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData }) {
+function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData, accountAction }) {
     const [is_dailyReport, set_is_dailyReport] = useState(false)
     const [MoneyCount, setMoneyCount] = useState({ TStudent: 0, TAmount: 0, TpaidAmount: 0, RAmount: 0, WaiveOff: 0, TpaidAmountByDailyReport: 0 });
 
@@ -183,8 +183,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
         // settable_data(table_data.table_data);
         // eslint-disable-next-line
     }, []);
-
-
 
     React.useEffect(() => {
 
@@ -230,18 +228,13 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
     const token = localStorage.getItem("token");
     const [date, setDate] = useState({})
 
-    const getAllInfoOfStudent = async (original, is_reciptBtn) => {
-        setLoading(true)
 
-        // set data or original table to localStorage we need it later
-        localStorage.setItem('userEdit', JSON.stringify(original))
+    ////////////////////////////
+    const getAllInfoOfStudent = (original, is_reciptBtn) => {
+        setLoading(true)
         let data = JSON.stringify({
-            // "stdId": "353c55ed-1e67-48a3-9ed2-fa1dfaecec73" // trmporary true condition for chenking information
             "stdId": original.stdId,
         });
-        console.log("_______");
-        console.log(data);
-        console.log("_______");
 
         let config = {
             method: 'post',
@@ -253,34 +246,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData 
             data: data
         };
 
-        const response = await axios(config)
-        localStorage.setItem('userEdit', JSON.stringify(response.data))
-        setLoading(false)
+        // const response = await axios(config)
+        accountAction(config, navigate, is_reciptBtn, setLoading);
 
-        if (isStudentAdmin()) {
-            console.log("Navigated ");
-            if (is_reciptBtn)
-                navigate('/student_admin_dashboard/studentprofile/feesrecipt');
-            else
-                navigate('/student_admin_dashboard/studentprofile');
-        }
-        else if (isAccountAdmin()) {
-            console.log("Navigated ");
-            if (is_reciptBtn)
-                navigate('/account_admin_dashboard/studentprofile/feesrecipt');
-            else
-                navigate('/account_admin_dashboard/studentprofile');
-
-        }
-        else if (isSuperAdmin()) {
-            console.log("Navigated ");
-            if (is_reciptBtn)
-                navigate('/admin_dashboard/studentprofile/feesrecipt');
-            else
-                navigate('/admin_dashboard/studentprofile');
-
-        }
     }
+    /////////////////////////////////////
+
     // const data = React.useMemo(() => tableData, []);
     const mainColoumns = [
         {
@@ -793,7 +764,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchUsers: (data) => dispatch(fetchStudentAccountData(data)),
         getReport: (data) => dispatch(getDailyReport(data)),
         backOriginal: () => dispatch(changeDailyReport()),
-
+        accountAction: (config, navigate, is_reciptBtn, setLoading) => dispatch(accountAction(config, navigate, is_reciptBtn, setLoading)),
     };
 };
 
