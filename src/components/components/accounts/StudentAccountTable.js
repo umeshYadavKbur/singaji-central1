@@ -512,7 +512,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         {
             selectedFlatRows: selectedFlatRows.forEach((row) => {
                 let data = Object.assign({}, row.original);
-                console.log(data);
+                // console.log(data);
                 delete data.photo;
                 if (data?.ReceivedAmount)
                     data.ReceivedAmount = (data?.ReceivedAmount)?.toString();

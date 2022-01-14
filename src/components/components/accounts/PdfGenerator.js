@@ -76,11 +76,11 @@ const downloadPdf = (data) => {
         data.forEach((ele, i) => {
 
             doc.text((count++).toString(), xPosition + 48 + 3, yPosition + (i * H))
-            doc.text(ele.name, xPosition + 141, yPosition + (i * H))
+            doc.text((ele.name)?.toString(), xPosition + 141, yPosition + (i * H))
             doc.text(ele.fathersName, xPosition + 309, yPosition + (i * H))
             doc.text((ele['stream(year)']), xPosition + 525, yPosition + (i * H))
             doc.text(ele.village, xPosition + 711, yPosition + (i * H))
-            doc.text(ele.ReceivedAmount, xPosition + 858, yPosition + (i * H))
+            doc.text((ele.ReceivedAmount)?.toString(), xPosition + 858, yPosition + (i * H))
             doc.text(ele.AccountsReceiptDate, xPosition + 1082, yPosition + (i * H))
             doc.text('-', xPosition + 1238, yPosition + (i * H))
 
