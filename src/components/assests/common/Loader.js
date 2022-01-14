@@ -10,7 +10,7 @@ function Loader() {
                 minHeight: '100%',
                 minWidth: '100%',
                 zIndex: "100000",
-                backgroundColor: 'rgb(227 227 227)',
+                // backgroundColor: 'rgb(227 227 227)',
                 opacity: '0.5'
             }}
         >
