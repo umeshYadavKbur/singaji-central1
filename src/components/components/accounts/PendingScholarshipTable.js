@@ -230,7 +230,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
         header: "Pending amount",
         accessor: "pending_Amount",
         Cell: ({ row: { original } }) => (
-          <div className="row d-flex d-inline-flex">
+          <div className="row d-flex ">
             <div className="col">
               <span
                 className="recieved-fee-circle"

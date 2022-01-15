@@ -194,5 +194,6 @@ button:not(:disabled) {
   width: 86px !important;
   height: 30px !important;
   padding: 0 !important;
+  padding-bottom: 3px !important;
   margin: 0 !important;
 }
