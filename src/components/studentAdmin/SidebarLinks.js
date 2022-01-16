@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { NavLink } from "react-router-dom";
+import React, { useState ,useEffect} from 'react';
+import { NavLink,useLocation } from "react-router-dom";
 import Education_svg from "../assests/image/sidebarIcons/Education.svg";
 
 
@@ -7,6 +7,10 @@ const SidebarLinks = ({ Toggle }) => {
     const [active_dropdown, setActiveDropdown] = useState('Dashboard');
     const [active_tab, setActiveTab] = useState('dashboard-collapse-btn');
     const [active_menu, setActiveMenu] = useState({ dashboard: false, education: false });
+
+    const currentLocation = useLocation().pathname;
+    // var location = getLocation();
+    const base = '/student_admin_dashboard'
 
     // const changeTab = (id) => {
 
@@ -16,7 +20,21 @@ const SidebarLinks = ({ Toggle }) => {
 
     // }
 
-    const dLink1 = (name, url, icon, id, parentId) => {
+    const DLink1 = (currentLocation,name, url, icon, id, parentId) => {
+        useEffect(() => {
+            const changeTab1 = () => {
+
+
+                setActiveDropdown(id);
+                setActiveTab(parentId)
+
+                return parentId
+            }
+            if (currentLocation === (url ? base + '/' + url : base)) {
+                console.log(changeTab1())
+            }
+
+        }, [currentLocation, id, parentId, url])
         return (
             <NavLink
 
@@ -62,9 +80,9 @@ const SidebarLinks = ({ Toggle }) => {
                     <div className="collapse collapse_superadmin p-0" id="education-collapse">
                         <ul className={`${Toggle ? 'btn-toggle-nav-hide' : 'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
-                                {dLink1("Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
-                                {dLink1("Students", "students", "ok", "Students", "education-collapse-btn")}
-                                {dLink1("Add students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}
+                                {DLink1(currentLocation,"Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
+                                {DLink1(currentLocation,"Students", "students", "ok", "Students", "education-collapse-btn")}
+                                {DLink1(currentLocation,"Add students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}
                             </li>
                         </ul>
                     </div>
