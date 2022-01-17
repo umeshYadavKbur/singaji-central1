@@ -58,7 +58,24 @@ const SidebarLinks = ({ Toggle }) => {
                 to={url}
                 id={id}
                 className={`sidebar_options_link ${active_dropdown === id ? "sidebar_options_active" : ""}`}
-                onClick={() => { setActiveDropdown(id); setActiveTab(parentId) }}
+                onClick={() => {
+                    if (Toggle) {
+
+                        document.getElementById('dashboard-collapse').classList.remove('show');
+                        document.getElementById('education-collapse').classList.remove('show');
+                        document.getElementById('account-collapse').classList.remove('show');
+                        setActiveMenu((pre) => {
+
+                            return {
+                                dashboard: false,
+                                account: false,
+                                education: false
+                            }
+                        })
+                    }
+                    setActiveDropdown(id); 
+                    setActiveTab(parentId)
+                }}
             >
                 <img src={icon} className=" Sidebar_text sidebar_icons" alt="" />
                 <span className="text-dark ">{name}</span>
@@ -80,10 +97,15 @@ const SidebarLinks = ({ Toggle }) => {
                                     dashboard: !active_menu.dashboard
                                 }
                             })
-                            // document.getElementById('dashboard-collapse-btn').classList.add('active_tab');
+
                         }}
                         href="#!"
-                        style={{ borderBottomRightRadius: `${active_menu.dashboard === true ? '0px' : ''}` }}
+                        style={Toggle ?
+                            !active_menu.dashboard ?
+                                { width: '60px', borderBottomRightRadius: `${active_menu.dashboard === true ? '0px' : ''}` }
+                                :
+                                { borderBottomRightRadius: `${active_menu.dashboard === true ? '0px' : ''}` }
+                            : { borderBottomRightRadius: `${active_menu.dashboard === true ? '0px' : ''}` }}
                         className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'dashboard-collapse-btn' ? 'active_tab' : ''} ${active_menu.dashboard === true ? 'active_tab' : ''} `}
                         role="button"
                         id="dashboard-collapse-btn"
@@ -95,7 +117,10 @@ const SidebarLinks = ({ Toggle }) => {
                                 className="Sidebar_text  sidebar_icons"
                                 alt=""
                             />
-                            <span className="text-dark ">Dashboard</span>
+                            <span className="text-dark " style={
+                                Toggle ?
+                                    !active_menu.dashboard ? { display: 'none' } :
+                                        {} : {}}>Dashboard</span>
                         </div>
                         {!Toggle && <i className="fas fa-chevron-down mr-3"></i>}
                     </a>
@@ -122,7 +147,13 @@ const SidebarLinks = ({ Toggle }) => {
                     <a
                         onClick={() => { setActiveMenu((pre) => { return { ...pre, education: !active_menu.education } }) }}
                         href="#!"
-                        style={{ borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }}
+                        // style={{ borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }}
+                        style={Toggle ?
+                            !active_menu.education ?
+                                { width: '60px', borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }
+                                :
+                                { borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }
+                            : { borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }}
                         className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'education-collapse-btn' ? 'active_tab' : ''} ${active_menu.education === true ? 'active_tab' : ''} `}
                         role="button"
                         // data-toggle="collapse"
@@ -135,7 +166,10 @@ const SidebarLinks = ({ Toggle }) => {
                                 className="  Sidebar_text  sidebar_icons"
                                 alt=""
                             />
-                            <span className="text-dark ">Education</span>
+                            <span style={
+                                Toggle ?
+                                    !active_menu.education ? { display: 'none' } :
+                                        {} : {}} className="text-dark ">Education</span>
                         </div>
                         {!Toggle && <i className="fas fa-chevron-down mr-3"></i>}
                     </a>
@@ -158,7 +192,13 @@ const SidebarLinks = ({ Toggle }) => {
                     <a
                         onClick={() => { setActiveMenu((pre) => { return { ...pre, account: !active_menu.account } }) }}
                         href="#!"
-                        style={{ borderBottomRightRadius: `${active_menu.account === true ? '0px' : ''}` }}
+                        // style={{ borderBottomRightRadius: `${active_menu.account === true ? '0px' : ''}` }}
+                        style={Toggle ?
+                            !active_menu.account ?
+                                { width: '60px', borderBottomRightRadius: `${active_menu.account === true ? '0px' : ''}` }
+                                :
+                                { borderBottomRightRadius: `${active_menu.account === true ? '0px' : ''}` }
+                            : { borderBottomRightRadius: `${active_menu.account === true ? '0px' : ''}` }}
                         className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'account-collapse-btn' ? 'active_tab' : ''} ${active_menu.account === true ? 'active_tab' : ''} `}
                         role="button"
                         // data-toggle="collapse"
@@ -171,7 +211,11 @@ const SidebarLinks = ({ Toggle }) => {
                                 className="  Sidebar_text  sidebar_icons"
                                 alt=""
                             />
-                            <span className="text-dark ">Account</span>
+                            <span
+                                style={
+                                    Toggle ?
+                                        !active_menu.account ? { display: 'none' } :
+                                            {} : {}} className="text-dark ">Account</span>
                         </div>
                         {!Toggle && <i className="fas fa-chevron-down mr-3"></i>}
                     </a>
