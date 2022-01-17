@@ -453,11 +453,11 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
         const result = await axios(config)
         //if the data is getting successfully than they set the data to upcoming data
+        setLoading(false)
         if (result.status === 200) {
             getReport(result.data)
             setColoumns(dailyReportColumn)
             set_is_dailyReport(true)
-            setLoading(false)
         }
     }
 

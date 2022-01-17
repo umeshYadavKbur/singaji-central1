@@ -37,12 +37,14 @@ const StudentAccountTableReducer = (state = initialState, action) => {
     case STUDENTACCOUNT_TABLE_CHANGE_SUCCESS:
       return {
         ...state,
+        loading: false,
         second_loading: false,
       };
 
     case STUDENTACCOUNT_TABLE_CHANGE_FAIL:
       return {
         ...state,
+        loading: false,
         second_loading: false,
       };
     case GET_DAILY_REPORT:

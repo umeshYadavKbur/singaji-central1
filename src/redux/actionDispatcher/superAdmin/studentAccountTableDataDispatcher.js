@@ -25,6 +25,7 @@ export const fetchStudentAccountData = (data) => {
             dispatch(accStuDataSuccess(response.data));
           }
           if (response.status === 400) {
+            dispatch(accStuDataFail(response.data))
             toast.warn('No data found !', {
               position: "bottom-center",
               autoClose: 3000,
@@ -34,9 +35,9 @@ export const fetchStudentAccountData = (data) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(accStuDataFail(response.data));
           }
           if (response.status === 500) {
+            dispatch(accStuDataFail(response.data))
             toast.warn('Internal Server Error', {
               position: "bottom-center",
               autoClose: 3000,
@@ -46,10 +47,10 @@ export const fetchStudentAccountData = (data) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(accStuDataFail(response.data));
           }
         })
         .catch(function (error) {
+          dispatch(accStuDataFail(error))
           toast.warn('Internal Server Error', {
             position: "bottom-center",
             autoClose: 3000,
@@ -59,9 +60,9 @@ export const fetchStudentAccountData = (data) => {
             draggable: true,
             progress: undefined,
           });
-          dispatch(accStuDataFail(error));
         });
     } catch (error) {
+      dispatch(accStuDataFail(error))
       toast.warn('Internal Server Error', {
         position: "bottom-center",
         autoClose: 3000,
@@ -71,7 +72,6 @@ export const fetchStudentAccountData = (data) => {
         draggable: true,
         progress: undefined,
       });
-      dispatch(accStuDataFail(error));
     }
   };
 };
@@ -82,7 +82,8 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
     try {
       axios(config)
         .then(function (response) {
-          console.log(response);
+          setLoading(false)
+          // console.log(response);
           if (response.status === 200) {
             localStorage.setItem('userEdit', JSON.stringify(response.data))
 
@@ -108,7 +109,6 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
                 navigate('/admin_dashboard/studentprofile');
             }
             dispatch(accountActionData(response.data));
-            setLoading(false)
 
           }
 
@@ -138,6 +138,8 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
           }
         })
         .catch(function (error) {
+          setLoading(false)
+
           toast.warn('Internal Server Error', {
             position: "bottom-center",
             autoClose: 3000,
@@ -150,6 +152,8 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
           dispatch(accStuDataFail(error));
         });
     } catch (error) {
+      setLoading(false)
+
       toast.warn('Internal Server Error', {
         position: "bottom-center",
         autoClose: 3000,
