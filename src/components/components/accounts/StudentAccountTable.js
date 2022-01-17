@@ -36,40 +36,9 @@ import Loader from "../../assests/common/Loader";
 //importing for downloading data
 import { useExportData } from "react-table-plugins";
 import Papa from "papaparse";
-import JsPDF from "jspdf";
 import "jspdf-autotable";
 
 
-//for exporting data in csv
-function getExportFileBlob({ columns, data, fileType, fileName }) {
-    if (fileType === "csv") {
-        // CSV Export
-        const headerNames = columns.map((col) => col.exportValue);
-        const csvString = Papa.unparse({ fields: headerNames, data });
-        return new Blob([csvString], { type: "text/csv" });
-    }
-    //PDF Export
-    if (fileType === "pdf") {
-        const headerNames = columns.map((column) => column.exportValue);
-        const doc = new JsPDF();
-        doc.autoTable({
-            head: [headerNames],
-            body: data,
-            margin: { top: 20 },
-            styles: {
-                minCellHeight: 9,
-                halign: "left",
-                valign: "center",
-                fontSize: 11,
-            },
-        });
-        doc.save(`${fileName}.pdf`);
-        return false;
-    }
-
-    // Other formats goes here
-    return false;
-}
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -203,6 +172,33 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
 function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData, accountAction }) {
     const [is_dailyReport, set_is_dailyReport] = useState(false)
     const [MoneyCount, setMoneyCount] = useState({ TStudent: 0, TAmount: 0, TpaidAmount: 0, RAmount: 0, WaiveOff: 0, TpaidAmountByDailyReport: 0 });
+    const [exportCsv, setExportCsv] = useState([])
+
+
+
+    //for exporting data in csv
+    function getExportFileBlob({ columns, data, fileType, fileName }) {
+        if (fileType === "csv") {
+            // CSV Export
+            const headerNames = columns.map((col) => col.exportValue);
+            const csvString = Papa.unparse({ fields: headerNames, data });
+            return new Blob([csvString], { type: "text/csv" });
+        }
+        //PDF Export
+        if (fileType === "pdf") {
+            //Check it out here 
+            console.log('====================================');
+            console.log("CAlled ", data);
+            console.log('====================================');
+            setExportCsv(data)
+            downloadPdf(exportCsv)
+
+            return false;
+        }
+
+        // Other formats goes here
+        return false;
+    }
 
     React.useEffect(() => {
         var config = {
@@ -546,7 +542,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
     const { globalFilter, pageSize, pageIndex, } = state;
     // var exportData = [];
-    var exportCsv = [];
+    // var exportCsv = [];
+
     const checkboxData = JSON.stringify(
         {
             selectedFlatRows: selectedFlatRows.forEach((row) => {
@@ -660,17 +657,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                         >
                                             Excel
                                         </button>
-                                        {/* <button className="dropdown-item" style={{ fontWeight: 'bold' }}
-                                            onClick={() => {
-                                                exportData("pdf", false)
-                                            }}
-                                        >
-                                            PDF
-                                        </button> */}
                                     </div>
-                                    {is_dailyReport &&
-                                        <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
-                                    }
+                                    {/* {is_dailyReport && */}
+                                    <div className="dropdown-item" onClick={() => {
+                                        exportData("pdf", false)
+                                    }}><b>Pdf</b></div>
+                                    {/* } */}
 
                                 </div>
                             </div>
