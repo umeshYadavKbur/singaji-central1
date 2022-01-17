@@ -18,13 +18,10 @@ import {
     CPopover,
 } from "@coreui/react";
 import filtericon from "../../assests/image/AccountIcons/filter.svg";
-import { CSVLink } from "react-csv";
 import { DateRangePicker } from "rsuite";
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
-// import { isSuperAdmin } from '../../../helpers/SuperAdmin';
-// import { isAccountAdmin } from '../../../helpers/AccountAdmin';
-// import { isStudentAdmin } from '../../../helpers/StudentAdmin';
+
 import allUrls from '../../../redux/constants/url'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -35,6 +32,44 @@ import { fetchStudentAccountData, getDailyReport, changeDailyReport, accountActi
 import SkeletonColor from '../../../helpers/Skeletrone';
 import Pagination from "../../assests/common/Pagination";
 import Loader from "../../assests/common/Loader";
+
+//importing for downloading data
+import { useExportData } from "react-table-plugins";
+import Papa from "papaparse";
+import JsPDF from "jspdf";
+import "jspdf-autotable";
+
+
+//for exporting data in csv
+function getExportFileBlob({ columns, data, fileType, fileName }) {
+    if (fileType === "csv") {
+        // CSV Export
+        const headerNames = columns.map((col) => col.exportValue);
+        const csvString = Papa.unparse({ fields: headerNames, data });
+        return new Blob([csvString], { type: "text/csv" });
+    }
+    //PDF Export
+    if (fileType === "pdf") {
+        const headerNames = columns.map((column) => column.exportValue);
+        const doc = new JsPDF();
+        doc.autoTable({
+            head: [headerNames],
+            body: data,
+            margin: { top: 20 },
+            styles: {
+                minCellHeight: 9,
+                halign: "left",
+                valign: "center",
+                fontSize: 11,
+            },
+        });
+        doc.save(`${fileName}.pdf`);
+        return false;
+    }
+
+    // Other formats goes here
+    return false;
+}
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -185,7 +220,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     }, []);
 
     React.useEffect(() => {
-
         let data = studentData?.table_data;
         console.log(data)
 
@@ -477,15 +511,20 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         selectedFlatRows,
         state,
         setGlobalFilter,
-
+        exportData,
         preGlobalFilteredRows,
         prepareRow,
     } = useTable(
-        { columns, data: studentData.table_data },
+        {
+            columns,
+            data: studentData.table_data,
+            getExportFileBlob,
+        },
         useGlobalFilter,
         useFilters,
         useSortBy,
         usePagination,
+        useExportData,
         useRowSelect,
         (hooks) => {
             hooks.visibleColumns.push((columns) => {
@@ -506,7 +545,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     );
 
     const { globalFilter, pageSize, pageIndex, } = state;
-    var exportData = [];
+    // var exportData = [];
     var exportCsv = [];
     const checkboxData = JSON.stringify(
         {
@@ -518,7 +557,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     data.ReceivedAmount = (data?.ReceivedAmount)?.toString();
 
                 console.log(data);
-                exportData.push(data)
+                // exportData.push(data)
                 // console.log(selectedData);
                 exportCsv.push(data)
 
@@ -551,8 +590,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             )}
             <div className="container-fluid">
                 <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px' }}>
-
-
                     <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
                         <div className=" info-col"  >
                             <h5 style={{ marginTop: "12px" }}>{MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
@@ -615,9 +652,22 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                     Download
                                 </button>
                                 <div class="dropdown-menu mt-1">
-
-
-                                    <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>
+                                    <div >
+                                        <button className="dropdown-item" style={{ fontWeight: 'bold' }}
+                                            onClick={() => {
+                                                exportData("csv", false);
+                                            }}
+                                        >
+                                            Excel
+                                        </button>
+                                        <button className="dropdown-item" style={{ fontWeight: 'bold' }}
+                                            onClick={() => {
+                                                exportData("pdf", false)
+                                            }}
+                                        >
+                                            PDF
+                                        </button>
+                                    </div>
                                     {is_dailyReport &&
                                         <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
                                     }
