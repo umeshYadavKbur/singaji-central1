@@ -41,7 +41,24 @@ const SidebarLinks = ({ Toggle }) => {
                 to={url}
                 id={id}
                 className={`sidebar_options_link ${active_dropdown === id ? "sidebar_options_active" : ""}`}
-                onClick={() => { setActiveDropdown(id); setActiveTab(parentId) }}
+                onClick={() => {
+                    if (Toggle) {
+
+                        // document.getElementById('dashboard-collapse').classList.remove('show');
+                        document.getElementById('education-collapse').classList.remove('show');
+                        // document.getElementById('account-collapse').classList.remove('show');
+                        setActiveMenu((pre) => {
+
+                            return {
+                                dashboard: false,
+                                account: false,
+                                education: false
+                            }
+                        })
+                    }
+                    setActiveDropdown(id); 
+                    setActiveTab(parentId)
+                }}
             >
                 <img src={icon} className=" Sidebar_text sidebar_icons" alt="" />
                 <span className="text-dark ">{name}</span>
@@ -59,7 +76,13 @@ const SidebarLinks = ({ Toggle }) => {
                     <a
                         onClick={() => { setActiveMenu((pre) => { return { ...pre, education: !active_menu.education } }) }}
                         href="#!"
-                        style={{ borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }}
+                        // style={{ borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }}
+                        style={Toggle ?
+                            !active_menu.education ?
+                                { width: '60px', borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }
+                                :
+                                { borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }
+                            : { borderBottomRightRadius: `${active_menu.education === true ? '0px' : ''}` }}
                         className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'education-collapse-btn' ? 'active_tab' : ''} ${active_menu.education === true ? 'active_tab' : ''} `}
                         role="button"
                         // data-toggle="collapse"
@@ -72,17 +95,20 @@ const SidebarLinks = ({ Toggle }) => {
                                 className="  Sidebar_text  sidebar_icons"
                                 alt=""
                             />
-                            <span className="text-dark ">Education</span>
+                            <span style={
+                                Toggle ?
+                                    !active_menu.education ? { display: 'none' } :
+                                        {} : {}} className="text-dark ">Education</span>
                         </div>
                         {!Toggle && <i className="fas fa-chevron-down mr-3"></i>}
                     </a>
 
-                    <div className="collapse collapse_superadmin p-0" id="education-collapse">
+                    <div className="collapse collapse_superadmin" id="education-collapse">
                         <ul className={`${Toggle ? 'btn-toggle-nav-hide' : 'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
-                                {DLink1(currentLocation,"Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
-                                {DLink1(currentLocation,"Students", "students", "ok", "Students", "education-collapse-btn")}
-                                {DLink1(currentLocation,"Add students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}
+                                {DLink1(currentLocation, "Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
+                                {DLink1(currentLocation, "Students", "students", "ok", "Students", "education-collapse-btn")}
+                                {DLink1(currentLocation, "Add students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}
                             </li>
                         </ul>
                     </div>
