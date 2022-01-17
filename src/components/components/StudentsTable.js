@@ -28,11 +28,14 @@ import AllUrl from "../../redux/constants/url"
 import updown_sort from '../assests/image/updown_sort.svg'
 import { DeactivateButton, PaidButton, UnpaidButton } from "../assests/common/Color";
 import Pagination from "../assests/common/Pagination";
+import { useNavigate } from "react-router-dom";
+
 // import { baseUrl } from "../../redux/constants/url";
 
 
 function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
   const token = localStorage.getItem("token");
+  const navigate = useNavigate()
 
   const [columns] = React.useState([
     {
@@ -238,7 +241,9 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: 'icon',
       Cell: ({ row: { original } }) => (
         // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
-        <img src={Edit_icon} alt="Edit" onClick={() => { console.log("edit student icon") }} />
+        <img src={Edit_icon} alt="Edit" onClick={() => {
+          navigate("/admin_dashboard/addnewstudent");
+          localStorage.setItem('userEdit',JSON.stringify(original)) }} />
 
       )
     }

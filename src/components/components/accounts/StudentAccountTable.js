@@ -610,11 +610,11 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                     }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
                                 <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
                             </div>
-                            <div class="btn-group  ml-1">
-                                <button class="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div className="btn-group  ml-1">
+                                <button className="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Download
                                 </button>
-                                <div class="dropdown-menu mt-1">
+                                <div className="dropdown-menu mt-1">
 
 
                                     <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>
