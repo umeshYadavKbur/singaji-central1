@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Fragment, useMemo } from "react";
 import {
     useTable,
@@ -60,6 +60,12 @@ function SelectColumnFilter({
         return [...options.values()];
     }, [id, preFilteredRows]);
 
+    let offsetObj = [0, 0];
+
+    if (id === 'branch') offsetObj = [20, 10]
+    else if (id === 'joinBatch') offsetObj = [20, 10]
+
+
     return (
         <Fragment>
             <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
@@ -67,6 +73,7 @@ function SelectColumnFilter({
 
                 <CPopover
 
+                    offset={offsetObj}
 
                     content={
                         <div className="">
@@ -105,12 +112,13 @@ function SelectColumnFilter({
                         </div>
                     }
                     placement="right"
+
                 >
                     <div className="btn-group dropright">
                         <button
 
                             onClick={(e) => { e.preventDefault() }}
-                            className="btn  dropdown-toggle"
+                            className="btn filter_btn  dropdown-toggle"
 
                         >
                             {id}
@@ -265,7 +273,6 @@ function StudentTableFirst({ fetchUsers, studentData }) {
         canNextPage,
         setPageSize,
         pageOptions,
-        selectedFlatRows,
         state,
         setGlobalFilter,
         preGlobalFilteredRows,
@@ -351,8 +358,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
 
                                         <CDropdownMenu
                                             component={"div"}
-                                            style={{ width: 'auto' }}
-                                            className="pt-0 "
+                                            className="pt-0 filter-dropdown-menu"
                                             placement="bottom-end"
 
                                         >
