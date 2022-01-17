@@ -71,6 +71,12 @@ function SelectColumnFilter({
         return [...options.values()];
     }, [id, preFilteredRows]);
 
+    let offsetObj = [0, 0];
+
+    if (id === 'stream') offsetObj = [63, 10]
+    else if (id === 'village') offsetObj = [134, 10]
+
+
     return (
         <Fragment>
             <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
@@ -78,6 +84,7 @@ function SelectColumnFilter({
 
                 <CPopover
 
+                    offset={offsetObj}
 
                     content={
                         <div className="">
@@ -116,12 +123,13 @@ function SelectColumnFilter({
                         </div>
                     }
                     placement="right"
+
                 >
                     <div className="btn-group dropright">
                         <button
 
                             onClick={(e) => { e.preventDefault() }}
-                            className="btn  dropdown-toggle"
+                            className="btn filter_btn  dropdown-toggle"
 
                         >
                             {id}
@@ -325,17 +333,17 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             Filter: "",
             filter: "",
         },
-        {
-            header: "Mobile no",
-            accessor: "mobile",
-            Filter: "",
-            filter: "",
-        },
+
         {
             header: "Stream",
             accessor: "stream",
             Filter: SelectColumnFilter,
             filter: MultipleFilter,
+        }, {
+            header: "Mobile no",
+            accessor: "mobile",
+            Filter: "",
+            filter: "",
         },
         {
             header: 'Village',
@@ -677,8 +685,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
                                         <CDropdownMenu
                                             component={"div"}
-                                            style={{ width: 'auto' }}
-                                            className="pt-0 "
+                                            className="pt-0 filter-dropdown-menu"
                                             placement="bottom-end"
 
                                         >

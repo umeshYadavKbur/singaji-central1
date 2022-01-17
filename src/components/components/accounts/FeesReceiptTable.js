@@ -9,7 +9,7 @@ import { TableCheckbox } from '../tableComponents/TableCheckbox';
 import { GlobalFilter } from "../tableComponents/GlobalFilter";
 import filtericon from '../../assests/image/AccountIcons/filter.svg'
 
-import { CDropdown, CDropdownMenu, CDropdownToggle } from '@coreui/react'
+import { CDropdown, CDropdownMenu, CDropdownToggle ,CPopover} from '@coreui/react'
 import feesReceiptTableData from "../../../redux/actionDispatcher/account/feesReceiptTableDispather";
 import AllUrl from "../../../redux/constants/url";
 import { connect } from "react-redux";
@@ -37,62 +37,78 @@ function setFilteredParams(filterArr, val) {
 }
 
 function SelectColumnFilter({
-    column: { filterValue = [], setFilter, preFilteredRows, id }
-}) {
+    column: { filterValue = [], setFilter, preFilteredRows, id },
+  }) {
     const options = useMemo(() => {
-        const options = new Set();
-
-        preFilteredRows.forEach((row) => {
-            options.add(row.values[id]);
-        });
-        return [...options.values()];
+      const options = new Set();
+  
+      preFilteredRows.forEach((row) => {
+        options.add(row.values[id]);
+      });
+      return [...options.values()];
     }, [id, preFilteredRows]);
-
+  
+    let offsetObj = [0, 0];
+  
+    if (id === 'branch') offsetObj = [47, 10]
+   
+  
     return (
-        <Fragment>
-            <div className="block">
-                {/* <span className="block capitalize mb-4">{id}</span> */}
-                <div className="accordion accordion-flush" id="accordionFlushExample">
-                    <div className="accordion-item">
-                        <h2 className="accordion-header" id="flush-headingOne">
-                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${id}`} aria-expanded="false" aria-controls={`${id}`}>
-                                {id}
-                            </button>
-                        </h2>
-                    </div>
-                </div>
-                {/* eslint-disable-next-line */}
+      <Fragment>
+        <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
+          {/* <span className="block capitalize mb-4">{id}</span> */}
+          <CPopover
+           offset={offsetObj}
+            content={
+              <div className="">
                 {options.map((option, i) => {
-                    return (
-                        <Fragment key={i}>
-                            <div id={`${id}`} className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <input
-                                    checked={filterValue.includes(option)}
-                                    type="checkbox"
-                                    className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                                    id={option}
-                                    name={option}
-                                    value={option}
-                                    onChange={(e) => {
-                                        setFilter(setFilteredParams(filterValue, e.target.value));
-                                    }}
-                                ></input>
-
-                                <label
-                                    htmlFor={option}
-                                    className="ml-1.5 font-medium text-gray-700"
-                                >
-                                    {option}
-                                </label>
-
-                            </div>
-                        </Fragment>
-                    );
+                  return (
+                    <Fragment key={i}>
+                      <div id={`${id}`}>
+                        <input
+                          checked={filterValue.includes(option)}
+                          type="checkbox"
+                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                          id={option}
+                          name={option}
+                          value={option}
+                          style={{ cursor: 'pointer' }}
+                          onChange={(e) => {
+  
+                            setFilter(
+                              setFilteredParams(filterValue, e.target.value)
+                            );
+                          }}
+                          onClick={(e) => { e.stopPropagation() }}
+                        ></input>
+                        <label
+                          htmlFor={option}
+                          className="ml-1.5 font-medium text-gray-700"
+                        >
+                          {option}
+                        </label>
+                      </div>
+                    </Fragment>
+                  );
                 })}
+              </div>
+            }
+            placement="right"
+          >
+            <div className="btn-group dropright">
+              <button
+                type="button"
+                className="btn filter_btn  dropdown-toggle"
+                data-bs-toggle="collapse"
+              >
+                {id}
+              </button>
             </div>
-        </Fragment>
+          </CPopover>
+        </div>
+      </Fragment>
     );
-}
+  }
 
 // Define a default UI for filtering
 // function GlobalFilter({
@@ -322,8 +338,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
 
                                 <CDropdownMenu
                                     component={"div"}
-                                    style={{ width: 'auto' }}
-                                    className="pt-0 "
+                                    className="pt-0 filter-dropdown-menu"
                                     placement="bottom-end"
 
                                 >

@@ -57,11 +57,18 @@ function SelectColumnFilter({
     return [...options.values()];
   }, [id, preFilteredRows]);
 
+  let offsetObj = [0, 0];
+
+  if (id === 'stream') offsetObj = [33, 10]
+  else if (id === 'category') offsetObj = [33, 10]
+  else if (id === 'feesScheme') offsetObj = [47, 10]
+
   return (
     <Fragment>
       <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
         {/* <span className="block capitalize mb-4">{id}</span> */}
         <CPopover
+         offset={offsetObj}
           content={
             <div className="">
               {options.map((option, i) => {
@@ -101,7 +108,7 @@ function SelectColumnFilter({
           <div className="btn-group dropright">
             <button
               type="button"
-              className="btn  dropdown-toggle"
+              className="btn filter_btn  dropdown-toggle"
               data-bs-toggle="collapse"
             >
               {id}
@@ -360,8 +367,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
 
                 <CDropdownMenu
                   component={"div"}
-                  style={{ width: 'auto' }}
-                  className="pt-0 "
+                  className="pt-0 filter-dropdown-menu"
                   placement="bottom-end"
 
                 >
