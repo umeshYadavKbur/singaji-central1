@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Dashboard_svg from "../assests/image/sidebarIcons/Dashboard.svg";
 import Alumini_svg from "../assests/image/sidebarIcons/Alumini.svg";
 import Accounts_svg from "../assests/image/sidebarIcons/Accounts.svg";
@@ -9,9 +9,18 @@ import Education_svg from "../assests/image/sidebarIcons/Education.svg";
 import Others_svg from "../assests/image/sidebarIcons/Others.svg";
 
 const SidebarLinks = ({ Toggle }) => {
-    const [active_dropdown, setActiveDropdown] = useState('Dashboard');
-    const [active_tab, setActiveTab] = useState('dashboard-collapse-btn');
+    const [active_dropdown, setActiveDropdown] = useState('');
+    const [active_tab, setActiveTab] = useState('');
     const [active_menu, setActiveMenu] = useState({ dashboard: false, education: false, account: false });
+
+    const currentLocation = useLocation().pathname;
+    // var location = getLocation();
+    const base = '/admin_dashboard'
+
+
+    // function getLocation() {
+
+    // }
 
     const changeTab = (id) => {
 
@@ -21,9 +30,31 @@ const SidebarLinks = ({ Toggle }) => {
 
     }
 
-    const dLink1 = (name, url, icon, id, parentId) => {
+
+    const DLink1 = (currentLocation, name, url, icon, id, parentId) => {
+
+
+
+
+        useEffect(() => {
+            const changeTab1 = () => {
+
+
+                setActiveDropdown(id);
+                setActiveTab(parentId)
+
+                return parentId
+            }
+            if (currentLocation === (url ? base + '/' + url : base)) {
+                console.log(changeTab1())
+            }
+
+        }, [currentLocation, id, parentId, url])
+
+
         return (
             <NavLink
+
                 to={url}
                 id={id}
                 className={`sidebar_options_link ${active_dropdown === id ? "sidebar_options_active" : ""}`}
@@ -74,9 +105,9 @@ const SidebarLinks = ({ Toggle }) => {
                         <ul className={`${Toggle ? 'btn-toggle-nav-hide' : 'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
 
-                                {dLink1("Dashboard", "", "ok", 'Dashboard', 'dashboard-collapse-btn')}
-                                {dLink1("Fees Stucture", "feesstructuretable", "ok", 'Fees_Stucture', 'dashboard-collapse-btn')}
-                                {dLink1("My Admin", "admintable", "ok", 'My_Admin', 'dashboard-collapse-btn')}
+                                {DLink1(currentLocation, "Dashboard", "", "ok", 'Dashboard', 'dashboard-collapse-btn')}
+                                {DLink1(currentLocation, "Fees Stucture", "feesstructuretable", "ok", 'Fees_Stucture', 'dashboard-collapse-btn')}
+                                {DLink1(currentLocation, "My Admin", "admintable", "ok", 'My_Admin', 'dashboard-collapse-btn')}
 
                             </li>
                         </ul>
@@ -112,9 +143,9 @@ const SidebarLinks = ({ Toggle }) => {
                     <div className="collapse collapse_superadmin" id="education-collapse">
                         <ul className={`${Toggle ? 'btn-toggle-nav-hide' : 'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
-                                {dLink1("Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
-                                {dLink1("Students", "students", "ok", "Students", "education-collapse-btn")}
-                                {dLink1("Add students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}
+                                {DLink1(currentLocation, "Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
+                                {DLink1(currentLocation, "Students", "students", "ok", "Students", "education-collapse-btn")}
+                                {DLink1(currentLocation, "Add students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}
                             </li>
                         </ul>
                     </div>
@@ -148,9 +179,9 @@ const SidebarLinks = ({ Toggle }) => {
                     <div className="collapse collapse_superadmin" id="account-collapse">
                         <ul className={`${Toggle ? 'btn-toggle-nav-hide' : 'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
-                                {dLink1("Student Account", "studentaccounttable", "ok", "Student_account", 'account-collapse-btn')}
-                                {dLink1("Pending Scholarship", "pendingscholarship", "ok", "Pending_students", "account-collapse-btn")}
-                                {dLink1("Fees Receipt List", "feesreceiptlist", "ok", "Fees_receiptlist", 'account-collapse-btn')}
+                                {DLink1(currentLocation, "Student Account", "studentaccounttable", "ok", "Student_account", 'account-collapse-btn')}
+                                {DLink1(currentLocation, "Pending Scholarship", "pendingscholarship", "ok", "Pending_students", "account-collapse-btn")}
+                                {DLink1(currentLocation, "Fees Receipt List", "feesreceiptlist", "ok", "Fees_receiptlist", 'account-collapse-btn')}
                             </li>
                         </ul>
                     </div>
