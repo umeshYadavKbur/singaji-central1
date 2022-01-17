@@ -660,13 +660,13 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                         >
                                             Excel
                                         </button>
-                                        <button className="dropdown-item" style={{ fontWeight: 'bold' }}
+                                        {/* <button className="dropdown-item" style={{ fontWeight: 'bold' }}
                                             onClick={() => {
                                                 exportData("pdf", false)
                                             }}
                                         >
                                             PDF
-                                        </button>
+                                        </button> */}
                                     </div>
                                     {is_dailyReport &&
                                         <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
