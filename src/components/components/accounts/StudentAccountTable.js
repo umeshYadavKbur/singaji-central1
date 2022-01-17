@@ -19,7 +19,7 @@ import {
 } from "@coreui/react";
 import filtericon from "../../assests/image/AccountIcons/filter.svg";
 import { CSVLink } from "react-csv";
-import { DateRangePicker } from "rsuite";
+import { DateRangePicker, Tooltip, Whisper } from "rsuite";
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 // import { isSuperAdmin } from '../../../helpers/SuperAdmin';
@@ -255,6 +255,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
     }
     /////////////////////////////////////
+    /////////////////////////////////////
 
     // const data = React.useMemo(() => tableData, []);
     const mainColoumns = [
@@ -272,35 +273,41 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             accessor: "photo",
 
             Cell: ({ row: { original, index } }) =>
-                // console.log("original.photo",original.photo)
-               (
+            // console.log("original.photo",original.photo)
+            (
                 <div className="d-flex m-0 flex-column justify-content-start">
-                    {original.photo ?<img
-                        alt="profile"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                            getAllInfoOfStudent(original, false)
-                        }}
-                        className="mx-auto"
-                        src={original.photo}
-                      
-                        width={50}
-                        
-                        text="Image"
-                        style={{borderRadius:'25px'}}
-                    />:
-                    <img
-                        alt="profile"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                            getAllInfoOfStudent(original, false)
-                        }}
+                    <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                        <Tooltip style={{ background: "rgb(249, 147, 0)" }}>
+                            This is a help <i>tooltip</i> .
+                        </Tooltip>
+                    }>
+                        {original.photo ? <img
+                            alt="profile"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => {
+                                getAllInfoOfStudent(original, false)
+                            }}
                             className="mx-auto"
-                            src={AvatarImg}
-                        width={50}
-                        
-                        text="Image"
-                    />}
+                            src={original.photo}
+
+                            width={50}
+
+                            text="Image"
+                            style={{ borderRadius: '25px' }}
+                        /> :
+                            <img
+                                alt="profile"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => {
+                                    getAllInfoOfStudent(original, false)
+                                }}
+                                className="mx-auto"
+                                src={AvatarImg}
+                                width={50}
+
+                                text="Image"
+                            />}
+                    </Whisper>
                 </div >
             ),
             Filter: "",
@@ -340,12 +347,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             header: 'Received Fee',
             accessor: 'received_Amount',
             Cell: ({ row: { original } }) => (
-                <div className='row d-flex '>
-                    <div className="col">
-                        <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000" }}></span>
+                <div className='circle-main '>
+                    <div className="">
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000", marginRight: "10px", marginLeft: "17px" }}></span>
 
                     </div>
-                    <div className="col">
+                    <div className="">
                         <span className='' >
                             {original.received_Amount}
                         </span>
@@ -359,12 +366,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             header: 'Pending Fee',
             accessor: 'remain_Amount',
             Cell: ({ row: { original } }) => (
-                <div className='row d-flex '>
-                    <div className="col">
-                        <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A" }}></span>
+                <div className='circle-main '>
+                    <div className="">
+                        <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A", marginRight: "10px", marginLeft: "15px" }}></span>
 
                     </div>
-                    <div className="col">
+                    <div className="" >
                         <span className='' >
                             {original.remain_Amount}
                         </span>
@@ -447,6 +454,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         }
 
     ]
+
 
     const [columns, setColoumns] = useState(mainColoumns)
     const showDailyReport = async () => {
@@ -659,7 +667,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                                 src={filtericon}
                                                 alt=""
                                                 style={{
-                                                    height: "35px",
+                                                    height: "22px",
                                                     width: "35px",
                                                     marginTop: "-35px",
                                                     marginLeft: "-13px",

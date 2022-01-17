@@ -196,11 +196,11 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 header: "Received Fee",
                 accessor: "ReceivedAmount",
                 Cell: ({ row: { original } }) => (
-                    <div className='row d-flex d-inline-flex'>
-                        <div className="col">
-                            <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(153, 248, 126)" }}></span>
+                    <div className='circle-main'>
+                        <div className="">
+                            <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(153, 248, 126)", marginRight: "10px", marginLeft: "23px" }}></span>
                         </div>
-                        <div className="col">
+                        <div className="">
                             <span className='' >
                                 {original.ReceivedAmount}
                             </span>
@@ -312,7 +312,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                                         src={filtericon}
                                         alt=""
                                         style={{
-                                            height: "35px",
+                                            height: "23px",
                                             width: "35px",
                                             marginTop: "-35px",
                                             marginLeft: "-13px",
