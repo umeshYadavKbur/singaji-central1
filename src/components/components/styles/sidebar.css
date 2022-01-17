@@ -471,7 +471,7 @@ label #sidebar_btn:hover {
   margin-bottom: 3px;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
-  margin-top: -7px;
+  /* margin-top: -7px; */
     padding-top: 3px !important;
     padding-bottom: 3px !important;
 
