@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { connect } from "react-redux";
+import Loader from '../assests/common/Loader';
 
 
 import "./styles/Table.css";
@@ -141,7 +142,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                       "Content-Type": "application/json",
                     },
                   };
-                  fetchStudentTable(con);
+                  fetchStudentTable(con, true);
                 }
                 else if (result.status === 404) {
                   toast.warning('User Not Found', {
@@ -210,7 +211,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                         "Content-Type": "application/json",
                       },
                     };
-                    fetchStudentTable(config);
+                    fetchStudentTable(config, true);
                   }
                 }
               })
@@ -269,7 +270,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
         "Content-Type": "application/json",
       },
     };
-    fetchStudentTable(config);
+    fetchStudentTable(config, false);
     // setTableData(table_data.table_data);
     // eslint-disable-next-line
   }, []);
@@ -330,6 +331,9 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
   ) : (
     //   return (
     <>
+      {table_data.secondLoading && (
+        <Loader />
+      )}
       <ToastContainer
         position="top-center"
         autoClose={2500}
@@ -433,15 +437,13 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 const mapStateToProps = (state) => {
   return {
     table_data: state.studentTableData,
-
-
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchStudentTable: (data) => dispatch(fetchStudentTable(data)),
-    VerifyStudent: (data) => dispatch(VerifyStudent(data))
+    fetchStudentTable: (data, isLoading) => dispatch(fetchStudentTable(data, isLoading)),
+    VerifyStudent: (data) => dispatch(VerifyStudent(data)),
   };
 };
 

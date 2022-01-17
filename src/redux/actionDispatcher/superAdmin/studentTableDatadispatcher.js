@@ -3,22 +3,33 @@ import {
   FETCH_STUDENT_TABLE_DATA,
   STUDENT_TABLE_DATA_FAIL,
   STUDENT_TABLE_DATA_SUCCESS,
+  STUDENT_SECOND_LOADING,
+  STUDENT_SECOND_LOADING_END,
 } from "../../constants/actions";
 import Swal from "sweetalert2";
 import { toast } from 'react-toastify'
 
-export const fetchStudentTable = (data) => {
+export const fetchStudentTable = (data, isLoading) => {
   return (dispatch) => {
-    dispatch(fetchTableData());
+    if (isLoading) {
+      dispatch(setLoadingState())
+    } else {
+      dispatch(fetchTableData());
+    }
     try {
       axios(data)
         .then(function (response) {
-          //Printing the response of the data
-          // console.log((response));
           if (response.status === 200) {
-            dispatch(fetchSuccessTableData(response.data.reverse()));
+
+            if (isLoading) {
+              dispatch(fetchSuccessTableData(response.data.reverse()));
+              dispatch(setLoadingStateFalse())
+            } else {
+              dispatch(fetchSuccessTableData(response.data.reverse()));
+            }
           }
           if (response.status === 400) {
+
             toast.warn('No data found !', {
               position: "bottom-center",
               autoClose: 3000,
@@ -28,8 +39,14 @@ export const fetchStudentTable = (data) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(fetchFailTableData(response.data));
+            if (isLoading) {
+              dispatch(setLoadingStateFalse())
+            } else {
+              dispatch(fetchFailTableData(response.data));
+            }
           }
+
+
           if (response.status === 500) {
             toast.warn('Internal Server Error', {
               position: "bottom-center",
@@ -40,12 +57,19 @@ export const fetchStudentTable = (data) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(fetchFailTableData(response.data));
+            if (isLoading) {
+              dispatch(setLoadingStateFalse())
+            } else {
+              dispatch(fetchFailTableData(response.data));
+            }
           }
         })
         .catch(function (error) {
-          //   console.log(error);
-          fetchFailTableData(error);
+          if (isLoading) {
+            dispatch(setLoadingStateFalse())
+          } else {
+            dispatch(fetchFailTableData(error));
+          }
           Swal.fire({
             title: "Some Problem Occurred",
             icon: "warning",
@@ -76,7 +100,11 @@ export const fetchStudentTable = (data) => {
           popup: '',                     // disable popup fade-out animation
         }
       });
-      fetchFailTableData(error);
+      if (isLoading) {
+        dispatch(setLoadingStateFalse())
+      } else {
+        dispatch(fetchFailTableData(error));
+      }
       //   console.log(error);
     }
   };
@@ -99,5 +127,17 @@ const fetchFailTableData = (error) => {
   return {
     type: STUDENT_TABLE_DATA_FAIL,
     payload: error,
+  };
+};
+
+export const setLoadingState = () => {
+  return {
+    type: STUDENT_SECOND_LOADING,
+  };
+};
+
+export const setLoadingStateFalse = () => {
+  return {
+    type: STUDENT_SECOND_LOADING_END,
   };
 };
