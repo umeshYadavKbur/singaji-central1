@@ -3,10 +3,10 @@ import React from 'react';
 import '../common/styles/Loader.css'
 const LoaderButton = () => {
     return (
-        <div>
-            <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-        </div>
-    )
+        <div className="mb-1">
+            <div class="spinner-4 mx-auto"></div>
+        </div> 
+   )
 }
 
 export default LoaderButton

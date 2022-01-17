@@ -230,14 +230,14 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
         header: "Pending amount",
         accessor: "pending_Amount",
         Cell: ({ row: { original } }) => (
-          <div className="row d-flex ">
-            <div className="col">
+          <div className="circle-main ">
+            <div className="">
               <span
                 className="recieved-fee-circle"
-                style={{ backgroundColor: "#ffc107" }}
+                style={{ backgroundColor: "#ffc107", marginRight: "10px", marginLeft: "20px" }}
               ></span>
             </div>
-            <div className="col">
+            <div className="">
               <span className="">{original.pending_Amount}</span>
             </div>
           </div>
@@ -350,7 +350,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
                     src={filtericon}
                     alt=""
                     style={{
-                      height: "35px",
+                      height: "22px",
                       width: "35px",
                       marginTop: "-35px",
                       marginLeft: "-13px",

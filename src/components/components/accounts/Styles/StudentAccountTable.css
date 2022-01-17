@@ -168,6 +168,7 @@
   /* background-color: rgb(255, 214, 78); */
   border-radius: 50%;
   display: inline-block;
+  /* margin-right: -10px; */
 }
 
 .pagination-div {
@@ -196,4 +197,13 @@ button:not(:disabled) {
   padding: 0 !important;
   padding-bottom: 3px !important;
   margin: 0 !important;
+}
+.rs-picker-toggle-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 12px !important;
+  max-width: 100%;
+}
+.circle-main{
+  display: flex;
 }
