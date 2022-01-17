@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import {useEffect,useState} from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -8,20 +8,22 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./styles/AddNewStudent.css"
 import Select from 'react-select'
 import * as Yup from "yup";
-import { useFormik } from 'formik';
+import {useFormik} from 'formik';
 import axios from 'axios';
 import AddNewStudent from '../../redux/actionDispatcher/superAdmin/addNewStudentDispatcher'
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import NumberFormat from 'react-number-format';
 import allUrls from '../../redux/constants/url'
 
-function AddNewStudentPage({ AddNewStudent }) {
-    var editData = JSON.parse(localStorage.getItem('studentData'))
-    console.log(editData);
+function AddNewStudentPage({AddNewStudent}) {
+    var editData = JSON.parse(localStorage.getItem('userEdit'))
+    console.log('editdata',editData);
+    // var editData = ''
+    // console.log(editData);
 
-    const [branchNames, setBranchNames] = useState([{ subjects: 'loading...', id: 0 }])
-    const [trackNames, setTrackNames] = useState([{ trackName: 'loading...', trackId: 0 }])
-    const [villageNames, setVillageNames] = useState([{ label: 'loading...', villageId: 0 }])
+    const [branchNames,setBranchNames] = useState([{subjects: 'loading...',id: 0}])
+    const [trackNames,setTrackNames] = useState([{trackName: 'loading...',trackId: 0}])
+    const [villageNames,setVillageNames] = useState([{label: 'loading...',villageId: 0}])
 
 
     useEffect(() => {
@@ -38,7 +40,7 @@ function AddNewStudentPage({ AddNewStudent }) {
             /////////////////////////
             const villageNamesRes = await axios(allUrls.villageNameList)
             let newVillageName = [];
-            villageNamesRes.data.forEach((ele) => { newVillageName.push({ 'label': ele.villagename, 'value': ele.villagename }) })
+            villageNamesRes.data.forEach((ele) => {newVillageName.push({'label': ele.villagename,'value': ele.villagename})})
             // console.log(newVillageName);
             setVillageNames(newVillageName);
 
@@ -52,7 +54,7 @@ function AddNewStudentPage({ AddNewStudent }) {
         return () => {
             localStorage.removeItem('userEdit')
         }
-    }, []);
+    },[]);
 
 
 
@@ -62,88 +64,88 @@ function AddNewStudentPage({ AddNewStudent }) {
         // Date of birth , village name  , category name , 12 subject , scheme fees  , GKB scholarship , track name 
 
         // Personal Detail start here
-        firstName: editData ? editData.accountInfo.firstName : "",
-        lastName: editData ? editData.accountInfo.lastName : "",
-        dob: editData ? editData.accountInfo.dob : "", // not working properly
-        contactNumber: editData ? editData.accountInfo.mobile : "",
-        fatherName: editData ? editData.accountInfo.fathersName : "",
-        fatherOccupation: editData ? editData.accountInfo.fatherOccupation : "",
-        fatherIncome: editData ? editData.accountInfo.fatherIncome : "",
-        FatherContactNumber: editData ? editData.accountInfo.fatherContactNumber : "",
-        address: editData ? editData.accountInfo.address : "",
-        pincode: editData ? editData.accountInfo.pincode : "",
-        village: editData ? editData.accountInfo.village : "",// not working
-        tehsil: editData ? editData.accountInfo.tehsil : "",
-        district: editData ? editData.accountInfo.district : "",
-        email: editData ? editData.accountInfo.email : "",
-        aadharNumber: editData ? editData.accountInfo.aadarNo : "",
-        category: editData ? editData.accountInfo.category : "",
-        gender: editData ? editData.accountInfo.gender : "male",
+        firstName: editData ? editData.firstName : "",
+        lastName: editData ? editData.lastName : "",
+        dob: editData ? editData.dob : "", // not working properly
+        contactNumber: editData ? editData.mobile : "",
+        fatherName: editData ? editData.fathersName : "",
+        fatherOccupation: editData ? editData.fatherOccupation : "",
+        fatherIncome: editData ? editData.fatherIncome : "",
+        FatherContactNumber: editData ? editData.fatherContactNumber : "",
+        address: editData ? editData.address : "",
+        pincode: editData ? editData.pincode : "",
+        village: editData ? editData.village : "",// not working
+        tehsil: editData ? editData.tehsil : "",
+        district: editData ? editData.district : "",
+        email: editData ? editData.email : "",
+        aadharNumber: editData ? editData.aadarNo : "",
+        category: editData ? editData.category : "",
+        gender: editData ? editData.gender : "male",
         // Personal information end here 
 
         //Acadmic Details stated from here
-        schoolName: editData ? editData.accountInfo.schoolName : "",
-        subject12: editData ? editData.accountInfo.school12sub : "",
-        streamName: editData ? editData.accountInfo.branch : "",
-        joinBatch: editData ? editData.accountInfo.joinBatch : "",
-        rollNumber12: editData ? editData.accountInfo.rollNumber12 : "",
-        percent12: editData ? editData.accountInfo.persentage12 : "",
-        year: editData ? editData.accountInfo.year : "",
-        percent10: editData ? editData.accountInfo.persentage10 : "",
-        rollNumber10: editData ? editData.accountInfo.rollNumber10 : "",
+        schoolName: editData ? editData.schoolName : "",
+        subject12: editData ? editData.school12sub : "",
+        streamName: editData ? editData.branch : "",
+        joinBatch: editData ? editData.joinBatch : "",
+        rollNumber12: editData ? editData.rollNumber12 : "",
+        percent12: editData ? editData.persentage12 : "",
+        year: editData ? editData.year : "",
+        percent10: editData ? editData.persentage10 : "",
+        rollNumber10: editData ? editData.rollNumber10 : "",
         //Acadmic Details end  here
 
         // Fees detail start from here 
-        GKBAmount: editData ? editData.accountInfo.GKB_Amount : 0,
-        postmatricAmount: editData ? editData.accountInfo.Postmetric_Amount : 0,
+        GKBAmount: editData ? editData.GKB_Amount : 0,
+        postmatricAmount: editData ? editData.Postmetric_Amount : 0,
 
         // editData.pendingFee[0].PendingFees
-        firstInstallmentDate: editData ? editData.accountInfo.FirstinstallmentDate : "",
-        firstInstallment: editData ? editData.accountInfo.Firstinstallment : 0,
-        secondInstallmentDate: editData ? editData.accountInfo.SecondinstallmentDate : "",
-        secondInstallment: editData ? editData.accountInfo.Secondinstallment : 0,
-        thirdInstallmentDate: editData ? editData.accountInfo.ThirdinstallmentDate : "",
-        thirdInstallment: editData ? editData.accountInfo.Thirdinstallment : 0,
+        firstInstallmentDate: editData ? editData.FirstinstallmentDate : "",
+        firstInstallment: editData ? editData.Firstinstallment : 0,
+        secondInstallmentDate: editData ? editData.SecondinstallmentDate : "",
+        secondInstallment: editData ? editData.Secondinstallment : 0,
+        thirdInstallmentDate: editData ? editData.ThirdinstallmentDate : "",
+        thirdInstallment: editData ? editData.Thirdinstallment : 0,
 
-        feesScheme: editData ? editData.accountInfo.feesScheme : 'fullFees',
-        courseFees: editData ? editData.accountInfo.Totalfee : "",
-        regisrationFees: editData ? editData.accountInfo.reg_Fees : "1500",
-        postmatricScolarship: editData ? editData.accountInfo.Is_Postmetric : "no",
+        feesScheme: editData ? editData.feesScheme : 'fullFees',
+        courseFees: editData ? editData.Totalfee : "",
+        regisrationFees: editData ? editData.reg_Fees : "1500",
+        postmatricScolarship: editData ? editData.Is_Postmetric : "no",
 
         //remaining
         gkbScolarship: editData ? editData.Is_GKB : "no",//not working
         gkbOwner: editData ? editData.GaonKiBeti : "self",
         postmatricOwner: editData ? editData.Postmetric : "self",
         payableAmmount: editData ? editData.remain_Amount : "",
-        remark: editData ? editData.accountInfo.remark : "",
-        ScholarshipAmount: editData ? editData.accountInfo.ScholarshipAmount : 0,
-        trackName: editData ? editData.accountInfo.trackName : "",
-        busFees: editData ? editData.accountInfo.Busfee : "",
+        remark: editData ? editData.remark : "",
+        ScholarshipAmount: editData ? editData.ScholarshipAmount : 0,
+        trackName: editData ? editData.trackName : "",
+        busFees: editData ? editData.Busfee : "",
         // Fees detail end from here 
 
     }
 
     const validationSchema = Yup.object({
-        firstName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!"),
-        lastName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates').required("Required!"),
-        dob: Yup.string().required("Required!").test('doc_check', 'Minimum age must be 12-14 years', val => val?.slice(0, 4) <= (new Date().getFullYear()) - 13),
-        contactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
-        fatherName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!"),
-        fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates'),
-        fatherIncome: Yup.string().required("Required!").min(4, 'Must be exactly 4 digits').test('Is positive', 'must be positive', val => val > 0),
-        FatherContactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
-        address: Yup.string().trim().min(10, 'minimum 10 characters required').required("Required!"),
-        village: Yup.string().required("Required!").trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates'),
-        pincode: Yup.string().trim().required("Required!").test('len', 'Must be exactly 6 digits', val => val?.replace('X', '').length === 6),
-        tehsil: Yup.string().trim().min(3, 'minimum 3 characters required').required("Required!").matches(/^[a-zA-Z]+$/, 'must be alphabates'),
-        district: Yup.string().trim().min(3, 'minimum 3 characters required').required("Required!").matches(/^[a-zA-Z]+$/, 'must be alphabates'),
+        firstName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!"),
+        lastName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates').required("Required!"),
+        dob: Yup.string().required("Required!").test('doc_check','Minimum age must be 12-14 years',val => val?.slice(0,4) <= (new Date().getFullYear()) - 13),
+        contactNumber: Yup.string().trim().min(10,'Must be exactly 10 digits').required("Required!"),
+        fatherName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!"),
+        fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates'),
+        fatherIncome: Yup.string().required("Required!").min(4,'Must be exactly 4 digits').test('Is positive','must be positive',val => val > 0),
+        FatherContactNumber: Yup.string().trim().min(10,'Must be exactly 10 digits').required("Required!"),
+        address: Yup.string().trim().min(10,'minimum 10 characters required').required("Required!"),
+        village: Yup.string().required("Required!").trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates'),
+        pincode: Yup.string().trim().required("Required!").test('len','Must be exactly 6 digits',val => val?.replace('X','').length === 6),
+        tehsil: Yup.string().trim().min(3,'minimum 3 characters required').required("Required!").matches(/^[a-zA-Z]+$/,'must be alphabates'),
+        district: Yup.string().trim().min(3,'minimum 3 characters required').required("Required!").matches(/^[a-zA-Z]+$/,'must be alphabates'),
         email: Yup.string().email("Invalid Email Format ").required("Required!"),
-        aadharNumber: Yup.string().trim().required("Required!").test('len', 'Must be exactly 12 digits', val => val?.replace('X', '').length === 14),
+        aadharNumber: Yup.string().trim().required("Required!").test('len','Must be exactly 12 digits',val => val?.replace('X','').length === 14),
         category: Yup.string().required("Required!"),
 
         percent10: Yup.string().required("Required!"),
         rollNumber10: Yup.string().required("Required!"),
-        joinBatch: Yup.string().trim().required("Required!").test('len', 'Must be exactly 4 digits', val => val?.replace('X', '').length === 4),
+        joinBatch: Yup.string().trim().required("Required!").test('len','Must be exactly 4 digits',val => val?.replace('X','').length === 4),
         percent12: Yup.string().required("Required!"),
         rollNumber12: Yup.string().required("Required!"),
         year: Yup.string().required("Required!"),
@@ -151,29 +153,29 @@ function AddNewStudentPage({ AddNewStudent }) {
         subject12: Yup.string().required("Required!"),
         schoolName: Yup.string().required("Required!"),
 
-        GKBAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
-        postmatricAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        GKBAmount: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
+        postmatricAmount: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
         thirdInstallmentDate: Yup.string().required("Required!"),
-        thirdInstallment: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        thirdInstallment: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
         secondInstallmentDate: Yup.string().required("Required!"),
-        secondInstallment: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        secondInstallment: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
         feesScheme: Yup.string().required("Required!"),
         firstInstallmentDate: Yup.string().required("Required!"),
-        firstInstallment: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
-        courseFees: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
-        regisrationFees: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        firstInstallment: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
+        courseFees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
+        regisrationFees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
 
         postmatricScolarship: Yup.string().required("Required!"),
         gkbScolarship: Yup.string().required("Required!"),
         gkbOwner: Yup.string().required("Required!"),
         postmatricOwner: Yup.string().required("Required!"),
         remark: Yup.string().required("Required!"),
-        payableAmmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        payableAmmount: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
         // postmatricAmount: Yup.string().required("Required!"),
         // GKBAmount: Yup.string().required("Required!"),
 
         trackName: Yup.string().required("Required!"),
-        busFees: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        busFees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
 
     })
     // let len=formik.values.aadharNumber;
@@ -242,7 +244,7 @@ function AddNewStudentPage({ AddNewStudent }) {
 
     const getCourseFees = async () => {
 
-        if (formik.values.joinBatch !== '' && formik.values.joinBatch.replace('X', '').length === 4 && formik.values.streamName !== '') {
+        if(formik.values.joinBatch !== '' && formik.values.joinBatch.replace('X','').length === 4 && formik.values.streamName !== '') {
             // console.log("api calling");
 
             var data = '';
@@ -259,25 +261,25 @@ function AddNewStudentPage({ AddNewStudent }) {
 
 
                 const StudentCourseFees = await axios(config)
-                if (StudentCourseFees.status === 200) {
-                    formik.setFieldValue('courseFees', StudentCourseFees.data[0].total_fees);
+                if(StudentCourseFees.status === 200) {
+                    formik.setFieldValue('courseFees',StudentCourseFees.data[0].total_fees);
 
                 } else {
-                    formik.setFieldValue('courseFees', '');
+                    formik.setFieldValue('courseFees','');
 
                 }
 
                 console.log(StudentCourseFees);
-            } catch (error) {
+            } catch(error) {
                 console.log(error);
-                formik.setFieldValue('courseFees', '');
+                formik.setFieldValue('courseFees','');
 
             }
 
         }
     }
 
-    const [expanded, setExpanded] = React.useState({
+    const [expanded,setExpanded] = React.useState({
         panel1: true,
         panel2: true,
         panel3: true,
@@ -301,18 +303,18 @@ function AddNewStudentPage({ AddNewStudent }) {
             <div className='addnewstudent mx-auto px-3'>
                 <form onSubmit={formik.handleSubmit}>
                     {/* Personal Details */}
-                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel1 === true} onChange={handleChange('panel1')}>
+                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel1 === true} onChange={handleChange('panel1')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             style={{
-                                backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px"
+                                backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"
                             }}
                         >
-                            <Typography style={{ color: "#414c97", margin: "0px" }}><b> Personal Details</b></Typography>
+                            <Typography style={{color: "#414c97",margin: "0px"}}><b> Personal Details</b></Typography>
                         </AccordionSummary>
-                        <AccordionDetails style={{ backgroundColor: '#F4F7FC', padding: '15px' }}>
+                        <AccordionDetails style={{backgroundColor: '#F4F7FC',padding: '15px'}}>
                             <Typography component={'div'} className='add_student_dropdown_menu' >
                                 {/* Personal Details */}
 
@@ -518,12 +520,13 @@ function AddNewStudentPage({ AddNewStudent }) {
                                         /> */}
                                         <Select
                                             options={villageNames}
-                                            onChange={({ value }) => { formik.setFieldValue('village', value) }}
+                                            onChange={({value}) => {formik.setFieldValue('village',value)}}
                                             onBlur={formik.handleBlur}
                                             // value={formik.values.village}
                                             name="village"
                                             className={formik.touched.village ? ` ${formik.errors.village ? "invalid" : ""}` : ''}
-                                            placeholder="Village"
+                                            defaultValue={{label: editData ? editData.village : '',value: editData ? editData.village : ''}}
+                                            placeholder="select Village"
                                         />
                                         {formik.errors.village && formik.touched.village ? (
                                             <div className="text-danger fs-6">
@@ -644,6 +647,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             <label className="addStdLable" >
 
                                                 <input type="radio" onChange={formik.handleChange}
+                                                    defaultChecked={editData ? editData.gender : ''}
                                                     onBlur={formik.handleBlur} name="gender" value="male" defaultChecked />
                                                 {' '} Male
 
@@ -651,6 +655,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             <label className="addStdLable">
 
                                                 <input type="radio" onChange={formik.handleChange}
+                                                    defaultChecked={editData ? editData.gender : ''}
                                                     onBlur={formik.handleBlur} name="gender" value="female" />
                                                 {' '} Female
 
@@ -667,16 +672,16 @@ function AddNewStudentPage({ AddNewStudent }) {
                     {/* Personal Details */}
 
                     {/* Acadmic Details */}
-                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel2 === true} onChange={handleChange('panel2')} >
+                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel2 === true} onChange={handleChange('panel2')} >
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{ backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
+                            style={{backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
                         >
-                            <Typography style={{ color: "#414c97" }}><b>Acadmic Details </b></Typography>
+                            <Typography style={{color: "#414c97"}}><b>Acadmic Details </b></Typography>
                         </AccordionSummary>
-                        <AccordionDetails style={{ backgroundColor: '#F4F7FC', padding: '15px' }}>
+                        <AccordionDetails style={{backgroundColor: '#F4F7FC',padding: '15px'}}>
                             <Typography component={'div'}>
 
                                 <div className='row m-1'>
@@ -724,7 +729,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             onBlurCapture={getCourseFees}
                                             onChange={formik.handleChange} className={formik.touched.streamName ? `form-select ${formik.errors.streamName ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
                                             <option value=''>Select branch</option>
-                                            {branchNames.map((ele, i) => {
+                                            {branchNames.map((ele,i) => {
                                                 return (
                                                     <option key={i} value={ele.subjects}>{ele.subjects}</option>
                                                 )
@@ -791,7 +796,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             name="percent12"
                                             type="text"
                                             format="##%"
-                                            mask={['X', 'X', '%']}
+                                            mask={['X','X','%']}
                                             placeholder="XX%"
 
                                             className={formik.touched.percent12 ? `form-control ${formik.errors.percent12 ? "invalid" : ""}` : 'form-control'}
@@ -850,7 +855,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             type="text"
                                             className={formik.touched.percent10 ? `form-control ${formik.errors.percent10 ? "invalid" : ""}` : 'form-control'}
                                             format="##%"
-                                            mask={['X', 'X', '%']}
+                                            mask={['X','X','%']}
                                             placeholder="XX%"
 
                                         />
@@ -871,19 +876,19 @@ function AddNewStudentPage({ AddNewStudent }) {
                     {/* Acadmic Details */}
 
                     {/* Fees Details */}
-                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel3 === true} onChange={handleChange('panel3')}>
+                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel3 === true} onChange={handleChange('panel3')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{ backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
+                            style={{backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
                         >
-                            <Typography style={{ color: "#414c97" }}><b>Fees Details </b></Typography>
+                            <Typography style={{color: "#414c97"}}><b>Fees Details </b></Typography>
                         </AccordionSummary>
-                        <AccordionDetails style={{ backgroundColor: '#F4F7FC', padding: '15px' }}>
+                        <AccordionDetails style={{backgroundColor: '#F4F7FC',padding: '15px'}}>
                             <Typography component={'div'}>
                                 <div className='row m-1'>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">Registration Fees*</label>  <input
                                             name="regisrationFees"
                                             value={formik.values.regisrationFees}
@@ -902,7 +907,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             ""
                                         )}
                                     </div>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">Course Fees*</label> <input
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
@@ -921,11 +926,11 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             ""
                                         )}
                                     </div>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">First Installment*</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.firstInstallment = parseInt(formik.values.firstInstallment?.toString().replace(/,/g, '').replace('₹', ''))}
+                                            value={formik.values.firstInstallment = parseInt(formik.values.firstInstallment?.toString().replace(/,/g,'').replace('₹',''))}
                                             name="firstInstallment"
                                             className={formik.touched.firstInstallment ? `form-control ${formik.errors.firstInstallment ? "invalid" : ""}` : 'form-control'}
                                             placeholder="First Installment"
@@ -941,7 +946,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             ""
                                         )}
                                     </div>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">First Installment Date*</label>  <input
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
@@ -961,7 +966,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                     </div>
                                 </div>
                                 <div className='row m-1'>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">Scheme Fees*</label>
                                         <select name="feesScheme" value={formik.values.feesScheme} onChange={formik.handleChange}
                                             onBlur={formik.handleBlur} className={formik.touched.feesScheme ? `form-select ${formik.errors.feesScheme ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
@@ -979,7 +984,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             ""
                                         )}
                                     </div>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         {/* <label className="addStdLable" htmlFor="">Course* Fees</label> <input
                              onChange={formik.handleChange}
                              onBlur={formik.handleBlur}
@@ -990,11 +995,11 @@ function AddNewStudentPage({ AddNewStudent }) {
                                 placeholder="Course Fees"
                             /> */}
                                     </div>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">Second Installment*</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.feesScheme === "oneShot" ? formik.values.secondInstallment = 0 : formik.values.secondInstallment = parseInt(formik.values.secondInstallment?.toString().replace(/,/g, '').replace('₹', ''))}
+                                            value={formik.values.feesScheme === "oneShot" ? formik.values.secondInstallment = 0 : formik.values.secondInstallment = parseInt(formik.values.secondInstallment?.toString().replace(/,/g,'').replace('₹',''))}
                                             name="secondInstallment"
                                             className={formik.touched.secondInstallment ? `form-control ${formik.errors.secondInstallment ? "invalid" : ""}` : 'form-control'}
                                             placeholder="Second Installment"
@@ -1011,7 +1016,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             ""
                                         )}
                                     </div>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">Second Installment Date*</label>  <input
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
@@ -1033,7 +1038,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                 </div>
 
                                 <div className='row m-1'>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="postmatricScolarship">Postmatric ScolarShip*</label>
                                         <select
                                             name="postmatricScolarship"
@@ -1056,7 +1061,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                         )}
 
                                     </div>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">GKB ScolarShip*</label>
                                         <select name="gkbScolarship" className={formik.touched.gkbScolarship ? `form-select ${formik.errors.gkbScolarship ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02"
                                             value={formik.values.gender === "male" ? formik.values.gkbScolarship = "no" : formik.values.gkbScolarship}
@@ -1074,11 +1079,11 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             ""
                                         )}
                                     </div>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">Third Installment*</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.feesScheme === "oneShot" ? formik.values.thirdInstallment = 0 : formik.values.thirdInstallment = parseInt(formik.values.thirdInstallment?.toString().replace(/,/g, '').replace('₹', ''))}
+                                            value={formik.values.feesScheme === "oneShot" ? formik.values.thirdInstallment = 0 : formik.values.thirdInstallment = parseInt(formik.values.thirdInstallment?.toString().replace(/,/g,'').replace('₹',''))}
                                             name="thirdInstallment"
                                             className={formik.touched.thirdInstallment ? `form-control ${formik.errors.thirdInstallment ? "invalid" : ""}` : 'form-control'}
                                             placeholder="Third Installment"
@@ -1095,7 +1100,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                             ""
                                         )}
                                     </div>
-                                    <div className="col" style={{ marginTop: '7px' }}>
+                                    <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">Third Installment Date*</label>  <input
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
@@ -1119,7 +1124,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                 <div className="row m-1">
                                     <div className="col-9">
                                         <div className='row'>
-                                            <div className="col" style={{ marginTop: '7px' }}>
+                                            <div className="col" style={{marginTop: '7px'}}>
                                                 <label className="addStdLable" htmlFor="">Postmatric Owner*</label>
                                                 <select name="postmatricOwner" className={formik.touched.postmatricOwner ? `form-select ${formik.errors.postmatricOwner ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02"
                                                     value={formik.values.postmatricScolarship === "no" ? formik.values.postmatricOwner = "self" : formik.values.postmatricOwner}
@@ -1137,7 +1142,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                                     ""
                                                 )}
                                             </div>
-                                            <div className="col" style={{ marginTop: '7px' }}>
+                                            <div className="col" style={{marginTop: '7px'}}>
                                                 <label className="addStdLable" htmlFor="">GKB Owner*</label>
                                                 <select name="gkbOwner" className={formik.touched.gkbOwner ? `form-select ${formik.errors.gkbOwner ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02"
                                                     value={formik.values.gkbScolarship === "no" ? formik.values.gkbOwner = "self" : formik.values.gkbOwner}
@@ -1155,12 +1160,12 @@ function AddNewStudentPage({ AddNewStudent }) {
                                                     ""
                                                 )}
                                             </div>
-                                            <div className="col" style={{ marginTop: '7px' }}>
+                                            <div className="col" style={{marginTop: '7px'}}>
                                                 <label className="addStdLable" htmlFor="">Total Payable Amount*</label>  <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={formik.values.payableAmmount = parseInt(formik.values.firstInstallment?.toString().replace(/,/g, '').replace('₹', '')) + parseInt(formik.values.secondInstallment?.toString().replace(/,/g, '').replace('₹', '')) + parseInt(formik.values.thirdInstallment?.toString().replace(/,/g, '').replace('₹', ''))
-                                                        + parseInt(formik.values.ScholarshipAmount?.toString().replace(/,/g, '').replace('₹', ''))}
+                                                    value={formik.values.payableAmmount = parseInt(formik.values.firstInstallment?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.secondInstallment?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.thirdInstallment?.toString().replace(/,/g,'').replace('₹',''))
+                                                        + parseInt(formik.values.ScholarshipAmount?.toString().replace(/,/g,'').replace('₹',''))}
                                                     name="payableAmmount"
                                                     className={formik.touched.payableAmmount ? `form-control ${formik.errors.payableAmmount ? "invalid" : ""}` : 'form-control'}
                                                     placeholder="Payable Amount"
@@ -1180,11 +1185,11 @@ function AddNewStudentPage({ AddNewStudent }) {
 
                                         </div>
                                         <div className='row '>
-                                            <div className="col" style={{ marginTop: '7px' }}>
+                                            <div className="col" style={{marginTop: '7px'}}>
                                                 <label className="addStdLable" htmlFor="">Postmatric Amount*</label>  <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={formik.values.category === "Gen" ? formik.values.postmatricAmount = 0 : formik.values.postmatricOwner === "self" ? formik.values.postmatricAmount = 0 : formik.values.postmatricAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g, '').replace('₹', ''))}
+                                                    value={formik.values.category === "Gen" ? formik.values.postmatricAmount = 0 : formik.values.postmatricOwner === "self" ? formik.values.postmatricAmount = 0 : formik.values.postmatricAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g,'').replace('₹',''))}
                                                     name="postmatricAmount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
@@ -1200,11 +1205,11 @@ function AddNewStudentPage({ AddNewStudent }) {
                                                     ""
                                                 )}
                                             </div>
-                                            <div className="col" style={{ marginTop: '7px' }}>
+                                            <div className="col" style={{marginTop: '7px'}}>
                                                 <label className="addStdLable" htmlFor="">GKB Amount*</label> <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={formik.values.gender === 'male' ? formik.values.GKBAmount = 0 : formik.values.gkbOwner === "self" ? formik.values.GKBAmount = 0 : formik.values.GKBAmount = parseInt(formik.values.GKBAmount?.toString().replace(/,/g, '').replace('₹', ''))}
+                                                    value={formik.values.gender === 'male' ? formik.values.GKBAmount = 0 : formik.values.gkbOwner === "self" ? formik.values.GKBAmount = 0 : formik.values.GKBAmount = parseInt(formik.values.GKBAmount?.toString().replace(/,/g,'').replace('₹',''))}
                                                     name="GKBAmount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
@@ -1221,11 +1226,11 @@ function AddNewStudentPage({ AddNewStudent }) {
                                                     ""
                                                 )}
                                             </div>
-                                            <div className="col" style={{ marginTop: '7px' }}>
+                                            <div className="col" style={{marginTop: '7px'}}>
                                                 <label className="addStdLable" htmlFor="">Scholarship Amount*</label> <NumberFormat
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={formik.values.ScholarshipAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g, '').replace('₹', '')) + parseInt(formik.values.GKBAmount?.toString().replace(/,/g, '').replace('₹', ''))}
+                                                    value={formik.values.ScholarshipAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g,'').replace('₹','')) + parseInt(formik.values.GKBAmount?.toString().replace(/,/g,'').replace('₹',''))}
                                                     name="ScholarshipAmount"
                                                     thousandSeparator={true}
                                                     thousandsGroupStyle='lakh'
@@ -1271,16 +1276,16 @@ function AddNewStudentPage({ AddNewStudent }) {
                     {/* Fees Details */}
 
                     {/* Bus Details */}
-                    <Accordion className="my-2" style={{ boxShadow: "none" }} expanded={expanded.panel4 === true} onChange={handleChange('panel4')}>
+                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel4 === true} onChange={handleChange('panel4')}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{ backgroundColor: '#E6E9F4', borderBottom: '2px solid orange', maxHeight: "50px", minHeight: "50px" }}
+                            style={{backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
                         >
-                            <Typography style={{ color: "#414c97" }}><b>Bus Details</b></Typography>
+                            <Typography style={{color: "#414c97"}}><b>Bus Details</b></Typography>
                         </AccordionSummary>
-                        <AccordionDetails style={{ backgroundColor: '#F4F7FC', padding: '15px' }}>
+                        <AccordionDetails style={{backgroundColor: '#F4F7FC',padding: '15px'}}>
                             <Typography component={'div'}>
                                 <div className='row m-1'>
                                     <div className="col-3">
@@ -1306,7 +1311,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                         <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
                                             onBlur={formik.handleBlur} className={formik.touched.trackName ? `form-select ${formik.errors.trackName ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
                                             <option value='0'>Select Track</option>
-                                            {trackNames.map((ele, i) => {
+                                            {trackNames.map((ele,i) => {
                                                 return (
                                                     <option key={i} value={ele.trackname}>{ele.trackname}</option>
                                                 )
@@ -1338,17 +1343,25 @@ function AddNewStudentPage({ AddNewStudent }) {
                         left: "80%",
                         top: "90%",
                         zindex: "5000",
-                    }}  >
+                    }}  >{editData ?
                         <button className="btn btn-sm btn-warning text-light fw-bold" type="submit"
                             style={{
                                 width: "220px",
                                 maxHeight: '29PX',
                             }}
-                        >Submit</button>
+                        >Update</button> :
+                        <button className="btn btn-sm btn-warning text-light fw-bold" type="submit"
+                            style={{
+                                width: "220px",
+                                maxHeight: '29PX',
+                            }}
+                        >Submit</button>}
                     </div>
 
                 </form>
             </div>
+
+           
 
         </>
     );
@@ -1369,7 +1382,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 //Connecting the component to our store
-export default connect(mapStateToProps, mapDispatchToProps)(AddNewStudentPage);
+export default connect(mapStateToProps,mapDispatchToProps)(AddNewStudentPage);
 
 // Busfee: 0
 // Firstinstallment: 8500
@@ -1417,3 +1430,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(AddNewStudentPage);
 // trackName: "Sandalpur"
 // village: "sandalpur"
 // year: "II"
+

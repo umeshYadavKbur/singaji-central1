@@ -97,6 +97,7 @@ function StudentProfile() {
     var StudentPhoto = StudentProfileData.accountInfo.photo
 
     const initialValues = {
+
         studentName: StudentName,
         fatherName: StudentProfileData.accountInfo.fathersName,
         contactNumber: StudentProfileData.accountInfo.mobile,
@@ -107,6 +108,19 @@ function StudentProfile() {
         aadharNumber: StudentProfileData.accountInfo.aadarNo,
         year: StudentProfileData.accountInfo.year,
         EnrollmentNumber: '',
+
+        remark:   StudentProfileData?StudentProfileData.accountInfo.remark:'',
+        ThirdinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.ThirdinstallmentDate:'',
+        Thirdinstallment: StudentProfileData ? StudentProfileData.accountInfo.Thirdinstallment:'',
+        SecondinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.SecondinstallmentDate:'',
+        Secondinstallment: StudentProfileData ? StudentProfileData.accountInfo.Secondinstallment:'',
+        FirstinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.FirstinstallmentDate:'',
+        Firstinstallment: StudentProfileData ? StudentProfileData.accountInfo.Firstinstallment:'',
+        GKB_Amount: StudentProfileData ? StudentProfileData.accountInfo.GKB_Amount:'',
+        Busfee: StudentProfileData ? StudentProfileData.accountInfo.Busfee:'',
+        reg_Fees: StudentProfileData ? StudentProfileData.accountInfo.reg_Fees:'',
+        Tutionfee: StudentProfileData ? StudentProfileData.accountInfo.Tutionfee:'',
+        feesScheme: StudentProfileData ? StudentProfileData.accountInfo.feesScheme:'',
 
     }
     const validationSchema = Yup.object({
@@ -468,19 +482,19 @@ function StudentProfile() {
                         <div className="row">
                             <div className="col">
                                 <label htmlFor="">Account status</label>
-                                <input type="text" className='form-control' placeholder='Account status' />
+                                <input name="harsh" onChange={formik.handleChange} value={formik.values.harsh} type="text" className='form-control' placeholder='Account status' />
                             </div>
                             <div className="col">
                                 <label htmlFor="">Fees Scheme</label>
-                                <input type="text" className='form-control' placeholder='Fees Scheme' />
+                                <input name="feesScheme" onChange={formik.handleChange} value={formik.values.feesScheme} type="text" className='form-control' placeholder='Fees Scheme' />
                             </div>
                             <div className="col">
                                 <label htmlFor="">Course Fees</label>
-                                <input type="number" className='form-control' placeholder='Course Fees' />
+                                <input name="Tutionfee" onChange={formik.handleChange} value={formik.values.Tutionfee} type="number" className='form-control' placeholder='Course Fees' />
                             </div>
                             <div className="col">
                                 <label htmlFor="">Scolarship Type</label>
-                                <input type="number" className='form-control' placeholder='Father contact' />
+                                <input name="harsh" onChange={formik.handleChange} value={formik.values.harsh} type="number" className='form-control' placeholder='Father contact' />
                             </div>
                         </div>
 
@@ -488,53 +502,53 @@ function StudentProfile() {
                         <div className="row">
                             <div className="col">
                                 <label htmlFor="">Registration Amount</label>
-                                <input type="text" className='form-control' placeholder='Registration Amount' />
+                                <input name="reg_Fees" onChange={formik.handleChange} value={formik.values.reg_Fees} type="text" className='form-control' placeholder='Registration Amount' />
                             </div>
                             <div className="col">
                                 <label htmlFor="">Registration Number</label>
-                                <input type="text" className='form-control' placeholder='Registration number ' />
+                                <input name="harsh" onChange={formik.handleChange} value={formik.values.harsh} type="text" className='form-control' placeholder='Registration number ' />
                             </div>
                             <div className="col">
                                 <label htmlFor="">Bus Fees</label>
-                                <input type="number" className='form-control' placeholder='Bus Fees' />
+                                <input name="Busfee" onChange={formik.handleChange} value={formik.values.Busfee} type="number" className='form-control' placeholder='Bus Fees' />
                             </div>
                             <div className="col">
                                 <label htmlFor="">GKB Amount</label>
-                                <input type="number" className='form-control' placeholder='Father contact' />
+                                <input name="GKB_Amount" onChange={formik.handleChange} value={formik.values.GKB_Amount} type="number" className='form-control' placeholder='Father contact' />
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col">
                                 <label htmlFor="">First Installment</label>
-                                <input type="number" className='form-control' placeholder='First Installment' />
+                                <input name="Firstinstallment" onChange={formik.handleChange} value={formik.values.Firstinstallment} type="number" className='form-control' placeholder='First Installment' />
                             </div>
                             <div className="col">
                                 <label htmlFor="">First Installment date</label>
-                                <input type="date" className='form-control' placeholder='First Installment date' />
+                                <input name="FirstinstallmentDate" onChange={formik.handleChange} value={formik.values.FirstinstallmentDate} type="date" className='form-control' placeholder='First Installment date' />
                             </div>
                             <div className="col">
                                 <label htmlFor="">Second Installment</label>
-                                <input type="number" className='form-control' placeholder='Second Installment' />
+                                <input name="Secondinstallment" onChange={formik.handleChange} value={formik.values.Secondinstallment} type="number" className='form-control' placeholder='Second Installment' />
                             </div>
                             <div className="col">
                                 <label htmlFor="">Second Installment date</label>
-                                <input type="date" className='form-control' placeholder='Second Installment date' />
+                                <input name="SecondinstallmentDate" onChange={formik.handleChange} value={formik.values.SecondinstallmentDate} type="date" className='form-control' placeholder='Second Installment date' />
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col">
                                 <label htmlFor="">Third Installment</label>
-                                <input type="number" className='form-control' placeholder='Third Installment' />
+                                <input name="Thirdinstallment" onChange={formik.handleChange} value={formik.values.Thirdinstallment} type="number" className='form-control' placeholder='Third Installment' />
                             </div>
                             <div className="col">
                                 <label htmlFor="">Third Installment date</label>
-                                <input type="date" className='form-control' placeholder='Third Installment date' />
+                                <input name="ThirdinstallmentDate" onChange={formik.handleChange} value={formik.values.ThirdinstallmentDate} type="date" className='form-control' placeholder='Third Installment date' />
                             </div>
                             <div className="col">
                                 <label htmlFor="">Remark</label>
-                                <input type="number" className='form-control' placeholder='Remark' />
+                                <input name="remark" onChange={formik.handleChange} value={formik.values.remark} type="text" className='form-control' placeholder='Remark' />
                             </div>
                             <div className="col-3  my-4 p-1 ps-2">
                                 <div>
