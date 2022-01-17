@@ -89,14 +89,19 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                                 `You want to ${original.is_active === 0 ? 'Active' : 'Deactive'} this admin`,
                             // icon: 'warning',
                             showCancelButton: true,
-                            // showCancelButton: true,
-                            cancelButtonText: 'Cancel',
-                            confirmButtonText: `${original.is_active === 0 ? 'Active' : 'Deactive'}`,
+                            showConfirmButton: true,
+                            // cancelButtonText: 'Cancel',
+                            cancelButtonText: `${original.is_active === 0 ? 'Active' : 'Deactive'} `,
+                            confirmButtonText: `${original.is_active === 0 ? 'Active' : 'Deactive'} `,
+                            // confirmButtonText:'Deactive',
+                            reverseButtons: true,
+                           
                             showCloseButton: true,
                             cancelButtonColor: 'gray',
                             confirmButtonColor: "#4f83df",
+                            
                             showLoaderOnDeny: true,
-                            reverseButtons: true,
+                            
                             showClass: {
                                 backdrop: 'swal2-noanimation', // disable backdrop animation
                                 popup: '',                     // disable popup animation

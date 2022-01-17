@@ -16,8 +16,8 @@ import NumberFormat from 'react-number-format';
 import allUrls from '../../redux/constants/url'
 
 function AddNewStudentPage({AddNewStudent}) {
-    var editData = JSON.parse(localStorage.getItem('userEdit'))
-    console.log('editdata',editData);
+    var editData = JSON.parse(localStorage.getItem('RegistrationEdit'))
+    // console.log('editdata',editData);
     // var editData = ''
     // console.log(editData);
 
@@ -52,7 +52,7 @@ function AddNewStudentPage({AddNewStudent}) {
         callingFun();
 
         return () => {
-            localStorage.removeItem('userEdit')
+            localStorage.removeItem('RegistrationEdit')
         }
     },[]);
 
@@ -525,7 +525,7 @@ function AddNewStudentPage({AddNewStudent}) {
                                             // value={formik.values.village}
                                             name="village"
                                             className={formik.touched.village ? ` ${formik.errors.village ? "invalid" : ""}` : ''}
-                                            defaultValue={{label: editData ? editData.village : '',value: editData ? editData.village : ''}}
+                                            defaultValue={ editData?{label: editData.village ,value: editData.village}:''}
                                             placeholder="select Village"
                                         />
                                         {formik.errors.village && formik.touched.village ? (
@@ -643,19 +643,19 @@ function AddNewStudentPage({AddNewStudent}) {
 
                                     <div className="col">
                                         <label className="addStdLable" >Gender</label>
-                                        <div>
+                                        <div className='mt-1'>
                                             <label className="addStdLable" >
 
                                                 <input type="radio" onChange={formik.handleChange}
                                                     defaultChecked={editData ? editData.gender : ''}
-                                                    onBlur={formik.handleBlur} name="gender" value="male" defaultChecked />
+                                                    onBlur={formik.handleBlur} name="gender" value="male" defaultChecked={editData ? editData.gender === "male" ? true : false : true} />
                                                 {' '} Male
 
                                             </label>{' '}
                                             <label className="addStdLable">
 
                                                 <input type="radio" onChange={formik.handleChange}
-                                                    defaultChecked={editData ? editData.gender : ''}
+                                                    defaultChecked={editData ? editData.gender === "female"?true:false : false}
                                                     onBlur={formik.handleBlur} name="gender" value="female" />
                                                 {' '} Female
 

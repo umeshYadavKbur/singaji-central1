@@ -243,7 +243,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
         // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
         <img src={Edit_icon} alt="Edit" onClick={() => {
           navigate("/admin_dashboard/addnewstudent");
-          localStorage.setItem('userEdit',JSON.stringify(original)) }} />
+          localStorage.setItem('RegistrationEdit',JSON.stringify(original)) }} />
 
       )
     }
