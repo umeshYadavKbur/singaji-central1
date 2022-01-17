@@ -16,7 +16,7 @@ import axios from 'axios'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import * as Yup from "yup";
-
+import AvatarImg from '../../assests/image/Avtar.jpeg'
 
 
 const StyledModal = styled(ModalUnstyled)`
@@ -95,6 +95,7 @@ function StudentProfile() {
     var StudentName = StudentProfileData.accountInfo.firstName + ' ' + StudentProfileData.accountInfo.lastName
     var StudentClassName = (StudentProfileData.accountInfo.branch).toUpperCase()
     var StudentPhoto = StudentProfileData.accountInfo.photo
+    // console.log(StudentPhoto);
 
     const initialValues = {
 
@@ -193,27 +194,30 @@ function StudentProfile() {
         <div>
 
 
-            <div className="row my-3 me-3 ms-2" style={{ backgroundColor: '#DDDDDD', borderRadius: '8px' }}>
-                <div className="col-3 my-5">
-                    {StudentPhoto === ' ' ? <img style={{ borderRadius: "50px", height: "100px", width: '100px', marginLeft: '50px', backgroundColor: '#DDDDDD' }} src="https://ssism.s3.us-east-2.amazonaws.com/avtar.jpg" alt="avtar_photo" /> : <img style={{ borderRadius: "50px", height: "100px", width: '100px', marginLeft: '50px', backgroundColor: '#DDDDDD' }} src={StudentPhoto} alt="avtar_photo" />
+            <div className="row my-3 me-3 ms-2" style={{backgroundColor: '#E6E9F4', borderRadius: '8px' }}>
+                <div className="col-2 my-5">
+                    {StudentPhoto.includes('/null')?
+                     <img style={{borderRadius: "50px",height: "100px",width: '100px',marginLeft: '50px',backgroundColor: '#DDDDDD'}} src={AvatarImg} alt="avtar_photo" /> 
+                    :
+                     <img style={{ borderRadius: "50px", height: "100px", width: '100px', marginLeft: '50px', backgroundColor: '#DDDDDD' }} src={StudentPhoto} alt="avtar_photo" />
                     }
 
                     <img src={Edit_icon} alt='edit_icon' className='mt-5' style={{ marginLeft: "-10px", height: '20px', width: '20px' }} />
 
                 </div>
                 <div className="col-3">
-                    <div className='mt-3' style={{ color: '#5A607F' }}>
+                    <div className='mt-5' style={{ color: '#5A607F' }}>
                         <span className='fw-bold' style={{ fontSize: '22px' }}>{StudentName}</span>
                         <br />
                         {`${StudentClassName} (${StudentProfileData.accountInfo.joinBatch + '-' + (parseInt(StudentProfileData.accountInfo.joinBatch) + 3)})`}
                     </div>
                     <div className="btn-group" role="group" aria-label="Basic example">
-                        <button onClick={() => { navigate("feesrecipt"); }} className="btn  btn-warning text-light fw-bold" type="submit">Reciept</button>
+                        <button style={{backgroundColor: '#ff9707'}} onClick={() => { navigate("feesrecipt"); }} className="btn  btn-warning text-light fw-bold" type="submit">Reciept</button>
 
-                        <button className="btn btn-outline-info fw-bold" type="submit" onClick={() => { navigate("uploaddocument"); }}>Upload Document</button>
+                        <button style={{color: '#0dcaf0',backgroundColor:'#E6E9F4'}} className="btn btn-outline-info fw-bold" type="submit" onClick={() => { navigate("uploaddocument"); }}>Upload Document</button>
                     </div>
                 </div>
-                <div className="col-6 d-flex justify-content-end">
+                <div className="col-7 d-flex justify-content-end">
                     <img src={student_Profile__RocketImg} className='mt-4 ' alt="rocket" />
                     <img src={Edit_icon} onClick={handleOpen} className='mb-1 ' alt="rocket" style={{ height: '40px', width: '40px', alignSelf: 'self-end', cursor: 'pointer' }} />
                     {/* <img src={Edit_icon} alt='edit_icon'  /> */}
@@ -416,6 +420,7 @@ function StudentProfile() {
                                                 onBlur={formik.handleBlur}
                                                 name="village"
                                                 className={formik.touched.village ? ` ${formik.errors.village ? "invalid" : ""}` : ''}
+                                                defaultValue={StudentProfileData ? {label: StudentProfileData.accountInfo.village,value: StudentProfileData.accountInfo.village} : ''}
                                                 placeholder="Village"
                                             />
                                             {formik.errors.village && formik.touched.village ? (
@@ -450,11 +455,10 @@ function StudentProfile() {
 
 
                                     </div>
-                                    <div className="d-flex mt-2 m-1">
-                                        <div className="col"></div>
-                                        <div className="col">
-                                            <button type='submit' onClick={handleClose} className='btn btn-lg btn-light'>Cancel</button>
-                                            <button type='submit' className='btn btn-lg btn-primary' >Update</button>
+                                    <div className="d-flex justify-content-end mt-3 m-1">
+                                        <div className='me-3'>
+                                            <button style={{width: '116px'}} type='submit' onClick={handleClose} className='btn  btn-light m-1'>Cancel</button>
+                                            <button style={{width: '116px'}} type='submit' className='btn  btn-primary m-1' >Update</button>
                                         </div></div>
                                 </div>
                             </div>
@@ -550,11 +554,18 @@ function StudentProfile() {
                                 <label htmlFor="">Remark</label>
                                 <input name="remark" onChange={formik.handleChange} value={formik.values.remark} type="text" className='form-control' placeholder='Remark' />
                             </div>
-                            <div className="col-3  my-4 p-1 ps-2">
-                                <div>
-                                    <button className="btn btn-sm btn-primary text-light fw-bold m-1 " style={{ width: "250px", height: "40px" }} type="submit">Update</button></div>
+                            <div className="col-3">
+                               
                             </div>
                         </div>
+
+                        <div className="d-flex  justify-content-end my-4" >
+                            <div className="me-2">
+                                
+                                    <button className="btn btn-sm btn-primary text-light fw-bold m-1 " style={{width: "250px",height: "40px"}} type="submit">Update</button>
+                            </div>
+                        </div>
+
 
                     </Typography>
                 </AccordionDetails>

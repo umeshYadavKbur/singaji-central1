@@ -35,6 +35,10 @@ import { fetchStudentAccountData, getDailyReport, changeDailyReport, accountActi
 import SkeletonColor from '../../../helpers/Skeletrone';
 import Pagination from "../../assests/common/Pagination";
 import Loader from "../../assests/common/Loader";
+import AvatarImg from '../../assests/image/Avtar.jpeg'
+
+
+
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -267,9 +271,11 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             header: "Profile",
             accessor: "photo",
 
-            Cell: ({ row: { original, index } }) => (
+            Cell: ({ row: { original, index } }) =>
+                // console.log("original.photo",original.photo)
+               (
                 <div className="d-flex m-0 flex-column justify-content-start">
-                    <img
+                    {original.photo ?<img
                         alt="profile"
                         style={{ cursor: "pointer" }}
                         onClick={() => {
@@ -277,10 +283,24 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                         }}
                         className="mx-auto"
                         src={original.photo}
+                      
                         width={50}
-                        textColor="#fff"
+                        
                         text="Image"
-                    />
+                        style={{borderRadius:'25px'}}
+                    />:
+                    <img
+                        alt="profile"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                            getAllInfoOfStudent(original, false)
+                        }}
+                            className="mx-auto"
+                            src={AvatarImg}
+                        width={50}
+                        
+                        text="Image"
+                    />}
                 </div >
             ),
             Filter: "",
