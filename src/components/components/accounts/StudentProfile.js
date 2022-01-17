@@ -211,7 +211,7 @@ function StudentProfile() {
                         <br />
                         {`${StudentClassName} (${StudentProfileData.accountInfo.joinBatch + '-' + (parseInt(StudentProfileData.accountInfo.joinBatch) + 3)})`}
                     </div>
-                    <div className="btn-group" role="group" aria-label="Basic example">
+                    <div className="btn-group mt-2" role="group" aria-label="Basic example">
                         <button style={{backgroundColor: '#ff9707'}} onClick={() => { navigate("feesrecipt"); }} className="btn  btn-warning text-light fw-bold" type="submit">Reciept</button>
 
                         <button style={{color: '#0dcaf0',backgroundColor:'#E6E9F4'}} className="btn btn-outline-info fw-bold" type="submit" onClick={() => { navigate("uploaddocument"); }}>Upload Document</button>
