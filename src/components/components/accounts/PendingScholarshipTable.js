@@ -27,6 +27,7 @@ import { ToastContainer } from "react-toastify";
 import Pagination from "../../assests/common/Pagination";
 import { GlobalFilter } from "../tableComponents/GlobalFilter";
 import { Tooltip, Whisper } from "rsuite";
+import rightArrow from '../../assests/image/right_arrow_icon.svg'
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
   const arr = [];
@@ -106,14 +107,18 @@ function SelectColumnFilter({
           }
           placement="right"
         >
-          <div className="btn-group dropright">
+          <div className="btn-group">
             <button
               type="button"
-              className="btn filter_btn  dropdown-toggle"
+              className="btn filter_btn"
               data-bs-toggle="collapse"
             >
               {id}
             </button>
+            <img src={rightArrow} width="6px" style={{
+                            marginTop: "4px",
+                            marginRight: '10px'
+                        }} />
           </div>
         </CPopover>
       </div>

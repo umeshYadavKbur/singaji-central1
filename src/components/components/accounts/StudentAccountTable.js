@@ -36,6 +36,7 @@ import SkeletonColor from '../../../helpers/Skeletrone';
 import Pagination from "../../assests/common/Pagination";
 import Loader from "../../assests/common/Loader";
 import AvatarImg from '../../assests/image/Avtar.jpeg'
+import rightArrow from '../../assests/image/right_arrow_icon.svg'
 
 
 
@@ -77,6 +78,34 @@ function SelectColumnFilter({
     else if (id === 'trackName') offsetObj = [90, 10]
     else if (id === 'year') offsetObj = [33, 10]
 
+    let name = id;
+
+    switch (id) {
+        case 'is_active':
+            name = 'Student Status';
+            break;
+        case 'year':
+            name = 'Select Year';
+            break;
+
+        case 'branch':
+            name = 'Select Class';
+            break;
+
+        case 'joinBatch':
+            name = 'Select Session';
+            break;
+        case 'trackName':
+            name = 'Select Track';
+            break;
+        case 'gender':
+            name = 'Select Gender';
+            break;
+
+
+        default:
+            break;
+    }
 
     return (
         <Fragment>
@@ -91,6 +120,17 @@ function SelectColumnFilter({
                         <div className="">
 
                             {options.map((option, i) => {
+                                let option_label = option;
+
+                                if (id === 'is_active') {
+                                    if (option === 'true')
+                                        option_label = 'Active'
+                                    else
+                                        option_label = 'Deactive'
+
+
+                                }
+
                                 return (
 
                                     <Fragment key={i}>
@@ -115,7 +155,8 @@ function SelectColumnFilter({
                                                 htmlFor={option}
                                                 className="ml-2 font-medium text-gray-700"
                                             >
-                                                {option}
+                                                {option_label}
+
                                             </label>
                                         </div>
                                     </Fragment>
@@ -126,15 +167,20 @@ function SelectColumnFilter({
                     placement="right"
 
                 >
-                    <div className="btn-group dropright">
+                    <div className="btn-group ">
                         <button
 
                             onClick={(e) => { e.preventDefault() }}
-                            className="btn filter_btn  dropdown-toggle"
+                            className="btn filter_btn"
+                            
 
                         >
-                            {id}
+                            {name}
                         </button>
+                        <img src={rightArrow} width="6px" style={{
+                            marginTop: "4px",
+                            marginRight: '10px'
+                        }} />
                     </div>
                 </CPopover>
             </div >
@@ -333,6 +379,17 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             accessor: 'fathersName',
             Filter: "",
             filter: "",
+        }, {
+            header: () => <span style={{ display: 'none', width: '0px' }}></span>,
+            accessor: "is_active",
+            Filter: SelectColumnFilter,
+            filter: MultipleFilter,
+            Cell: ({ row: { original } }) => (
+                <>
+                </>
+            ),
+            width: 0
+
         },
 
         {
@@ -346,12 +403,36 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             Filter: SelectColumnFilter,
             filter: MultipleFilter,
         },
-       
+        {
+            header: () => <span style={{ display: 'none', width: '0px' }}></span>,
+            accessor: "joinBatch",
+            Filter: SelectColumnFilter,
+            filter: MultipleFilter,
+            Cell: ({ row: { original } }) => (
+                <>
+                </>
+            ),
+            width: 0
+
+        },
         {
             header: "Mobile no",
             accessor: "mobile",
             Filter: "",
             filter: "",
+        }
+        ,
+        {
+            header: () => <span style={{ display: 'none', width: '0px' }}></span>,
+            accessor: "gender",
+            Filter: SelectColumnFilter,
+            filter: MultipleFilter,
+            Cell: ({ row: { original } }) => (
+                <>
+                </>
+            ),
+            width: 0
+
         },
         {
             header: 'Village',
@@ -360,7 +441,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             filter: "",
         },
         {
-            header: () => <span style={{ display: 'none',width:'0px' }}></span>,
+            header: () => <span style={{ display: 'none', width: '0px' }}></span>,
             accessor: "trackName",
             Filter: SelectColumnFilter,
             filter: MultipleFilter,
@@ -390,8 +471,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             Filter: "",
             filter: "",
         },
-         {
-            header: () => <span style={{ display: 'none',width:'0px' }}></span>,
+        {
+            header: () => <span style={{ display: 'none', width: '0px' }}></span>,
             accessor: "year",
             Filter: SelectColumnFilter,
             filter: MultipleFilter,
@@ -402,7 +483,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             width: 0
 
         },
-         
+
         {
             header: 'Pending Fee',
             accessor: 'remain_Amount',
@@ -732,8 +813,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
                                         <CDropdownMenu
                                             component={"div"}
-                                            className="pt-0 filter-dropdown-menu"
+                                            className="pt-0 filter-dropdown-menu-student_account_table"
                                             placement="bottom-end"
+                                           
 
                                         >
                                             <div>

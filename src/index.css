@@ -26,14 +26,28 @@ body {
 
   position: absolute !important;
   inset: 0px auto auto 0px !important;
-  transform: translate3d(-50px, 47px, 0px) !important;
+  transform: translate3d(-77px, 47px, 0px) !important;
+  min-width: fit-content !important;
+}
+.filter-dropdown-menu-student_account_table{
+
+  position: absolute !important;
+  inset: 0px auto auto 0px !important;
+  transform: translate3d(-112px, 47px, 0px) !important;
   min-width: fit-content !important;
 }
 
 .filter_btn{
   border: none !important;
   box-shadow: none !important;
+  text-align: left !important;
+  width: 135px !important;
 }
+/* 
+.filter_btn::after{
+
+  background:url(./components/assests/image/right_arrow_icon.svg) !important;
+} */
 
 .popover-arrow{
   position: absolute !important;
