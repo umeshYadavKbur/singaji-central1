@@ -29,12 +29,12 @@ const downloadPdf = (data) => {
     doc.addImage(ssismLogo, 20, 23, 150, 48)
     doc.setFontSize(26);
     doc.setFont('Poppins', 'bold')
-    doc.text('Daily Report', (width / 2)-42, (94 / 2) + 5)
-    
+    doc.text('Daily Report', (width / 2) - 42, (94 / 2) + 5)
+
     doc.setFontSize(18);
     doc.setFont('Poppins-SemiBold', 'normal');
-    doc.text(`Print Date ${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`, (width)-150,  35)
-    doc.text(`Session    ${' '+date.getFullYear()}-${(date.getFullYear()+1)-2000}`, (width)-150, 65)
+    doc.text(`Print Date ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`, (width) - 150, 35)
+    doc.text(`Session    ${' ' + date.getFullYear()}-${(date.getFullYear() + 1) - 2000}`, (width) - 150, 65)
 
     doc.setFillColor('#F4F7FC');
     doc.rect(0, 107, width, 57, 'F');
@@ -59,22 +59,28 @@ const downloadPdf = (data) => {
 
     let yPosition = 200;
     let H = 60;
+    let footerHeight = 250;
+    let ReceivedAmount = 0;
 
- 
+
+
 
     let count = 1;
     newList.forEach((data, pageNO) => {
-      
+
 
 
         if ((pageNO + 1) > 1) {
             doc.addPage();
             yPosition = 40;
-            H = 60
+            H = 60;
+            footerHeight = 60;
+
         }
 
         data.forEach((ele, i) => {
-
+            footerHeight += H;
+            ReceivedAmount += parseInt(ele.ReceivedAmount);
             doc.text((count++).toString(), xPosition + 48 + 3, yPosition + (i * H))
             doc.text((ele.name)?.toString(), xPosition + 141, yPosition + (i * H))
             doc.text(ele.fathersName, xPosition + 309, yPosition + (i * H))
@@ -89,8 +95,9 @@ const downloadPdf = (data) => {
     })
 
     doc.setFillColor('#F4F7FC');
-    doc.rect(0, height-56, width, 56, 'F')
-    doc.text('Copy right SSISM.ORG',(width/2)-42,height-28)
+    doc.rect(0, footerHeight - 56, width, 56, 'F')
+    doc.text('Copy right SSISM.ORG', (width / 2) - 42, footerHeight - 23)
+    doc.text(ReceivedAmount.toString(), xPosition + 858, footerHeight - 23)
 
     doc.output('pdfobjectnewwindow');
 

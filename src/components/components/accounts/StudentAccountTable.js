@@ -172,7 +172,7 @@ function SelectColumnFilter({
 
                             onClick={(e) => { e.preventDefault() }}
                             className="btn filter_btn"
-                            
+
 
                         >
                             {name}
@@ -752,7 +752,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                     getBackPosition()
                                     set_is_dailyReport(false)
                                 }}
-
+                                    onOk={showDailyReport}
                                     onChange={(value) => {
 
                                         if (!value) {
@@ -815,7 +815,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                             component={"div"}
                                             className="pt-0 filter-dropdown-menu-student_account_table"
                                             placement="bottom-end"
-                                           
+
 
                                         >
                                             <div>
