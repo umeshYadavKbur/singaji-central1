@@ -329,7 +329,6 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
   ) : table_data.error ? (
     <h2>{table_data.error}</h2>
   ) : (
-    //   return (
     <>
       {table_data.secondLoading && (
         <Loader />

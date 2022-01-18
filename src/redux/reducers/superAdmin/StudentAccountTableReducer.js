@@ -1,5 +1,6 @@
 import {
   FETCH_STUDENTACCOUNT_DATA,
+  STUDENTACCOUNT_TABLE_DATA_FAIL,
   GET_DAILY_REPORT,
   CHANGE_DAILY_REPORT,
   STUDENTACCOUNT_TABLE_DATA_SUCCESS,
@@ -23,6 +24,11 @@ const StudentAccountTableReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case STUDENTACCOUNT_TABLE_DATA_FAIL:
+      return {
+        ...state,
+        loading: false,
       };
 
     case STUDENTACCOUNT_TABLE_DATA_SUCCESS:

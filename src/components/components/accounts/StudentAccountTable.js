@@ -728,7 +728,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     </div>
                 </div>
                 <table {...getTableProps()} id="customers">
-
                     <thead style={{ position: 'sticky', top: '212px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -760,19 +759,29 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                             </tr>
                         ))}
                     </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {page.map((row) => {
-                            prepareRow(row);
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => {
+                    <tbody {...getTableBodyProps()}
+                        style={{ position: 'sticky', width: '100%', backgroundColor: 'red', height: '450px'}}
+                    >
+                        {
+                            studentData ?
+                                (<>
+                                    {page.map((row) => {
+                                        prepareRow(row);
                                         return (
-                                            <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                            <tr {...row.getRowProps()}>
+                                                {row.cells.map((cell) => {
+                                                    return (
+                                                        <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                                    );
+                                                })}
+                                            </tr>
                                         );
                                     })}
-                                </tr>
-                            );
-                        })}
+                                </>)
+                                : (<h2>hello</h2>)
+                        }
+
+
                     </tbody>
                 </table>
                 <Pagination
