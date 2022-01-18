@@ -37,6 +37,7 @@ import Loader from "../../assests/common/Loader";
 import { useExportData } from "react-table-plugins";
 import Papa from "papaparse";
 import "jspdf-autotable";
+import Offline_page from './../../auth/Offline_page';
 
 
 
@@ -64,7 +65,6 @@ function SelectColumnFilter({
 }) {
     const options = useMemo(() => {
         const options = new Set();
-
         preFilteredRows.forEach((row) => {
             options.add(row.values[id]);
         });
@@ -75,16 +75,11 @@ function SelectColumnFilter({
         <Fragment>
             <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
                 {/* <span className="block capitalize mb-4">{id}</span> */}
-
                 <CPopover
-
-
                     content={
                         <div className="">
-
                             {options.map((option, i) => {
                                 return (
-
                                     <Fragment key={i}>
                                         <div id={`${id}`}>
                                             <input
@@ -96,7 +91,6 @@ function SelectColumnFilter({
                                                 value={option}
                                                 style={{ cursor: 'pointer' }}
                                                 onChange={(e) => {
-
                                                     setFilter(
                                                         setFilteredParams(filterValue, e.target.value)
                                                     );
@@ -119,10 +113,8 @@ function SelectColumnFilter({
                 >
                     <div className="btn-group dropright">
                         <button
-
                             onClick={(e) => { e.preventDefault() }}
                             className="btn  dropdown-toggle"
-
                         >
                             {id}
                         </button>
@@ -557,7 +549,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 // exportData.push(data)
                 // console.log(selectedData);
                 exportCsv.push(data)
-
             }
             )
             // console.log);
@@ -566,10 +557,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         2
     );
     console.log(checkboxData)
-
     /// for download pdf
-
-
 
     const getBackPosition = () => {
         backOriginal()
@@ -579,12 +567,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     return studentData.loading ? (
         <SkeletonColor></SkeletonColor>
     ) : studentData.error ? (
-        <h2>{studentData.error}</h2>
-    ) : (
+        <Offline_page />) : (
         <Fragment>
             {loading && (
                 <Loader />
             )}
+
             <div className="container-fluid">
                 <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px' }}>
                     <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
@@ -605,7 +593,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                         </div>
                     </div>
                     <div className="row  mx-0 mt-3" >
-
                         <div className="d-flex">
                             <div style={{ marginLeft: '-12px' }}>
                                 <select
@@ -760,28 +747,20 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                         ))}
                     </thead>
                     <tbody {...getTableBodyProps()}
-                        style={{ position: 'sticky', width: '100%', backgroundColor: 'red', height: '450px'}}
+                        style={{ position: 'sticky', width: '100%', backgroundColor: 'red', height: '450px' }}
                     >
-                        {
-                            studentData ?
-                                (<>
-                                    {page.map((row) => {
-                                        prepareRow(row);
+                        {page.map((row) => {
+                            prepareRow(row);
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {row.cells.map((cell) => {
                                         return (
-                                            <tr {...row.getRowProps()}>
-                                                {row.cells.map((cell) => {
-                                                    return (
-                                                        <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                                                    );
-                                                })}
-                                            </tr>
+                                            <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                                         );
                                     })}
-                                </>)
-                                : (<h2>hello</h2>)
-                        }
-
-
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
                 <Pagination
@@ -796,9 +775,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     canNextPage={canNextPage}
                     nextPage={nextPage}
                 />
-
             </div>
-
         </Fragment >
     );
 }

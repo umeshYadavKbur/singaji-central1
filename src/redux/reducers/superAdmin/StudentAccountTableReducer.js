@@ -15,7 +15,7 @@ const initialState = {
   table_data: [],
   reportData: [],
   personalInfo: [],
-  error: "",
+  error: false,
 };
 
 const StudentAccountTableReducer = (state = initialState, action) => {
@@ -28,6 +28,7 @@ const StudentAccountTableReducer = (state = initialState, action) => {
     case STUDENTACCOUNT_TABLE_DATA_FAIL:
       return {
         ...state,
+        error: true,
         loading: false,
       };
 
