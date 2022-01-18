@@ -62,7 +62,7 @@ function ForgotPassword({ passData, fetchUserEmail }) {
               />
             </div>
             <div className="d-flex justify-content-center">
-              <h4 className="h4 mb-3 text-secondary">Enter your Email</h4>
+              <h4 className="h4 mb-3"> <b>Enter your Email</b> </h4>
             </div>
             <div className="mb-3 input-login-box">
               <input
@@ -72,7 +72,7 @@ function ForgotPassword({ passData, fetchUserEmail }) {
                 onChange={formik.handleChange}
                 name="email"
                 type="text"
-                className="form-control"
+                className="form-control login-input"
                 placeholder="Email"
               />
               {formik.errors.email && formik.touched.email ? (<div className="text-danger fs-6">{formik.errors.email}</div>) : ("")}

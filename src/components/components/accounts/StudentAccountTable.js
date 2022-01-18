@@ -275,8 +275,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
 
                     <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
-                        <Tooltip style={{ background: "rgb(249, 147, 0)" }}>
-                            This is a help <i>tooltip</i> .
+                        <Tooltip>
+                         View Profile .
                         </Tooltip>
                     }>
                         <img
@@ -371,9 +371,15 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             Cell: ({ row: { original, index } }) => {
                 return (
                     // <div className="d-flex m-0 flex-column justify-content-start">
+                    <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                        <Tooltip>
+                         Genrate Receipt .
+                        </Tooltip>
+                    }>
                     <button className="table_btn_size" onClick={() => {
                         getAllInfoOfStudent(original, true)
                     }} style={{ backgroundColor: "#F99300", fontWeight: 'bold', color: 'white', borderRadius: '5px' }} >Receipt</button>
+                      </Whisper>
                     // </div >
                 )
             },
@@ -647,6 +653,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                             className="py-0"
                                             caret={false}
                                         >
+                                              <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                        <Tooltip>
+                         Filter Data .
+                        </Tooltip>
+                    }>
+                                            
                                             <img
                                                 src={filtericon}
                                                 alt=""
@@ -656,7 +668,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                                     marginTop: "-35px",
                                                     marginLeft: "-13px",
                                                 }}
-                                            />
+                                            /></Whisper>
                                         </CDropdownToggle>
 
                                         <CDropdownMenu

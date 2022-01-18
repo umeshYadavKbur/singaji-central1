@@ -32,6 +32,8 @@ const AppHeaderDropdown = ({ userData, logout }) => {
 
       <CDropdownMenu component={'div'} className="pt-0 " placement="bottom-end" style={{ backgroundColor: '#7e84a3', marginLeft: '-223px', height: '-webkit - fill - available', zIndex: '510' }} >
         <div style={{ flexDirection: 'column', backgroundColor: '#7e84a3', minHeight: '369px', width: '294px', alignItems: 'center', paddingTop: '49px', display: 'flex', flex: 'basis', zIndex: '510' }}>
+         
+         
           <CAvatar
             src={avatar8}
             style={{
@@ -40,7 +42,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
             }}
           />
           <p style={{ textAlign: 'center', color: 'white', fontSize: '11px' }}><span style={{ color: 'white', fontSize: '13px', fontWeight: 'bold' }}>{userData.userInfo}</span><br /> {userData.email}</p>
-          <button
+          {/* <button
             style={{
               outline: "1px solid white",
               color: "white",
@@ -53,7 +55,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
             }}
           >
             Manage your server
-          </button>
+          </button> */}
           <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />
           <div style={{ cursor: 'pointer' }}>
             <img style={{ height: '18px', width: '18px', marginLeft: '-50px' }} src={Settings} alt="Settings" />
