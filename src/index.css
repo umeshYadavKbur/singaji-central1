@@ -7,6 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
+
+/* --------------------common css elements ------------------------ */
+
+/* ======= sweet alert ======= */
 .swal2-confirm{
 
   width: 86px !important;
@@ -34,3 +40,62 @@ body {
     top: 0px !important;
     transform: translate3d(0px, 5px, 0px) !important;
 }
+/* =========== tooltip css ========= */
+
+
+.rs-tooltip[class*=placement-top]:after{
+  border-top-color: #FFDBA7 !important;
+    /* border-top-color: var(--rs-tooltip-bg); */
+    border-width: 6px 6px 0;
+    bottom: -6px;
+    margin-left: -6px;
+}
+.rs-tooltip{
+  color: #444754 !important;
+  background-color: #FFDBA7 !important;
+}
+
+.rs-tooltip[class*=placement-bottom]:after {
+  border-bottom-color: #FFDBA7 !important;
+  /* border-bottom-color: var(--rs-tooltip-bg); */
+  border-width: 0 6px 6px;
+  margin-left: -6px;
+  top: -6px;
+}
+
+/* =========== checkbox ============= */
+input.largerCheckbox {
+  width: 14px;
+  height: 14px;
+  /* margin-top: 2px; */
+}
+
+
+
+
+
+
+
+/* =============edit scroll bar ========== */
+
+/* ::-webkit-scrollbar {
+  width: 10px;
+  height: 30px;
+}
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(209, 207, 207); 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+/* ::-webkit-scrollbar-thumb {
+  background: orange; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+/* ::-webkit-scrollbar-thumb:hover {
+  background: orange; 
+} */ 

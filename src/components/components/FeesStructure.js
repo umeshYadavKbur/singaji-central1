@@ -6,6 +6,8 @@ import {
   // CModalTitle,
 } from "@coreui/react";
 import React, { useState } from "react";
+import { Tooltip, Whisper } from "rsuite";
+
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -16,6 +18,7 @@ import crossButton from "../assests/image/crossButton.svg";
 import Edit_icon from "../assests/image/Edit_icon.svg";
 import axios from "axios";
 import Swal from "sweetalert2";
+
 import { changeFeesStructureStatus } from "../../redux/actionDispatcher/superAdmin/feesStructureTableDataDispatcher";
 import './styles/Table.css'
 import LoaderButton from "../assests/common/LoaderButton";
@@ -138,13 +141,21 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
 
   return (
     <>
+
       {original ? (
-        <img
-          style={{ cursor: "pointer" }}
-          src={Edit_icon}
-          alt="Edit"
-          onClick={() => { getData() }}
-        />
+        <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+          <Tooltip>
+            Edit Fees Structure
+          </Tooltip>}>
+
+          <img
+            style={{ cursor: "pointer" }}
+            src={Edit_icon}
+            alt="Edit"
+            onClick={() => { getData() }}
+          />
+        </Whisper>
+
       ) : (
         <CButton
           style={{
@@ -162,6 +173,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
           Create Fees Structure <i className="fas fa-plus pl-3"></i>
         </CButton>
       )}
+
 
       <CModal
         alignment="center"

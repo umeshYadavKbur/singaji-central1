@@ -75,7 +75,7 @@ function Login({ userData, fetchUsers }) {
               <br />
             </div>
             <div className="d-flex justify-content-center fw-bold">
-              <h4 className="h4 mb-3 " style={{ color: "black" }}>Login</h4>
+              <h4 className="h4 mb-3 " style={{ color: "black" }}> <b> Login</b></h4>
             </div>
             <div className="mb-3 input-login-box">
               <input

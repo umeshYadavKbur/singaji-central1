@@ -15,6 +15,7 @@ import AllUrl from "../../../redux/constants/url";
 import { connect } from "react-redux";
 import SkeletonColor from "../../../helpers/Skeletrone";
 import Pagination from "../../assests/common/Pagination";
+import { Tooltip, Whisper } from "rsuite";
 
 
 const MultipleFilter = (rows, accessor, filterValue) => {
@@ -324,6 +325,10 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                                     className="py-0"
                                     caret={false}
                                 >
+                                    <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                  <Tooltip>
+                   Filter Data .
+                  </Tooltip>}>
                                     <img
                                         src={filtericon}
                                         alt=""
@@ -333,7 +338,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                                             marginTop: "-35px",
                                             marginLeft: "-13px",
                                         }}
-                                    />
+                                    /></Whisper>
                                 </CDropdownToggle>
 
                                 <CDropdownMenu

@@ -19,7 +19,7 @@ export  const TableCheckbox = React.forwardRef(
         return (
             <>
             <div style={test}>
-            <input type="checkbox"  ref={resolvedRef} {...rest} />
+            <input type="checkbox" className="largerCheckbox" ref={resolvedRef} {...rest} />
             {/* <input type="checkbox" id="fruit1" name="fruit-1" value="Apple"/> */}
   {/* <label for="fruit1"></label> */}
 
