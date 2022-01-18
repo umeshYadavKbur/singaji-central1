@@ -73,8 +73,9 @@ function SelectColumnFilter({
 
     let offsetObj = [0, 0];
 
-    if (id === 'stream') offsetObj = [63, 10]
-    else if (id === 'village') offsetObj = [134, 10]
+    if (id === 'branch') offsetObj = [45, 10]
+    else if (id === 'trackName') offsetObj = [90, 10]
+    else if (id === 'year') offsetObj = [33, 10]
 
 
     return (
@@ -93,11 +94,11 @@ function SelectColumnFilter({
                                 return (
 
                                     <Fragment key={i}>
-                                        <div id={`${id}`}>
+                                        <div id={`${id}`} className="d-flex ">
                                             <input
                                                 checked={filterValue.includes(option)}
                                                 type="checkbox"
-                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mt-1"
                                                 id={option}
                                                 name={option}
                                                 value={option}
@@ -112,7 +113,7 @@ function SelectColumnFilter({
                                             ></input>
                                             <label
                                                 htmlFor={option}
-                                                className="ml-1.5 font-medium text-gray-700"
+                                                className="ml-2 font-medium text-gray-700"
                                             >
                                                 {option}
                                             </label>
@@ -286,12 +287,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 <div className="d-flex m-0 flex-column justify-content-start">
                     <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
                         <Tooltip>
-                         View Profile .
+                            View Profile .
                         </Tooltip>
                     }>
                         {original.photo ? <img
                             alt="profile"
-                            style={{ cursor: "pointer" ,borderRadius: '25px' }}
+                            style={{ cursor: "pointer", borderRadius: '25px' }}
                             onClick={() => {
                                 getAllInfoOfStudent(original, false)
                             }}
@@ -301,7 +302,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                             width={50}
 
                             text="Image"
-                          
+
                         /> :
                             <img
                                 alt="profile"
@@ -336,10 +337,17 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
         {
             header: "Stream",
-            accessor: "stream",
+            accessor: "branch",
+            Cell: ({ row: { original } }) => (
+                <span className='' >
+                    {`${original.branch}( ${original.year} )`}
+                </span>
+            ),
             Filter: SelectColumnFilter,
             filter: MultipleFilter,
-        }, {
+        },
+       
+        {
             header: "Mobile no",
             accessor: "mobile",
             Filter: "",
@@ -348,8 +356,20 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         {
             header: 'Village',
             accessor: 'village',
+            Filter: "",
+            filter: "",
+        },
+        {
+            header: () => <span style={{ display: 'none',width:'0px' }}></span>,
+            accessor: "trackName",
             Filter: SelectColumnFilter,
             filter: MultipleFilter,
+            Cell: ({ row: { original } }) => (
+                <>
+                </>
+            ),
+            width: 0
+
         },
         {
             header: 'Received Fee',
@@ -370,6 +390,19 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             Filter: "",
             filter: "",
         },
+         {
+            header: () => <span style={{ display: 'none',width:'0px' }}></span>,
+            accessor: "year",
+            Filter: SelectColumnFilter,
+            filter: MultipleFilter,
+            Cell: ({ row: { original } }) => (
+                <>
+                </>
+            ),
+            width: 0
+
+        },
+         
         {
             header: 'Pending Fee',
             accessor: 'remain_Amount',
@@ -397,13 +430,13 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     // <div className="d-flex m-0 flex-column justify-content-start">
                     <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
                         <Tooltip>
-                         Genrate Receipt .
+                            Genrate Receipt .
                         </Tooltip>
                     }>
-                    <button className="table_btn_size" onClick={() => {
-                        getAllInfoOfStudent(original, true)
-                    }} style={{ backgroundColor: "#F99300", fontWeight: 'bold', color: 'white', borderRadius: '5px' }} >Receipt</button>
-                      </Whisper>
+                        <button className="table_btn_size" onClick={() => {
+                            getAllInfoOfStudent(original, true)
+                        }} style={{ backgroundColor: "#F99300", fontWeight: 'bold', color: 'white', borderRadius: '5px' }} >Receipt</button>
+                    </Whisper>
                     // </div >
                 )
             },
@@ -503,6 +536,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         }
     }
 
+
+
     const {
         getTableProps,
         getTableBodyProps,
@@ -523,7 +558,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         preGlobalFilteredRows,
         prepareRow,
     } = useTable(
-        { columns, data: studentData.table_data },
+        { columns, data: studentData.table_data, initialState: { hiddenColumns: [""] } },
         useGlobalFilter,
         useFilters,
         useSortBy,
@@ -677,22 +712,22 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                             className="py-0"
                                             caret={false}
                                         >
-                                              <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
-                        <Tooltip>
-                         Filter Data .
-                        </Tooltip>
-                    }>
-                                            
-                                            <img
-                                                src={filtericon}
-                                                alt=""
-                                                style={{
-                                                    height: "22px",
-                                                    width: "35px",
-                                                    marginTop: "-35px",
-                                                    marginLeft: "-13px",
-                                                }}
-                                            /></Whisper>
+                                            <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                                                <Tooltip>
+                                                    Filter Data .
+                                                </Tooltip>
+                                            }>
+
+                                                <img
+                                                    src={filtericon}
+                                                    alt=""
+                                                    style={{
+                                                        height: "22px",
+                                                        width: "35px",
+                                                        marginTop: "-35px",
+                                                        marginLeft: "-13px",
+                                                    }}
+                                                /></Whisper>
                                         </CDropdownToggle>
 
                                         <CDropdownMenu
@@ -740,26 +775,34 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                 {headerGroup.headers.map((column) => (
                                     <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                         {column.render("header")}
-                                        <span>
-                                            {column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <img
-                                                        src={updown_sort}
-                                                        style={{ marginLeft: "5px" }}
-                                                        alt=""
-                                                    />
+                                        {console.log(column)}
+                                        {column.id !== 'year' && column.id !== 'trackName' ?
+
+                                            <span>
+                                                {column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <img
+                                                            src={updown_sort}
+                                                            style={{ marginLeft: "5px" }}
+                                                            alt=""
+                                                        />
+                                                    ) : (
+                                                        <img
+                                                            src={updown_sort}
+                                                            style={{ marginLeft: "5px" }}
+                                                            alt=""
+                                                        />
+                                                    )
                                                 ) : (
-                                                    <img
-                                                        src={updown_sort}
-                                                        style={{ marginLeft: "5px" }}
-                                                        alt=""
-                                                    />
-                                                )
-                                            ) : (
-                                                ""
-                                            )}
-                                            {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
-                                        </span>
+                                                    ""
+                                                )}
+                                                {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
+                                            </span>
+
+                                            : ''}
+
+
+
                                     </th>
                                 ))}
                             </tr>
