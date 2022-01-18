@@ -488,6 +488,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         getTableBodyProps,
         headerGroups,
         page,
+        rows,
         nextPage,
         previousPage,
         canPreviousPage,
@@ -574,7 +575,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             )}
 
             <div className="container-fluid">
-                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px' }}>
+                {/* for the header section   */}
+                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px', width: '100%', height: '25%' }}>
                     <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
                         <div className=" info-col"  >
                             <h5 style={{ marginTop: "12px" }}>{MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
@@ -714,67 +716,87 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                         </div>
                     </div>
                 </div>
-                <table {...getTableProps()} id="customers">
-                    <thead style={{ position: 'sticky', top: '212px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
-                        {headerGroups.map((headerGroup) => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                        {column.render("header")}
-                                        <span>
-                                            {column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <img
-                                                        src={updown_sort}
-                                                        style={{ marginLeft: "5px" }}
-                                                        alt=""
-                                                    />
+                {/* for the body section  */}
+                <div style={{ width: '100%', height: '70%', paddingBottom: '4%' }}>
+                    <table {...getTableProps()} id="customers">
+                        <thead style={{ position: 'sticky', top: '212px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+                            {headerGroups.map((headerGroup) => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map((column) => (
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render("header")}
+                                            <span>
+                                                {column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <img
+                                                            src={updown_sort}
+                                                            style={{ marginLeft: "5px" }}
+                                                            alt=""
+                                                        />
+                                                    ) : (
+                                                        <img
+                                                            src={updown_sort}
+                                                            style={{ marginLeft: "5px" }}
+                                                            alt=""
+                                                        />
+                                                    )
                                                 ) : (
-                                                    <img
-                                                        src={updown_sort}
-                                                        style={{ marginLeft: "5px" }}
-                                                        alt=""
-                                                    />
-                                                )
-                                            ) : (
-                                                ""
-                                            )}
-                                            {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
-                                        </span>
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}
-                        style={{ position: 'sticky', width: '100%', backgroundColor: 'red', height: '450px' }}
-                    >
-                        {page.map((row) => {
-                            prepareRow(row);
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => {
-                                        return (
-                                            <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                                        );
-                                    })}
+                                                    ""
+                                                )}
+                                                {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
+                                            </span>
+                                        </th>
+                                    ))}
                                 </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-                <Pagination
-                    page={page}
-                    pageIndex={pageIndex}
-                    pageCount={pageCount}
-                    pageSize={pageSize}
-                    canPreviousPage={canPreviousPage}
-                    previousPage={previousPage}
-                    pageOptions={pageOptions}
-                    gotoPage={gotoPage}
-                    canNextPage={canNextPage}
-                    nextPage={nextPage}
-                />
+                            ))}
+                        </thead>
+                        <tbody {...getTableBodyProps()} stle={{ width: "100%" }} >
+
+                            {page.map((row) => {
+                                prepareRow(row);
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map((cell) => {
+                                            return (
+                                                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                            );
+                                        })}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                    {
+                        !rows.length && (
+                            <div style={{ height: "55vh", width: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
+                                <h1 style={{ color: "#5A607F" }}>No Result Found</h1>
+                            </div>
+                        )
+                    }
+                </div>
+                {/* for the pagination section */}
+                <div style={{ maxWidth: '100%', height: '4%' }}>
+                    <div style={{
+                        position: "fixed",
+                        top: "95%",
+                        width: "100%",
+                        zindex: "5",
+                        backgroundColor: '#f4f7fc'
+                    }}  >
+                        <Pagination
+                            page={page}
+                            pageIndex={pageIndex}
+                            pageCount={pageCount}
+                            pageSize={pageSize}
+                            canPreviousPage={canPreviousPage}
+                            previousPage={previousPage}
+                            pageOptions={pageOptions}
+                            gotoPage={gotoPage}
+                            canNextPage={canNextPage}
+                            nextPage={nextPage}
+                        />
+                    </div>
+                </div>
             </div>
         </Fragment >
     );

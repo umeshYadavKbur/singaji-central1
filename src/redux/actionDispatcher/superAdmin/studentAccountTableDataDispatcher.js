@@ -22,7 +22,7 @@ export const fetchStudentAccountData = (data) => {
         .then(function (response) {
           console.log(response);
           if (response.status === 200) {
-            dispatch(accStuDataSuccess());
+            dispatch(accStuDataSuccess(response.data));
           }
           if (response.status === 400) {
             dispatch(accStuDataFail())
