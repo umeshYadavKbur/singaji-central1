@@ -99,7 +99,8 @@ function StudentProfile() {
 
     const initialValues = {
 
-        studentName: StudentName,
+        firstName: StudentProfileData.accountInfo.firstName,
+        lastName: StudentProfileData.accountInfo.lastName,
         fatherName: StudentProfileData.accountInfo.fathersName,
         contactNumber: StudentProfileData.accountInfo.mobile,
         FatherContactNumber: StudentProfileData.accountInfo.fatherContactNumber,
@@ -133,7 +134,7 @@ function StudentProfile() {
         year: Yup.string().required("Required!"),
         aadharNumber: Yup.string().trim().required("Required!").test('len', 'Must be exactly 12 digits', val => val?.replace('X', '').length === 14),
         village: Yup.string().required("Required!").trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates'),
-        EnrollmentNumber: Yup.string().required("Required!").trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates'),
+        EnrollmentNumber: Yup.string().required("Required!"),
         streamName: Yup.string().required("Required!"),
 
 
@@ -142,36 +143,21 @@ function StudentProfile() {
     const formik = useFormik({
         initialValues,
         validationSchema,
-        onSubmit: (values) => {
+        onSubmit: async(values) => {
             console.log(values);
             const UpdatePersonalInfoData = {
                 "stdId": StudentProfileData.accountInfo.stdId,
-                "firstName": "sandhya",
-                "lastName": "jaiswal",
-                "photo": null,
+                "firstName": formik.values.firstName,
+                "lastName": formik.values.lastName,
                 "branch": formik.values.streamName,
                 "fathersName": formik.values.fatherName,
                 "dob": formik.values.dob,
                 "mobile": formik.values.contactNumber,
                 "fatherContactNumber": formik.values.FatherContactNumber,
-                "email": "sandhya123@gmail.com",
-                "schoolName": "fifth mountain academy",
-                "school12sub": "pcm",
-                "persentage12": "84",
-                "rollNumber12": "1234568765",
-                "persentage10": "84",
-                "rollNumber10": "123456756",
                 "aadarNo": formik.values.aadharNumber,
-                "fatherOccupation": "farmer",
-                "fatherIncome": "10000",
-                "category": "obc",
-                "gender": "male",
-                "pincode": "4553356",
-                "trackName": "khategaon",
-                "address": "gram-agarda",
                 "village": formik.values.village,
-                "tehsil": "khategaon",
-                "district": "dewas"
+                "enrollmentNo": formik.values.EnrollmentNumber,
+                
             }
             var config = {
                 method: 'post',
@@ -180,15 +166,14 @@ function StudentProfile() {
                     'Authorization': `Bearer  ${localStorage.getItem("token")}`,
                     'Content-Type': 'application/json'
                 },
-                // data: UpdatePersonalInfoData
+                data: UpdatePersonalInfoData
             };
-            console.log(config, UpdatePersonalInfoData)
+            // console.log(config, UpdatePersonalInfoData)
 
-            // const response = await axios(config)
-            // console.log(response);
+            const response = await axios(config)
+            console.log(response);
         }
     })
-    // formik.setFieldValue('village',StudentProfileData.accountInfo.village)
 
     return (
         <div>
@@ -244,23 +229,49 @@ function StudentProfile() {
                                 <div className="row">
                                     <div className='row m-1'>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Student Name</label>  <input
+                                            <label className="addStdLable" htmlFor="">First Name</label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
-                                                value={formik.values.studentName}
-                                                name="studentName"
+                                                value={formik.values.firstName}
+                                                name="firstName"
                                                 type="text"
-                                                className={formik.touched.studentName ? `form-control ${formik.errors.studentName ? "invalid" : ""}` : 'form-control'}
-                                                placeholder="Student name"
+                                                className={formik.touched.firstName ? `form-control ${formik.errors.firstName ? "invalid" : ""}` : 'form-control'}
+                                                placeholder="First name"
                                             />
-                                            {formik.errors.studentName && formik.touched.studentName ? (
+                                            {formik.errors.firstName && formik.touched.firstName ? (
                                                 <div className="text-danger fs-6">
-                                                    {formik.errors.studentName}
+                                                    {formik.errors.firstName}
                                                 </div>
                                             ) : (
                                                 ""
                                             )}
                                         </div>
+                                        <div className="col">
+                                            <label className="addStdLable" htmlFor="">Last Name</label>  <input
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.lastName}
+                                                name="lastName"
+                                                type="text"
+                                                className={formik.touched.lastName ? `form-control ${formik.errors.lastName ? "invalid" : ""}` : 'form-control'}
+                                                placeholder="Last Name"
+                                            />
+                                            {formik.errors.lastName && formik.touched.lastName ? (
+                                                <div className="text-danger fs-6">
+                                                    {formik.errors.lastName}
+                                                </div>
+                                            ) : (
+                                                ""
+                                            )}
+                                        </div>
+                                       
+
+
+
+                                    </div>
+
+                                    {/* Second Four Input Field */}
+                                    <div className='row m-1'>
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Father Name</label>  <input
                                                 onChange={formik.handleChange}
@@ -280,13 +291,6 @@ function StudentProfile() {
                                             )}
                                         </div>
 
-
-
-                                    </div>
-
-                                    {/* Second Four Input Field */}
-                                    <div className='row m-1'>
-
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Contact Number</label>
                                             <NumberFormat onChange={formik.handleChange}
@@ -302,6 +306,11 @@ function StudentProfile() {
                                             )}
                                         </div>
 
+                                        
+
+                                    </div>
+
+                                    <div className='row m-1'>
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Father Contact</label>
                                             <NumberFormat onChange={formik.handleChange}
@@ -318,10 +327,6 @@ function StudentProfile() {
                                                 ""
                                             )}
                                         </div>
-
-                                    </div>
-
-                                    <div className='row m-1'>
 
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Stream Name</label>
@@ -345,27 +350,7 @@ function StudentProfile() {
                                             )}
 
                                         </div>
-                                        <div className="col">
-                                            <label className="addStdLable" htmlFor="">Year</label>
-
-                                            <select name="year" value={formik.values.year} onBlur={formik.handleBlur}
-
-                                                onChange={formik.handleChange} className={formik.touched.year ? `form-select ${formik.errors.year ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
-
-                                                <option value='I'>I</option>
-                                                <option value='II'>II</option>
-                                                <option value='III'>III</option>
-
-                                            </select>
-                                            {formik.errors.year && formik.touched.year ? (
-                                                <div className="text-danger fs-6">
-                                                    {formik.errors.year}
-                                                </div>
-                                            ) : (
-                                                ""
-                                            )}
-
-                                        </div>
+                                      
                                     </div>
                                     <div className='row m-1'>
                                         <div className="col">
@@ -554,8 +539,26 @@ function StudentProfile() {
                                 <label htmlFor="">Remark</label>
                                 <input name="remark" onChange={formik.handleChange} value={formik.values.remark} type="text" className='form-control' placeholder='Remark' />
                             </div>
-                            <div className="col-3">
-                               
+                            <div className="col">
+                                <label className="addStdLable" htmlFor="">Year</label>
+
+                                <select name="year" value={formik.values.year} onBlur={formik.handleBlur}
+
+                                    onChange={formik.handleChange} className={formik.touched.year ? `form-select ${formik.errors.year ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
+
+                                    <option value='I'>I</option>
+                                    <option value='II'>II</option>
+                                    <option value='III'>III</option>
+
+                                </select>
+                                {formik.errors.year && formik.touched.year ? (
+                                    <div className="text-danger fs-6">
+                                        {formik.errors.year}
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+
                             </div>
                         </div>
 
