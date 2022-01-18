@@ -26,6 +26,7 @@ import SkeletonColor from "../../../helpers/Skeletrone";
 import { ToastContainer } from "react-toastify";
 import Pagination from "../../assests/common/Pagination";
 import { GlobalFilter } from "../tableComponents/GlobalFilter";
+import { Tooltip, Whisper } from "rsuite";
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
   const arr = [];
@@ -345,7 +346,11 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
                   placement="bottom-end"
                   className="py-0"
                   caret={false}
-                >
+                > <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                  <Tooltip>
+                   Filter Data .
+                  </Tooltip>
+              }>
                   <img
                     src={filtericon}
                     alt=""
@@ -355,7 +360,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
                       marginTop: "-35px",
                       marginLeft: "-13px",
                     }}
-                  />
+                  /></Whisper>
                 </CDropdownToggle>
 
                 <CDropdownMenu

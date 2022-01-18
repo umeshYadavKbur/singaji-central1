@@ -140,21 +140,22 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
   }
 
   return (
-    <><Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
-            <Tooltip>
-              Edit Fees Structure
-            </Tooltip>
-        }>
-      {original ? (
+    <>
 
-           
-        <img
-          style={{ cursor: "pointer" }}
-          src={Edit_icon}
-          alt="Edit"
-          onClick={() => { getData() }}
-        />  
-        
+      {original ? (
+        <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+          <Tooltip>
+            Edit Fees Structure
+          </Tooltip>}>
+
+          <img
+            style={{ cursor: "pointer" }}
+            src={Edit_icon}
+            alt="Edit"
+            onClick={() => { getData() }}
+          />
+        </Whisper>
+
       ) : (
         <CButton
           style={{
@@ -172,7 +173,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
           Create Fees Structure <i className="fas fa-plus pl-3"></i>
         </CButton>
       )}
-      </Whisper>
+
 
       <CModal
         alignment="center"

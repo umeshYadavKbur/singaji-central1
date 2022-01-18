@@ -33,6 +33,27 @@ body {
   background-color: #FFDBA7 !important;
 }
 
+.rs-tooltip[class*=placement-bottom]:after {
+  border-bottom-color: #FFDBA7 !important;
+  /* border-bottom-color: var(--rs-tooltip-bg); */
+  border-width: 0 6px 6px;
+  margin-left: -6px;
+  top: -6px;
+}
+
+/* =========== checkbox ============= */
+input.largerCheckbox {
+  width: 14px;
+  height: 14px;
+  /* margin-top: 2px; */
+}
+
+
+
+
+
+
+
 /* =============edit scroll bar ========== */
 
 /* ::-webkit-scrollbar {

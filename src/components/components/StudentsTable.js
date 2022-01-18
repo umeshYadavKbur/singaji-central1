@@ -29,6 +29,7 @@ import updown_sort from '../assests/image/updown_sort.svg'
 import { DeactivateButton, PaidButton, UnpaidButton } from "../assests/common/Color";
 import Pagination from "../assests/common/Pagination";
 import { useNavigate } from "react-router-dom";
+import { Tooltip, Whisper } from "rsuite";
 
 // import { baseUrl } from "../../redux/constants/url";
 
@@ -241,9 +242,15 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: 'icon',
       Cell: ({ row: { original } }) => (
         // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
-        <img src={Edit_icon} alt="Edit" onClick={() => {
+        <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+          <Tooltip>
+            Edit Student Info
+          </Tooltip>
+      }>
+        <img src={Edit_icon} style={{cursor: "pointer"}} alt="Edit" onClick={() => {
           navigate("/admin_dashboard/addnewstudent");
-          localStorage.setItem('userEdit',JSON.stringify(original)) }} />
+          localStorage.setItem('userEdit',JSON.stringify(original)) }} /> 
+          </Whisper>
 
       )
     }

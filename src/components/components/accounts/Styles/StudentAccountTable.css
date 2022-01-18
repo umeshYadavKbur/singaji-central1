@@ -207,3 +207,8 @@ button:not(:disabled) {
 .circle-main{
   display: flex;
 }
+
+
+.date-range-button:hover{
+background-color: #ffd394;
+}
