@@ -25,6 +25,7 @@ export const fetchStudentAccountData = (data) => {
             dispatch(accStuDataSuccess(response.data));
           }
           if (response.status === 400) {
+            dispatch(accStuDataFail())
             toast.warn('No data found !', {
               position: "bottom-center",
               autoClose: 3000,
@@ -34,9 +35,9 @@ export const fetchStudentAccountData = (data) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(accStuDataFail(response.data));
           }
           if (response.status === 500) {
+            dispatch(accStuDataFail())
             toast.warn('Internal Server Error', {
               position: "bottom-center",
               autoClose: 3000,
@@ -46,10 +47,10 @@ export const fetchStudentAccountData = (data) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(accStuDataFail(response.data));
           }
         })
         .catch(function (error) {
+          dispatch(accStuDataFail())
           toast.warn('Internal Server Error', {
             position: "bottom-center",
             autoClose: 3000,
@@ -59,9 +60,9 @@ export const fetchStudentAccountData = (data) => {
             draggable: true,
             progress: undefined,
           });
-          dispatch(accStuDataFail(error));
         });
     } catch (error) {
+      dispatch(accStuDataFail())
       toast.warn('Internal Server Error', {
         position: "bottom-center",
         autoClose: 3000,
@@ -71,7 +72,6 @@ export const fetchStudentAccountData = (data) => {
         draggable: true,
         progress: undefined,
       });
-      dispatch(accStuDataFail(error));
     }
   };
 };
@@ -82,7 +82,8 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
     try {
       axios(config)
         .then(function (response) {
-          console.log(response);
+          setLoading(false)
+          // console.log(response);
           if (response.status === 200) {
             localStorage.setItem('userEdit', JSON.stringify(response.data))
 
@@ -108,7 +109,6 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
                 navigate('/admin_dashboard/studentprofile');
             }
             dispatch(accountActionData(response.data));
-            setLoading(false)
 
           }
 
@@ -122,7 +122,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(accStuDataFail(response.data));
+            dispatch(accStuDataFail());
           }
           if (response.status === 500) {
             toast.warn('Internal Server Error', {
@@ -134,10 +134,12 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(accStuDataFail(response.data));
+            dispatch(accStuDataFail());
           }
         })
         .catch(function (error) {
+          setLoading(false)
+
           toast.warn('Internal Server Error', {
             position: "bottom-center",
             autoClose: 3000,
@@ -147,9 +149,11 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
             draggable: true,
             progress: undefined,
           });
-          dispatch(accStuDataFail(error));
+          dispatch(accStuDataFail());
         });
     } catch (error) {
+      setLoading(false)
+
       toast.warn('Internal Server Error', {
         position: "bottom-center",
         autoClose: 3000,
@@ -159,7 +163,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
         draggable: true,
         progress: undefined,
       });
-      dispatch(accStuDataFail(error));
+      dispatch(accStuDataFail());
     }
   };
 };
@@ -180,7 +184,7 @@ const accStuDataSuccess = (data) => {
 
 const accStuDataFail = () => {
   return {
-    type: STUDENTACCOUNT_TABLE_DATA_FAIL
+    type: STUDENTACCOUNT_TABLE_DATA_FAIL,
   }
 }
 

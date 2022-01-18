@@ -6,7 +6,7 @@ import {
 } from '../../constants/actions'
 
 const getAllInfoOfStudent = async (original) => {
-   dispatch( studentAccountTableStudentInformationRequest())
+   dispatch(studentAccountTableStudentInformationRequest())
 
     // setLoading(true)
     // set data or original table to localStorage we need it later

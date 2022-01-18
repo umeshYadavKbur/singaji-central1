@@ -1,6 +1,11 @@
-import { VERIFY_STUDENT_TABLE_DATA, VERIFY_STUDENT_TABLE_DATA_FAIL, VERIFY_STUDENT_TABLE_DATA_SUCCESS } from "../../constants/actions";
+import {
+    VERIFY_STUDENT_TABLE_DATA,
+    VERIFY_STUDENT_TABLE_DATA_FAIL,
+    VERIFY_STUDENT_TABLE_DATA_SUCCESS
+} from "../../constants/actions";
 import { toast } from "react-toastify";
 import AllUrl from "../../constants/url";
+import { setLoadingState, setLoadingStateFalse } from "./studentTableDatadispatcher";
 var axios = require('axios');
 // import getData from "../../services/agent";
 
@@ -8,6 +13,7 @@ var axios = require('axios');
 export const VerifyStudent = (data) => {
     // console.log("data dispatch", data);
     return async (dispatch) => {
+        dispatch(setLoadingState())
         // const url = loginUrl;
         // wait untill the data not received so getData function take data and url part
 
@@ -31,6 +37,8 @@ export const VerifyStudent = (data) => {
         try {
             userResData = await axios(config);
             console.log(userResData)
+            dispatch(setLoadingStateFalse())
+
             if (userResData.status === 200) {
                 dispatch(VerifyStudentSuccess(userResData.data));
                 toast.dark(`student ${data.firstName} ${data.lastName} is shifted to accounts`, {
@@ -83,6 +91,7 @@ export const VerifyStudent = (data) => {
             }
             return userResData.status;
         } catch (error) {
+            dispatch(setLoadingStateFalse())
             toast.error('Internal Server Error', {
                 position: "bottom-center",
                 autoClose: 2000,

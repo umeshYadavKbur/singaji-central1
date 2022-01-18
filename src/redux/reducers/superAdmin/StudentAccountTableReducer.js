@@ -1,5 +1,6 @@
 import {
   FETCH_STUDENTACCOUNT_DATA,
+  STUDENTACCOUNT_TABLE_DATA_FAIL,
   GET_DAILY_REPORT,
   CHANGE_DAILY_REPORT,
   STUDENTACCOUNT_TABLE_DATA_SUCCESS,
@@ -14,7 +15,7 @@ const initialState = {
   table_data: [],
   reportData: [],
   personalInfo: [],
-  error: "",
+  error: false,
 };
 
 const StudentAccountTableReducer = (state = initialState, action) => {
@@ -23,6 +24,12 @@ const StudentAccountTableReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case STUDENTACCOUNT_TABLE_DATA_FAIL:
+      return {
+        ...state,
+        error: true,
+        loading: false,
       };
 
     case STUDENTACCOUNT_TABLE_DATA_SUCCESS:
@@ -37,12 +44,14 @@ const StudentAccountTableReducer = (state = initialState, action) => {
     case STUDENTACCOUNT_TABLE_CHANGE_SUCCESS:
       return {
         ...state,
+        loading: false,
         second_loading: false,
       };
 
     case STUDENTACCOUNT_TABLE_CHANGE_FAIL:
       return {
         ...state,
+        loading: false,
         second_loading: false,
       };
     case GET_DAILY_REPORT:

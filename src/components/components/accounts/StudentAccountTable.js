@@ -18,13 +18,11 @@ import {
     CPopover,
 } from "@coreui/react";
 import filtericon from "../../assests/image/AccountIcons/filter.svg";
-import { CSVLink } from "react-csv";
+// import { CSVLink } from "react-csv";
 import { DateRangePicker, Tooltip, Whisper } from "rsuite";
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
-// import { isSuperAdmin } from '../../../helpers/SuperAdmin';
-// import { isAccountAdmin } from '../../../helpers/AccountAdmin';
-// import { isStudentAdmin } from '../../../helpers/StudentAdmin';
+
 import allUrls from '../../../redux/constants/url'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -38,6 +36,13 @@ import Loader from "../../assests/common/Loader";
 import AvatarImg from '../../assests/image/Avtar.jpeg'
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
 
+
+
+
+//importing for downloading data
+import { useExportData } from "react-table-plugins";
+import Papa from "papaparse";
+import OfflinePage from '../../auth/OfflinePage';
 
 
 
@@ -65,7 +70,6 @@ function SelectColumnFilter({
 }) {
     const options = useMemo(() => {
         const options = new Set();
-
         preFilteredRows.forEach((row) => {
             options.add(row.values[id]);
         });
@@ -111,14 +115,12 @@ function SelectColumnFilter({
         <Fragment>
             <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
                 {/* <span className="block capitalize mb-4">{id}</span> */}
-
                 <CPopover
 
                     offset={offsetObj}
 
                     content={
                         <div className="">
-
                             {options.map((option, i) => {
                                 let option_label = option;
 
@@ -132,7 +134,6 @@ function SelectColumnFilter({
                                 }
 
                                 return (
-
                                     <Fragment key={i}>
                                         <div id={`${id}`} className="d-flex ">
                                             <input
@@ -144,7 +145,6 @@ function SelectColumnFilter({
                                                 value={option}
                                                 style={{ cursor: 'pointer' }}
                                                 onChange={(e) => {
-
                                                     setFilter(
                                                         setFilteredParams(filterValue, e.target.value)
                                                     );
@@ -169,7 +169,6 @@ function SelectColumnFilter({
                 >
                     <div className="btn-group ">
                         <button
-
                             onClick={(e) => { e.preventDefault() }}
                             className="btn filter_btn"
 
@@ -177,7 +176,7 @@ function SelectColumnFilter({
                         >
                             {name}
                         </button>
-                        <img src={rightArrow} width="6px" style={{
+                        <img src={rightArrow} alt=">" width="6px" style={{
                             marginTop: "4px",
                             marginRight: '10px'
                         }} />
@@ -227,6 +226,33 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
 function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData, accountAction }) {
     const [is_dailyReport, set_is_dailyReport] = useState(false)
     const [MoneyCount, setMoneyCount] = useState({ TStudent: 0, TAmount: 0, TpaidAmount: 0, RAmount: 0, WaiveOff: 0, TpaidAmountByDailyReport: 0 });
+    const [exportCsv, setExportCsv] = useState([])
+
+
+
+    //for exporting data in csv
+    function getExportFileBlob({ columns, data, fileType, fileName }) {
+        if (fileType === "csv") {
+            // CSV Export
+            const headerNames = columns.map((col) => col.exportValue);
+            const csvString = Papa.unparse({ fields: headerNames, data });
+            return new Blob([csvString], { type: "text/csv" });
+        }
+        //PDF Export
+        if (fileType === "pdf") {
+            //Check it out here 
+            console.log('====================================');
+            console.log("CAlled ", data);
+            console.log('====================================');
+            setExportCsv(data)
+            downloadPdf(exportCsv)
+
+            return false;
+        }
+
+        // Other formats goes here
+        return false;
+    }
 
     React.useEffect(() => {
         var config = {
@@ -244,7 +270,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     }, []);
 
     React.useEffect(() => {
-
         let data = studentData?.table_data;
         console.log(data)
 
@@ -609,11 +634,11 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
         const result = await axios(config)
         //if the data is getting successfully than they set the data to upcoming data
+        setLoading(false)
         if (result.status === 200) {
             getReport(result.data)
             setColoumns(dailyReportColumn)
             set_is_dailyReport(true)
-            setLoading(false)
         }
     }
 
@@ -624,6 +649,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         getTableBodyProps,
         headerGroups,
         page,
+        rows,
         nextPage,
         previousPage,
         canPreviousPage,
@@ -635,15 +661,20 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         selectedFlatRows,
         state,
         setGlobalFilter,
-
+        exportData,
         preGlobalFilteredRows,
         prepareRow,
     } = useTable(
-        { columns, data: studentData.table_data, initialState: { hiddenColumns: [""] } },
+        {
+            columns,
+            data: studentData.table_data,
+            getExportFileBlob,
+        },
         useGlobalFilter,
         useFilters,
         useSortBy,
         usePagination,
+        useExportData,
         useRowSelect,
         (hooks) => {
             hooks.visibleColumns.push((columns) => {
@@ -664,8 +695,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     );
 
     const { globalFilter, pageSize, pageIndex, } = state;
-    var exportData = [];
-    var exportCsv = [];
+    // var exportData = [];
+    // var exportCsv = [];
+
     const checkboxData = JSON.stringify(
         {
             selectedFlatRows: selectedFlatRows.forEach((row) => {
@@ -676,10 +708,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     data.ReceivedAmount = (data?.ReceivedAmount)?.toString();
 
                 console.log(data);
-                exportData.push(data)
+                // exportData.push(data)
                 // console.log(selectedData);
                 exportCsv.push(data)
-
             }
             )
             // console.log);
@@ -688,10 +719,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         2
     );
     console.log(checkboxData)
-
     /// for download pdf
-
-
 
     const getBackPosition = () => {
         backOriginal()
@@ -701,16 +729,15 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     return studentData.loading ? (
         <SkeletonColor></SkeletonColor>
     ) : studentData.error ? (
-        <h2>{studentData.error}</h2>
-    ) : (
+        <OfflinePage />) : (
         <Fragment>
             {loading && (
                 <Loader />
             )}
+
             <div className="container-fluid">
-                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px' }}>
-
-
+                {/* for the header section   */}
+                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px', width: '100%', height: '25%' }}>
                     <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
                         <div className=" info-col"  >
                             <h5 style={{ marginTop: "12px" }}>{MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
@@ -729,7 +756,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                         </div>
                     </div>
                     <div className="row  mx-0 mt-3" >
-
                         <div className="d-flex">
                             <div style={{ marginLeft: '-12px' }}>
                                 <select
@@ -772,13 +798,21 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                 <button className="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Download
                                 </button>
-                                <div className="dropdown-menu mt-1">
-
-
-                                    <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>
-                                    {is_dailyReport &&
-                                        <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
-                                    }
+                                <div class="dropdown-menu mt-1">
+                                    <div >
+                                        <button className="dropdown-item" style={{ fontWeight: 'bold' }}
+                                            onClick={() => {
+                                                exportData("csv", false);
+                                            }}
+                                        >
+                                            Excel
+                                        </button>
+                                    </div>
+                                    {/* {is_dailyReport && */}
+                                    <div className="dropdown-item" onClick={() => {
+                                        exportData("pdf", false)
+                                    }}><b>Pdf</b></div>
+                                    {/* } */}
 
                                 </div>
                             </div>
@@ -849,77 +883,98 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                         </div>
                     </div>
                 </div>
-                <table {...getTableProps()} id="customers">
+                {/* for the body section  */}
+                {/* <div style={{ width: '100%', height: '70%', paddingBottom: '4%' }}> */}
+                    <table {...getTableProps()} id="customers">
 
-                    <thead style={{ position: 'sticky', top: '212px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
-                        {headerGroups.map((headerGroup) => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                        {column.render("header")}
-                                        {console.log(column)}
-                                        {column.id !== 'year' && column.id !== 'trackName' ?
+                        <thead style={{ position: 'sticky', top: '212px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+                            {headerGroups.map((headerGroup) => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map((column) => (
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render("header")}
+                                            {console.log(column)}
+                                            {column.id !== 'year' && column.id !== 'trackName' ?
 
-                                            <span>
-                                                {column.isSorted ? (
-                                                    column.isSortedDesc ? (
-                                                        <img
-                                                            src={updown_sort}
-                                                            style={{ marginLeft: "5px" }}
-                                                            alt=""
-                                                        />
+                                                <span>
+                                                    {column.isSorted ? (
+                                                        column.isSortedDesc ? (
+                                                            <img
+                                                                src={updown_sort}
+                                                                style={{ marginLeft: "5px" }}
+                                                                alt=""
+                                                            />
+                                                        ) : (
+                                                            <img
+                                                                src={updown_sort}
+                                                                style={{ marginLeft: "5px" }}
+                                                                alt=""
+                                                            />
+                                                        )
                                                     ) : (
-                                                        <img
-                                                            src={updown_sort}
-                                                            style={{ marginLeft: "5px" }}
-                                                            alt=""
-                                                        />
-                                                    )
-                                                ) : (
-                                                    ""
-                                                )}
-                                                {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
-                                            </span>
+                                                        ""
+                                                    )}
+                                                    {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
+                                                </span>
 
-                                            : ''}
+                                                : ''}
 
 
 
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {page.map((row) => {
-                            prepareRow(row);
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => {
-                                        return (
-                                            <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                                        );
-                                    })}
+                                        </th>
+                                    ))}
                                 </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-                <Pagination
-                    page={page}
-                    pageIndex={pageIndex}
-                    pageCount={pageCount}
-                    pageSize={pageSize}
-                    canPreviousPage={canPreviousPage}
-                    previousPage={previousPage}
-                    pageOptions={pageOptions}
-                    gotoPage={gotoPage}
-                    canNextPage={canNextPage}
-                    nextPage={nextPage}
-                />
+                            ))}
+                        </thead>
+                      
+                        <tbody {...getTableBodyProps()} stle={{ width: "100%" }} >
 
+                            {page.map((row) => {
+                                prepareRow(row);
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map((cell) => {
+                                            return (
+                                                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                            );
+                                        })}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                    {
+                        !rows.length && (
+                            <div style={{ height: "55vh", width: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
+                                <h1 style={{ color: "#5A607F" }}>No Result Found</h1>
+                            </div>
+                        )
+                    }
+                {/* </div> */}
+                {/* for the pagination section */}
+                {/* <div style={{ maxWidth: '100%', height: '4%' }}>
+                    <div style={{
+                        position: "fixed",
+                        top: "95%",
+                        width: "100%",
+                        zindex: "5",
+                        backgroundColor: '#f4f7fc'
+                    }}  > */}
+                        <Pagination
+                            page={page}
+                            pageIndex={pageIndex}
+                            pageCount={pageCount}
+                            pageSize={pageSize}
+                            canPreviousPage={canPreviousPage}
+                            previousPage={previousPage}
+                            pageOptions={pageOptions}
+                            gotoPage={gotoPage}
+                            canNextPage={canNextPage}
+                            nextPage={nextPage}
+                        />
+                    {/* </div> */}
+                {/* </div> */}
             </div>
-
         </Fragment >
     );
 }
