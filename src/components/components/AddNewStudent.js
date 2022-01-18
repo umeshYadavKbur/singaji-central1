@@ -107,7 +107,8 @@ function AddNewStudentPage({AddNewStudent}) {
         thirdInstallmentDate: editData ? editData.ThirdinstallmentDate : "",
         thirdInstallment: editData ? editData.Thirdinstallment : 0,
 
-        feesScheme: editData ? editData.feesScheme : 'fullFees',
+        feesScheme: editData ? editData.feesScheme : 'none',
+        sponsorshipType: 'none',
         courseFees: editData ? editData.Totalfee : "",
         regisrationFees: editData ? editData.reg_Fees : "1500",
         postmatricScolarship: editData ? editData.Is_Postmetric : "no",
@@ -647,7 +648,6 @@ function AddNewStudentPage({AddNewStudent}) {
                                             <label className="addStdLable" >
 
                                                 <input type="radio" onChange={formik.handleChange}
-                                                    defaultChecked={editData ? editData.gender : ''}
                                                     onBlur={formik.handleBlur} name="gender" value="male" defaultChecked={editData ? editData.gender === "male" ? true : false : true} />
                                                 {' '} Male
 
@@ -967,13 +967,12 @@ function AddNewStudentPage({AddNewStudent}) {
                                 </div>
                                 <div className='row m-1'>
                                     <div className="col" style={{marginTop: '7px'}}>
-                                        <label className="addStdLable" htmlFor="">Scheme Fees*</label>
+                                        <label className="addStdLable" htmlFor=""> Fees Scheme*</label>
                                         <select name="feesScheme" value={formik.values.feesScheme} onChange={formik.handleChange}
                                             onBlur={formik.handleBlur} className={formik.touched.feesScheme ? `form-select ${formik.errors.feesScheme ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
+                                            <option value='none'>None</option>
                                             <option value='fullFees'>Full Fees</option>
-                                            <option value='SNS_SVS'>SNS_SVS</option>
                                             <option value='oneShot'>One Shot</option>
-                                            <option value='Rewa'>Rewa</option>
                                             <option value='OnlyScholarShip'>OnlyScholarShip</option>
                                         </select>
                                         {formik.errors.feesScheme && formik.touched.feesScheme ? (
@@ -985,15 +984,22 @@ function AddNewStudentPage({AddNewStudent}) {
                                         )}
                                     </div>
                                     <div className="col" style={{marginTop: '7px'}}>
-                                        {/* <label className="addStdLable" htmlFor="">Course* Fees</label> <input
-                             onChange={formik.handleChange}
-                             onBlur={formik.handleBlur}
-                             value={formik.values.firstName}
-                                name="courseFees"
-                                type="text"
-                                className={formik.touched.firstName ? `form-control ${formik.errors.firstName ? "invalid" : ""}` :'form-control'}
-                                placeholder="Course Fees"
-                            /> */}
+                                        <label className="addStdLable" htmlFor="">Sponsorship Type*</label>
+                                        <select name="sponsorshipType"
+                                         value={ formik.values.feesScheme !== "none"? formik.values.sponsorshipType = "none":formik.values.sponsorshipType}
+                                          onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur} className={formik.touched.sponsorshipType ? `form-select ${formik.errors.sponsorshipType ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select" disabled={formik.values.feesScheme === "none"? false : true } >
+                                            <option value='none'>None</option>
+                                            <option value='SNS_SVS'>SNS_SVS</option>
+                                            <option value='Rewa'>Rewa</option>
+                                        </select>
+                                        {formik.errors.sponsorshipType && formik.touched.sponsorshipType ? (
+                                            <div className="text-danger fs-6">
+                                                {formik.errors.sponsorshipType}
+                                            </div>
+                                        ) : (
+                                            ""
+                                        )}
                                     </div>
                                     <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">Second Installment*</label>  <NumberFormat
@@ -1340,20 +1346,22 @@ function AddNewStudentPage({AddNewStudent}) {
                         height: '100%',
                         width: '100%',
                         position: "fixed",
-                        left: "80%",
+                        left: "83%",
                         top: "90%",
                         zindex: "5000",
                     }}  >{editData ?
-                        <button className="btn btn-sm btn-warning text-light fw-bold" type="submit"
+                        <button className="btn btn-sm btn-primary text-light fw-bold" type="submit"
                             style={{
                                 width: "220px",
-                                maxHeight: '29PX',
+                                maxHeight: '35px',
+                                backgroundColor:'rgb(75 0 255)'
                             }}
                         >Update</button> :
                         <button className="btn btn-sm btn-warning text-light fw-bold" type="submit"
                             style={{
                                 width: "220px",
-                                maxHeight: '29PX',
+                                maxHeight: '35px',
+                                backgroundColor:'orange'
                             }}
                         >Submit</button>}
                     </div>
