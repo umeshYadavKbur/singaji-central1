@@ -18,7 +18,7 @@ import {
     CPopover,
 } from "@coreui/react";
 import filtericon from "../../assests/image/AccountIcons/filter.svg";
-// import { CSVLink } from "react-csv";
+import { CSVLink } from "react-csv";
 import { DateRangePicker, Tooltip, Whisper } from "rsuite";
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
@@ -36,12 +36,6 @@ import Loader from "../../assests/common/Loader";
 import AvatarImg from '../../assests/image/Avtar.jpeg'
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
 
-
-
-
-//importing for downloading data
-import { useExportData } from "react-table-plugins";
-import Papa from "papaparse";
 import OfflinePage from '../../auth/OfflinePage';
 
 
@@ -171,8 +165,6 @@ function SelectColumnFilter({
                         <button
                             onClick={(e) => { e.preventDefault() }}
                             className="btn filter_btn"
-
-
                         >
                             {name}
                         </button>
@@ -226,33 +218,6 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
 function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData, accountAction }) {
     const [is_dailyReport, set_is_dailyReport] = useState(false)
     const [MoneyCount, setMoneyCount] = useState({ TStudent: 0, TAmount: 0, TpaidAmount: 0, RAmount: 0, WaiveOff: 0, TpaidAmountByDailyReport: 0 });
-    const [exportCsv, setExportCsv] = useState([])
-
-
-
-    //for exporting data in csv
-    function getExportFileBlob({ columns, data, fileType, fileName }) {
-        if (fileType === "csv") {
-            // CSV Export
-            const headerNames = columns.map((col) => col.exportValue);
-            const csvString = Papa.unparse({ fields: headerNames, data });
-            return new Blob([csvString], { type: "text/csv" });
-        }
-        //PDF Export
-        if (fileType === "pdf") {
-            //Check it out here 
-            console.log('====================================');
-            console.log("CAlled ", data);
-            console.log('====================================');
-            setExportCsv(data)
-            downloadPdf(exportCsv)
-
-            return false;
-        }
-
-        // Other formats goes here
-        return false;
-    }
 
     React.useEffect(() => {
         var config = {
@@ -612,7 +577,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     const [columns, setColoumns] = useState(mainColoumns)
     const showDailyReport = async () => {
         setLoading(true)
-
         function convert(str) {
             var date = new Date(str),
                 mnth = ("0" + (date.getMonth() + 1)).slice(-2),
@@ -622,7 +586,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
         var first = convert(date.a)
         var last = convert(date.b)
-
         var config = {
             method: "GET",
             url: `${AllUrl.dailyReport}${first}&${last}`,
@@ -661,20 +624,20 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         selectedFlatRows,
         state,
         setGlobalFilter,
-        exportData,
+        // exportData,
         preGlobalFilteredRows,
         prepareRow,
     } = useTable(
         {
             columns,
             data: studentData.table_data,
-            getExportFileBlob,
+            // getExportFileBlob,
         },
         useGlobalFilter,
         useFilters,
         useSortBy,
         usePagination,
-        useExportData,
+        // useExportData,
         useRowSelect,
         (hooks) => {
             hooks.visibleColumns.push((columns) => {
@@ -695,31 +658,32 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     );
 
     const { globalFilter, pageSize, pageIndex, } = state;
-    // var exportData = [];
-    // var exportCsv = [];
+
+
+    var exportData = [];
+    var exportCsv = [];
 
     const checkboxData = JSON.stringify(
         {
             selectedFlatRows: selectedFlatRows.forEach((row) => {
                 let data = Object.assign({}, row.original);
-                // console.log(data);
+                console.log(data);
                 delete data.photo;
                 if (data?.ReceivedAmount)
                     data.ReceivedAmount = (data?.ReceivedAmount)?.toString();
-
                 console.log(data);
-                // exportData.push(data)
+                exportData.push(data)
                 // console.log(selectedData);
                 exportCsv.push(data)
-            }
-            )
-            // console.log);
+            })
         },
         null,
         2
     );
     console.log(checkboxData)
-    /// for download pdf
+    //  for download pdf
+
+
 
     const getBackPosition = () => {
         backOriginal()
@@ -778,7 +742,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                     getBackPosition()
                                     set_is_dailyReport(false)
                                 }}
-                                    onOk={showDailyReport}
+                                    // onOk={showDailyReport}
                                     onChange={(value) => {
 
                                         if (!value) {
@@ -800,19 +764,10 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                 </button>
                                 <div class="dropdown-menu mt-1">
                                     <div >
-                                        <button className="dropdown-item" style={{ fontWeight: 'bold' }}
-                                            onClick={() => {
-                                                exportData("csv", false);
-                                            }}
-                                        >
-                                            Excel
-                                        </button>
-                                    </div>
-                                    {/* {is_dailyReport && */}
-                                    <div className="dropdown-item" onClick={() => {
-                                        exportData("pdf", false)
-                                    }}><b>Pdf</b></div>
-                                    {/* } */}
+                                        <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>                                    </div>
+                                    {is_dailyReport &&
+                                        <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
+                                    }
 
                                 </div>
                             </div>
@@ -885,71 +840,71 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 </div>
                 {/* for the body section  */}
                 {/* <div style={{ width: '100%', height: '70%', paddingBottom: '4%' }}> */}
-                    <table {...getTableProps()} id="customers">
+                <table {...getTableProps()} id="customers">
 
-                        <thead style={{ position: 'sticky', top: '212px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
-                            {headerGroups.map((headerGroup) => (
-                                <tr {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map((column) => (
-                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                            {column.render("header")}
-                                            {console.log(column)}
-                                            {column.id !== 'year' && column.id !== 'trackName' ?
+                    <thead style={{ position: 'sticky', top: '212px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+                        {headerGroups.map((headerGroup) => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                        {column.render("header")}
+                                        {/* {console.log(column)} */}
+                                        {column.id !== 'year' && column.id !== 'trackName' ?
 
-                                                <span>
-                                                    {column.isSorted ? (
-                                                        column.isSortedDesc ? (
-                                                            <img
-                                                                src={updown_sort}
-                                                                style={{ marginLeft: "5px" }}
-                                                                alt=""
-                                                            />
-                                                        ) : (
-                                                            <img
-                                                                src={updown_sort}
-                                                                style={{ marginLeft: "5px" }}
-                                                                alt=""
-                                                            />
-                                                        )
+                                            <span>
+                                                {column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <img
+                                                            src={updown_sort}
+                                                            style={{ marginLeft: "5px" }}
+                                                            alt=""
+                                                        />
                                                     ) : (
-                                                        ""
-                                                    )}
-                                                    {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
-                                                </span>
+                                                        <img
+                                                            src={updown_sort}
+                                                            style={{ marginLeft: "5px" }}
+                                                            alt=""
+                                                        />
+                                                    )
+                                                ) : (
+                                                    ""
+                                                )}
+                                                {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
+                                            </span>
 
-                                                : ''}
+                                            : ''}
 
 
 
-                                        </th>
-                                    ))}
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+
+                    <tbody {...getTableBodyProps()} stle={{ width: "100%" }} >
+
+                        {page.map((row) => {
+                            prepareRow(row);
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {row.cells.map((cell) => {
+                                        return (
+                                            <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                        );
+                                    })}
                                 </tr>
-                            ))}
-                        </thead>
-                      
-                        <tbody {...getTableBodyProps()} stle={{ width: "100%" }} >
-
-                            {page.map((row) => {
-                                prepareRow(row);
-                                return (
-                                    <tr {...row.getRowProps()}>
-                                        {row.cells.map((cell) => {
-                                            return (
-                                                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                                            );
-                                        })}
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                    {
-                        !rows.length && (
-                            <div style={{ height: "55vh", width: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
-                                <h1 style={{ color: "#5A607F" }}>No Result Found</h1>
-                            </div>
-                        )
-                    }
+                            );
+                        })}
+                    </tbody>
+                </table>
+                {
+                    !rows.length && (
+                        <div style={{ height: "55vh", width: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
+                            <h1 style={{ color: "#5A607F" }}>No Result Found</h1>
+                        </div>
+                    )
+                }
                 {/* </div> */}
                 {/* for the pagination section */}
                 {/* <div style={{ maxWidth: '100%', height: '4%' }}>
@@ -960,19 +915,19 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                         zindex: "5",
                         backgroundColor: '#f4f7fc'
                     }}  > */}
-                        <Pagination
-                            page={page}
-                            pageIndex={pageIndex}
-                            pageCount={pageCount}
-                            pageSize={pageSize}
-                            canPreviousPage={canPreviousPage}
-                            previousPage={previousPage}
-                            pageOptions={pageOptions}
-                            gotoPage={gotoPage}
-                            canNextPage={canNextPage}
-                            nextPage={nextPage}
-                        />
-                    {/* </div> */}
+                <Pagination
+                    page={page}
+                    pageIndex={pageIndex}
+                    pageCount={pageCount}
+                    pageSize={pageSize}
+                    canPreviousPage={canPreviousPage}
+                    previousPage={previousPage}
+                    pageOptions={pageOptions}
+                    gotoPage={gotoPage}
+                    canNextPage={canNextPage}
+                    nextPage={nextPage}
+                />
+                {/* </div> */}
                 {/* </div> */}
             </div>
         </Fragment >
