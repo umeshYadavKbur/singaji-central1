@@ -78,7 +78,7 @@ function AddNewStudentPage({AddNewStudent}) {
         tehsil: editData ? editData.tehsil : "",
         district: editData ? editData.district : "",
         email: editData ? editData.email : "",
-        aadharNumber: editData ? editData.aadarNo : "",
+        aadharNumber: editData ? (editData.aadarNo).match(/.{4}/g).join(' ') : "",
         category: editData ? editData.category : "",
         gender: editData ? editData.gender : "male",
         // Personal information end here 
@@ -108,13 +108,13 @@ function AddNewStudentPage({AddNewStudent}) {
         thirdInstallment: editData ? editData.Thirdinstallment : 0,
 
         feesScheme: editData ? editData.feesScheme : 'none',
-        sponsorshipType: 'none',
+        sponsorshipType: editData ? editData.sponsorshipType:'none',
         courseFees: editData ? editData.Totalfee : "",
         regisrationFees: editData ? editData.reg_Fees : "1500",
-        postmatricScolarship: editData ? editData.Is_Postmetric : "no",
+        postmatricScolarship: editData ? (editData.is_Postmetric)?.toLowerCase() : "no",
 
         //remaining
-        gkbScolarship: editData ? editData.Is_GKB : "no",//not working
+        gkbScolarship: editData ? (editData.Is_GKB)?.toLowerCase() : "no",//not working
         gkbOwner: editData ? editData.GaonKiBeti : "self",
         postmatricOwner: editData ? editData.Postmetric : "self",
         payableAmmount: editData ? editData.remain_Amount : "",
@@ -179,16 +179,29 @@ function AddNewStudentPage({AddNewStudent}) {
         busFees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
 
     })
-    // let len=formik.values.aadharNumber;
-    // if(len.length <12)
-    // {
-    //     formik.errors.aadharNumber ="Invalid Aadhar Number"
-    // }
+   
+
+ const updateStudentData  = async(data) => {
+    data.id = editData.id
+    console.log(data);
+     var config = {
+         method: 'post',
+         url: `${allUrls.updateRegisterStudentInfo}`,
+         headers: {
+             'Authorization': `Bearer ${localStorage.getItem("token")}`
+         },
+         data: data
+     }
+     const response = await axios(config)
+    console.log(response);
+}
+
+
+
     const formik = useFormik({
         initialValues,
         validationSchema,
         onSubmit: (values) => {
-
             const bodyData = {
                 "firstName": formik.values.firstName,
                 "lastName": formik.values.lastName,
@@ -235,8 +248,14 @@ function AddNewStudentPage({AddNewStudent}) {
                 "Postmetric": formik.values.postmatricOwner,
                 "Postmetric_Amount": formik.values.postmatricAmount,
                 "is_Postmetric": formik.values.postmatricScolarship,
-                "remark": formik.values.remark
+                "remark": formik.values.remark,
+                "sponsorshipType":formik.values.sponsorshipType,
             }
+
+            editData?
+                updateStudentData(bodyData)
+            :
+
             AddNewStudent(bodyData)
             // console.log(bodyData);
         }
