@@ -78,7 +78,7 @@ function AddNewStudentPage({AddNewStudent}) {
         tehsil: editData ? editData.tehsil : "",
         district: editData ? editData.district : "",
         email: editData ? editData.email : "",
-        aadharNumber: editData ? editData.aadarNo : "",
+        aadharNumber: editData ? (editData.aadarNo).match(/.{4}/g).join(' ') : "",
         category: editData ? editData.category : "",
         gender: editData ? editData.gender : "male",
         // Personal information end here 
@@ -107,13 +107,14 @@ function AddNewStudentPage({AddNewStudent}) {
         thirdInstallmentDate: editData ? editData.ThirdinstallmentDate : "",
         thirdInstallment: editData ? editData.Thirdinstallment : 0,
 
-        feesScheme: editData ? editData.feesScheme : 'fullFees',
+        feesScheme: editData ? editData.feesScheme : 'none',
+        sponsorshipType: editData ? editData.sponsorshipType:'none',
         courseFees: editData ? editData.Totalfee : "",
         regisrationFees: editData ? editData.reg_Fees : "1500",
-        postmatricScolarship: editData ? editData.Is_Postmetric : "no",
+        postmatricScolarship: editData ? (editData.is_Postmetric)?.toLowerCase() : "no",
 
         //remaining
-        gkbScolarship: editData ? editData.Is_GKB : "no",//not working
+        gkbScolarship: editData ? (editData.Is_GKB)?.toLowerCase() : "no",//not working
         gkbOwner: editData ? editData.GaonKiBeti : "self",
         postmatricOwner: editData ? editData.Postmetric : "self",
         payableAmmount: editData ? editData.remain_Amount : "",
@@ -178,16 +179,29 @@ function AddNewStudentPage({AddNewStudent}) {
         busFees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
 
     })
-    // let len=formik.values.aadharNumber;
-    // if(len.length <12)
-    // {
-    //     formik.errors.aadharNumber ="Invalid Aadhar Number"
-    // }
+   
+
+ const updateStudentData  = async(data) => {
+    data.id = editData.id
+    console.log(data);
+     var config = {
+         method: 'post',
+         url: `${allUrls.updateRegisterStudentInfo}`,
+         headers: {
+             'Authorization': `Bearer ${localStorage.getItem("token")}`
+         },
+         data: data
+     }
+     const response = await axios(config)
+    console.log(response);
+}
+
+
+
     const formik = useFormik({
         initialValues,
         validationSchema,
         onSubmit: (values) => {
-
             const bodyData = {
                 "firstName": formik.values.firstName,
                 "lastName": formik.values.lastName,
@@ -234,8 +248,14 @@ function AddNewStudentPage({AddNewStudent}) {
                 "Postmetric": formik.values.postmatricOwner,
                 "Postmetric_Amount": formik.values.postmatricAmount,
                 "is_Postmetric": formik.values.postmatricScolarship,
-                "remark": formik.values.remark
+                "remark": formik.values.remark,
+                "sponsorshipType":formik.values.sponsorshipType,
             }
+
+            editData?
+                updateStudentData(bodyData)
+            :
+
             AddNewStudent(bodyData)
             // console.log(bodyData);
         }
@@ -647,7 +667,6 @@ function AddNewStudentPage({AddNewStudent}) {
                                             <label className="addStdLable" >
 
                                                 <input type="radio" onChange={formik.handleChange}
-                                                    defaultChecked={editData ? editData.gender : ''}
                                                     onBlur={formik.handleBlur} name="gender" value="male" defaultChecked={editData ? editData.gender === "male" ? true : false : true} />
                                                 {' '} Male
 
@@ -967,13 +986,12 @@ function AddNewStudentPage({AddNewStudent}) {
                                 </div>
                                 <div className='row m-1'>
                                     <div className="col" style={{marginTop: '7px'}}>
-                                        <label className="addStdLable" htmlFor="">Scheme Fees*</label>
+                                        <label className="addStdLable" htmlFor=""> Fees Scheme*</label>
                                         <select name="feesScheme" value={formik.values.feesScheme} onChange={formik.handleChange}
                                             onBlur={formik.handleBlur} className={formik.touched.feesScheme ? `form-select ${formik.errors.feesScheme ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
+                                            <option value='none'>None</option>
                                             <option value='fullFees'>Full Fees</option>
-                                            <option value='SNS_SVS'>SNS_SVS</option>
                                             <option value='oneShot'>One Shot</option>
-                                            <option value='Rewa'>Rewa</option>
                                             <option value='OnlyScholarShip'>OnlyScholarShip</option>
                                         </select>
                                         {formik.errors.feesScheme && formik.touched.feesScheme ? (
@@ -985,15 +1003,22 @@ function AddNewStudentPage({AddNewStudent}) {
                                         )}
                                     </div>
                                     <div className="col" style={{marginTop: '7px'}}>
-                                        {/* <label className="addStdLable" htmlFor="">Course* Fees</label> <input
-                             onChange={formik.handleChange}
-                             onBlur={formik.handleBlur}
-                             value={formik.values.firstName}
-                                name="courseFees"
-                                type="text"
-                                className={formik.touched.firstName ? `form-control ${formik.errors.firstName ? "invalid" : ""}` :'form-control'}
-                                placeholder="Course Fees"
-                            /> */}
+                                        <label className="addStdLable" htmlFor="">Sponsorship Type*</label>
+                                        <select name="sponsorshipType"
+                                         value={ formik.values.feesScheme !== "none"? formik.values.sponsorshipType = "none":formik.values.sponsorshipType}
+                                          onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur} className={formik.touched.sponsorshipType ? `form-select ${formik.errors.sponsorshipType ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select" disabled={formik.values.feesScheme === "none"? false : true } >
+                                            <option value='none'>None</option>
+                                            <option value='SNS_SVS'>SNS_SVS</option>
+                                            <option value='Rewa'>Rewa</option>
+                                        </select>
+                                        {formik.errors.sponsorshipType && formik.touched.sponsorshipType ? (
+                                            <div className="text-danger fs-6">
+                                                {formik.errors.sponsorshipType}
+                                            </div>
+                                        ) : (
+                                            ""
+                                        )}
                                     </div>
                                     <div className="col" style={{marginTop: '7px'}}>
                                         <label className="addStdLable" htmlFor="">Second Installment*</label>  <NumberFormat
@@ -1340,20 +1365,22 @@ function AddNewStudentPage({AddNewStudent}) {
                         height: '100%',
                         width: '100%',
                         position: "fixed",
-                        left: "80%",
+                        left: "83%",
                         top: "90%",
                         zindex: "5000",
                     }}  >{editData ?
-                        <button className="btn btn-sm btn-warning text-light fw-bold" type="submit"
+                        <button className="btn btn-sm btn-primary text-light fw-bold" type="submit"
                             style={{
                                 width: "220px",
-                                maxHeight: '29PX',
+                                maxHeight: '35px',
+                                backgroundColor:'rgb(75 0 255)'
                             }}
                         >Update</button> :
                         <button className="btn btn-sm btn-warning text-light fw-bold" type="submit"
                             style={{
                                 width: "220px",
-                                maxHeight: '29PX',
+                                maxHeight: '35px',
+                                backgroundColor:'orange'
                             }}
                         >Submit</button>}
                     </div>

@@ -701,21 +701,21 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
             <div className="container-fluid">
                 {/* for the header section   */}
-                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px', width: '100%', height: '25%' }}>
-                    <div className="row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
-                        <div className=" info-col"  >
+                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px', width: '100%' }}>
+                    <div className="d-flex row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
+                        <div className="col info-col m-2"  >
                             <h5 style={{ marginTop: "12px" }}>{MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
                         </div>
-                        <div className=" info-col" >
+                        <div className="col info-col m-2" >
                             <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? MoneyCount.TAmount : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
                         </div>
-                        <div className=" info-col" >
+                        <div className="col info-col m-2" >
                             <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport : MoneyCount.TpaidAmount} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
                         </div>
-                        <div className=" info-col" >
+                        <div className="col info-col m-2" >
                             <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? MoneyCount.RAmount : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
                         </div>
-                        <div className=" info-col">
+                        <div className="col info-col m-2">
                             <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff : '0'}<br /> <p >Waive Off</p> </h5>
                         </div>
                     </div>
@@ -758,7 +758,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                     }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
                                 <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
                             </div>
-                            <div className="btn-group  ml-1">
+                            <div className="btn-group  ml-3">
                                 <button className="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Download
                                 </button>

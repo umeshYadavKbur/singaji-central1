@@ -17,6 +17,9 @@ import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import * as Yup from "yup";
 import AvatarImg from '../../assests/image/Avtar.jpeg'
+import ToastContainer from 'rsuite/esm/toaster/ToastContainer';
+import { toast } from 'react-toastify';
+import checkBoxImg from '../../assests/image/AccountIcons/thirdInstallmentCheckImg.svg'
 
 
 const StyledModal = styled(ModalUnstyled)`
@@ -66,10 +69,10 @@ function StudentProfile() {
             const branchName = await axios(allUrls.branchList)
             if (branchName.status === 200) {
 
+                setBranchNames(branchName.data)
             }
             // console.log(branchName.data);
             // console.log("branch Name ", branchName.data);
-            setBranchNames(branchName.data)
 
             /////////////////////////
             const villageNamesRes = await axios(allUrls.villageNameList)
@@ -79,7 +82,7 @@ function StudentProfile() {
             setVillageNames(newVillageName);
         }
         getData();
-    })
+    },[]);
 
 
     const [open, setOpen] = React.useState(false);
@@ -99,7 +102,8 @@ function StudentProfile() {
 
     const initialValues = {
 
-        studentName: StudentName,
+        firstName: StudentProfileData.accountInfo.firstName,
+        lastName: StudentProfileData.accountInfo.lastName,
         fatherName: StudentProfileData.accountInfo.fathersName,
         contactNumber: StudentProfileData.accountInfo.mobile,
         FatherContactNumber: StudentProfileData.accountInfo.fatherContactNumber,
@@ -109,7 +113,7 @@ function StudentProfile() {
         aadharNumber: StudentProfileData.accountInfo.aadarNo,
         year: StudentProfileData.accountInfo.year,
         EnrollmentNumber: '',
-
+        accountStatus: StudentProfileData ? StudentProfileData.accountInfo.is_active : '',
         remark:   StudentProfileData?StudentProfileData.accountInfo.remark:'',
         ThirdinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.ThirdinstallmentDate:'',
         Thirdinstallment: StudentProfileData ? StudentProfileData.accountInfo.Thirdinstallment:'',
@@ -133,7 +137,7 @@ function StudentProfile() {
         year: Yup.string().required("Required!"),
         aadharNumber: Yup.string().trim().required("Required!").test('len', 'Must be exactly 12 digits', val => val?.replace('X', '').length === 14),
         village: Yup.string().required("Required!").trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates'),
-        EnrollmentNumber: Yup.string().required("Required!").trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates'),
+        // EnrollmentNumber: Yup.string().required("Required!"),
         streamName: Yup.string().required("Required!"),
 
 
@@ -142,57 +146,181 @@ function StudentProfile() {
     const formik = useFormik({
         initialValues,
         validationSchema,
-        onSubmit: (values) => {
+        onSubmit: async(values) => {
             console.log(values);
-            const UpdatePersonalInfoData = {
-                "stdId": StudentProfileData.accountInfo.stdId,
-                "firstName": "sandhya",
-                "lastName": "jaiswal",
-                "photo": null,
-                "branch": formik.values.streamName,
-                "fathersName": formik.values.fatherName,
-                "dob": formik.values.dob,
-                "mobile": formik.values.contactNumber,
-                "fatherContactNumber": formik.values.FatherContactNumber,
-                "email": "sandhya123@gmail.com",
-                "schoolName": "fifth mountain academy",
-                "school12sub": "pcm",
-                "persentage12": "84",
-                "rollNumber12": "1234568765",
-                "persentage10": "84",
-                "rollNumber10": "123456756",
-                "aadarNo": formik.values.aadharNumber,
-                "fatherOccupation": "farmer",
-                "fatherIncome": "10000",
-                "category": "obc",
-                "gender": "male",
-                "pincode": "4553356",
-                "trackName": "khategaon",
-                "address": "gram-agarda",
-                "village": formik.values.village,
-                "tehsil": "khategaon",
-                "district": "dewas"
-            }
-            var config = {
-                method: 'post',
-                url: allUrls.updatePersonalInformation,
-                headers: {
-                    'Authorization': `Bearer  ${localStorage.getItem("token")}`,
-                    'Content-Type': 'application/json'
-                },
-                // data: UpdatePersonalInfoData
-            };
-            console.log(config, UpdatePersonalInfoData)
-
-            // const response = await axios(config)
-            // console.log(response);
         }
     })
-    // formik.setFieldValue('village',StudentProfileData.accountInfo.village)
+
+    
+    const updatePersonalInformation = async() => {
+        
+        const UpdatePersonalInfoData = {
+            "stdId": StudentProfileData.accountInfo.stdId,
+            "firstName": formik.values.firstName,
+            "lastName": formik.values.lastName,
+            "branch": formik.values.streamName,
+            "fathersName": formik.values.fatherName,
+            "dob": formik.values.dob,
+            "mobile": formik.values.contactNumber,
+            "fatherContactNumber": formik.values.FatherContactNumber,
+            "aadarNo": formik.values.aadharNumber,
+            "village": formik.values.village,
+            "enrollmentNo": formik.values.EnrollmentNumber,
+
+        }
+        var config = {
+            method: 'post',
+            url: allUrls.updatePersonalInformation,
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                'Content-Type': 'application/json'
+            },
+            data: UpdatePersonalInfoData
+        };
+        // console.log(config, UpdatePersonalInfoData)
+
+        const response = await axios(config)
+        if(response.status === 200){
+            toast.success('Personal Information Successfully Updated',{
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+        else if(response.status === 400){
+            toast.warn('Invalid Email',{
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            }); 
+        }
+        else if(response.status === 406) 
+        {
+            toast.warn('User Not Found',{
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });         }
+        else 
+        {
+            toast.warn('Internal server error',{
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });         }
+        // console.log(response.status);
+    
+    }
+    const updateAccountInformation = async() => {
+        
+        const UpdatePersonalInfoData = {
+            "stdId": StudentProfileData.accountInfo.stdId,
+            "is_active": formik.values.accountStatus,
+            "feesScheme": formik.values.feesScheme,
+            "Tutionfee": formik.values.Tutionfee,
+            "Scholarship": '',
+            "reg_Fees": formik.values.reg_Fees,
+            "Busfee": formik.values.Busfee,
+            "GKB_Amount": formik.values.GKB_Amount,
+            "Firstinstallment": formik.values.Firstinstallment,
+            "FirstinstallmentDate": formik.values.FirstinstallmentDate,
+            "Secondinstallment": formik.values.Secondinstallment,
+            "SecondinstallmentDate": formik.values.SecondinstallmentDate,
+            "Thirdinstallment": formik.values.Thirdinstallment,
+            "ThirdinstallmentDate": formik.values.ThirdinstallmentDate,
+            "remark": formik.values.remark
+        }
+        var config = {
+            method: 'post',
+            url: allUrls.updatePersonalInformation,
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                'Content-Type': 'application/json'
+            },
+            data: UpdatePersonalInfoData
+        };
+        // console.log(config, UpdatePersonalInfoData)
+
+        const response = await axios(config)
+        if(response.status === 200){
+            toast.success('Personal Information Successfully Updated',{
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+        else if(response.status === 400){
+            toast.warn('Invalid Email',{
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            }); 
+        }
+        else if(response.status === 406) 
+        {
+            toast.warn('User Not Found',{
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });         }
+        else 
+        {
+            toast.warn('Internal server error',{
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });         }
+        // console.log(response.status);
+    
+    }
 
     return (
         <div>
-
+            <ToastContainer
+                position="top-center"
+                autoClose={2500}
+                hideProgressBar={true}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                
+            />
+            <form onSubmit={formik.handleSubmit}>
 
             <div className="row my-3 me-3 ms-2" style={{backgroundColor: '#E6E9F4', borderRadius: '8px' }}>
                 <div className="col-2 my-5">
@@ -232,7 +360,7 @@ function StudentProfile() {
                 BackdropComponent={Backdrop}
             >
                 <Box sx={style}  >
-                    <form onSubmit={formik.handleSubmit}>
+                 
 
                         <div style={{ borderRadius: '5px' }}>
 
@@ -244,23 +372,49 @@ function StudentProfile() {
                                 <div className="row">
                                     <div className='row m-1'>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Student Name</label>  <input
+                                            <label className="addStdLable" htmlFor="">First Name</label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
-                                                value={formik.values.studentName}
-                                                name="studentName"
+                                                value={formik.values.firstName}
+                                                name="firstName"
                                                 type="text"
-                                                className={formik.touched.studentName ? `form-control ${formik.errors.studentName ? "invalid" : ""}` : 'form-control'}
-                                                placeholder="Student name"
+                                                className={formik.touched.firstName ? `form-control ${formik.errors.firstName ? "invalid" : ""}` : 'form-control'}
+                                                placeholder="First name"
                                             />
-                                            {formik.errors.studentName && formik.touched.studentName ? (
+                                            {formik.errors.firstName && formik.touched.firstName ? (
                                                 <div className="text-danger fs-6">
-                                                    {formik.errors.studentName}
+                                                    {formik.errors.firstName}
                                                 </div>
                                             ) : (
                                                 ""
                                             )}
                                         </div>
+                                        <div className="col">
+                                            <label className="addStdLable" htmlFor="">Last Name</label>  <input
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.lastName}
+                                                name="lastName"
+                                                type="text"
+                                                className={formik.touched.lastName ? `form-control ${formik.errors.lastName ? "invalid" : ""}` : 'form-control'}
+                                                placeholder="Last Name"
+                                            />
+                                            {formik.errors.lastName && formik.touched.lastName ? (
+                                                <div className="text-danger fs-6">
+                                                    {formik.errors.lastName}
+                                                </div>
+                                            ) : (
+                                                ""
+                                            )}
+                                        </div>
+                                       
+
+
+
+                                    </div>
+
+                                    {/* Second Four Input Field */}
+                                    <div className='row m-1'>
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Father Name</label>  <input
                                                 onChange={formik.handleChange}
@@ -280,13 +434,6 @@ function StudentProfile() {
                                             )}
                                         </div>
 
-
-
-                                    </div>
-
-                                    {/* Second Four Input Field */}
-                                    <div className='row m-1'>
-
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Contact Number</label>
                                             <NumberFormat onChange={formik.handleChange}
@@ -302,6 +449,11 @@ function StudentProfile() {
                                             )}
                                         </div>
 
+                                        
+
+                                    </div>
+
+                                    <div className='row m-1'>
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Father Contact</label>
                                             <NumberFormat onChange={formik.handleChange}
@@ -318,10 +470,6 @@ function StudentProfile() {
                                                 ""
                                             )}
                                         </div>
-
-                                    </div>
-
-                                    <div className='row m-1'>
 
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Stream Name</label>
@@ -345,27 +493,7 @@ function StudentProfile() {
                                             )}
 
                                         </div>
-                                        <div className="col">
-                                            <label className="addStdLable" htmlFor="">Year</label>
-
-                                            <select name="year" value={formik.values.year} onBlur={formik.handleBlur}
-
-                                                onChange={formik.handleChange} className={formik.touched.year ? `form-select ${formik.errors.year ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
-
-                                                <option value='I'>I</option>
-                                                <option value='II'>II</option>
-                                                <option value='III'>III</option>
-
-                                            </select>
-                                            {formik.errors.year && formik.touched.year ? (
-                                                <div className="text-danger fs-6">
-                                                    {formik.errors.year}
-                                                </div>
-                                            ) : (
-                                                ""
-                                            )}
-
-                                        </div>
+                                      
                                     </div>
                                     <div className='row m-1'>
                                         <div className="col">
@@ -458,12 +586,12 @@ function StudentProfile() {
                                     <div className="d-flex justify-content-end mt-3 m-1">
                                         <div className='me-3'>
                                             <button style={{width: '116px'}} type='submit' onClick={handleClose} className='btn  btn-light m-1'>Cancel</button>
-                                            <button style={{width: '116px'}} type='submit' className='btn  btn-primary m-1' >Update</button>
+                                            <button style={{width: '116px'}} type='submit' onClick={updatePersonalInformation} className='btn  btn-primary m-1' >Update</button>
                                         </div></div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    
                 </Box>
             </StyledModal>
 
@@ -486,7 +614,10 @@ function StudentProfile() {
                         <div className="row">
                             <div className="col">
                                 <label htmlFor="">Account status</label>
-                                <input name="harsh" onChange={formik.handleChange} value={formik.values.harsh} type="text" className='form-control' placeholder='Account status' />
+                                    <select name="accountStatus" value={formik.values.accountStatus} onChange={formik.values.accountStatus} className='form-control' >
+                                        <option value="true">Active</option>
+                                        <option value="false">Deactive</option>
+                                    </select>
                             </div>
                             <div className="col">
                                 <label htmlFor="">Fees Scheme</label>
@@ -497,7 +628,7 @@ function StudentProfile() {
                                 <input name="Tutionfee" onChange={formik.handleChange} value={formik.values.Tutionfee} type="number" className='form-control' placeholder='Course Fees' />
                             </div>
                             <div className="col">
-                                <label htmlFor="">Scolarship Type</label>
+                                <label htmlFor="">Sponsorship Type</label>
                                 <input name="harsh" onChange={formik.handleChange} value={formik.values.harsh} type="number" className='form-control' placeholder='Father contact' />
                             </div>
                         </div>
@@ -542,10 +673,12 @@ function StudentProfile() {
                         </div>
 
                         <div className="row">
-                            <div className="col">
-                                <label htmlFor="">Third Installment</label>
-                                <input name="Thirdinstallment" onChange={formik.handleChange} value={formik.values.Thirdinstallment} type="number" className='form-control' placeholder='Third Installment' />
-                            </div>
+                           
+                                <div className='col'><label htmlFor="">Third Installment</label>
+                                    <input name="Thirdinstallment" onChange={formik.handleChange} value={formik.values.Thirdinstallment} type="number" className='form-control' placeholder='Third Installment' />
+                                  
+                                    <img  src={checkBoxImg} alt="." />
+                           </div>
                             <div className="col">
                                 <label htmlFor="">Third Installment date</label>
                                 <input name="ThirdinstallmentDate" onChange={formik.handleChange} value={formik.values.ThirdinstallmentDate} type="date" className='form-control' placeholder='Third Installment date' />
@@ -554,15 +687,33 @@ function StudentProfile() {
                                 <label htmlFor="">Remark</label>
                                 <input name="remark" onChange={formik.handleChange} value={formik.values.remark} type="text" className='form-control' placeholder='Remark' />
                             </div>
-                            <div className="col-3">
-                               
+                            <div className="col">
+                                <label className="addStdLable" htmlFor="">Year</label>
+
+                                <select name="year" value={formik.values.year} onBlur={formik.handleBlur}
+
+                                    onChange={formik.handleChange} className={formik.touched.year ? `form-select ${formik.errors.year ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
+
+                                    <option value='I'>I</option>
+                                    <option value='II'>II</option>
+                                    <option value='III'>III</option>
+
+                                </select>
+                                {formik.errors.year && formik.touched.year ? (
+                                    <div className="text-danger fs-6">
+                                        {formik.errors.year}
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+
                             </div>
                         </div>
 
                         <div className="d-flex  justify-content-end my-4" >
                             <div className="me-2">
                                 
-                                    <button className="btn btn-sm btn-primary text-light fw-bold m-1 " style={{width: "250px",height: "40px"}} type="submit">Update</button>
+                                    <button className="btn btn-sm btn-primary text-light fw-bold m-1 " style={{width: "250px",height: "40px"}} type="submit" onClick={updateAccountInformation} >Update</button>
                             </div>
                         </div>
 
@@ -570,6 +721,7 @@ function StudentProfile() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
+            </form>
         </div>
     )
 }

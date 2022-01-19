@@ -281,7 +281,7 @@ function FeesRecipt({ accountAction }) {
                         <div className="col">
                             <label htmlFor="">Pay By</label>
                             <select name="payBy" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.payBy} className='form-select'>
-                                <option defaultValue="Case">Case</option>
+                                <option defaultValue="Cash">Cash</option>
                                 <option value="Online">Online</option>
                                 <option value="Cheque">Cheque</option>
                             </select>
@@ -407,7 +407,7 @@ function FeesRecipt({ accountAction }) {
                                 <label htmlFor="">Year</label>
                             </div>
                             <div className="col">
-                                <label htmlFor="">Fees Ammount</label>
+                                <label htmlFor="">Fees Amount</label>
                             </div>
                             <div className="col">
                                 <label htmlFor="">Recieved Fee</label>

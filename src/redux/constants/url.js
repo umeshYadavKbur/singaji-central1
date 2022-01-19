@@ -36,6 +36,7 @@ const AllUrl = {
     verifyStudent: `${baseUrl}/api/varify_student`,
     verifyStudentPaidUnpaid: `${baseUrl}/api/reg_fees_status`,
     addNewStudent: `${baseUrl}/api/register`,
+    updateRegisterStudentInfo: `${baseUrl}/api/update_registrated_students`,
     updatePersonalInformation: `${baseUrl}/api/update_personal_info`,// update the personal information of a particular student 
     updateAccountInformation: `${baseUrl}/api/update_account_info`,// update the Account information of a particular student 
     allInfoOfActiveStudent: `${baseUrl}/api/all_info_of_active_student`,// get the all data about student related
