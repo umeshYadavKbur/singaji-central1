@@ -88,7 +88,7 @@ const downloadPdf = (data) => {
             doc.text(ele.village, xPosition + 711, yPosition + (i * H))
             doc.text((ele.ReceivedAmount)?.toString(), xPosition + 858, yPosition + (i * H))
             doc.text(ele.AccountsReceiptDate, xPosition + 1082, yPosition + (i * H))
-            doc.text('-', xPosition + 1238, yPosition + (i * H))
+            // doc.text('-', xPosition + 1238, yPosition + (i * H))
 
 
         });
@@ -96,7 +96,7 @@ const downloadPdf = (data) => {
 
     doc.setFillColor('#F4F7FC');
     doc.rect(0, footerHeight - 56, width, 56, 'F')
-    doc.text('Copy right SSISM.ORG', (width / 2) - 42, footerHeight - 23)
+    doc.text('Total / --',xPosition + 48,  footerHeight - 23)
     doc.text(ReceivedAmount.toString(), xPosition + 858, footerHeight - 23)
 
     doc.output('pdfobjectnewwindow');

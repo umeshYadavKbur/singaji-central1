@@ -244,10 +244,10 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         let WaiveOff = 0;
         let TpaidAmountByDailyReport = 0;
         data.forEach((ele) => {
-            RAmount += ele?.remain_Amount
-            TAmount += ele?.total_Fees
+            RAmount += ele?.RemainAmount
+            TAmount += ele?.TotalFees
 
-            TpaidAmount += ele?.received_Amount;
+            TpaidAmount += ele?.ReceivedAmount;
             TpaidAmountByDailyReport += ele?.ReceivedAmount
             WaiveOff += ele?.WaiveOff;
         })
@@ -444,7 +444,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         },
         {
             header: 'Received Fee',
-            accessor: 'received_Amount',
+            accessor: 'ReceivedAmount',
             Cell: ({ row: { original } }) => (
                 <div className='circle-main '>
                     <div className="">
@@ -453,7 +453,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     </div>
                     <div className="">
                         <span className='' >
-                            {original.received_Amount}
+                            {original.ReceivedAmount}
                         </span>
                     </div>
                 </div>
@@ -476,7 +476,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
         {
             header: 'Pending Fee',
-            accessor: 'remain_Amount',
+            accessor: 'RemainAmount',
             Cell: ({ row: { original } }) => (
                 <div className='circle-main '>
                     <div className="">
@@ -485,7 +485,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     </div>
                     <div className="" >
                         <span className='' >
-                            {original.remain_Amount}
+                            {original.RemainAmount}
                         </span>
                     </div>
                 </div>
