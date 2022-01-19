@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Fragment, useMemo } from "react";
-import downloadPdf from "./PdfGenerator";
+import downloadPdf from "./PdfGeneratorDailyReport";
+import downloadPdfStudentList from './PdfGeneratorStudentList'
 import {
     useTable,
     useFilters,
@@ -765,8 +766,10 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                 <div class="dropdown-menu mt-1">
                                     <div >
                                         <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>                                    </div>
-                                    {is_dailyReport &&
+                                    {is_dailyReport ?
                                         <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
+                                        :
+                                        <div className="dropdown-item" onClick={() => { downloadPdfStudentList(exportCsv) }}><b>Pdf</b></div>
                                     }
 
                                 </div>
