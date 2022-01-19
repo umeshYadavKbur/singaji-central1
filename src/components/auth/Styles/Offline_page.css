@@ -1,0 +1,25 @@
+.main-div{
+    background-color: #F4F7FC;
+    background-position: center;
+    background-size: cover;
+    display: block;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+.offline-svg{
+    /* margin-top: %; */
+    height: 100px;
+    display: block;
+    margin-top: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+    width: 100px;
+}
+
+.offline-text{
+    color: blueviolet;
+}
