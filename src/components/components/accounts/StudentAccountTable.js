@@ -742,7 +742,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                     getBackPosition()
                                     set_is_dailyReport(false)
                                 }}
-                                    // onOk={showDailyReport}
+                                    onOk={showDailyReport}
                                     onChange={(value) => {
 
                                         if (!value) {
