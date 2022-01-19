@@ -344,7 +344,7 @@ function AddNewStudentPage({AddNewStudent}) {
     return (
         <>
 
-            <div className='addnewstudent mx-auto px-3'>
+            <div className='d-flex addnewstudent mx-auto px-3'>
                 <form onSubmit={formik.handleSubmit}>
                     {/* Personal Details */}
                     <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel1 === true} onChange={handleChange('panel1')}>
