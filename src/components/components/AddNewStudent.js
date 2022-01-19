@@ -14,6 +14,8 @@ import AddNewStudent from '../../redux/actionDispatcher/superAdmin/addNewStudent
 import {connect} from 'react-redux';
 import NumberFormat from 'react-number-format';
 import allUrls from '../../redux/constants/url'
+import Swal from 'sweetalert2';
+
 
 function AddNewStudentPage({AddNewStudent}) {
     var editData = JSON.parse(localStorage.getItem('RegistrationEdit'))
@@ -194,6 +196,28 @@ function AddNewStudentPage({AddNewStudent}) {
      }
      const response = await axios(config)
     console.log(response);
+    if(response.status === 200)
+    {
+        Swal.fire({
+
+            title: '<i class="far fa-check-circle" ></i> Success',
+            html:
+                '<hr/>' +
+                'Successfully Updated ',
+            showConfirmButton: false,
+            // showCloseButton:true,
+            timer: 2500,
+            showClass: {
+                backdrop: 'swal2-noanimation', // disable backdrop animation
+                popup: '',                     // disable popup animation
+                icon: ''                       // disable icon animation
+            },
+            hideClass: {
+                popup: '',                     // disable popup fade-out animation
+            }
+
+        })
+    }
 }
 
 
