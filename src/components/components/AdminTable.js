@@ -91,11 +91,10 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             showCancelButton: true,
                             showConfirmButton: true,
                             // cancelButtonText: 'Cancel',
-                            cancelButtonText: `${original.is_active === 0 ? 'Active' : 'Deactive'} `,
+                            cancelButtonText: 'Cancle',
                             confirmButtonText: `${original.is_active === 0 ? 'Active' : 'Deactive'} `,
                             // confirmButtonText:'Deactive',
                             reverseButtons: true,
-                           
                             showCloseButton: true,
                             cancelButtonColor: 'gray',
                             confirmButtonColor: "#4f83df",
