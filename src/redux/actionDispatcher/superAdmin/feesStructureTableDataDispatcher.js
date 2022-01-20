@@ -6,9 +6,14 @@ import {
   FEES_STRUCTURE_CHANGE_STATUS,
   FEES_STRUCTURE_CHANGE_SUCCESS,
   FEES_STRUCTURE_CHANGE_FAIL,
+  CHANGE_TOTAL_FEES,
+  CHANGE_TOTAL_FEES_SUCCESS,
+  CHANGE_TOTAL_FEES_FAIL,
 } from "../../constants/actions";
 import AllUrl from "../../constants/url";
-import { toast } from 'react-toastify'
+import {
+  toast
+} from 'react-toastify'
 
 
 export const fetchFeesTableData = (data) => {
@@ -125,8 +130,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
         draggable: true,
         progress: undefined,
       });
-    }
-    else if (response.status === 500) {
+    } else if (response.status === 500) {
       if (visible) {
         setVisible(!visible)
       }
@@ -141,8 +145,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
         draggable: true,
         progress: undefined,
       });
-    }
-    else {
+    } else {
       if (visible) {
         setVisible(!visible)
       }
@@ -160,6 +163,109 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
   }
 };
 
+
+export const changeTotalFees = (data, setVisible, visible) => {
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+
+    const getUpdatedTableData = async () => {
+      var config = {
+        method: "GET",
+        url: AllUrl.allSchemaList,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      var response = await axios(config);
+      dispatch(fetchSuccessTableData(response.data));
+    }
+
+    dispatch(changeTotalFeesReq());
+
+    var response = await axios(data);
+    // console.log(response);
+    if (response.status === 200) {
+      if (visible) {
+        setVisible(!visible)
+      }
+      toast.success('Update successfully !', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(changeTotalFeesSuccess());
+      getUpdatedTableData();
+    } else if (response.status === 400) {
+      if (visible) {
+        setVisible(!visible)
+      }
+      // let value = JSON.stringify(response.status);
+      dispatch(changeTotalFeesFail());
+      toast.warn('Internal Server Error', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response.status === 500) {
+      if (visible) {
+        setVisible(!visible)
+      }
+      // let value = JSON.stringify(response.status);
+      dispatch(changeTotalFeesFail());
+      toast.error("Internal Server Error", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      if (visible) {
+        setVisible(!visible)
+      }
+      toast.error("Internal Server Error", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(changeTotalFeesFail(response))
+    }
+  }
+};
+
+
+
+const changeTotalFeesReq = () => {
+  return {
+    type: CHANGE_TOTAL_FEES,
+  };
+};
+
+const changeTotalFeesSuccess = () => {
+  return {
+    type: CHANGE_TOTAL_FEES_SUCCESS,
+  };
+};
+const changeTotalFeesFail = () => {
+  return {
+    type: CHANGE_TOTAL_FEES_FAIL,
+  };
+};
 const fetchTableData = () => {
   return {
     type: FETCH_FEES_STRUCT_TABLE_DATA,
