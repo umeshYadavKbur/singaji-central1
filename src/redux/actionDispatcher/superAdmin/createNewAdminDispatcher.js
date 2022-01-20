@@ -37,7 +37,7 @@ export const createNewAdmin = (data, navigate) => {
               progress: undefined,
             });
           } else if (response.status === 208) {
-            dispatch(newAdminReqSuccess());
+            dispatch(newAdminReqFail());
             Swal.fire({
               position: 'top-center',
               icon: 'info',
@@ -46,7 +46,7 @@ export const createNewAdmin = (data, navigate) => {
               timer: 2500
             })
           } else if (response.status === 404) {
-            dispatch(newAdminReqSuccess());
+            dispatch(newAdminReqFail());
             Swal.fire({
               position: 'top-center',
               icon: 'warning',
@@ -86,6 +86,7 @@ export const createNewAdmin = (data, navigate) => {
 
         });
     } catch (error) {
+      dispatch(newAdminReqFail(error));
       Swal.fire({
         position: 'top-center',
         icon: 'error',
@@ -101,7 +102,7 @@ export const createNewAdmin = (data, navigate) => {
           popup: '',                     // disable popup fade-out animation
         }
       })
-      console.log(error);
+      // console.log(error);
     }
   };
 };

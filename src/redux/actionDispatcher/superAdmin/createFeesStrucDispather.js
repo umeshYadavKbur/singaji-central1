@@ -106,7 +106,7 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
           popup: '',                     // disable popup fade-out animation
         }
       })
-      console.log(error);
+      // console.log(error);
       dispatch(feesReqFail(error));
 
     }

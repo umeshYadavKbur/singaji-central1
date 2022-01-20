@@ -17,9 +17,33 @@ const getStudentsdata = (data) => {
                     }
                 })
                 .catch(function (error) {
+                    Swal.fire({
+                        title: "Connection lost!",
+                        icon: "warning",
+                        showClass: {
+                            backdrop: 'swal2-noanimation', // disable backdrop animation
+                            popup: '',                     // disable popup animation
+                            icon: ''                       // disable icon animation
+                        },
+                        hideClass: {
+                            popup: '',                     // disable popup fade-out animation
+                        }
+                    })
                     fetchFailTableData(error);
                 });
         } catch (error) {
+            Swal.fire({
+                title: "Connection lost !",
+                icon: "warning",
+                showClass: {
+                    backdrop: 'swal2-noanimation', // disable backdrop animation
+                    popup: '',                     // disable popup animation
+                    icon: ''                       // disable icon animation
+                },
+                hideClass: {
+                    popup: '',                     // disable popup fade-out animation
+                }
+            })
             fetchFailTableData(error);
             //   console.log(error);
         }

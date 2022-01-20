@@ -18,7 +18,7 @@ export const fetchFeesTableData = (data) => {
       axios(data)
         .then(function (response) {
           //Printing the response of the data
-          console.log(response);
+          // console.log(response);
           if (response.status === 200) {
             dispatch(fetchSuccessTableData(response.data));
           }
@@ -94,7 +94,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
     dispatch(feesStructureStatusChange());
 
     var response = await axios(data);
-    console.log(response);
+    // console.log(response);
     if (response.status === 200) {
       if (visible) {
         setVisible(!visible)

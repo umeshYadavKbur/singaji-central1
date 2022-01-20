@@ -7,7 +7,7 @@ var axios = require('axios');
 
 
 export const AdminStatusChange = (data) => {
-    console.log("data dispatch", data);
+    // console.log("data dispatch", data);
     return async (dispatch) => {
 
         // dispatch(AdminStatusChangeRequest());
