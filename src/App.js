@@ -67,6 +67,7 @@ function App() {
 
   return (
     <Provider store={store}>
+      
       <Router>
         {
           is_online ?
