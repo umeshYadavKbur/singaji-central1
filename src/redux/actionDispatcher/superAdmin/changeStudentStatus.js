@@ -43,7 +43,7 @@ export const changeStatus = (data) => {
           }
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
           Swal.fire({
             position: 'top-center',
             icon: 'error',
@@ -76,7 +76,7 @@ export const changeStatus = (data) => {
           popup: '',                     // disable popup fade-out animation
         }
       })
-      console.log(error);
+      // console.log(error);
     }
   };
 };
