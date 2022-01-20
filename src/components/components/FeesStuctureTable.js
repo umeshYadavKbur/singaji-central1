@@ -20,6 +20,8 @@ import { ToastContainer } from "react-toastify";
 import updown_sort from '../assests/image/updown_sort.svg'
 import Pagination from "../assests/common/Pagination";
 import Loader from "../assests/common/Loader";
+import Offline_page from "../auth/OfflinePage";
+import NoDataFound from "../assests/common/NoDataFound";
 
 // import LoaderButton from "../../assests/common/LoaderButton";
 
@@ -56,6 +58,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
     canPreviousPage,
     gotoPage,
     pageCount,
+    rows,
     setPageSize,
     selectedFlatRows,
     prepareRow,
@@ -103,7 +106,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
   ) : table_data.error ? (
-    <h2>{table_data.error}</h2>
+      <Offline_page />
   ) : (
     <>
       <ToastContainer
@@ -194,6 +197,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
             })}
           </tbody>
         </table>
+        <NoDataFound rows={rows} />
         <Pagination
           page={page}
           pageIndex={pageIndex}

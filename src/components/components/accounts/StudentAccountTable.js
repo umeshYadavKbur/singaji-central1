@@ -38,6 +38,7 @@ import AvatarImg from '../../assests/image/Avtar.jpeg'
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
 
 import OfflinePage from '../../auth/OfflinePage';
+import NoDataFound from "../../assests/common/NoDataFound";
 
 
 
@@ -901,23 +902,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                         })}
                     </tbody>
                 </table>
-                {
-                    !rows.length && (
-                        <div style={{ width: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
-                            <h1 style={{ color: "#5A607F" }}>No Result Found</h1>
-                        </div>
-                    )
-                }
-                {/* </div> */}
+               <NoDataFound rows={rows}/>
                 {/* for the pagination section */}
-                {/* <div style={{ maxWidth: '100%', height: '4%' }}>
-                    <div style={{
-                        position: "fixed",
-                        top: "95%",
-                        width: "100%",
-                        zindex: "5",
-                        backgroundColor: '#f4f7fc'
-                    }}  > */}
+            
                 <Pagination
                     page={page}
                     pageIndex={pageIndex}
@@ -930,8 +917,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     canNextPage={canNextPage}
                     nextPage={nextPage}
                 />
-                {/* </div> */}
-                {/* </div> */}
             </div>
         </Fragment >
     );

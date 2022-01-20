@@ -28,6 +28,8 @@ import Pagination from "../../assests/common/Pagination";
 import { GlobalFilter } from "../tableComponents/GlobalFilter";
 import { Tooltip, Whisper } from "rsuite";
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
+import Offline_page from "../../auth/OfflinePage";
+import NoDataFound from "../../assests/common/NoDataFound";
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
   const arr = [];
@@ -278,7 +280,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
     selectedFlatRows,
     state,
     setGlobalFilter,
-
+    rows,
     preGlobalFilteredRows,
     prepareRow,
   } = useTable(
@@ -319,7 +321,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
   return scholarData.loading ? (
     <SkeletonColor></SkeletonColor>
   ) : scholarData.error ? (
-    <h2>{scholarData.error}</h2>
+           <Offline_page />
   ) : (
     <Fragment>
       <ToastContainer
@@ -505,6 +507,8 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
             })}
           </tbody>
         </table>
+        <NoDataFound rows={rows}/>
+
         <Pagination
           page={page}
           pageIndex={pageIndex}

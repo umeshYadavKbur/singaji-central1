@@ -28,6 +28,8 @@ import SkeletonColor from '../../../helpers/Skeletrone';
 import Pagination from "../../assests/common/Pagination";
 import Loader from "../../assests/common/Loader";
 import { ActivateButton, DeactivateButton } from "../../assests/common/Color";
+import Offline_page from "../../auth/OfflinePage";
+import NoDataFound from "../../assests/common/NoDataFound";
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -265,6 +267,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
         getTableBodyProps,
         headerGroups,
         page,
+        rows,
         nextPage,
         previousPage,
         canPreviousPage,
@@ -310,7 +313,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
     return studentData.loading ? (
         <SkeletonColor></SkeletonColor>
     ) : studentData.error ? (
-        <h2>{studentData.error}</h2>
+            <Offline_page />
     ) : (
         <Fragment>
             {studentData.loading && (
@@ -441,6 +444,8 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                         })}
                     </tbody>
                 </table>
+               <NoDataFound rows={rows}/>
+
                 <Pagination
                     page={page}
                     pageIndex={pageIndex}

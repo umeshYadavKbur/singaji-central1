@@ -31,6 +31,7 @@ import { DeactivateButton, PaidButton, UnpaidButton } from "../assests/common/Co
 import Pagination from "../assests/common/Pagination";
 import { useNavigate } from "react-router-dom";
 import { Tooltip, Whisper } from "rsuite";
+import NoDataFound from "../assests/common/NoDataFound";
 
 // import { baseUrl } from "../../redux/constants/url";
 
@@ -299,6 +300,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     setGlobalFilter,
     page,
     nextPage,
+    rows,
     previousPage,
     canNextPage,
     canPreviousPage,
@@ -429,7 +431,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
             })}
           </tbody>
         </table>
-
+        <NoDataFound rows={rows} />
         <Pagination
           page={page}
           pageIndex={pageIndex}
