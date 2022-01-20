@@ -1,5 +1,5 @@
 import React from 'react';
-import Offline_svg from '../assests/image/Offline.svg';
+import Offline_svg from '../assests/image/error2.png';
 
 const Offline_page = () => {
     return (

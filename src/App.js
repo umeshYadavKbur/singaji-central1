@@ -27,7 +27,7 @@ import StudentAdmin from "./helpers/StudentAdmin";
 
 
 
-import Offline from '../src/components/auth/Offline_page';
+import Offline from '../src/components/auth/OfflinePage';
 
 function App() {
   const [is_online, setIs_online] = useState(true)
