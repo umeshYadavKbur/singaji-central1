@@ -22,6 +22,7 @@ import {toast} from 'react-toastify';
 import checkBoxImg from '../../assests/image/AccountIcons/thirdInstallmentCheckImg.svg'
 import UpdateStudentPersonalInfo from './UpdateStudentPersonalInfo';
 import './Styles/StudentAccountTable.css'
+import LoaderButton from '../../assests/common/LoaderButton'
 
 
 const StyledModal = styled(ModalUnstyled)`
@@ -61,6 +62,7 @@ const style = {
 function StudentProfile() {
     const [branchNames,setBranchNames] = useState([{subjects: 'loading...',id: 0}])
     const [villageNames,setVillageNames] = useState([{label: 'loading...',villageId: 0}])
+    const [loaderLoading,setLoaderLoading] = useState(false)
 
 
     useEffect(() => {
@@ -182,11 +184,13 @@ function StudentProfile() {
                 // data: UpdateAccountInfoData
             };
             // console.log(config, UpdatePersonalInfoData)
+            setLoaderLoading(true)
 
             const response = await axios(config)
             if(response.status === 200) {
+                setLoaderLoading(false)
                 toast.success('Account Information Successfully Updated',{
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -196,8 +200,21 @@ function StudentProfile() {
                 });
             }
             else if(response.status === 400) {
+                setLoaderLoading(false)
                 toast.warn('Invalid Email',{
-                    position: "bottom-center",
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+            else if(response.status === 404) {
+                setLoaderLoading(false)
+                toast.warn('User Not Found',{
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -207,8 +224,9 @@ function StudentProfile() {
                 });
             }
             else if(response.status === 406) {
+                setLoaderLoading(false)
                 toast.warn('User Not Found',{
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -217,9 +235,10 @@ function StudentProfile() {
                     progress: undefined,
                 });
             }
-            else {
+            else if(response.status === 500) {
+                setLoaderLoading(false)
                 toast.warn('Internal server error',{
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -227,6 +246,9 @@ function StudentProfile() {
                     draggable: true,
                     progress: undefined,
                 });
+            }
+            else{
+                setLoaderLoading(false)
             }
             // console.log(response.status);
 
@@ -537,7 +559,7 @@ function StudentProfile() {
                             <div className="d-flex  justify-content-end my-4" >
                                 <div className="me-2">
 
-                                    <button className="btn btn-sm btn-primary text-light fw-bold m-1 " style={{width: "250px",height: "40px"}} type="submit"  >Update</button>
+                                    <button className="btn btn-sm btn-primary text-light fw-bold m-1 " style={{width: "250px",height: "40px"}} type="submit" disabled={loaderLoading}  >{loaderLoading ? (<LoaderButton/>):"Update"}</button>
                                 </div>
                             </div>
 
