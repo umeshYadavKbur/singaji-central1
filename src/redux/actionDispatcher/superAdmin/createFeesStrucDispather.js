@@ -73,7 +73,7 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
           }
         })
         .catch(function (error) {
-          dispatch(feesReqFail(error));
+          dispatch(feesReqFail(error.message));
           Swal.fire({
             position: 'top-center',
             icon: 'error',
@@ -107,7 +107,7 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
         }
       })
       // console.log(error);
-      dispatch(feesReqFail(error));
+      dispatch(feesReqFail(error.message));
 
     }
   };

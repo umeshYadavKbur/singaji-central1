@@ -118,7 +118,7 @@ const AddNewStudent = (data) => {
                     popup: '',                     // disable popup fade-out animation
                 }
             })
-            dispatch(AddNewStudentFailure(error));
+            dispatch(AddNewStudentFailure(error.message));
         }
     }
 }

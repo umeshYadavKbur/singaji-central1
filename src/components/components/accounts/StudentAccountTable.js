@@ -903,7 +903,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 </table>
                 {
                     !rows.length && (
-                        <div style={{ height: "55vh", width: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
+                        <div style={{ width: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
                             <h1 style={{ color: "#5A607F" }}>No Result Found</h1>
                         </div>
                     )

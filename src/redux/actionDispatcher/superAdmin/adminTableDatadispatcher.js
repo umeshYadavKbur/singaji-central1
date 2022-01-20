@@ -68,7 +68,6 @@ export const fetchAdminTableData = (data) => {
         progress: undefined,
       });
       fetchFailTableData(error.message);
-      //   console.log(error);
     }
   };
 };

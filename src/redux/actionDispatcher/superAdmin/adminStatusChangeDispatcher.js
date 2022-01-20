@@ -9,10 +9,8 @@ var axios = require('axios');
 export const AdminStatusChange = (data) => {
     // console.log("data dispatch", data);
     return async (dispatch) => {
-
         // dispatch(AdminStatusChangeRequest());
         dispatch(fetchTableDataSec());
-
         var body = JSON.stringify({
             email: data.email,
             is_active: data.is_active === 1 ? '0' : '1',

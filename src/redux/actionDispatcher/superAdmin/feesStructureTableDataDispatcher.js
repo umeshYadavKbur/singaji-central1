@@ -57,7 +57,7 @@ export const fetchFeesTableData = (data) => {
             draggable: true,
             progress: undefined,
           });
-          dispatch(fetchFailTableData(error));
+          dispatch(fetchFailTableData(error.message));
         });
     } catch (error) {
       toast.warn('Internal Server Error', {
@@ -69,7 +69,7 @@ export const fetchFeesTableData = (data) => {
         draggable: true,
         progress: undefined,
       });
-      dispatch(fetchFailTableData(error));
+      dispatch(fetchFailTableData(error.message));
     }
   };
 };

@@ -50,7 +50,7 @@ export const fetchStudentAccountData = (data) => {
           }
         })
         .catch(function (error) {
-          dispatch(accStuDataFail(error))
+          dispatch(accStuDataFail(error.message))
           toast.warn('Internal Server Error', {
             position: "bottom-center",
             autoClose: 3000,
@@ -149,7 +149,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
             draggable: true,
             progress: undefined,
           });
-          dispatch(accStuDataFail(error));
+          dispatch(accStuDataFail(error.message));
         });
     } catch (error) {
       setLoading(false)
