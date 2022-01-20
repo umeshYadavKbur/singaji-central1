@@ -15,9 +15,15 @@ import {connect} from 'react-redux';
 import NumberFormat from 'react-number-format';
 import allUrls from '../../redux/constants/url'
 import Swal from 'sweetalert2';
+import LoaderButton from '../assests/common/LoaderButton'
+import {ToastContainer} from 'react-toastify';
+import { toast } from 'react-toastify';
+import Loader from 'rsuite/Loader';
+import SuccessIcon from '../assests/image/SuccessIcon.svg'
 
 
-function AddNewStudentPage({AddNewStudent}) {
+
+function AddNewStudentPage({addStudent,AddNewStudent}) {
     var editData = JSON.parse(localStorage.getItem('RegistrationEdit'))
     // console.log('editdata',editData);
     // var editData = ''
@@ -26,6 +32,7 @@ function AddNewStudentPage({AddNewStudent}) {
     const [branchNames,setBranchNames] = useState([{subjects: 'loading...',id: 0}])
     const [trackNames,setTrackNames] = useState([{trackName: 'loading...',trackId: 0}])
     const [villageNames,setVillageNames] = useState([{label: 'loading...',villageId: 0}])
+    const [loaderLoading,setLoaderLoading] = useState(false)
 
 
     useEffect(() => {
@@ -184,6 +191,7 @@ function AddNewStudentPage({AddNewStudent}) {
    
 
  const updateStudentData  = async(data) => {
+     setLoaderLoading(true)
     data.id = editData.id
     console.log(data);
      var config = {
@@ -196,17 +204,24 @@ function AddNewStudentPage({AddNewStudent}) {
      }
      const response = await axios(config)
     console.log(response);
+   
     if(response.status === 200)
     {
-        Swal.fire({
+        setLoaderLoading(false)
 
-            title: '<i class="far fa-check-circle" ></i> Success',
+        Swal.fire({
+            // icon:'success',
+            // imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuvL3T42GwFfKMOq7IbYltCKRFrklMbdU0yA&usqp=CAU",
+            // html:'<br/>',
+            imageUrl: SuccessIcon,
+            imageAlt:'image',
             html:
-                '<hr/>' +
-                'Successfully Updated ',
+                '<h1>Success</h1>'+'<hr/>' +
+                'Student Detail Successfully Updated <br/> <br/> ',
             showConfirmButton: false,
             // showCloseButton:true,
             timer: 2500,
+            
             showClass: {
                 backdrop: 'swal2-noanimation', // disable backdrop animation
                 popup: '',                     // disable popup animation
@@ -217,6 +232,38 @@ function AddNewStudentPage({AddNewStudent}) {
             }
 
         })
+    }
+    else if(response.status === 404)
+    {
+        setLoaderLoading(false)
+
+        toast.warn('Student Not Found',{
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+    else if(response.status === 500)
+    {
+        setLoaderLoading(false)
+
+        toast.warn('Internal Server Error',{
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+    else{
+        setLoaderLoading(false)
+
     }
 }
 
@@ -272,7 +319,7 @@ function AddNewStudentPage({AddNewStudent}) {
                 "Postmetric": formik.values.postmatricOwner,
                 "Postmetric_Amount": formik.values.postmatricAmount,
                 "is_Postmetric": formik.values.postmatricScolarship,
-                "remark": formik.values.remark,
+                // "remark": formik.values.remark,
                 "sponsorshipType":formik.values.sponsorshipType,
             }
 
@@ -343,8 +390,19 @@ function AddNewStudentPage({AddNewStudent}) {
 
     return (
         <>
+            <ToastContainer
+                position="top-center"
+                autoClose={2500}
+                hideProgressBar={true}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
 
-            <div className='addnewstudent mx-auto px-3'>
+            <div className=' addnewstudent mx-auto px-3'>
                 <form onSubmit={formik.handleSubmit}>
                     {/* Personal Details */}
                     <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel1 === true} onChange={handleChange('panel1')}>
@@ -1392,21 +1450,26 @@ function AddNewStudentPage({AddNewStudent}) {
                         left: "83%",
                         top: "90%",
                         zindex: "5000",
-                    }}  >{editData ?
+                    }}  >{
+                        editData ?
                         <button className="btn btn-sm btn-primary text-light fw-bold" type="submit"
+                                    disabled={loaderLoading}
                             style={{
                                 width: "220px",
-                                maxHeight: '35px',
+                                maxHeight: '45px',
                                 backgroundColor:'rgb(75 0 255)'
                             }}
-                        >Update</button> :
+                                >{loaderLoading ? (loaderLoading ? (<Loader size="xs" content="Update" />):'') :"Update"}</button> :
                         <button className="btn btn-sm btn-warning text-light fw-bold" type="submit"
                             style={{
                                 width: "220px",
-                                maxHeight: '35px',
+                                maxHeight: '45px',
                                 backgroundColor:'orange'
                             }}
-                        >Submit</button>}
+                                disabled={addStudent.loading}
+                            >{addStudent?.loading?(<LoaderButton/>):"Submit"}
+                            </button>
+                            }
                     </div>
 
                 </form>
@@ -1421,7 +1484,7 @@ function AddNewStudentPage({AddNewStudent}) {
 //Getting the state from the store
 const mapStateToProps = (state) => {
     return {
-        userData: state.auth,
+        addStudent: state.addStudent,
     };
 };
 

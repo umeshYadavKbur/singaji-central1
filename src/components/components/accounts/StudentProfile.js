@@ -21,6 +21,8 @@ import ToastContainer from 'rsuite/esm/toaster/ToastContainer';
 import {toast} from 'react-toastify';
 import checkBoxImg from '../../assests/image/AccountIcons/thirdInstallmentCheckImg.svg'
 import UpdateStudentPersonalInfo from './UpdateStudentPersonalInfo';
+import './Styles/StudentAccountTable.css'
+import LoaderButton from '../../assests/common/LoaderButton'
 
 
 const StyledModal = styled(ModalUnstyled)`
@@ -60,6 +62,7 @@ const style = {
 function StudentProfile() {
     const [branchNames,setBranchNames] = useState([{subjects: 'loading...',id: 0}])
     const [villageNames,setVillageNames] = useState([{label: 'loading...',villageId: 0}])
+    const [loaderLoading,setLoaderLoading] = useState(false)
 
 
     useEffect(() => {
@@ -103,21 +106,23 @@ function StudentProfile() {
 
     const initialValues = {
 
-
-        ThirdinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.ThirdinstallmentDate : '',
-        Thirdinstallment: StudentProfileData ? StudentProfileData.accountInfo.Thirdinstallment : '',
-        SecondinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.SecondinstallmentDate : '',
-        Secondinstallment: StudentProfileData ? StudentProfileData.accountInfo.Secondinstallment : '',
-        FirstinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.FirstinstallmentDate : '',
-        Firstinstallment: StudentProfileData ? StudentProfileData.accountInfo.Firstinstallment : '',
+        
+        accountStatus: StudentProfileData ? StudentProfileData.accountInfo.is_active : '',
+        remark: StudentProfileData ? StudentProfileData.accountInfo.remark : '',
+        GKB_Amount: StudentProfileData ? StudentProfileData.accountInfo.GKB_Amount : '',
         Busfee: StudentProfileData ? StudentProfileData.accountInfo.Busfee : '',
         reg_Fees: StudentProfileData ? StudentProfileData.accountInfo.reg_Fees : '',
         Tutionfee: StudentProfileData ? StudentProfileData.accountInfo.Tutionfee : '',
-        GKB_Amount: StudentProfileData ? StudentProfileData.accountInfo.GKB_Amount : '',
-        accountStatus: StudentProfileData ? StudentProfileData.accountInfo.is_active : '',
-        remark: StudentProfileData ? StudentProfileData.accountInfo.remark : '',
         year: StudentProfileData ? StudentProfileData.accountInfo.year : '',
+        Firstinstallment: StudentProfileData ? StudentProfileData.accountInfo.Firstinstallment : '',
+        FirstinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.FirstinstallmentDate : '',
+        Secondinstallment: StudentProfileData ? StudentProfileData.accountInfo.Secondinstallment : '',
+        SecondinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.SecondinstallmentDate : '',
+        Thirdinstallment: StudentProfileData ? StudentProfileData.accountInfo.Thirdinstallment : '',
+        ThirdinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.ThirdinstallmentDate : '',
         sponsorshipType: StudentProfileData ? StudentProfileData.accountInfo.sponsorshipType : '',
+        feesScheme: StudentProfileData ? StudentProfileData.accountInfo.feesScheme : '',
+        registrationNumber: StudentProfileData ? StudentProfileData.accountInfo.registrationNumber : '',
 
 
     }
@@ -125,7 +130,7 @@ function StudentProfile() {
 
 
         accountStatus: Yup.string().required("Required!"),
-        remark: Yup.string().required("Required!"),
+        // remark: Yup.string().required("Required!"),
         GKB_Amount: Yup.string().required("Required!"),
         Busfee: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
         reg_Fees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
@@ -176,14 +181,16 @@ function StudentProfile() {
                     'Authorization': `Bearer ${localStorage.getItem("token")}`,
                     'Content-Type': 'application/json'
                 },
-                data: UpdateAccountInfoData
+                // data: UpdateAccountInfoData
             };
             // console.log(config, UpdatePersonalInfoData)
+            setLoaderLoading(true)
 
             const response = await axios(config)
             if(response.status === 200) {
+                setLoaderLoading(false)
                 toast.success('Account Information Successfully Updated',{
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -193,8 +200,21 @@ function StudentProfile() {
                 });
             }
             else if(response.status === 400) {
+                setLoaderLoading(false)
                 toast.warn('Invalid Email',{
-                    position: "bottom-center",
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+            else if(response.status === 404) {
+                setLoaderLoading(false)
+                toast.warn('User Not Found',{
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -204,8 +224,9 @@ function StudentProfile() {
                 });
             }
             else if(response.status === 406) {
+                setLoaderLoading(false)
                 toast.warn('User Not Found',{
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -214,9 +235,10 @@ function StudentProfile() {
                     progress: undefined,
                 });
             }
-            else {
+            else if(response.status === 500) {
+                setLoaderLoading(false)
                 toast.warn('Internal server error',{
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -224,6 +246,9 @@ function StudentProfile() {
                     draggable: true,
                     progress: undefined,
                 });
+            }
+            else{
+                setLoaderLoading(false)
             }
             // console.log(response.status);
 
@@ -268,12 +293,12 @@ function StudentProfile() {
                             <div  style={{color: '#5A607F'}}>
                                 <span className='fw-bold' style={{fontSize: '22px'}}>{StudentName}</span>
                                 <br />
-                                {`${StudentClassName} (${StudentProfileData.accountInfo.joinBatch + '-' + (parseInt(StudentProfileData.accountInfo.joinBatch) + 3)})`}
+                                <span style={{fontWeight:500}} > {`${StudentClassName} (${StudentProfileData.accountInfo.joinBatch + '-' + (parseInt(StudentProfileData.accountInfo.joinBatch) + 3)})`}</span>
                             </div>
                             <div className="btn-group mt-2" role="group" aria-label="Basic example">
-                                <button style={{backgroundColor: '#ff9707'}} onClick={() => {navigate("feesrecipt");}} className="btn  btn-warning text-light fw-bold" type="submit">Reciept</button>
+                                <button style={{backgroundColor: '#f99300',borderRadius: '11px 0px 0px 11px'}} onClick={() => {navigate("feesrecipt");}} className="btn  btn-warning text-light fw-bold" type="submit">Reciept</button>
 
-                                <button style={{color: '#0dcaf0',backgroundColor: '#E6E9F4'}} className="btn btn-outline-info fw-bold" type="submit" onClick={() => {navigate("uploaddocument");}}>Upload Document</button>
+                                <button style={{color: '#7099e3',backgroundColor: '#e6e9f4',borderRadius: ' 0px 11px 11px 0px',border: '1px solid #7099e3'}} className="btn btn-outline fw-bold" type="submit" onClick={() => {navigate("uploaddocument");}}>Upload Document</button>
                             </div>
                         </div>
                     </div>
@@ -298,7 +323,6 @@ function StudentProfile() {
 
                 <Accordion className="my-2 me-3 ms-2" expanded={true} >
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                         style={{
@@ -314,14 +338,21 @@ function StudentProfile() {
 
                             <div className="row">
                                 <div className="col">
-                                    <label htmlFor="">Account status</label>
+                                    <label className='addStdLable' htmlFor="">Account status</label>
                                     <select name="accountStatus" value={formik.values.accountStatus} onChange={formik.values.accountStatus} className={formik.touched.accountStatus ? `form-select ${formik.errors.accountStatus ? "invalid" : ""}` : 'form-select'} >
                                         <option value="true">Active</option>
                                         <option value="false">Deactive</option>
                                     </select>
+                                    {formik.errors.accountStatus && formik.touched.accountStatus ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.accountStatus}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Fees Scheme</label>
+                                    <label className='addStdLable' htmlFor="">Fees Scheme</label>
                                     <select name="feesScheme" value={formik.values.feesScheme} onChange={formik.handleChange}
                                         onBlur={formik.handleBlur} className={formik.touched.feesScheme ? `form-select ${formik.errors.feesScheme ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
                                         <option value='none'>None</option>
@@ -338,11 +369,18 @@ function StudentProfile() {
                                     )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Course Fees</label>
+                                    <label className='addStdLable' htmlFor="">Course Fees</label>
                                     <input name="Tutionfee" onChange={formik.handleChange} value={formik.values.Tutionfee} type="number" className='form-control' placeholder='Course Fees' />
+                                    {formik.errors.Tutionfee && formik.touched.Tutionfee ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.Tutionfee}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Sponsorship Type</label>
+                                    <label className='addStdLable' htmlFor="">Sponsorship Type</label>
                                     <select name="sponsorshipType"
                                         value={formik.values.feesScheme !== "none" ? formik.values.sponsorshipType = "none" : formik.values.sponsorshipType}
                                         onChange={formik.handleChange}
@@ -364,61 +402,139 @@ function StudentProfile() {
 
                             <div className="row">
                                 <div className="col">
-                                    <label htmlFor="">Registration Amount</label>
+                                    <label className='addStdLable' htmlFor="">Registration Amount</label>
                                     <input name="reg_Fees" onChange={formik.handleChange} value={formik.values.reg_Fees} type="text" className='form-control' placeholder='Registration Amount' disabled />
+                                    {formik.errors.reg_Fees && formik.touched.reg_Fees ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.reg_Fees}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Registration Number</label>
-                                    <input name="harsh" onChange={formik.handleChange} value={formik.values.harsh} type="text" className='form-control' placeholder='Registration number ' />
+                                    <label className='addStdLable' htmlFor="">Registration Number</label>
+                                    <input name="registrationNumber" onChange={formik.handleChange} value={formik.values.registrationNumber} type="text" className='form-control' placeholder='Registration number ' />
+                                    {formik.errors.registrationNumber && formik.touched.registrationNumber ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.registrationNumber}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Bus Fees</label>
+                                    <label className='addStdLable' htmlFor="">Bus Fees</label>
                                     <input name="Busfee" onChange={formik.handleChange} value={formik.values.Busfee} type="number" className='form-control' placeholder='Bus Fees' />
+                                    {formik.errors.Busfee && formik.touched.Busfee ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.Busfee}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">GKB Amount</label>
+                                    <label className='addStdLable' htmlFor="">GKB Amount</label>
                                     <input name="GKB_Amount" onChange={formik.handleChange} value={formik.values.GKB_Amount} type="number" className='form-control' placeholder='Father contact' />
+                                    {formik.errors.GKB_Amount && formik.touched.GKB_Amount ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.GKB_Amount}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className="col">
-                                    <label htmlFor="">First Installment</label>
+                                    <label className='addStdLable' htmlFor="">First Installment</label>
                                     <input name="Firstinstallment" onChange={formik.handleChange} value={formik.values.Firstinstallment} type="number" className='form-control' placeholder='First Installment' />
+                                    {formik.errors.Firstinstallment && formik.touched.Firstinstallment ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.Firstinstallment}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">First Installment date</label>
+                                    <label className='addStdLable' htmlFor="">First Installment date</label>
                                     <input name="FirstinstallmentDate" onChange={formik.handleChange} value={formik.values.FirstinstallmentDate} type="date" className='form-control' placeholder='First Installment date' />
+                                    {formik.errors.FirstinstallmentDate && formik.touched.FirstinstallmentDate ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.FirstinstallmentDate}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Second Installment</label>
+                                    <label className='addStdLable' htmlFor="">Second Installment</label>
                                     <input name="Secondinstallment" onChange={formik.handleChange} value={formik.values.Secondinstallment} type="number" className='form-control' placeholder='Second Installment' />
+                                    {formik.errors.Secondinstallment && formik.touched.Secondinstallment ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.Secondinstallment}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Second Installment date</label>
+                                    <label className='addStdLable' htmlFor="">Second Installment date</label>
                                     <input name="SecondinstallmentDate" onChange={formik.handleChange} value={formik.values.SecondinstallmentDate} type="date" className='form-control' placeholder='Second Installment date' />
+                                    {formik.errors.SecondinstallmentDate && formik.touched.SecondinstallmentDate ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.SecondinstallmentDate}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                             </div>
 
                             <div className="row">
 
-                                <div className=' col'><label htmlFor="">Third Installment</label>
+                                <div className=' col'><label className='addStdLable' htmlFor="">Third Installment</label>
                                     <div className="d-flex">
                                         <input name="Thirdinstallment" onChange={formik.handleChange} value={formik.values.Thirdinstallment} type="number" className='form-control' placeholder='Third Installment' />
 
                                         {StudentProfileData.accountInfo.ScholarshipAmount > 0 ? <img style={{marginLeft: "-25px"}} src={checkBoxImg} alt="." /> : ''}
-                                    </div>
+                                        </div>
+                                        {formik.errors.Thirdinstallment && formik.touched.Thirdinstallment ? (
+                                            <div className=" text-danger fs-6">
+                                                {formik.errors.Thirdinstallment}
+                                            </div>
+                                        ) : (
+                                            ""
+                                        )}
+                                    
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Third Installment date</label>
+                                    <label className='addStdLable' htmlFor="">Third Installment date</label>
                                     <input name="ThirdinstallmentDate" onChange={formik.handleChange} value={formik.values.ThirdinstallmentDate} type="date" className='form-control' placeholder='Third Installment date' />
+                                    {formik.errors.ThirdinstallmentDate && formik.touched.ThirdinstallmentDate ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.ThirdinstallmentDate}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">Remark</label>
+                                    <label className='addStdLable' htmlFor="">Remark</label>
                                     <input name="remark" onChange={formik.handleChange} value={formik.values.remark} type="text" className='form-control' placeholder='Remark' />
+                                    {formik.errors.remark && formik.touched.remark ? (
+                                        <div className="text-danger fs-6">
+                                            {formik.errors.remark}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                                 <div className="col">
-                                    <label className="addStdLable" htmlFor="">Year</label>
+                                    <label className='addStdLable' className="addStdLable" htmlFor="">Year</label>
 
                                     <select name="year" value={formik.values.year} onBlur={formik.handleBlur}
 
@@ -443,7 +559,7 @@ function StudentProfile() {
                             <div className="d-flex  justify-content-end my-4" >
                                 <div className="me-2">
 
-                                    <button className="btn btn-sm btn-primary text-light fw-bold m-1 " style={{width: "250px",height: "40px"}} type="submit"  >Update</button>
+                                    <button className="btn btn-sm btn-primary text-light fw-bold m-1 " style={{width: "250px",height: "40px"}} type="submit" disabled={loaderLoading}  >{loaderLoading ? (<LoaderButton/>):"Update"}</button>
                                 </div>
                             </div>
 

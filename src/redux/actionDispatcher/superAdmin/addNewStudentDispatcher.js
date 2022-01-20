@@ -5,6 +5,7 @@ import { ADD_STUDENT_FAIL, ADD_STUDENT_REQUEST, ADD_STUDENT_SUCCESS } from "../.
 import Swal from 'sweetalert2'
 import AllUrl from "../../constants/url";
 import axios from "axios";
+import SuccessIcon from '../../../components/assests/image/SuccessIcon.svg'
 
 const AddNewStudent = (data) => {
     var dataOfAddStudent = {
@@ -29,8 +30,11 @@ const AddNewStudent = (data) => {
             if (userResData.request.status === 200) {
                 dispatch(AddNewStudentSuccess(userResData.data));
                 Swal.fire({
-
-                    title: '<i class="far fa-check-circle" ></i> Success',
+                    imageUrl: SuccessIcon,
+                    imageAlt: 'image',
+                    imageWidth: '75px',
+                    imageHeight: '75px',
+                    title: 'Success',
                     html:
                         '<hr/>' +
                         'You form is Successfully submited ',
