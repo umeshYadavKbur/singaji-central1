@@ -66,7 +66,7 @@ export const createNewAdmin = (data, navigate) => {
           }
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
           dispatch(newAdminReqFail(error));
           Swal.fire({
             position: 'top-center',

@@ -31,7 +31,7 @@ export const AdminStatusChange = (data) => {
         let userResData;
         try {
             userResData = await axios(config);
-            console.log(userResData)
+            // console.log(userResData)
             if (userResData.status === 200) {
                 dispatch(AdminStatusChangeSuccess(userResData.data));
                 toast.success(`Successfull `, {

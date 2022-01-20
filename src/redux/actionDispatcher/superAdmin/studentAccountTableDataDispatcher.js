@@ -20,12 +20,12 @@ export const fetchStudentAccountData = (data) => {
     try {
       axios(data)
         .then(function (response) {
-          console.log(response);
+          // console.log(response);
           if (response.status === 200) {
             dispatch(accStuDataSuccess(response.data));
           }
           if (response.status === 400) {
-            dispatch(accStuDataFail())
+            dispatch(accStuDataFail(response.data))
             toast.warn('No data found !', {
               position: "bottom-center",
               autoClose: 3000,
@@ -37,7 +37,7 @@ export const fetchStudentAccountData = (data) => {
             });
           }
           if (response.status === 500) {
-            dispatch(accStuDataFail())
+            dispatch(accStuDataFail(response.data))
             toast.warn('Internal Server Error', {
               position: "bottom-center",
               autoClose: 3000,
@@ -50,7 +50,7 @@ export const fetchStudentAccountData = (data) => {
           }
         })
         .catch(function (error) {
-          dispatch(accStuDataFail())
+          dispatch(accStuDataFail(error))
           toast.warn('Internal Server Error', {
             position: "bottom-center",
             autoClose: 3000,
@@ -62,7 +62,7 @@ export const fetchStudentAccountData = (data) => {
           });
         });
     } catch (error) {
-      dispatch(accStuDataFail())
+      dispatch(accStuDataFail(error.message))
       toast.warn('Internal Server Error', {
         position: "bottom-center",
         autoClose: 3000,
@@ -122,7 +122,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(accStuDataFail());
+            dispatch(accStuDataFail(response.data));
           }
           if (response.status === 500) {
             toast.warn('Internal Server Error', {
@@ -134,7 +134,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(accStuDataFail());
+            dispatch(accStuDataFail(response.data));
           }
         })
         .catch(function (error) {
@@ -149,7 +149,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
             draggable: true,
             progress: undefined,
           });
-          dispatch(accStuDataFail());
+          dispatch(accStuDataFail(error));
         });
     } catch (error) {
       setLoading(false)
@@ -163,7 +163,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
         draggable: true,
         progress: undefined,
       });
-      dispatch(accStuDataFail());
+      dispatch(accStuDataFail(error.message));
     }
   };
 };
@@ -182,9 +182,10 @@ const accStuDataSuccess = (data) => {
   }
 }
 
-const accStuDataFail = () => {
+const accStuDataFail = (error) => {
   return {
     type: STUDENTACCOUNT_TABLE_DATA_FAIL,
+    payload: error
   }
 }
 

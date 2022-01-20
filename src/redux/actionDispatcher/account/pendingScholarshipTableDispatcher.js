@@ -12,7 +12,7 @@ const pendingScholarship = (data) => {
         try {
             axios(data)
                 .then(function (response) {
-                    console.log((response));
+                    // console.log((response));
                     if (response.status === 200) {
                         dispatch(fetchSuccessTableData(response.data));
                     }
@@ -42,7 +42,7 @@ const pendingScholarship = (data) => {
                     }
                 })
                 .catch(function (error) {
-                    dispatch(fetchFailTableData());
+                    dispatch(fetchFailTableData(error.message));
                     toast.warning('Something went wrong', {
                         position: "bottom-center",
                         autoClose: 3000,
@@ -54,7 +54,7 @@ const pendingScholarship = (data) => {
                     });
                 });
         } catch (error) {
-            dispatch(fetchFailTableData());
+            dispatch(fetchFailTableData(error.message));
             toast.warning('Internal server error', {
                 position: "bottom-center",
                 autoClose: 3000,
@@ -85,8 +85,9 @@ const fetchSuccessTableData = (data) => {
     };
 };
 
-const fetchFailTableData = () => {
+const fetchFailTableData = (error) => {
     return {
         type: PENDING_SCHOLARSHIP_TABLE_FAIL,
+        payload: error
     };
 };
