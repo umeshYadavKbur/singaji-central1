@@ -42,7 +42,7 @@ const pendingScholarship = (data) => {
                     }
                 })
                 .catch(function (error) {
-                    dispatch(fetchFailTableData(error));
+                    dispatch(fetchFailTableData());
                     toast.warning('Something went wrong', {
                         position: "bottom-center",
                         autoClose: 3000,
@@ -54,7 +54,7 @@ const pendingScholarship = (data) => {
                     });
                 });
         } catch (error) {
-            dispatch(fetchFailTableData(error));
+            dispatch(fetchFailTableData());
             toast.warning('Internal server error', {
                 position: "bottom-center",
                 autoClose: 3000,
@@ -85,9 +85,8 @@ const fetchSuccessTableData = (data) => {
     };
 };
 
-const fetchFailTableData = (error) => {
+const fetchFailTableData = () => {
     return {
         type: PENDING_SCHOLARSHIP_TABLE_FAIL,
-        payload: error,
     };
 };

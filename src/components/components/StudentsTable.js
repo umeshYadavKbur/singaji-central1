@@ -247,12 +247,13 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           <Tooltip>
             Edit Student Info
           </Tooltip>
-      }>
-        <img src={Edit_icon} style={{cursor: "pointer"}} alt="Edit" onClick={() => {
-          navigate("/admin_dashboard/addnewstudent");
-          localStorage.setItem('RegistrationEdit',JSON.stringify(original)) }} />
-          
-          </Whisper>
+        }>
+          <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
+            navigate("/admin_dashboard/addnewstudent");
+            localStorage.setItem('RegistrationEdit', JSON.stringify(original))
+          }} />
+
+        </Whisper>
 
       )
     }

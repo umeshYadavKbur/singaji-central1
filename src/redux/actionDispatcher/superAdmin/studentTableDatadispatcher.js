@@ -42,7 +42,7 @@ export const fetchStudentTable = (data, isLoading) => {
             if (isLoading) {
               dispatch(setLoadingStateFalse())
             } else {
-              dispatch(fetchFailTableData(response.data));
+              dispatch(fetchFailTableData());
             }
           }
 
@@ -60,7 +60,7 @@ export const fetchStudentTable = (data, isLoading) => {
             if (isLoading) {
               dispatch(setLoadingStateFalse())
             } else {
-              dispatch(fetchFailTableData(response.data));
+              dispatch(fetchFailTableData());
             }
           }
         })
@@ -68,7 +68,7 @@ export const fetchStudentTable = (data, isLoading) => {
           if (isLoading) {
             dispatch(setLoadingStateFalse())
           } else {
-            dispatch(fetchFailTableData(error));
+            dispatch(fetchFailTableData());
           }
           Swal.fire({
             title: "Some Problem Occurred",
@@ -103,7 +103,7 @@ export const fetchStudentTable = (data, isLoading) => {
       if (isLoading) {
         dispatch(setLoadingStateFalse())
       } else {
-        dispatch(fetchFailTableData(error));
+        dispatch(fetchFailTableData());
       }
       //   console.log(error);
     }
@@ -123,10 +123,9 @@ const fetchSuccessTableData = (data) => {
   };
 };
 
-const fetchFailTableData = (error) => {
+const fetchFailTableData = () => {
   return {
     type: STUDENT_TABLE_DATA_FAIL,
-    payload: error,
   };
 };
 
