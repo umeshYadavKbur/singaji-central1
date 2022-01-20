@@ -98,7 +98,7 @@ export const fetchUsers = (data, navigate) => {
       return userResData.request.status;
     } catch (error) {
       //if crudential fails than Login fail action dispatch
-      // console.log(error)
+      console.log(error)
       let value = JSON.stringify(userResData.request.status);
       dispatch(loginFailure(value));
       toast.error('Internal server error', {

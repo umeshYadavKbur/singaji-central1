@@ -36,7 +36,7 @@ export const VerifyStudent = (data) => {
 
         try {
             userResData = await axios(config);
-            // console.log(userResData)
+            console.log(userResData)
             dispatch(setLoadingStateFalse())
 
             if (userResData.status === 200) {

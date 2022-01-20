@@ -73,7 +73,7 @@ export const newPasswordRequest = (data, navigate) => {
         draggable: true,
         progress: undefined,
       });
-      // console.log(error);
+      console.log(error);
     }
   };
 };

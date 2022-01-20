@@ -107,8 +107,7 @@ function SelectColumnFilter({
               <img src={rightArrow} width="6px" style={{
                             marginTop: "4px",
                             marginRight: '10px'
-                        }}
-                        alt="<" />
+                        }} />
             </div>
           </CPopover>
         </div>
