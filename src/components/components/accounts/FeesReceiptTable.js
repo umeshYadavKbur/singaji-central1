@@ -17,7 +17,7 @@ import SkeletonColor from "../../../helpers/Skeletrone";
 import Pagination from "../../assests/common/Pagination";
 import { Tooltip, Whisper } from "rsuite";
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
-import Offline_page from "../../auth/OfflinePage";
+import OfflinePage from "../../auth/OfflinePage";
 import NoDataFound from "../../assests/common/NoDataFound";
 
 const MultipleFilter = (rows, accessor, filterValue) => {
@@ -303,7 +303,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
     return feesReceipt.loading ? (
         <SkeletonColor></SkeletonColor>
     ) : feesReceipt.error ? (
-        <Offline_page />
+        <OfflinePage />
     ) : (
         <Fragment>
             <div className="container-fluid">

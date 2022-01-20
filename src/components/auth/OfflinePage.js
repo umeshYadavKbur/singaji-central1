@@ -1,7 +1,7 @@
 import React from 'react';
 import Offline_svg from '../assests/image/Offline.svg';
 
-const Offline_page = () => {
+const OfflinePage = () => {
     return (
         <>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%' }}>
@@ -13,4 +13,4 @@ const Offline_page = () => {
     )
 }
 
-export default Offline_page
+export default OfflinePage

@@ -6,7 +6,7 @@ import {
   STUDENT_SECOND_LOADING,
   STUDENT_SECOND_LOADING_END,
 } from "../../constants/actions";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import {
   toast
 } from 'react-toastify'

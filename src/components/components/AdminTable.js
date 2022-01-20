@@ -15,7 +15,7 @@ import updown_sort from '../assests/image/updown_sort.svg'
 import { ActivateButton, DeactivateButton } from '../assests/common/Color';
 import Pagination from '../assests/common/Pagination';
 import Loader from '../assests/common/Loader';
-import Offline_page from '../auth/OfflinePage';
+import OfflinePage from '../auth/OfflinePage';
 import NoDataFound from '../assests/common/NoDataFound';
 
 
@@ -200,7 +200,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
     return table_data.loading ? (
         <SkeletonColor></SkeletonColor>
     ) : table_data.error ? (
-            <Offline_page />
+            <OfflinePage />
     ) : (
         <>
             {table_data.second_loading && (
