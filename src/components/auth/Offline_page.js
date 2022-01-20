@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Offline_svg from '../assests/image/error.svg';
+import Offline_svg from '../assests/image/error2.png';
 import "./Styles/Offline_page.css"
 
 const Offline_page = () => {
@@ -32,7 +32,7 @@ const Offline_page = () => {
                     </div>
 
                     <div className='offlinePage_reload' >
-                        <div className=" row offline-text">Slow or no Internet connection. <br />please check your internet settings and try again</div>
+                        <div className=" row offline-text">No internet connection found! <br />check your connection</div>
                         <button onClick={() => setSendRequest(true)}   className='Offline-page-button' >Reload</button>
                     </div>
                 </div>

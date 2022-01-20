@@ -12,13 +12,13 @@
 }
 .offline-svg{
     /* margin-top: %; */
-    /* height: 181px; */
+    height: 181px;
     display: block;
     /* margin-top: 240px !important; */
   margin-left: auto;
   margin-right: auto;
   /* width: 50%; */
-    /* width: 268px; */
+    width: 268px;
 }
 
 .offline-text{
@@ -32,11 +32,12 @@
     height: 36px;
     background-color: orange;
     border-radius: 5px;
+    font-size: 20px;
     margin-top: 20px !important;
     color: white;
 }
 .offlinePage_reload{
 
 
-    margin-top: -50px !important;
+    /* margin-top: -50px !important; */
 }
