@@ -6,8 +6,10 @@ import {
   STUDENT_SECOND_LOADING,
   STUDENT_SECOND_LOADING_END,
 } from "../../constants/actions";
-import Swal from "sweetalert2";
-import { toast } from 'react-toastify'
+// import Swal from "sweetalert2";
+import {
+  toast
+} from 'react-toastify'
 
 export const fetchStudentTable = (data, isLoading) => {
   return (dispatch) => {
@@ -42,7 +44,7 @@ export const fetchStudentTable = (data, isLoading) => {
             if (isLoading) {
               dispatch(setLoadingStateFalse())
             } else {
-              dispatch(fetchFailTableData(response.data));
+              dispatch(fetchFailTableData());
             }
           }
 
@@ -60,7 +62,7 @@ export const fetchStudentTable = (data, isLoading) => {
             if (isLoading) {
               dispatch(setLoadingStateFalse())
             } else {
-              dispatch(fetchFailTableData(response.data));
+              dispatch(fetchFailTableData());
             }
           }
         })
@@ -68,42 +70,60 @@ export const fetchStudentTable = (data, isLoading) => {
           if (isLoading) {
             dispatch(setLoadingStateFalse())
           } else {
-            dispatch(fetchFailTableData(error));
+            dispatch(fetchFailTableData());
           }
-          Swal.fire({
-            title: "Some Problem Occurred",
-            icon: "warning",
-            showConfirmButton: false,
-            timer: 2500,
-            showClass: {
-              backdrop: 'swal2-noanimation', // disable backdrop animation
-              popup: '',                     // disable popup animation
-              icon: ''                       // disable icon animation
-            },
-            hideClass: {
-              popup: '',                     // disable popup fade-out animation
-            }
+          toast.warn('Some Problem Occurred', {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
           });
+          //   Swal.fire({
+          //     title: "Some Problem Occurred",
+          //     icon: "warning",
+          //     showConfirmButton: false,
+          //     timer: 2500,
+          //     showClass: {
+          //       backdrop: 'swal2-noanimation', // disable backdrop animation
+          //       popup: '',                     // disable popup animation
+          //       icon: ''                       // disable icon animation
+          //     },
+          //     hideClass: {
+          //       popup: '',                     // disable popup fade-out animation
+          //     }
+          //   });
         });
     } catch (error) {
-      Swal.fire({
-        title: "Some Problem Occurred",
-        icon: "warning",
-        showConfirmButton: false,
-        timer: 2500,
-        showClass: {
-          backdrop: 'swal2-noanimation', // disable backdrop animation
-          popup: '',                     // disable popup animation
-          icon: ''                       // disable icon animation
-        },
-        hideClass: {
-          popup: '',                     // disable popup fade-out animation
-        }
+      toast.warn('Some Problem Occurred', {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
+      // Swal.fire({
+      //   title: "Some Problem Occurred",
+      //   icon: "warning",
+      //   showConfirmButton: false,
+      //   timer: 2500,
+      //   showClass: {
+      //     backdrop: 'swal2-noanimation', // disable backdrop animation
+      //     popup: '',                     // disable popup animation
+      //     icon: ''                       // disable icon animation
+      //   },
+      //   hideClass: {
+      //     popup: '',                     // disable popup fade-out animation
+      //   }
+      // });
       if (isLoading) {
         dispatch(setLoadingStateFalse())
       } else {
-        dispatch(fetchFailTableData(error));
+        dispatch(fetchFailTableData());
       }
       //   console.log(error);
     }
@@ -123,10 +143,9 @@ const fetchSuccessTableData = (data) => {
   };
 };
 
-const fetchFailTableData = (error) => {
+const fetchFailTableData = () => {
   return {
     type: STUDENT_TABLE_DATA_FAIL,
-    payload: error,
   };
 };
 

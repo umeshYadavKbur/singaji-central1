@@ -19,7 +19,7 @@ import Edit_icon from "../assests/image/Edit_icon.svg";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-import { changeFeesStructureStatus } from "../../redux/actionDispatcher/superAdmin/feesStructureTableDataDispatcher";
+import { changeTotalFees } from "../../redux/actionDispatcher/superAdmin/feesStructureTableDataDispatcher";
 import './styles/Table.css'
 import LoaderButton from "../assests/common/LoaderButton";
 import AllUrl from "../../redux/constants/url"
@@ -314,7 +314,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                 >
                   {
                     statusData.second_loading ? (<LoaderButton />) :
-                      table_data.second_loading ? (<LoaderButton />) : (original ? "Update" : "Save")
+                      table_data.third_loading ? (<LoaderButton />) : (original ? "Update" : "Save")
                   }
                 </button>
               </form>
@@ -338,7 +338,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createFees: (data, navigate, setVisible, visible) => dispatch(createFeesStructure(data, navigate, setVisible, visible)),
-    changeFeesStatus: (data, setVisible, visible) => dispatch(changeFeesStructureStatus(data, setVisible, visible)),
+    changeFeesStatus: (data, setVisible, visible) => dispatch(changeTotalFees(data, setVisible, visible)),
   };
 };
 

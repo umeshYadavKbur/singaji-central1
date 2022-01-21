@@ -15,7 +15,6 @@ import feesstructureTableReducer from "./reducers/superAdmin/feesStuctureTableRe
 import VerifyStudentReducer from "./reducers/superAdmin/studentVerifyTableReducer";
 import AdminStatusChangeReducer from "./reducers/superAdmin/adminStatusChangeReducer";
 import fetchStudentAccountData from "./reducers/superAdmin/StudentAccountTableReducer";
-import studentAccountTableStudentInformation from "./reducers/account/studentAccountTableStudentInformationreducer";
 import pendingScholarshipTable from './reducers/account/pendingScholarshipTable'
 import feesReceiptTable from './reducers/account/feesRecieptTable'
 
@@ -35,7 +34,6 @@ const RootReducer = combineReducers({
     AdminStatusChangeData: AdminStatusChangeReducer,
     addStudent: addNewStudentReducer,
     accountStudentTableData: fetchStudentAccountData,
-    studentAccountTableStudentInformation: studentAccountTableStudentInformation,
     pendingScholarship: pendingScholarshipTable,
     feesReceiptData: feesReceiptTable,
 });

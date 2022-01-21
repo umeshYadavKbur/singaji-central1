@@ -11,16 +11,40 @@ const getStudentsdata = (data) => {
         try {
             axios(data)
                 .then(function (response) {
-                    console.log((response));
+                    // console.log((response));
                     if (response.status === 200) {
                         dispatch(fetchSuccessTableData(response.data));
                     }
                 })
                 .catch(function (error) {
+                    Swal.fire({
+                        title: "Connection lost!",
+                        icon: "warning",
+                        showClass: {
+                            backdrop: 'swal2-noanimation', // disable backdrop animation
+                            popup: '',                     // disable popup animation
+                            icon: ''                       // disable icon animation
+                        },
+                        hideClass: {
+                            popup: '',                     // disable popup fade-out animation
+                        }
+                    })
                     fetchFailTableData(error);
                 });
         } catch (error) {
-            fetchFailTableData(error);
+            Swal.fire({
+                title: "Connection lost !",
+                icon: "warning",
+                showClass: {
+                    backdrop: 'swal2-noanimation', // disable backdrop animation
+                    popup: '',                     // disable popup animation
+                    icon: ''                       // disable icon animation
+                },
+                hideClass: {
+                    popup: '',                     // disable popup fade-out animation
+                }
+            })
+            fetchFailTableData(error.message);
             //   console.log(error);
         }
     };

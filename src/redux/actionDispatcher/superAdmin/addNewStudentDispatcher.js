@@ -23,8 +23,8 @@ const AddNewStudent = (data) => {
 
         // wait untill the data not received so getData function take data and url part
         dispatch(AddNewStudentRequest());
-        let userResData= await axios(dataOfAddStudent);
-        console.log("the response is ::", userResData.request.status);
+        let userResData = await axios(dataOfAddStudent);
+        // console.log("the response is ::", userResData.request.status);
         // changing the userResData if we need token so userResData.data.toke will be used
         try {
             if (userResData.request.status === 200) {
@@ -42,12 +42,12 @@ const AddNewStudent = (data) => {
                     // showCloseButton:true,
                     timer: 2500,
                     showClass: {
-                      backdrop: 'swal2-noanimation', // disable backdrop animation
-                      popup: '',                     // disable popup animation
-                      icon: ''                       // disable icon animation
+                        backdrop: 'swal2-noanimation', // disable backdrop animation
+                        popup: '',                     // disable popup animation
+                        icon: ''                       // disable icon animation
                     },
                     hideClass: {
-                      popup: '',                     // disable popup fade-out animation
+                        popup: '',                     // disable popup fade-out animation
                     }
 
                 })
@@ -57,12 +57,12 @@ const AddNewStudent = (data) => {
                     title: "Email Already found",
                     icon: "warning",
                     showClass: {
-                      backdrop: 'swal2-noanimation', // disable backdrop animation
-                      popup: '',                     // disable popup animation
-                      icon: ''                       // disable icon animation
+                        backdrop: 'swal2-noanimation', // disable backdrop animation
+                        popup: '',                     // disable popup animation
+                        icon: ''                       // disable icon animation
                     },
                     hideClass: {
-                      popup: '',                     // disable popup fade-out animation
+                        popup: '',                     // disable popup fade-out animation
                     }
                 })
                 dispatch(AddNewStudentFailure(userResData.data));
@@ -75,25 +75,54 @@ const AddNewStudent = (data) => {
                     showConfirmButton: false,
                     timer: 2500,
                     showClass: {
-                      backdrop: 'swal2-noanimation', // disable backdrop animation
-                      popup: '',                     // disable popup animation
-                      icon: ''                       // disable icon animation
+                        backdrop: 'swal2-noanimation', // disable backdrop animation
+                        popup: '',                     // disable popup animation
+                        icon: ''                       // disable icon animation
                     },
                     hideClass: {
-                      popup: '',                     // disable popup fade-out animation
+                        popup: '',                     // disable popup fade-out animation
                     }
                 })
                 dispatch(AddNewStudentFailure(userResData.data));
             }
             else {
-
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'warning',
+                    title: 'Something went wrong!',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    showClass: {
+                        backdrop: 'swal2-noanimation', // disable backdrop animation
+                        popup: '',                     // disable popup animation
+                        icon: ''                       // disable icon animation
+                    },
+                    hideClass: {
+                        popup: '',                     // disable popup fade-out animation
+                    }
+                })
                 dispatch(AddNewStudentFailure(userResData.data));
             }
             return userResData.request.status
         }
         catch (error) {
             //if crudential fails than Login fail action dispatch
-            dispatch(AddNewStudentFailure(error));
+            Swal.fire({
+                position: 'top-center',
+                icon: 'warning',
+                title: 'Connection lost !',
+                showConfirmButton: false,
+                timer: 2500,
+                showClass: {
+                    backdrop: 'swal2-noanimation', // disable backdrop animation
+                    popup: '',                     // disable popup animation
+                    icon: ''                       // disable icon animation
+                },
+                hideClass: {
+                    popup: '',                     // disable popup fade-out animation
+                }
+            })
+            dispatch(AddNewStudentFailure(error.message));
         }
     }
 }

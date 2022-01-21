@@ -64,7 +64,6 @@ function App() {
   // }
 
 
-
   return (
     <Provider store={store}>
       
@@ -92,13 +91,13 @@ function App() {
               </Route>
               <Route path="*" element={<Navigate replace to="/login" />} />
             </Routes>
-            : 
-            
+            :
+
             <Routes>
 
               <Route exact path="*" element={<Offline />} />
-              </Routes>
-              }
+            </Routes>
+        }
       </Router>
     </Provider>
   );
