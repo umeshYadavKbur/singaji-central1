@@ -87,11 +87,9 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                                 'Are you sure?' +
                                 '<br>' +
                                 `You want to ${original.is_active === 0 ? 'Active' : 'Deactive'} this admin`,
-                            // icon: 'warning',
                             showCancelButton: true,
                             showConfirmButton: true,
                             cancelButtonText: 'Cancel',
-                            // cancelButtonText: 'Cancle',
                             confirmButtonText: `${original.is_active === 0 ? 'Active' :'Deactive'} `,
                             // confirmButtonText:'Deactive',
                             reverseButtons: true,

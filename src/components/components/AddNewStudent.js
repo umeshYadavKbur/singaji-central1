@@ -319,7 +319,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
                 "Postmetric": formik.values.postmatricOwner,
                 "Postmetric_Amount": formik.values.postmatricAmount,
                 "is_Postmetric": formik.values.postmatricScolarship,
-                // "remark": formik.values.remark,
+                "remark": formik.values.remark,
                 "sponsorshipType":formik.values.sponsorshipType,
             }
 

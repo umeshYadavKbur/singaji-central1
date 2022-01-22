@@ -52,7 +52,7 @@ const AddNewStudent = (data) => {
 
                 })
             }
-            else if (userResData.request.status === 406) {
+            else if (userResData.request.status === 208) {
                 Swal.fire({
                     title: "Email Already found",
                     icon: "warning",
@@ -71,7 +71,7 @@ const AddNewStudent = (data) => {
                 Swal.fire({
                     position: 'top-center',
                     icon: 'warning',
-                    title: 'This fees structure is Already createrd!',
+                    title: 'This Student is Already createrd!',
                     showConfirmButton: false,
                     timer: 2500,
                     showClass: {
