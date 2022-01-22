@@ -313,7 +313,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
     return studentData.loading ? (
         <SkeletonColor></SkeletonColor>
     ) : studentData.error ? (
-            <OfflinePage />
+        <OfflinePage />
     ) : (
         <Fragment>
             {studentData.loading && (
@@ -444,7 +444,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                         })}
                     </tbody>
                 </table>
-               <NoDataFound rows={rows}/>
+                <NoDataFound rows={rows} />
 
                 <Pagination
                     page={page}

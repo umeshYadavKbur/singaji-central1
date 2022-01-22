@@ -92,15 +92,15 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             showCancelButton: true,
                             showConfirmButton: true,
                             cancelButtonText: 'Cancel',
-                            confirmButtonText: `${original.is_active === 0 ? 'Active' :'Deactive'} `,
+                            confirmButtonText: `${original.is_active === 0 ? 'Active' : 'Deactive'} `,
                             // confirmButtonText:'Deactive',
                             reverseButtons: true,
                             showCloseButton: true,
                             cancelButtonColor: 'gray',
                             confirmButtonColor: "#4f83df",
-                            
+
                             showLoaderOnDeny: true,
-                            
+
                             showClass: {
                                 backdrop: 'swal2-noanimation', // disable backdrop animation
                                 popup: '',                     // disable popup animation
@@ -198,7 +198,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
     return table_data.loading ? (
         <SkeletonColor></SkeletonColor>
     ) : table_data.error ? (
-            <OfflinePage />
+        <OfflinePage />
     ) : (
         <>
             {table_data.second_loading && (

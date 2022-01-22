@@ -26,31 +26,31 @@ const AppHeaderDropdown = ({ userData, logout }) => {
 
 
   return (
-    
+
     <CDropdown variant="nav-item" style={{ zIndex: '510' }} >
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-      <Whisper placement="bottom" controlId="control-id-hover" trigger="hover" speaker={
-            <Tooltip>
-              View Profile
-            </Tooltip>
+        <Whisper placement="bottom" controlId="control-id-hover" trigger="hover" speaker={
+          <Tooltip>
+            View Profile
+          </Tooltip>
         }>
-        <CAvatar src={avatar8} size="lg" />
+          <CAvatar src={avatar8} size="lg" />
         </Whisper>
 
       </CDropdownToggle>
 
       <CDropdownMenu component={'div'} className="pt-0 " placement="bottom-end" style={{ backgroundColor: '#7e84a3', marginLeft: '-223px', height: '-webkit - fill - available', zIndex: '510' }} >
-        
+
         <div style={{ flexDirection: 'column', backgroundColor: '#7e84a3', minHeight: '369px', width: '294px', alignItems: 'center', paddingTop: '49px', display: 'flex', flex: 'basis', zIndex: '510' }}>
-         
-      
+
+
           <CAvatar
             src={avatar8}
             style={{
               height: "82px",
               width: "82px",
             }}
-          />  
+          />
           <p style={{ textAlign: 'center', color: 'white', fontSize: '11px' }}><span style={{ color: 'white', fontSize: '13px', fontWeight: 'bold' }}>{userData.userInfo}</span><br /> {userData.email}</p>
           {/* <button
             style={{

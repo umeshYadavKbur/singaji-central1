@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {  useFormik } from "formik";
+import { useFormik } from "formik";
 // import * as Yup from "yup";
 import { connect } from "react-redux";
 import AddNewStudent from "../../redux/actionDispatcher/superAdmin/addNewStudentDispatcher";
@@ -32,18 +32,18 @@ function AddStudent() {
   //   registrationFees: Yup.string().required("Required!"),
   //   gender: Yup.string().required("Required!"),
   //   schemeFees: Yup.string().required("Required!"),
-    //  courseFees: Yup.string().required("Required!"),
-    //  postmatricScholarship: Yup.string().required("Required!"),
-    //  postmatricScholarshipOwner: Yup.string().required("Required!"),
-    //  gkbScholarship: Yup.string().required("Required!"),
-    //  gkbScholarshipOwner: Yup.string().required("Required!"),
-    //  firstInstallment: Yup.string().required("Required!"),
-    //  firstInstallmentDate: Yup.string().required("Required!"),
-    //  secondInstallment: Yup.string().required("Required!"),
-    //  secondInstallmentDate: Yup.string().required("Required!"),
-    //  thirdInstallment: Yup.string().required("Required!"),
-    //  thirdInstallmentDate: Yup.string().required("Required!"),
-    //  totalFees: Yup.string().required("Required!"),
+  //  courseFees: Yup.string().required("Required!"),
+  //  postmatricScholarship: Yup.string().required("Required!"),
+  //  postmatricScholarshipOwner: Yup.string().required("Required!"),
+  //  gkbScholarship: Yup.string().required("Required!"),
+  //  gkbScholarshipOwner: Yup.string().required("Required!"),
+  //  firstInstallment: Yup.string().required("Required!"),
+  //  firstInstallmentDate: Yup.string().required("Required!"),
+  //  secondInstallment: Yup.string().required("Required!"),
+  //  secondInstallmentDate: Yup.string().required("Required!"),
+  //  thirdInstallment: Yup.string().required("Required!"),
+  //  thirdInstallmentDate: Yup.string().required("Required!"),
+  //  totalFees: Yup.string().required("Required!"),
   // });
 
   const initialValues = {

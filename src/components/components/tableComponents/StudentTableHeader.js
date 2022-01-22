@@ -1,7 +1,7 @@
 // import {Fragment} from "react";
 // import ActiveButton from "../../../assests/common/ActiveButton";
 import Edit_icon from '../../../assests/image/Edit_icon.svg'
-import {VerifyStudent} from "../../../../redux/actionDispatcher/studentVerifyTableDataDispatcher";
+import { VerifyStudent } from "../../../../redux/actionDispatcher/studentVerifyTableDataDispatcher";
 import Swal from 'sweetalert2'
 
 const StudentTableHeader = [
@@ -36,7 +36,7 @@ const StudentTableHeader = [
   {
     header: "Reg.fee",
     accessor: "reg_fees_status",
-    Cell: ({row: {original}}) => (
+    Cell: ({ row: { original } }) => (
       <button
         style={
           original.reg_fees_status === "Paid"
@@ -69,7 +69,7 @@ const StudentTableHeader = [
   {
     header: "Status",
     accessor: "status",
-    Cell: ({row: {original}}) => (
+    Cell: ({ row: { original } }) => (
       <button
         style={{
           width: "80px",
@@ -96,9 +96,9 @@ const StudentTableHeader = [
             // showCancelButton: true,
             cancelButtonText: 'Active',
             confirmButtonText: 'Cancel',
-            showCloseButton:true,
+            showCloseButton: true,
             cancelButtonColor: 'blue',
-            confirmButtonColor:"gray",
+            confirmButtonColor: "gray",
             showClass: {
               backdrop: 'swal2-noanimation', // disable backdrop animation
               popup: '',                     // disable popup animation
@@ -109,7 +109,7 @@ const StudentTableHeader = [
             }
 
           }).then((result) => {
-            if(result.isConfirmed=== false) {
+            if (result.isConfirmed === false) {
               Swal.fire(
                 'Deleted!',
                 'Your file has been deleted.',
@@ -127,7 +127,7 @@ const StudentTableHeader = [
   {
     header: 'Edit',
     accessor: 'icon',
-    Cell: ({row: {original}}) => (
+    Cell: ({ row: { original } }) => (
       // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
       <img src={Edit_icon} alt="Edit" />
 

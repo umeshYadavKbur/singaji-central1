@@ -9,7 +9,7 @@ import { TableCheckbox } from '../tableComponents/TableCheckbox';
 import { GlobalFilter } from "../tableComponents/GlobalFilter";
 import filtericon from '../../assests/image/AccountIcons/filter.svg'
 
-import { CDropdown, CDropdownMenu, CDropdownToggle ,CPopover} from '@coreui/react'
+import { CDropdown, CDropdownMenu, CDropdownToggle, CPopover } from '@coreui/react'
 import feesReceiptTableData from "../../../redux/actionDispatcher/account/feesReceiptTableDispather";
 import AllUrl from "../../../redux/constants/url";
 import { connect } from "react-redux";
@@ -41,82 +41,82 @@ function setFilteredParams(filterArr, val) {
 
 function SelectColumnFilter({
     column: { filterValue = [], setFilter, preFilteredRows, id },
-  }) {
+}) {
     const options = useMemo(() => {
-      const options = new Set();
-  
-      preFilteredRows.forEach((row) => {
-        options.add(row.values[id]);
-      });
-      return [...options.values()];
+        const options = new Set();
+
+        preFilteredRows.forEach((row) => {
+            options.add(row.values[id]);
+        });
+        return [...options.values()];
     }, [id, preFilteredRows]);
-  
+
     let offsetObj = [0, 0];
-  
+
     if (id === 'branch') offsetObj = [47, 10]
-   
-  
+
+
     return (
-      <Fragment>
-        <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
-          {/* <span className="block capitalize mb-4">{id}</span> */}
-          <CPopover
-           offset={offsetObj}
-            content={
-              <div className="">
-                {options.map((option, i) => {
-                  return (
-                    <Fragment key={i}>
-                      <div id={`${id}`}>
-                        <input
-                          checked={filterValue.includes(option)}
-                          type="checkbox"
-                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                          id={option}
-                          name={option}
-                          value={option}
-                          style={{ cursor: 'pointer' }}
-                          onChange={(e) => {
-  
-                            setFilter(
-                              setFilteredParams(filterValue, e.target.value)
-                            );
-                          }}
-                          onClick={(e) => { e.stopPropagation() }}
-                        ></input>
-                        <label
-                          htmlFor={option}
-                          className="ml-1.5 font-medium text-gray-700"
+        <Fragment>
+            <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
+                {/* <span className="block capitalize mb-4">{id}</span> */}
+                <CPopover
+                    offset={offsetObj}
+                    content={
+                        <div className="">
+                            {options.map((option, i) => {
+                                return (
+                                    <Fragment key={i}>
+                                        <div id={`${id}`}>
+                                            <input
+                                                checked={filterValue.includes(option)}
+                                                type="checkbox"
+                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                                                id={option}
+                                                name={option}
+                                                value={option}
+                                                style={{ cursor: 'pointer' }}
+                                                onChange={(e) => {
+
+                                                    setFilter(
+                                                        setFilteredParams(filterValue, e.target.value)
+                                                    );
+                                                }}
+                                                onClick={(e) => { e.stopPropagation() }}
+                                            ></input>
+                                            <label
+                                                htmlFor={option}
+                                                className="ml-1.5 font-medium text-gray-700"
+                                            >
+                                                {option}
+                                            </label>
+                                        </div>
+                                    </Fragment>
+                                );
+                            })}
+                        </div>
+                    }
+                    placement="right"
+                >
+                    <div className="btn-group ">
+                        <button
+                            type="button"
+                            className="btn filter_btn "
+                            data-bs-toggle="collapse"
                         >
-                          {option}
-                        </label>
-                      </div>
-                    </Fragment>
-                  );
-                })}
-              </div>
-            }
-            placement="right"
-          >
-            <div className="btn-group ">
-              <button
-                type="button"
-                className="btn filter_btn "
-                data-bs-toggle="collapse"
-              >
-                {id}
-              </button>
-              <img src={rightArrow} width="6px" style={{
+                            {id}
+                        </button>
+                        <img src={rightArrow} width="6px" style={{
                             marginTop: "4px",
                             marginRight: '10px'
                         }}
-                        alt="<" />
+                            alt="<" />
+                    </div>
+                </CPopover>
             </div>
-          </CPopover>
-        </div>
-      </Fragment>
+        </Fragment>
     );
-  }
+}
 
 // Define a default UI for filtering
 // function GlobalFilter({
@@ -307,75 +307,75 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
     ) : (
         <Fragment>
             <div className="container-fluid">
-            <div style={{ position: 'sticky', top: '80px',width:'100%',paddingTop:'10px',paddingBottom:'10px', backgroundColor: '#f4f7fc', zIndex: '6' }}>
-                <div className="d-flex">
-                    <div className="">
-                        <select
-                            className="form-select table_select_row_options"
-                            value={pageSize}
-                            onChange={(e) => setPageSize(Number(e.target.value))}
-                        >
-                            {[10, 25, 50, 100].map((pageSize) => (
-                                <option value={pageSize} key={pageSize}>
-                                    Show Entries {pageSize}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-
-                    <div className="d-flex ml-auto me-1">
-                        <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
-
-                            <CDropdown variant="nav-item" style={{ color: 'white' }}>
-                                <CDropdownToggle
-                                    placement="bottom-end"
-                                    className="py-0"
-                                    caret={false}
-                                >
-                                    <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
-                  <Tooltip>
-                   Filter Data .
-                  </Tooltip>}>
-                                    <img
-                                        src={filtericon}
-                                        alt=""
-                                        style={{
-                                            height: "23px",
-                                            width: "35px",
-                                            marginTop: "-35px",
-                                            marginLeft: "-13px",
-                                        }}
-                                    /></Whisper>
-                                </CDropdownToggle>
-
-                                <CDropdownMenu
-                                    component={"div"}
-                                    className="pt-0 filter-dropdown-menu"
-                                    placement="bottom-end"
-
-                                >
-                                    <div>
-                                        {headerGroups.map((headerGroup) => (
-                                            <div
-                                                style={{ display: "flex flex-column" }}
-                                                {...headerGroup.getHeaderGroupProps()}
-                                            >
-                                                {headerGroup.headers.map((column, i) => (
-                                                    <div
-                                                        key={i}
-                                                        style={{ display: "block", justifyContent: "center" }}
-                                                    >
-                                                        {column.canFilter ? column.render("Filter") : null}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </CDropdownMenu>
-                            </CDropdown>
-
+                <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '6' }}>
+                    <div className="d-flex">
+                        <div className="">
+                            <select
+                                className="form-select table_select_row_options"
+                                value={pageSize}
+                                onChange={(e) => setPageSize(Number(e.target.value))}
+                            >
+                                {[10, 25, 50, 100].map((pageSize) => (
+                                    <option value={pageSize} key={pageSize}>
+                                        Show Entries {pageSize}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
-                        {/* <CDropdown variant="nav-item" style={{ color: 'white' }} >
+
+                        <div className="d-flex ml-auto me-1">
+                            <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
+
+                                <CDropdown variant="nav-item" style={{ color: 'white' }}>
+                                    <CDropdownToggle
+                                        placement="bottom-end"
+                                        className="py-0"
+                                        caret={false}
+                                    >
+                                        <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                                            <Tooltip>
+                                                Filter Data .
+                                            </Tooltip>}>
+                                            <img
+                                                src={filtericon}
+                                                alt=""
+                                                style={{
+                                                    height: "23px",
+                                                    width: "35px",
+                                                    marginTop: "-35px",
+                                                    marginLeft: "-13px",
+                                                }}
+                                            /></Whisper>
+                                    </CDropdownToggle>
+
+                                    <CDropdownMenu
+                                        component={"div"}
+                                        className="pt-0 filter-dropdown-menu"
+                                        placement="bottom-end"
+
+                                    >
+                                        <div>
+                                            {headerGroups.map((headerGroup) => (
+                                                <div
+                                                    style={{ display: "flex flex-column" }}
+                                                    {...headerGroup.getHeaderGroupProps()}
+                                                >
+                                                    {headerGroup.headers.map((column, i) => (
+                                                        <div
+                                                            key={i}
+                                                            style={{ display: "block", justifyContent: "center" }}
+                                                        >
+                                                            {column.canFilter ? column.render("Filter") : null}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </CDropdownMenu>
+                                </CDropdown>
+
+                            </div>
+                            {/* <CDropdown variant="nav-item" style={{ color: 'white' }} >
                             <CDropdownToggle
                                 placement="bottom-end"
                                 className="py-0"
@@ -419,19 +419,19 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                             </CDropdownMenu>
                         </CDropdown> */}
 
-                        <div className="ml-auto me-4">
-                            <GlobalFilter
-                                preGlobalFilteredRows={preGlobalFilteredRows}
-                                filter={globalFilter}
-                                setFilter={setGlobalFilter}
-                            />
+                            <div className="ml-auto me-4">
+                                <GlobalFilter
+                                    preGlobalFilteredRows={preGlobalFilteredRows}
+                                    filter={globalFilter}
+                                    setFilter={setGlobalFilter}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
 
                 <table {...getTableProps()} id="customers">
-                    <thead style={{ position: 'sticky', top: '135px',width:'100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+                    <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
@@ -477,7 +477,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                         })}
                     </tbody>
                 </table>
-               <NoDataFound rows={rows}/>
+                <NoDataFound rows={rows} />
 
                 <Pagination
                     page={page}

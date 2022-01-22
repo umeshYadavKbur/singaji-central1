@@ -29,9 +29,9 @@ const downloadPdf = (data) => {
     doc.addImage(ssismLogo, 20, 23, 150, 48)
     doc.setFontSize(26);
     doc.setFont('Poppins', 'bold')
-    doc.text('Daily Report', (width / 2) - 42, (94 / 2) - 15 )
+    doc.text('Daily Report', (width / 2) - 42, (94 / 2) - 15)
     doc.setFontSize(17);
-    doc.text(`Session -   ${' ' + date.getFullYear()}-${(date.getFullYear() + 1) - 2000}`,(width / 2) - 42,(94 / 2) + 17)
+    doc.text(`Session -   ${' ' + date.getFullYear()}-${(date.getFullYear() + 1) - 2000}`, (width / 2) - 42, (94 / 2) + 17)
 
     doc.setFontSize(18);
     doc.setFont('Poppins-SemiBold', 'normal');
@@ -98,7 +98,7 @@ const downloadPdf = (data) => {
 
     doc.setFillColor('#F4F7FC');
     doc.rect(0, footerHeight - 56, width, 56, 'F')
-    doc.text('Total / --',xPosition + 48,  footerHeight - 23)
+    doc.text('Total / --', xPosition + 48, footerHeight - 23)
     doc.text(ReceivedAmount.toString(), xPosition + 900, footerHeight - 23)
 
     doc.output('pdfobjectnewwindow');

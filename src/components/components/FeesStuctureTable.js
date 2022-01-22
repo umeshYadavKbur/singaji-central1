@@ -106,7 +106,7 @@ function FeesStructure({ table_data, fetchFeesTable }) {
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
   ) : table_data.error ? (
-      <OfflinePage />
+    <OfflinePage />
   ) : (
     <>
       <ToastContainer

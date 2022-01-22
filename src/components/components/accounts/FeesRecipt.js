@@ -379,7 +379,7 @@ function FeesRecipt({ accountAction }) {
                         <div className=' col-5 d-flex justify-content-end'>
 
                             <Link className='m-1 me-5 ' onClick={backToProfilePage} to='#!'>Go To Profile</Link>
-                            <button className="btn btn-md btn-outline-warning fw-bold  " style={{width: "200px",backgroundColor: 'white',color: 'orange'}} type="submit" disabled={loading} >Generate Receipt</button>
+                            <button className="btn btn-md btn-outline-warning fw-bold  " style={{ width: "200px", backgroundColor: 'white', color: 'orange' }} type="submit" disabled={loading} >Generate Receipt</button>
                         </div>
 
                     </div>
