@@ -306,7 +306,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     // const data = React.useMemo(() => tableData, []);
     const mainColoumns = [
         {
-            header: "S No",
+            header: "S.No",
             accessor: "Srno",
             Cell: ({ row: { original, index } }) => {
                 return index + 1;
@@ -366,7 +366,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             filter: "",
         },
         {
-            header: 'Father name',
+            header: "Father's Name",
             accessor: 'fathersName',
             Filter: "",
             filter: "",
@@ -407,7 +407,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
         },
         {
-            header: "Mobile no",
+            header: "Mobile No",
             accessor: "mobile",
             Filter: "",
             filter: "",

@@ -1146,7 +1146,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
 
                                 <div className='row m-1'>
                                     <div className="col" style={{marginTop: '7px'}}>
-                                        <label className="addStdLable" htmlFor="postmatricScolarship">Postmatric ScolarShip*</label>
+                                        <label className="addStdLable" htmlFor="postmatricScolarship">Postmatric Scholarship*</label>
                                         <select
                                             name="postmatricScolarship"
                                             value={formik.values.postmatricScolarship}
@@ -1169,7 +1169,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
 
                                     </div>
                                     <div className="col" style={{marginTop: '7px'}}>
-                                        <label className="addStdLable" htmlFor="">GKB ScolarShip*</label>
+                                        <label className="addStdLable" htmlFor="">GKB Scholarship*</label>
                                         <select name="gkbScolarship" className={formik.touched.gkbScolarship ? `form-select ${formik.errors.gkbScolarship ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02"
                                             value={formik.values.gender === "male" ? formik.values.gkbScolarship = "no" : formik.values.gkbScolarship}
                                             onChange={formik.handleChange}

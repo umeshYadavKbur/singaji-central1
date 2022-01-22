@@ -3,7 +3,7 @@ import HeaderColumn from "../../assests/common/HeaderColumn";
 import FeesStructure from "../FeesStructure";
 const FeesStructureColumn = [
   {
-    header: "S No",
+    header: "S.No",
     accessor: "Srno",
     Cell: ({ row: { original, index } }) => {
       return (index + 1)
