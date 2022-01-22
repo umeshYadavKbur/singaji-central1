@@ -17,6 +17,8 @@ import SkeletonColor from "../../../helpers/Skeletrone";
 import Pagination from "../../assests/common/Pagination";
 import { Tooltip, Whisper } from "rsuite";
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
+import OfflinePage from "../../auth/OfflinePage";
+import NoDataFound from "../../assests/common/NoDataFound";
 
 const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -107,7 +109,8 @@ function SelectColumnFilter({
               <img src={rightArrow} width="6px" style={{
                             marginTop: "4px",
                             marginRight: '10px'
-                        }} />
+                        }}
+                        alt="<" />
             </div>
           </CPopover>
         </div>
@@ -257,7 +260,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
         state,
         pageCount,
         setGlobalFilter,
-        // rows,
+        rows,
         preGlobalFilteredRows,
         prepareRow,
     } = useTable(
@@ -300,7 +303,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
     return feesReceipt.loading ? (
         <SkeletonColor></SkeletonColor>
     ) : feesReceipt.error ? (
-        <h2>{feesReceipt.error}</h2>
+        <OfflinePage />
     ) : (
         <Fragment>
             <div className="container-fluid">
@@ -474,6 +477,8 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                         })}
                     </tbody>
                 </table>
+               <NoDataFound rows={rows}/>
+
                 <Pagination
                     page={page}
                     pageIndex={pageIndex}

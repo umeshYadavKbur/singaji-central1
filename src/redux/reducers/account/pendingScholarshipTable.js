@@ -9,7 +9,7 @@ import {
 const initialState = {
     loading: false,
     table_data: [],
-    error: "",
+    error: false,
 };
 
 const pendingScholarshipTable = (state = initialState, action) => {
@@ -18,18 +18,19 @@ const pendingScholarshipTable = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
-                error: "",
+                error: false,
             };
         case PENDING_SCHOLARSHIP_TABLE_FAIL:
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                error: true,
             };
         case PENDING_SCHOLARSHIP_TABLE_SUCCESS:
             return {
                 loading: false,
                 table_data: action.payload,
+                error: false,
             };
 
         default:

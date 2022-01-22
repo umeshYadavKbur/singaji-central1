@@ -16,7 +16,7 @@ export const fetchAdminTableData = (data) => {
     try {
       axios(data)
         .then(function (response) {
-          console.log((response));
+          // console.log((response));
           if (response.status === 200) {
             dispatch(fetchSuccessTableData(response.data));
           }
@@ -55,7 +55,7 @@ export const fetchAdminTableData = (data) => {
             draggable: true,
             progress: undefined,
           });
-          fetchFailTableData(error);
+          fetchFailTableData(error.message);
         });
     } catch (error) {
       toast.warn('Internal Server Error', {
@@ -67,8 +67,7 @@ export const fetchAdminTableData = (data) => {
         draggable: true,
         progress: undefined,
       });
-      fetchFailTableData(error);
-      //   console.log(error);
+      fetchFailTableData(error.message);
     }
   };
 };
@@ -79,7 +78,7 @@ export const getAdminTableData = (data) => {
     try {
       axios(data)
         .then(function (response) {
-          console.log((response));
+          // console.log((response));
           if (response.status === 200) {
             dispatch(fetchSuccessSecTableData(response.data));
           }

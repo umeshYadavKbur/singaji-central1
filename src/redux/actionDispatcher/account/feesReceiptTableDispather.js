@@ -12,7 +12,7 @@ const feesReceiptTableData = (data) => {
         try {
             axios(data)
                 .then(function (response) {
-                    console.log((response));
+                    // console.log((response));
                     if (response.status === 200) {
                         dispatch(fetchSuccessTableData(response.data));
                     }
@@ -51,7 +51,7 @@ const feesReceiptTableData = (data) => {
                         draggable: true,
                         progress: undefined,
                     });
-                    fetchFailTableData(error);
+                    fetchFailTableData(error.message);
                 });
         } catch (error) {
             toast.warning('Internal server error', {
@@ -63,7 +63,7 @@ const feesReceiptTableData = (data) => {
                 draggable: true,
                 progress: undefined,
             });
-            fetchFailTableData(error);
+            fetchFailTableData(error.message);
             //   console.log(error);
         }
     };

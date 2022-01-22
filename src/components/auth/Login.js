@@ -32,7 +32,7 @@ function Login({ userData, fetchUsers }) {
 
 
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
       const data = {
         email: formik.values.email,
         password: formik.values.password,

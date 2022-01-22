@@ -24,14 +24,14 @@ const tableReducer = (state = initialState, action) => {
       return {
         loading: false,
         table_data: action.payload,
-        error: "",
+        error: false,
       };
 
     case STUDENT_TABLE_DATA_FAIL:
       return {
         loading: false,
         table_data: [],
-        error: action.payload,
+        error: true,
       };
     case STUDENT_SECOND_LOADING:
       return {

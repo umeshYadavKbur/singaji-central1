@@ -8,11 +8,19 @@ import {
   ACCOUNT_TABLE_ACTION_SUCCESS,
 } from "../../constants/actions";
 // import AllUrl from "../../constants/url";
-import { toast } from 'react-toastify'
+import {
+  toast
+} from 'react-toastify'
 
-import { isSuperAdmin } from '../../../helpers/SuperAdmin';
-import { isStudentAdmin } from '../../../helpers/StudentAdmin';
-import { isAccountAdmin } from '../../../helpers/AccountAdmin';
+import {
+  isSuperAdmin
+} from '../../../helpers/SuperAdmin';
+import {
+  isStudentAdmin
+} from '../../../helpers/StudentAdmin';
+import {
+  isAccountAdmin
+} from '../../../helpers/AccountAdmin';
 
 export const fetchStudentAccountData = (data) => {
   return (dispatch) => {
@@ -20,12 +28,12 @@ export const fetchStudentAccountData = (data) => {
     try {
       axios(data)
         .then(function (response) {
-          console.log(response);
+          // console.log(response);
           if (response.status === 200) {
             dispatch(accStuDataSuccess(response.data));
           }
           if (response.status === 400) {
-            dispatch(accStuDataFail())
+            dispatch(accStuDataFail(response.data))
             toast.warn('No data found !', {
               position: "bottom-center",
               autoClose: 3000,
@@ -37,7 +45,7 @@ export const fetchStudentAccountData = (data) => {
             });
           }
           if (response.status === 500) {
-            dispatch(accStuDataFail())
+            dispatch(accStuDataFail(response.data))
             toast.warn('Internal Server Error', {
               position: "bottom-center",
               autoClose: 3000,
@@ -50,7 +58,7 @@ export const fetchStudentAccountData = (data) => {
           }
         })
         .catch(function (error) {
-          dispatch(accStuDataFail())
+          dispatch(accStuDataFail(error.message))
           toast.warn('Internal Server Error', {
             position: "bottom-center",
             autoClose: 3000,
@@ -62,7 +70,7 @@ export const fetchStudentAccountData = (data) => {
           });
         });
     } catch (error) {
-      dispatch(accStuDataFail())
+      dispatch(accStuDataFail(error.message))
       toast.warn('Internal Server Error', {
         position: "bottom-center",
         autoClose: 3000,
@@ -93,15 +101,13 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
                 navigate('/student_admin_dashboard/studentprofile/feesrecipt');
               else
                 navigate('/student_admin_dashboard/studentprofile');
-            }
-            else if (isAccountAdmin()) {
+            } else if (isAccountAdmin()) {
               // console.log("Navigated ");
               if (is_reciptBtn)
                 navigate('/account_admin_dashboard/studentprofile/feesrecipt');
               else
                 navigate('/account_admin_dashboard/studentprofile');
-            }
-            else if (isSuperAdmin()) {
+            } else if (isSuperAdmin()) {
               // console.log("Navigated ");
               if (is_reciptBtn)
                 navigate('/admin_dashboard/studentprofile/feesrecipt');
@@ -122,7 +128,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(accStuDataFail());
+            dispatch(accStuDataFail(response.data));
           }
           if (response.status === 500) {
             toast.warn('Internal Server Error', {
@@ -134,7 +140,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(accStuDataFail());
+            dispatch(accStuDataFail(response.data));
           }
         })
         .catch(function (error) {
@@ -149,7 +155,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
             draggable: true,
             progress: undefined,
           });
-          dispatch(accStuDataFail());
+          dispatch(accStuDataFail(error.message));
         });
     } catch (error) {
       setLoading(false)
@@ -163,7 +169,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
         draggable: true,
         progress: undefined,
       });
-      dispatch(accStuDataFail());
+      dispatch(accStuDataFail(error.message));
     }
   };
 };
@@ -182,9 +188,10 @@ const accStuDataSuccess = (data) => {
   }
 }
 
-const accStuDataFail = () => {
+const accStuDataFail = (error) => {
   return {
     type: STUDENTACCOUNT_TABLE_DATA_FAIL,
+    payload: error
   }
 }
 
