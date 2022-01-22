@@ -7,37 +7,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
-
 /* --------------------common css elements ------------------------ */
 
 /* ======= sweet alert ======= */
-.swal2-confirm{
-
+.swal2-confirm {
   width: 86px !important;
 }
-
 
 /* /////////////// */
 /* filter css */
 
-.filter-dropdown-menu{
-
+.filter-dropdown-menu {
   position: absolute !important;
   inset: 0px auto auto 0px !important;
   transform: translate3d(-77px, 47px, 0px) !important;
   min-width: fit-content !important;
 }
-.filter-dropdown-menu-student_account_table{
-
+.filter-dropdown-menu-student_account_table {
   position: absolute !important;
   inset: 0px auto auto 0px !important;
   transform: translate3d(-112px, 47px, 0px) !important;
   min-width: fit-content !important;
 }
 
-.filter_btn{
+.filter_btn {
   border: none !important;
   box-shadow: none !important;
   text-align: left !important;
@@ -49,28 +42,27 @@ body {
   background:url(./components/assests/image/right_arrow_icon.svg) !important;
 } */
 
-.popover-arrow{
+.popover-arrow {
   position: absolute !important;
-    top: 0px !important;
-    transform: translate3d(0px, 5px, 0px) !important;
+  top: 0px !important;
+  transform: translate3d(0px, 5px, 0px) !important;
 }
 /* =========== tooltip css ========= */
 
-
-.rs-tooltip[class*=placement-top]:after{
-  border-top-color: #FFDBA7 !important;
-    /* border-top-color: var(--rs-tooltip-bg); */
-    border-width: 6px 6px 0;
-    bottom: -6px;
-    margin-left: -6px;
+.rs-tooltip[class*='placement-top']:after {
+  border-top-color: #ffdba7 !important;
+  /* border-top-color: var(--rs-tooltip-bg); */
+  border-width: 6px 6px 0;
+  bottom: -6px;
+  margin-left: -6px;
 }
-.rs-tooltip{
+.rs-tooltip {
   color: #444754 !important;
-  background-color: #FFDBA7 !important;
+  background-color: #ffdba7 !important;
 }
 
-.rs-tooltip[class*=placement-bottom]:after {
-  border-bottom-color: #FFDBA7 !important;
+.rs-tooltip[class*='placement-bottom']:after {
+  border-bottom-color: #ffdba7 !important;
   /* border-bottom-color: var(--rs-tooltip-bg); */
   border-width: 0 6px 6px;
   margin-left: -6px;
@@ -83,12 +75,6 @@ input.largerCheckbox {
   height: 14px;
   /* margin-top: 2px; */
 }
-
-
-
-
-
-
 
 /* =============edit scroll bar ========== */
 
@@ -112,4 +98,22 @@ input.largerCheckbox {
 /* Handle on hover */
 /* ::-webkit-scrollbar-thumb:hover {
   background: orange; 
-} */ 
+} */
+
+.filter-dropdown-menu {
+  position: absolute !important;
+  inset: 0px auto auto 0px !important;
+  transform: translate3d(-50px, 47px, 0px) !important;
+  min-width: fit-content !important;
+}
+
+.filter_btn {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.popover-arrow {
+  position: absolute !important;
+  top: 0px !important;
+  transform: translate3d(0px, 5px, 0px) !important;
+}
