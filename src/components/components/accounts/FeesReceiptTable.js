@@ -4,7 +4,7 @@ import '../styles/HeaderDropdown.css'
 import { Fragment, useMemo } from "react";
 import { useTable, useFilters, useSortBy, useGlobalFilter, usePagination, useRowSelect } from "react-table";
 import updown_sort from '../../assests/image/updown_sort.svg'
-import { TableCheckbox } from '../tableComponents/TableCheckbox';
+// import { TableCheckbox } from '../tableComponents/TableCheckbox';
 // import tableData from './fees_receipt.json'
 import { GlobalFilter } from "../tableComponents/GlobalFilter";
 import filtericon from '../../assests/image/AccountIcons/filter.svg'
@@ -19,6 +19,7 @@ import { Tooltip, Whisper } from "rsuite";
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
 import OfflinePage from "../../auth/OfflinePage";
 import NoDataFound from "../../assests/common/NoDataFound";
+// import Icon_feather_download from '../../assests/image/AccountIcons/Icon_feather_download.svg';
 
 const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -172,7 +173,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
     const columns = React.useMemo(
         () => [
             {
-                header: "S No",
+                header: "S.No",
                 accessor: "S.N",
                 Cell: ({ row: { original, index } }) => {
                     return (index + 1)
@@ -181,7 +182,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 filter: "",
             },
             {
-                header: "Data",
+                header: "Date",
                 accessor: "AccountsReceiptDate",
                 Filter: "",
                 filter: ""
@@ -199,7 +200,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 filter: ""
             },
             {
-                header: "Father name",
+                header: "Father's Name",
                 accessor: "fathersName",
                 Filter: "",
                 filter: ""
@@ -240,6 +241,28 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 Filter: "",
                 filter: ""
             },
+            // {
+            //     header: 'Download',
+            //     accessor: 'Do',
+            //     Cell: ({row: {original}}) => (
+            //         // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
+            //         <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+            //             <Tooltip>
+            //                 Edit Student Info
+            //             </Tooltip>
+            //         }>
+            //             <img src={Icon_feather_download} style={{cursor: "pointer"}} alt="Edit" 
+            //             // onClick={() => {
+            //             //     navigate("/admin_dashboard/addnewstudent");
+            //             //     localStorage.setItem('RegistrationEdit',JSON.stringify(original))
+            //             // }}
+            //              />
+
+            //         </Whisper>
+
+            //     )
+            // },
+            
         ],
         []
     );
@@ -271,22 +294,22 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
         useSortBy,
         usePagination,
         useRowSelect,
-        (hooks) => {
-            hooks.visibleColumns.push((columns) => {
-                return [
-                    {
-                        id: "selection",
-                        header: ({ getToggleAllRowsSelectedProps }) => (
-                            < TableCheckbox {...getToggleAllRowsSelectedProps()} />
-                        ),
-                        Cell: ({ row }) => (
-                            <TableCheckbox {...row.getToggleRowSelectedProps()} />
-                        ),
-                    },
-                    ...columns,
-                ];
-            });
-        }
+        // (hooks) => {
+        //     hooks.visibleColumns.push((columns) => {
+        //         return [
+        //             {
+        //                 id: "selection",
+        //                 header: ({ getToggleAllRowsSelectedProps }) => (
+        //                     < TableCheckbox {...getToggleAllRowsSelectedProps()} />
+        //                 ),
+        //                 Cell: ({ row }) => (
+        //                     <TableCheckbox {...row.getToggleRowSelectedProps()} />
+        //                 ),
+        //             },
+        //             ...columns,
+        //         ];
+        //     });
+        // }
 
     );
 

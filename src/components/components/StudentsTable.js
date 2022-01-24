@@ -42,7 +42,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 
   const [columns] = React.useState([
     {
-      header: "S No",
+      header: "S.No",
       accessor: "Srno",
       Cell: ({ row: { original, index } }) => {
         return (index + 1)
@@ -53,7 +53,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "firstName",
     },
     {
-      header: "Father Name",
+      header: "Father's Name",
       accessor: "fathersName",
     },
     {
@@ -74,7 +74,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "mobile",
     },
     {
-      header: "Reg.fee",
+      header: "Reg Fee",
       accessor: "reg_fees_status",
       Cell: ({ row: { original } }) => (
         <button

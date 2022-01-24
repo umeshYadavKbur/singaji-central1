@@ -41,7 +41,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
 
     const [columns] = React.useState([
         {
-            header: "S No",
+            header: "S.No",
             accessor: "Srno",
             Cell: ({ row: { original, index } }) => {
                 return (index + 1)
@@ -56,7 +56,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             accessor: 'name'
         },
         {
-            header: 'AdminId',
+            header: 'Admin Id',
             accessor: 'userId'
         },
         {
