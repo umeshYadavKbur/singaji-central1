@@ -4,14 +4,14 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import Edit_icon from '../../assests/image/Edit_icon.svg'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import '../styles/AddNewStudent.css'
 import {useNavigate} from 'react-router-dom';
 import student_Profile__RocketImg from '../../assests/image/AccountIcons/studentProfileRocketImg.svg'
 import allUrls from '../../../redux/constants/url'
 import {useFormik} from 'formik'
-import NumberFormat from 'react-number-format'
-import Select from 'react-select'
+// import NumberFormat from 'react-number-format'
+// import Select from 'react-select'
 import axios from 'axios'
 import {styled,Box} from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
@@ -61,32 +61,32 @@ const style = {
 };
 
 function StudentProfile() {
-    const [branchNames,setBranchNames] = useState([{subjects: 'loading...',id: 0}])
-    const [villageNames,setVillageNames] = useState([{label: 'loading...',villageId: 0}])
+    // const [branchNames,setBranchNames] = useState([{subjects: 'loading...',id: 0}])
+    // const [villageNames,setVillageNames] = useState([{label: 'loading...',villageId: 0}])
     const [loaderLoading,setLoaderLoading] = useState(false)
 
 
     useEffect(() => {
 
 
-        const getData = async () => {
+        // const getData = async () => {
 
-            const branchName = await axios(allUrls.branchList)
-            if(branchName.status === 200) {
+        //     const branchName = await axios(allUrls.branchList)
+        //     if(branchName.status === 200) {
 
-                setBranchNames(branchName.data)
-            }
-            // console.log(branchName.data);
-            // console.log("branch Name ", branchName.data);
+        //         setBranchNames(branchName.data)
+        //     }
+        //     // console.log(branchName.data);
+        //     // console.log("branch Name ", branchName.data);
 
-            /////////////////////////
-            const villageNamesRes = await axios(allUrls.villageNameList)
-            let newVillageName = [];
-            villageNamesRes.data.forEach((ele) => {newVillageName.push({'label': ele.villagename,'value': ele.villagename})})
-            // console.log(newVillageName);
-            setVillageNames(newVillageName);
-        }
-        getData();
+        //     /////////////////////////
+        //     const villageNamesRes = await axios(allUrls.villageNameList)
+        //     let newVillageName = [];
+        //     villageNamesRes.data.forEach((ele) => {newVillageName.push({'label': ele.villagename,'value': ele.villagename})})
+        //     // console.log(newVillageName);
+        //     setVillageNames(newVillageName);
+        // }
+        // getData();
     },[]);
 
 
@@ -164,6 +164,7 @@ function StudentProfile() {
                 "feesScheme": formik.values.feesScheme,
                 "Tutionfee": formik.values.Tutionfee,
                 "Scholarship": '',
+                'year':formik.values.year,
                 "reg_Fees": formik.values.reg_Fees,
                 "Busfee": formik.values.Busfee,
                 "GKB_Amount": formik.values.GKB_Amount,
@@ -182,7 +183,7 @@ function StudentProfile() {
                     'Authorization': `Bearer ${localStorage.getItem("token")}`,
                     'Content-Type': 'application/json'
                 },
-                // data: UpdateAccountInfoData
+                data: UpdateAccountInfoData
             };
             // console.log(config, UpdatePersonalInfoData)
             setLoaderLoading(true)
@@ -289,7 +290,7 @@ function StudentProfile() {
                             {/* <img src={Edit_icon} alt='edit_icon' className='mt-5' style={{marginLeft: "-10px",height: '20px',width: '20px'}} /> */}
 
                         </div>
-                        <div className='ml-3'>
+                        <div className='ml-4'>
 
                             <div  style={{color: '#5A607F'}}>
                                 <span className='fw-bold' style={{fontSize: '22px'}}>{StudentName}</span>
@@ -299,7 +300,7 @@ function StudentProfile() {
                             <div className="btn-group mt-2" role="group" aria-label="Basic example">
                                 <button style={{backgroundColor: '#f99300',borderRadius: '11px 0px 0px 11px'}} onClick={() => {navigate("feesrecipt");}} className="btn  btn-warning text-light fw-bold" type="submit">Reciept</button>
 
-                                <button style={{color: '#7099e3',backgroundColor: '#e6e9f4',borderRadius: ' 0px 11px 11px 0px',border: '1px solid #7099e3'}} className="btn btn-outline fw-bold" type="submit" onClick={() => {navigate("uploaddocument");}}>Upload Document</button>
+                                <button style={{color: '#4F83DF',backgroundColor: '#e6e9f4',borderRadius: ' 0px 11px 11px 0px',border: '1px solid #4F83DF'}} className="btn btn-outline fw-bold" type="submit" onClick={() => {navigate("uploaddocument");}}>Upload Document</button>
                             </div>
                         </div>
                     </div>
@@ -345,7 +346,7 @@ function StudentProfile() {
                             {/* Personal Details */}
 
 
-                            <div className="row">
+                            <div className="row mt-3">
                                 <div className="col">
                                     <label className='addStdLable' htmlFor="">Account status</label>
                                     <select name="accountStatus" value={formik.values.accountStatus} onChange={formik.values.accountStatus} className={formik.touched.accountStatus ? `form-select ${formik.errors.accountStatus ? "invalid" : ""}` : 'form-select'} >
@@ -409,7 +410,7 @@ function StudentProfile() {
                             </div>
 
 
-                            <div className="row">
+                            <div className="row mt-3">
                                 <div className="col">
                                     <label className='addStdLable' htmlFor="">Registration Amount</label>
                                     <input name="reg_Fees" onChange={formik.handleChange} value={formik.values.reg_Fees} type="text" className='form-control' placeholder='Registration Amount' disabled />
@@ -456,7 +457,7 @@ function StudentProfile() {
                                 </div>
                             </div>
 
-                            <div className="row">
+                            <div className="row mt-3">
                                 <div className="col">
                                     <label className='addStdLable' htmlFor="">First Installment</label>
                                     <input name="Firstinstallment" onChange={formik.handleChange} value={formik.values.Firstinstallment} type="number" className='form-control' placeholder='First Installment' />
@@ -503,7 +504,7 @@ function StudentProfile() {
                                 </div>
                             </div>
 
-                            <div className="row">
+                            <div className="row mt-3">
 
                                 <div className=' col'><label className='addStdLable' htmlFor="">Third Installment</label>
                                     <div className="d-flex">
@@ -543,7 +544,7 @@ function StudentProfile() {
                                     )}
                                 </div>
                                 <div className="col">
-                                    <label className='addStdLable' className="addStdLable" htmlFor="">Year</label>
+                                    <label className='addStdLable' htmlFor="">Year</label>
 
                                     <select name="year" value={formik.values.year} onBlur={formik.handleBlur}
 

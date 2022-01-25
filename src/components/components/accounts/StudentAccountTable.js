@@ -280,7 +280,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const token = localStorage.getItem("token");
-    const [date, setDate] = useState({})
+    const [date, setDate] = useState({a:new Date() ,b:new Date()})
 
 
     ////////////////////////////
@@ -333,14 +333,14 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     }>
                         {original.photo ? <img
                             alt="profile"
-                            style={{ cursor: "pointer", borderRadius: '50%',width: "50px" , height: "50px" }}
+                            style={{ cursor: "pointer", borderRadius: '50%', width: "50px", height: "50px" }}
                             onClick={() => {
                                 getAllInfoOfStudent(original, false)
                             }}
                             className="mx-auto"
                             src={original.photo}
 
-                            
+
 
                             text="Image"
 
@@ -579,18 +579,25 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     ]
 
 
-    const [columns, setColoumns] = useState(mainColoumns)
+    const [columns, setColoumns] = useState(mainColoumns);
+
+    // function to show daily report
     const showDailyReport = async () => {
         setLoading(true)
         function convert(str) {
-            var date = new Date(str),
-                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-                day = ("0" + date.getDate()).slice(-2);
+                console.log(str)
+            var date = new Date(str)
+                console.log(date)
+                  let  mnth = ("0" + (date.getMonth() + 1)).slice(-2)
+                  let  day = ("0" + date.getDate()).slice(-2);
             return [date.getFullYear(), mnth, day].join("-");
         }
 
         var first = convert(date.a)
         var last = convert(date.b)
+
+        console.log(first)
+        console.log(last)
         var config = {
             method: "GET",
             url: `${AllUrl.dailyReport}${first}&${last}`,
@@ -747,7 +754,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                     getBackPosition()
                                     set_is_dailyReport(false)
                                 }}
-                                    onOk={showDailyReport}
+                                    // onOk={showDailyReport}
                                     onChange={(value) => {
 
                                         if (!value) {
@@ -756,7 +763,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                         }
                                         var a = value[0]
                                         var b = value[1]
-
+                                        console.log(value)
                                         setDate({
                                             a, b
                                         })

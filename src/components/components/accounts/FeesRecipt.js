@@ -54,7 +54,7 @@ function FeesRecipt({ accountAction }) {
     const initialValues = {
         payBy: 'Case',
         studentName: `${StudentName}`,
-        studentClassYear: 'I',
+        studentClassYear:(StudentAccountData.accountInfo.year?.toString()),
         FatherName: StudentAccountData.accountInfo.fathersName,
         waiveOff: '0',
         chequeDate: '',
@@ -239,7 +239,8 @@ function FeesRecipt({ accountAction }) {
                         <div className="col">
                             <label htmlFor="">Year</label>
                             <select name='studentClassYear' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.studentClassYear} className='form-select'  >
-                                <option defaultValue="I">I</option>
+                                {/* <option defaultValue={(StudentAccountData.accountInfo.year)?.toString()}>{StudentAccountData.accountInfo.year}</option> */}
+                                <option value="I">I</option>
                                 <option value="II">II</option>
                                 <option value="III">III</option>
                             </select>
