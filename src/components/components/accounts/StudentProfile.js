@@ -23,6 +23,7 @@ import checkBoxImg from '../../assests/image/AccountIcons/thirdInstallmentCheckI
 import UpdateStudentPersonalInfo from './UpdateStudentPersonalInfo';
 import './Styles/StudentAccountTable.css'
 import LoaderButton from '../../assests/common/LoaderButton'
+import { Tooltip, Whisper } from 'rsuite';
 
 
 const StyledModal = styled(ModalUnstyled)`
@@ -99,8 +100,8 @@ function StudentProfile() {
 
     // console.log(StudentProfileData);
 
-    var StudentName = StudentProfileData.accountInfo.firstName + ' ' + StudentProfileData.accountInfo.lastName
-    var StudentClassName = (StudentProfileData.accountInfo.branch).toUpperCase()
+    var StudentName = StudentProfileData.accountInfo.firstName + ' ' + StudentProfileData.accountInfo.lastName 
+    var StudentClassName = (StudentProfileData.accountInfo.branch).toUpperCase() +'-'+ StudentProfileData.accountInfo.year
     var StudentPhoto = StudentProfileData.accountInfo.photo
     // console.log(StudentPhoto);
 
@@ -304,8 +305,16 @@ function StudentProfile() {
                     </div>
                     <div className="col-6 d-flex justify-content-end">
                         <img src={student_Profile__RocketImg} className='mt-4 ' alt="rocket" />
+                        <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                        <Tooltip>
+                            Edit personal info.
+                        </Tooltip>
+                    }>
+
                         <img src={Edit_icon} onClick={handleOpen} className='mb-1 ' alt="rocket" style={{height: '40px',width: '40px',alignSelf: 'self-end',cursor: 'pointer'}} />
                         {/* <img src={Edit_icon} alt='edit_icon'  /> */}
+                    </Whisper>
+                        {/* <Whisper/> */}
                     </div>
                 </div>
 

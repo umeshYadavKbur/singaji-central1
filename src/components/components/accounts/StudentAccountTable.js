@@ -445,7 +445,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
         },
         {
-            header: 'Received Fee',
+            header: 'Received Fees',
             accessor: 'ReceivedAmount',
             Cell: ({ row: { original } }) => (
                 <div className='circle-main '>
@@ -477,7 +477,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         },
 
         {
-            header: 'Pending Fee',
+            header: 'Pending Fees',
             accessor: 'RemainAmount',
             Cell: ({ row: { original } }) => (
                 <div className='circle-main '>

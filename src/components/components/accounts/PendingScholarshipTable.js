@@ -120,7 +120,7 @@ function SelectColumnFilter({
             <img src={rightArrow} width="6px" style={{
               marginTop: "4px",
               marginRight: '10px'
-            }} />
+            }} alt="/"/>
           </div>
         </CPopover>
       </div>
@@ -200,7 +200,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
         filter: "",
       },
       {
-        header: "Father name",
+        header: "Father's name",
         accessor: "fathersName",
         Filter: "",
         filter: "",
