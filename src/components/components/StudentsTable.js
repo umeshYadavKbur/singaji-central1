@@ -53,7 +53,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "firstName",
     },
     {
-      header: "Father Name",
+      header: "Father's Name",
       accessor: "fathersName",
     },
     {

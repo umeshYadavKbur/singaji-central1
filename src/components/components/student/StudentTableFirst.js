@@ -232,7 +232,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                 filter: ""
             },
             {
-                header: "Father Name",
+                header: "Father's Name",
                 accessor: "fathersName",
                 Filter: "",
                 filter: ""
@@ -272,16 +272,14 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                 accessor: "status",
                 Cell: ({ row: { original, index } }) => {
                     return (
-                        <button
-                            style={
-                                original.status
-                                    ? ActivateButton
-                                    : DeactivateButton
-                            }
-
+                        <p
+                        style={{marginTop: "3px" , marginBottom: "3px" }}
                         >
+                            <b>
+
                             {original.status ? "Active" : "Deactive"}
-                        </button>
+                            </b>
+                        </p>
                     )
                 },
                 Filter: "",
@@ -349,7 +347,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                 <Loader />
             )}
             <div className="container-fluid">
-                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px' }}>
+                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '20px' }}>
                     <div className="row  mx-0 mt-3" >
 
                         <div className="d-flex">
