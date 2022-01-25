@@ -330,14 +330,14 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     }>
                         {original.photo ? <img
                             alt="profile"
-                            style={{ cursor: "pointer", borderRadius: '25px' }}
+                            style={{ cursor: "pointer", borderRadius: '50%',width: "50px" , height: "50px" }}
                             onClick={() => {
                                 getAllInfoOfStudent(original, false)
                             }}
                             className="mx-auto"
                             src={original.photo}
 
-                            width={50}
+                            
 
                             text="Image"
 
