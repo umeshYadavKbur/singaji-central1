@@ -54,7 +54,7 @@ function SelectColumnFilter({
 
     let offsetObj = [0, 0];
 
-    if (id === 'branch') offsetObj = [47, 10]
+    if (id === 'branch') offsetObj = [63, 10]
 
 
     return (
@@ -200,7 +200,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 filter: ""
             },
             {
-                header: "Father's Name",
+                header: "Father Name",
                 accessor: "fathersName",
                 Filter: "",
                 filter: ""
@@ -262,7 +262,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
 
             //     )
             // },
-            
+
         ],
         []
     );

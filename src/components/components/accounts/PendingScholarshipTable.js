@@ -63,9 +63,9 @@ function SelectColumnFilter({
 
   let offsetObj = [0, 0];
 
-  if (id === 'stream') offsetObj = [33, 10]
-  else if (id === 'category') offsetObj = [33, 10]
-  else if (id === 'feesScheme') offsetObj = [47, 10]
+  if (id === 'stream') offsetObj = [75, 10]
+  else if (id === 'category') offsetObj = [48, 10]
+  else if (id === 'feesScheme') offsetObj = [65, 10]
 
   return (
     <Fragment>
@@ -321,7 +321,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
   return scholarData.loading ? (
     <SkeletonColor></SkeletonColor>
   ) : scholarData.error ? (
-           <OfflinePage />
+    <OfflinePage />
   ) : (
     <Fragment>
       <ToastContainer
@@ -507,7 +507,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
             })}
           </tbody>
         </table>
-        <NoDataFound rows={rows}/>
+        <NoDataFound rows={rows} />
 
         <Pagination
           page={page}
