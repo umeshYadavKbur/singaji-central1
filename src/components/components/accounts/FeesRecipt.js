@@ -306,8 +306,8 @@ function FeesRecipt({ accountAction }) {
                         </div>
                         <div className="col">
                             <label htmlFor="">Late Fees</label>
-                            <Numberformat name='LateFeeAmount' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.waiveOff} className='form-control' placeholder='Waive off' />
-                            {formik.errors.waiveOff && formik.touched.waiveOff ? (
+                            <Numberformat name='LateFeeAmount' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.LateFeeAmount} className='form-control' placeholder='Waive off' />
+                            {formik.errors.LateFeeAmount && formik.touched.LateFeeAmount ? (
                                 <div className="text-danger fs-6">
                                     {formik.errors.LateFeeAmount}
                                 </div>
