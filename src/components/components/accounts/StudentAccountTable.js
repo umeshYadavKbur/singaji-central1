@@ -812,9 +812,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                             className="pt-0 filter-dropdown-menu-student_account_table"
                                             placement="bottom-end"
 
-
                                         >
-                                            <div>
+                                            <div className="p-lg-2 pb-0">
                                                 {headerGroups.map((headerGroup) => (
                                                     <div
                                                         style={{ display: "flex flex-column" }}

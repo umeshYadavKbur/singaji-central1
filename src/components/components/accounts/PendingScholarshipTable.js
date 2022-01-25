@@ -49,12 +49,13 @@ function setFilteredParams(filterArr, val) {
   if (filterArr.length === 0) filterArr = undefined;
   return filterArr;
 }
+
+
 function SelectColumnFilter({
   column: { filterValue = [], setFilter, preFilteredRows, id },
 }) {
   const options = useMemo(() => {
     const options = new Set();
-
     preFilteredRows.forEach((row) => {
       options.add(row.values[id]);
     });
@@ -67,28 +68,59 @@ function SelectColumnFilter({
   else if (id === 'category') offsetObj = [48, 10]
   else if (id === 'feesScheme') offsetObj = [65, 10]
 
+
+  let name = id;
+
+  switch (id) {
+    case 'stream':
+      name = 'Stream';
+      break;
+    case 'category':
+      name = 'Category';
+      break;
+
+    case 'feesScheme':
+      name = 'Fees Scheme';
+      break;
+
+    default:
+      break;
+  }
+
   return (
     <Fragment>
       <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
         {/* <span className="block capitalize mb-4">{id}</span> */}
         <CPopover
+
           offset={offsetObj}
+
           content={
             <div className="">
               {options.map((option, i) => {
+                let option_label = option;
+
+                if (id === 'is_active') {
+                  if (option === 'true')
+                    option_label = 'Active'
+                  else
+                    option_label = 'Deactive'
+
+
+                }
+
                 return (
                   <Fragment key={i}>
-                    <div id={`${id}`}>
+                    <div id={`${id}`} className="d-flex ">
                       <input
                         checked={filterValue.includes(option)}
                         type="checkbox"
-                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mt-1"
                         id={option}
                         name={option}
                         value={option}
                         style={{ cursor: 'pointer' }}
                         onChange={(e) => {
-
                           setFilter(
                             setFilteredParams(filterValue, e.target.value)
                           );
@@ -97,9 +129,10 @@ function SelectColumnFilter({
                       ></input>
                       <label
                         htmlFor={option}
-                        className="ml-1.5 font-medium text-gray-700"
+                        className="ml-2 font-medium text-gray-700"
                       >
-                        {option}
+                        {option_label}
+
                       </label>
                     </div>
                   </Fragment>
@@ -108,23 +141,23 @@ function SelectColumnFilter({
             </div>
           }
           placement="right"
+
         >
-          <div className="btn-group">
+          <div className="btn-group ">
             <button
-              type="button"
+              onClick={(e) => { e.preventDefault() }}
               className="btn filter_btn"
-              data-bs-toggle="collapse"
             >
-              {id}
+              {name}
             </button>
-            <img src={rightArrow} width="6px" style={{
+            <img src={rightArrow} alt=">" width="6px" style={{
               marginTop: "4px",
               marginRight: '10px'
             }} />
           </div>
         </CPopover>
-      </div>
-    </Fragment>
+      </div >
+    </Fragment >
   );
 }
 
@@ -383,7 +416,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
                     placement="bottom-end"
 
                   >
-                    <div>
+                    <div className="p-lg-2 pb-0">
                       {headerGroups.map((headerGroup) => (
                         <div
                           style={{ display: "flex flex-column" }}

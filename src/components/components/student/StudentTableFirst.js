@@ -130,7 +130,7 @@ function SelectColumnFilter({
                                                 htmlFor={option}
                                                 className="ml-2 font-medium text-gray-700"
                                             >
-                                                {option_label}
+                                                {"  " + option_label}
 
                                             </label>
                                         </div>
@@ -394,7 +394,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                                             placement="bottom-end"
 
                                         >
-                                            <div>
+                                            <div className="p-lg-2 pb-0">
                                                 {headerGroups.map((headerGroup) => (
                                                     <div
                                                         style={{ display: "flex flex-column" }}
