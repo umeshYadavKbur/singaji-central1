@@ -34,7 +34,7 @@ const StudentTableHeader = [
     accessor: "mobile",
   },
   {
-    header: "Reg.fee",
+    header: "Reg. fees",
     accessor: "reg_fees_status",
     Cell: ({ row: { original } }) => (
       <button

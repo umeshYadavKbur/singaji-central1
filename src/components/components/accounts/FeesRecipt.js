@@ -411,10 +411,10 @@ function FeesRecipt({ accountAction }) {
                                 <label htmlFor="">Fees Amount</label>
                             </div>
                             <div className="col">
-                                <label htmlFor="">Recieved Fee</label>
+                                <label htmlFor="">Recieved Fees</label>
                             </div>
                             <div className="d-flex col-2">
-                                <label htmlFor="">Pending Fee</label>
+                                <label htmlFor="">Pending Fees</label>
                             </div>
 
                         </div>

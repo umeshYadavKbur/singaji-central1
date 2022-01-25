@@ -262,7 +262,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                 filter: "",
             },
             {
-                header: "Registration Fee",
+                header: "Registration Fees",
                 accessor: "reg_Fees",
                 Filter: "",
                 filter: ""

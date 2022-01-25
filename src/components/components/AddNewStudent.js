@@ -726,10 +726,10 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                             <option value="">
                                                 Category
                                             </option>
-                                            <option value="GEN">Gen</option>
+                                            <option value="GEN">GEN</option>
                                             <option value="OBC">OBC</option>
-                                            <option value="ST">St</option>
-                                            <option value="SC">Sc</option>
+                                            <option value="SC">SC</option>
+                                            <option value="ST">ST</option>
                                         </select>
                                         {formik.errors.category && formik.touched.category ? (
                                             <div className="text-danger fs-6">
@@ -1453,14 +1453,14 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                     disabled={loaderLoading}
                                     style={{
                                         width: "220px",
-                                        maxHeight: '45px',
+                                        height: '41px',
                                         backgroundColor: 'rgb(75 0 255)'
                                     }}
                                 >{loaderLoading ? (loaderLoading ? (<Loader size="xs" content="Update" />) : '') : "Update"}</button> :
                                 <button className="btn btn-sm btn-warning text-light fw-bold" type="submit"
                                     style={{
                                         width: "220px",
-                                        maxHeight: '45px',
+                                        height: '41px',
                                         backgroundColor: 'orange'
                                     }}
                                     disabled={addStudent.loading}

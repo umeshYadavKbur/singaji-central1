@@ -74,7 +74,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "mobile",
     },
     {
-      header: "Reg Fee",
+      header: "Reg. Fees",
       accessor: "reg_fees_status",
       Cell: ({ row: { original } }) => (
         <button
@@ -224,7 +224,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               // VerifyStudent(original.email);
             }
             else {
-              toast.warning('Firstly Pay Registration Fee', {
+              toast.warning('Firstly Pay Registration Fees', {
                 position: "bottom-center",
                 autoClose: 2000,
                 hideProgressBar: true,

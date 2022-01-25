@@ -238,7 +238,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 filter: ""
             },
             {
-                header: "Received Fee",
+                header: "Received Fees",
                 accessor: "ReceivedAmount",
                 Cell: ({ row: { original } }) => (
                     <div className='circle-main'>
