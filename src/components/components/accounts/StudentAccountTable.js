@@ -74,12 +74,12 @@ function SelectColumnFilter({
 
     let offsetObj = [0, 0];
 
-    if (id === 'branch') offsetObj = [76, 10]
-    else if (id === 'trackName') offsetObj = [93, 10]
-    else if (id === 'year') offsetObj = [33, 10]
-    else if (id === 'joinBatch') offsetObj = [50, 10]
-    else if (id === 'is_active') offsetObj = [33, 10]
-    else if (id === 'gender') offsetObj = [33, 10]
+    if (id === 'branch') offsetObj = [76, 18]
+    else if (id === 'trackName') offsetObj = [93, 18]
+    else if (id === 'year') offsetObj = [33, 18]
+    else if (id === 'joinBatch') offsetObj = [50, 18]
+    else if (id === 'is_active') offsetObj = [33, 18]
+    else if (id === 'gender') offsetObj = [33, 18]
 
     let name = id;
 

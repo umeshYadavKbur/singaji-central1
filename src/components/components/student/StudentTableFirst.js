@@ -67,8 +67,8 @@ function SelectColumnFilter({
 
     let offsetObj = [0, 0];
 
-    if (id === 'branch') offsetObj = [78, 10]
-    if (id === 'joinBatch') offsetObj = [35, 10]
+    if (id === 'branch') offsetObj = [78, 18]
+    if (id === 'joinBatch') offsetObj = [35, 18]
 
 
 

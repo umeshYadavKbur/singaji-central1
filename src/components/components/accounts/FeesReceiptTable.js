@@ -52,7 +52,7 @@ function SelectColumnFilter({
 
     let offsetObj = [0, 0];
 
-    if (id === 'branch') offsetObj = [63, 10]
+    if (id === 'branch') offsetObj = [63, 18]
     let name = id;
 
     switch (id) {

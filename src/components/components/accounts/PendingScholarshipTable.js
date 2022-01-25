@@ -64,9 +64,9 @@ function SelectColumnFilter({
 
   let offsetObj = [0, 0];
 
-  if (id === 'stream') offsetObj = [75, 10]
-  else if (id === 'category') offsetObj = [48, 10]
-  else if (id === 'feesScheme') offsetObj = [65, 10]
+  if (id === 'stream') offsetObj = [75, 18]
+  else if (id === 'category') offsetObj = [48, 18]
+  else if (id === 'feesScheme') offsetObj = [65, 18]
 
 
   let name = id;
