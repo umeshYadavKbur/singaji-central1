@@ -327,7 +327,7 @@ function StudentProfile() {
                     BackdropComponent={Backdrop}
                 >
                     <Box sx={style}>
-                        <UpdateStudentPersonalInfo />
+                        <UpdateStudentPersonalInfo handleClose={handleClose} />
                     </Box>
                 </StyledModal>
 

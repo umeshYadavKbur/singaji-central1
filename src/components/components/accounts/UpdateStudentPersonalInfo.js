@@ -9,10 +9,8 @@ import {toast} from 'react-toastify';
 import { useState,useEffect } from 'react'
 
 
-function UpdateStudentPersonalInfo() {
+function UpdateStudentPersonalInfo({handleClose}) {
 
-    const [open,setOpen] = React.useState(true);
-    const handleClose = () => setOpen(false);
 
     const data = localStorage.getItem('userEdit')
     const StudentProfileData = JSON.parse(data)
@@ -386,8 +384,8 @@ function UpdateStudentPersonalInfo() {
                             </div>
                             <div className="d-flex justify-content-end mt-3 m-1">
                                 <div className='me-3'>
-                                    <button style={{width: '116px'}} type='button' onClick={handleClose} className='btn  btn-light m-1'>Cancel</button>
-                                    <button style={{width: '116px'}} type="submit" onSubmit={formik.handleSubmit}  className='btn  btn-primary m-1' >Update</button>
+                                    <button style={{width: '116px',height:"41px"}} type='button' onClick={handleClose} className='btn  btn-light m-2'>Cancel</button>
+                                    <button style={{width: '153px',height:'41px'}} type="submit" onSubmit={formik.handleSubmit}  className='btn  btn-primary ml-2' >Update</button>
                                 </div>
                                 </div>
                           

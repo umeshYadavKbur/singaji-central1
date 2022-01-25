@@ -13,11 +13,13 @@ import { toast } from 'react-toastify';
 import imageCompression from 'browser-image-compression';
 import { ToastContainer } from "react-toastify";
 import Loader from '../../assests/common/Loader';
+import { Tooltip, Whisper } from 'rsuite';
 
 function UploadDocumentFrom() {
     const navigate = useNavigate();
     const [showLightBox, setShowLightBox] = useState(false);
-    const [Lightbox, setLightBox] = useState({ image: '', title: '' });
+    const [LightboxIndex, setLightBoxIndex] = useState(1);
+    const [ImageForLightBox, setImageForLightBox] = useState([]);
     const [loading, setLoading] = useState(false)
 
     const initialValues = {
@@ -37,7 +39,7 @@ function UploadDocumentFrom() {
     const [imgData, setImageData] = useState(initialValues);
     const [imgDataOnline, setImageDataOnline] = useState(initialValues);
     const [stdId1, setStdId] = useState('');
-    const [is_data, setIs_data] = useState(false);
+    // const [is_data, setIs_data] = useState(false);
 
     useEffect(() => {
         const stdData = JSON.parse(localStorage.getItem('userEdit'));
@@ -54,6 +56,14 @@ function UploadDocumentFrom() {
                 const data = response.data;
                 console.log(data)
                 data.forEach((ele) => { setImageDataOnline((val) => { return { ...val, [ele.doc_type]: ele.doc_Url } }) })
+              let  arrayObj = data.map(ele => {
+                    return {
+                      title: ele.doc_type,
+                      url: ele.doc_Url
+                    };
+                  });
+                  setImageForLightBox(arrayObj);
+                // data.forEach((ele) => { setImageForLightBox((val) => { return { ...val, [ele.doc_type]: ele.doc_Url } }) })
             }
         }
         getData();
@@ -105,6 +115,19 @@ function UploadDocumentFrom() {
                 }
                 console.log(result)
 
+            }else{
+                toast.error('Please Choose File To Upload', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+
+
+
             }
         }
     })
@@ -127,7 +150,7 @@ function UploadDocumentFrom() {
                     var Base64 = reader.result
                     console.log(Base64)
                     setImageData((val) => { return { ...val, [feildName]: Base64 } })
-                    setIs_data(true);
+                    // setIs_data(true);
                 }
                 reader.onerror = (err) => {
                     console.log(err);
@@ -140,7 +163,10 @@ function UploadDocumentFrom() {
     }
 
     const showImgOnLightBox = (image, title) => {
-        setLightBox({ image, title })
+       let id = ImageForLightBox.findIndex(ele => ele?.title === title)
+
+        setLightBoxIndex(id)
+
         setShowLightBox(true)
     }
 
@@ -161,13 +187,20 @@ function UploadDocumentFrom() {
                             </div>
                     }
                 </div>
-                <p className="mx-auto fw-bold text-center mt-2" style={{ cursor: 'pointer', color: '#4f83df' }}
-                    onClick={() => { document.getElementById(NAME_FOR_FILE).click() }}>
-                    {DISPLAY_NAME}</p>
-                <input name={NAME_FOR_FILE} placeholder={NAME_FOR_FILE} id={NAME_FOR_FILE} type="file" accept="image/*" onChange={(e) => {
-                    imageToBase64(e.target.files[0], NAME_FOR_FILE);
+                <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                    <Tooltip>
+                       Click Here To Choose File
+                    </Tooltip>}>
 
-                }} value={formik.values.NAME_FOR_FILE} hidden={true} />
+
+                    <p className="mx-auto fw-bold text-center mt-2" style={{ cursor: 'pointer', color: '#4f83df' }}
+                        onClick={() => { document.getElementById(NAME_FOR_FILE).click() }}>
+                        {DISPLAY_NAME}</p>
+                    {/* <Whisper /> */}
+                    </Whisper>
+                    <input name={NAME_FOR_FILE} placeholder={NAME_FOR_FILE} id={NAME_FOR_FILE} type="file" accept="image/*" onChange={(e) => {
+                        imageToBase64(e.target.files[0], NAME_FOR_FILE);
+                    }} value={formik.values.NAME_FOR_FILE} hidden={true} />
             </div>
         )
     }
@@ -189,7 +222,7 @@ function UploadDocumentFrom() {
                 <Loader />
             )}
 
-            {showLightBox && <ImageLightbox image={Lightbox.image} title={Lightbox.title} onClose={() => { setShowLightBox(false) }} />}
+            {showLightBox && <ImageLightbox images={ImageForLightBox} startIndex={LightboxIndex} onClose={() => { setShowLightBox(false) }} />}
 
 
             <form onSubmit={formik.handleSubmit}>
@@ -209,8 +242,13 @@ function UploadDocumentFrom() {
                 </div>
 
                 <div className="d-flex justify-content-end m-1">
+                    <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                        <Tooltip>
+                           Upload Documents
+                        </Tooltip>}>
 
-                    <button disabled={!is_data} className="btn btn-primary text-light fw-bold " style={{ marginRight: '19px', width: "220px", height: "41px" }} type="submit">Save</button>
+                        <button  className="btn btn-primary text-light fw-bold " style={{ marginRight: '30px',marginTop:'110px', width: "220px", height: "41px" }} type="submit">Save</button>
+                    </Whisper>
 
                 </div>
 
