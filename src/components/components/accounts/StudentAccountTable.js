@@ -74,9 +74,12 @@ function SelectColumnFilter({
 
     let offsetObj = [0, 0];
 
-    if (id === 'branch') offsetObj = [45, 10]
-    else if (id === 'trackName') offsetObj = [90, 10]
+    if (id === 'branch') offsetObj = [76, 10]
+    else if (id === 'trackName') offsetObj = [93, 10]
     else if (id === 'year') offsetObj = [33, 10]
+    else if (id === 'joinBatch') offsetObj = [50, 10]
+    else if (id === 'is_active') offsetObj = [33, 10]
+    else if (id === 'gender') offsetObj = [33, 10]
 
     let name = id;
 
@@ -367,7 +370,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             filter: "",
         },
         {
-            header: "Father's Name",
+            header: "Father Name",
             accessor: 'fathersName',
             Filter: "",
             filter: "",
@@ -809,9 +812,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                             className="pt-0 filter-dropdown-menu-student_account_table"
                                             placement="bottom-end"
 
-
                                         >
-                                            <div>
+                                            <div className="p-lg-2 pb-0">
                                                 {headerGroups.map((headerGroup) => (
                                                     <div
                                                         style={{ display: "flex flex-column" }}
@@ -902,9 +904,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                         })}
                     </tbody>
                 </table>
-               <NoDataFound rows={rows}/>
+                <NoDataFound rows={rows} />
                 {/* for the pagination section */}
-            
+
                 <Pagination
                     page={page}
                     pageIndex={pageIndex}

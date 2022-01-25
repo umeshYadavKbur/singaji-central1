@@ -10,6 +10,8 @@ import {
     useAsyncDebounce,
 } from "react-table";
 import { TableCheckbox } from "../tableComponents/TableCheckbox";
+import rightArrow from '../../assests/image/right_arrow_icon.svg'
+
 import {
     CDropdown,
     CDropdownMenu,
@@ -50,12 +52,13 @@ function setFilteredParams(filterArr, val) {
     return filterArr;
 }
 
+
+
 function SelectColumnFilter({
     column: { filterValue = [], setFilter, preFilteredRows, id },
 }) {
     const options = useMemo(() => {
         const options = new Set();
-
         preFilteredRows.forEach((row) => {
             options.add(row.values[id]);
         });
@@ -64,37 +67,59 @@ function SelectColumnFilter({
 
     let offsetObj = [0, 0];
 
-    if (id === 'branch') offsetObj = [20, 10]
-    else if (id === 'joinBatch') offsetObj = [20, 10]
+    if (id === 'branch') offsetObj = [78, 10]
+    if (id === 'joinBatch') offsetObj = [35, 10]
 
+
+
+    let name = id;
+
+    switch (id) {
+        case 'branch':
+            name = 'Branch';
+            break;
+        case 'joinBatch':
+            name = 'Join Year';
+            break;
+
+        default:
+            break;
+    }
 
     return (
         <Fragment>
             <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
                 {/* <span className="block capitalize mb-4">{id}</span> */}
-
                 <CPopover
 
                     offset={offsetObj}
 
                     content={
                         <div className="">
-
                             {options.map((option, i) => {
-                                return (
+                                let option_label = option;
 
+                                if (id === 'is_active') {
+                                    if (option === 'true')
+                                        option_label = 'Active'
+                                    else
+                                        option_label = 'Deactive'
+
+
+                                }
+
+                                return (
                                     <Fragment key={i}>
-                                        <div id={`${id}`}>
+                                        <div id={`${id}`} className="d-flex ">
                                             <input
                                                 checked={filterValue.includes(option)}
                                                 type="checkbox"
-                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mt-1"
                                                 id={option}
                                                 name={option}
                                                 value={option}
                                                 style={{ cursor: 'pointer' }}
                                                 onChange={(e) => {
-
                                                     setFilter(
                                                         setFilteredParams(filterValue, e.target.value)
                                                     );
@@ -103,9 +128,10 @@ function SelectColumnFilter({
                                             ></input>
                                             <label
                                                 htmlFor={option}
-                                                className="ml-1.5 font-medium text-gray-700"
+                                                className="ml-2 font-medium text-gray-700"
                                             >
-                                                {option}
+                                                {"  " + option_label}
+
                                             </label>
                                         </div>
                                     </Fragment>
@@ -116,21 +142,24 @@ function SelectColumnFilter({
                     placement="right"
 
                 >
-                    <div className="btn-group dropright">
+                    <div className="btn-group ">
                         <button
-
                             onClick={(e) => { e.preventDefault() }}
-                            className="btn filter_btn  dropdown-toggle"
-
+                            className="btn filter_btn"
                         >
-                            {id}
+                            {name}
                         </button>
+                        <img src={rightArrow} alt=">" width="6px" style={{
+                            marginTop: "4px",
+                            marginRight: '10px'
+                        }} />
                     </div>
                 </CPopover>
             </div >
         </Fragment >
     );
 }
+
 
 // Define a default UI for filtering
 function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
@@ -365,7 +394,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                                             placement="bottom-end"
 
                                         >
-                                            <div>
+                                            <div className="p-lg-2 pb-0">
                                                 {headerGroups.map((headerGroup) => (
                                                     <div
                                                         style={{ display: "flex flex-column" }}
