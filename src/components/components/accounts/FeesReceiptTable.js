@@ -228,6 +228,13 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
             {
                 header: "Stream",
                 accessor: "branch",
+
+                Cell: ({ row: { original } }) => (
+                    <span>
+
+                        {`${original.branch} ( ${original.year} )`}
+                    </span>
+                ),
                 Filter: SelectColumnFilter,
                 filter: MultipleFilter,
             },
@@ -241,9 +248,9 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 header: "Received Fees",
                 accessor: "ReceivedAmount",
                 Cell: ({ row: { original } }) => (
-                    <div className='circle-main'>
-                        <div className="">
-                            <span className='recieved-fee-circle' style={{ backgroundColor: "rgb(153, 248, 126)", marginRight: "10px", marginLeft: "23px" }}></span>
+                    <div className='circle-main align-items-center'>
+                        <div className="d-flex align-items-center">
+                            <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000", marginRight: "10px", marginLeft: "23px" }}></span>
                         </div>
                         <div className="">
                             <span className='' >

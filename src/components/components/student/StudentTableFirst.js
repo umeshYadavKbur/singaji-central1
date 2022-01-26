@@ -221,7 +221,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
     const columns = React.useMemo(
         () => [
             {
-                header: "S No",
+                header: "S. No",
                 accessor: "S.N",
                 Cell: ({ row: { original, index } }) => {
                     return (index + 1)
@@ -266,7 +266,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                 filter: "",
             },
             {
-                header: "Registration Fees",
+                header: "Reg. Fees",
                 accessor: "reg_Fees",
                 Filter: "",
                 filter: ""

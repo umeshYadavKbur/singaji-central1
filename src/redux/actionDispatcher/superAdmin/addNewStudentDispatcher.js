@@ -7,7 +7,7 @@ import AllUrl from "../../constants/url";
 import axios from "axios";
 import SuccessIcon from '../../../components/assests/image/SuccessIcon.svg'
 
-const AddNewStudent = (data) => {
+const AddNewStudent = (data,backToProfilePage) => {
     var dataOfAddStudent = {
         method: 'post',
         url: AllUrl.newRegistraionUrl,
@@ -18,11 +18,11 @@ const AddNewStudent = (data) => {
         data: data
     };
     return async (dispatch) => {
+        dispatch(AddNewStudentRequest());
         // Sending the additional url to be attached on baseUrl in other function
         // const registrationUrl = AllUrl.newRegistraionUrl;
 
         // wait untill the data not received so getData function take data and url part
-        dispatch(AddNewStudentRequest());
         let userResData = await axios(dataOfAddStudent);
         // console.log("the response is ::", userResData.request.status);
         // changing the userResData if we need token so userResData.data.toke will be used
@@ -51,6 +51,7 @@ const AddNewStudent = (data) => {
                     }
 
                 })
+                backToProfilePage()
             }
             else if (userResData.request.status === 208) {
                 Swal.fire({

@@ -14,17 +14,22 @@ import AddNewStudent from '../../redux/actionDispatcher/superAdmin/addNewStudent
 import { connect } from 'react-redux';
 import NumberFormat from 'react-number-format';
 import allUrls from '../../redux/constants/url'
+import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
 import LoaderButton from '../assests/common/LoaderButton'
+import { isSuperAdmin } from '../../helpers/SuperAdmin';
+import { isAccountAdmin } from '../../helpers/AccountAdmin';
+import { isStudentAdmin } from '../../helpers/StudentAdmin';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
-import Loader from 'rsuite/Loader';
+// import Loader from 'rsuite/Loader';
 import SuccessIcon from '../assests/image/SuccessIcon.svg'
 
 
 
 function AddNewStudentPage({ addStudent, AddNewStudent }) {
     var editData = JSON.parse(localStorage.getItem('RegistrationEdit'))
+    const navigate = useNavigate();
     // console.log('editdata',editData);
     // var editData = ''
     // console.log(editData);
@@ -188,7 +193,21 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         busFees: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
 
     })
-
+    const backToProfilePage = (e) => {
+        // e.preventDefault()
+        if (isStudentAdmin()) {
+            console.log("Navigated ");
+            navigate('/student_admin_dashboard/studenttable');
+        }
+        else if (isAccountAdmin()) {
+            console.log("Navigated ");
+            navigate('/account_admin_dashboard/studenttable');
+        }
+        else if (isSuperAdmin()) {
+            console.log("Navigated ");
+            navigate('/admin_dashboard/studenttable');
+        }
+    }
 
     const updateStudentData = async (data) => {
         setLoaderLoading(true)
@@ -231,6 +250,8 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                 }
 
             })
+
+            backToProfilePage()
         }
         else if (response.status === 404) {
             setLoaderLoading(false)
@@ -324,7 +345,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                 updateStudentData(bodyData)
                 :
 
-                AddNewStudent(bodyData)
+                AddNewStudent(bodyData,backToProfilePage)
             // console.log(bodyData);
         }
     });
@@ -1142,7 +1163,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                 </div>
 
                                 <div className='row m-1'>
-                                    <div className="col" style={{marginTop: '7px'}}>
+                                    <div className="col" style={{ marginTop: '7px' }}>
                                         <label className="addStdLable" htmlFor="postmatricScolarship">Postmatric Scholarship*</label>
                                         <select
                                             name="postmatricScolarship"
@@ -1165,7 +1186,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                         )}
 
                                     </div>
-                                    <div className="col" style={{marginTop: '7px'}}>
+                                    <div className="col" style={{ marginTop: '7px' }}>
                                         <label className="addStdLable" htmlFor="">GKB Scholarship*</label>
                                         <select name="gkbScolarship" className={formik.touched.gkbScolarship ? `form-select ${formik.errors.gkbScolarship ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02"
                                             value={formik.values.gender === "male" ? formik.values.gkbScolarship = "no" : formik.values.gkbScolarship}
@@ -1454,9 +1475,9 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                     style={{
                                         width: "220px",
                                         height: '41px',
-                                        backgroundColor: 'rgb(75 0 255)'
+                                        backgroundColor: '#4f83df'
                                     }}
-                                >{loaderLoading ? (loaderLoading ? (<Loader size="xs" content="Update" />) : '') : "Update"}</button> :
+                                >{loaderLoading ? (loaderLoading ? ( <LoaderButton />) : '') : "Update"}</button> :
                                 <button className="btn btn-sm btn-warning text-light fw-bold" type="submit"
                                     style={{
                                         width: "220px",
@@ -1464,7 +1485,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                         backgroundColor: 'orange'
                                     }}
                                     disabled={addStudent.loading}
-                                >{addStudent?.loading ? (<LoaderButton />) : "Submit"}
+                                >{addStudent.loading ? (<LoaderButton />) : "Submit"}
                                 </button>
                         }
                     </div>
@@ -1488,7 +1509,7 @@ const mapStateToProps = (state) => {
 //passing the userData in fetchUsers function and also dispatch method
 const mapDispatchToProps = (dispatch) => {
     return {
-        AddNewStudent: (data) => dispatch(AddNewStudent(data)),
+        AddNewStudent: (data,backToProfilePage) => dispatch(AddNewStudent(data,backToProfilePage)),
     };
 };
 
