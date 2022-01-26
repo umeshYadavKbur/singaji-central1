@@ -1,5 +1,5 @@
 export const DeactivateButton = {
-    width: "86px",
+    // width: "6px",
     height:'30px',
     borderRadius: "5px",
     backgroundColor: "#CCE5FF",

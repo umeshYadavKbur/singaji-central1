@@ -273,12 +273,12 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                 Cell: ({ row: { original, index } }) => {
                     return (
                         <p
-                        style={{marginTop: "3px" , marginBottom: "3px" }}
+                        style={{marginTop: "3px" , marginBottom: "3px" , fontWeight: "600" }}
                         >
-                            <b>
+                            
 
                             {original.status ? "Active" : "Deactive"}
-                            </b>
+                            
                         </p>
                     )
                 },

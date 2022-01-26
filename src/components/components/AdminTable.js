@@ -75,7 +75,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             accessor: 'is_active',
             Cell: ({ row: { original } }) => (
                 <button
-                    className="table_btn_size"
+                    className="table_btn_size "
                     style={
                         original.is_active === 1
                             ? ActivateButton
@@ -88,7 +88,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                                 '<hr>' +
                                 'Are you sure?' +
                                 '<br>' +
-                                `You want to ${original.is_active === 0 ? 'Active' : 'Deactive'} this admin`,
+                                `You want to ${original.is_active === 0 ? 'active' : 'deactive'} this admin`,
                             showCancelButton: true,
                             showConfirmButton: true,
                             cancelButtonText: 'Cancel',
@@ -96,7 +96,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             // confirmButtonText:'Deactive',
                             reverseButtons: true,
                             showCloseButton: true,
-                            cancelButtonColor: 'gray',
+                            // cancelButtonColor: 'gray',
                             confirmButtonColor: "#4f83df",
 
                             showLoaderOnDeny: true,
