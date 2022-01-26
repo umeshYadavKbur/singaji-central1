@@ -111,31 +111,36 @@ function SelectColumnFilter({
 
                 return (
                   <Fragment key={i}>
-                    <div id={`${id}`} className="d-flex ">
-                      <input
-                        checked={filterValue.includes(option)}
-                        type="checkbox"
-                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mt-1"
-                        id={option}
-                        name={option}
-                        value={option}
-                        style={{ cursor: 'pointer' }}
-                        onChange={(e) => {
-                          setFilter(
-                            setFilteredParams(filterValue, e.target.value)
-                          );
-                        }}
-                        onClick={(e) => { e.stopPropagation() }}
-                      ></input>
+                  <div id={`${id}`} style={{height:'30px',cursor:'pointer'}} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
                       <label
-                        htmlFor={option}
-                        className="ml-2 font-medium text-gray-700"
+                          onClick={(e) => { e.stopPropagation() }}
+                          className="font-medium text-gray-700 d-flex align-items-center cursor-pointer"
+                      // onCLick={}
+                      style={{cursor:'pointer'}}
                       >
-                        {option_label}
+                          <input
+                              checked={filterValue.includes(option)}
+                              type="checkbox"
+                              className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-1"
+                              id={option}
+                              name={option}
+                              value={option}
+                              style={{ cursor: 'pointer' }}
+                              onChange={(e) => {
+                                  setFilter(
+                                      setFilteredParams(filterValue, e.target.value)
+                                  );
+                              }}
+                              onClick={(e) => { e.stopPropagation() }}
+                          >
+
+                          </input>
+
+                          {option_label}
 
                       </label>
-                    </div>
-                  </Fragment>
+                  </div>
+              </Fragment>
                 );
               })}
             </div>
@@ -143,7 +148,7 @@ function SelectColumnFilter({
           placement="right"
 
         >
-          <div className="btn-group ">
+          <div className="btn-group filter_btn_hover">
             <button
               onClick={(e) => { e.preventDefault() }}
               className="btn filter_btn"
@@ -153,7 +158,7 @@ function SelectColumnFilter({
             <img src={rightArrow} alt=">" width="6px" style={{
               marginTop: "4px",
               marginRight: '10px'
-            }} alt="/"/>
+            }} />
           </div>
         </CPopover>
       </div >

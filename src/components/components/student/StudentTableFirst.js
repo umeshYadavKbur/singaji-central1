@@ -110,11 +110,17 @@ function SelectColumnFilter({
 
                                 return (
                                     <Fragment key={i}>
-                                        <div id={`${id}`} className="d-flex ">
+                                    <div id={`${id}`} style={{height:'30px',cursor:'pointer'}} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
+                                        <label
+                                            onClick={(e) => { e.stopPropagation() }}
+                                            className="font-medium text-gray-700 d-flex align-items-center cursor-pointer"
+                                        // onCLick={}
+                                        style={{cursor:'pointer'}}
+                                        >
                                             <input
                                                 checked={filterValue.includes(option)}
                                                 type="checkbox"
-                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mt-1"
+                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-1"
                                                 id={option}
                                                 name={option}
                                                 value={option}
@@ -125,16 +131,15 @@ function SelectColumnFilter({
                                                     );
                                                 }}
                                                 onClick={(e) => { e.stopPropagation() }}
-                                            ></input>
-                                            <label
-                                                htmlFor={option}
-                                                className="ml-2 font-medium text-gray-700"
                                             >
-                                                {"  " + option_label}
 
-                                            </label>
-                                        </div>
-                                    </Fragment>
+                                            </input>
+
+                                            {option_label}
+
+                                        </label>
+                                    </div>
+                                </Fragment>
                                 );
                             })}
                         </div>
@@ -142,7 +147,7 @@ function SelectColumnFilter({
                     placement="right"
 
                 >
-                    <div className="btn-group ">
+                    <div className="btn-group filter_btn_hover">
                         <button
                             onClick={(e) => { e.preventDefault() }}
                             className="btn filter_btn"
@@ -200,23 +205,36 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
 function StudentTableFirst({ fetchUsers, studentData }) {
     const token = localStorage.getItem("token");
 
+//     React.useEffect(() => {
+//         // const getData =as ()=>{
+// // 
+//             var config = {
+//                 method: "GET",
+//                 url: AllUrl.allRegistratedStudent,
+//                 headers: {
+//                     Authorization: `Bearer ${localStorage.getItem("token")}`,
+//                     "Content-Type": "application/json",
+//                 },
+//             };
+//             fetchUsers(config);
+//         // }
+//         // getData()
+//     }, []);
+
     React.useEffect(() => {
-        const getData = ()=>{
+        var config = {
+            method: "GET",
+            url: AllUrl.allRegistratedStudent,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        };
 
-            var config = {
-                method: "GET",
-                url: AllUrl.allRegistratedStudent,
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    "Content-Type": "application/json",
-                },
-            };
-            fetchUsers(config);
-        }
-        getData()
+        fetchUsers(config);
+        // settable_data(table_data.table_data);
+        // eslint-disable-next-line
     }, []);
-
-
 
     const columns = React.useMemo(
         () => [

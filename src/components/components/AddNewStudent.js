@@ -234,7 +234,8 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                 imageUrl: SuccessIcon,
                 imageAlt: 'image',
                 html:
-                    '<h1>Success</h1>' + '<hr/>' +
+                    '<h1>Success</h1>' +
+                    '<hr/>' +
                     'Student Detail Successfully Updated <br/> <br/> ',
                 showConfirmButton: false,
                 // showCloseButton:true,

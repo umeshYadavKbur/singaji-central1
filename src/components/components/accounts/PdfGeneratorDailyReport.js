@@ -23,7 +23,7 @@ const downloadPdf = (data) => {
 
     var doc = new jsPDF('landscape', 'px', [1366, 768]);
     var width = doc.internal.pageSize.getWidth()
-    var height = doc.internal.pageSize.getHeight()
+    // var height = doc.internal.pageSize.getHeight()
     doc.setFillColor('#F4F7FC');
     doc.rect(0, 0, width, 94, 'F')
     doc.addImage(ssismLogo, 20, 23, 150, 48)

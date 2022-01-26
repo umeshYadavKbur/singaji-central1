@@ -45,6 +45,11 @@ body {
   text-align: left !important;
   width: 135px !important;
 }
+.filter_btn_hover:hover{
+  background-color: #e6e9f4 !important;
+  border-radius: 3px;
+}
+
 /* 
 .filter_btn::after{
 
@@ -55,7 +60,7 @@ body {
   position: absolute !important;
   top: 0px !important;
   transform: translate3d(0px, 5px, 0px) !important;
-  display: none !important;
+  /* display: none !important; */
 }
 /* =========== tooltip css ========= */
 
@@ -85,6 +90,8 @@ input.largerCheckbox {
   height: 14px;
   /* margin-top: 2px; */
 }
+
+
 
 /* =============edit scroll bar ========== */
 
