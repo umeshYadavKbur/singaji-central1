@@ -39,6 +39,7 @@ import rightArrow from '../../assests/image/right_arrow_icon.svg'
 
 import OfflinePage from '../../auth/OfflinePage';
 import NoDataFound from "../../assests/common/NoDataFound";
+import CountUp from 'react-countup';
 
 
 
@@ -139,12 +140,12 @@ function SelectColumnFilter({
 
                                 return (
                                     <Fragment key={i}>
-                                        <div id={`${id}`} style={{height:'30px',cursor:'pointer'}} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
+                                        <div id={`${id}`} style={{ height: '30px', cursor: 'pointer' }} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
                                             <label
                                                 onClick={(e) => { e.stopPropagation() }}
                                                 className="font-medium text-gray-700 d-flex align-items-center cursor-pointer"
-                                            // onCLick={}
-                                            style={{cursor:'pointer'}}
+                                                // onCLick={}
+                                                style={{ cursor: 'pointer' }}
                                             >
                                                 <input
                                                     checked={filterValue.includes(option)}
@@ -253,42 +254,6 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         // eslint-disable-next-line
     }, []);
 
-    React.useEffect(() => {
-        let data = studentData?.table_data;
-        console.log(data)
-
-        let RAmount = 0;
-        let TAmount = 0;
-        let TpaidAmount = 0;
-        let WaiveOff = 0;
-        let TpaidAmountByDailyReport = 0;
-        data.forEach((ele) => {
-            RAmount += ele?.RemainAmount
-            TAmount += ele?.TotalFees
-
-            TpaidAmount += ele?.ReceivedAmount;
-            TpaidAmountByDailyReport += ele?.ReceivedAmount
-            WaiveOff += ele?.WaiveOff;
-        })
-
-        setMoneyCount((val) => {
-            return {
-
-                'TStudent': data.length,
-                RAmount,
-                TAmount,
-                TpaidAmount,
-                WaiveOff,
-                TpaidAmountByDailyReport
-
-            }
-        })
-
-
-        // console.log(MoneyCount)
-
-
-    }, [studentData.table_data]);
 
 
     const navigate = useNavigate()
@@ -419,7 +384,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             filter: MultipleFilter,
             Cell: ({ row: { original } }) => (
                 <>
-                  {/* <span>{original.joinBatch}</span> */}
+                    {/* <span>{original.joinBatch}</span> */}
                 </>
             ),
             width: 0
@@ -709,12 +674,74 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     );
     console.log(checkboxData)
     //  for download pdf
+    ////
+
+    //// for 5 title data feed
+
+    React.useEffect(() => {
+        let data = rows;
+        console.log(data)
+
+        let RAmount = 0;
+        let TAmount = 0;
+        let TpaidAmount = 0;
+        let WaiveOff = 0;
+        let TpaidAmountByDailyReport = 0;
+        data.forEach((ele) => {
+            ele = ele.original
+            RAmount += ele?.RemainAmount
+            TAmount += ele?.TotalFees
+
+            TpaidAmount += ele?.ReceivedAmount;
+            TpaidAmountByDailyReport += ele?.ReceivedAmount
+            WaiveOff += ele?.WaiveOff;
+        })
+
+        setMoneyCount((val) => {
+            return {
+
+                'TStudent': data.length,
+                RAmount,
+                TAmount,
+                TpaidAmount,
+                WaiveOff,
+                TpaidAmountByDailyReport
+
+            }
+        })
 
 
+        // console.log(MoneyCount)
+
+
+    }, [rows]);
 
     const getBackPosition = () => {
         backOriginal()
         setColoumns(mainColoumns)
+    }
+
+    const AnimateNum = ({ num }) => {
+
+
+        return (
+            <>
+                <CountUp
+
+                    start={30000}
+                    end={num}
+                    duration={1}
+                    separator=","
+                    easingF={function (x, t, b, c, d) { return -c * (t /= d) * (t - 2) + b; }}
+                    prefix="₹ "
+
+
+                >
+
+                </CountUp>
+            </>
+
+        )
     }
 
     return studentData.loading ? (
@@ -731,19 +758,19 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px', width: '100%' }}>
                     <div className="d-flex row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
                         <div className="col info-col m-2"  >
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}> <CountUp  start={0} end={MoneyCount.TStudent} duration={1}> </CountUp> <br /> <p >Total Students</p> </h5>
                         </div>
                         <div className="col info-col m-2" >
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? MoneyCount.TAmount : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? <AnimateNum num={MoneyCount.TAmount} /> : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
                         </div>
                         <div className="col info-col m-2" >
-                            <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport : MoneyCount.TpaidAmount} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? <AnimateNum num={MoneyCount.TpaidAmountByDailyReport} /> : <AnimateNum num={MoneyCount.TpaidAmount} />} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
                         </div>
                         <div className="col info-col m-2" >
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? MoneyCount.RAmount : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? <AnimateNum num={MoneyCount.RAmount} /> : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
                         </div>
                         <div className="col info-col m-2">
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff : '0'}<br /> <p >Waive Off</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? <AnimateNum num={MoneyCount.WaiveOff} /> : '0'}<br /> <p >Waive Off</p> </h5>
                         </div>
                     </div>
                     <div className="row  mx-0 mt-3" >
