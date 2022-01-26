@@ -109,7 +109,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                 <div>
                   <img onClick={() => setVisible(!visible)}
                     style={{ height: "20px", width: "20px", marginLeft: '110%', marginTop: "-10px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
-                  <h4 className=" text-aligns-center createAdminhead" style={{ color: '#5A607F', marginRight: "30px", fontWeight: 'bold' }}>
+                  <h4 className=" text-aligns-center createAdminhead" style={{ color: '#5A607F',  fontWeight: 'bold' }}>
                     Create Admin
                   </h4>
                   <img src={logo} alt="logo ssism" className="logo_img" />{" "}

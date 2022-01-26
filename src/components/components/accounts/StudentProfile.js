@@ -569,7 +569,7 @@ function StudentProfile() {
                             <div className="d-flex  justify-content-end my-4" >
                                 <div className="me-2">
 
-                                    <button className="btn btn-sm btn-primary text-light fw-bold m-1 " style={{width: "250px",height: "40px"}} type="submit"
+                                    <button className="btn btn-sm text-light fw-bold m-1 " style={{width: "219px",height: "40px", backgroundColor: "#4f83df"}} type="submit"
                                      disabled={loaderLoading}  
                                     // disabled={true}
                                      >{loaderLoading ? (<LoaderButton/>):"Update"}

@@ -19,7 +19,8 @@
   height: 60px;
   display: flex;
   align-content: center;
-  margin-left: 40px;
+  /* margin-left: 40px; */
+  margin: auto;
 }
 
 .createAdmin input {
