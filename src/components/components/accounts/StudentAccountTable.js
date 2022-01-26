@@ -384,7 +384,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             filter: "",
         },
         {
-            header: "Father Name",
+            header: "Father's Name",
             accessor: 'fathersName',
             Filter: "",
             filter: "",
@@ -419,7 +419,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             filter: MultipleFilter,
             Cell: ({ row: { original } }) => (
                 <>
-                  <span>{original.joinBatch}</span>
+                  {/* <span>{original.joinBatch}</span> */}
                 </>
             ),
             width: 0

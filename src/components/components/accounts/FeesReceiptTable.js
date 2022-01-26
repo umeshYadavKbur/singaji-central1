@@ -225,7 +225,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 filter: ""
             },
             {
-                header: "Father Name",
+                header: "Father's Name",
                 accessor: "fathersName",
                 Filter: "",
                 filter: ""
