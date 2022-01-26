@@ -53,7 +53,6 @@ function UpdateStudentPersonalInfo({ handleClose }) {
         streamName: StudentProfileData ? StudentProfileData.accountInfo.branch : '',
         aadharNumber: StudentProfileData ? (StudentProfileData.accountInfo.aadarNo).toString().match(/.{4}/g).join(' ') : '',
         EnrollmentNumber: '',
-
     }
 
     const validationSchema = Yup.object({
@@ -62,7 +61,7 @@ function UpdateStudentPersonalInfo({ handleClose }) {
         dob: Yup.string().required("Required!").test('doc_check', 'Minimum age must be 12-14 years', val => val?.slice(0, 4) <= (new Date().getFullYear()) - 13),
         contactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
         FatherContactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
-        aadharNumber: Yup.string().trim().required("Required!").test('len', 'Must be exactly 12 digits', val => val?.replace('X', '').length === 14),
+        aadharNumber: Yup.string().trim().required("Required!").test('len', 'Must be exactly 12 digits', val => val?.replace('X', '').length === 12),
         village: Yup.string().required("Required!").trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates'),
         // EnrollmentNumber: Yup.string().required("Required!"),
         streamName: Yup.string().required("Required!"),
@@ -371,7 +370,7 @@ function UpdateStudentPersonalInfo({ handleClose }) {
                                             name="aadharNumber"
                                             // placeholder="Aadhar Number"
                                             className={formik.touched.aadharNumber ? `form-control ${formik.errors.aadharNumber ? "invalid" : ""}` : 'form-control'}
-                                            format="#### #### ####"
+                                            // format="#### #### ####"
                                             mask={'X'}
                                             placeholder="EX:- 436175370721"
                                         />
