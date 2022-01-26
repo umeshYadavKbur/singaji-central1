@@ -29,6 +29,7 @@ const AddNewStudent = (data,backToProfilePage) => {
         try {
             if (userResData.request.status === 200) {
                 dispatch(AddNewStudentSuccess(userResData.data));
+                backToProfilePage()
                 Swal.fire({
                     imageUrl: SuccessIcon,
                     imageAlt: 'image',
@@ -51,7 +52,7 @@ const AddNewStudent = (data,backToProfilePage) => {
                     }
 
                 })
-                backToProfilePage()
+                
             }
             else if (userResData.request.status === 208) {
                 Swal.fire({
