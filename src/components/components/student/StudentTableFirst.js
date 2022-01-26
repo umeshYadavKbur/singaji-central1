@@ -29,7 +29,7 @@ import { fetchStudentAccountData, changeDailyReport } from '../../../redux/actio
 import SkeletonColor from '../../../helpers/Skeletrone';
 import Pagination from "../../assests/common/Pagination";
 import Loader from "../../assests/common/Loader";
-import { ActivateButton, DeactivateButton } from "../../assests/common/Color";
+// import { ActivateButton, DeactivateButton } from "../../assests/common/Color";
 import OfflinePage from "../../auth/OfflinePage";
 import NoDataFound from "../../assests/common/NoDataFound";
 
@@ -201,15 +201,19 @@ function StudentTableFirst({ fetchUsers, studentData }) {
     const token = localStorage.getItem("token");
 
     React.useEffect(() => {
-        var config = {
-            method: "GET",
-            url: AllUrl.allRegistratedStudent,
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-        };
-        fetchUsers(config);
+        const getData = ()=>{
+
+            var config = {
+                method: "GET",
+                url: AllUrl.allRegistratedStudent,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            fetchUsers(config);
+        }
+        getData()
     }, []);
 
 
