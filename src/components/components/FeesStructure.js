@@ -205,7 +205,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                   <select
                     name="stream"
                     id="stream"
-                    className=" mt-2 form-select input-lg text-secondary  border-secondary  "
+                    className="form-select input-lg text-secondary  border-secondary  "
                     value={formik.values.stream}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}

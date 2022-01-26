@@ -14,6 +14,7 @@ import { isStudentAdmin } from '../../../helpers/StudentAdmin';
 import { Link } from 'react-router-dom';
 import Icon_feather_download from '../../assests/image/AccountIcons/Icon_feather_download.svg';
 import * as Yup from "yup";
+import Swal from 'sweetalert2'
 import AllUrl from '../../../redux/constants/url';
 import Loader from '../../assests/common/Loader';
 import { connect } from 'react-redux';
@@ -105,6 +106,10 @@ function FeesRecipt({ accountAction }) {
         initialValues,
         validationSchema,
         onSubmit: async () => {
+
+
+          const submitForm =async ()=>{
+            
             setLoading(true)
             // console.log(values);
 
@@ -163,6 +168,46 @@ function FeesRecipt({ accountAction }) {
                 document.body.removeChild(link)
             }
 
+          }
+
+
+                    Swal.fire({
+                            title: `Confirmation`,
+
+                            html:
+                                '<hr>' +
+                                'Are you sure?' +
+                                '<br>' +
+                                `You want to generate fees receipt .`,
+                            showCancelButton: true,
+                            showConfirmButton: true,
+                            cancelButtonText: 'No',
+                            confirmButtonText: `Yes `,
+                            // confirmButtonText:'Deactive',
+                            reverseButtons: true,
+                            showCloseButton: true,
+                            // cancelButtonColor: 'gray',
+                            confirmButtonColor: "#F8A72C",
+
+                            showLoaderOnDeny: true,
+
+                            showClass: {
+                                backdrop: 'swal2-noanimation', // disable backdrop animation
+                                popup: '',                     // disable popup animation
+                                icon: ''                       // disable icon animation
+                            },
+                            hideClass: {
+                                popup: '',                     // disable popup fade-out animation
+                            }
+
+                        }).then(async (result) => {
+                            if (result.isConfirmed) {
+                                 submitForm()
+                            }
+                        })
+
+
+
 
         }
     })
@@ -214,13 +259,13 @@ function FeesRecipt({ accountAction }) {
 
                     <div className="row">
                         <div className="col">
-                            <label htmlFor="">Father Name</label>
+                            <label className='addStdLable' htmlFor="">Father Name</label>
                             <input name='FatherName' onChange={formik.handleChange} value={formik.values.FatherName} type="text" className='form-control' placeholder='Father Name'
 
                                 readOnly={true} />
                         </div>
                         <div className="col">
-                            <label htmlFor="">Installment No.</label>
+                            <label className='addStdLable' htmlFor="">Installment No.</label>
                             <select name='installmentNo' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.installmentNo} className='form-select' >
                                 <option defaultValue="1">1</option>
                                 <option value="2">2</option>
@@ -237,7 +282,7 @@ function FeesRecipt({ accountAction }) {
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="">Year</label>
+                            <label className='addStdLable' htmlFor="">Year</label>
                             <select name='studentClassYear' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.studentClassYear} className='form-select'  >
                                 {/* <option defaultValue={(StudentAccountData.accountInfo.year)?.toString()}>{StudentAccountData.accountInfo.year}</option> */}
                                 <option value="I">I</option>
@@ -253,7 +298,7 @@ function FeesRecipt({ accountAction }) {
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="">Reciept Date</label>
+                            <label className='addStdLable' htmlFor="">Reciept Date</label>
                             <input name='recieptdate' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.recieptdate} type="date" className='form-control' placeholder='Date' />
                             {formik.errors.recieptdate && formik.touched.recieptdate ? (
                                 <div className="text-danger fs-6">
@@ -268,7 +313,7 @@ function FeesRecipt({ accountAction }) {
 
 
                         <div className="col">
-                            <label htmlFor="">Amount</label>
+                            <label className='addStdLable' htmlFor="">Amount</label>
                             <Numberformat name='feesAmount' onBlur={formik.handleBlur} thousandSeparator={true}
                                 thousandsGroupStyle='lakh' onChange={formik.handleChange} value={formik.values.feesAmount} className='form-control' placeholder='Amount' />
                             {formik.errors.feesAmount && formik.touched.feesAmount ? (
@@ -280,7 +325,7 @@ function FeesRecipt({ accountAction }) {
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="">Pay By</label>
+                            <label className='addStdLable' htmlFor="">Pay By</label>
                             <select name="payBy" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.payBy} className='form-select'>
                                 <option defaultValue="Cash">Cash</option>
                                 <option value="Online">Online</option>
@@ -295,7 +340,7 @@ function FeesRecipt({ accountAction }) {
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="">Waive off</label>
+                            <label className='addStdLable' htmlFor="">Waive off</label>
                             <Numberformat name='waiveOff' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.waiveOff} className='form-control' placeholder='Waive off' />
                             {formik.errors.waiveOff && formik.touched.waiveOff ? (
                                 <div className="text-danger fs-6">
@@ -306,7 +351,7 @@ function FeesRecipt({ accountAction }) {
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="">Late Fees</label>
+                            <label className='addStdLable' htmlFor="">Late Fees</label>
                             <Numberformat name='LateFeeAmount' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.LateFeeAmount} className='form-control' placeholder='Waive off' />
                             {formik.errors.LateFeeAmount && formik.touched.LateFeeAmount ? (
                                 <div className="text-danger fs-6">
@@ -321,7 +366,7 @@ function FeesRecipt({ accountAction }) {
                     <div className="row">
 
                         <div className="col">
-                            <label htmlFor="">Cheque Date</label>
+                            <label className='addStdLable' htmlFor="">Cheque Date</label>
                             <input name='chequeDate' onBlur={formik.handleBlur}
                                 disabled={formik.values.payBy !== 'Cheque'}
                                 onChange={formik.handleChange} value={formik.values.chequeDate} type="date" className='form-control' />
@@ -334,7 +379,7 @@ function FeesRecipt({ accountAction }) {
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="">Bank Name</label>
+                            <label className='addStdLable' htmlFor="">Bank Name</label>
                             <input name='BankName' onBlur={formik.handleBlur}
                                 disabled={formik.values.payBy !== 'Cheque'}
                                 onChange={formik.handleChange} value={formik.values.BankName} type="text" className='form-control' placeholder='Bank Name' />
@@ -347,7 +392,7 @@ function FeesRecipt({ accountAction }) {
                             )}
                         </div>
                         <div className="col">
-                            <label htmlFor="">Cheque No.</label>
+                            <label className='addStdLable' htmlFor="">Cheque No.</label>
                             <input name='ChequeNo' onBlur={formik.handleBlur}
                                 disabled={formik.values.payBy !== 'Cheque'}
                                 onChange={formik.handleChange} value={formik.values.ChequeNo} type="text" className='form-control' placeholder='Cheque No' />
@@ -361,7 +406,7 @@ function FeesRecipt({ accountAction }) {
                         </div>
 
                         <div className="col">
-                            <label htmlFor="">Remark</label>
+                            <label className='addStdLable' htmlFor="">Remark</label>
                             <input name='Remark' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.Remark} type="text" className='form-control' placeholder='Remark' />
                             {formik.errors.Remark && formik.touched.Remark ? (
                                 <div className="text-danger fs-6">
@@ -405,16 +450,16 @@ function FeesRecipt({ accountAction }) {
 
                         <div className="row m-1 my-2 p-1 pt-2 fw-bold" style={{ backgroundColor: 'white', color: '#5A607F' }}>
                             <div className="col">
-                                <label htmlFor="">Year</label>
+                                <label className='addStdLable' htmlFor="">Year</label>
                             </div>
                             <div className="col">
-                                <label htmlFor="">Fees Amount</label>
+                                <label className='addStdLable' htmlFor="">Fees Amount</label>
                             </div>
                             <div className="col">
-                                <label htmlFor="">Recieved Fees</label>
+                                <label className='addStdLable' htmlFor="">Recieved Fees</label>
                             </div>
                             <div className="d-flex col-2">
-                                <label htmlFor="">Pending Fees</label>
+                                <label className='addStdLable' htmlFor="">Pending Fees</label>
                             </div>
 
                         </div>
@@ -425,16 +470,16 @@ function FeesRecipt({ accountAction }) {
 
 
                                 <div className="col">
-                                    <label htmlFor="">{pendingFee.year === 'I' ? 'First Year' : pendingFee.year === 'II' ? 'Second Year' : 'Third Year'}</label>
+                                    <label  htmlFor="">{pendingFee.year === 'I' ? 'First Year' : pendingFee.year === 'II' ? 'Second Year' : 'Third Year'}</label>
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">{pendingFee.FeesAmount}</label>
+                                    <label  htmlFor="">{pendingFee.FeesAmount}</label>
                                 </div>
                                 <div className="col">
-                                    <label htmlFor="">{pendingFee.ReceivedFees}</label>
+                                    <label  htmlFor="">{pendingFee.ReceivedFees}</label>
                                 </div>
                                 <div className="d-flex col-2">
-                                    <label htmlFor="">{pendingFee.PendingFees}</label>
+                                    <label  htmlFor="">{pendingFee.PendingFees}</label>
                                 </div>
                             </div>
                         ))}
@@ -443,16 +488,16 @@ function FeesRecipt({ accountAction }) {
 
                         <div className="row m-1 my-2 p-1 pt-2 " style={{ backgroundColor: '#dadadb ' }}>
                             <div className="col">
-                                <label htmlFor="">Total</label>
+                                <label className='addStdLable' htmlFor="">Total</label>
                             </div>
                             <div className="col">
-                                <label htmlFor="">{totalFeesAmount}</label>
+                                <label className='addStdLable' htmlFor="">{totalFeesAmount}</label>
                             </div>
                             <div className="col">
-                                <label htmlFor="">{totalReceivedFees}</label>
+                                <label className='addStdLable' htmlFor="">{totalReceivedFees}</label>
                             </div>
                             <div className="d-flex col-2">
-                                <label htmlFor="">{totalpendingFees} </label>
+                                <label className='addStdLable' htmlFor="">{totalpendingFees} </label>
                             </div>
                         </div>
 

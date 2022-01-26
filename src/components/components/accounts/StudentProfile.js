@@ -349,7 +349,7 @@ function StudentProfile() {
                             <div className="row mt-3">
                                 <div className="col">
                                     <label className='addStdLable' htmlFor="">Account status</label>
-                                    <select name="accountStatus" value={formik.values.accountStatus} onChange={formik.values.accountStatus} className={formik.touched.accountStatus ? `form-select ${formik.errors.accountStatus ? "invalid" : ""}` : 'form-select'} >
+                                    <select name="accountStatus" value={formik.values.accountStatus} onChange={formik.handleChange} className={formik.touched.accountStatus ? `form-select ${formik.errors.accountStatus ? "invalid" : ""}` : 'form-select'} >
                                         <option value="true">Active</option>
                                         <option value="false">Deactive</option>
                                     </select>
