@@ -37,7 +37,7 @@ function HeaderColumn({ original, table_data, changeFeesStatus }) {
             "<hr>" +
             "Are you sure?" +
             "<br>" +
-            `You want to  ${original.active === 1 ? "Deactive" : "Active"
+            `You want to  ${original.active === 1 ? "deactive" : "active"
             } this ${original.branch_name}`,
           showCancelButton: true,
           cancelButtonText: "Cancel",

@@ -299,7 +299,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                         >
                             
 
-                            {original.status ? "Active" : "Deactive"}
+                            {original.status ? "Deactive" : "Active"}
                             
                         </p>
                     )

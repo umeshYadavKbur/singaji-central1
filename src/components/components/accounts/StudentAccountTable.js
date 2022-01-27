@@ -21,7 +21,7 @@ import {
 import filtericon from "../../assests/image/AccountIcons/filter.svg";
 import { CSVLink } from "react-csv";
 import DateRangePicker from "rsuite/DateRangePicker";
-import {  Tooltip, Whisper } from "rsuite";
+import { Tooltip, Whisper } from "rsuite";
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 
@@ -137,6 +137,12 @@ function SelectColumnFilter({
                                         option_label = 'II Year'
                                     else if (option === 'III')
                                         option_label = 'III Year'
+                                } else if (id === 'gender') {
+                                    if (option === 'female')
+                                        option_label = 'Female'
+                                    else if (option === 'male')
+                                        option_label = 'Male'
+
                                 }
 
                                 return (
@@ -747,10 +753,10 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
     const CIcon = () => {
 
-        return( <>
-        <img style={{ marginLeft: "-110px"}} src={dateIcon} alt='date' />
+        return (<>
+            <img style={{ marginLeft: "-110px" }} src={dateIcon} alt='date' />
         </>);
-      };
+    };
 
     return studentData.loading ? (
         <SkeletonColor></SkeletonColor>
@@ -800,17 +806,17 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
                             <div className="d-flex  ml-3">
                                 <DateRangePicker
-                                caretAs={CIcon}
-                                
-                                onClean={(e) => {
-                                   
-                                    e.preventDefault();
-                                    getBackPosition()
-                                    set_is_dailyReport(false)
-                                }}
+                                    caretAs={CIcon}
 
-                                onChange={(value) => {
-                                    
+                                    onClean={(e) => {
+
+                                        e.preventDefault();
+                                        getBackPosition()
+                                        set_is_dailyReport(false)
+                                    }}
+
+                                    onChange={(value) => {
+
                                         if (!value) {
 
                                             return;
@@ -822,9 +828,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                             a, b
                                         })
                                     }}
-                                    
+
                                     appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
-                                <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
+                                <button onClick={showDailyReport} className='date-range-button'>Daily Report</button>
                             </div>
                             <div className="btn-group  ml-3">
                                 <button className="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

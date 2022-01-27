@@ -223,7 +223,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
   const columns = React.useMemo(
     () => [
       {
-        header: "S No",
+        header: "S.No",
         accessor: "Srno",
         Cell: ({ row: { original, index } }) => {
           return index + 1;

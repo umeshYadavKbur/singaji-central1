@@ -298,7 +298,7 @@ function StudentProfile() {
                                 <span style={{fontWeight:500}} > {`${StudentClassName} (${StudentProfileData.accountInfo.joinBatch + '-' + (parseInt(StudentProfileData.accountInfo.joinBatch) + 3)})`}</span>
                             </div>
                             <div className="btn-group mt-2" role="group" aria-label="Basic example">
-                                <button style={{backgroundColor: '#f99300',borderRadius: '11px 0px 0px 11px'}} onClick={() => {navigate("feesrecipt");}} className="btn  btn-warning text-light fw-bold" type="submit">Reciept</button>
+                                <button style={{backgroundColor: '#f99300',borderRadius: '11px 0px 0px 11px'}} onClick={() => {navigate("feesrecipt");}} className="btn  btn-warning text-light fw-bold" type="submit">Receipt</button>
 
                                 <button style={{color: '#4F83DF',backgroundColor: '#e6e9f4',borderRadius: ' 0px 11px 11px 0px',border: '1px solid #4F83DF'}} className="btn btn-outline fw-bold" type="submit" onClick={() => {navigate("uploaddocument");}}>Upload Document</button>
                             </div>

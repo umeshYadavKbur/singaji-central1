@@ -53,7 +53,7 @@ function FeesRecipt({ accountAction }) {
 
 
     const initialValues = {
-        payBy: 'Case',
+        payBy: 'Cash',
         studentName: `${StudentName}`,
         studentClassYear:(StudentAccountData.accountInfo.year?.toString()),
         FatherName: StudentAccountData.accountInfo.fathersName,
