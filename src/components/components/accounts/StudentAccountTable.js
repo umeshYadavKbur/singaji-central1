@@ -20,7 +20,8 @@ import {
 } from "@coreui/react";
 import filtericon from "../../assests/image/AccountIcons/filter.svg";
 import { CSVLink } from "react-csv";
-import { DateRangePicker, Tooltip, Whisper } from "rsuite";
+import DateRangePicker from "rsuite/DateRangePicker";
+import {  Tooltip, Whisper } from "rsuite";
 import './Styles/StudentAccountTable.css';
 import updown_sort from '../../assests/image/updown_sort.svg';
 
@@ -36,7 +37,7 @@ import Pagination from "../../assests/common/Pagination";
 import Loader from "../../assests/common/Loader";
 import AvatarImg from '../../assests/image/Avtar.jpeg'
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
-
+import dateIcon from '../../assests/image/AccountIcons/DateIcon.svg'
 import OfflinePage from '../../auth/OfflinePage';
 import NoDataFound from "../../assests/common/NoDataFound";
 import CountUp from 'react-countup';
@@ -744,6 +745,13 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         )
     }
 
+    const CIcon = () => {
+
+        return( <>
+        <img style={{ marginLeft: "-110px"}} src={dateIcon} alt='date' />
+        </>);
+      };
+
     return studentData.loading ? (
         <SkeletonColor></SkeletonColor>
     ) : studentData.error ? (
@@ -758,7 +766,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px', width: '100%' }}>
                     <div className="d-flex row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
                         <div className="col info-col m-2"  >
-                            <h5 style={{ marginTop: "12px" }}> <CountUp  start={0} end={MoneyCount.TStudent} duration={1}> </CountUp> <br /> <p >Total Students</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}> <CountUp start={0} end={MoneyCount.TStudent} duration={0.5}> </CountUp> <br /> <p >Total Students</p> </h5>
                         </div>
                         <div className="col info-col m-2" >
                             <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? <AnimateNum num={MoneyCount.TAmount} /> : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
@@ -791,14 +799,18 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
 
                             <div className="d-flex  ml-3">
-                                <DateRangePicker onClean={(e) => {
+                                <DateRangePicker
+                                caretAs={CIcon}
+                                
+                                onClean={(e) => {
+                                   
                                     e.preventDefault();
                                     getBackPosition()
                                     set_is_dailyReport(false)
                                 }}
-                                    // onOk={showDailyReport}
-                                    onChange={(value) => {
 
+                                onChange={(value) => {
+                                    
                                         if (!value) {
 
                                             return;
@@ -809,7 +821,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                         setDate({
                                             a, b
                                         })
-                                    }} appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
+                                    }}
+                                    
+                                    appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
                                 <button onClick={showDailyReport} className='date-range-button'>Daily report</button>
                             </div>
                             <div className="btn-group  ml-3">

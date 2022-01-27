@@ -170,10 +170,6 @@
     /* font-weight: bold; */
 }
 
-.rs-picker-daterange .rs-picker-toggle.rs-btn .rs-picker-toggle-caret {
-    /* display: none; */
-    background: url("/src/components/assests/image/AccountIcons/calender_icon") !important;
-}
 
 
 /* ------------------------------------------ table columns csss ---------------------------------- */
