@@ -18,7 +18,7 @@ const storage = {
 
     setItem: (key, value) => {
 
-        const encrypt_value = encrypt(value)
+        const encrypt_value = encrypt(value)//gjhgth5453ghhf
         localStorage.setItem(key, encrypt_value);
 
 
@@ -26,9 +26,11 @@ const storage = {
 
     getItem: (key) => {
 
-        const encrypt_value = localStorage.getItem(key);
-
-        return decrypt(encrypt_value);
+        const encrypt_value = localStorage.getItem(key);//hfhgfas5465
+        if (!encrypt_value) {
+            return false
+        }
+        return decrypt(encrypt_value);//A
 
 
     }

@@ -21,6 +21,7 @@ import { connect } from 'react-redux';
 import allUrls from '../../../redux/constants/url'
 import { accountAction } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
 import axios from 'axios';
+import FeesRecieptDeletePopup from './FeesRecieptDeletePopup';
 
 
 function FeesRecipt({ accountAction }) {
@@ -49,6 +50,13 @@ function FeesRecipt({ accountAction }) {
         totalpendingFees = totalpendingFees + parseInt(ele.PendingFees)
 
     })
+
+    const delete_reciept = {
+        stdId:"",
+        AccountsReceiptNo:"",
+        report_remark:""
+
+    }
 
 
 
@@ -586,8 +594,22 @@ function FeesRecipt({ accountAction }) {
                                                             <span style={{ fontSize: '12px' }}>Inst.{StudentAccountData.InstallmentNo}</span>
                                                         </p></div>
 
-                                                    <div className="col-2">
+                                                    <div className="col-5 d-flex">
+                                                        {/* <span><i class="fa fa-camera-retro fa-lg"></i></span>
+                                                        {/* <a href={StudentAccountData.AccountsReceiptName} rel="noreferrer" target='_blank'><img className='mt-3' src={} alt="downloadImg" /></a></div> */}
+                                                        {/* <div>
+
                                                         <a href={StudentAccountData.AccountsReceiptName} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} alt="downloadImg" /></a></div>
+                                                        <FeesRecieptDeletePopup></FeesRecieptDeletePopup>
+                                                        </div> */}
+                                                        <div>
+                                                        {/* <a href={StudentAccountData.AccountsReceiptName} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} alt="downloadImg" /></a> */}
+                                                        <FeesRecieptDeletePopup data={StudentAccountData}  ></FeesRecieptDeletePopup>
+
+                                                        </div>
+                                                        <a href={StudentAccountData.AccountsReceiptName} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} alt="downloadImg" /></a>
+                                                        </div>
+                                                        
                                                 </div>
                                             </div>
 

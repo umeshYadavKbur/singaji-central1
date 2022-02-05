@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useAnimate } from "react-simple-animate";
 
 import "../components/styles/adminDashboard.css";
@@ -78,6 +78,7 @@ function AdminDashboard() {
             <Route path="pendingscholarship" element={<PendingScholarshipTable />} />
             <Route path="feesreceiptlist" element={<FeesReceiptTable />} />
             <Route path="studentprofile/updatepersonaldetial" element={<UpdatePersonalDetialOfStudent />} />
+            <Route path="*" element={<Navigate replace to="/login" />} />
           </Routes>
         </div>
       </div>
