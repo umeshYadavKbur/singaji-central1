@@ -71,7 +71,7 @@ const AllUrl = {
 
     // Fees reciept delete api
 
-    deletereciept: `${baseUrl}/api/delete_reported_receipt`
+    deletereciept: `${baseUrl}/api/report_receipt`
 }
 export default AllUrl
 

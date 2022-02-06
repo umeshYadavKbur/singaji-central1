@@ -23,14 +23,19 @@ import axios from 'axios';
 import crossButton from "../../assests/image/crossButton.svg";
 import AllUrl from "../../../redux/constants/url";
 import LoaderButton from "../../assests/common/LoaderButton";
+import Swal from "sweetalert2";
 
 function FeesRecieptDeletePopup({ data }) {
+
+    
+
     const token = localStorage.getItem("token");
     const stdId = data.stdId
     const AccountsReceiptNo = data.AccountsReceiptNo
     // console.log(adminData);
 
     const [visible, setVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     // console.log(data)
 
@@ -47,6 +52,7 @@ function FeesRecieptDeletePopup({ data }) {
         validationSchema,
 
          onSubmit: async (values) => {
+             setLoading(true);
             console.log(data.stdId);
             var resultData = JSON.stringify({
                 stdId: stdId,
@@ -66,7 +72,22 @@ function FeesRecieptDeletePopup({ data }) {
                 data: resultData,
             };
             var resultOfAxios = await axios(config)
+            setLoading(false);
+            if(resultOfAxios.status === 200)
+            {
+                // console.log(resultOfAxios.status)
+                Swal.fire(
+                    'Request sent',
+                    ' ',
+                    'success'
+                  )
+                   setVisible(!visible)
+
+            }
             console.log(resultOfAxios);
+
+            console.log("--------------")
+            console.log(resultOfAxios.status)
 
             // createNewAdmin(config, navigate);
         },
@@ -113,8 +134,8 @@ function FeesRecieptDeletePopup({ data }) {
                                     className=" submit_btn w-100  btn-md text-light font-weight-bold"
                                     type="submit"
                                 >
-                                    {/* {adminData.loading ? <LoaderButton /> : "Request"} */}
-                                    Send
+                                    {loading ? <LoaderButton /> : "Request"}
+                                    
                                 </button>
                             </form>
                         </div>

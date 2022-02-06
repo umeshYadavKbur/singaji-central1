@@ -273,6 +273,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 Filter: "",
                 filter: ""
             },
+            
             // {
             //     header: 'Download',
             //     accessor: 'Do',
