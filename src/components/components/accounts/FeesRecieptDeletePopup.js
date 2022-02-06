@@ -15,7 +15,7 @@ import * as Yup from "yup";
 // import crossButton from "../assests/image/crossButton.svg";
 // import "./styles/createAdmin.css";
 // import { createNewAdmin } from "../../redux/actionDispatcher/superAdmin/createNewAdminDispatcher";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 // import LoaderButton from "../assests/common/LoaderButton";
 // import AllUrl from "../../redux/constants/url";
 import axios from 'axios';
@@ -119,6 +119,7 @@ function FeesRecieptDeletePopup({ data }) {
                             <form onSubmit={formik.handleSubmit}>
                                 <textarea name="remark"
                                     class="form-control" id="exampleFormControlTextarea1 remark"
+                                    placeholder="Reason For Report This Receipt."
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur} value={formik.values.remark} rows="3"></textarea>
                                 {formik.errors.remark && formik.touched.remark ? (

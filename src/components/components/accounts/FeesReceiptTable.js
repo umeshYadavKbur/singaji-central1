@@ -19,7 +19,7 @@ import { Tooltip, Whisper } from "rsuite";
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
 import OfflinePage from "../../auth/OfflinePage";
 import NoDataFound from "../../assests/common/NoDataFound";
-import Icon_feather_download from '../../assests/image/AccountIcons/Icon_feather_download.svg';
+import Icon_feather_download from '../../assests/image/AccountIcons/receipt_download_icon.svg';
 
 const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -89,36 +89,36 @@ function SelectColumnFilter({
 
                                 return (
                                     <Fragment key={i}>
-                                    <div id={`${id}`} style={{height:'30px',cursor:'pointer'}} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
-                                        <label
-                                            onClick={(e) => { e.stopPropagation() }}
-                                            className="font-medium text-gray-700 d-flex align-items-center cursor-pointer"
-                                        // onCLick={}
-                                        style={{cursor:'pointer'}}
-                                        >
-                                            <input
-                                                checked={filterValue.includes(option)}
-                                                type="checkbox"
-                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-1"
-                                                id={option}
-                                                name={option}
-                                                value={option}
-                                                style={{ cursor: 'pointer' }}
-                                                onChange={(e) => {
-                                                    setFilter(
-                                                        setFilteredParams(filterValue, e.target.value)
-                                                    );
-                                                }}
+                                        <div id={`${id}`} style={{ height: '30px', cursor: 'pointer' }} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
+                                            <label
                                                 onClick={(e) => { e.stopPropagation() }}
+                                                className="font-medium text-gray-700 d-flex align-items-center cursor-pointer"
+                                                // onCLick={}
+                                                style={{ cursor: 'pointer' }}
                                             >
+                                                <input
+                                                    checked={filterValue.includes(option)}
+                                                    type="checkbox"
+                                                    className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-1"
+                                                    id={option}
+                                                    name={option}
+                                                    value={option}
+                                                    style={{ cursor: 'pointer' }}
+                                                    onChange={(e) => {
+                                                        setFilter(
+                                                            setFilteredParams(filterValue, e.target.value)
+                                                        );
+                                                    }}
+                                                    onClick={(e) => { e.stopPropagation() }}
+                                                >
 
-                                            </input>
+                                                </input>
 
-                                            {option_label}
+                                                {option_label}
 
-                                        </label>
-                                    </div>
-                                </Fragment>
+                                            </label>
+                                        </div>
+                                    </Fragment>
                                 );
                             })}
                         </div>
@@ -273,22 +273,22 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 Filter: "",
                 filter: ""
             },
-            
+
             {
                 header: 'Download',
-                accessor: 'download',
+                accessor: 'photo',
                 Filter: "",
                 filter: "",
-                Cell: ({row: {original}}) => (
+                Cell: ({ row: { original } }) => (
                     // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
                     <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
                         <Tooltip>
-                            Download reciept
+                            Download Receipt
                         </Tooltip>
                     }>
-                        <div>
+                        <div >
 
-                          <a href={original} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} style={{cursor: "pointer" , backgroundColor: "gray"}} alt="_blank" /></a>
+                            <a href={original.photo} rel="noreferrer" target='_blank'><img className='mb-1' src={Icon_feather_download} style={{ cursor: "pointer" }} alt="_blank" /></a>
                         </div>
 
                     </Whisper>
