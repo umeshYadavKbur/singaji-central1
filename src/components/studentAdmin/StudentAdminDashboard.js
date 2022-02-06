@@ -58,6 +58,7 @@ function AdminDashboard() {
             <Route path="studenttable" element={<StudentTable />} />
             <Route path="students" element={<StudentTableFirst />} />
             <Route path="addnewstudent" element={<AddNewStudent />} />
+            <Route path="*" element={<Navigate replace to="/login" />} />
           </Routes>
         </div>
       </div>

@@ -72,6 +72,7 @@ function AdminDashboard() {
             <Route path="studentprofile/feesrecipt" element={<FeesRecipt />} />
             <Route path="studentprofile/updatepersonaldetial" element={<UpdatePersonalDetialOfStudent />} />
             <Route path="pendingscholarship" element={<PendingScholarshipTable />} />
+            <Route path="*" element={<Navigate replace to="/login" />} />
 
           </Routes>
         </div>
