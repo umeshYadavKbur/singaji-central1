@@ -19,7 +19,7 @@ import { Tooltip, Whisper } from "rsuite";
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
 import OfflinePage from "../../auth/OfflinePage";
 import NoDataFound from "../../assests/common/NoDataFound";
-// import Icon_feather_download from '../../assests/image/AccountIcons/Icon_feather_download.svg';
+import Icon_feather_download from '../../assests/image/AccountIcons/Icon_feather_download.svg';
 
 const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
@@ -274,27 +274,27 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                 filter: ""
             },
             
-            // {
-            //     header: 'Download',
-            //     accessor: 'Do',
-            //     Cell: ({row: {original}}) => (
-            //         // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
-            //         <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
-            //             <Tooltip>
-            //                 Edit Student Info
-            //             </Tooltip>
-            //         }>
-            //             <img src={Icon_feather_download} style={{cursor: "pointer"}} alt="Edit" 
-            //             // onClick={() => {
-            //             //     navigate("/admin_dashboard/addnewstudent");
-            //             //     localStorage.setItem('RegistrationEdit',JSON.stringify(original))
-            //             // }}
-            //              />
+            {
+                header: 'Download',
+                accessor: 'download',
+                Filter: "",
+                filter: "",
+                Cell: ({row: {original}}) => (
+                    // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
+                    <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                        <Tooltip>
+                            Download reciept
+                        </Tooltip>
+                    }>
+                        <div>
 
-            //         </Whisper>
+                          <a href={original} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} style={{cursor: "pointer" , backgroundColor: "gray"}} alt="_blank" /></a>
+                        </div>
 
-            //     )
-            // },
+                    </Whisper>
+
+                )
+            },
 
         ],
         []
