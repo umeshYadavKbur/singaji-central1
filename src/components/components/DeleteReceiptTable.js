@@ -319,107 +319,110 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
     // console.log(checkboxData);
     return table_data.loading ? (
         <Loader />
-    ) : table_data.error ? (
-        <OfflinePage />
-    ) : (
-        <>
-            <ToastContainer
-                position="top-center"
-                autoClose={2500}
-                hideProgressBar={true}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+    )
+        //  : table_data.table_data ? (
+        // <OfflinePage />
 
-            <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
-                <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+        // ) 
+        : (
+            <>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={2500}
+                    hideProgressBar={true}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
+
+                <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
+                    <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '5' }}>
 
 
-                    <div className="d-flex" >
-                        <div className="">
-                            <select
-                                className="form-select table_select_row_options"
-                                value={pageSize}
-                                onChange={(e) => setPageSize(Number(e.target.value))}
-                            >
-                                {[10, 25, 50, 100].map((pageSize) => (
-                                    <option value={pageSize} key={pageSize}>Show Entries {pageSize}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="d-flex ml-auto me-1">
-                            <div className="me-4">
-                                <GlobalFilter
-                                    filter={globalFilter}
-                                    setFilter={setGlobalFilter}
-                                ></GlobalFilter>
+                        <div className="d-flex" >
+                            <div className="">
+                                <select
+                                    className="form-select table_select_row_options"
+                                    value={pageSize}
+                                    onChange={(e) => setPageSize(Number(e.target.value))}
+                                >
+                                    {[10, 25, 50, 100].map((pageSize) => (
+                                        <option value={pageSize} key={pageSize}>Show Entries {pageSize}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="d-flex ml-auto me-1">
+                                <div className="me-4">
+                                    <GlobalFilter
+                                        filter={globalFilter}
+                                        setFilter={setGlobalFilter}
+                                    ></GlobalFilter>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <table {...getTableProps()} id="customers" className="table table-sm">
-                    <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
-                        {headerGroups.map((headerGroup) => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                        {column.render("header")}
-                                        <span>
-                                            {column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
+                    <table {...getTableProps()} id="customers" className="table table-sm">
+                        <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+                            {headerGroups.map((headerGroup) => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map((column) => (
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render("header")}
+                                            <span>
+                                                {column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
+                                                    ) : (
+                                                        <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
+                                                        // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                                                    )
                                                 ) : (
-                                                    <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
-                                                    // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
-                                                )
-                                            ) : (
 
-                                                column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                                                    column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
 
 
-                                            )}
-                                        </span>
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {page.map((row) => {
-                            prepareRow(row);
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => {
-                                        return (
-                                            <td {...cell.getCellProps()}>{cell.render("Cell")} </td>
-                                        );
-                                    })}
+                                                )}
+                                            </span>
+                                        </th>
+                                    ))}
                                 </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-                <NoDataFound rows={rows} />
-                <Pagination
-                    page={page}
-                    pageIndex={pageIndex}
-                    pageCount={pageCount}
-                    pageSize={pageSize}
-                    canPreviousPage={canPreviousPage}
-                    previousPage={previousPage}
-                    pageOptions={pageOptions}
-                    gotoPage={gotoPage}
-                    canNextPage={canNextPage}
-                    nextPage={nextPage}
-                />
-            </div>
-        </>
-    );
+                            ))}
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {page.map((row) => {
+                                prepareRow(row);
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map((cell) => {
+                                            return (
+                                                <td {...cell.getCellProps()}>{cell.render("Cell")} </td>
+                                            );
+                                        })}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                    <NoDataFound rows={rows} />
+                    <Pagination
+                        page={page}
+                        pageIndex={pageIndex}
+                        pageCount={pageCount}
+                        pageSize={pageSize}
+                        canPreviousPage={canPreviousPage}
+                        previousPage={previousPage}
+                        pageOptions={pageOptions}
+                        gotoPage={gotoPage}
+                        canNextPage={canNextPage}
+                        nextPage={nextPage}
+                    />
+                </div>
+            </>
+        );
 }
 
 const mapStateToProps = (state) => {
