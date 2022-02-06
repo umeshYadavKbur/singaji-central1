@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useMemo } from "react";
 import { GlobalFilter } from "./tableComponents/GlobalFilter";
+import Edit_icon from '../assests/image/Edit_icon.svg'
 import {
     useTable,
     useSortBy,
@@ -25,6 +26,8 @@ import OfflinePage from "../auth/OfflinePage";
 import NoDataFound from "../assests/common/NoDataFound";
 import Swal from "sweetalert2";
 import { ActivateButton, DeactivateButton } from "../assests/common/Color";
+import { Tooltip, Whisper } from "rsuite";
+import ViewReceiptPopup from "./ViewReceiptPopup";
 
 // import LoaderButton from "../../assests/common/LoaderButton";
 
@@ -55,7 +58,11 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
         },
         {
             header: "Name",
-            accessor: "AccountsReceiptName",
+            accessor: "name",
+        },
+        {
+            header: "Father's Name",
+            accessor: "fathersName",
         },
         {
             header: "Date",
@@ -254,6 +261,26 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                     }}>
                     Approve
                 </button>)
+        },
+        {
+            header: 'Action',
+            accessor: 'view',
+            Cell: ({ row: { original, index } }) => {
+                return (
+                    // <div className="d-flex m-0 flex-column justify-content-start">
+                    <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                        <Tooltip>
+                            View details
+                        </Tooltip>
+                    }>
+                        <ViewReceiptPopup data={original} />
+
+                    </Whisper>
+                    // </div >
+                )
+            },
+            Filter: "",
+            filter: "",
         },
     ]);
 
