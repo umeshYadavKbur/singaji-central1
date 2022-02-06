@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useMemo } from "react";
 import { GlobalFilter } from "./tableComponents/GlobalFilter";
-import Edit_icon from '../assests/image/Edit_icon.svg'
+// import Edit_icon from '../assests/image/Edit_icon.svg'
 import {
     useTable,
     useSortBy,
@@ -17,7 +17,7 @@ import { TableCheckbox } from "./tableComponents/TableCheckbox";
 import { connect } from "react-redux";
 import { fetchFeesTableData } from "../../redux/actionDispatcher/superAdmin/feesStructureTableDataDispatcher";
 import AllUrl from "../../redux/constants/url";
-import SkeletonColor from "../../helpers/Skeletrone";
+// import SkeletonColor from "../../helpers/Skeletrone";
 import { toast, ToastContainer } from "react-toastify";
 import updown_sort from '../assests/image/updown_sort.svg'
 import Pagination from "../assests/common/Pagination";
@@ -27,7 +27,7 @@ import NoDataFound from "../assests/common/NoDataFound";
 import Swal from "sweetalert2";
 import { ActivateButton, DeactivateButton } from "../assests/common/Color";
 import { Tooltip, Whisper } from "rsuite";
-import ViewReceiptPopup from "./ViewReceiptPopup";
+// import ViewReceiptPopup from "./ViewReceiptPopup";
 
 // import LoaderButton from "../../assests/common/LoaderButton";
 
@@ -270,11 +270,27 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                     // <div className="d-flex m-0 flex-column justify-content-start">
                     <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
                         <Tooltip>
-                            View details
+                            View Receipt
                         </Tooltip>
                     }>
-                        <ViewReceiptPopup data={original} />
+                        <a href={original.photo} rel="noreferrer" target='_blank'>
+                            <button
+                                style={{
+                                    backgroundColor: "#F7922A",
+                                    color: "white",
+                                    outline: "none",
+                                    border: "none",
+                                    fontWeight: "bold",
+                                    height: '31px',
+                                    borderRadius: "3px"
+                                }}
 
+                            >
+                                View
+                            </button>
+                          
+
+                        </a>
                     </Whisper>
                     // </div >
                 )
