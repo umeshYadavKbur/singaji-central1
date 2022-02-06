@@ -23,6 +23,7 @@ import StudentTable from '../components/StudentsTable'
 import FeesReceiptTable from "../components/accounts/FeesReceiptTable";
 import StudentTableFirst from "../components/student/StudentTableFirst";
 import UpdatePersonalDetialOfStudent from "../components/accounts/UpdatePersonalDetialOfStudent";
+import DeleteReceiptTable from "../components/DeleteReceiptTable";
 
 function AdminDashboard() {
   const { play, style, isPlaying } = useAnimate({
@@ -78,6 +79,7 @@ function AdminDashboard() {
             <Route path="pendingscholarship" element={<PendingScholarshipTable />} />
             <Route path="feesreceiptlist" element={<FeesReceiptTable />} />
             <Route path="studentprofile/updatepersonaldetial" element={<UpdatePersonalDetialOfStudent />} />
+            <Route path="reportedreceipt" element={<DeleteReceiptTable />} />
             <Route path="*" element={<Navigate replace to="/login" />} />
           </Routes>
         </div>

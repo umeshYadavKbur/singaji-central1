@@ -54,6 +54,9 @@ const HeaderLink = () => {
         else if (currentLocation === "/admin_dashboard/feesreceiptlist") {
             return "Fees Receipt List";
         }
+        else if (currentLocation === "/admin_dashboard/reportedreceipt") {
+            return "Reported Receipt";
+        }
         else {
             return "Dashboard";
         }

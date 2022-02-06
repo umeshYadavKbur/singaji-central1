@@ -60,6 +60,10 @@ const AllUrl = {
     villageNameList: `${baseUrl}/api/village_name`,
     villageNameById: `${baseUrl}/api//track_name/3`, // where 3 is an id of track
     uploadFile: `${baseUrl}/api/uploadFile`,
+    reportReceipt: `${baseUrl}/api/list_of_reported_receipt`,
+    deleteReportedList: `${baseUrl}/api/delete_reported_receipt`,
+    rejectReceipt: `${baseUrl}/api/report_receipt`,//to deactivate a student fees receipt reject
+    
     //_____________________________________
 
     //Account admin tables url 

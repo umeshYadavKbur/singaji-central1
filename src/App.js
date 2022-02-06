@@ -71,8 +71,6 @@ function App() {
         {
           is_online ?
             <Routes>
-
-
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/forgetpassword" element={<ForgotPassword />} />
               <Route
@@ -92,9 +90,7 @@ function App() {
               <Route path="*" element={<Navigate replace to="/login" />} />
             </Routes>
             :
-
             <Routes>
-
               <Route exact path="*" element={<Offline />} />
             </Routes>
         }

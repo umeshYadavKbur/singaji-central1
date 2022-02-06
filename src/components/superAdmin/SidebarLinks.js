@@ -226,6 +226,7 @@ const SidebarLinks = ({ Toggle }) => {
                                 {DLink1(currentLocation, "Student Account", "studentaccounttable", "ok", "Student_account", 'account-collapse-btn')}
                                 {DLink1(currentLocation, "Pending Scholarship", "pendingscholarship", "ok", "Pending_students", "account-collapse-btn")}
                                 {DLink1(currentLocation, "Fees Receipt List", "feesreceiptlist", "ok", "Fees_receiptlist", 'account-collapse-btn')}
+                                {DLink1(currentLocation, "Reported Receipt", "reportedreceipt", "ok", "Fees_receipt_del_req", 'account-collapse-btn')}
                             </li>
                         </ul>
                     </div>
@@ -252,7 +253,6 @@ const SidebarLinks = ({ Toggle }) => {
 
 
             <Link className={`sidebar_options ${active_tab === 'Alumini' ? 'active_tab' : ''}`} to="#!"
-
                 id="Alumini"
                 onClick={() => { changeTab("Alumini") }}
             >

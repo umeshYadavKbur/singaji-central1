@@ -28,16 +28,18 @@ const feesStructureTableReducer = (state = initialState, action) => {
 
     case FEES_STRUCT_TABLE_DATA_SUCCESS:
       return {
+        ...state,
         loading: false,
-          table_data: action.payload,
-          error: "",
+        table_data: action.payload,
+        error: "",
       };
 
     case FEES_STRUCT_TABLE_DATA_FAIL:
       return {
+        ...state,
         loading: false,
-          table_data: [],
-          error: action.payload,
+        table_data: [],
+        error: action.payload,
       };
 
     case FEES_STRUCTURE_CHANGE_STATUS:
