@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useAnimate } from "react-simple-animate";
 
 import "../components/styles/adminDashboard.css";

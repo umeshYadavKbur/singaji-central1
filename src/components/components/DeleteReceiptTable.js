@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useMemo } from "react";
+// import { useMemo } from "react";
 import { GlobalFilter } from "./tableComponents/GlobalFilter";
 // import Edit_icon from '../assests/image/Edit_icon.svg'
 import {
@@ -22,7 +22,7 @@ import { toast, ToastContainer } from "react-toastify";
 import updown_sort from '../assests/image/updown_sort.svg'
 import Pagination from "../assests/common/Pagination";
 import Loader from "../assests/common/Loader";
-import OfflinePage from "../auth/OfflinePage";
+// import OfflinePage from "../auth/OfflinePage";
 import NoDataFound from "../assests/common/NoDataFound";
 import Swal from "sweetalert2";
 import { ActivateButton, DeactivateButton } from "../assests/common/Color";
@@ -146,7 +146,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                         draggable: false,
                                         progress: undefined,
                                     });
-                                    var config = {
+                                    let config = {
                                         method: "GET",
                                         url: AllUrl.reportReceipt,
                                         headers: {
@@ -235,7 +235,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                         draggable: false,
                                         progress: undefined,
                                     });
-                                    var config = {
+                                    let config = {
                                         method: "GET",
                                         url: AllUrl.reportReceipt,
                                         headers: {
@@ -359,7 +359,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
         null,
         2
     );
-    // console.log(checkboxData);
+    console.log(checkboxData);
     return table_data.loading ? (
         <Loader />
     )

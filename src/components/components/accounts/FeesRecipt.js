@@ -51,12 +51,12 @@ function FeesRecipt({ accountAction }) {
 
     })
 
-    const delete_reciept = {
-        stdId:"",
-        AccountsReceiptNo:"",
-        report_remark:""
+    // const delete_reciept = {
+    //     stdId:"",
+    //     AccountsReceiptNo:"",
+    //     report_remark:""
 
-    }
+    // }
 
 
 
