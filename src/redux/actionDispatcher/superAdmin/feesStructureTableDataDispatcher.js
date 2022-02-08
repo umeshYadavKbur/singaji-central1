@@ -16,9 +16,11 @@ import {
 } from 'react-toastify'
 
 
-export const fetchFeesTableData = (data) => {
+export const fetchFeesTableData = (data, Show) => {
   return (dispatch) => {
-    dispatch(fetchTableData());
+    if (!Show) {
+      dispatch(fetchTableData());
+    }
     try {
       axios(data)
         .then(function (response) {
@@ -51,9 +53,21 @@ export const fetchFeesTableData = (data) => {
             });
             dispatch(fetchFailTableData(response.data));
           }
+          if (response.status === 404 ) {
+            toast.warn('Data not found', {
+              position: "bottom-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            dispatch(fetchFailTableData(response.data));
+          }
         })
         .catch(function (error) {
-          toast.warn('Internal Server Error', {
+          toast.warn('No data found !', {
             position: "bottom-center",
             autoClose: 3000,
             hideProgressBar: false,

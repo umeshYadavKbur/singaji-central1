@@ -27,11 +27,14 @@ import NoDataFound from "../assests/common/NoDataFound";
 import Swal from "sweetalert2";
 import { ActivateButton, DeactivateButton } from "../assests/common/Color";
 import { Tooltip, Whisper } from "rsuite";
+import SkeletonColor from "../../helpers/Skeletrone";
+import { useState } from "react";
 // import ViewReceiptPopup from "./ViewReceiptPopup";
 
 // import LoaderButton from "../../assests/common/LoaderButton";
 
 function DeleteReceiptTable({ table_data, fetchFeesTable }) {
+    const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
     React.useEffect(() => {
         var config = {
@@ -118,6 +121,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
 
                         }).then(async (result) => {
                             if (result.isConfirmed) {
+                                setLoading(true)
                                 var body = JSON.stringify({
                                     stdId: original.stdId,
                                     AccountsReceiptNo: original.AccountsReceiptNo,
@@ -154,9 +158,24 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                             "Content-Type": "application/json",
                                         },
                                     };
-                                    fetchFeesTable(config);
+                                    setLoading(false)
+                                    var Show = true;
+                                    fetchFeesTable(config, Show);
                                 }
                                 else if (result.status === 404) {
+                                    setLoading(false)
+                                    toast.warning('Something went wrong', {
+                                        position: "bottom-center",
+                                        autoClose: 2000,
+                                        hideProgressBar: true,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: false,
+                                        progress: undefined,
+                                    });
+                                }
+                                else {
+                                    setLoading(false)
                                     toast.warning('Something went wrong', {
                                         position: "bottom-center",
                                         autoClose: 2000,
@@ -209,6 +228,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
 
                         }).then(async (result) => {
                             if (result.isConfirmed) {
+                                setLoading(true);
                                 var body = JSON.stringify({
                                     stdId: original.stdId,
                                     AccountsReceiptNo: original.AccountsReceiptNo,
@@ -243,9 +263,24 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                             "Content-Type": "application/json",
                                         },
                                     };
-                                    fetchFeesTable(config);
+                                    var Show = true;
+                                    fetchFeesTable(config, Show);
+                                    setLoading(false)
                                 }
                                 else if (result.status === 404) {
+                                    toast.warning('Somethingn went wrong !', {
+                                        position: "bottom-center",
+                                        autoClose: 2000,
+                                        hideProgressBar: true,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: false,
+                                        progress: undefined,
+                                    });
+                                    setLoading(false)
+                                }
+                                else {
+                                    setLoading(false)
                                     toast.warning('Somethingn went wrong !', {
                                         position: "bottom-center",
                                         autoClose: 2000,
@@ -288,7 +323,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                             >
                                 View
                             </button>
-                          
+
 
                         </a>
                     </Whisper>
@@ -300,7 +335,6 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
         },
     ]);
 
-    // const tableData =
     const {
         getTableProps,
         getTableBodyProps,
@@ -361,14 +395,13 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
     );
     console.log(checkboxData);
     return table_data.loading ? (
-        <Loader />
+        <SkeletonColor></SkeletonColor>
     )
-        //  : table_data.table_data ? (
-        // <OfflinePage />
-
-        // ) 
         : (
             <>
+                {
+                    loading && <Loader />
+                }
                 <ToastContainer
                     position="top-center"
                     autoClose={2500}
@@ -476,7 +509,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchFeesTable: (data) => dispatch(fetchFeesTableData(data)),
+        fetchFeesTable: (data, Show) => dispatch(fetchFeesTableData(data, Show)),
     };
 };
 

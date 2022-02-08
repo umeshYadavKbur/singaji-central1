@@ -28,6 +28,18 @@ const feesReceiptTableData = (data) => {
                         });
                         dispatch(fetchFailTableData(response.data));
                     }
+                    if (response.status === 400) {
+                        toast.warning('No data found ', {
+                            position: "bottom-center",
+                            autoClose: 3000,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        dispatch(fetchFailTableData(response.data));
+                    }
                     if (response.status === 500) {
                         toast.warning('Internal server error', {
                             position: "bottom-center",
