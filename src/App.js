@@ -91,7 +91,7 @@ function App() {
             </Routes>
             :
             <Routes>
-              <Route exact path="*" element={<Offline />} />
+              <Route exact path="*" element={<Offline isFullPage={true} />} />
             </Routes>
         }
       </Router>

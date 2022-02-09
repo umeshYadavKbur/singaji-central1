@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Offline_svg from '../assests/image/error2.png';
 import "./Styles/Offline_page.css"
 
-const OfflinePage = () => {
+const OfflinePage = ({isFullPage}) => {
 
     // onClick={window.location.reload()}
     // function refreshPage(){
@@ -24,7 +24,7 @@ const OfflinePage = () => {
 
     return (
         <>
-            <div className="d-flex justify-content-center align-items-center main-div">
+            <div style={isFullPage? {height: "100vh"} : ""} className="d-flex justify-content-center align-items-center main-div">
                 <div>
 
                     <div className="">
