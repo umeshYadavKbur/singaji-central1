@@ -71,8 +71,6 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
     }, []);
 
 
-
-
     const initialValues = {
         //not working
         // Date of birth , village name  , category name , 12 subject , scheme fees  , GKB scholarship , track name 

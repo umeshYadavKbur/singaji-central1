@@ -24,6 +24,7 @@ import FeesReceiptTable from "../components/accounts/FeesReceiptTable";
 import StudentTableFirst from "../components/student/StudentTableFirst";
 import UpdatePersonalDetialOfStudent from "../components/accounts/UpdatePersonalDetialOfStudent";
 import DeleteReceiptTable from "../components/DeleteReceiptTable";
+import SelfAppliedStudentTable from "../components/SelfAppliedStudentTable";
 
 function AdminDashboard() {
   const { play, style, isPlaying } = useAnimate({
@@ -57,10 +58,13 @@ function AdminDashboard() {
         <div className="header_dashboard">
           <Navbar Options={HeaderLink} />
         </div>
+
+        
         <div className="table_dashboard">
           <Routes>
             <Route path="" element={<Dashboard />} />
             <Route path="studenttable" element={<StudentTable />} />
+            <Route path="selfappliedstudent" element={<SelfAppliedStudentTable />} />
             {/* Nested routes  */}
             <Route path="studentaccounttable" element={<StudentAccountTable />} />
             {/* Nested routes  */}

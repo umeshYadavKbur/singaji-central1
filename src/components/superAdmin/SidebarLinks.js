@@ -177,6 +177,7 @@ const SidebarLinks = ({ Toggle }) => {
                     <div className="collapse collapse_superadmin" id="education-collapse">
                         <ul className={`${Toggle ? 'btn-toggle-nav-hide' : 'btn-toggle-nav'}  list-unstyled `}>
                             <li className="dropdown_items_div ml-1">
+                                {DLink1(currentLocation, "Self Applied Student", "selfappliedstudent", "ok", "Self_applied_students", 'education-collapse-btn')}
                                 {DLink1(currentLocation, "Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
                                 {DLink1(currentLocation, "Students", "students", "ok", "Students", "education-collapse-btn")}
                                 {DLink1(currentLocation, "Add students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}

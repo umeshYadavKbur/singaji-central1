@@ -44,6 +44,7 @@ const AllUrl = {
     GetDocumentsOfStudents: `${baseUrl}/api/get_documents`, // get documents of particular student
     UploadDocument: `${baseUrl}/api/upload_document`, // get documents of particular student
     accountStudent: `${baseUrl}/api/get_students_account_list`,
+    selfRegisterStudents: `${baseUrl}/api/self_registrated_student`,
     //_____________________________________
 
     //landing pages urls 
