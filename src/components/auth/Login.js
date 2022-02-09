@@ -5,17 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import LoaderButton from "../assests/common/LoaderButton";
 
-//importing Components
+//importing components 
 import { ToastContainer } from 'react-toastify';
 import Singaji_logo from "../assests/image/Singaji_logo.svg";
 import { fetchUsers } from "../../redux/actionDispatcher/auth/authDispatcher";
 import '../components/styles/Login.css';
 
 function Login({ userData, fetchUsers }) {
-  // setInterval(async () => {
-  //   const result = await checkOnlineStatus();
-  //   result ?console.log("online"):console.log("offline");
-  // },300);
+
   var navigate = useNavigate();
 
   const validationSchema = Yup.object({
@@ -129,6 +126,7 @@ function Login({ userData, fetchUsers }) {
               type="submit"
               disabled={userData.loading}
             >
+              {/* used loader for button here ============= */}
               {userData.loading ? (<LoaderButton />) : "Submit"}
             </button>
           </form>

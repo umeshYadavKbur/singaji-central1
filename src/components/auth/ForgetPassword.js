@@ -3,9 +3,6 @@ import { useFormik } from 'formik';
 import { connect } from 'react-redux';
 import *as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
-
-//Components
-// import './login.css'
 import Singaji_logo from '../assests/image/Singaji_logo.svg'
 import { fetchUserEmail } from '../../redux/actionDispatcher/auth/forgotpassDispatcher';
 import '../components/styles/Login.css';
@@ -14,6 +11,8 @@ import { ToastContainer } from "react-toastify";
 
 function ForgotPassword({ passData, fetchUserEmail }) {
   const navigate = useNavigate();
+
+  // ==== VALIDATION - formik with yup library ================
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email Format*").required("Enter the Email!"),
@@ -25,12 +24,11 @@ function ForgotPassword({ passData, fetchUserEmail }) {
     validationSchema,
     onSubmit: (values) => {
       const email = { email: formik.values.email };
-      // console.log("Email", email);
+
       fetchUserEmail(email, navigate);
     },
   });
-  // const isBigScreen = useMediaQuery({query: '(min-width: 1824px)'})
-  // const isTabletOrMobile = useMediaQuery({query: '(max-width: 600px)'})
+
 
   return (
     <>

@@ -30,38 +30,17 @@ import StudentAdmin from "./helpers/StudentAdmin";
 import Offline from '../src/components/auth/OfflinePage';
 
 function App() {
-  const [is_online, setIs_online] = useState(true)
-  // const navigate = useNavigate()
+  const [is_online, setIs_online] = useState(true)  //online status
   window.addEventListener("online", function () {
     console.log("internet is ok!👍")
     setIs_online(true)
   });
 
-  window.addEventListener("offline", function () {
-    // alert("Oops! You are offline now!");
-    // navigate("/offline")
+  window.addEventListener("offline", function () {              //to check the internet connection
+   
     setIs_online(false)
-    //  return  <Offline></Offline>
+   
   });
-
-  //   function updateConnectionStatus() {  
-  //     if(navigator.onLine) {
-  //       console.log("......................................");
-  //       alert("online");
-
-  //     } else {
-  //       alert("ofline")
-
-  //     }
-  // }
-  // updateConnectionStatus();
-
-  // var isOnline = window.navigator.onLine;
-  // if (isOnline) {
-  //   alert('online');
-  // } else {
-  //   alert('offline');
-  // }
 
 
   return (
@@ -91,7 +70,8 @@ function App() {
             </Routes>
             :
             <Routes>
-              <Route exact path="*" element={<Offline isFullPage={true} />} />
+              <Route exact path="*" element={<Offline isFullPage={true} />} /> 
+              {/*  passed a prop isFullPage to correct css for full page or to render in a component  */}
             </Routes>
         }
       </Router>

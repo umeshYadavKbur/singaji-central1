@@ -4,18 +4,11 @@ import "./Styles/Offline_page.css"
 
 const OfflinePage = ({isFullPage}) => {
 
-    // onClick={window.location.reload()}
-    // function refreshPage(){
-    //     window.location.reload();
-    // } 
-    // onClick={refreshPage()}
-
+    // page reload button ================================
     const [sendRequest, setSendRequest] = useState(false);
 
     useEffect(() => {
         if (sendRequest) {
-            //send the request
-            //    setSendRequest(false);
             window.location.reload();
             console.log("page reloaded 👍!")
         }

@@ -7,9 +7,9 @@ import "../components/styles/adminDashboard.css";
 import Dashboard from "../components/Dashboard";
 import Navbar from "../components/Navbar";
 import FeesStructureTable from "../components/FeesStuctureTable";
-// import AdminTable from "../components/AdminTable";
+
 import Sidebar from "../components/Sidebar";
-// import StudentAccount from "./components/StudentAccount";
+
 import StudentAccountTable from '../components/accounts/StudentAccountTable';
 import AddStudent from "../components/AddStudent";
 import { ToastContainer } from "react-toastify";
@@ -25,6 +25,9 @@ import FeesReceiptTable from './../components/accounts/FeesReceiptTable';
 
 
 function AdminDashboard() {
+
+  // ======= TO OPEN AND COLLAPSE THE SIDEBAR ==========
+
   const { play, style, isPlaying } = useAnimate({
     start: {
       width: "281px",
@@ -38,18 +41,20 @@ function AdminDashboard() {
 
   return (
     <div className="main_container_dashboard">
-      <ToastContainer
+      <ToastContainer                         // === TOASTER TO NOTIFY THE ACTIONS ==== (REACT TOASTIFY LIBRARY)
         position="top-center"
         autoClose={2500}
         hideProgressBar={true}
         newestOnTop={false}
-        closeOnClick
+        closeOnClick 
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
       />
       <div className="side_bar_content" style={style}>
+
+        {/* ==================== SIDEBAR ======================== */}
         <Sidebar play={play} isPlaying={isPlaying} Options={SidebarLinks} />
       </div>
       <div className="header_table">
@@ -59,12 +64,12 @@ function AdminDashboard() {
         <div className="table_dashboard">
           <Routes>
             <Route path="" element={<Dashboard />} />
-            {/* Nested routes  */}
+           {/* ====================== NESTED ROUTING ====================== */}
             <Route path="studentaccounttable" element={<StudentAccountTable />} />
             <Route path="feesreceiptlist" element={<FeesReceiptTable />} />
 
-
-            {/* Nested routes  */}
+           {/* =============================== NESTED ROUTING================= */}
+     
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
             <Route path="addnewstudent" element={<AddStudent />} />
             <Route path="studentprofile" element={<StudentProfile />} />

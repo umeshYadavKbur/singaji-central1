@@ -1,12 +1,17 @@
-// import axios from "axios";
+
 import React from "react";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
 import { changeFeesStructureStatus } from "../../../redux/actionDispatcher/superAdmin/feesStructureTableDataDispatcher";
-// import { fetchFeesTableDataConfig } from "../../../redux/constants/config";
+
 import { baseUrl } from "../../../redux/constants/url";
 import { ActivateButton, DeactivateButton } from "./Color";
-function HeaderColumn({ original, table_data, changeFeesStatus }) {
+
+// ================ fees structure table button column file ========================
+
+function HeaderColumn({ original, changeFeesStatus }) {
+
+  // this funtion will edit or update in fees structure table 
   const changeStatus = (data) => {
     const token = localStorage.getItem("token");
     var config = {
@@ -62,11 +67,7 @@ function HeaderColumn({ original, table_data, changeFeesStatus }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    table_data: state.feesStructTableData,
-  };
-};
+// =================== connect to store ==============
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -74,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderColumn);
+export default connect(null, mapDispatchToProps)(HeaderColumn);

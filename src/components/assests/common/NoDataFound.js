@@ -1,4 +1,7 @@
 const NoDataFound=({rows})=>{
+
+    // when there is no data availble in tables ==========
+
     return(
         !rows.length && (
             <div style={{ width: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>

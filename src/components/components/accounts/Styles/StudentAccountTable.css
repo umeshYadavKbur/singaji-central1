@@ -10,12 +10,10 @@
 
 .Stu-Acc-info {
     width: 98%;
-    /* background-color: khaki; */
-    /* height: 75px; */
+   
     display: flex;
     justify-content: space-between;
-    /* justify-content: center; */
-    /* justify-content: space-between; */
+  
     align-content: center;
     flex-wrap: nowrap;
     text-align: center;
@@ -34,8 +32,7 @@
     background-color: #fff;
     text-align: center;
     -webkit-appearance: none;
-    /* padding: 10px;
-      -webkit-appearance: none; */
+  
 }
 
 .select-acc-student:focus {
@@ -46,13 +43,11 @@
 }
 
 
-/* .select-acc-student select{
- 
-  } */
+
 
 .dropdown-arrow {
     background: url("../../../assests/image/AccountIcons/dropdownarrow.svg") no-repeat right;
-    /* background: url("../../assests/image/AccountIcons/dropdownarrow.svg") no-repeat right; */
+
 }
 
 .info-div {
@@ -61,16 +56,8 @@
 }
 
 
-/* .info-div{
-    margin: 20px;
-  } */
-
 .info-col {
-    /* background-color: lavender; */
-    /* border: 1px solid black; */
-    /* background-color: lavender; */
-    /* border: 1px solid black; */
-    /* box-shadow: 0 10px 15px rgba(241, 140, 7, 0.2); */
+
     box-shadow: 2px 7px 10px 0px rgba(0, 0, 0, 0.082);
     height: 76px;
     text-align: center;
@@ -95,24 +82,7 @@
     background-color: #ddd;
 }
 
-
-/* #customers table th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color: #04AA6D;
-    color: white;
-  } */
-
-
-/* -------------------------------------------- */
-
-
-/* .stu-acc-table{
-    /* color: blanchedalmond; */
-
-
-/* }  */
+/* ----------------------- date picker -------------------- */
 
 .rs-picker-default .rs-picker-toggle.rs-btn {
     border: 1px solid #f99300 !important;
@@ -124,9 +94,6 @@
 }
 
 
-/* .rs-picker-default .rs-picker-toggle.rs-btn:hover{
-    border: 2px solid #d68c468e !important;
-  } */
 
 .rs-picker-has-value .rs-btn .rs-picker-toggle-value,
 .rs-picker-has-value .rs-picker-toggle .rs-picker-toggle-value {
@@ -138,6 +105,13 @@
 .rs-picker-toggle {
     border-radius: 2px !important;
 }
+.rs-picker-toggle-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 12px !important;
+    max-width: 100%;
+}
+
 
 .date-range-button {
     height: 41px;
@@ -154,11 +128,7 @@
 }
 
 .rs-picker-toggle .rs-picker-toggle-placeholder {
-    /* margin: auto !important; */
-    /* color: blue !important; */
-    /* text-align: center;
-      
-      justify-self: center; */
+ 
     margin-left: 50%;
     color: #5a607f !important;
     font-weight: bold !important;
@@ -170,17 +140,13 @@
     /* font-weight: bold; */
 }
 
+.date-range-button:hover {
+    background-color: #ffd394;
+}
 
-
-/* ------------------------------------------ table columns csss ---------------------------------- */
-
+/* ---------------- green and yellow circles ---------------------- */
 .recieved-fee-circle {
-    /* max-height: 5px;
-    max-width: 5px; */
-    /* padding: 5px;
-    border-radius: 50%;
-    color: green;
-    background-color: green; */
+   
     height: 16px;
     width: 16px;
     /* background-color: rgb(255, 214, 78); */
@@ -188,6 +154,10 @@
     display: inline-block;
     /* margin-right: -10px; */
 }
+
+
+
+
 
 .pagination-div {
     width: 98% !important;
@@ -216,23 +186,11 @@ button:not(:disabled) {
     margin: 0 !important;
 }
 
-.rs-picker-toggle-wrapper {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 12px !important;
-    max-width: 100%;
-}
-
-.circle-main {
-    display: flex;
-}
-
-.date-range-button:hover {
-    background-color: #ffd394;
-}
 
 
-/* for student frofile page */
+
+
+/* for student frofile page ---------------- */
 
 .addStdLable {
     margin: 1px !important;
@@ -241,4 +199,4 @@ button:not(:disabled) {
 }
 
 
-/* for student frofile page */
+/* for student frofile page -------------------- */

@@ -1,3 +1,6 @@
+
+// ========= All the table buttons ====================================
+
 export const DeactivateButton = {
     // width: "6px",
     height:'30px',

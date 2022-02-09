@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
-// import { ToastContainer } from 'react-toastify';
+
 import * as Yup from "yup";
 import React from "react";
 
@@ -15,10 +15,10 @@ import { ToastContainer } from 'react-toastify';
 
 function ResetPassword({ newPassword, newPasswordRequest }) {
   const { token } = useParams();
-  // const history = useHistory();
+ 
   const navigate = useNavigate();
 
-  // console.log(newPassword);
+ 
   const validationSchema = Yup.object({
     password: Yup.string().required("Required*"),
     confirm: Yup.string().required("Required*"),
@@ -26,6 +26,7 @@ function ResetPassword({ newPassword, newPasswordRequest }) {
 
 
   const formik = useFormik({
+    
     initialValues: {
       confirm: "",
       password: "",

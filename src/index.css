@@ -7,9 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* --------------------common css elements ------------------------ */
 
-/* ======= sweet alert ======= */
+
+/* ================================ Sweet Alert ============================ */
+
 .swal2-confirm {
   width: 96px !important;
 }
@@ -23,8 +24,7 @@ body {
   font-size: 1em;
 }
 
-/* /////////////// */
-/* filter css */
+/* ================== Filetaration css ========================= */
 
 .filter-dropdown-menu {
   position: absolute !important;
@@ -50,17 +50,12 @@ body {
   border-radius: 3px;
 }
 
-/* 
-.filter_btn::after{
-
-  background:url(./components/assests/image/right_arrow_icon.svg) !important;
-} */
 
 .popover-arrow {
   position: absolute !important;
   top: 0px !important;
   transform: translate3d(0px, 5px, 0px) !important;
-  /* display: none !important; */
+
 }
 /* =========== tooltip css ========= */
 
@@ -117,6 +112,9 @@ input.largerCheckbox {
   background: orange; 
 } */
 
+
+/* ==================== filteration of tables =================== */
+
 .filter-dropdown-menu {
   position: absolute !important;
   inset: 0px auto auto 0px !important;
@@ -128,6 +126,9 @@ input.largerCheckbox {
   border: none !important;
   box-shadow: none !important;
 }
+
+/* ======================= popeover arrow =======================
+ */
 
 .popover-arrow {
   position: absolute !important;

@@ -1,6 +1,8 @@
 import React from 'react'
 import './styles/Loader.css'
 
+// ========================= skeleton loader on the tables ======================
+
 function Loader() {
     return (
         <div

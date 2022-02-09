@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {  NavLink, useLocation } from "react-router-dom";
-// import Dashboard_svg from "../assests/image/sidebarIcons/Dashboard.svg";
-// import Alumini_svg from "../assests/image/sidebarIcons/Alumini.svg";
 import Accounts_svg from "../assests/image/sidebarIcons/Accounts.svg";
-// import External_company_svg from "../assests/image/sidebarIcons/External_company.svg";
-// import Donation_svg from "../assests/image/sidebarIcons/Donation.svg";
-// // import Education_svg from "../assests/image/sidebarIcons/Education.svg";
-// import Others_svg from "../assests/image/sidebarIcons/Others.svg";
+
 
 const SidebarLinks = ({ Toggle }) => {
     const [active_dropdown, setActiveDropdown] = useState('Dashboard');
@@ -14,16 +9,8 @@ const SidebarLinks = ({ Toggle }) => {
     const [active_menu, setActiveMenu] = useState({ dashboard: false, education: false, account: false });
 
     const currentLocation = useLocation().pathname;
-    // var location = getLocation();
+  
     const base = '/account_admin_dashboard'
-
-    // const changeTab = (id) => {
-
-    //     setActiveDropdown('');
-    //     setActiveTab(id);
-    //     // setActiveMenu({})
-
-    // }
 
     const DLink1 = (currentLocation, name, url, icon, id, parentId) => {
         useEffect(() => {
@@ -49,8 +36,6 @@ const SidebarLinks = ({ Toggle }) => {
                 onClick={(e) => {
                     if (Toggle) {
 
-                        // document.getElementById('dashboard-collapse').classList.remove('show');
-                        // document.getElementById('education-collapse').classList.remove('show');
                         document.getElementById('account-collapse').classList.remove('show');
                         setActiveMenu((pre) => {
 
@@ -81,7 +66,7 @@ const SidebarLinks = ({ Toggle }) => {
                     <a
                         onClick={() => { setActiveMenu((pre) => { return { ...pre, account: !active_menu.account } }) }}
                         href="#!"
-                        // style={{ borderBottomRightRadius: `${active_menu.account === true ? '0px' : ''}` }}
+  
                         style={Toggle ?
                             !active_menu.account ?
                                 { width: '60px', borderBottomRightRadius: `${active_menu.account === true ? '0px' : ''}` }
@@ -90,7 +75,7 @@ const SidebarLinks = ({ Toggle }) => {
                             : { borderBottomRightRadius: `${active_menu.account === true ? '0px' : ''}` }}
                         className={`data-toggle sidebar_options_drop d-flex justify-content-between ${active_tab === 'account-collapse-btn' ? 'active_tab' : ''} ${active_menu.account === true ? 'active_tab' : ''} `}
                         role="button"
-                        // data-toggle="collapse"
+                  
                         id="account-collapse-btn"
                         data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="true"
                     >
@@ -120,24 +105,6 @@ const SidebarLinks = ({ Toggle }) => {
                     </div>
                 </ul>
             </div>
-            {/* Thirt dropdown_items_div
-            <Link className={`sidebar_options ${active_tab === 'Accounts' ? 'active_tab' : ''}`}
-                to="studentaccounttable"
-
-                id="Accounts"
-                onClick={() => { changeTab("Accounts") }}
-            >
-                <img
-                    src={Accounts_svg}
-                    className=" Sidebar_text  sidebar_icons"
-                    alt=""
-                />
-                <span className="text-dark ">Accounts</span>
-            </Link> */}
-
-
-
-
         
         </>
     );

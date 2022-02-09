@@ -4,8 +4,7 @@ import '../styles/HeaderDropdown.css'
 import { Fragment, useMemo } from "react";
 import { useTable, useFilters, useSortBy, useGlobalFilter, usePagination, useRowSelect } from "react-table";
 import updown_sort from '../../assests/image/updown_sort.svg'
-// import { TableCheckbox } from '../tableComponents/TableCheckbox';
-// import tableData from './fees_receipt.json'
+
 import { GlobalFilter } from "../tableComponents/GlobalFilter";
 import filtericon from '../../assests/image/AccountIcons/filter.svg'
 
@@ -21,6 +20,8 @@ import OfflinePage from "../../auth/OfflinePage";
 import NoDataFound from "../../assests/common/NoDataFound";
 import Icon_feather_download from '../../assests/image/AccountIcons/receipt_download_icon.svg';
 
+
+// =============== Table data filteration =========================
 const MultipleFilter = (rows, accessor, filterValue) => {
     const arr = [];
     rows.forEach((val) => {
@@ -39,6 +40,9 @@ function setFilteredParams(filterArr, val) {
     if (filterArr.length === 0) filterArr = undefined;
     return filterArr;
 }
+
+
+// ====================== Column filter =====================
 function SelectColumnFilter({
     column: { filterValue = [], setFilter, preFilteredRows, id },
 }) {
@@ -68,7 +72,7 @@ function SelectColumnFilter({
     return (
         <Fragment>
             <div onClick={(e) => { e.preventDefault() }} className="d-flex justify-content-end">
-                {/* <span className="block capitalize mb-4">{id}</span> */}
+           
                 <CPopover
 
                     offset={offsetObj}
@@ -144,32 +148,6 @@ function SelectColumnFilter({
     );
 }
 
-// Define a default UI for filtering
-// function GlobalFilter({
-//     filter, setFilter, preGlobalFilteredRows
-// }) {
-//     const count = preGlobalFilteredRows.length
-//     const [value, setValue] = React.useState(filter)
-//     const onChange = useAsyncDebounce(value => {
-//         setFilter(value || undefined)
-//     }, 200)
-
-//     return (
-//         <>
-//             <input
-//                 style=
-//                 {{ width: "270px", height: "41px", outline: "none", border: "1px solid #7979792b", padding: "5px", borderRadius: "4px" }} type="search" value={filter || ''}
-//                 onChange={e => {
-//                     setValue(e.target.value)
-//                     onChange(e.target.value)
-//                 }}
-//                 placeholder={`Search ${count} records...`} />
-//             <i style={{ marginLeft: "-31px", color: "rgb(90, 96, 127,0.7)" }}
-//                 className="fas fa-search" >
-//             </i>
-//         </>
-//     )
-// }
 
 
 function FeesReceiptTable({ feesReceipt, fetchData }) {
@@ -534,7 +512,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                     </tbody>
                 </table>
                 <NoDataFound rows={rows} />
-
+            {/* ================= passing table page data too the pagintaion component ================= */}
                 <Pagination
                     page={page}
                     pageIndex={pageIndex}
@@ -552,7 +530,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
     );
 }
 
-
+//Getting the state from the store
 const mapStateToProps = (state) => {
     return {
         feesReceipt: state.feesReceiptData,

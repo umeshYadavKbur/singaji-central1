@@ -14,8 +14,9 @@ const HeaderLink = () => {
     var location = getLocation();
 
     const navigate = useNavigate();
-
+        // ======== Function to get the location of the current path the it will change the header text according to path ============
     function getLocation() {
+
         if (currentLocation === "/account_admin_dashboard") {
             return "Dashboard";
         }
@@ -31,6 +32,7 @@ const HeaderLink = () => {
         else if (currentLocation === "/account_admin_dashboard/feesstructuretable") {
             return "Fees Structure";
         }
+        // ======== for the student profile ! returns student information ==========
         else if (currentLocation.includes('account_admin_dashboard/studentprofile')) {
             if (editData) {
                 return (
@@ -77,6 +79,7 @@ const HeaderLink = () => {
                         </button>
                     </div>
                 )}
+                {/* ========= ADMIN PROFILE ============= */}
                 <AppHeaderDropdown />
             </div>
         </div>
