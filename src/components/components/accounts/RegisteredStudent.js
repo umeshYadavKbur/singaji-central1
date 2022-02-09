@@ -1,9 +1,9 @@
 import * as React from "react";
 // import { useMemo } from "react";
 
-import Edit_icon from '../assests/image/Edit_icon.svg'
+import Edit_icon from '../../assests/image/Edit_icon.svg'
 import Swal from 'sweetalert2'
-import { GlobalFilter } from "./tableComponents/GlobalFilter";
+import { GlobalFilter } from "../../components/tableComponents/GlobalFilter";
 import {
   useTable,
   useSortBy,
@@ -15,23 +15,23 @@ import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { connect } from "react-redux";
-import Loader from '../assests/common/Loader';
+import Loader from '../../assests/common/Loader';
 
 
-import "./styles/Table.css";
-import { fetchStudentTable } from "../../redux/actionDispatcher/superAdmin/studentTableDatadispatcher";
-import SkeletonColor from "../../helpers/Skeletrone";
-import Archived_icon from "../assests/image/Archived_icon.svg"
-import { TableCheckbox } from "./tableComponents/TableCheckbox";
-import { VerifyStudent } from "../../redux/actionDispatcher/superAdmin/studentVerifyTableDataDispatcher";
+import "../../components/styles/Table.css";
+import { fetchStudentTable } from "../../../redux/actionDispatcher/superAdmin/studentTableDatadispatcher";
+import SkeletonColor from "../../../helpers/Skeletrone";
+import Archived_icon from "../../assests/image/Archived_icon.svg"
+import { TableCheckbox } from "../tableComponents/TableCheckbox";
+import { VerifyStudent } from "../../../redux/actionDispatcher/superAdmin/studentVerifyTableDataDispatcher";
 // import AddNewStudent from "./AddNewStudent";
-import AllUrl from "../../redux/constants/url"
-import updown_sort from '../assests/image/updown_sort.svg'
-import { DeactivateButton, PaidButton, UnpaidButton } from "../assests/common/Color";
-import Pagination from "../assests/common/Pagination";
+import AllUrl from "../../../redux/constants/url"
+import updown_sort from '../../assests/image/updown_sort.svg'
+import { DeactivateButton, PaidButton, UnpaidButton } from "../../assests/common/Color";
+import Pagination from "../../assests/common/Pagination";
 import { useNavigate } from "react-router-dom";
 import { Tooltip, Whisper } from "rsuite";
-import NoDataFound from "../assests/common/NoDataFound";
+import NoDataFound from "../../assests/common/NoDataFound";
 
 // import { baseUrl } from "../../redux/constants/url";
 
