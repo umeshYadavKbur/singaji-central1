@@ -1,5 +1,7 @@
 import React from 'react'
 
+//  ==================== all tables common Pagination ===========================
+
 function Pagination(
     {
         page,

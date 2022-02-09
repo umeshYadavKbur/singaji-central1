@@ -2,20 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Offline_svg from '../assests/image/error2.png';
 import "./Styles/Offline_page.css"
 
-const OfflinePage = () => {
+const OfflinePage = ({isFullPage}) => {
 
-    // onClick={window.location.reload()}
-    // function refreshPage(){
-    //     window.location.reload();
-    // } 
-    // onClick={refreshPage()}
-
+    // page reload button ================================
     const [sendRequest, setSendRequest] = useState(false);
 
     useEffect(() => {
         if (sendRequest) {
-            //send the request
-            //    setSendRequest(false);
             window.location.reload();
             console.log("page reloaded 👍!")
         }
@@ -24,7 +17,7 @@ const OfflinePage = () => {
 
     return (
         <>
-            <div className="d-flex justify-content-center align-items-center main-div">
+            <div style={isFullPage? {height: "100vh"} : ""} className="d-flex justify-content-center align-items-center main-div">
                 <div>
 
                     <div className="">
