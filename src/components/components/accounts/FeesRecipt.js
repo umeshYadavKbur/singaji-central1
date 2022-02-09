@@ -548,8 +548,8 @@ function FeesRecipt({ accountAction }) {
                                                         {StudentName}
                                                     </p>
                                                 </div>
-                                                <div className="d-flex col justify-content-end">
-                                                    <p className='p-1' style={{ fontSize: '14px', color: 'white' }}>{StudentAccountData.AccountsReceiptNo}</p>
+                                                <div className="d-flex col justify-content-end ">
+                                                    <p className='p-1' style={{ fontSize: '12px', margin: "auto" ,color: 'white' }}>{StudentAccountData.AccountsReceiptNo}</p>
                                                 </div>
                                             </div>
 
@@ -564,8 +564,8 @@ function FeesRecipt({ accountAction }) {
                                                         </p>
                                                     </div>
                                                     <div className="d-flex col justify-content-end ">
-                                                        <p className='p-1 m-0 ms-2 ' style={{ fontSize: '15px', color: '#656A87' }}>
-                                                            <span style={{ fontSize: '13px' }}>Class</span> <br />
+                                                        <p className='p-1 m-0 ms-2  ' style={{  fontSize: '15px', color: '#656A87' }}>
+                                                            <span style={{ fontSize: '13px' ,paddingRight: "23px"  }}>Class</span> <br />
                                                             {StudentClassName + '-' + StudentAccountData.year}
                                                         </p>
                                                     </div>
@@ -578,7 +578,7 @@ function FeesRecipt({ accountAction }) {
                                                         </p>
                                                     </div>
                                                     <div className="d-flex col justify-content-end ">
-                                                        <p className='p-1 m-0' style={{ fontSize: '15px', color: '#656A87' }}>
+                                                        <p className='p-1 pl-4 m-0' style={{ fontSize: '15px', color: '#656A87' }}>
                                                             <span style={{ fontSize: '13px' }}>Waive off</span> <br />
                                                             ₹ {StudentAccountData.waiveOf}
                                                         </p>
@@ -594,7 +594,7 @@ function FeesRecipt({ accountAction }) {
                                                             <span style={{ fontSize: '12px' }}>Inst.{StudentAccountData.InstallmentNo}</span>
                                                         </p></div>
 
-                                                    <div className="col-5 d-flex">
+                                                    <div className="col-4 d-flex justify-content-end ">
                                                         {/* <span><i class="fa fa-camera-retro fa-lg"></i></span>
                                                         {/* <a href={StudentAccountData.AccountsReceiptName} rel="noreferrer" target='_blank'><img className='mt-3' src={} alt="downloadImg" /></a></div> */}
                                                         {/* <div>
