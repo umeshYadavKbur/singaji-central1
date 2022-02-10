@@ -57,7 +57,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "fathersName",
     },
     {
-      header: "Stream",
+      header: "Branch",
       accessor: "branch",
     },
     {
@@ -72,6 +72,21 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     {
       header: "Mobile",
       accessor: "mobile",
+    },
+    {
+      header: "RFS",
+      accessor: "receive_fees_status",
+      Cell: ({ row: { original } }) => (
+        <div className='circle-main align-items-center'>
+            <div className="d-flex align-items-center">
+                <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A", marginRight: "10px", marginLeft: "15px" }}></span>
+            </div>
+        </div>
+    ),
+    },
+    {
+      header: "Receiver",
+      accessor: "receiver",
     },
     {
       header: "Reg. Fees",
@@ -166,79 +181,79 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           {original.reg_fees_status}
         </button>)
     },
-    {
-      header: "Status",
-      accessor: "status",
-      Cell: ({ row: { original } }) => (
-        <button
-          className="table_btn_size"
-          style={DeactivateButton}
-          onClick={() => {
-            // setData(original.status)
-            if (original.reg_fees_status === "Paid") {
-              console.log(original.email)
-              Swal.fire({
-                title: 'Active',
+    // {
+    //   header: "Status",
+    //   accessor: "status",
+    //   Cell: ({ row: { original } }) => (
+    //     <button
+    //       className="table_btn_size"
+    //       style={DeactivateButton}
+    //       onClick={() => {
+    //         // setData(original.status)
+    //         if (original.reg_fees_status === "Paid") {
+    //           console.log(original.email)
+    //           Swal.fire({
+    //             title: 'Active',
 
-                html:
-                  '<hr>' +
-                  'Are you sure?' +
-                  '<br>' +
-                  `You want to active ${original.firstName} ${original.lastName} `,
-                // icon: 'warning',
-                showCancelButton: true,
-                // showCancelButton: true,
-                cancelButtonText: 'Cancel',
-                confirmButtonText: 'Active',
-                showCloseButton: true,
-                cancelButtonColor: 'gray',
-                confirmButtonColor: "#4f83df",
-                reverseButtons: true,
-                showClass: {
-                  backdrop: 'swal2-noanimation', // disable backdrop animation
-                  popup: '',                     // disable popup animation
-                  icon: ''                       // disable icon animation
-                },
-                hideClass: {
-                  popup: '',                     // disable popup fade-out animation
-                }
+    //             html:
+    //               '<hr>' +
+    //               'Are you sure?' +
+    //               '<br>' +
+    //               `You want to active ${original.firstName} ${original.lastName} `,
+    //             // icon: 'warning',
+    //             showCancelButton: true,
+    //             // showCancelButton: true,
+    //             cancelButtonText: 'Cancel',
+    //             confirmButtonText: 'Active',
+    //             showCloseButton: true,
+    //             cancelButtonColor: 'gray',
+    //             confirmButtonColor: "#4f83df",
+    //             reverseButtons: true,
+    //             showClass: {
+    //               backdrop: 'swal2-noanimation', // disable backdrop animation
+    //               popup: '',                     // disable popup animation
+    //               icon: ''                       // disable icon animation
+    //             },
+    //             hideClass: {
+    //               popup: '',                     // disable popup fade-out animation
+    //             }
 
-              }).then(async (result) => {
-                if (result.isConfirmed) {
-                  const resultofverify = await VerifyStudent(original);
-                  // console.log(resultofverify);
-                  if (resultofverify === 200) {
-                    var config = {
-                      method: "GET",
-                      url: AllUrl.allRegistratedStudent,
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                      },
-                    };
-                    fetchStudentTable(config, true);
-                  }
-                }
-              })
-              // alert("Do you want to change this   : " + original.email)
-              // VerifyStudent(original.email);
-            }
-            else {
-              toast.warning('Firstly Pay Registration Fees', {
-                position: "bottom-center",
-                autoClose: 2000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: false,
-                progress: undefined,
-              });
-            }
-          }}>
-          Deactive
-        </button>
-      )
-    },
+    //           }).then(async (result) => {
+    //             if (result.isConfirmed) {
+    //               const resultofverify = await VerifyStudent(original);
+    //               // console.log(resultofverify);
+    //               if (resultofverify === 200) {
+    //                 var config = {
+    //                   method: "GET",
+    //                   url: AllUrl.allRegistratedStudent,
+    //                   headers: {
+    //                     Authorization: `Bearer ${token}`,
+    //                     "Content-Type": "application/json",
+    //                   },
+    //                 };
+    //                 fetchStudentTable(config, true);
+    //               }
+    //             }
+    //           })
+    //           // alert("Do you want to change this   : " + original.email)
+    //           // VerifyStudent(original.email);
+    //         }
+    //         else {
+    //           toast.warning('Firstly Pay Registration Fees', {
+    //             position: "bottom-center",
+    //             autoClose: 2000,
+    //             hideProgressBar: true,
+    //             closeOnClick: true,
+    //             pauseOnHover: true,
+    //             draggable: false,
+    //             progress: undefined,
+    //           });
+    //         }
+    //       }}>
+    //       Deactive
+    //     </button>
+    //   )
+    // },
     {
       header: 'Edit',
       accessor: 'icon',
