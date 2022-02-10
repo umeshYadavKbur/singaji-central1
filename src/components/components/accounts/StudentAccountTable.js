@@ -441,12 +441,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 <div className='circle-main align-items-center'>
                     <div className="d-flex align-items-center">
                         <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000", marginRight: "10px", marginLeft: "17px" }}></span>
-
-                    </div>
-                    <div className="">
-                        <span className='' >
-                            {original.ReceivedAmount}
-                        </span>
+                        {original.ReceivedAmount}
                     </div>
                 </div>
             ),
@@ -473,12 +468,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 <div className='circle-main align-items-center'>
                     <div className="d-flex align-items-center">
                         <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A", marginRight: "10px", marginLeft: "15px" }}></span>
-
-                    </div>
-                    <div className="" >
-                        <span className='' >
-                            {original.RemainAmount}
-                        </span>
+                        {original.RemainAmount}
                     </div>
                 </div>
             ),

@@ -111,36 +111,36 @@ function SelectColumnFilter({
 
                 return (
                   <Fragment key={i}>
-                  <div id={`${id}`} style={{height:'30px',cursor:'pointer'}} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
+                    <div id={`${id}`} style={{ height: '30px', cursor: 'pointer' }} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
                       <label
-                          onClick={(e) => { e.stopPropagation() }}
-                          className="font-medium text-gray-700 d-flex align-items-center cursor-pointer"
-                      // onCLick={}
-                      style={{cursor:'pointer'}}
+                        onClick={(e) => { e.stopPropagation() }}
+                        className="font-medium text-gray-700 d-flex align-items-center cursor-pointer"
+                        // onCLick={}
+                        style={{ cursor: 'pointer' }}
                       >
-                          <input
-                              checked={filterValue.includes(option)}
-                              type="checkbox"
-                              className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-1"
-                              id={option}
-                              name={option}
-                              value={option}
-                              style={{ cursor: 'pointer' }}
-                              onChange={(e) => {
-                                  setFilter(
-                                      setFilteredParams(filterValue, e.target.value)
-                                  );
-                              }}
-                              onClick={(e) => { e.stopPropagation() }}
-                          >
+                        <input
+                          checked={filterValue.includes(option)}
+                          type="checkbox"
+                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-1"
+                          id={option}
+                          name={option}
+                          value={option}
+                          style={{ cursor: 'pointer' }}
+                          onChange={(e) => {
+                            setFilter(
+                              setFilteredParams(filterValue, e.target.value)
+                            );
+                          }}
+                          onClick={(e) => { e.stopPropagation() }}
+                        >
 
-                          </input>
+                        </input>
 
-                          {option_label}
+                        {option_label}
 
                       </label>
-                  </div>
-              </Fragment>
+                    </div>
+                  </Fragment>
                 );
               })}
             </div>
@@ -287,11 +287,8 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
             <div className="d-flex align-items-center">
               <span
                 className="recieved-fee-circle"
-                style={{ backgroundColor:`${original.pending_Amount <=  0?'#56F000': "#ffc107"}`, marginRight: "10px", marginLeft: "20px" }}
-              ></span>
-            </div>
-            <div className="">
-              <span className="">{original.pending_Amount}</span>
+                style={{ backgroundColor: `${original.pending_Amount <= 0 ? '#56F000' : "#ffc107"}`, marginRight: "10px", marginLeft: "20px" }}
+              ></span>{original.pending_Amount}
             </div>
           </div>
         ),
