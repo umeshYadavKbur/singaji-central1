@@ -69,7 +69,7 @@
     }
     
     .selfregisration .col {
-        padding: 0 2px;
+        padding: 0 7px;
     }
     
     @media screen and (max-width: 770px) {
@@ -91,6 +91,9 @@
         }
         .selfregisration .addStdLable input[type='radio']:checked:after {
             top: -1px;
+        }
+        .selfregisration .col {
+            padding: 0 2px;
         }
     }
     /* .add_student_dropdown_menu.css-15v22id-MuiAccordionDetails-root {

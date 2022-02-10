@@ -17,6 +17,11 @@ import {useMediaQuery} from 'react-responsive'
 import Swal from 'sweetalert2';
 import SuccessIcon from "../assests/image/SuccessIcon.svg"
 import {toast} from 'react-toastify'
+import logoimage from "../assests/image/logoimage.png";
+import LoaderButton from "../assests/common/LoaderButton";
+import profile_image from "../assests/image/profile_img.png"
+import imageCompression from 'browser-image-compression';
+
 
 
 function SelfRegistration() {
@@ -26,6 +31,7 @@ function SelfRegistration() {
     const [trackNames,setTrackNames] = useState([{trackName: 'loading...',trackId: 0}])
     const [villageNames,setVillageNames] = useState([{label: 'loading...',villageId: 0}])
     const [loaderLoading,setLoaderLoading] = useState(false)
+    const [imgData,setImageData] = useState('');
 
 
     useEffect(() => {
@@ -94,6 +100,7 @@ function SelfRegistration() {
         courseFees: "",
         trackName: "",
         photo: "",
+        photo1: "",
 
 
     }
@@ -180,7 +187,7 @@ function SelfRegistration() {
                 "village": formik.values.village,
                 "tehsil": formik.values.tehsil,
                 "district": formik.values.district,
-                "photo":formik.values.photo,
+                "photo":formik.values.photo1,
                 "feesScheme":"Fullfess"
 
             }
@@ -273,11 +280,11 @@ function SelfRegistration() {
                     }
                 
             
-
-            console.log(response);
-
-        }
-    });
+                    console.log(response);
+                    
+                }
+            });
+            console.log(formik.values.photo);
 
     const getCourseFees = async () => {
 
@@ -344,6 +351,36 @@ function SelfRegistration() {
             fontSize: 10,
         })
     };
+    const imageToBase64 = async (file,feildName) => {
+        if(file) {
+            const options = {
+                maxSizeMB: 0.01,
+                maxWidthOrHeight: 1920,
+                // useWebWorker: true
+            }
+            try {
+                const compressedFile = await imageCompression(file,options);
+                // console.log(compressedFile)
+                console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+                var reader = new FileReader();
+                reader.readAsDataURL(compressedFile)
+                reader.onload = async () => {
+                    var Base64 = reader.result
+                    // console.log(Base64)
+                    formik.setFieldValue("photo1",Base64)
+                    
+                    // setIs_data(true);
+                }
+                reader.onerror = (err) => {
+                    console.log(err);
+                }
+            } catch(error) {
+                console.log(error);
+            }
+
+        }
+    }
+
 
     return (
         <>
@@ -359,10 +396,12 @@ function SelfRegistration() {
                 pauseOnHover
             />
 
-            <div className=' addnewstudent selfregisration mx-auto'>
+            <div className=' addnewstudent selfregisration mx-auto m-1'>
                 <div class="row" style={{backgroundColor: '#F4F7FC',color:"#414c97",}} >
-                    <div class="col-3 ">.col-md-4</div>
-                    <div class="col-4 offset-4 fw-bold">Self Registartion</div>
+                    <div class="col-3 ">
+                        <img src={logoimage} alt="logo" />
+                        </div>
+                    <div class="d-flex justify-content-end col-4  my-auto offset-4 fw-bold">Self Registartion</div>
                 </div>
                 <form onSubmit={formik.handleSubmit}>
                     {/* Personal Details */}
@@ -384,13 +423,19 @@ function SelfRegistration() {
                             <Typography component={'div'} className='add_student_dropdown_menu' >
                                 {/* Personal Details */}
 
-
+                                <div className="form-row m-1" >
+                                    {formik.values.photo1 !== '' ? <img style={{cursor: 'pointer',height: '48px',width: '48px',borderRadius: '50%',cursor: 'pointer',border:'3px solid #5a607f'}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={formik.values.photo1} alt="image" />:<img className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={profile_image} alt="image" /> }
+                                    <input type="file" name="photo"  value={formik.values.photo} id="profilePhoto" style={{display: "none"}} accept="image/*" onChange={(e) => {
+                                        imageToBase64(e.target.files[0],"photo");
+                                    }} />
+                                    <p className='my-auto ml-2 fw-bold' style={{cursor: 'pointer',color:"#5a607f"}}> Upload Profile<span style={{color:'red'}}><span style={{color:'red'}}>*</span></span></p>
+                                </div>
 
                                 {/* first four input feild */}
                                 <div className='form-row m-1'>
                                     <div class="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">First Name*</label>  <input
+                                            <label className="addStdLable" htmlFor="">First Name<span style={{color:'red'}}>*</span></label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.firstName}
@@ -408,7 +453,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Last Name*</label>  <input
+                                            <label className="addStdLable" htmlFor="">Last Name<span style={{color:'red'}}>*</span></label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.lastName}
@@ -429,7 +474,7 @@ function SelfRegistration() {
                                     <div class="d-flex form-group col-md-6">
 
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">DOB*</label>  <input
+                                            <label className="addStdLable" htmlFor="">DOB<span style={{color:'red'}}>*</span></label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.dob}
@@ -447,7 +492,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Contact Number*</label>
+                                            <label className="addStdLable" htmlFor="">Contact Number<span style={{color:'red'}}>*</span></label>
                                             <NumberFormat onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.contactNumber}
@@ -467,7 +512,7 @@ function SelfRegistration() {
                                 <div className='form-row m-1'>
                                     <div className="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Father Name*</label>  <input
+                                            <label className="addStdLable" htmlFor="">Father Name<span style={{color:'red'}}>*</span></label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.fatherName}
@@ -485,7 +530,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Father Occupation*</label>  <input
+                                            <label className="addStdLable" htmlFor="">Father Occupation<span style={{color:'red'}}>*</span></label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.fatherOccupation}
@@ -505,7 +550,7 @@ function SelfRegistration() {
                                     </div>
                                     <div className="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Father Annual Income*</label>
+                                            <label className="addStdLable" htmlFor="">Father Annual Income<span style={{color:'red'}}>*</span></label>
                                             <input onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 type="number"
@@ -522,7 +567,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Father Contact*</label>
+                                            <label className="addStdLable" htmlFor="">Father Contact<span style={{color:'red'}}>*</span></label>
                                             <NumberFormat onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.FatherContactNumber}
@@ -544,7 +589,7 @@ function SelfRegistration() {
                                 <div className="form-row m-1">
                                     <div class="d-flex form-group col-md-12">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Address*</label>
+                                            <label className="addStdLable" htmlFor="">Address<span style={{color:'red'}}>*</span></label>
                                             <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
@@ -567,7 +612,7 @@ function SelfRegistration() {
                                 <div className='form-row m-1'>
                                     <div class="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Pincode*</label>  <NumberFormat
+                                            <label className="addStdLable" htmlFor="">Pincode<span style={{color:'red'}}>*</span></label>  <NumberFormat
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.pincode}
@@ -588,7 +633,7 @@ function SelfRegistration() {
                                         </div>
 
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Village*</label>
+                                            <label className="addStdLable" htmlFor="">Village<span style={{color:'red'}}>*</span></label>
 
                                             <Select
                                                 options={villageNames}
@@ -613,7 +658,7 @@ function SelfRegistration() {
                                     <div class="d-flex form-group col-md-6">
 
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Tehsil*</label>  <input
+                                            <label className="addStdLable" htmlFor="">Tehsil<span style={{color:'red'}}>*</span></label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.tehsil}
@@ -631,7 +676,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">District*</label>  <input
+                                            <label className="addStdLable" htmlFor="">District<span style={{color:'red'}}>*</span></label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.district}
@@ -654,7 +699,7 @@ function SelfRegistration() {
                                 <div className='form-row m-1'>
                                     <div class="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Email*</label>  <input
+                                            <label className="addStdLable" htmlFor="">Email<span style={{color:'red'}}>*</span></label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.email}
@@ -672,7 +717,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Aadhar Number*</label>
+                                            <label className="addStdLable" htmlFor="">Aadhar Number<span style={{color:'red'}}>*</span></label>
                                             <NumberFormat onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.aadharNumber}
@@ -694,7 +739,7 @@ function SelfRegistration() {
                                     </div>
                                     <div class="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Category*</label>
+                                            <label className="addStdLable" htmlFor="">Category<span style={{color:'red'}}>*</span></label>
                                             <select
                                                 name="category"
                                                 onChange={formik.handleChange}
@@ -771,7 +816,7 @@ function SelfRegistration() {
                                 <div className='form-row m-1'>
                                     <div class="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">12<sup>th</sup> School Name*</label>  <input
+                                            <label className="addStdLable" htmlFor="">12<sup>th</sup> School Name<span style={{color:'red'}}>*</span></label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.schoolName}
@@ -790,7 +835,7 @@ function SelfRegistration() {
                                         </div>
 
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">12<sup>th</sup> Subject*</label>
+                                            <label className="addStdLable" htmlFor="">12<sup>th</sup> Subject<span style={{color:'red'}}>*</span></label>
                                             <select onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur} name="subject12" value={formik.values.subject12} className={!isDesktopOrLaptop ? formik.touched.subject12 ? `form-select form-control-sm ${formik.errors.subject12 ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.subject12 ? `form-select  ${formik.errors.subject12 ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
                                                 <option value="">Select Subject</option>
@@ -810,7 +855,7 @@ function SelfRegistration() {
                                     </div>
                                     <div class="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Stream Name*</label>
+                                            <label className="addStdLable" htmlFor="">Stream Name<span style={{color:'red'}}>*</span></label>
 
                                             <select name="streamName" value={formik.values.streamName} onBlur={formik.handleBlur}
                                                 onBlurCapture={getCourseFees}
@@ -833,7 +878,7 @@ function SelfRegistration() {
 
                                         </div>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Join Batch*</label>
+                                            <label className="addStdLable" htmlFor="">Join Batch<span style={{color:'red'}}>*</span></label>
                                             <NumberFormat
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
@@ -861,7 +906,7 @@ function SelfRegistration() {
                                 <div className='form-row m-1'>
                                     <div class="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">12<sup>th</sup> Roll Number*</label>  <NumberFormat
+                                            <label className="addStdLable" htmlFor="">12<sup>th</sup> Roll Number<span style={{color:'red'}}>*</span></label>  <NumberFormat
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.rollNumber12}
@@ -878,7 +923,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">12<sup>th</sup> Percentage*</label>  <NumberFormat
+                                            <label className="addStdLable" htmlFor="">12<sup>th</sup> Percentage<span style={{color:'red'}}>*</span></label>  <NumberFormat
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.percent12}
@@ -899,7 +944,7 @@ function SelfRegistration() {
                                         </div>
                                     </div><div class="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Year*</label>
+                                            <label className="addStdLable" htmlFor="">Year<span style={{color:'red'}}>*</span></label>
                                             <select name="year" value={formik.values.year} onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur} className={!isDesktopOrLaptop ? formik.touched.year ? `form-select form-control-sm ${formik.errors.year ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.year ? `form-select  ${formik.errors.year ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
                                                 <option value=''>Select Year</option>
@@ -916,7 +961,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col">
-                                            <label className="addStdLable" >Bus Track*</label>
+                                            <label className="addStdLable" >Bus Track<span style={{color:'red'}}>*</span></label>
                                             <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur} className={!isDesktopOrLaptop ? formik.touched.trackName ? `form-select form-control-sm ${formik.errors.trackName ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.trackName ? `form-select  ${formik.errors.trackName ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
                                                 <option value='0'>Select Track</option>
@@ -941,7 +986,7 @@ function SelfRegistration() {
                                 <div className='form-row m-1'>
                                     <div class="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">10<sup>th</sup> Roll Number*</label>  <NumberFormat
+                                            <label className="addStdLable" htmlFor="">10<sup>th</sup> Roll Number<span style={{color:'red'}}>*</span></label>  <NumberFormat
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.rollNumber10}
@@ -959,7 +1004,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">10<sup>th</sup> Percentage*</label>  <NumberFormat
+                                            <label className="addStdLable" htmlFor="">10<sup>th</sup> Percentage<span style={{color:'red'}}>*</span></label>  <NumberFormat
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.percent10}
@@ -981,7 +1026,7 @@ function SelfRegistration() {
                                         </div>
                                     </div><div class="d-flex form-group col-md-6">
                                         <div className="col" >
-                                            <label className="addStdLable" htmlFor="">Course Fees*</label> <input
+                                            <label className="addStdLable" htmlFor="">Course Fees<span style={{color:'red'}}>*</span></label> <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.courseFees}
@@ -1000,7 +1045,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col" >
-                                            <label className="addStdLable" htmlFor="">Upload Document*</label> <input
+                                            {/* <label className="addStdLable" htmlFor="">Upload Document<span style={{color:'red'}}>*</span></label> <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.photo}
@@ -1016,7 +1061,7 @@ function SelfRegistration() {
                                                 </div>
                                             ) : (
                                                 ""
-                                            )}
+                                            )} */}
                                         </div>
                                     </div>
 
@@ -1047,7 +1092,7 @@ function SelfRegistration() {
                                 backgroundColor: 'orange'
                             }}
 
-                        > Submit
+                        > {loaderLoading?<LoaderButton/>:"Submit"}
                         </button>
 
                     </div>
