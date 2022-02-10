@@ -23,7 +23,7 @@ import AccountAdminDashboard from './components/accountAdmin/AccountAdminDashboa
 import SuperAdmin from "./helpers/SuperAdmin";
 import AccountAdmin from "./helpers/AccountAdmin";
 import StudentAdmin from "./helpers/StudentAdmin";
-
+import SelfRegistration from "./components/auth/SelfRegistration";
 
 
 
@@ -51,6 +51,7 @@ function App() {
           is_online ?
             <Routes>
               <Route exact path="/login" element={<Login />} />
+              <Route exact path="/self_registration" element={<SelfRegistration />} />
               <Route exact path="/forgetpassword" element={<ForgotPassword />} />
               <Route
                 exact

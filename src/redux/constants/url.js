@@ -52,6 +52,7 @@ const AllUrl = {
     registerNewStudent: `${baseUrl}/api/register`,
     forgotPassword: `${baseUrl}/api/resetPasswordLink/`, //new password
     resetPassword: `${baseUrl}/api/resetPasswordEmail`, //only email send
+    selfRegistration: `${baseUrl}/api/self_registration`,
     //_____________________________________
 
     // helpers related url

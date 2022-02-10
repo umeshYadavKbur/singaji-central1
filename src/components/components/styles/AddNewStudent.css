@@ -1,85 +1,108 @@
-.Add_Student_Dropdown {
-    background-color: rgb(199 204 209 / 31%);
-    border-bottom: 2px solid orange;
-    padding: 5px;
-    /* padding: 5px 5px 5px 15px; */
-    /* width: 90%; */
-    /* margin: 9px 0px 9px 15px; */
-}
-
-.add_student_dropdown_menu.show {
-    /* width: 90% !important; */
-    height: auto !important;
-    /* margin: 9px 0px 9px 15px; */
-    /* box-shadow: none !important; */
-    background-color: #f4f7fc !important;
-}
-
-.addnewstudent.form-control {
-    margin-top: 0 !important;
-}
-
-.addnewstudent .addStdLable {
-    margin: 1px !important;
-    font-weight: 500 !important;
-    color: #5a607f !important;
-}
-
-.valid {
-    border: 2px solid rgb(71, 221, 71) !important;
-}
-
-.addnewstudent .invalid:focus {
-    color: #212529;
-    background-color: #fff;
-    border-color: rgba(220, 53, 70, 0.61);
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(255, 0, 25, 0.4);
-    border: 1px solid rgba(220, 53, 70, 0.822) !important;
-}
-
-.invalid {
-    border: 1.5px solid rgba(220, 53, 70, 0.822) !important;
-}
-
-.addnewstudent .addStdLable input[type='radio']:after {
-    width: 13px;
-    height: 13px;
-    border-radius: 15px;
-    top: -5px;
-    left: -1px;
-    position: relative;
-    content: '';
-    display: inline-block;
-    visibility: visible;
-}
-
-.addnewstudent .addStdLable input[type='radio']:checked:after {
-    width: 15px;
-    height: 15px;
-    border-radius: 15px;
-    top: -4px;
-    left: -1px;
-    position: relative;
-    background-color: #ffa500;
-    content: '';
-    display: inline-block;
-    visibility: visible;
-    border: 2px solid white;
-}
-
-
-/* .add_student_dropdown_menu.css-15v22id-MuiAccordionDetails-root {
+    .Add_Student_Dropdown {
+        background-color: rgb(199 204 209 / 31%);
+        border-bottom: 2px solid orange;
+        padding: 5px;
+        /* padding: 5px 5px 5px 15px; */
+        /* width: 90%; */
+        /* margin: 9px 0px 9px 15px; */
+    }
+    
+    .add_student_dropdown_menu.show {
+        /* width: 90% !important; */
+        height: auto !important;
+        /* margin: 9px 0px 9px 15px; */
+        /* box-shadow: none !important; */
+        background-color: #f4f7fc !important;
+    }
+    
+    .addnewstudent.form-control {
+        margin-top: 0 !important;
+    }
+    
+    .addnewstudent .addStdLable {
+        margin: 1px !important;
+        font-weight: 500 !important;
+        color: #5a607f !important;
+    }
+    
+    .valid {
+        border: 2px solid rgb(71, 221, 71) !important;
+    }
+    
+    .addnewstudent .invalid:focus {
+        color: #212529;
+        background-color: #fff;
+        border-color: rgba(220, 53, 70, 0.61);
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(255, 0, 25, 0.4);
+        border: 1px solid rgba(220, 53, 70, 0.822) !important;
+    }
+    
+    .invalid {
+        border: 1.5px solid rgba(220, 53, 70, 0.822) !important;
+    }
+    
+    .addnewstudent .addStdLable input[type='radio']:after {
+        width: 13px;
+        height: 13px;
+        border-radius: 15px;
+        top: -5px;
+        left: -1px;
+        position: relative;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+    }
+    
+    .addnewstudent .addStdLable input[type='radio']:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -4px;
+        left: -1px;
+        position: relative;
+        background-color: #ffa500;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
+    
+    .selfregisration .col {
+        padding: 0 7px;
+    }
+    
+    @media screen and (max-width: 770px) {
+        .selfregisration .addStdLable {
+            margin: 1px !important;
+            font-weight: 500 !important;
+            color: #5a607f !important;
+            font-size: 10px;
+        }
+        .selfregisration .form-control-sm {
+            font-size: 10px;
+            height: 26px !important;
+        }
+        .selfregisration .form-group {
+            margin-bottom: 5px;
+        }
+        .selfregisration .css-tlfecz-indicatorContainer {
+            padding: 0;
+        }
+        .selfregisration .addStdLable input[type='radio']:checked:after {
+            top: -1px;
+        }
+        .selfregisration .col {
+            padding: 0 2px;
+        }
+    }
+    /* .add_student_dropdown_menu.css-15v22id-MuiAccordionDetails-root {
     padding: 0;
 } */
-
-
-/* .css-1elwnq4-MuiPaper-root-MuiAccordion-root.Mui-expanded {
+    /* .css-1elwnq4-MuiPaper-root-MuiAccordion-root.Mui-expanded {
     margin: 16px;
 } */
-
-
-/* .Add_Student_Dropdown.css-1elwnq4-MuiPaper-root-MuiAccordion-root.Mui-expanded {
+    /* .Add_Student_Dropdown.css-1elwnq4-MuiPaper-root-MuiAccordion-root.Mui-expanded {
     margin: 15px!important;
 
 
