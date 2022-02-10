@@ -34,6 +34,9 @@ const HeaderLink = () => {
         else if (currentLocation === "/admin_dashboard/addnewstudent") {
             return "Add New Student";
         }
+        else if (currentLocation === "/admin_dashboard/registeredStudent") {
+            return "Registered student";
+        }
         else if (currentLocation.includes('admin_dashboard/studentprofile')) {
             if (editData) {
                 return (

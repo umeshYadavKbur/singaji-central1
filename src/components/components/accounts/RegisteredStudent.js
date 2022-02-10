@@ -27,11 +27,13 @@ import { VerifyStudent } from "../../../redux/actionDispatcher/superAdmin/studen
 // import AddNewStudent from "./AddNewStudent";
 import AllUrl from "../../../redux/constants/url"
 import updown_sort from '../../assests/image/updown_sort.svg'
-import { DeactivateButton, PaidButton, UnpaidButton } from "../../assests/common/Color";
+import { DeactivateButton, PaidButton, PendingButton, RecievedButton, UnpaidButton } from "../../assests/common/Color";
 import Pagination from "../../assests/common/Pagination";
 import { useNavigate } from "react-router-dom";
 import { Tooltip, Whisper } from "rsuite";
 import NoDataFound from "../../assests/common/NoDataFound";
+import { CSVLink } from "react-csv";
+import downloadPdfStudentList from './PdfGeneratorStudentList'
 
 // import { baseUrl } from "../../redux/constants/url";
 
@@ -57,7 +59,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "fathersName",
     },
     {
-      header: "Stream",
+      header: "Branch",
       accessor: "branch",
     },
     {
@@ -74,32 +76,35 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "mobile",
     },
     {
-      header: "Reg. Fees",
+      header: "Reciver",
+      accessor: "kk",
+    },
+    {
+      header: "Pay status",
       accessor: "reg_fees_status",
       Cell: ({ row: { original } }) => (
         <button
           className="table_btn_size"
           style={
             original.reg_fees_status === "Paid"
-              ? PaidButton : UnpaidButton}
+              ? RecievedButton : PendingButton}
           disabled={original.reg_fees_status === "Paid"}
           onClick={() => {
             Swal.fire({
-              title: 'Payment Confermation',
+              title: 'Payment Confirmation',
 
               html:
                 '<hr>' +
-                'Are you sure?' +
-                '<br>' +
-                'You want to confirm this payment ',
+                'have you recieved the payment ',
               // icon: 'warning',
               showCancelButton: true,
               // showCancelButton: true,
               cancelButtonText: 'Cancel',
-              confirmButtonText: 'Paid',
+              confirmButtonText: "<h8 style='color:rgb(5, 106, 12);font-size: 18px'>Yes</h8>",
               showCloseButton: true,
               cancelButtonColor: 'gray',
-              confirmButtonColor: "#F8A72C",
+              confirmButtonColor: "rgb(164, 230, 177)",
+              confirmButtonTextColor: "black",
               reverseButtons: true,
               showClass: {
                 backdrop: 'swal2-noanimation', // disable backdrop animation
@@ -163,11 +168,12 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               }
             })
           }}>
-          {original.reg_fees_status}
+          {original.reg_fees_status === "Paid" ? "Recieved" : "Pending"}
+
         </button>)
     },
     {
-      header: "Status",
+      header: "Action",
       accessor: "status",
       Cell: ({ row: { original } }) => (
         <button
@@ -178,18 +184,18 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
             if (original.reg_fees_status === "Paid") {
               console.log(original.email)
               Swal.fire({
-                title: 'Active',
+                title: 'Shift to account',
 
                 html:
                   '<hr>' +
-                  'Are you sure?' +
+                  'do you want to shift' +
                   '<br>' +
-                  `You want to active ${original.firstName} ${original.lastName} `,
+                  ` ${original.firstName} ${original.lastName} ?`,
                 // icon: 'warning',
                 showCancelButton: true,
                 // showCancelButton: true,
                 cancelButtonText: 'Cancel',
-                confirmButtonText: 'Active',
+                confirmButtonText: 'Yes',
                 showCloseButton: true,
                 cancelButtonColor: 'gray',
                 confirmButtonColor: "#4f83df",
@@ -235,47 +241,31 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               });
             }
           }}>
-          Deactive
+          Shift
         </button>
       )
     },
-    {
-      header: 'Edit',
-      accessor: 'icon',
-      Cell: ({ row: { original } }) => (
-        // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
-        <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
-          <Tooltip>
-            Edit Student Info
-          </Tooltip>
-        }>
-          <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
-            navigate("/admin_dashboard/addnewstudent");
-            localStorage.setItem('RegistrationEdit', JSON.stringify(original))
-          }} />
+    // {
+    //   header: 'Edit',
+    //   accessor: 'icon',
+    //   Cell: ({ row: { original } }) => (
+    //     // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
+    //     <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+    //       <Tooltip>
+    //         Edit Student Info
+    //       </Tooltip>
+    //     }>
+    //       <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
+    //         navigate("/admin_dashboard/addnewstudent");
+    //         localStorage.setItem('RegistrationEdit', JSON.stringify(original))
+    //       }} />
 
-        </Whisper>
+    //     </Whisper>
 
-      )
-    }
+    //   )
+    // }
   ]);
-  // async function getData(data,loginUrl) {
-  //   var url = `${baseUrl}${loginUrl}`;
-  //   console.log(url);
-  //   try {
-  //     var res = await axios.post(url,data);
-  //     console.log("The response of dat is :: ",res);
-  //     if(res.status === 200) {
-  //       //here i change the return data so the response object coming from an api is directly return
-  //       return res;
-  //     }
-  //     // Don't forget to return something
-  //     return res;
-  //   } catch(err) {
-  //     return err;
-  //   }
-  // }
-  // const columns = useMemo(() => StudentTableHeader, []);
+
   React.useEffect(() => {
     var config = {
       method: "GET",
@@ -289,6 +279,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     // setTableData(table_data.table_data);
     // eslint-disable-next-line
   }, []);
+
 
 
 
@@ -308,7 +299,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     gotoPage,
     pageCount,
     setPageSize,
-    // selectedFlatRows,
+    selectedFlatRows,
     prepareRow,
   } = useTable(
     {
@@ -339,6 +330,26 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 
   const { globalFilter } = state;
   const { pageIndex, pageSize } = state;
+  // var exportData = [];
+  var exportCsv = [];
+
+  const checkboxData = JSON.stringify(
+    {
+      selectedFlatRows: selectedFlatRows.forEach((row) => {
+        let data = Object.assign({}, row.original);
+        console.log(data);
+        delete data.photo;
+        if (data?.ReceivedAmount)
+          data.ReceivedAmount = (data?.ReceivedAmount)?.toString();
+        console.log(data);
+        // exportData.push(data)
+        // console.log(selectedData);
+        exportCsv.push(data)
+      })
+    },
+    null,
+    2
+  );
 
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
@@ -373,13 +384,35 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                   ))
                 }
               </select>
+
             </div>
+
+            {/* ===========  Archived button ============= */}
+            <div className=' ml-4 '>
+              <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
+            </div>
+
+            {/* =================== Download to pdf or excel ================ */}
+            <div className="btn-group  ml-3" style={{ position: 'sticky', zIndex: '10' }}>
+              <button className="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Download
+              </button>
+              <div class="dropdown-menu mt-1">
+                <div >
+                  <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>                                    </div>
+
+                {/* <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div> */}
+
+                <div className="dropdown-item " style={{cursor:"pointer"}} onClick={() => { downloadPdfStudentList(exportCsv) }}><b>Pdf</b></div>
+
+
+              </div>
+            </div>
+
 
             <div className='d-flex ml-auto me-1'>
 
-              <div className='me-4'>
-                <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
-              </div>
+
               {/* <div className='me-4'>
               <button type="button" class="btn btn-outline-primary fw-bold ">Active</button>
             </div> */}
@@ -389,7 +422,8 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           </div>
         </div>
         <table {...getTableProps()} id="customers" className="table table-sm">
-          <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+          {/* <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}> */}
+          <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc' }}>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
