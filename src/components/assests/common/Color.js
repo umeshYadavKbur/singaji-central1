@@ -43,3 +43,25 @@ export const UnpaidButton = {
     border: 'none',
 }
 
+export const PendingButton = {
+    width: "86px",
+    height:'30px',
+    
+    // backgroundColor: "#edcda4",
+    backgroundColor: "#f8d7da",
+    borderRadius: "5px",
+    fontWeight: "bold",
+    color: "#f16f50",
+    border: 'none',
+}
+export const RecievedButton = {
+    width: "86px",
+    height:'30px',
+    
+    // backgroundColor: "#edcda4",
+    backgroundColor: "#A4E6B1",
+    borderRadius: "5px",
+    fontWeight: "bold",
+    color: "#056A0C",
+    border: 'none',
+}
