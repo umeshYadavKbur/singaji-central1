@@ -121,6 +121,7 @@ function Login({ userData, fetchUsers }) {
                 Forgot password
               </Link>
             </div>
+          
             <button
               className="w-100 btn btn-md btn-warning fw-bold text-light button-color"
               type="submit"
@@ -129,6 +130,20 @@ function Login({ userData, fetchUsers }) {
               {/* used loader for button here ============= */}
               {userData.loading ? (<LoaderButton />) : "Submit"}
             </button>
+            <div className="d-flex justify-content-end mt-2">
+              <Link
+                disabled={userData.loading}
+                to="/self_registration"
+                style={{
+                  color: "gray",
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  marginBottom: "5px"
+                }}
+              >
+              Self Registartion
+              </Link>
+            </div>
           </form>
         </div>
       </div>

@@ -396,12 +396,12 @@ function SelfRegistration() {
                 pauseOnHover
             />
 
-            <div className=' addnewstudent selfregisration mx-auto m-1'>
+            <div className=' addnewstudent selfregisration mx-auto px-3'>
                 <div className="row" style={{backgroundColor: '#F4F7FC',color:"#414c97",}} >
                     <div className="col-3 ">
                         <img src={logoimage} alt="logo" />
                         </div>
-                    <div className="d-flex justify-content-end col-4  my-auto offset-4 fw-bold">Self Registartion</div>
+                    <div className="d-flex justify-content-end col-4  my-auto offset-4 fw-bold">Student Registartion</div>
                 </div>
                 <form onSubmit={formik.handleSubmit}>
                     {/* Personal Details */}
