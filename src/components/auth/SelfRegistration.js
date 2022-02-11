@@ -399,9 +399,9 @@ function SelfRegistration() {
             <div className=' addnewstudent selfregisration mx-auto px-3'>
                 <div className="row" style={{backgroundColor: '#F4F7FC',color:"#414c97",}} >
                     <div className="col-3 ">
-                        <img src={logoimage} alt="logo" />
+                        <img style={{height:isDesktopOrLaptop?'auto':'50px'}} src={logoimage} alt="logo" />
                         </div>
-                    <div className="d-flex justify-content-end col-4  my-auto offset-4 fw-bold">Student Registartion</div>
+                    <div className="d-flex justify-content-end col-4  my-auto offset-4 fw-bold">Student Registration</div>
                 </div>
                 <form onSubmit={formik.handleSubmit}>
                     {/* Personal Details */}
@@ -816,6 +816,48 @@ function SelfRegistration() {
                                 <div className='form-row m-1'>
                                     <div className="d-flex form-group col-md-6">
                                         <div className="col">
+                                            <label className="addStdLable" htmlFor="">10<sup>th</sup> Roll Number<span style={{color: 'red'}}>*</span></label>  <NumberFormat
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.rollNumber10}
+                                                name="rollNumber10"
+                                                type="text"
+                                                className={!isDesktopOrLaptop ? formik.touched.rollNumber10 ? `form-control form-control-sm ${formik.errors.rollNumber10 ? "invalid" : ""}` : 'form-control form-control-sm' : formik.touched.rollNumber10 ? `form-control  ${formik.errors.rollNumber10 ? "invalid" : ""}` : 'form-control '}
+                                                placeholder="Roll Number"
+                                            />
+                                            {formik.errors.rollNumber10 && formik.touched.rollNumber10 ? (
+                                                <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
+                                                    {formik.errors.rollNumber10}
+                                                </div>
+                                            ) : (
+                                                ""
+                                            )}
+                                        </div>
+                                        <div className="col">
+                                            <label className="addStdLable" htmlFor="">10<sup>th</sup> Percentage<span style={{color: 'red'}}>*</span></label>  <NumberFormat
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.percent10}
+                                                name="percent10"
+                                                type="text"
+                                                className={!isDesktopOrLaptop ? formik.touched.percent10 ? `form-control form-control-sm ${formik.errors.percent10 ? "invalid" : ""}` : 'form-control form-control-sm' : formik.touched.percent10 ? `form-control  ${formik.errors.percent10 ? "invalid" : ""}` : 'form-control '}
+                                                format="##%"
+                                                mask={['X','X','%']}
+                                                placeholder="XX%"
+
+                                            />
+                                            {formik.errors.percent10 && formik.touched.percent10 ? (
+                                                <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
+                                                    {formik.errors.percent10}
+                                                </div>
+                                            ) : (
+                                                ""
+                                            )}
+                                        </div>
+
+                                        </div>
+                                    <div className="d-flex form-group col-md-6">
+                                        <div className="col">
                                             <label className="addStdLable" htmlFor="">12<sup>th</sup> School Name<span style={{color:'red'}}>*</span></label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
@@ -853,53 +895,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                     </div>
-                                    <div className="d-flex form-group col-md-6">
-                                        <div className="col">
-                                            <label className="addStdLable" htmlFor="">Stream Name<span style={{color:'red'}}>*</span></label>
-
-                                            <select name="streamName" value={formik.values.streamName} onBlur={formik.handleBlur}
-                                                onBlurCapture={getCourseFees}
-                                                onChange={formik.handleChange} className={!isDesktopOrLaptop ? formik.touched.streamName ? `form-select form-control-sm ${formik.errors.streamName ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.streamName ? `form-select  ${formik.errors.streamName ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
-                                                <option value=''>Select branch</option>
-                                                {branchNames.map((ele,i) => {
-                                                    return (
-                                                        <option key={i} value={ele.subjects}>{ele.subjects}</option>
-                                                    )
-                                                })}
-
-                                            </select>
-                                            {formik.errors.streamName && formik.touched.streamName ? (
-                                                <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
-                                                    {formik.errors.streamName}
-                                                </div>
-                                            ) : (
-                                                ""
-                                            )}
-
-                                        </div>
-                                        <div className="col">
-                                            <label className="addStdLable" htmlFor="">Join Batch<span style={{color:'red'}}>*</span></label>
-                                            <NumberFormat
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                onBlurCapture={getCourseFees}
-                                                value={formik.values.joinBatch}
-                                                name="joinBatch"
-                                                // type="text"
-                                                className={!isDesktopOrLaptop ? formik.touched.joinBatch ? `form-control form-control-sm ${formik.errors.joinBatch ? "invalid" : ""}` : 'form-control form-control-sm' : formik.touched.joinBatch ? `form-control  ${formik.errors.joinBatch ? "invalid" : ""}` : 'form-control '}
-                                                format="####"
-                                                mask={'X'}
-                                                placeholder="EX:-2022"
-                                            />
-                                            {formik.errors.joinBatch && formik.touched.joinBatch ? (
-                                                <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
-                                                    {formik.errors.joinBatch}
-                                                </div>
-                                            ) : (
-                                                ""
-                                            )}
-                                        </div>
-                                    </div>
+                                    
 
 
                                 </div>
@@ -942,91 +938,35 @@ function SelfRegistration() {
                                                 ""
                                             )}
                                         </div>
-                                    </div><div className="d-flex form-group col-md-6">
+                                    </div>
+                                    <div className="d-flex form-group col-md-6">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Year<span style={{color:'red'}}>*</span></label>
-                                            <select name="year" value={formik.values.year} onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur} className={!isDesktopOrLaptop ? formik.touched.year ? `form-select form-control-sm ${formik.errors.year ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.year ? `form-select  ${formik.errors.year ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
-                                                <option value=''>Select Year</option>
-                                                <option value='I'>I Year</option>
-                                                <option value='II'>II Year</option>
-                                                <option value='III'>III Year</option>
-                                            </select>
-                                            {formik.errors.year && formik.touched.year ? (
-                                                <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
-                                                    {formik.errors.year}
-                                                </div>
-                                            ) : (
-                                                ""
-                                            )}
-                                        </div>
-                                        <div className="col">
-                                            <label className="addStdLable" >Bus Track<span style={{color:'red'}}>*</span></label>
-                                            <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur} className={!isDesktopOrLaptop ? formik.touched.trackName ? `form-select form-control-sm ${formik.errors.trackName ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.trackName ? `form-select  ${formik.errors.trackName ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
-                                                <option value='0'>Select Track</option>
-                                                {trackNames.map((ele,i) => {
+                                            <label className="addStdLable" htmlFor="">Branch Name<span style={{color: 'red'}}>*</span></label>
+
+                                            <select name="streamName" value={formik.values.streamName} onBlur={formik.handleBlur}
+                                                onBlurCapture={getCourseFees}
+                                                onChange={formik.handleChange} className={!isDesktopOrLaptop ? formik.touched.streamName ? `form-select form-control-sm ${formik.errors.streamName ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.streamName ? `form-select  ${formik.errors.streamName ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
+                                                <option value=''>Select branch</option>
+                                                {branchNames.map((ele,i) => {
                                                     return (
-                                                        <option key={i} value={ele.trackname}>{ele.trackname}</option>
+                                                        <option key={i} value={ele.subjects}>{ele.subjects}</option>
                                                     )
                                                 })}
 
                                             </select>
-                                            {formik.errors.trackName && formik.touched.trackName ? (
+                                            {formik.errors.streamName && formik.touched.streamName ? (
                                                 <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
-                                                    {formik.errors.trackName}
+                                                    {formik.errors.streamName}
                                                 </div>
                                             ) : (
                                                 ""
                                             )}
-                                        </div>
-                                    </div>
 
-                                </div>
-                                <div className='form-row m-1'>
-                                    <div className="d-flex form-group col-md-6">
-                                        <div className="col">
-                                            <label className="addStdLable" htmlFor="">10<sup>th</sup> Roll Number<span style={{color:'red'}}>*</span></label>  <NumberFormat
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                value={formik.values.rollNumber10}
-                                                name="rollNumber10"
-                                                type="text"
-                                                className={!isDesktopOrLaptop ? formik.touched.rollNumber10 ? `form-control form-control-sm ${formik.errors.rollNumber10 ? "invalid" : ""}` : 'form-control form-control-sm' : formik.touched.rollNumber10 ? `form-control  ${formik.errors.rollNumber10 ? "invalid" : ""}` : 'form-control '}
-                                                placeholder="Roll Number"
-                                            />
-                                            {formik.errors.rollNumber10 && formik.touched.rollNumber10 ? (
-                                                <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
-                                                    {formik.errors.rollNumber10}
-                                                </div>
-                                            ) : (
-                                                ""
-                                            )}
                                         </div>
-                                        <div className="col">
-                                            <label className="addStdLable" htmlFor="">10<sup>th</sup> Percentage<span style={{color:'red'}}>*</span></label>  <NumberFormat
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                value={formik.values.percent10}
-                                                name="percent10"
-                                                type="text"
-                                                className={!isDesktopOrLaptop ? formik.touched.percent10 ? `form-control form-control-sm ${formik.errors.percent10 ? "invalid" : ""}` : 'form-control form-control-sm' : formik.touched.percent10 ? `form-control  ${formik.errors.percent10 ? "invalid" : ""}` : 'form-control '}
-                                                format="##%"
-                                                mask={['X','X','%']}
-                                                placeholder="XX%"
 
-                                            />
-                                            {formik.errors.percent10 && formik.touched.percent10 ? (
-                                                <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
-                                                    {formik.errors.percent10}
-                                                </div>
-                                            ) : (
-                                                ""
-                                            )}
-                                        </div>
-                                    </div><div className="d-flex form-group col-md-6">
+
                                         <div className="col" >
-                                            <label className="addStdLable" htmlFor="">Course Fees<span style={{color:'red'}}>*</span></label> <input
+                                            <label className="addStdLable" htmlFor="">Course Fees<span style={{color: 'red'}}>*</span></label> <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.courseFees}
@@ -1044,24 +984,49 @@ function SelfRegistration() {
                                                 ""
                                             )}
                                         </div>
-                                        <div className="col" >
-                                            {/* <label className="addStdLable" htmlFor="">Upload Document<span style={{color:'red'}}>*</span></label> <input
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                value={formik.values.photo}
-                                                name="photo"
-                                                type="file"
-                                                className={!isDesktopOrLaptop ? formik.touched.photo ? `form-control form-control-sm ${formik.errors.photo ? "invalid" : ""}` : 'form-control form-control-sm' : formik.touched.photo ? `form-control  ${formik.errors.photo ? "invalid" : ""}` : 'form-control '}
-                                                placeholder="Course Fees"
-                                                disabled={true}
-                                            />
-                                            {formik.errors.photo && formik.touched.photo ? (
+
+                                    </div>
+
+                                </div>
+                                <div className='form-row m-1'>
+                                    
+                                    <div className="d-flex form-group col-md-6">
+                                        <div className="col">
+                                            <label className="addStdLable" htmlFor="">Year<span style={{color: 'red'}}>*</span></label>
+                                            <select name="year" value={formik.values.year} onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur} className={!isDesktopOrLaptop ? formik.touched.year ? `form-select form-control-sm ${formik.errors.year ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.year ? `form-select  ${formik.errors.year ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
+                                                <option value=''>Select Year</option>
+                                                <option value='I'>I Year</option>
+                                                <option value='II'>II Year</option>
+                                                <option value='III'>III Year</option>
+                                            </select>
+                                            {formik.errors.year && formik.touched.year ? (
                                                 <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
-                                                    {formik.errors.photo}
+                                                    {formik.errors.year}
                                                 </div>
                                             ) : (
                                                 ""
-                                            )} */}
+                                            )}
+                                        </div>
+                                        <div className="col">
+                                            <label className="addStdLable" >Bus Track<span style={{color: 'red'}}>*</span></label>
+                                            <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur} className={!isDesktopOrLaptop ? formik.touched.trackName ? `form-select form-control-sm ${formik.errors.trackName ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.trackName ? `form-select  ${formik.errors.trackName ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
+                                                <option value='0'>Select Track</option>
+                                                {trackNames.map((ele,i) => {
+                                                    return (
+                                                        <option key={i} value={ele.trackname}>{ele.trackname}</option>
+                                                    )
+                                                })}
+
+                                            </select>
+                                            {formik.errors.trackName && formik.touched.trackName ? (
+                                                <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
+                                                    {formik.errors.trackName}
+                                                </div>
+                                            ) : (
+                                                ""
+                                            )}
                                         </div>
                                     </div>
 
