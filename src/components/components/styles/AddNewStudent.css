@@ -77,20 +77,30 @@
             margin: 1px !important;
             font-weight: 500 !important;
             color: #5a607f !important;
-            font-size: 10px;
+            font-size: 15px;
         }
         .selfregisration .form-control-sm {
-            font-size: 10px;
-            height: 26px !important;
+            font-size: 1rem;
+            height: 38px !important;
         }
         .selfregisration .form-group {
             margin-bottom: 5px;
         }
-        .selfregisration .css-tlfecz-indicatorContainer {
+        /* .selfregisration .css-tlfecz-indicatorContainer {
             padding: 0;
+        } */
+        .selfregisration input[type='text']:focus {
+            color: #212529;
+            background-color: #fff;
+            border-color: rgba(53, 139, 220, 0.678);
+            outline: 0;
+            box-shadow: 0 0 0 0.15em rgba(19, 33, 228, 0.4);
+            border: 1px solid rgba(48, 126, 243, 0.822) !important;
         }
         .selfregisration .addStdLable input[type='radio']:checked:after {
-            top: -1px;
+            /* top: -1px; */
+            width: 21px;
+            height: 21px;
         }
         .selfregisration .col {
             padding: 0 2px;
