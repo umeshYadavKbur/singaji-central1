@@ -356,6 +356,9 @@ function SelfRegistration() {
     const isDesktopOrLaptop = useMediaQuery({
         query: '(min-width:770px)'
     })
+    const mobile = useMediaQuery({
+        query: '(min-width:455px)'
+    })
     const customStyles = {
         control: base => ({
             ...base,
@@ -987,6 +990,7 @@ function SelfRegistration() {
                                                 value={formik.values.courseFees}
                                                 name="courseFees"
                                                 type="text"
+                                                style={{marginTop:!mobile?"1.5pc":" "}}
                                                 className={!isDesktopOrLaptop ? formik.touched.courseFees ? `form-control form-control-sm ${formik.errors.courseFees ? "invalid" : ""}` : 'form-control form-control-sm' : formik.touched.courseFees ? `form-control  ${formik.errors.courseFees ? "invalid" : ""}` : 'form-control '}
                                                 placeholder="Course Fees"
                                                 disabled={true}
@@ -1059,10 +1063,10 @@ function SelfRegistration() {
                     <div style={{
                         height: '100%',
                         width: '100%',
-                        position: "fixed",
                         left: !isDesktopOrLaptop ? "0%" : "83%",
                         top: "90%",
                         zindex: "5000",
+                        position: "fixed",
                         display:isDesktopOrLaptop?'':'flex',
                         justifyContent:'center'
                     }}  >
