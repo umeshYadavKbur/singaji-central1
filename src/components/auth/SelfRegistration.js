@@ -21,7 +21,7 @@ import logoimage from "../assests/image/logoimage.png";
 import LoaderButton from "../assests/common/LoaderButton";
 import profile_image from "../assests/image/profile_img.png"
 import imageCompression from 'browser-image-compression';
-
+import Plus_icon from '../assests/image/Plus_icon.svg'
 
 
 function SelfRegistration() {
@@ -126,14 +126,14 @@ function SelfRegistration() {
         percent10: Yup.string().required("Required!"),
         rollNumber10: Yup.string().required("Required!"),
         // joinBatch: Yup.string().trim().required("Required!").test('len','Must be exactly 4 digits',val => val?.replace('X','').length === 4),
-        percent12: Yup.string().required("Required!"),
-        rollNumber12: Yup.string().required("Required!"),
+        // percent12: Yup.string().required("Required!"),
+        // rollNumber12: Yup.string().required("Required!"),
         year: Yup.string().required("Required!"),
         streamName: Yup.string().required("Required!"),
         subject12: Yup.string().required("Required!"),
         schoolName: Yup.string().required("Required!"),
         // courseFees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
-        trackName: Yup.string().required("Required!"),
+        // trackName: Yup.string().required("Required!"),
 
     })
 
@@ -441,6 +441,7 @@ function SelfRegistration() {
 
                                 <div className="form-row m-1" style={{cursor: 'pointer'}} >
                                     {formik.values.photo1 !== '' ? <img style={{cursor: 'pointer',height: '48px',width: '48px',borderRadius: '50%',cursor: 'pointer',border:'3px solid #5a607f'}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={formik.values.photo1} alt="image" />:<img className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={profile_image} alt="image" /> }
+                                    <img src={Plus_icon} alt="Plus_icon" style={{marginTop:'21px', marginLeft:'-11px'}} />
                                     <input type="file" name="photo"  value={formik.values.photo} id="profilePhoto" style={{display: "none"}} accept="image/*" onChange={(e) => {
                                         imageToBase64(e.target.files[0],"photo");
                                     }} />
@@ -476,7 +477,7 @@ function SelfRegistration() {
                                                 name="lastName"
                                                 type="text"
                                                 className={!isDesktopOrLaptop ? formik.touched.lastName ? `form-control form-control-sm ${formik.errors.lastName ? "invalid" : ""}` : 'form-control form-control-sm' : formik.touched.lastName ? `form-control  ${formik.errors.lastName ? "invalid" : ""}` : 'form-control '}
-                                                placeholder="Last name"
+                                                placeholder="Last Name"
                                             />  {formik.errors.lastName && formik.touched.lastName ? (
                                                 <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
                                                     {formik.errors.lastName}
