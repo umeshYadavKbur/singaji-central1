@@ -414,7 +414,7 @@ function SelfRegistration() {
 
             <div className={!isDesktopOrLaptop ? ' addnewstudent selfregisration mx-auto px-2' : ' addnewstudent selfregisration mx-auto px-3'}>
                 <div className="row p-1" style={{backgroundColor: '#F4F7FC',color:"#414c97",}} >
-                    <div className="col-2 ">
+                    <div className="col-2 " style={{padding:'0px'}}>
                         <img style={{height:isDesktopOrLaptop?'auto':'40px'}} src={logoimage} alt="logo" />
                         </div>
                     <div className="d-flex justify-content-end col-5  my-auto offset-5 fw-bold" style={{lineHeight: isDesktopOrLaptop ? '' : "20px",fontSize: isDesktopOrLaptop ? '20px' : "15px"}}>Self Registration</div>
@@ -430,7 +430,7 @@ function SelfRegistration() {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             style={{
-                                backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"
+                                backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "40px",height:!isDesktopOrLaptop?'40px':'50px'
                             }}
                         >
                             <Typography style={{color: "#414c97",margin: "0px"}}><b> Personal Details</b></Typography>
@@ -439,7 +439,7 @@ function SelfRegistration() {
                             <Typography component={'div'} className='add_student_dropdown_menu' >
                                 {/* Personal Details */}
 
-                                <div className="form-row m-1" style={{cursor: 'pointer'}} >
+                                <div className="form-row my-1" style={{cursor: 'pointer'}} >
                                     {formik.values.photo1 !== '' ? <img style={{cursor: 'pointer',height: '48px',width: '48px',borderRadius: '50%',cursor: 'pointer',border:'3px solid #5a607f'}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={formik.values.photo1} alt="image" />:<img className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={profile_image} alt="image" /> }
                                     <img src={Plus_icon} alt="Plus_icon" style={{marginTop:'21px', marginLeft:'-11px'}} />
                                     <input type="file" name="photo"  value={formik.values.photo} id="profilePhoto" style={{display: "none"}} accept="image/*" onChange={(e) => {
@@ -449,7 +449,7 @@ function SelfRegistration() {
                                 </div>
 
                                 {/* first four input feild */}
-                                <div className='form-row m-1'>
+                                <div className='form-row my-1'>
                                     <div className="d-flex form-group col-md-6">
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">First Name<span style={{color:'red'}}>*</span></label>  <input
@@ -459,7 +459,7 @@ function SelfRegistration() {
                                                 name="firstName"
                                                 type="text"
                                                 className={!isDesktopOrLaptop ? formik.touched.firstName ? `form-control form-control-sm ${formik.errors.firstName ? "invalid" : ""}` : 'form-control form-control-sm' : formik.touched.firstName ? `form-control  ${formik.errors.firstName ? "invalid" : ""}` : 'form-control '}
-                                                placeholder="First name"
+                                                placeholder="First Name"
                                             />
                                             {formik.errors.firstName && formik.touched.firstName ? (
                                                 <div className="text-danger" style={{fontSize: !isDesktopOrLaptop ? "10px" : "18px"}}>
@@ -526,7 +526,7 @@ function SelfRegistration() {
                                 </div>
 
                                 {/* Second Four Input Field */}
-                                <div className='form-row m-1'>
+                                <div className='form-row my-1'>
                                     <div className="d-flex form-group col-md-6">
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Father Name<span style={{color:'red'}}>*</span></label>  <input
@@ -603,7 +603,7 @@ function SelfRegistration() {
 
                                 </div>
                                 {/* Addres Input feild */}
-                                <div className="form-row m-1">
+                                <div className="form-row my-1">
                                     <div className="d-flex form-group col-md-12">
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Address<span style={{color:'red'}}>*</span></label>
@@ -626,7 +626,7 @@ function SelfRegistration() {
                                         </div></div>
                                 </div>
                                 {/* third Four input feild */}
-                                <div className='form-row m-1'>
+                                <div className='form-row my-1'>
                                     <div className="d-flex form-group col-md-6">
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Pincode<span style={{color:'red'}}>*</span></label>  <NumberFormat
@@ -713,7 +713,7 @@ function SelfRegistration() {
                                     </div>
                                 </div>
                                 {/* Fourth four input feild */}
-                                <div className='form-row m-1'>
+                                <div className='form-row my-1'>
                                     <div className="d-flex form-group col-md-6">
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Email<span style={{color:'red'}}>*</span></label>  <input
@@ -823,14 +823,14 @@ function SelfRegistration() {
                             // expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
-                            style={{backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "50px"}}
+                            style={{backgroundColor: '#E6E9F4',borderBottom: '2px solid orange',maxHeight: "50px",minHeight: "40px",height: !isDesktopOrLaptop ? '40px' : '50px'}}
                         >
                             <Typography style={{color: "#414c97"}}><b>Acadmic Details </b></Typography>
                         </AccordionSummary>
                         <AccordionDetails style={{backgroundColor: 'white',padding: !isDesktopOrLaptop ? '0px' : '15px'}}>
                             <Typography component={'div'}>
 
-                                <div className='form-row m-1'>
+                                <div className='form-row my-1'>
                                     <div className="d-flex form-group col-md-6">
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">10<sup>th</sup> Roll Number<span style={{color: 'red'}}>*</span></label>  <NumberFormat
@@ -916,7 +916,7 @@ function SelfRegistration() {
 
 
                                 </div>
-                                <div className='form-row m-1'>
+                                <div className='form-row my-1'>
                                     <div className="d-flex form-group col-md-6">
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">12<sup>th</sup> Roll Number<span style={{color:'red'}}>*</span></label>  <NumberFormat
@@ -959,12 +959,12 @@ function SelfRegistration() {
                                     <div className="d-flex form-group col-md-6">
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Branch Name<span style={{color: 'red'}}>*</span></label> 
-                                            <label className="addStdLable" style={{fontSize:'12px'}}>अपना प्रवेश विषय चुनें</label>
+                                            <label className="addStdLable" style={{fontSize:'12px'}}> अपना प्रवेश विषय चुनें</label>
 
                                             <select name="streamName" value={formik.values.streamName} onBlur={formik.handleBlur}
                                                 onBlurCapture={getCourseFees}
                                                 onChange={formik.handleChange} className={!isDesktopOrLaptop ? formik.touched.streamName ? `form-select form-control-sm ${formik.errors.streamName ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.streamName ? `form-select  ${formik.errors.streamName ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
-                                                <option value=''>Select branch</option>
+                                                <option value=''>Select Branch</option>
                                                 {branchNames.map((ele,i) => {
                                                     return (
                                                         <option key={i} value={ele.subjects}>{ele.subjects}</option>
@@ -1008,7 +1008,7 @@ function SelfRegistration() {
                                     </div>
 
                                 </div>
-                                <div className='form-row m-1'>
+                                <div className='form-row my-1'>
                                     
                                     <div className="d-flex form-group col-md-6">
                                         <div className="col">
