@@ -98,12 +98,12 @@
             border: 1px solid rgba(48, 126, 243, 0.822) !important;
         }
         .selfregisration .addStdLable input[type='radio']:checked:after {
-            /* top: -1px; */
-            width: 21px;
-            height: 21px;
+            top: -1px;
+            width: 18px;
+            height: 18px;
         }
         .selfregisration .col {
-            padding: 0 2px;
+            padding: 0 5px;
         }
     }
     /* .add_student_dropdown_menu.css-15v22id-MuiAccordionDetails-root {
