@@ -15,7 +15,7 @@ import {ToastContainer} from 'react-toastify';
 import AllUrl from '../../redux/constants/url';
 import {useMediaQuery} from 'react-responsive'
 import Swal from 'sweetalert2';
-import SuccessIcon from "../assests/image/SuccessIcon.svg"
+import Success_Icon_yellow from "../assests/image/Success_Icon_yellow.svg"
 import {toast} from 'react-toastify'
 import logoimage from "../assests/image/logoimage.png";
 import LoaderButton from "../assests/common/LoaderButton";
@@ -155,7 +155,7 @@ function SelfRegistration() {
 
     const formik = useFormik({
         initialValues,
-        validationSchema,
+        // validationSchema,
         onSubmit: async (values) => {
             setLoaderLoading(true)
             const bodyData = {
@@ -164,8 +164,9 @@ function SelfRegistration() {
                 "branch": formik.values.streamName,
                 "year": formik.values.year,
                 "joinBatch": formik.values.joinBatch,
-                // "Tutionfee": formik.values.courseFees,
+                "Tutionfee": formik.values.courseFees,
                 "fathersName": formik.values.fatherName,
+                "reg_Fees":"1500",
                 "dob": formik.values.dob,
                 "mobile": formik.values.contactNumber,
                 "fatherContactNumber": formik.values.FatherContactNumber,
@@ -188,7 +189,7 @@ function SelfRegistration() {
                 "tehsil": formik.values.tehsil,
                 "district": formik.values.district,
                 "photo":formik.values.photo1,
-                "feesScheme":"Fullfess"
+                // "feesScheme":"Fullfess"
 
             }
             var config = {
@@ -200,16 +201,18 @@ function SelfRegistration() {
                 data: bodyData
             };
             const response = await axios(config)
+            setLoaderLoading(false)
+
             if(response.status === 200)
             {
                 setLoaderLoading(false)
                     
-                    Swal.fire({
-                        imageUrl: SuccessIcon,
+                Swal.fire({
+                        title: 'Success',
+                        imageUrl: Success_Icon_yellow,
                         imageAlt: 'image',
                         imageWidth: '75px',
                         imageHeight: '75px',
-                        title: 'Success',
                         html:
                             '<hr/>' +
                             'You form is Successfully submited ',
@@ -266,7 +269,7 @@ function SelfRegistration() {
                     progress: undefined,
                 });
                     }
-                    else if(response.status === 404)
+                    else if(response.status === 406)
                     {
                 setLoaderLoading(false)
                 toast.error('Invalid Email',{
@@ -412,20 +415,24 @@ function SelfRegistration() {
             />
 
             <div className={!isDesktopOrLaptop ? ' addnewstudent selfregisration mx-auto px-2' : ' addnewstudent selfregisration mx-auto px-3'}>
-                <div className="row p-1 " style={{
-                    backgroundColor: '#F4F7FC',color: "#414c97",position: "fixed", zIndex: '1',width: '100%' }} >
+                <div className="row" style={{
+                    backgroundColor: '#F4F7FC',color: "#414c97",position: "fixed",zIndex: '1',top: 0,
+                    left: 0,
+                    right: 0,padding:' 0 15px',
+                    height: isDesktopOrLaptop ? 'auto' : '60px',
+                    boxShadow: '0px 12px 5px 0px rgb(186 185 185 / 75%)',
+                    webkitBoxShadow:'0px 5px 5px 0px rgb(186 185 185 / 75%) '
+    }} >
                     
                     <div className="col-2 " style={{padding:'0px'}}>
-                        <img style={{height:isDesktopOrLaptop?'auto':'40px'}} src={logoimage} alt="logo" />
+                        <img style={{height: isDesktopOrLaptop ? 'auto' : '48px',margin: isDesktopOrLaptop ?'5px 0' : '3px'}} src={logoimage} alt="logo" />
                         </div>
                     <div className="d-flex justify-content-end col-5  my-auto offset-5 fw-bold" style={{lineHeight: isDesktopOrLaptop ? '' : "20px",fontSize: isDesktopOrLaptop ? '20px' : "15px"}}>Self Registration</div>
                 </div>
-                <div className='text-light'>hello</div>
-                {isDesktopOrLaptop ? <div className='text-light'>hello</div>:''}
-                <div className='text-light'>hello</div>
-                <form  onSubmit={formik.handleSubmit}>
+                
+                <form onSubmit={formik.handleSubmit} style={{marginTop: isDesktopOrLaptop ?'88px':'70px'}}>
                     {/* Personal Details */}
-                    <Accordion className="my-2" style={{boxShadow: "none"}} expanded={expanded.panel1 === true}
+                    <Accordion className="my-2 " style={{boxShadow: "none",marginTop:'88px'}} expanded={expanded.panel1 === true}
 
                     // onChange={handleChange('panel1')}
                     >
@@ -1034,7 +1041,7 @@ function SelfRegistration() {
                                                 ""
                                             )}
                                         </div>
-                                        <div className="col mb-3">
+                                        <div className="col mb-4">
                                             <label className="addStdLable" >Bus Track<span style={{color: 'red'}}>*</span></label>
                                             <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur} className={!isDesktopOrLaptop ? formik.touched.trackName ? `form-select form-control-sm ${formik.errors.trackName ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.trackName ? `form-select  ${formik.errors.trackName ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
@@ -1075,12 +1082,17 @@ function SelfRegistration() {
                         zindex: "5000",
                         position: "fixed",
                         display:isDesktopOrLaptop?'':'flex',
-                        justifyContent:'center'
+                        justifyContent:'center',
+                        bottom: 0,
+                        right: 0,
+                        background: !isDesktopOrLaptop ?'rgb(255,255,255)':'',
+                        padding: '15px',
+                        boxShadow: !isDesktopOrLaptop ?'rgb(186 185 185 / 75%) 0px -5px 5px 0px':'',
                     }}  >
 
                         <button className="btn btn-sm btn-warning text-light fw-bold" type="submit"
                             style={{
-                                width: !isDesktopOrLaptop ? "95%" : "220px",
+                                width: !isDesktopOrLaptop ? "100%" : "220px",
                                 height: '55px',
                                 fontSize:'18px',
                                 backgroundColor: 'orange'   
