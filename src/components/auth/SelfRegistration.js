@@ -111,14 +111,14 @@ function SelfRegistration() {
         dob: Yup.string().required("Required!").test('doc_check','Minimum age must be 12-14 years',val => val?.slice(0,4) <= (new Date().getFullYear()) - 13),
         contactNumber: Yup.string().trim().min(10,'Must be exactly 10 digits').required("Required!"),
         fatherName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!"),
-        fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates'),
-        fatherIncome: Yup.string().required("Required!").min(4,'Must be exactly 4 digits').test('Is positive','must be positive',val => val > 0),
+        // fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates'),
+        // fatherIncome: Yup.string().required("Required!").min(4,'Must be exactly 4 digits').test('Is positive','must be positive',val => val > 0),
         FatherContactNumber: Yup.string().trim().min(10,'Must be exactly 10 digits').required("Required!"),
         address: Yup.string().trim().min(10,'minimum 10 characters required').required("Required!"),
         village: Yup.string().required("Required!").trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates'),
         pincode: Yup.string().trim().required("Required!").test('len','Must be exactly 6 digits',val => val?.replace('X','').length === 6),
         tehsil: Yup.string().trim().min(3,'minimum 3 characters required').required("Required!").matches(/^[a-zA-Z]+$/,'must be alphabates'),
-        // district: Yup.string().trim().min(3,'minimum 3 characters required').required("Required!").matches(/^[a-zA-Z]+$/,'must be alphabates'),
+        district: Yup.string().trim().min(3,'minimum 3 characters required').required("Required!").matches(/^[a-zA-Z]+$/,'must be alphabates'),
         email: Yup.string().email("Invalid Email Format ").required("Required!"),
         aadharNumber: Yup.string().trim().required("Required!").test('len','Must be exactly 12 digits',val => val?.replace('X','').length === 14),
         category: Yup.string().required("Required!"),
@@ -155,7 +155,7 @@ function SelfRegistration() {
 
     const formik = useFormik({
         initialValues,
-        validationSchema,
+        // validationSchema,
         onSubmit: async (values) => {
             setLoaderLoading(true)
             const bodyData = {
@@ -209,8 +209,9 @@ function SelfRegistration() {
                     
                 Swal.fire({
                         title: 'Success',
-                        width: isDesktopOrLaptop?'auto':'250px',
-                        height: isDesktopOrLaptop?'auto':'250px',
+                        width: isDesktopOrLaptop?' ':'250px',
+                        height: isDesktopOrLaptop?' ':'250px',
+                        borderRadius:'25px',
                         imageUrl: Success_Icon_yellow,
                         imageAlt: 'image',
                         imageWidth: '75px',
@@ -562,7 +563,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Father Occupation<span style={{color:'red'}}>*</span></label>  <input
+                                            <label className="addStdLable" htmlFor="">Father Occupation</label>  <input
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.fatherOccupation}
@@ -582,7 +583,7 @@ function SelfRegistration() {
                                     </div>
                                     <div className="d-flex form-group col-md-6 my-2">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">Father Annual Income<span style={{color:'red'}}>*</span></label>
+                                            <label className="addStdLable" htmlFor="">Father Annual Income</label>
                                             <input onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 type="number"
@@ -934,7 +935,7 @@ function SelfRegistration() {
                                 <div className='form-row '>
                                     <div className="d-flex form-group col-md-6 my-2">
                                         <div className="col">
-                                            <label className="addStdLable" htmlFor="">12<sup>th</sup> Roll Number<span style={{color:'red'}}>*</span></label>  <NumberFormat
+                                            <label className="addStdLable" htmlFor="">12<sup>th</sup> Roll Number</label>  <NumberFormat
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.rollNumber12}
@@ -1044,7 +1045,7 @@ function SelfRegistration() {
                                             )}
                                         </div>
                                         <div className="col mb-4">
-                                            <label className="addStdLable" >Bus Track<span style={{color: 'red'}}>*</span></label>
+                                            <label className="addStdLable" >Bus Track</label>
                                             <select name="trackName" value={formik.values.trackName} onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur} className={!isDesktopOrLaptop ? formik.touched.trackName ? `form-select form-control-sm ${formik.errors.trackName ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.trackName ? `form-select  ${formik.errors.trackName ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
                                                 <option value='0'>Select Track</option>
