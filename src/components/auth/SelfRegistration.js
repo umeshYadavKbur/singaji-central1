@@ -155,7 +155,7 @@ function SelfRegistration() {
 
     const formik = useFormik({
         initialValues,
-        // validationSchema,
+        validationSchema,
         onSubmit: async (values) => {
             setLoaderLoading(true)
             const bodyData = {
@@ -208,10 +208,10 @@ function SelfRegistration() {
                 setLoaderLoading(false)
                     
                 Swal.fire({
+                    borderRadius: isDesktopOrLaptop ? '':'40px',
                         title: 'Success',
                         width: isDesktopOrLaptop?' ':'250px',
                         height: isDesktopOrLaptop?' ':'250px',
-                        borderRadius:'25px',
                         imageUrl: Success_Icon_yellow,
                         imageAlt: 'image',
                         imageWidth: isDesktopOrLaptop ? ' 75px' :'55px',
