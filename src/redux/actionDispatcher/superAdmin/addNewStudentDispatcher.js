@@ -38,7 +38,7 @@ const AddNewStudent = (data,backToProfilePage) => {
                     title: 'Success',
                     html:
                         '<hr/>' +
-                        'You form is Successfully submited ',
+                        'Your form is Successfully submited ',
                     showConfirmButton: false,
                     // showCloseButton:true,
                     timer: 2500,

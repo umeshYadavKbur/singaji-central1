@@ -218,7 +218,7 @@ function SelfRegistration() {
                         imageHeight: isDesktopOrLaptop ? ' 75px' :'55px',
                         html:
                             '<hr/>' +
-                            'You form is Successfully submited ',
+                            'Your form is Successfully submited ',
                         showConfirmButton: false,
                         // showCloseButton:true,
                         timer: 2500,
