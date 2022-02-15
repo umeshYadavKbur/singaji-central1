@@ -423,7 +423,7 @@ function SelfRegistration() {
                     right: 0,padding:' 0 15px',
                     height: isDesktopOrLaptop ? 'auto' : '60px',
                     boxShadow: '0px 12px 5px 0px rgb(186 185 185 / 75%)',
-                    webkitBoxShadow:'0px 5px 5px 0px rgb(186 185 185 / 75%) '
+                    WebkitBoxShadow:'0px 5px 5px 0px rgb(186 185 185 / 75%) '
     }} >
                     
                     <div className="col-2 " style={{padding:'0px'}}>
