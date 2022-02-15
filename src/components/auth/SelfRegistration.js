@@ -214,8 +214,8 @@ function SelfRegistration() {
                         borderRadius:'25px',
                         imageUrl: Success_Icon_yellow,
                         imageAlt: 'image',
-                        imageWidth: '75px',
-                        imageHeight: '75px',
+                        imageWidth: isDesktopOrLaptop ? ' 75px' :'55px',
+                        imageHeight: isDesktopOrLaptop ? ' 75px' :'55px',
                         html:
                             '<hr/>' +
                             'You form is Successfully submited ',
