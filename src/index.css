@@ -137,3 +137,31 @@ input.largerCheckbox {
 }
 
 
+/* ======================== setting modal file css =================== */
+
+.personal-setting-button{
+  background-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+}
+
+.my-save-button{
+  background-color: orange;
+  outline: none;
+  border-width: 0px;
+  height: 35px;
+  border-radius: 4px;
+}
+
+
+.cross-btn-div{
+  height: 116px;
+  background-color: #D5D7E3;
+  width: 526px !important;
+  margin-right: 0 !important;
+
+}
+.my-modal-body{
+  padding: 0 !important;
+  width: 526px !important;
+}

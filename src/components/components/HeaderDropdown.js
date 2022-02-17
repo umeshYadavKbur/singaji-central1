@@ -12,6 +12,7 @@ import { logout } from "../../redux/actionDispatcher/auth/authDispatcher";
 import { connect } from "react-redux";
 import Settings from '../assests/image/setting.svg';
 import { Tooltip, Whisper } from "rsuite";
+import SettingsModalFile from "./SettingsModalFile";
 
 
 const AppHeaderDropdown = ({ userData, logout }) => {
@@ -67,10 +68,10 @@ const AppHeaderDropdown = ({ userData, logout }) => {
             Manage your server
           </button> */}
           <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />
-          <div style={{ cursor: 'pointer' }}>
-            <img style={{ height: '18px', width: '18px', marginLeft: '-50px' }} src={Settings} alt="Settings" />
-            <span style={{ color: 'white', fontWeight: '4px', marginLeft: '8px' }}>
-              Settings
+          <div className="d-flex justify-content-center" style={{ cursor: 'pointer' }}>
+            <img className="mt-2" style={{ height: '18px', width: '18px', marginLeft: '-10px'  }} src={Settings} alt="Settings" />
+            <span style={{ color: 'white', fontWeight: '4px', marginLeft: '0px' }}>
+              <SettingsModalFile/>
             </span>
           </div>
           <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />
