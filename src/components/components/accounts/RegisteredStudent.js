@@ -269,7 +269,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
   React.useEffect(() => {
     var config = {
       method: "GET",
-      url: AllUrl.allRegistratedStudent,
+      url: AllUrl.allRegistratedStudentAccountList,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
