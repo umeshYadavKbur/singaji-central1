@@ -305,16 +305,16 @@ function SelfRegistration() {
             });
             console.log(formik.values.photo);
 
-    const getCourseFees = async () => {
+    const getCourseFees = async (branch) => {
 
-        if( formik.values.streamName !== '') {
+        if( branch !== '') {
             // console.log("api calling");
 
             var data = '';
 
             var config = {
                 method: 'get',
-                url: `${allUrls.showFees}${formik.values.streamName + formik.values.joinBatch}`,
+                url: `${allUrls.showFees}${branch + formik.values.joinBatch}`,
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem("token")}`
                 },
@@ -978,8 +978,8 @@ function SelfRegistration() {
                                             <label className="addStdLable" htmlFor="">Branch Name<span style={{color: 'red'}}>*</span></label> 
                                             <label className="addStdLable" style={{fontSize:'12px'}}> अपना प्रवेश विषय चुनें</label>
 
-                                            <select name="streamName" value={formik.values.streamName} onBlurCapture={formik.handleBlur} onBlur={getCourseFees}
-                                                onChange={formik.handleChange} className={!isDesktopOrLaptop ? formik.touched.streamName ? `form-select form-control-sm ${formik.errors.streamName ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.streamName ? `form-select  ${formik.errors.streamName ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
+                                            <select name="streamName" value={formik.values.streamName}  
+                                                onChange={async(e) => { await formik.setFieldValue("streamName",e.target.value); getCourseFees(e.target.value)}} className={!isDesktopOrLaptop ? formik.touched.streamName ? `form-select form-control-sm ${formik.errors.streamName ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.streamName ? `form-select  ${formik.errors.streamName ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
                                                     
                                                 <option value=''>Select Branch</option>
                                                 {branchNames.map((ele,i) => {
