@@ -402,6 +402,7 @@ function SelfRegistration() {
 
         }
     }
+    
 
     return (
         <>
@@ -419,7 +420,7 @@ function SelfRegistration() {
 
             <div className={!isDesktopOrLaptop ? ' addnewstudent selfregisration mx-auto px-2' : ' addnewstudent selfregisration mx-auto px-3'}>
                 <div className="row" style={{
-                    backgroundColor: '#F4F7FC',color: "#414c97",position: "fixed",zIndex: '1',top: 0,
+                    backgroundColor: 'white',color: "#414c97",position: "fixed",zIndex: '1',top: 0,
                     left: 0,
                     right: 0,padding:' 0 15px',
                     height: isDesktopOrLaptop ? 'auto' : '60px',
@@ -977,9 +978,9 @@ function SelfRegistration() {
                                             <label className="addStdLable" htmlFor="">Branch Name<span style={{color: 'red'}}>*</span></label> 
                                             <label className="addStdLable" style={{fontSize:'12px'}}> अपना प्रवेश विषय चुनें</label>
 
-                                            <select name="streamName" value={formik.values.streamName} onBlur={formik.handleBlur}
-                                                onBlurCapture={getCourseFees}
+                                            <select name="streamName" value={formik.values.streamName} onBlurCapture={formik.handleBlur} onBlur={getCourseFees}
                                                 onChange={formik.handleChange} className={!isDesktopOrLaptop ? formik.touched.streamName ? `form-select form-control-sm ${formik.errors.streamName ? "invalid" : ""}` : 'form-select form-control-sm' : formik.touched.streamName ? `form-select  ${formik.errors.streamName ? "invalid" : ""}` : 'form-select '} id="inputGroupSelect02" placeholder="select">
+                                                    
                                                 <option value=''>Select Branch</option>
                                                 {branchNames.map((ele,i) => {
                                                     return (
