@@ -74,100 +74,109 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
       accessor: "mobile",
     },
     {
-      header: "Reg. Fees",
-      accessor: "reg_fees_status",
-      Cell: ({ row: { original } }) => (
-        <button
-          className="table_btn_size"
-          style={
-            original.reg_fees_status === "Paid"
-              ? PaidButton : UnpaidButton}
-          disabled={original.reg_fees_status === "Paid"}
-          onClick={() => {
-            Swal.fire({
-              title: 'Payment Confermation',
-
-              html:
-                '<hr>' +
-                'Are you sure?' +
-                '<br>' +
-                'You want to confirm this payment ',
-              // icon: 'warning',
-              showCancelButton: true,
-              // showCancelButton: true,
-              cancelButtonText: 'Cancel',
-              confirmButtonText: 'Paid',
-              showCloseButton: true,
-              cancelButtonColor: 'gray',
-              confirmButtonColor: "#F8A72C",
-              reverseButtons: true,
-              showClass: {
-                backdrop: 'swal2-noanimation', // disable backdrop animation
-                popup: '',                     // disable popup animation
-                icon: ''                       // disable icon animation
-              },
-              hideClass: {
-                popup: '',                     // disable popup fade-out animation
-              }
-
-
-            }).then(async (result) => {
-              if (result.isConfirmed) {
-                var body = JSON.stringify({
-                  email: original.email
-                });
-
-                var config = {
-                  method: 'post',
-                  url: `${AllUrl.verifyStudentPaidUnpaid}`,
-                  headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                    'Content-Type': 'application/json'
-                  },
-                  data: body
-                };
-
-                const result = await axios(config)
-                // console.log("_____________________________________", result);
-                if (result.status === 200) {
-                  toast.success('Registration Fees Paid SuccessFul', {
-                    position: "bottom-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: false,
-                    progress: undefined,
-                  });
-                  var con = {
-                    method: "GET",
-                    url: AllUrl.allRegistratedStudent,
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                      "Content-Type": "application/json",
-                    },
-                  };
-                  fetchStudentTable(con, true);
-                }
-                else if (result.status === 404) {
-                  toast.warning('User Not Found', {
-                    position: "bottom-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: false,
-                    progress: undefined,
-                  });
-                }
-              }
-            })
-          }}>
-          {original.reg_fees_status}
-        </button>)
+      header: "Date",
+      accessor: "createdAt",
+      Cell: ({ row: { original, index } }) => {
+        let word = original.createdAt;
+        let words = word.split('T');
+        return (words[0])
+      }
     },
+    // {
+    //   header: "Reg. Fees",
+    //   accessor: "reg_fees_status",
+    //   Cell: ({ row: { original } }) => (
+    //     <button
+    //       className="table_btn_size"
+    //       style={
+    //         original.reg_fees_status === "Paid"
+    //           ? PaidButton : UnpaidButton}
+    //       disabled={original.reg_fees_status === "Paid"}
+    //       onClick={() => {
+    //         Swal.fire({
+    //           title: 'Payment Confermation',
+
+    //           html:
+    //             '<hr>' +
+    //             'Are you sure?' +
+    //             '<br>' +
+    //             'You want to confirm this payment ',
+    //           // icon: 'warning',
+    //           showCancelButton: true,
+    //           // showCancelButton: true,
+    //           cancelButtonText: 'Cancel',
+    //           confirmButtonText: 'Paid',
+    //           showCloseButton: true,
+    //           cancelButtonColor: 'gray',
+    //           confirmButtonColor: "#F8A72C",
+    //           reverseButtons: true,
+    //           showClass: {
+    //             backdrop: 'swal2-noanimation', // disable backdrop animation
+    //             popup: '',                     // disable popup animation
+    //             icon: ''                       // disable icon animation
+    //           },
+    //           hideClass: {
+    //             popup: '',                     // disable popup fade-out animation
+    //           }
+
+
+    //         }).then(async (result) => {
+    //           if (result.isConfirmed) {
+    //             var body = JSON.stringify({
+    //               email: original.email
+    //             });
+
+    //             var config = {
+    //               method: 'post',
+    //               url: `${AllUrl.verifyStudentPaidUnpaid}`,
+    //               headers: {
+    //                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    //                 'Content-Type': 'application/json'
+    //               },
+    //               data: body
+    //             };
+
+    //             const result = await axios(config)
+    //             // console.log("_____________________________________", result);
+    //             if (result.status === 200) {
+    //               toast.success('Registration Fees Paid SuccessFul', {
+    //                 position: "bottom-center",
+    //                 autoClose: 2000,
+    //                 hideProgressBar: true,
+    //                 closeOnClick: true,
+    //                 pauseOnHover: true,
+    //                 draggable: false,
+    //                 progress: undefined,
+    //               });
+    //               var con = {
+    //                 method: "GET",
+    //                 url: AllUrl.allRegistratedStudent,
+    //                 headers: {
+    //                   Authorization: `Bearer ${token}`,
+    //                   "Content-Type": "application/json",
+    //                 },
+    //               };
+    //               fetchStudentTable(con, true);
+    //             }
+    //             else if (result.status === 404) {
+    //               toast.warning('User Not Found', {
+    //                 position: "bottom-center",
+    //                 autoClose: 2000,
+    //                 hideProgressBar: true,
+    //                 closeOnClick: true,
+    //                 pauseOnHover: true,
+    //                 draggable: false,
+    //                 progress: undefined,
+    //               });
+    //             }
+    //           }
+    //         })
+    //       }}>
+    //       {original.reg_fees_status}
+    //     </button>)
+    // },
     {
-      header: "Status",
+      header: "STA",
       accessor: "status",
       Cell: ({ row: { original } }) => (
         <button
@@ -235,29 +244,29 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
               });
             }
           }}>
-          Deactive
+          STA
         </button>
       )
     },
-    {
-      header: 'Edit',
-      accessor: 'icon',
-      Cell: ({ row: { original } }) => (
-        // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
-        <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
-          <Tooltip>
-            Edit Student Info
-          </Tooltip>
-        }>
-          <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
-            navigate("/admin_dashboard/addnewstudent");
-            localStorage.setItem('RegistrationEdit', JSON.stringify(original))
-          }} />
+    // {
+    //   header: 'Edit',
+    //   accessor: 'icon',
+    //   Cell: ({ row: { original } }) => (
+    //     // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
+    //     <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+    //       <Tooltip>
+    //         Edit Student Info
+    //       </Tooltip>
+    //     }>
+    //       <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
+    //         navigate("/admin_dashboard/addnewstudent");
+    //         localStorage.setItem('RegistrationEdit', JSON.stringify(original))
+    //       }} />
 
-        </Whisper>
+    //     </Whisper>
 
-      )
-    }
+    //   )
+    // }
   ]);
   // async function getData(data,loginUrl) {
   //   var url = `${baseUrl}${loginUrl}`;
