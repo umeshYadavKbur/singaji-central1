@@ -79,7 +79,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       Cell: ({ row: { original } }) => (
         <div className='circle-main align-items-center'>
             <div className="d-flex align-items-center">
-                <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A", marginRight: "10px", marginLeft: "15px" }}></span>
+            {original.acc_reg_fees_status === 'Paid' ? <span className='recieved-fee-circle' style={{backgroundColor: "#56F000",marginRight: "10px",marginLeft: "15px"}}></span>:<span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A", marginRight: "10px", marginLeft: "15px" }}></span>}
             </div>
         </div>
     ),
