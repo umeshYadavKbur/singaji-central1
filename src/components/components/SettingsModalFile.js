@@ -10,72 +10,74 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import logo from "../assests/image/User.svg";
 import crossButton from "../assests/image/crossButton.svg";
 import "./styles/createAdmin.css";
 import { createNewAdmin } from "../../redux/actionDispatcher/superAdmin/createNewAdminDispatcher";
 import { useNavigate } from "react-router-dom";
 import LoaderButton from "../assests/common/LoaderButton";
 import AllUrl from "../../redux/constants/url";
-import axios from 'axios'
+import axios from 'axios';
+import personal_png from "../assests/image/personal-profile.svg"
 
 function CreateAdminPopup({ adminData, createNewAdmin }) {
-  const token = localStorage.getItem("token");
+
+  const myname = localStorage.getItem("user");
+  const userEmail = localStorage.getItem("email");
+  console.log("------------------------------")
+  console.log(myname)
+
+  const token = JSON.stringify(localStorage.getItem("token"));
   const navigate = useNavigate();
 
   // console.log(adminData);
 
+
   const [visible, setVisible] = useState(false);
   const [roles, setRoles] = useState([{ roleId: '3', roleName: 'Loading...' }]);
 
-  useEffect(() => {
-    const fn = async () => {
-      const roles = await axios(AllUrl.roleList)
-      // console.log('====================================');
-      // console.log(roles.data);
-      // console.log('====================================');
-      setRoles(roles.data)
-    }
-    fn();
-  }, []);
+  // useEffect(() => {
+  //   const fn = async () => {
+  //     const roles = await axios(AllUrl.roleList)
+  //     // console.log('====================================');
+  //     // console.log(roles.data);
+  //     // console.log('====================================');
+  //     setRoles(roles.data)
+  //   }
+  //   fn();
+  // }, []);
 
 
 
 
 
   const validationSchema = Yup.object({
-    email: Yup.string()
-      .email("Invalid Email Format*")
-      .required("Please fill the field above"),
     name: Yup.string().required("Please fill the field above"),
-    role: Yup.string().required("Please fill the field above"),
+    password: Yup.string().required("Please fill the field above"),
   });
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      name: "",
-      role: '',
+      name: myname ? myname :"",
+      password: '',
     },
     validationSchema,
 
-    onSubmit: (values) => {
-      var data = JSON.stringify({
-        email: formik.values.email,
-        name: formik.values.name,
-        role: formik.values.role,
-      });
-      var config = {
-        method: "post",
-        url: AllUrl.createNewAdmin,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
-      createNewAdmin(config, navigate);
-    },
+    // onSubmit: (values) => {
+    //   var data = JSON.stringify({
+    //     name: formik.values.name,
+    //     password: formik.values.role,
+    //   });
+    //   var config = {
+    //     method: "post",
+    //     url: AllUrl.createNewAdmin,
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //       "Content-Type": "application/json",
+    //     },
+    //     data: data,
+    //   };
+    //   createNewAdmin(config, navigate);
+    // },
   });
 
   return (
@@ -100,22 +102,19 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
           <div className="first_div createAdmin">
             <div className=" cross-btn-div d-flex ">
               <img onClick={() => setVisible(!visible)}
-                style={{ height: "20px", width: "20px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
+                style={{ height: "22px", width: "22px", cursor: "pointer",marginRight: "14px",marginTop: "15px"}} src={crossButton} alt="close" className="logo_img" />
             </div>
-            <div className="second_div " style={{ marginTop: "0px" }}>
-              <form onSubmit={formik.handleSubmit}>
+            <div className="second_div justify-content-center  " style={{ marginTop: "0px" }}>
+              <form onSubmit={formik.handleSubmit} className="d-flex justify-content-center flex-column" >
 
-                <div>
-
-                  <h4 className=" text-aligns-center createAdminhead" style={{ color: '#5A607F', fontWeight: 'bold' }}>
-                    Create Admin
-                  </h4>
-                  <img src={logo} alt="logo ssism" className="logo_img" />{" "}
+                <div className="row d-flex justify-content-center"  style={{marginTop: "-85px"}}  >
+                  <img src={personal_png} alt="logo ssism" className="personal-profile" />{" "}
                 </div>
-                <div>
-                  <label htmlFor="gmail" className="labels" >
-                    Username
-                  </label>
+                <div className="row d-flex justify-content-center mt-2 " style={{color: "#5a607f"}}>{userEmail}</div>
+                <div className="row d-flex justify-content-center fw-bold mt-2 " style={{color: "#5a607f", fontSize: "22px"}}>Edit Profile</div>
+
+                <div className="d-flex flex-column justify-content-center" style={{alignItems: "center"}}>
+                 
                   <input
                     value={formik.values.name}
                     onChange={formik.handleChange}
@@ -124,8 +123,28 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     // aria-label="email"
                     name="name"
                     type="text"
+                    style={{width: "270px",marginTop: "32px" , height: "40px"}}
                     id="name"
-                    placeholder="Enter name "
+                    // placeholder="Enter name "
+                  />
+                  {formik.errors.name && formik.touched.name ? (
+                    <div className="text-danger fs-6">
+                      {formik.errors.name}
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  <input
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="inputs"
+                    // aria-label="email"
+                    name="password"
+                    type="password"
+                    style={{width: "270px" ,marginTop: "38px", height: "40px"}}
+                    id="password"
+                    placeholder="Current password"
                   />
                   {formik.errors.name && formik.touched.name ? (
                     <div className="text-danger fs-6">
@@ -137,43 +156,13 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
 
 
 
-                  <label htmlFor="role" className="labels "   >
-                    Role
-                  </label>
-                  <select
-                    name="role"
-                    className="form-select text-secondary  border-secondary "
-                    value={formik.values.role}
-                    // defaultValue="null"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    // eslint-disable-next-line
-                    id="role"
-                    type="text"
-                  >
-                    <option value='' className="form-select"   >
-                      Role
-                    </option>
-                    {roles.map((role, id) => {
-                      var data2 = role.roleName.charAt(0).toUpperCase() + role.roleName.slice(1).toLowerCase();
-                      data2 = data2.replace('admin', ' Admin');
-                      return (<option value={role.roleId} className="form-select" style={{ color: '#5A607F' }}> {data2}</option>)
-                    }
-
-                    )}
-                  </select>
-                  {formik.errors.role && formik.touched.role ? (
-                    <div className="text-danger fs-6">
-                      {formik.errors.role}
-                    </div>
-                  ) : (
-                    ""
-                  )}
+                 
                 </div>
+                <div style={{height: "35px"}} ></div>
                 <button
                   disabled={adminData.loading}
-                  style={{ marginTop: '35px' }}
-                  className=" submit_btn w-100  btn-md text-light font-weight-bold"
+                
+                  className=" setting-save-btn mx-auto"
                   type="submit"
                 >
                   {adminData.loading ? <LoaderButton /> : "Save"}
