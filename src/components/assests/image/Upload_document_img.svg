@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15.324" height="15.324" viewBox="0 0 15.324 15.324">
+  <g id="Group_2428" data-name="Group 2428" transform="translate(-0.474 -0.103)">
+    <g id="Rectangle_1756" data-name="Rectangle 1756" transform="translate(0.474 0.103)" fill="#fff" stroke="#595f7e" stroke-linecap="round" stroke-width="1">
+      <rect width="15.324" height="15.324" rx="4" stroke="none"/>
+      <rect x="0.5" y="0.5" width="14.324" height="14.324" rx="3.5" fill="none"/>
+    </g>
+    <path id="Icon_ionic-md-arrow-round-back" data-name="Icon ionic-md-arrow-round-back" d="M7.871,3.281H2.63L4.663,1.337a.81.81,0,0,0,0-1.107A.724.724,0,0,0,3.6.23L.22,3.511A.746.746,0,0,0,0,4.06v.01a.746.746,0,0,0,.22.549L3.6,7.9a.724.724,0,0,0,1.058,0,.81.81,0,0,0,0-1.107L2.628,4.848H7.869a.767.767,0,0,0,.749-.784A.759.759,0,0,0,7.871,3.281Z" transform="translate(12.201 3.462) rotate(90)" fill="#595f7e"/>
+  </g>
+</svg>

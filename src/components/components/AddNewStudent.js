@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./styles/AddNewStudent.css"
 import Select from 'react-select'
 import * as Yup from "yup";
-import {useFormik} from 'formik';
+import {Formik, useFormik} from 'formik';
 import axios from 'axios';
 import AddNewStudent from '../../redux/actionDispatcher/superAdmin/addNewStudentDispatcher'
 import {connect} from 'react-redux';
@@ -24,10 +24,16 @@ import {ToastContainer} from 'react-toastify';
 import {toast} from 'react-toastify';
 // import Loader from 'rsuite/Loader';
 import SuccessIcon from '../assests/image/SuccessIcon.svg'
+import Rectangle_img from '../assests/image/Rectangle_img.svg'
+import imageCompression from 'browser-image-compression';
+import UploadDocumentImage from '../assests/image/Upload_document_img.svg';
+import { Link } from 'react-router-dom';
+
 
 
 
 function AddNewStudentPage({addStudent,AddNewStudent}) {
+    
     var editData = JSON.parse(localStorage.getItem('RegistrationEdit'))
     const navigate = useNavigate();
     // console.log('editdata',editData);
@@ -134,7 +140,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
         ScholarshipAmount: editData ? editData.ScholarshipAmount : 0,
         trackName: editData ? editData.trackName : "",
         busFees: editData ? editData.Busfee : "",
-        commitment: editData ? editData.commitment :"",
+        commitment: editData ? editData.commitment : "",
         // Fees detail end from here 
 
     }
@@ -338,6 +344,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
                 "is_Postmetric": formik.values.postmatricScolarship,
                 "remark": formik.values.remark,
                 "sponsorshipType": formik.values.sponsorshipType,
+                "commitment":formik.values.commitment
             }
 
             editData ?
@@ -404,6 +411,38 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
 
         });
     };
+    function swipe() {
+        window.open(formik.values.commitment,'_blank','noopener,noreferrer')
+    }
+    const imageToBase64 = async (file,feildName) => {
+        if(file) {
+            const options = {
+                maxSizeMB: 0.5,
+                maxWidthOrHeight: 1920,
+                // useWebWorker: true
+            }
+            try {
+                const compressedFile = await imageCompression(file,options);
+                // console.log(compressedFile)
+                console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+                var reader = new FileReader();
+                reader.readAsDataURL(compressedFile)
+                reader.onload = async () => {
+                    var Base64 = reader.result
+                    console.log(Base64)
+                    formik.setFieldValue("commitment",Base64)
+
+                    // setIs_data(true);
+                }
+                reader.onerror = (err) => {
+                    console.log(err);
+                }
+            } catch(error) {
+                console.log(error);
+            }
+
+        }
+    }
 
     return (
         <>
@@ -1307,27 +1346,35 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
                                     </div>
                                     <div className="col">
                                         <label className="addStdLable" htmlFor="">Upload Commitment*</label>
-                                        {/* <input name="commitment" value={formik.values.commitment} onChange={formik.handleChange} type="file" onBlur={formik.handleBlur} className="form-control"
-                                         /> */}
-
+                                        <div className="d-flex">
+                                            <img src={Rectangle_img} style={{height: '43px',width: '100%',borderBottom: "1px solid #DDDDDD"}} alt="upload_commitmed" onClick={() => {
+                                                document.getElementById("commitment").click()
+                                            }} />
+                                            <img src={UploadDocumentImage} alt="upload_commitmed" onClick={() => {
+                                                document.getElementById("commitment").click()
+                                            }} style={{marginLeft: '-25px',marginTop: '3px'}} />
+                                            {formik.values.commitment !== '' ? <img src={formik.values.commitment} alt="upload_commitmed" onClick={swipe} id="commitmentImage" style={{ height:'30px',width:'30px', marginLeft: '-90%',marginTop: '9px'}} />:''}
+                                        </div>
                                         <input
-                                            onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.commitment}
                                             name="commitment"
                                             type="file"
-                                            className={formik.touched.commitment ? `form-control ${formik.errors.commitment ? "invalid" : ""}` : 'form-control'}
+                                            id="commitment"
+                                            onChange={(e) => {
+                                                imageToBase64(e.target.files[0],"commitment");
+                                            }}
+                                            // className={formik.touched.commitment ? `form-control ${formik.errors.commitment ? "invalid" : ""}` : 'form-control'}
                                             placeholder="Payable Amount"
-                                            style={{display:'none'}}
-                                            
+                                            style={{display: 'none'}}
+
                                         />
-                                        {formik.errors.commitment && formik.touched.commitment ? (
+                                        {formik.errors.commitment ?
                                             <div className="text-danger fs-6">
                                                 {formik.errors.commitment}
                                             </div>
-                                        ) : (
-                                            ""
-                                        )}
+                                            : ''
+                                        }
+
 
                                         {/* {formik.errors.com && formik.touched.com ? (
                                             <div className="text-danger fs-6">
@@ -1482,7 +1529,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
                                             ""
                                         )}
                                     </div>
-                                    
+
 
                                 </div>
 
