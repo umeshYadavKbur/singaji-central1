@@ -72,6 +72,7 @@ function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
           photo: formik.values.photo1
         });
         console.log(data, ":::::::::::::::::::: ");
+        if(formik.values.newpass === formik.values.newpassAgain){
         var config = {
           method: "POST",
           url: AllUrl.settingApi,
@@ -80,8 +81,20 @@ function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
             "Content-Type": "application/json",
           },
           data: data,
-        };
+        };}
+       
 
+      }
+      else{
+        toast.warn('Enter the same new passwords!', {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
       const response = await axios(config);
       setLoading(false)
@@ -182,13 +195,14 @@ function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
                   
 
                 <div className="form-row d-flex justify-content-center  mt-2" style={{cursor: 'pointer'}} >
-                                    {formik.values.photo1 !== '' ? <img style={{cursor: 'pointer',height: '100px',width: '100px',borderRadius: '50%',cursor: 'pointer' , marginTop: "-16px"}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={formik.values.photo1} alt="pppp" />
+                                    {/* {formik.values.photo1 !== '' ? <img style={{cursor: 'pointer',height: '100px',width: '100px',borderRadius: '50%',cursor: 'pointer' , marginTop: "-16px"}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={formik.values.photo1} alt="pppp" />
                                         : <img style={{cursor: 'pointer',height:  '100px',width:  '100px', marginTop: "-16px"}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={personal_png} alt="pppp" /> 
                                     }
                                     <img  alt="Plus_icon" src={Plus_icon} style={{marginTop:'21px', marginLeft:'-11px'}} />
                                     <input type="file" name="photo"  value={formik.values.photo} id="profilePhoto" style={{display: "none"}} accept="image/*" onChange={(e) => {
                                         imageToBase64(e.target.files[0],"photo");
-                                    }} />
+                                    }} /> */}
+                                    <img src={personal_png} alt="logo ssism" className="personal-profile" />{" "}
                                 </div>
 
 
