@@ -6,19 +6,19 @@ import {
   // CModalTitle,
   // CModalTitle,
 } from "@coreui/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import crossButton from "../assests/image/crossButton.svg";
 import "./styles/createAdmin.css";
 import { createNewAdmin } from "../../redux/actionDispatcher/superAdmin/createNewAdminDispatcher";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import LoaderButton from "../assests/common/LoaderButton";
-import AllUrl from "../../redux/constants/url";
-import axios from 'axios';
+// import AllUrl from "../../redux/constants/url";
+// import axios from 'axios';
 import personal_png from "../assests/image/personal-profile.svg"
-
+import { useAnimate } from "react-simple-animate";
 function CreateAdminPopup({ adminData, createNewAdmin }) {
 
   const myname = localStorage.getItem("user");
@@ -26,29 +26,12 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
   console.log("------------------------------")
   console.log(myname)
 
-  const token = JSON.stringify(localStorage.getItem("token"));
-  const navigate = useNavigate();
+  // const token = JSON.stringify(localStorage.getItem("token"));
+  // const navigate = useNavigate();
 
-  // console.log(adminData);
+  const [show, setShow] = useState(false);
 
-
-  const [visible, setVisible] = useState(false);
-  const [roles, setRoles] = useState([{ roleId: '3', roleName: 'Loading...' }]);
-
-  // useEffect(() => {
-  //   const fn = async () => {
-  //     const roles = await axios(AllUrl.roleList)
-  //     // console.log('====================================');
-  //     // console.log(roles.data);
-  //     // console.log('====================================');
-  //     setRoles(roles.data)
-  //   }
-  //   fn();
-  // }, []);
-
-
-
-
+  const [visible, setVisibleSe] = useState(false);
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Please fill the field above"),
@@ -57,7 +40,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
 
   const formik = useFormik({
     initialValues: {
-      name: myname ? myname :"",
+      name: myname ? myname : "",
       password: '',
     },
     validationSchema,
@@ -80,52 +63,53 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
     // },
   });
 
+
   return (
     <div>
       <CButton
         className="personal-setting-button"
-        onClick={() => setVisible(!visible)}
+        onClick={() => setVisibleSe(!visible)}
       >
         {/* <i className="fas fa-plus"></i> */}
         Settings
       </CButton>
       <CModal
-
         alignment="center"
         visible={visible}
         onClose={() => {
           formik.handleReset();
-          setVisible(false);
+          setVisibleSe(false);
         }}
       >
         <CModalBody className="my-modal-body" >
-          <div className="first_div createAdmin">
+          <div className="first_div createAdmin ">
             <div className=" cross-btn-div d-flex ">
-              <img onClick={() => setVisible(!visible)}
-                style={{ height: "22px", width: "22px", cursor: "pointer",marginRight: "14px",marginTop: "15px"}} src={crossButton} alt="close" className="logo_img" />
+              <img onClick={() => setVisibleSe(!visible)}
+                style={{ height: "22px", width: "22px", cursor: "pointer", marginRight: "14px", marginTop: "15px" }} src={crossButton} alt="close" className="logo_img" />
             </div>
             <div className="second_div justify-content-center  " style={{ marginTop: "0px" }}>
               <form onSubmit={formik.handleSubmit} className="d-flex justify-content-center flex-column" >
 
-                <div className="row d-flex justify-content-center"  style={{marginTop: "-85px"}}  >
+                <div className="row d-flex justify-content-center" style={{ marginTop: "-85px" }}  >
                   <img src={personal_png} alt="logo ssism" className="personal-profile" />{" "}
                 </div>
-                <div className="row d-flex justify-content-center mt-2 " style={{color: "#5a607f"}}>{userEmail}</div>
-                <div className="row d-flex justify-content-center fw-bold mt-2 " style={{color: "#5a607f", fontSize: "22px"}}>Edit Profile</div>
+                <div className="row d-flex justify-content-center mt-2 " style={{ color: "#5a607f" }}>{userEmail}</div>
+                <div className="row d-flex justify-content-center fw-bold mt-2 " style={{ color: "#5a607f", fontSize: "22px" }}>Edit Profile</div>
 
-                <div className="d-flex flex-column justify-content-center" style={{alignItems: "center"}}>
-                 
+                <div className="d-flex flex-column justify-content-center" style={{ alignItems: "center" }}>
+
                   <input
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     className="inputs"
+                    // onClick={(e) => (e.stopPropagation())}
                     // aria-label="email"
                     name="name"
                     type="text"
-                    style={{width: "270px",marginTop: "32px" , height: "40px"}}
+                    style={{ width: "270px", marginTop: "32px", height: "40px" }}
                     id="name"
-                    // placeholder="Enter name "
+                  // placeholder="Enter name "
                   />
                   {formik.errors.name && formik.touched.name ? (
                     <div className="text-danger fs-6">
@@ -135,14 +119,16 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     ""
                   )}
                   <input
-                    value={formik.values.name}
+                    value={formik.values.pass}
                     onChange={formik.handleChange}
+                    onClick={() => setShow(!show)}
+
                     onBlur={formik.handleBlur}
                     className="inputs"
                     // aria-label="email"
                     name="password"
-                    type="password"
-                    style={{width: "270px" ,marginTop: "38px", height: "40px"}}
+                    type=""
+                    style={{ width: "270px", marginTop: "38px", height: "40px" }}
                     id="password"
                     placeholder="Current password"
                   />
@@ -154,14 +140,20 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     ""
                   )}
 
+                  <div >
+                    {
+                      show ? <div id="box" className="box d-flex flex-column justify-content-center"  >
+                        <input type="text" style={{ width: "270px", marginTop: "38px", height: "40px" }} className="" />
+                        <input type="text" style={{ width: "270px", marginTop: "38px", height: "40px" }} className="" />
+                      </div> : ""
+                    }
+                  </div>
 
-
-                 
                 </div>
-                <div style={{height: "35px"}} ></div>
+                <div style={{ height: "35px" }} ></div>
                 <button
                   disabled={adminData.loading}
-                
+
                   className=" setting-save-btn mx-auto"
                   type="submit"
                 >

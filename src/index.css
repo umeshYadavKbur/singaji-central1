@@ -140,7 +140,7 @@ input.largerCheckbox {
 /* ======================== setting modal file css =================== */
 
 .personal-setting-button{
-  background-color: transparent !important;
+  /* background-color: transparent !important; */
   outline: none !important;
   border: none !important;
 }
@@ -153,12 +153,10 @@ input.largerCheckbox {
   border-radius: 4px;
 }
 
-.first_div{
-  /* border-top-left-radius: 10px ; */
 
+.setting-modal-div{
   border-radius: 5px !important;
   height: 639px;
- 
 }
 
 .cross-btn-div{
@@ -197,5 +195,35 @@ input.largerCheckbox {
 .my-form-div{
   justify-content: center;
   align-items: center;
+  border-radius: 4px;
   
+}
+
+.first_div{
+  border-radius: 4px;
+}
+
+/* .myAnime{
+  transition-timing-function: ease-in-out;
+  transition: 1.2s;
+
+}
+
+.anime-main-cont .myAnime{
+  transition-timing-function: ease-in-out;
+  transition: 1.2s;
+} */
+
+.box {
+  background: goldenrod;
+  width: 300px;
+  height: 300px;
+  margin: 30px auto;
+  transition: all 2s linear;
+  display: block;
+}
+
+.hidden {
+  display: none;
+  opacity: 0;
 }
