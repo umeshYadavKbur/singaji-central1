@@ -16,53 +16,134 @@ import { createNewAdmin } from "../../redux/actionDispatcher/superAdmin/createNe
 // import { useNavigate } from "react-router-dom";
 import LoaderButton from "../assests/common/LoaderButton";
 // import AllUrl from "../../redux/constants/url";
-// import axios from 'axios';
+import axios from 'axios';
 import personal_png from "../assests/image/personal-profile.svg"
 import { useAnimate } from "react-simple-animate";
-function CreateAdminPopup({ adminData, createNewAdmin }) {
+import Settings from '../assests/image/setting.svg';
+import AllUrl from "../../redux/constants/url";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import imageCompression from "browser-image-compression";
+import Plus_icon from '../assests/image/Plus_icon.svg'
+
+function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
 
   const myname = localStorage.getItem("user");
   const userEmail = localStorage.getItem("email");
+  const userId = localStorage.getItem("userId");
   console.log("------------------------------")
   console.log(myname)
 
-  // const token = JSON.stringify(localStorage.getItem("token"));
-  // const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
 
   const [visible, setVisibleSe] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Please fill the field above"),
     password: Yup.string().required("Please fill the field above"),
+    newpass: Yup.string().required("Please fill the field above"),
+    newpassAgain: Yup.string().required("Please fill the field above"),
   });
 
   const formik = useFormik({
     initialValues: {
       name: myname ? myname : "",
       password: '',
+      newpass: '',
+      newpassAgain: ''
     },
     validationSchema,
 
-    // onSubmit: (values) => {
-    //   var data = JSON.stringify({
-    //     name: formik.values.name,
-    //     password: formik.values.role,
-    //   });
-    //   var config = {
-    //     method: "post",
-    //     url: AllUrl.createNewAdmin,
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //       "Content-Type": "application/json",
-    //     },
-    //     data: data,
-    //   };
-    //   createNewAdmin(config, navigate);
-    // },
+    onSubmit: async (values) => {
+      if (formik.values.newpass === formik.values.newpassAgain) {
+        setLoading(true)
+
+        var data = JSON.stringify({
+          userId: userId,
+          name: formik.values.name,
+          password: formik.values.role,
+          oldPassword: formik.values.password,
+          newPassword: formik.values.newpass,
+          confirmPassword: formik.values.newpassAgain,
+          photo: formik.values.photo1
+        });
+        console.log(data, ":::::::::::::::::::: ");
+        var config = {
+          method: "POST",
+          url: AllUrl.settingApi,
+          headers: {
+            authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          data: data,
+        };
+
+      }
+      const response = await axios(config);
+      setLoading(false)
+      if (response.status === 200) {
+        toast.suc('Crendentials updated successfully ', {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setVisibleSe(!visible)
+        setShow2(false)
+      }
+      if(response.status === 201){
+        toast.warn('There is an problem while uploading new data ', {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
+      // createNewAdmin(config, navigate);
+
+    },
   });
 
+  const imageToBase64 = async (file,feildName) => {
+    if(file) {
+        const options = {
+            maxSizeMB: 0.01,
+            maxWidthOrHeight: 1920,
+            // useWebWorker: true
+        }
+        try {
+            const compressedFile = await imageCompression(file,options);
+            // console.log(compressedFile)
+            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+            var reader = new FileReader();
+            reader.readAsDataURL(compressedFile)
+            reader.onload = async () => {
+                var Base64 = reader.result
+                // console.log(Base64)
+                formik.setFieldValue("photo1",Base64)
+                
+                // setIs_data(true);
+            }
+            reader.onerror = (err) => {
+                console.log(err);
+            }
+        } catch(error) {
+            console.log(error);
+        }
+
+    }
+}
 
   return (
     <div>
@@ -70,6 +151,13 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         className="personal-setting-button"
         onClick={() => setVisibleSe(!visible)}
       >
+        <img style={{
+          height: '18px',
+          width: '18px',
+          marginLeft: '-50px',
+
+          marginRight: "10px"
+        }} src={Settings} alt="Settings" />
         {/* <i className="fas fa-plus"></i> */}
         Settings
       </CButton>
@@ -91,7 +179,21 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
               <form onSubmit={formik.handleSubmit} className="d-flex justify-content-center flex-column" >
 
                 <div className="row d-flex justify-content-center" style={{ marginTop: "-85px" }}  >
-                  <img src={personal_png} alt="logo ssism" className="personal-profile" />{" "}
+                  
+
+                <div className="form-row d-flex justify-content-center  mt-2" style={{cursor: 'pointer'}} >
+                                    {formik.values.photo1 !== '' ? <img style={{cursor: 'pointer',height: '100px',width: '100px',borderRadius: '50%',cursor: 'pointer' , marginTop: "-16px"}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={formik.values.photo1} alt="pppp" />
+                                        : <img style={{cursor: 'pointer',height:  '100px',width:  '100px', marginTop: "-16px"}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={personal_png} alt="pppp" /> 
+                                    }
+                                    <img  alt="Plus_icon" src={Plus_icon} style={{marginTop:'21px', marginLeft:'-11px'}} />
+                                    <input type="file" name="photo"  value={formik.values.photo} id="profilePhoto" style={{display: "none"}} accept="image/*" onChange={(e) => {
+                                        imageToBase64(e.target.files[0],"photo");
+                                    }} />
+                                </div>
+
+
+
+
                 </div>
                 <div className="row d-flex justify-content-center mt-2 " style={{ color: "#5a607f" }}>{userEmail}</div>
                 <div className="row d-flex justify-content-center fw-bold mt-2 " style={{ color: "#5a607f", fontSize: "22px" }}>Edit Profile</div>
@@ -112,7 +214,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   // placeholder="Enter name "
                   />
                   {formik.errors.name && formik.touched.name ? (
-                    <div className="text-danger fs-6">
+                    <div style={{ marginRight: "95px" }} className="text-danger fs-6">
                       {formik.errors.name}
                     </div>
                   ) : (
@@ -132,9 +234,9 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                     id="password"
                     placeholder="Current password"
                   />
-                  {formik.errors.name && formik.touched.name ? (
-                    <div className="text-danger fs-6">
-                      {formik.errors.name}
+                  {formik.errors.password && formik.touched.password ? (
+                    <div style={{ marginRight: "95px" }} className="text-danger fs-6">
+                      {formik.errors.password}
                     </div>
                   ) : (
                     ""
@@ -143,8 +245,34 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   <div >
                     {
                       show ? <div id="box" className="box d-flex flex-column justify-content-center"  >
-                        <input type="text" style={{ width: "270px", marginTop: "38px", height: "40px" }} className="" />
-                        <input type="text" style={{ width: "270px", marginTop: "38px", height: "40px" }} className="" />
+                        <input type="text"
+                          value={formik.values.newpass}
+                          onChange={formik.handleChange}
+                          name="newpass"
+
+                          placeholder="New password" style={{ width: "270px", marginTop: "38px", height: "40px" }} className="" />
+                        {formik.errors.newpass && formik.touched.newpass ? (
+                          <div className="text-danger fs-6">
+                            {formik.errors.newpass}
+                          </div>
+                        ) : (
+                          ""
+                        )}
+
+
+                        <input type="text"
+                          value={formik.values.newpassAgain}
+                          onChange={formik.handleChange}
+                          name="newpassAgain"
+
+                          placeholder="New password, again" style={{ width: "270px", marginTop: "38px", height: "40px" }} className="" />
+                        {formik.errors.newpassAgain && formik.touched.newpassAgain ? (
+                          <div className="text-danger fs-6">
+                            {formik.errors.newpassAgain}
+                          </div>
+                        ) : (
+                          ""
+                        )}
                       </div> : ""
                     }
                   </div>
@@ -157,7 +285,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                   className=" setting-save-btn mx-auto"
                   type="submit"
                 >
-                  {adminData.loading ? <LoaderButton /> : "Save"}
+                  {loading ? <LoaderButton /> : "Save"}
                 </button>
               </form>
             </div>
