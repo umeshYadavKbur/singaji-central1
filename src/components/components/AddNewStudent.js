@@ -34,7 +34,7 @@ import { Link } from 'react-router-dom';
 
 function AddNewStudentPage({addStudent,AddNewStudent}) {
     
-    var editData = JSON.parse(localStorage.getItem('RegistrationEdit'))
+    var editData = JSON.parse(localStorage.getItem('RegistrationEdit'));
     const navigate = useNavigate();
     // console.log('editdata',editData);
     // var editData = ''
@@ -70,6 +70,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
             setTrackNames(trackNamesRes.data);
         }
         callingFun();
+        getCourseFees();
 
         return () => {
             localStorage.removeItem('RegistrationEdit')
@@ -77,7 +78,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
     },[]);
 
 
-    const initialValues = {
+    const initialValues ={
         //not working
         // Date of birth , village name  , category name , 12 subject , scheme fees  , GKB scholarship , track name 
 
@@ -89,7 +90,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
         fatherName: editData ? editData.fathersName : "",
         fatherOccupation: editData ? editData.fatherOccupation : "",
         fatherIncome: editData ? editData.fatherIncome : "",
-        FatherContactNumber: editData ? editData.fatherContactNumber : "",
+        FatherContactNumber: editData ? editData.fatherContactNumber === null ? "" : editData.fatherContactNumber : "",
         address: editData ? editData.address : "",
         pincode: editData ? editData.pincode : "",
         village: editData ? editData.village : "",// not working
@@ -105,7 +106,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
         schoolName: editData ? editData.schoolName : "",
         subject12: editData ? editData.school12sub : "",
         streamName: editData ? editData.branch : "",
-        joinBatch: editData ? editData.joinBatch : "",
+        joinBatch: editData ? editData.joinBatch : new Date().getFullYear(),
         rollNumber12: editData ? editData.rollNumber12 : "",
         percent12: editData ? editData.persentage12 : "",
         year: editData ? editData.year : "",
@@ -127,19 +128,19 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
 
         feesScheme: editData ? editData.feesScheme : 'none',
         sponsorshipType: editData ? editData.sponsorshipType : 'none',
-        courseFees: editData ? editData.Totalfee : "",
+        courseFees: editData ? editData.Totalfee===null? "":editData.Totalfee : "",
         regisrationFees: editData ? editData.reg_Fees : "1500",
         postmatricScolarship: editData ? (editData.is_Postmetric)?.toLowerCase() : "no",
 
         //remaining
         gkbScolarship: editData ? (editData.Is_GKB)?.toLowerCase() : "no",//not working
-        gkbOwner: editData ? editData.GaonKiBeti : "self",
-        postmatricOwner: editData ? editData.Postmetric : "self",
+        gkbOwner: editData ? editData.GaonKiBeti ===null? "self": editData.GaonKiBeti : "self",
+        postmatricOwner: editData ? editData.Postmetric===null ? "self": editData.Postmetric : "self",
         payableAmmount: editData ? editData.remain_Amount : "",
-        remark: editData ? editData.remark : "",
+        remark: editData ? editData.remark ===null ? "": editData.remark : "",
         ScholarshipAmount: editData ? editData.ScholarshipAmount : 0,
         trackName: editData ? editData.trackName : "",
-        busFees: editData ? editData.Busfee : "",
+        busFees: editData ? editData.Busfee ===null ? "": editData.Busfee : "",
         commitment: editData ? editData.commitment : "",
         // Fees detail end from here 
 
@@ -189,7 +190,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
         gkbScolarship: Yup.string().required("Required!"),
         gkbOwner: Yup.string().required("Required!"),
         postmatricOwner: Yup.string().required("Required!"),
-        remark: Yup.string().required("Required!"),
+        remark: Yup.string("Require").required("Required!"),
         payableAmmount: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
         // postmatricAmount: Yup.string().required("Required!"),
         // GKBAmount: Yup.string().required("Required!"),
@@ -357,16 +358,16 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
     });
     // const [getCourseFee, setGetCourseFee] = useState(true)
 
-    const getCourseFees = async () => {
+    const getCourseFees = async (branch,joinBatch) => {
 
-        if(formik.values.joinBatch !== '' && formik.values.joinBatch.replace('X','').length === 4 && formik.values.streamName !== '') {
+        if(joinBatch !== '' && joinBatch.replace('X','').length === 4 && branch !== '') {
             // console.log("api calling");
 
             var data = '';
 
             var config = {
-                method: 'get',
-                url: `${allUrls.showFees}${formik.values.streamName + formik.values.joinBatch}`,
+                method: 'get', 
+                url: `${allUrls.showFees}${branch+ joinBatch}`,
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem("token")}`
                 },
@@ -883,8 +884,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
                                         <label className="addStdLable" htmlFor="">Stream Name*</label>
 
                                         <select name="streamName" value={formik.values.streamName} onBlur={formik.handleBlur}
-                                            onBlurCapture={getCourseFees}
-                                            onChange={formik.handleChange} className={formik.touched.streamName ? `form-select ${formik.errors.streamName ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
+                                            onChange={async (e) => {await formik.setFieldValue("streamName",e.target.value); getCourseFees(e.target.value,formik.values.joinBatch)}} className={formik.touched.streamName ? `form-select ${formik.errors.streamName ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02" placeholder="select">
                                             <option value=''>Select branch</option>
                                             {branchNames.map((ele,i) => {
                                                 return (
@@ -905,9 +905,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
                                     <div className="col">
                                         <label className="addStdLable" htmlFor="">Join Batch*</label>
                                         <NumberFormat
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                            onBlurCapture={getCourseFees}
+                                            onChange={async (e) => {await formik.setFieldValue("joinBatch",e.target.value); getCourseFees(formik.values.streamName,e.target.value)}}                                            onBlur={formik.handleBlur}
                                             value={formik.values.joinBatch}
                                             name="joinBatch"
                                             // type="text"
