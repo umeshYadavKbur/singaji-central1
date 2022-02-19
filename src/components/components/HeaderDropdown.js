@@ -66,7 +66,8 @@ const AppHeaderDropdown = ({ userData, logout }) => {
                 height: '1px',
                 opacity: '1'
               }} />
-              <div style={{ cursor: 'pointer' }}>
+                      
+              <div style={{ marginTop: '-23px', cursor: 'pointer' }}>
 
                 <span style={{
                   color: 'white',
