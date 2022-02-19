@@ -6,7 +6,6 @@ import { logout } from "../../redux/actionDispatcher/auth/authDispatcher";
 import { connect } from "react-redux";
 import Settings from '../assests/image/setting.svg';
 import { Tooltip, Whisper } from "rsuite";
-import CreateAdminPopup from './CreateAdminPopup'
 
 const AppHeaderDropdown = ({ userData, logout }) => {
   // const history = useHistory();
