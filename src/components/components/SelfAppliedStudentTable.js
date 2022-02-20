@@ -3,7 +3,7 @@ import * as React from "react";
 
 import Edit_icon from '../assests/image/Edit_icon.svg'
 import Swal from 'sweetalert2'
-import { GlobalFilter } from "./tableComponents/GlobalFilter";
+import {GlobalFilter} from "./tableComponents/GlobalFilter";
 import {
   useTable,
   useSortBy,
@@ -11,27 +11,26 @@ import {
   usePagination,
   useRowSelect,
 } from "react-table";
-import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
+import {ToastContainer} from "react-toastify";
+import {toast} from "react-toastify";
 import axios from "axios";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import Loader from '../assests/common/Loader';
 import {Fragment,useMemo} from "react";
 
 
 import "./styles/Table.css";
-import { fetchStudentTable } from "../../redux/actionDispatcher/superAdmin/studentTableDatadispatcher";
+import {fetchStudentTable} from "../../redux/actionDispatcher/superAdmin/studentTableDatadispatcher";
 import SkeletonColor from "../../helpers/Skeletrone";
 import Archived_icon from "../assests/image/Archived_icon.svg"
-import { TableCheckbox } from "./tableComponents/TableCheckbox";
-import { VerifyStudent } from "../../redux/actionDispatcher/superAdmin/studentVerifyTableDataDispatcher";
+import {TableCheckbox} from "./tableComponents/TableCheckbox";
 // import AddNewStudent from "./AddNewStudent";
 import AllUrl from "../../redux/constants/url"
 import updown_sort from '../assests/image/updown_sort.svg'
-import { DeactivateButton, PaidButton, UnpaidButton } from "../assests/common/Color";
+import {DeactivateButton,PaidButton,UnpaidButton} from "../assests/common/Color";
 import Pagination from "../assests/common/Pagination";
-import { useNavigate } from "react-router-dom";
-import { Tooltip, Whisper } from "rsuite";
+import {useNavigate} from "react-router-dom";
+import {Tooltip,Whisper} from "rsuite";
 import NoDataFound from "../assests/common/NoDataFound";
 import {fontSize} from "@mui/system";
 import delete_icon from "../../components/assests/image/delete_Icon.svg"
@@ -45,7 +44,7 @@ import {
   CDropdownToggle,
   CPopover,
 } from "@coreui/react";
-  
+
 
 // import { baseUrl } from "../../redux/constants/url";
 
@@ -58,7 +57,7 @@ export const MultipleFilter = (rows,accessor,filterValue) => {
 };
 
 
-function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
+function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
   const token = localStorage.getItem("token");
   const navigate = useNavigate()
 
@@ -66,7 +65,7 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
     {
       header: "S.No",
       accessor: "Srno",
-      Cell: ({ row: { original, index } }) => {
+      Cell: ({row: {original,index}}) => {
         return (index + 1)
       },
       Filter: "",
@@ -109,67 +108,104 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
       Filter: "",
       filter: "",
     },
-   
+
     {
       header: "STA",
       accessor: "STA",
       Filter: "",
       filter: "",
-      Cell: ({ row: { original } }) => (
+      Cell: ({row: {original}}) => (
         <button
           className="table_btn_size"
           style={DeactivateButton}
-          disabled={true}
+          // disabled={true}
           onClick={() => {
             // setData(original.status)
-              console.log(original.email)
-              Swal.fire({
-                title: 'Active',
+            console.log(original.email)
+            Swal.fire({
+              title: 'Shift To Applied',
 
-                html:
-                  '<hr>' +
-                  'Are you sure?' +
-                  '<br>' +
-                  `You want to active ${original.firstName} ${original.lastName} `,
-                // icon: 'warning',
-                showCancelButton: true,
-                // showCancelButton: true,
-                cancelButtonText: 'Cancel',
-                confirmButtonText: 'Active',
-                showCloseButton: true,
-                cancelButtonColor: 'gray',
-                confirmButtonColor: "#4f83df",
-                reverseButtons: true,
-                showClass: {
-                  backdrop: 'swal2-noanimation', // disable backdrop animation
-                  popup: '',                     // disable popup animation
-                  icon: ''                       // disable icon animation
-                },
-                hideClass: {
-                  popup: '',                     // disable popup fade-out animation
+              html:
+                '<hr>' +
+                'Are you sure?' +
+                '<br>' +
+                `Do You want to shift ${original.firstName} ${original.lastName}  to  applied student`,
+              // icon: 'warning',
+              showCancelButton: true,
+              // showCancelButton: true,
+              cancelButtonText: 'Cancel',
+              confirmButtonText: 'Shift',
+              showCloseButton: true,
+              cancelButtonColor: 'gray',
+              confirmButtonColor: "rgb(157 203 251)",
+              reverseButtons: true,
+              showClass: {
+                backdrop: 'swal2-noanimation', // disable backdrop animation
+                popup: '',                     // disable popup animation
+                icon: ''                       // disable icon animation
+              },
+              hideClass: {
+                popup: '',                     // disable popup fade-out animation
+              }
+
+            }).then(async (result) => {
+              console.log("original values are ::",original)
+
+              if(result.isConfirmed) {
+                let data = JSON.stringify({
+                  stdId:original.id})
+                var config = {
+                  method: "POST",
+                  url: AllUrl.shiftToAppliedStudent,
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                  },
+                  data: data
+                };
+                const resultofverify = await axios (config);
+                console.log("resultofverify",resultofverify);
+                if(resultofverify.status === 200) {
+                  var fetchStudentTableConfig = {
+                    method: "GET",
+                    url: AllUrl.allRegistratedStudent,
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                      "Content-Type": "application/json",
+                    },
+                  };
+                  fetchStudentTable(fetchStudentTableConfig,true);
                 }
-
-              }).then(async (result) => {
-                if (result.isConfirmed) {
-                  const resultofverify = await VerifyStudent(original);
-                  // console.log(resultofverify);
-                  if (resultofverify === 200) {
-                    var config = {
-                      method: "GET",
-                      url: AllUrl.allRegistratedStudent,
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                      },
-                    };
-                    fetchStudentTable(config, true);
-                  }
+                else if(resultofverify === 404)
+                {
+                  toast.error('Some field are empty please edit it',{
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                  });
                 }
-              })
-              
-            }
+                else if(resultofverify.status === 500)
+                {
+                  toast.error('Internal Server Error',{
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                  });
+                }
+              }
+            })
 
-           }>
+          }
+
+          }>
           STA
         </button>
       )
@@ -179,16 +215,16 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
       accessor: 'icon',
       Filter: "",
       filter: "",
-      Cell: ({ row: { original } }) => (
+      Cell: ({row: {original}}) => (
         // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
         <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
           <Tooltip>
             Edit Student Info
           </Tooltip>
         }>
-          <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
+          <img src={Edit_icon} style={{cursor: "pointer"}} alt="Edit" onClick={() => {
             navigate("/admin_dashboard/addnewstudent");
-            localStorage.setItem('RegistrationEdit', JSON.stringify(original))
+            localStorage.setItem('RegistrationEdit',JSON.stringify(original))
           }} />
 
         </Whisper>
@@ -222,10 +258,10 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
         "Content-Type": "application/json",
       },
     };
-    fetchStudentTable(config, false);
+    fetchStudentTable(config,false);
     // setTableData(table_data.table_data);
     // eslint-disable-next-line
-  }, []);
+  },[]);
 
   function setFilteredParams(filterArr,val) {
     if(filterArr.includes(val)) {
@@ -381,6 +417,7 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
     );
   }
 
+  
 
 
   const {
@@ -399,7 +436,7 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
     gotoPage,
     pageCount,
     setPageSize,
-    // selectedFlatRows,
+    selectedFlatRows,
     prepareRow,
   } = useTable(
     {
@@ -415,10 +452,10 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
         return [
           {
             id: 'selection',
-            header: ({ getToggleAllRowsSelectedProps }) => (
+            header: ({getToggleAllRowsSelectedProps}) => (
               <TableCheckbox {...getToggleAllRowsSelectedProps()} />
             ),
-            Cell: ({ row }) => (
+            Cell: ({row}) => (
               <TableCheckbox {...row.getToggleRowSelectedProps()} />
             )
           },
@@ -427,9 +464,113 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
       })
     }
   );
+  var idData = [];
+  var exportCsv = [];
 
-  const { globalFilter } = state;
-  const { pageIndex, pageSize } = state;
+  const checkboxData = JSON.stringify(
+    {
+      selectedFlatRows: selectedFlatRows.forEach((row) => {
+        let data = Object.assign({},row.original);
+        console.log("data",data);
+        delete data.photo;
+        
+        idData.push(data.id)
+        // console.log(selectedData);
+        // exportCsv.push(data)
+      })
+    },
+    null,
+    2
+  );
+  console.log("checkboxData",checkboxData)
+  console.log("idData",idData)
+
+  function deleteSelfAppliedStudent() {
+    Swal.fire({
+      title: 'Delete',
+
+      html:
+        '<hr>' +
+        'Are you sure?' +
+        '<br>' +
+        `Do You want to delete record`,
+      // icon: 'warning',
+      showCancelButton: true,
+      // showCancelButton: true,
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Delete',
+      showCloseButton: true,
+      cancelButtonColor: 'gray',
+      confirmButtonColor: "rgb(231 122 122)",
+      reverseButtons: true,
+      showClass: {
+        backdrop: 'swal2-noanimation', // disable backdrop animation
+        popup: '',                     // disable popup animation
+        icon: ''                       // disable icon animation
+      },
+      hideClass: {
+        popup: '',                     // disable popup fade-out animation
+      }
+
+    }).then(async (result) => {
+      // console.log("original values are ::",original)
+
+      if(result.isConfirmed) {
+        let data = JSON.stringify({
+          id: idData
+        })
+        var config = {
+          method: "POST",
+          url: AllUrl.deleteSelfAppliedStudents,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          data: data
+        };
+        const resultofverify = await axios(config);
+        console.log(resultofverify);
+        if(resultofverify.status === 200) {
+          var fetchStudentTableConfig = {
+            method: "GET",
+            url: AllUrl.allRegistratedStudent,
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          };
+          fetchStudentTable(fetchStudentTableConfig,true);
+        }
+        else if(resultofverify.status === 404) {
+          toast.error('Some field are empty please edit it',{
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+          });
+        }
+        else if(resultofverify.status === 500) {
+          toast.error('Internal Server Error',{
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+          });
+        }
+      }
+    })
+
+
+  }
+
+  const {globalFilter} = state;
+  const {pageIndex,pageSize} = state;
 
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
@@ -452,91 +593,91 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
         pauseOnHover
 
       />
-      <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
-        <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+      <div style={{backgroundColor: "#F4F7FC",height: "auto",width: "auto"}}>
+        <div style={{position: 'sticky',top: '80px',width: '100%',paddingTop: '10px',paddingBottom: '10px',backgroundColor: '#f4f7fc',zIndex: '5'}}>
           <div className="d-flex">
 
             <div className=''>
               <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                 {
-                  [10, 25, 50, 100].map(pageSize => (
+                  [10,25,50,100].map(pageSize => (
                     <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
                   ))
                 }
               </select>
             </div>
-                <div className='ms-4'>
-                  <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
-                </div>
-                <div className='ms-4'>
-                  <button type="button" className="btn btn-primary  fw-bold ">Download </button>
-                </div>
-                <div className='ms-4'>
-                  <button type="button" className="btn " style={{backgroundColor:"#f7c3c3"}}>
-                    <img src={delete_icon} alt="delete_icon" /></button>
-                </div>
+            <div className='ms-4'>
+              <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
+            </div>
+            <div className='ms-4'>
+              <button type="button" className="btn btn-primary  fw-bold ">Download </button>
+            </div>
+            <div className='ms-4'>
+              <button onClick={deleteSelfAppliedStudent} type="button" className="btn " style={{backgroundColor: "#f7c3c3"}}>
+                <img src={delete_icon} alt="delete_icon" /></button>
+            </div>
 
             <div className='d-flex ml-auto me-1'>
 
-             
+
               <div >
-                    <CDropdown variant="nav-item" style={{color: 'white'}}>
-                      <CDropdownToggle
-                        placement="bottom-end"
-                        className="py-0"
-                        caret={false}
-                      >
-                        <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
-                          <Tooltip>
-                            Filter Data .
-                          </Tooltip>
-                        }>
+                <CDropdown variant="nav-item" style={{color: 'white'}}>
+                  <CDropdownToggle
+                    placement="bottom-end"
+                    className="py-0"
+                    caret={false}
+                  >
+                    <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                      <Tooltip>
+                        Filter Data .
+                      </Tooltip>
+                    }>
 
-                          <img
-                            src={filtericon}
-                            alt=""
-                            style={{
-                              height: "22px",
-                              width: "35px",
-                              marginTop: "-35px",
-                              marginLeft: "-13px",
-                            }}
-                          /></Whisper>
-                      </CDropdownToggle>
+                      <img
+                        src={filtericon}
+                        alt=""
+                        style={{
+                          height: "22px",
+                          width: "35px",
+                          marginTop: "-35px",
+                          marginLeft: "-13px",
+                        }}
+                      /></Whisper>
+                  </CDropdownToggle>
 
-                      <CDropdownMenu
-                        component={"div"}
-                        className="pt-0 filter-dropdown-menu-student_account_table"
-                        placement="bottom-end"
+                  <CDropdownMenu
+                    component={"div"}
+                    className="pt-0 filter-dropdown-menu-student_account_table"
+                    placement="bottom-end"
 
-                      >
-                        <div className="p-lg-2 pb-0">
-                          {headerGroups.map((headerGroup) => (
+                  >
+                    <div className="p-lg-2 pb-0">
+                      {headerGroups.map((headerGroup) => (
+                        <div
+                          style={{display: "flex flex-column"}}
+                          {...headerGroup.getHeaderGroupProps()}
+                        >
+                          {headerGroup.headers.map((column,i) => (
                             <div
-                              style={{display: "flex flex-column"}}
-                              {...headerGroup.getHeaderGroupProps()}
+                              key={i}
+                              style={{display: "block",justifyContent: "center"}}
                             >
-                              {headerGroup.headers.map((column,i) => (
-                                <div
-                                  key={i}
-                                  style={{display: "block",justifyContent: "center"}}
-                                >
-                                  {column.canFilter ? column.render("Filter") : null}
-                                </div>
-                              ))}
+                              {column.canFilter ? column.render("Filter") : null}
                             </div>
                           ))}
                         </div>
-                      </CDropdownMenu>
-                    </CDropdown>          
-                      </div>
+                      ))}
+                    </div>
+                  </CDropdownMenu>
+                </CDropdown>
+              </div>
               <div className='me-4'>
                 <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
               </div></div>
           </div>
         </div>
         <table {...getTableProps()} id="customers" className="table table-sm">
-          <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+          <thead style={{position: 'sticky',top: '135px',width: '100%',backgroundColor: '#f4f7fc',zIndex: '5'}}>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
@@ -546,14 +687,14 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable, VerifyStudent 
 
                       {column.isSorted ? (
                         column.isSortedDesc ? (
-                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
+                          <i style={{transform: 'scale(0.6)'}} className="fas fa-chevron-down"></i>
                         ) : (
-                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
+                          <i style={{transform: 'scale(0.6)'}} className="fas fa-chevron-up"></i>
                           // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
                         )
                       ) : (
 
-                        column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                        column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{marginLeft: "5px"}} alt="" />
 
 
                       )}
@@ -604,9 +745,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchStudentTable: (data, isLoading) => dispatch(fetchStudentTable(data, isLoading)),
-    VerifyStudent: (data) => dispatch(VerifyStudent(data)),
+    fetchStudentTable: (data,isLoading) => dispatch(fetchStudentTable(data,isLoading)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelfAppliedStudentTable);
+export default connect(mapStateToProps,mapDispatchToProps)(SelfAppliedStudentTable);
