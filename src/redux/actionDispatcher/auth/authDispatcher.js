@@ -22,10 +22,12 @@ export const fetchUsers = (data, navigate) => {
     // changing the userResData if we need token so userResData.data.toke will be used
     try {
       if (userResData.request.status === 200) {
+        console.log("Response :: ", userResData);
         //setting the Items in localStorage
         localStorage.setItem("user", userResData.data.user);
         localStorage.setItem("token", userResData.data.token);
         localStorage.setItem("email", userResData.data.email);
+        localStorage.setItem("userId", userResData.data.userId);
         storage.setItem("role", userResData.data.role);
 
 
@@ -66,7 +68,7 @@ export const fetchUsers = (data, navigate) => {
             popup: '',                     // disable popup fade-out animation
           }
         })
-        
+
         dispatch(loginFailure(userResData.data));
       }
 

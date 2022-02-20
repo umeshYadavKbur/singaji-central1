@@ -99,7 +99,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         visible={visible}
         onClose={() => {
           formik.handleReset();
-          setVisible(false);
+          // setVisible(false);
         }}
       >
         <CModalBody>

@@ -4,12 +4,12 @@ import "./styles/HeaderDropdown.css";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../redux/actionDispatcher/auth/authDispatcher";
 import { connect } from "react-redux";
-import Settings from '../assests/image/setting.svg';
 import { Tooltip, Whisper } from "rsuite";
+import SettingsModalFile from "./SettingsModalFile";
 
 const AppHeaderDropdown = ({ userData, logout }) => {
   // const history = useHistory();
-  const [show, setShow] = useState(false)
+  const [show, setShow2] = useState(false)
   const navigate = useNavigate();
 
   const logoutfunction = () => {
@@ -27,7 +27,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
         </Tooltip>
       }>
         <img
-          onClick={() => setShow(!show)}
+          onClick={() => setShow2(!show)}
           src={avatar8} alt=""
           style={{
             height: "42px",
@@ -67,17 +67,14 @@ const AppHeaderDropdown = ({ userData, logout }) => {
                 opacity: '1'
               }} />
               <div style={{ cursor: 'pointer' }}>
-                <img style={{
-                  height: '18px',
-                  width: '18px',
-                  marginLeft: '-50px'
-                }} src={Settings} alt="Settings" />
+
                 <span style={{
                   color: 'white',
                   fontWeight: '4px',
                   marginLeft: '8px'
                 }}>
-                  Settings
+                  {/* Settings */}
+                  <SettingsModalFile setShow2={setShow2} />
                 </span>
               </div>
               <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />

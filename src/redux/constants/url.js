@@ -47,6 +47,9 @@ const AllUrl = {
     UploadDocument: `${baseUrl}/api/upload_document`, // get documents of particular student
     accountStudent: `${baseUrl}/api/get_students_account_list`,
     selfRegisterStudents: `${baseUrl}/api/self_registrated_student`,
+    shiftToAppliedStudent: `${baseUrl}/api/shift_to_applied_students`,
+    deleteSelfAppliedStudents: `${baseUrl}/api/delete_self_applied_students`,
+    
     //_____________________________________
 
     //landing pages urls 
@@ -79,7 +82,11 @@ const AllUrl = {
 
     // Fees reciept delete api
 
-    deletereciept: `${baseUrl}/api/report_receipt`
+    deletereciept: `${baseUrl}/api/report_receipt`,
+
+    // personal profile settings 
+
+    settingApi: `${baseUrl}/api/edit_profile`
 }
 export default AllUrl
 

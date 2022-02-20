@@ -60,7 +60,7 @@ function AdminDashboard() {
           <Navbar Options={HeaderLink} />
         </div>
 
-        
+
         <div className="table_dashboard">
           <Routes>
             <Route path="" element={<Dashboard />} />
