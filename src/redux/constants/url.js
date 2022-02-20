@@ -32,9 +32,11 @@ const AllUrl = {
 
     //Student related url
     allRegistratedStudent: `${baseUrl}/api/registrated_student`,
+    allRegistratedStudentAccountList: `${baseUrl}/api/info_Of_All_Registered_Student_Account`,
     deleteStudent: `${baseUrl}/api/delete_cancel_student`,
     verifyStudent: `${baseUrl}/api/varify_student`,
     verifyStudentPaidUnpaid: `${baseUrl}/api/reg_fees_status`,
+    verifyStudentAccountPaidUnpaid: `${baseUrl}/api/acc_reg_fees_status`,
     addNewStudent: `${baseUrl}/api/register`,
     updateRegisterStudentInfo: `${baseUrl}/api/update_registrated_students`,
     updatePersonalInformation: `${baseUrl}/api/update_personal_info`,// update the personal information of a particular student 

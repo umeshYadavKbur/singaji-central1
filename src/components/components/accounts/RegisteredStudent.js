@@ -76,19 +76,19 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "mobile",
     },
     {
-      header: "Reciver",
-      accessor: "kk",
+      header: "Receiver",
+      accessor: "receiver",
     },
     {
       header: "Pay status",
-      accessor: "reg_fees_status",
+      accessor: "acc_reg_fees_status",
       Cell: ({ row: { original } }) => (
         <button
           className="table_btn_size"
           style={
-            original.reg_fees_status === "Paid"
+            original.acc_reg_fees_status === "Paid"
               ? RecievedButton : PendingButton}
-          disabled={original.reg_fees_status === "Paid"}
+          disabled={original.acc_reg_fees_status === "Paid"}
           onClick={() => {
             Swal.fire({
               title: 'Payment Confirmation',
@@ -124,7 +124,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 
                 var config = {
                   method: 'post',
-                  url: `${AllUrl.verifyStudentPaidUnpaid}`,
+                  url: `${AllUrl.verifyStudentAccountPaidUnpaid}`,
                   headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
@@ -168,7 +168,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               }
             })
           }}>
-          {original.reg_fees_status === "Paid" ? "Recieved" : "Pending"}
+          {original.acc_reg_fees_status === "Paid" ? "Recieved" : "Pending"}
 
         </button>)
     },
@@ -181,7 +181,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           style={DeactivateButton}
           onClick={() => {
             // setData(original.status)
-            if (original.reg_fees_status === "Paid") {
+            if (original.acc_reg_fees_status === "Paid") {
               console.log(original.email)
               Swal.fire({
                 title: 'Shift to account',
@@ -269,7 +269,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
   React.useEffect(() => {
     var config = {
       method: "GET",
-      url: AllUrl.allRegistratedStudent,
+      url: AllUrl.allRegistratedStudentAccountList,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
