@@ -1,6 +1,6 @@
 //main url in the application
-export const baseUrl = "https://singaji-central-server.herokuapp.com";
-// export const baseUrl = "http://localhost:5000";
+// export const baseUrl = "https://singaji-central-server.herokuapp.com";
+export const baseUrl = "http://localhost:5000";
 
 
 
@@ -47,6 +47,9 @@ const AllUrl = {
     UploadDocument: `${baseUrl}/api/upload_document`, // get documents of particular student
     accountStudent: `${baseUrl}/api/get_students_account_list`,
     selfRegisterStudents: `${baseUrl}/api/self_registrated_student`,
+    shiftToAppliedStudent: `${baseUrl}/api/shift_to_applied_students`,
+    deleteSelfAppliedStudents: `${baseUrl}/api/delete_self_applied_students`,
+    
     //_____________________________________
 
     //landing pages urls 
