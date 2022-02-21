@@ -28,7 +28,7 @@ import passKey from "../assests/image/key.svg";
 import "./styles/SettingModalFile.css"
 // import Plus_icon from '../assests/image/Plus_icon.svg'
 
-function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
+function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
 
 
   // --------------- Render count -----------------
@@ -88,20 +88,21 @@ function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
           photo: formik.values.photo1
         });
         console.log(data, ":::::::::::::::::::: ");
-        if(formik.values.newpass === formik.values.newpassAgain){
-        var config = {
-          method: "POST",
-          url: AllUrl.settingApi,
-          headers: {
-            authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          data: data,
-        };}
-       
+        if (formik.values.newpass === formik.values.newpassAgain) {
+          var config = {
+            method: "POST",
+            url: AllUrl.settingApi,
+            headers: {
+              authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            data: data,
+          };
+        }
+
 
       }
-      else{
+      else {
         toast.warn('Enter the same new passwords!', {
           position: "bottom-center",
           autoClose: 4000,
@@ -127,7 +128,7 @@ function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
         setVisibleSe(!visible)
         setShow2(false)
       }
-      if(response.status === 201){
+      if (response.status === 201) {
         toast.warn('There is an problem while uploading new data ', {
           position: "bottom-center",
           autoClose: 4000,
@@ -144,35 +145,35 @@ function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
     },
   });
 
-  const imageToBase64 = async (file,feildName) => {
-    if(file) {
-        const options = {
-            maxSizeMB: 0.01,
-            maxWidthOrHeight: 1920,
-            // useWebWorker: true
+  const imageToBase64 = async (file, feildName) => {
+    if (file) {
+      const options = {
+        maxSizeMB: 0.01,
+        maxWidthOrHeight: 1920,
+        // useWebWorker: true
+      }
+      try {
+        const compressedFile = await imageCompression(file, options);
+        // console.log(compressedFile)
+        console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+        var reader = new FileReader();
+        reader.readAsDataURL(compressedFile)
+        reader.onload = async () => {
+          var Base64 = reader.result
+          // console.log(Base64)
+          formik.setFieldValue("photo1", Base64)
+
+          // setIs_data(true);
         }
-        try {
-            const compressedFile = await imageCompression(file,options);
-            // console.log(compressedFile)
-            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
-            var reader = new FileReader();
-            reader.readAsDataURL(compressedFile)
-            reader.onload = async () => {
-                var Base64 = reader.result
-                // console.log(Base64)
-                formik.setFieldValue("photo1",Base64)
-                
-                // setIs_data(true);
-            }
-            reader.onerror = (err) => {
-                console.log(err);
-            }
-        } catch(error) {
-            console.log(error);
+        reader.onerror = (err) => {
+          console.log(err);
         }
+      } catch (error) {
+        console.log(error);
+      }
 
     }
-}
+  }
 
   return (
     <div>
@@ -199,48 +200,48 @@ function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
         }}
       >
         <CModalBody className="my-modal-body" >
-          <div className="first_div createAdmin ">
+          <div className="main-container createAdmin ">
             <div className=" cross-btn-div d-flex ">
               <img onClick={() => setVisibleSe(!visible)}
-                style={{ height: "22px", width: "22px", cursor: "pointer", marginRight: "14px", marginTop: "15px" }} src={crossButton} alt="close" className="logo_img" />
+                src={crossButton} alt="close" className="cross-button" />
             </div>
-            <div className="second_div justify-content-center  " style={{ marginTop: "0px" }}>
+            <div className="second_div justify-content-center mt-0 ">
               <form onSubmit={formik.handleSubmit} className="d-flex justify-content-center flex-column" >
 
                 <div className="row d-flex justify-content-center" style={{ marginTop: "-85px" }}  >
-                  
 
-                <div className="form-row d-flex justify-content-center  mt-2" style={{cursor: 'pointer'}} >
-                                    {/* {formik.values.photo1 !== '' ? <img style={{cursor: 'pointer',height: '100px',width: '100px',borderRadius: '50%',cursor: 'pointer' , marginTop: "-16px"}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={formik.values.photo1} alt="pppp" />
+
+                  <div className="form-row d-flex justify-content-center  mt-2  " >
+                    {/* {formik.values.photo1 !== '' ? <img style={{cursor: 'pointer',height: '100px',width: '100px',borderRadius: '50%',cursor: 'pointer' , marginTop: "-16px"}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={formik.values.photo1} alt="pppp" />
                                         : <img style={{cursor: 'pointer',height:  '100px',width:  '100px', marginTop: "-16px"}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={personal_png} alt="pppp" /> 
                                     }
                                     <img  alt="Plus_icon" src={Plus_icon} style={{marginTop:'21px', marginLeft:'-11px'}} />
                                     <input type="file" name="photo"  value={formik.values.photo} id="profilePhoto" style={{display: "none"}} accept="image/*" onChange={(e) => {
                                         imageToBase64(e.target.files[0],"photo");
                                     }} /> */}
-                                    <img src={personal_png} alt="logo ssism" className="personal-profile" />{" "}
-                                </div>
+                    <img src={personal_png} alt="logo ssism" className="personal-profile" />{" "}
+                  </div>
 
 
 
 
                 </div>
-                <div className="row d-flex justify-content-center mt-2 " style={{ color: "#5a607f" }}>{userEmail}</div>
-                <div className="row d-flex justify-content-center fw-bold mt-2 " style={{ color: "#5a607f", fontSize: "22px" }}>Edit Profile</div>
+                <div className="row d-flex justify-content-center mt-2 font-color " >{userEmail}</div>
+                <div className="row d-flex justify-content-center fw-bold mt-2 font-color" style={{fontSize: "22px" }}>Edit Profile</div>
 
-                <div className="d-flex flex-column justify-content-center" style={{ alignItems: "center" }}>
+                <div className="d-flex flex-column justify-content-center align-items-center" >
 
                   <input
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className="inputs"
+                    className="inputs name-input"
                     // onClick={(e) => (e.stopPropagation())}
                     // aria-label="email"
                     name="name"
                     type="text"
-                    style={{ width: "270px", marginTop: "32px", height: "40px" }}
                     id="name"
+
                   // placeholder="Enter name "
                   />
                   {formik.errors.name && formik.touched.name ? (
@@ -251,76 +252,76 @@ function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
                     ""
                   )}
                   <div className="  d-flex">
-                    <div className="col-10" style={{marginLeft: "2px"}}>
+                    <div className="col-10" style={{ marginLeft: "2px" }}>
 
-                  <input
-
-
-class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
+                      <input
 
 
-                    value={formik.values.pass}
-                    onChange={formik.handleChange}
-                    onClick={() => setShow(!show)}
-                    
-                    onBlur={formik.handleBlur}
-                    className="inputs"
-                    // aria-label="email"
-                    name="password"
-                    type=""
-                    style={{ width: "270px", marginTop: "38px", height: "40px",marginRight: "-28px" }}
-                    id="password"
-                    placeholder= {!show ? "Password": "Current password"}
-                    />
-                  {formik.errors.password && formik.touched.password ? (
-                    <div style={{ marginRight: "45px" }} className="text-danger fs-6">
-                      {formik.errors.password}
-                    </div>
-                  ) : (
-                    ""
-                    )} 
+                        class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
+
+
+                        value={formik.values.pass}
+                        onChange={formik.handleChange}
+                        onClick={() => setShow(!show)}
+
+                        onBlur={formik.handleBlur}
+                        className="inputs key-icon-input "
+                        // aria-label="email"
+                        name="password"
+                        type=""
+                        // className="key-icon-input"
+                        id="password"
+                        placeholder={!show ? "Password" : "Current password"}
+                      />
+                      {formik.errors.password && formik.touched.password ? (
+                        <div style={{ marginRight: "45px" }} className="text-danger fs-6">
+                          {formik.errors.password}
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
 
                     <div className="col-2">
 
-                  <img src={passKey} height="27px" onClick={() => setShow(!show)}  width="27px" style={{marginTop: "45px",marginLeft: "-25px",cursor:"pointer"}} alt="" />
+                      <img src={passKey} height="25px" onClick={() => setShow(!show)} width="25px" className="key-icon" alt="" />
                     </div>
-                    
-                    </div>
+
+                  </div>
 
                   <div >
-                  {
-                      show ? 
-                     <div id="box" className="box d-flex flex-column justify-content-center"  >
-                        <input type="text"
-                          value={formik.values.newpass}
-                          onChange={formik.handleChange}
-                          name="newpass"
+                    {
+                      show ?
+                        <div id="box" className="box d-flex flex-column justify-content-center"  >
+                          <input type="text"
+                            value={formik.values.newpass}
+                            onChange={formik.handleChange}
+                            name="newpass"
 
-                          placeholder="New password"  className="hidden-inputs" />
-                        {formik.errors.newpass && formik.touched.newpass ? (
-                          <div className="text-danger fs-6">
-                            {formik.errors.newpass}
-                          </div>
-                        ) : (
-                          ""
-                        )}
+                            placeholder="New password" className="hidden-inputs" />
+                          {formik.errors.newpass && formik.touched.newpass ? (
+                            <div className="text-danger fs-6">
+                              {formik.errors.newpass}
+                            </div>
+                          ) : (
+                            ""
+                          )}
 
 
-                        <input type="text"
-                          value={formik.values.newpassAgain}
-                          onChange={formik.handleChange}
-                          name="newpassAgain"
+                          <input type="text"
+                            value={formik.values.newpassAgain}
+                            onChange={formik.handleChange}
+                            name="newpassAgain"
 
-                          placeholder="New password, again" className="hidden-inputs" />
-                        {formik.errors.newpassAgain && formik.touched.newpassAgain ? (
-                          <div className="text-danger fs-6">
-                            {formik.errors.newpassAgain}
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                      </div> : ""
+                            placeholder="New password, again" className="hidden-inputs" />
+                          {formik.errors.newpassAgain && formik.touched.newpassAgain ? (
+                            <div className="text-danger fs-6">
+                              {formik.errors.newpassAgain}
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                        </div> : ""
                     }
                   </div>
 

@@ -129,4 +129,8 @@ input.largerCheckbox {
 }
 
 
-/* ======================== setting modal file css =================== */
+/* ======================== main purplee font color ============================*/
+.font-color{
+  /* style={{ color: "#5a607f" }} */
+  color: #5a607f !important;
+}
