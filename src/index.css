@@ -214,3 +214,7 @@ input.largerCheckbox {
   transition-timing-function: ease-in-out;
   transition: 1.2s;
 } */
+.button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  }

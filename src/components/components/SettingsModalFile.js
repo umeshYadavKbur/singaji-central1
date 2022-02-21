@@ -6,7 +6,7 @@ import {
   // CModalTitle,
   // CModalTitle,
 } from "@coreui/react";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -18,15 +18,30 @@ import LoaderButton from "../assests/common/LoaderButton";
 // import AllUrl from "../../redux/constants/url";
 import axios from 'axios';
 import personal_png from "../assests/image/personal-profile.svg"
-import { useAnimate } from "react-simple-animate";
+// import { useAnimate } from "react-simple-animate";
 import Settings from '../assests/image/setting.svg';
 import AllUrl from "../../redux/constants/url";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import imageCompression from "browser-image-compression";
-import Plus_icon from '../assests/image/Plus_icon.svg'
+import passKey from "../assests/image/key.svg"
+// import Plus_icon from '../assests/image/Plus_icon.svg'
 
 function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
+
+
+  // --------------- Render count -----------------
+  // const[render,setRender] = useState(0);
+  // useEffect(()=>{
+  //   setRender( prevRenderCount => prevRenderCount + 1)
+  // },[])
+  // console.log(`this component rendered ${render} times`)
+
+  // let render = useRef(0);
+  // useEffect(()=>{
+  //   render.current = render.current + 1 ;
+  // },[])
+  // console.log(render.current)
 
   const myname = localStorage.getItem("user");
   const userEmail = localStorage.getItem("email");
@@ -161,7 +176,7 @@ function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
   return (
     <div>
       <CButton
-        className="personal-setting-button"
+        className="personal-setting-button button"
         onClick={() => setVisibleSe(!visible)}
       >
         <img style={{
@@ -234,31 +249,48 @@ function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
                   ) : (
                     ""
                   )}
+                  <div className="  d-flex">
+                    <div className="col-10" style={{marginLeft: "2px"}}>
+
                   <input
+
+
+class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
+
+
                     value={formik.values.pass}
                     onChange={formik.handleChange}
                     onClick={() => setShow(!show)}
-
+                    
                     onBlur={formik.handleBlur}
                     className="inputs"
                     // aria-label="email"
                     name="password"
                     type=""
-                    style={{ width: "270px", marginTop: "38px", height: "40px" }}
+                    style={{ width: "270px", marginTop: "38px", height: "40px",marginRight: "-28px" }}
                     id="password"
-                    placeholder="Current password"
-                  />
+                    placeholder= {!show ? "Password": "Current password"}
+                    />
                   {formik.errors.password && formik.touched.password ? (
-                    <div style={{ marginRight: "95px" }} className="text-danger fs-6">
+                    <div style={{ marginRight: "45px" }} className="text-danger fs-6">
                       {formik.errors.password}
                     </div>
                   ) : (
                     ""
-                  )}
+                    )} 
+                    </div>
+
+                    <div className="col-2">
+
+                  <img src={passKey} height="27px" onClick={() => setShow(!show)}  width="27px" style={{marginTop: "45px",marginLeft: "-25px",cursor:"pointer"}} alt="" />
+                    </div>
+                    
+                    </div>
 
                   <div >
-                    {
-                      show ? <div id="box" className="box d-flex flex-column justify-content-center"  >
+                  {
+                      show ? 
+                     <div id="box" className="box d-flex flex-column justify-content-center"  >
                         <input type="text"
                           value={formik.values.newpass}
                           onChange={formik.handleChange}
