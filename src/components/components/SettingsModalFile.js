@@ -6,7 +6,7 @@ import {
   // CModalTitle,
   // CModalTitle,
 } from "@coreui/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -24,7 +24,8 @@ import AllUrl from "../../redux/constants/url";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import imageCompression from "browser-image-compression";
-import passKey from "../assests/image/key.svg"
+import passKey from "../assests/image/key.svg";
+import "./styles/SettingModalFile.css"
 // import Plus_icon from '../assests/image/Plus_icon.svg'
 
 function CreateAdminPopup({ adminData, createNewAdmin,setShow2 }) {
@@ -296,7 +297,7 @@ class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="but
                           onChange={formik.handleChange}
                           name="newpass"
 
-                          placeholder="New password" style={{ width: "270px", marginTop: "38px", height: "40px" }} className="" />
+                          placeholder="New password"  className="hidden-inputs" />
                         {formik.errors.newpass && formik.touched.newpass ? (
                           <div className="text-danger fs-6">
                             {formik.errors.newpass}
@@ -311,7 +312,7 @@ class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="but
                           onChange={formik.handleChange}
                           name="newpassAgain"
 
-                          placeholder="New password, again" style={{ width: "270px", marginTop: "38px", height: "40px" }} className="" />
+                          placeholder="New password, again" className="hidden-inputs" />
                         {formik.errors.newpassAgain && formik.touched.newpassAgain ? (
                           <div className="text-danger fs-6">
                             {formik.errors.newpassAgain}
@@ -324,7 +325,7 @@ class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="but
                   </div>
 
                 </div>
-                <div style={{ height: "35px" }} ></div>
+                <div style={{ height: `${!show ? "35px" : "20px"}` }} ></div>
                 <button
                   disabled={adminData.loading}
 

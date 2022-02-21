@@ -182,7 +182,7 @@ function FeesRecipt({ accountAction }) {
                     Swal.fire({
                             title: `Confirmation`,
 
-                            html:
+                            html: `Student- ${StudentName} , Amount- ${formik.values.feesAmount} , Insta No- ${formik.values.installmentNo} ` +
                                 '<hr>' +
                                 'Are you sure?' +
                                 '<br>' +
@@ -255,7 +255,7 @@ function FeesRecipt({ accountAction }) {
     // console.log('total fees::',totalFeesAmount,'totalReceivedFees',totalReceivedFees,'totalpendingFees',totalpendingFees);
 
 
-    // console.log(totalFeesAmount);
+    console.log(StudentName);
     return (
         <>
             {loading && (

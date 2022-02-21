@@ -84,7 +84,7 @@ const SidebarLinks = ({ Toggle }) => {
     };
 
     return (
-        <>
+        <div>
             {/* ---- first dropdown---- */}
             <div className="flex-shrink-0">
                 <ul className="list-unstyled m-0">
@@ -302,7 +302,7 @@ const SidebarLinks = ({ Toggle }) => {
                 />
                 <span className="text-dark">Others</span>
             </Link>
-        </>
+        </div>
     );
 };
 
