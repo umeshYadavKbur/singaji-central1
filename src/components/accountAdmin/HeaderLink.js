@@ -26,6 +26,9 @@ const HeaderLink = () => {
         else if (currentLocation === "/account_admin_dashboard/pendingscholarship") {
             return "Pending Scholarship";
         }
+        else if (currentLocation === "/account_admin_dashboard/registeredStudent") {
+            return "Registered student";
+        }
         else if (currentLocation === "/account_admin_dashboard/feesreceiptlist") {
             return "Fees Receipt List";
         }
