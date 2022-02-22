@@ -26,6 +26,7 @@ import UpdatePersonalDetialOfStudent from "../components/accounts/UpdatePersonal
 import DeleteReceiptTable from "../components/DeleteReceiptTable";
 import SelfAppliedStudentTable from "../components/SelfAppliedStudentTable";
 import RegisteredStudent from "../components/accounts/RegisteredStudent";
+import UpdateSelfAppliedStudentDetail from "../components/UpdateSelfAppliedStudentDetail";
 
 function AdminDashboard() {
   const { play, style, isPlaying } = useAnimate({
@@ -78,6 +79,8 @@ function AdminDashboard() {
 
 
             <Route path="addnewstudent" element={<AddNewStudent />} />
+            <Route path="updateselfappliedstudentdetail" element={<UpdateSelfAppliedStudentDetail />} />
+
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
             <Route path="studentprofile" element={<StudentProfile />} />
             <Route path="studentprofile/uploaddocument" element={<UploadDocumentFrom />} />
