@@ -132,7 +132,7 @@ const SidebarLinks = ({ Toggle }) => {
 
                                 {DLink1(currentLocation, "Dashboard", "", "ok", 'Dashboard', 'dashboard-collapse-btn')}
                                 {DLink1(currentLocation, "Fees Stucture", "feesstructuretable", "ok", 'Fees_Stucture', 'dashboard-collapse-btn')}
-                                {DLink1(currentLocation, "My Admin", "admintable", "ok", 'My_Admin', 'dashboard-collapse-btn')}
+                                {DLink1(currentLocation, "Admin List", "admintable", "ok", 'My_Admin', 'dashboard-collapse-btn')}
 
 
                             </li>
