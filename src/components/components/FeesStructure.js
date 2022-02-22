@@ -2,8 +2,6 @@ import {
   CButton,
   CModal,
   CModalBody,
-  // CModalHeader,
-  // CModalTitle,
 } from "@coreui/react";
 import React, { useState } from "react";
 import { Tooltip, Whisper } from "rsuite";
@@ -77,7 +75,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
       }
       else {
         var data = JSON.stringify({
-          branch_name: formik.values.stream,
+          branchName: formik.values.stream,
           starting_year: formik.values.startYear,
           ending_year: formik.values.endYear,
           total_fees: formik.values.totalFees,
@@ -134,7 +132,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
   }
 
   if (original) {
-    formik.values.stream = original.branch_name;
+    formik.values.stream = original.branchName;
     formik.values.startYear = original.starting_year;
     formik.values.endYear = original.ending_year;
   }
@@ -214,7 +212,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                   >
                     <option value='' className="fields form-select"   >
                       {
-                        original ? `${original.branch_name}` : "Stream"
+                        original ? `${original.branchName}` : "Stream"
                       }
                     </option>
                     {

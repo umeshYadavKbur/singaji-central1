@@ -31,9 +31,6 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
   useEffect(() => {
     const fn = async () => {
       const roles = await axios(AllUrl.roleList)
-      // console.log('====================================');
-      // console.log(roles.data);
-      // console.log('====================================');
       setRoles(roles.data)
     }
     fn();
@@ -55,7 +52,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
     initialValues: {
       email: "",
       name: "",
-      role: '',
+      role: "",
     },
     validationSchema,
 
@@ -98,8 +95,8 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
         alignment="center"
         visible={visible}
         onClose={() => {
-          formik.handleReset();
-          // setVisible(false);
+          formik.handleReset()
+          setVisible(false);
         }}
       >
         <CModalBody>
@@ -109,7 +106,7 @@ function CreateAdminPopup({ adminData, createNewAdmin }) {
                 <div>
                   <img onClick={() => setVisible(!visible)}
                     style={{ height: "20px", width: "20px", marginLeft: '110%', marginTop: "-10px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
-                  <h4 className=" text-aligns-center createAdminhead" style={{ color: '#5A607F',  fontWeight: 'bold' }}>
+                  <h4 className=" text-aligns-center createAdminhead" style={{ color: '#5A607F', fontWeight: 'bold' }}>
                     Create Admin
                   </h4>
                   <img src={logo} alt="logo ssism" className="logo_img" />{" "}

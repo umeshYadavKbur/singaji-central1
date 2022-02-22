@@ -4,6 +4,7 @@ import {
   ADMIN_TABLE_DATA_SUCCESS,
   FETCH_ADMIN_TABLE_DATA_SEC,
   FETCH_ADMIN_TABLE_DATA_SUCCESS,
+  FETCH_ADMIN_TABLE_DATA_FAIL
 } from "../../constants/actions";
 
 const initialState = {
@@ -32,7 +33,7 @@ const adminTableReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        table_data: [],
+        // table_data: [],
         error: action.payload,
       };
 
@@ -40,6 +41,11 @@ const adminTableReducer = (state = initialState, action) => {
       return {
         ...state,
         second_loading: true
+      };
+    case FETCH_ADMIN_TABLE_DATA_FAIL:
+      return {
+        ...state,
+        second_loading: false
       };
 
     case FETCH_ADMIN_TABLE_DATA_SUCCESS:

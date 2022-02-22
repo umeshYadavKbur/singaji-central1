@@ -11,19 +11,19 @@ const FeesStructureColumn = [
   },
   {
     header: "Branch Name",
-    accessor: "branch_name",
+    accessor: "branchName",
   },
   {
     header: "Starting Year",
-    accessor: "starting_year",
+    accessor: "startingYear",
   },
   {
     header: "Ending Year",
-    accessor: "ending_year",
+    accessor: "endingYear",
   },
   {
     header: "Total Fees",
-    accessor: "total_fees",
+    accessor: "totalFees",
   },
   {
     header: "Status",

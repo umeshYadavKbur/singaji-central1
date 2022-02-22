@@ -21,10 +21,6 @@ import NoDataFound from '../assests/common/NoDataFound';
 
 function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTableData }) {
     const token = localStorage.getItem("token");
-
-
-
-
     React.useEffect(() => {
         var config = {
             method: "GET",
@@ -72,27 +68,27 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
         },
         {
             header: 'Status',
-            accessor: 'is_active',
+            accessor: 'isActive',
             Cell: ({ row: { original } }) => (
                 <button
                     className="table_btn_size "
                     style={
-                        original.is_active === 1
+                        original.isActive === 1
                             ? ActivateButton
                             : DeactivateButton}
                     onClick={() => {
                         Swal.fire({
-                            title: `${original.is_active === 0 ? 'Active' : 'Deactive'}`,
+                            title: `${original.isActive === 0 ? 'Active' : 'Deactive'}`,
 
                             html:
                                 '<hr>' +
                                 'Are you sure?' +
                                 '<br>' +
-                                `You want to ${original.is_active === 0 ? 'active' : 'deactive'} this admin`,
+                                `You want to ${original.isActive === 0 ? 'active' : 'deactive'} this admin`,
                             showCancelButton: true,
                             showConfirmButton: true,
                             cancelButtonText: 'Cancel',
-                            confirmButtonText: `${original.is_active === 0 ? 'Active' : 'Deactive'} `,
+                            confirmButtonText: `${original.isActive === 0 ? 'Active' : 'Deactive'} `,
                             // confirmButtonText:'Deactive',
                             reverseButtons: true,
                             showCloseButton: true,
@@ -111,8 +107,12 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             }
 
                         }).then(async (result) => {
+                            console.log('====================================');
+                            console.log("++++++++++++++++++++++++++++");
+                            console.log('====================================');
                             if (result.isConfirmed) {
-                                let res = await AdminStatusChange(original);
+                                let res = await AdminStatusChange(original)
+                                console.log(res);
                                 if (res === 200) {
                                     var config = {
                                         method: "GET",
@@ -128,7 +128,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                         })
 
                     }}>
-                    {original.is_active === 1 ? 'Active' : 'Deactive'}
+                    {original.isActive === 1 ? 'Active' : 'Deactive'}
                 </button>
             )
         }

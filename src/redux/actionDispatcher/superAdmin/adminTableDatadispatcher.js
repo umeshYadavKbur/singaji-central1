@@ -126,7 +126,7 @@ const fetchSuccessSecTableData = (data) => {
     payload: data
   };
 };
-const fetchSuccessfailTableData = () => {
+export const fetchSuccessfailTableData = () => {
   return {
     type: FETCH_ADMIN_TABLE_DATA_FAIL,
   };
