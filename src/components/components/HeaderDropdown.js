@@ -66,7 +66,8 @@ const AppHeaderDropdown = ({ userData, logout }) => {
                 height: '1px',
                 opacity: '1'
               }} />
-              <div style={{ cursor: 'pointer' }}>
+                      
+              <div style={{ marginTop: '-23px', cursor: 'pointer' }}>
 
                 <span style={{
                   color: 'white',
@@ -74,7 +75,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
                   marginLeft: '8px'
                 }}>
                   {/* Settings */}
-                  <SettingsModalFile setShow2={setShow2} />
+                  <SettingsModalFile   setShow2={setShow2} />
                 </span>
               </div>
               <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />

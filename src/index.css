@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
+/* -------------------- Common Css -------------------------- */
 
 /* ================================ Sweet Alert ============================ */
 
@@ -137,80 +137,8 @@ input.largerCheckbox {
 }
 
 
-/* ======================== setting modal file css =================== */
-
-.personal-setting-button{
-  background-color: transparent !important;
-  outline: none !important;
-  margin-left: 10px !important;
-  border: none !important;
+/* ======================== main purplee font color ============================*/
+.font-color{
+  /* style={{ color: "#5a607f" }} */
+  color: #5a607f !important;
 }
-
-.my-save-button{
-  background-color: orange;
-  outline: none;
-  border-width: 0px;
-  height: 35px;
-  border-radius: 4px;
-}
-
-
-.setting-modal-div{
-  border-radius: 5px !important;
-  height: 639px;
-}
-
-.cross-btn-div{
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  height: 161px;
-  background-color: #D5DAEF;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: -1px;
-  width: 526px !important;
-  margin-right: 0 !important;
-
-}
-.my-modal-body{
-  padding: 0 !important;
-  width: 526px !important;
-  /* border-radius: 3px !important; */
-}
-
-.personal-profile{
-  height: 85px;
-  width: 115px  !important;
-}
-.setting-save-btn{
-  /* margin-top: '35px' ; */
-  margin-top: 35px;
-  background-color: orange;
-  outline: none;
-  border-width: 0px;
-  width: 270px;
-  height: 40px;
-  color: white;
-  border-radius: 4px;
-}
-.my-form-div{
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  
-}
-
-.first_div{
-  border-radius: 4px;
-}
-
-/* .myAnime{
-  transition-timing-function: ease-in-out;
-  transition: 1.2s;
-
-}
-
-.anime-main-cont .myAnime{
-  transition-timing-function: ease-in-out;
-  transition: 1.2s;
-} */
