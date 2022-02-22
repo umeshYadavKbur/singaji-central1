@@ -237,7 +237,7 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
           </Tooltip>
         }>
           <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
-            navigate("/admin_dashboard/addnewstudent");
+            navigate("/admin_dashboard/updateselfappliedstudentdetail");
             localStorage.setItem('SelfRegistrationEdit', JSON.stringify(original))
           }} />
         </Whisper>
