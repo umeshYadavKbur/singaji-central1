@@ -175,7 +175,11 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
                 };
                 const resultofverify = await axios(config);
                 console.log("resultofverify", resultofverify);
+                console.log("resultofverify", resultofverify.status);
                 if (resultofverify.status === 200) {
+                  Swal.fire({
+                    title: 'Shift To Applied Success',
+                  })
                   var fetchStudentTableConfig = {
                     method: "GET",
                     url: AllUrl.allRegistratedStudent,
@@ -186,8 +190,19 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
                   };
                   fetchStudentTable(fetchStudentTableConfig, true);
                 }
-                else if (resultofverify === 404) {
-                  toast.error('Some field are empty please edit it', {
+                else if(resultofverify.status === 406) {
+                  console.log("404 empty feild");
+                  toast.error('Some field are empty please edit it',{
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                  });
+                } else if(resultofverify.status === 500) {
+                  toast.error('Internal Server Error',{
                     position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -197,19 +212,10 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
                     progress: undefined,
                   });
                 }
-                else if (resultofverify.status === 500) {
-                  toast.error('Internal Server Error', {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: false,
-                    progress: undefined,
-                  });
-                }
-              }
-            })
+              
+            }
+            }).catch((err) =>
+            console.log("err" ,err))
 
           }
 

@@ -421,7 +421,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                 "commitment": formik.values.commitment
             }
             //Remaining the self register student to shift tha account table 
-            editData ?
+            editData || editDataSelf ?
                 updateStudentData(bodyData)
                 :
                 AddNewStudent(bodyData, backToProfilePage)
