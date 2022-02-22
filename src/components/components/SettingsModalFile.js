@@ -48,7 +48,7 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
   const userEmail = localStorage.getItem("email");
   const userId = localStorage.getItem("userId");
   console.log("------------------------------")
-  console.log(myname)
+  // console.log(myname)
 
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -60,9 +60,9 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Please fill the field above"),
-    password: Yup.string().required("Please fill the field above"),
-    newpass: Yup.string().required("Please fill the field above"),
-    newpassAgain: Yup.string().required("Please fill the field above"),
+    // password: Yup.string().required("Please fill the field above"),
+    // newpass: Yup.string().required("Please fill the field above"),
+    // newpassAgain: Yup.string().required("Please fill the field above"),
   });
 
   const formik = useFormik({
@@ -70,53 +70,115 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
       name: myname ? myname : "",
       password: '',
       newpass: '',
-      newpassAgain: ''
+      newpassAgain: '',
+      photo: ''
     },
     validationSchema,
 
     onSubmit: async (values) => {
-      if (formik.values.newpass === formik.values.newpassAgain) {
-        setLoading(true)
-
-        var data = JSON.stringify({
-          userId: userId,
-          name: formik.values.name,
-          password: formik.values.role,
-          oldPassword: formik.values.password,
-          newPassword: formik.values.newpass,
-          confirmPassword: formik.values.newpassAgain,
-          photo: formik.values.photo1
-        });
-        console.log(data, ":::::::::::::::::::: ");
-        if (formik.values.newpass === formik.values.newpassAgain) {
-          var config = {
-            method: "POST",
-            url: AllUrl.settingApi,
-            headers: {
-              authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            data: data,
-          };
-        }
 
 
+
+
+
+      setLoading(true)
+
+      var data = JSON.stringify({
+        userId: userId,
+        name: formik.values.name,
+        password: formik.values.role,
+        oldPassword: formik.values.password,
+        newPassword: formik.values.newpass,
+        confirmPassword: formik.values.newpassAgain,
+        photo: formik.values.photo
+      });
+      console.log(data, ":::::::::::::::::::: ");
+      var config = {
+        method: "POST",
+        url: AllUrl.settingApi,
+        headers: {
+          authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      console.log("form submitted ---------------------")
+      var response;
+      if (formik.values.password === '' && formik.values.newpass === '' && formik.values.newpassAgain === '') {
+
+        response = await axios(config)
+        setLoading(false)
       }
-      else {
-        toast.warn('Enter the same new passwords!', {
+      else if(formik.values.password !== '' && formik.values.newpass === '' && formik.values.newpassAgain === '' ){
+        toast.warn('Enter the remaining two fields!', {
+                position: "bottom-center",
+                 autoClose: 4000,
+                 hideProgressBar: true,
+                 closeOnClick: true,
+                 pauseOnHover: true,
+                 draggable: true,
+                 progress: undefined,
+               });
+               setLoading(false)
+
+      }else if(formik.values.password !== '' && formik.values.newpass !== '' && formik.values.newpassAgain === ''){
+
+        toast.warn('Enter the remaining one field!', {
           position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+           autoClose: 4000,
+           hideProgressBar: true,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+         });
+         setLoading(false)
+      }else{
+        if (formik.values.password !== '' && formik.values.newpass !== '' && formik.values.newpassAgain !== '') {
+          if (formik.values.newpass === formik.values.newpassAgain) {
+            
+            response = await axios(config)
+            setLoading(false)
+          } else {
+            toast.warn('Enter the same new passwords!', {
+              position: "bottom-center",
+              autoClose: 4000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setLoading(false)
+          }
+        }
       }
-      const response = await axios(config);
-      setLoading(false)
+
+
+
+
+      // } else if (formik.values.password !== '' && formik.values.newpass !== '' && formik.values.newpassAgain !== '') {
+      //   if (formik.values.newpass === formik.values.newpassAgain) {
+      //     setLoading(false)
+      //     response = await axios(config)
+
+      //   } else {
+      //     toast.warn('Enter the same new passwords!', {
+      //       position: "bottom-center",
+      //       autoClose: 4000,
+      //       hideProgressBar: true,
+      //       closeOnClick: true,
+      //       pauseOnHover: true,
+      //       draggable: true,
+      //       progress: undefined,
+      //     });
+      //   }
+      // }
+
       if (response.status === 200) {
-        toast.suc('Crendentials updated successfully ', {
+        setLoading(false)
+        toast.success('Crendentials updated successfully ', {
           position: "bottom-center",
           autoClose: 3000,
           hideProgressBar: true,
@@ -128,8 +190,8 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
         setVisibleSe(!visible)
         setShow2(false)
       }
-      if (response.status === 201) {
-        toast.warn('There is an problem while uploading new data ', {
+      if (response.status === 400) {
+        toast.warn('Your current password is invalid', {
           position: "bottom-center",
           autoClose: 4000,
           hideProgressBar: true,
@@ -227,7 +289,7 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
 
                 </div>
                 <div className="row d-flex justify-content-center mt-2 font-color " >{userEmail}</div>
-                <div className="row d-flex justify-content-center fw-bold mt-2 font-color" style={{fontSize: "22px" }}>Edit Profile</div>
+                <div className="row d-flex justify-content-center fw-bold mt-2 font-color" style={{ fontSize: "22px" }}>Edit Profile</div>
 
                 <div className="d-flex flex-column justify-content-center align-items-center" >
 
