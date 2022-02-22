@@ -7,6 +7,9 @@ import axios from 'axios'
 import * as Yup from "yup";
 import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react'
+import { connect } from 'react-redux';
+import { accountAction } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
+import { useNavigate } from 'react-router-dom';
 
 
 function UpdateStudentPersonalInfo({ handleClose }) {
@@ -35,7 +38,7 @@ function UpdateStudentPersonalInfo({ handleClose }) {
             /////////////////////////
             const villageNamesRes = await axios(allUrls.villageNameList)
             let newVillageName = [];
-            villageNamesRes.data.forEach((ele) => { newVillageName.push({ 'label': ele.villagename, 'value': ele.villagename }) })
+            villageNamesRes.data.forEach((ele) => { newVillageName.push({ 'label': ele.villageName, 'value': ele.villageName }) })
             // console.log(newVillageName);
             setVillageNames(newVillageName);
         }
@@ -51,8 +54,8 @@ function UpdateStudentPersonalInfo({ handleClose }) {
         dob: StudentProfileData ? StudentProfileData.accountInfo.dob : '',
         village: StudentProfileData ? StudentProfileData.accountInfo.village : '',
         streamName: StudentProfileData ? StudentProfileData.accountInfo.branch : '',
-        aadharNumber: StudentProfileData ? (StudentProfileData.accountInfo.aadarNo).toString().match(/.{4}/g).join(' ') : '',
-        EnrollmentNumber: '',
+        aadharNumber: StudentProfileData ? (StudentProfileData.accountInfo.aadharNo).toString().match(/.{4}/g).join(' ') : '',
+        EnrollmentNumber: StudentProfileData ? StudentProfileData.accountInfo.enrollmentNo : '',
     }
 
     const validationSchema = Yup.object({
@@ -85,17 +88,17 @@ function UpdateStudentPersonalInfo({ handleClose }) {
                 "dob": formik.values.dob,
                 "mobile": formik.values.contactNumber,
                 "fatherContactNumber": formik.values.FatherContactNumber,
-                "aadarNo": formik.values.aadharNumber.split(' ').join(''),
+                "aadharNo": formik.values.aadharNumber.split(' ').join(''),
                 "village": formik.values.village,
                 "enrollmentNo": formik.values.EnrollmentNumber,
 
             }
-            
+            const token = localStorage.getItem("token");
             var config = {
                 method: 'post',
                 url: allUrls.updatePersonalInformation,
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 data: UpdatePersonalInfoData
@@ -118,6 +121,27 @@ function UpdateStudentPersonalInfo({ handleClose }) {
                     handleClose()
                     , 2000
                 )
+                let backData = JSON.stringify({
+                    "stdId": StudentProfileData.accountInfo.stdId,
+                });
+                let getBackData = {
+                    method: 'post',
+                    url: allUrls.allInfoOfActiveStudent,
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    data: backData
+                };
+                axios(getBackData)
+                    .then(function (response) {
+
+                        console.log(response);
+                        if (response.status === 200) {
+                            localStorage.setItem('userEdit', JSON.stringify(response.data));
+                            window.location.reload();
+                        }
+                    })
             }
             else if (response.status === 400) {
                 toast.warn('Invalid Email', {
@@ -402,5 +426,10 @@ function UpdateStudentPersonalInfo({ handleClose }) {
         </>
     )
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        accountAction: (config, navigate, is_reciptBtn, setLoading) => dispatch(accountAction(config, navigate, is_reciptBtn, setLoading)),
+    };
+};
 
-export default UpdateStudentPersonalInfo
+export default connect(null, mapDispatchToProps)(UpdateStudentPersonalInfo);

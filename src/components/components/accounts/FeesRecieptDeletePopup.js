@@ -31,7 +31,7 @@ function FeesRecieptDeletePopup({ data }) {
 
     const token = localStorage.getItem("token");
     const stdId = data.stdId
-    const AccountsReceiptNo = data.AccountsReceiptNo
+    const AccountsReceiptNo = data.accountsReceiptNo
     // console.log(adminData);
 
     const [visible, setVisible] = useState(false);
@@ -56,9 +56,9 @@ function FeesRecieptDeletePopup({ data }) {
             console.log(data.stdId);
             var resultData = JSON.stringify({
                 stdId: stdId,
-                AccountsReceiptNo: AccountsReceiptNo,
-                report_remark: formik.values.remark,
-                is_report: "true"
+                accountsReceiptNo: AccountsReceiptNo,
+                reportRemark: formik.values.remark,
+                isReport: "true"
             });
 
             console.log(resultData)

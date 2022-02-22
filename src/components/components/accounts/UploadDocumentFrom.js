@@ -24,6 +24,7 @@ function UploadDocumentFrom() {
 
     const initialValues = {
         PHOTO: '',//
+        COMMITMENT:'',
         BANK_PASSBOOK: '',//
         AADHAR_CARD: '',////
         CAST_CERTIFICATE: '',//
@@ -55,11 +56,11 @@ function UploadDocumentFrom() {
             if (response.status === 200) {
                 const data = response.data;
                 console.log(data)
-                data.forEach((ele) => { setImageDataOnline((val) => { return { ...val, [ele.doc_type]: ele.doc_Url } }) })
+                data.forEach((ele) => { setImageDataOnline((val) => { return { ...val, [ele.docType]: ele.docUrl } }) })
               let  arrayObj = data.map(ele => {
                     return {
-                      title: ele.doc_type,
-                      url: ele.doc_Url
+                      title: ele.docType,
+                      url: ele.docUrl
                     };
                   });
                   setImageForLightBox(arrayObj);
@@ -92,7 +93,7 @@ function UploadDocumentFrom() {
             let img_obj_db = [];
             Object.entries(imgData).forEach(([key, value]) => {
                 if (value !== '') {
-                    img_obj_db.push({ document_type: key, base64Data: value })
+                    img_obj_db.push({ documentType: key, base64Data: value })
                     console.log(key)
                 }
             })
@@ -244,6 +245,7 @@ function UploadDocumentFrom() {
 
                 <div className="row justify-content-center m-1">
                     {<ImgDiv IMG={imgData.PHOTO} ONLINE_IMG={imgDataOnline.PHOTO} DISPLAY_NAME={'Passport Photo'} NAME_FOR_FILE={'PHOTO'} />}
+                    {<ImgDiv IMG={imgData.COMMITMENT} ONLINE_IMG={imgDataOnline.COMMITMENT} DISPLAY_NAME={'Commitment'} NAME_FOR_FILE={'COMMITMENT'} />}
                     {<ImgDiv IMG={imgData.TENTH_MARKSHEET} ONLINE_IMG={imgDataOnline.TENTH_MARKSHEET} DISPLAY_NAME={'10th Marksheet'} NAME_FOR_FILE={'TENTH_MARKSHEET'} />}
                     {<ImgDiv IMG={imgData.TWELTH_MARKSHEET} ONLINE_IMG={imgDataOnline.TWELTH_MARKSHEET} DISPLAY_NAME={'12th Marksheet'} NAME_FOR_FILE={'TWELTH_MARKSHEET'} />}
                     {<ImgDiv IMG={imgData.AADHAR_CARD} ONLINE_IMG={imgDataOnline.AADHAR_CARD} DISPLAY_NAME={'Aadhar Card'} NAME_FOR_FILE={'AADHAR_CARD'} />}

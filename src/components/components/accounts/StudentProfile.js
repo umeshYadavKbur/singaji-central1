@@ -60,7 +60,7 @@ const style = {
     pb: 3,
 };
 
-function StudentProfile() {
+function StudentProfile({ accountAction }) {
     // const [branchNames,setBranchNames] = useState([{subjects: 'loading...',id: 0}])
     // const [villageNames,setVillageNames] = useState([{label: 'loading...',villageId: 0}])
     const [loaderLoading,setLoaderLoading] = useState(false)
@@ -108,19 +108,19 @@ function StudentProfile() {
     const initialValues = {
 
         
-        accountStatus: StudentProfileData ? StudentProfileData.accountInfo.is_active : '',
+        accountStatus: StudentProfileData ? StudentProfileData.accountInfo.isActive : '',
         remark: StudentProfileData ? StudentProfileData.accountInfo.remark : '',
-        GKB_Amount: StudentProfileData ? StudentProfileData.accountInfo.GKB_Amount : '',
-        Busfee: StudentProfileData ? StudentProfileData.accountInfo.Busfee : '',
-        reg_Fees: StudentProfileData ? StudentProfileData.accountInfo.reg_Fees : '',
-        Tutionfee: StudentProfileData ? StudentProfileData.accountInfo.Tutionfee : '',
+        GKB_Amount: StudentProfileData ? StudentProfileData.accountInfo.GKBAmount : '',
+        Busfee: StudentProfileData ? StudentProfileData.accountInfo.busFee : '',
+        reg_Fees: StudentProfileData ? StudentProfileData.accountInfo.regFees : '',
+        Tutionfee: StudentProfileData ? StudentProfileData.accountInfo.tutionFee : '',
         year: StudentProfileData ? StudentProfileData.accountInfo.year : '',
-        Firstinstallment: StudentProfileData ? StudentProfileData.accountInfo.Firstinstallment : '',
-        FirstinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.FirstinstallmentDate : '',
-        Secondinstallment: StudentProfileData ? StudentProfileData.accountInfo.Secondinstallment : '',
-        SecondinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.SecondinstallmentDate : '',
-        Thirdinstallment: StudentProfileData ? StudentProfileData.accountInfo.Thirdinstallment : '',
-        ThirdinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.ThirdinstallmentDate : '',
+        Firstinstallment: StudentProfileData ? StudentProfileData.accountInfo.firstInstallment : '',
+        FirstinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.firstInstallmentDate : '',
+        Secondinstallment: StudentProfileData ? StudentProfileData.accountInfo.secondInstallment : '',
+        SecondinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.secondInstallmentDate : '',
+        Thirdinstallment: StudentProfileData ? StudentProfileData.accountInfo.thirdInstallment : '',
+        ThirdinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.thirdInstallmentDate : '',
         sponsorshipType: StudentProfileData ? StudentProfileData.accountInfo.sponsorshipType : '',
         feesScheme: StudentProfileData ? StudentProfileData.accountInfo.feesScheme : '',
         registrationNumber: StudentProfileData ? StudentProfileData.accountInfo.registrationNumber : '',
@@ -144,6 +144,7 @@ function StudentProfile() {
         Thirdinstallment: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
         ThirdinstallmentDate: Yup.string().required("Required!"),
         feesScheme: Yup.string().required("Required!"),
+        sponsorshipType: Yup.string().required("Required!"),
 
 
 
@@ -160,27 +161,28 @@ function StudentProfile() {
 
             const UpdateAccountInfoData = {
                 "stdId": StudentProfileData.accountInfo.stdId,
-                "is_active": formik.values.accountStatus,
+                "isActive": formik.values.accountStatus,
                 "feesScheme": formik.values.feesScheme,
-                "Tutionfee": formik.values.Tutionfee,
-                "Scholarship": '',
+                "tutionFee": formik.values.Tutionfee,
+                "sponsorshipType": formik.values.sponsorshipType,
                 'year':formik.values.year,
-                "reg_Fees": formik.values.reg_Fees,
-                "Busfee": formik.values.Busfee,
-                "GKB_Amount": formik.values.GKB_Amount,
-                "Firstinstallment": formik.values.Firstinstallment,
-                "FirstinstallmentDate": formik.values.FirstinstallmentDate,
-                "Secondinstallment": formik.values.Secondinstallment,
-                "SecondinstallmentDate": formik.values.SecondinstallmentDate,
-                "Thirdinstallment": formik.values.Thirdinstallment,
-                "ThirdinstallmentDate": formik.values.ThirdinstallmentDate,
+                "regFees": formik.values.reg_Fees,
+                "busFee": formik.values.Busfee,
+                "GKBAmount": formik.values.GKB_Amount,
+                "firstInstallment": formik.values.Firstinstallment,
+                "firstInstallmentDate": formik.values.FirstinstallmentDate,
+                "secondInstallment": formik.values.Secondinstallment,
+                "secondInstallmentDate": formik.values.SecondinstallmentDate,
+                "thirdInstallment": formik.values.Thirdinstallment,
+                "thirdInstallmentDate": formik.values.ThirdinstallmentDate,
                 "remark": formik.values.remark
             }
+            const token = localStorage.getItem("token");
             var config = {
                 method: 'post',
                 url: allUrls.updateAccountInformation,
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 data: UpdateAccountInfoData
@@ -200,6 +202,27 @@ function StudentProfile() {
                     draggable: true,
                     progress: undefined,
                 });
+                let backData = JSON.stringify({
+                    "stdId": StudentProfileData.accountInfo.stdId,
+                });
+                let getBackData = {
+                    method: 'post',
+                    url: allUrls.allInfoOfActiveStudent,
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    data: backData
+                };
+                axios(getBackData)
+                    .then(function (response) {
+
+                        console.log(response);
+                        if (response.status === 200) {
+                            localStorage.setItem('userEdit', JSON.stringify(response.data));
+                            window.location.reload();
+                        }
+                    })
             }
             else if(response.status === 400) {
                 setLoaderLoading(false)

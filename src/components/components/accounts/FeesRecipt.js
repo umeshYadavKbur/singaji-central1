@@ -45,9 +45,9 @@ function FeesRecipt({ accountAction }) {
 
     (StudentAccountData.pendingFee).forEach((ele) => {
 
-        totalFeesAmount = totalFeesAmount + parseInt(ele.FeesAmount)
-        totalReceivedFees = totalReceivedFees + parseInt(ele.ReceivedFees)
-        totalpendingFees = totalpendingFees + parseInt(ele.PendingFees)
+        totalFeesAmount = totalFeesAmount + parseInt(ele.feesAmount)
+        totalReceivedFees = totalReceivedFees + parseInt(ele.receivedFees)
+        totalpendingFees = totalpendingFees + parseInt(ele.pendingFees)
 
     })
 
@@ -124,15 +124,15 @@ function FeesRecipt({ accountAction }) {
             var submitData = JSON.stringify({
                 "stdId": StudentAccountData.accountInfo.stdId,
                 "year": formik.values.studentClassYear,
-                "ReceivedAmount": formik.values.feesAmount.split(',').join(''),
-                "LateFeeAmount": formik.values.LateFeeAmount.split(',').join(''),
+                "receivedAmount": formik.values.feesAmount.split(',').join(''),
+                "lateFeeAmount": formik.values.LateFeeAmount.split(',').join(''),
                 "waiveOf": formik.values.waiveOff.split(',').join(''),
-                "InstallmentNo": formik.values.installmentNo,
-                "ReceivedType": formik.values.payBy,
-                "ChequeNo": formik.values.ChequeNo,
-                "ChequeDate": formik.values.chequeDate,
-                "BankName": formik.values.BankName,
-                "Remark": formik.values.Remark
+                "installmentNo": formik.values.installmentNo,
+                "receivedType": formik.values.payBy,
+                "chequeNo": formik.values.ChequeNo,
+                "chequeDate": formik.values.chequeDate,
+                "bankName": formik.values.BankName,
+                "remark": formik.values.Remark
             })
 
             console.log(JSON.parse(submitData))
@@ -481,13 +481,13 @@ function FeesRecipt({ accountAction }) {
                                     <label  htmlFor="">{pendingFee.year === 'I' ? 'First Year' : pendingFee.year === 'II' ? 'Second Year' : 'Third Year'}</label>
                                 </div>
                                 <div className="col">
-                                    <label  htmlFor="">{pendingFee.FeesAmount}</label>
+                                    <label  htmlFor="">{pendingFee.feesAmount}</label>
                                 </div>
                                 <div className="col">
-                                    <label  htmlFor="">{pendingFee.ReceivedFees}</label>
+                                    <label  htmlFor="">{pendingFee.receivedFees}</label>
                                 </div>
                                 <div className="d-flex col-2">
-                                    <label  htmlFor="">{pendingFee.PendingFees}</label>
+                                    <label  htmlFor="">{pendingFee.pendingFees}</label>
                                 </div>
                             </div>
                         ))}
@@ -549,7 +549,7 @@ function FeesRecipt({ accountAction }) {
                                                     </p>
                                                 </div>
                                                 <div className="d-flex col justify-content-end ">
-                                                    <p className='p-1' style={{ fontSize: '12px', margin: "auto" ,color: 'white' }}>{StudentAccountData.AccountsReceiptNo}</p>
+                                                    <p className='p-1' style={{ fontSize: '12px', margin: "auto" ,color: 'white' }}>{StudentAccountData.accountsReceiptNo}</p>
                                                 </div>
                                             </div>
 
@@ -560,7 +560,7 @@ function FeesRecipt({ accountAction }) {
                                                         <p className='p-1 m-0' style={{ fontSize: '15px', color: '#656A87' }}>
                                                             <span style={{ fontSize: '13px' }}>Date</span>
                                                             <br />
-                                                            {StudentAccountData.AccountsReceiptDate}
+                                                            {StudentAccountData.accountsReceiptDate}
                                                         </p>
                                                     </div>
                                                     <div className="d-flex col justify-content-end ">
@@ -574,7 +574,7 @@ function FeesRecipt({ accountAction }) {
                                                     <div className="col">
                                                         <p className='p-1 m-0' style={{ fontSize: '15px', color: '#656A87' }}>
                                                             <span style={{ fontSize: '13px' }}>Pay by</span> <br />
-                                                            {StudentAccountData.ReceivedType}
+                                                            {StudentAccountData.receivedType}
                                                         </p>
                                                     </div>
                                                     <div className="d-flex col justify-content-end ">
@@ -590,8 +590,8 @@ function FeesRecipt({ accountAction }) {
                                                     <div className="col">
                                                         <p className='p-1 m-0' style={{ fontSize: '15px', color: 'white' }}>
 
-                                                            ₹ {StudentAccountData.ReceivedAmount}  <br />
-                                                            <span style={{ fontSize: '12px' }}>Inst.{StudentAccountData.InstallmentNo}</span>
+                                                            ₹ {StudentAccountData.receivedAmount}  <br />
+                                                            <span style={{ fontSize: '12px' }}>Inst.{StudentAccountData.installmentNo}</span>
                                                         </p></div>
 
                                                     <div className="col-4 d-flex justify-content-end ">

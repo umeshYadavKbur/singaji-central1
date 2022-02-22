@@ -84,16 +84,16 @@ const downloadPdf = (data) => {
 
         data.forEach((ele, i) => {
             footerHeight += H;
-            ReceivedAmount += parseInt(ele.ReceivedAmount);
-            RemainAmount += parseInt(ele.RemainAmount)
+            ReceivedAmount += parseInt(ele.receivedAmount);
+            RemainAmount += parseInt(ele.remainAmount)
             doc.text((count++).toString(), xPosition + 48 + 3, yPosition + (i * H))
             doc.text((ele.name)?.toString(), xPosition + 125, yPosition + (i * H))
             doc.text(ele.fathersName, xPosition + 285, yPosition + (i * H))
             doc.text(`${ele.branch}( ${ele.year} )`, xPosition + 492, yPosition + (i * H))
             doc.text(ele.village, xPosition + 659, yPosition + (i * H))
             doc.text((ele.mobile)?.toString(), xPosition + 817, yPosition + (i * H))
-            doc.text((ele.ReceivedAmount)?.toString(), xPosition + 1054, yPosition + (i * H))
-            doc.text((ele.RemainAmount)?.toString(), xPosition + 1247, yPosition + (i * H))
+            doc.text((ele.receivedAmount)?.toString(), xPosition + 1054, yPosition + (i * H))
+            doc.text((ele.remainAmount)?.toString(), xPosition + 1247, yPosition + (i * H))
             // doc.text('-', xPosition + 1238, yPosition + (i * H))
 
 

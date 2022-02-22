@@ -80,13 +80,13 @@ function SelectColumnFilter({
     else if (id === 'trackName') offsetObj = [93, 18]
     else if (id === 'year') offsetObj = [33, 18]
     else if (id === 'joinBatch') offsetObj = [50, 18]
-    else if (id === 'is_active') offsetObj = [33, 18]
+    else if (id === 'isActive') offsetObj = [33, 18]
     else if (id === 'gender') offsetObj = [33, 18]
 
     let name = id;
 
     switch (id) {
-        case 'is_active':
+        case 'isActive':
             name = 'Student Status';
             break;
         case 'year':
@@ -125,7 +125,7 @@ function SelectColumnFilter({
                             {options.map((option, i) => {
                                 let option_label = option;
 
-                                if (id === 'is_active') {
+                                if (id === 'isActive') {
                                     if (option === 'true')
                                         option_label = 'Active'
                                     else
@@ -362,7 +362,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             filter: "",
         }, {
             header: () => <span style={{ display: 'none', width: '0px' }}></span>,
-            accessor: "is_active",
+            accessor: "isActive",
             Filter: SelectColumnFilter,
             filter: MultipleFilter,
             Cell: ({ row: { original } }) => (
@@ -436,12 +436,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         },
         {
             header: 'Received Fees',
-            accessor: 'ReceivedAmount',
+            accessor: 'receivedAmount',
             Cell: ({ row: { original } }) => (
                 <div className='circle-main align-items-center'>
                     <div className="d-flex align-items-center">
                         <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000", marginRight: "10px", marginLeft: "17px" }}></span>
-                        {original.ReceivedAmount}
+                        {original.receivedAmount}
                     </div>
                 </div>
             ),
@@ -463,12 +463,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
         {
             header: 'Pending Fees',
-            accessor: 'RemainAmount',
+            accessor: 'remainAmount',
             Cell: ({ row: { original } }) => (
                 <div className='circle-main align-items-center'>
                     <div className="d-flex align-items-center">
                         <span className='recieved-fee-circle' style={{ backgroundColor: "#FCE83A", marginRight: "10px", marginLeft: "15px" }}></span>
-                        {original.RemainAmount}
+                        {original.remainAmount}
                     </div>
                 </div>
             ),
@@ -536,19 +536,19 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         },
         {
             header: 'Date',
-            accessor: 'AccountsReceiptDate',
+            accessor: 'accountsReceiptDate',
             Filter: "",
             filter: "",
         },
         {
             header: 'Received amount',
-            accessor: 'ReceivedAmount',
+            accessor: 'receivedAmount',
             Filter: "",
             filter: "",
         },
         {
             header: 'Waive Off amount',
-            accessor: 'WaiveOff',
+            accessor: 'waiveOff',
             Filter: "",
             filter: "",
         }
@@ -658,8 +658,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 let data = Object.assign({}, row.original);
                 console.log(data);
                 delete data.photo;
-                if (data?.ReceivedAmount)
-                    data.ReceivedAmount = (data?.ReceivedAmount)?.toString();
+                if (data?.receivedAmount)
+                    data.receivedAmount = (data?.receivedAmount)?.toString();
                 console.log(data);
                 exportData.push(data)
                 // console.log(selectedData);
@@ -686,12 +686,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         let TpaidAmountByDailyReport = 0;
         data.forEach((ele) => {
             ele = ele.original
-            RAmount += ele?.RemainAmount
-            TAmount += ele?.TotalFees
+            RAmount += ele?.remainAmount
+            TAmount += ele?.totalFees
 
-            TpaidAmount += ele?.ReceivedAmount;
-            TpaidAmountByDailyReport += ele?.ReceivedAmount
-            WaiveOff += ele?.WaiveOff;
+            TpaidAmount += ele?.receivedAmount;
+            TpaidAmountByDailyReport += ele?.receivedAmount
+            WaiveOff += ele?.waiveOff;
         })
 
         setMoneyCount((val) => {
