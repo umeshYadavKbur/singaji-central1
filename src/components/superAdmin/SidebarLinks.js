@@ -73,7 +73,7 @@ const SidebarLinks = ({ Toggle }) => {
                             }
                         })
                     }
-                    setActiveDropdown(id); 
+                    setActiveDropdown(id);
                     setActiveTab(parentId)
                 }}
             >
@@ -133,7 +133,7 @@ const SidebarLinks = ({ Toggle }) => {
                                 {DLink1(currentLocation, "Dashboard", "", "ok", 'Dashboard', 'dashboard-collapse-btn')}
                                 {DLink1(currentLocation, "Fees Stucture", "feesstructuretable", "ok", 'Fees_Stucture', 'dashboard-collapse-btn')}
                                 {DLink1(currentLocation, "My Admin", "admintable", "ok", 'My_Admin', 'dashboard-collapse-btn')}
-                            
+
 
                             </li>
                         </ul>
@@ -229,7 +229,7 @@ const SidebarLinks = ({ Toggle }) => {
                                 {DLink1(currentLocation, "Pending Scholarship", "pendingscholarship", "ok", "Pending_students", "account-collapse-btn")}
                                 {DLink1(currentLocation, "Fees Receipt List", "feesreceiptlist", "ok", "Fees_receiptlist", 'account-collapse-btn')}
                                 {DLink1(currentLocation, "Reported Receipt", "reportedreceipt", "ok", "Fees_receipt_del_req", 'account-collapse-btn')}
-                                {DLink1(currentLocation, "Registered Student", "registeredStudent", "ok", 'Registeret_Student', 'dashboard-collapse-btn')}
+                                {DLink1(currentLocation, "Register Student", "registeredStudent", "ok", "registered_student_table", 'account-collapse-btn')}
                             </li>
                         </ul>
                     </div>

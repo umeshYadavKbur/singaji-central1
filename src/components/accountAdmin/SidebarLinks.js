@@ -100,6 +100,7 @@ const SidebarLinks = ({ Toggle }) => {
                                 {DLink1(currentLocation, "Student Account", "studentaccounttable", "ok", "Student_account", 'account-collapse-btn')}
                                 {DLink1(currentLocation, "Pending Scholarship", "pendingscholarship", "ok", "Pending_students", "account-collapse-btn")}
                                 {DLink1(currentLocation, "Fees Receipt List", "feesreceiptlist", "ok", "Fees_receiptlist", 'account-collapse-btn')}
+                                {DLink1(currentLocation, "Register Student", "registeredStudent", "ok", "registered_student_table", 'account-collapse-btn')}
                             </li>
                         </ul>
                     </div>

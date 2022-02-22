@@ -29,7 +29,7 @@ import AllUrl from "../../redux/constants/url"
 import updown_sort from '../assests/image/updown_sort.svg'
 import { DeactivateButton, PaidButton, UnpaidButton } from "../assests/common/Color";
 import Pagination from "../assests/common/Pagination";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Tooltip, Whisper } from "rsuite";
 import NoDataFound from "../assests/common/NoDataFound";
 
@@ -37,9 +37,10 @@ import NoDataFound from "../assests/common/NoDataFound";
 
 
 function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
+
   const token = localStorage.getItem("token");
   const navigate = useNavigate()
-
+  var AppliedStudent;
   const [columns] = React.useState([
     {
       header: "S.No",
@@ -78,11 +79,11 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       accessor: "receive_fees_status",
       Cell: ({ row: { original } }) => (
         <div className='circle-main align-items-center'>
-            <div className="d-flex align-items-center">
-            {original.acc_reg_fees_status === 'Paid' ? <span className='recieved-fee-circle' style={{backgroundColor: "#56F000",marginRight: "10px",marginLeft: "15px"}}></span> : <span className='recieved-fee-circle' style={{backgroundColor: "#F00018", marginRight: "10px", marginLeft: "15px" }}></span>}
-            </div>
+          <div className="d-flex align-items-center">
+            {original.acc_reg_fees_status === 'Paid' ? <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000", marginRight: "10px", marginLeft: "15px" }}></span> : <span className='recieved-fee-circle' style={{ backgroundColor: "#F00018", marginRight: "10px", marginLeft: "15px" }}></span>}
+          </div>
         </div>
-    ),
+      ),
     },
     {
       header: "Receiver",
@@ -181,7 +182,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           {original.reg_fees_status}
         </button>)
     },
-   
+
     {
       header: 'Edit',
       accessor: 'icon',
@@ -193,8 +194,9 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           </Tooltip>
         }>
           <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
-            navigate("/admin_dashboard/addnewstudent");
+            navigate("/admin_dashboard/addnewstudent")
             localStorage.setItem('RegistrationEdit', JSON.stringify(original))
+            localStorage.setItem('SelfRegistrationEdit', JSON.stringify(original))
           }} />
 
         </Whisper>

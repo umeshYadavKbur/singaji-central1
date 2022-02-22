@@ -3,7 +3,7 @@ import * as React from "react";
 
 import Edit_icon from '../assests/image/Edit_icon.svg'
 import Swal from 'sweetalert2'
-import {GlobalFilter} from "./tableComponents/GlobalFilter";
+import { GlobalFilter } from "./tableComponents/GlobalFilter";
 import {
   useTable,
   useSortBy,
@@ -11,28 +11,28 @@ import {
   usePagination,
   useRowSelect,
 } from "react-table";
-import {ToastContainer} from "react-toastify";
-import {toast} from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Loader from '../assests/common/Loader';
-import {Fragment,useMemo} from "react";
+import { Fragment, useMemo } from "react";
 
 
 import "./styles/Table.css";
-import {fetchStudentTable} from "../../redux/actionDispatcher/superAdmin/studentTableDatadispatcher";
+import { fetchStudentTable } from "../../redux/actionDispatcher/superAdmin/studentTableDatadispatcher";
 import SkeletonColor from "../../helpers/Skeletrone";
 import Archived_icon from "../assests/image/Archived_icon.svg"
-import {TableCheckbox} from "./tableComponents/TableCheckbox";
+import { TableCheckbox } from "./tableComponents/TableCheckbox";
 // import AddNewStudent from "./AddNewStudent";
 import AllUrl from "../../redux/constants/url"
 import updown_sort from '../assests/image/updown_sort.svg'
-import {DeactivateButton,PaidButton,UnpaidButton} from "../assests/common/Color";
+import { DeactivateButton, PaidButton, UnpaidButton } from "../assests/common/Color";
 import Pagination from "../assests/common/Pagination";
-import {useNavigate} from "react-router-dom";
-import {Tooltip,Whisper} from "rsuite";
+import { useNavigate } from "react-router-dom";
+import { Tooltip, Whisper } from "rsuite";
 import NoDataFound from "../assests/common/NoDataFound";
-import {fontSize} from "@mui/system";
+import { fontSize } from "@mui/system";
 import delete_icon from "../../components/assests/image/delete_Icon.svg"
 import filtericon from "../../components/assests/image/AccountIcons/filter.svg";
 import rightArrow from '../../components/assests/image/right_arrow_icon.svg'
@@ -48,16 +48,17 @@ import {
 
 // import { baseUrl } from "../../redux/constants/url";
 
-export const MultipleFilter = (rows,accessor,filterValue) => {
+export const MultipleFilter = (rows, accessor, filterValue) => {
   const arr = [];
   rows.forEach((val) => {
-    if(filterValue.includes(val.original[accessor])) arr.push(val);
+    if (filterValue.includes(val.original[accessor])) arr.push(val);
   });
   return arr;
 };
 
 
-function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
+function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
+
   const token = localStorage.getItem("token");
   const navigate = useNavigate()
 
@@ -65,7 +66,7 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
     {
       header: "S.No",
       accessor: "Srno",
-      Cell: ({row: {original,index}}) => {
+      Cell: ({ row: { original, index } }) => {
         return (index + 1)
       },
       Filter: "",
@@ -108,13 +109,21 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
       Filter: "",
       filter: "",
     },
-
+    {
+      header: "Date",
+      accessor: "createdAt",
+      Cell: ({ row: { original, index } }) => {
+        let word = original.createdAt;
+        let words = word.split('T');
+        return (words[0])
+      }
+    },
     {
       header: "STA",
       accessor: "STA",
       Filter: "",
       filter: "",
-      Cell: ({row: {original}}) => (
+      Cell: ({ row: { original } }) => (
         <button
           className="table_btn_size"
           style={DeactivateButton}
@@ -149,11 +158,12 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
               }
 
             }).then(async (result) => {
-              console.log("original values are ::",original)
+              console.log("original values are ::", original)
 
-              if(result.isConfirmed) {
+              if (result.isConfirmed) {
                 let data = JSON.stringify({
-                  stdId:original.id})
+                  stdId: original.id
+                })
                 var config = {
                   method: "POST",
                   url: AllUrl.shiftToAppliedStudent,
@@ -163,9 +173,9 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
                   },
                   data: data
                 };
-                const resultofverify = await axios (config);
-                console.log("resultofverify",resultofverify);
-                if(resultofverify.status === 200) {
+                const resultofverify = await axios(config);
+                console.log("resultofverify", resultofverify);
+                if (resultofverify.status === 200) {
                   var fetchStudentTableConfig = {
                     method: "GET",
                     url: AllUrl.allRegistratedStudent,
@@ -174,11 +184,10 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
                       "Content-Type": "application/json",
                     },
                   };
-                  fetchStudentTable(fetchStudentTableConfig,true);
+                  fetchStudentTable(fetchStudentTableConfig, true);
                 }
-                else if(resultofverify === 404)
-                {
-                  toast.error('Some field are empty please edit it',{
+                else if (resultofverify === 404) {
+                  toast.error('Some field are empty please edit it', {
                     position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -188,9 +197,8 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
                     progress: undefined,
                   });
                 }
-                else if(resultofverify.status === 500)
-                {
-                  toast.error('Internal Server Error',{
+                else if (resultofverify.status === 500) {
+                  toast.error('Internal Server Error', {
                     position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -215,18 +223,17 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
       accessor: 'icon',
       Filter: "",
       filter: "",
-      Cell: ({row: {original}}) => (
+      Cell: ({ row: { original } }) => (
         // <i onClick={() => {alert("hii")}} class="far fa-edit"></i>
         <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
           <Tooltip>
             Edit Student Info
           </Tooltip>
         }>
-          <img src={Edit_icon} style={{cursor: "pointer"}} alt="Edit" onClick={() => {
+          <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
             navigate("/admin_dashboard/addnewstudent");
-            localStorage.setItem('RegistrationEdit',JSON.stringify(original))
+            localStorage.setItem('SelfRegistrationEdit', JSON.stringify(original))
           }} />
-
         </Whisper>
 
       )
@@ -258,24 +265,24 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
         "Content-Type": "application/json",
       },
     };
-    fetchStudentTable(config,false);
+    fetchStudentTable(config, false);
     // setTableData(table_data.table_data);
     // eslint-disable-next-line
-  },[]);
+  }, []);
 
-  function setFilteredParams(filterArr,val) {
-    if(filterArr.includes(val)) {
+  function setFilteredParams(filterArr, val) {
+    if (filterArr.includes(val)) {
       filterArr = filterArr.filter((n) => {
         return n !== val;
       });
     } else filterArr.push(val);
 
-    if(filterArr.length === 0) filterArr = undefined;
+    if (filterArr.length === 0) filterArr = undefined;
     return filterArr;
   }
 
   function SelectColumnFilter({
-    column: {filterValue = [],setFilter,preFilteredRows,id},
+    column: { filterValue = [], setFilter, preFilteredRows, id },
   }) {
     const options = useMemo(() => {
       const options = new Set();
@@ -283,16 +290,16 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
         options.add(row.values[id]);
       });
       return [...options.values()];
-    },[id,preFilteredRows]);
+    }, [id, preFilteredRows]);
 
-    let offsetObj = [0,0];
+    let offsetObj = [0, 0];
 
-    if(id === 'branch') offsetObj = [76,18]
-    else if(id === 'trackName') offsetObj = [93,18]
-    else if(id === 'year') offsetObj = [33,18]
-    else if(id === 'joinBatch') offsetObj = [50,18]
-    else if(id === 'is_active') offsetObj = [33,18]
-    else if(id === 'gender') offsetObj = [33,18]
+    if (id === 'branch') offsetObj = [76, 18]
+    else if (id === 'trackName') offsetObj = [93, 18]
+    else if (id === 'year') offsetObj = [33, 18]
+    else if (id === 'joinBatch') offsetObj = [50, 18]
+    else if (id === 'is_active') offsetObj = [33, 18]
+    else if (id === 'gender') offsetObj = [33, 18]
 
     let name = id;
 
@@ -333,37 +340,37 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
 
             content={
               <div className="">
-                {options.map((option,i) => {
+                {options.map((option, i) => {
                   let option_label = option;
 
-                  if(id === 'is_active') {
-                    if(option === 'true')
+                  if (id === 'is_active') {
+                    if (option === 'true')
                       option_label = 'Active'
                     else
                       option_label = 'Deactive'
-                  } else if(id === 'year') {
-                    if(option === 'I')
+                  } else if (id === 'year') {
+                    if (option === 'I')
                       option_label = 'I Year'
-                    else if(option === 'II')
+                    else if (option === 'II')
                       option_label = 'II Year'
-                    else if(option === 'III')
+                    else if (option === 'III')
                       option_label = 'III Year'
-                  } else if(id === 'gender') {
-                    if(option === 'female')
+                  } else if (id === 'gender') {
+                    if (option === 'female')
                       option_label = 'Female'
-                    else if(option === 'male')
+                    else if (option === 'male')
                       option_label = 'Male'
 
                   }
 
                   return (
                     <Fragment key={i}>
-                      <div id={`${id}`} style={{height: '30px',cursor: 'pointer'}} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
+                      <div id={`${id}`} style={{ height: '30px', cursor: 'pointer' }} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
                         <label
-                          onClick={(e) => {e.stopPropagation()}}
+                          onClick={(e) => { e.stopPropagation() }}
                           className="font-medium text-gray-700 d-flex align-items-center cursor-pointer"
                           // onCLick={}
-                          style={{cursor: 'pointer'}}
+                          style={{ cursor: 'pointer' }}
                         >
                           <input
                             checked={filterValue.includes(option)}
@@ -372,13 +379,13 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
                             id={option}
                             name={option}
                             value={option}
-                            style={{cursor: 'pointer'}}
+                            style={{ cursor: 'pointer' }}
                             onChange={(e) => {
                               setFilter(
-                                setFilteredParams(filterValue,e.target.value)
+                                setFilteredParams(filterValue, e.target.value)
                               );
                             }}
-                            onClick={(e) => {e.stopPropagation()}}
+                            onClick={(e) => { e.stopPropagation() }}
                           >
 
                           </input>
@@ -417,7 +424,7 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
     );
   }
 
-  
+
 
 
   const {
@@ -452,10 +459,10 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
         return [
           {
             id: 'selection',
-            header: ({getToggleAllRowsSelectedProps}) => (
+            header: ({ getToggleAllRowsSelectedProps }) => (
               <TableCheckbox {...getToggleAllRowsSelectedProps()} />
             ),
-            Cell: ({row}) => (
+            Cell: ({ row }) => (
               <TableCheckbox {...row.getToggleRowSelectedProps()} />
             )
           },
@@ -470,10 +477,10 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
   const checkboxData = JSON.stringify(
     {
       selectedFlatRows: selectedFlatRows.forEach((row) => {
-        let data = Object.assign({},row.original);
-        console.log("data",data);
+        let data = Object.assign({}, row.original);
+        console.log("data", data);
         delete data.photo;
-        
+
         idData.push(data.id)
         // console.log(selectedData);
         // exportCsv.push(data)
@@ -482,8 +489,8 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
     null,
     2
   );
-  console.log("checkboxData",checkboxData)
-  console.log("idData",idData)
+  console.log("checkboxData", checkboxData)
+  console.log("idData", idData)
 
   function deleteSelfAppliedStudent() {
     Swal.fire({
@@ -515,7 +522,7 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
     }).then(async (result) => {
       // console.log("original values are ::",original)
 
-      if(result.isConfirmed) {
+      if (result.isConfirmed) {
         let data = JSON.stringify({
           id: idData
         })
@@ -530,7 +537,7 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
         };
         const resultofverify = await axios(config);
         console.log(resultofverify);
-        if(resultofverify.status === 200) {
+        if (resultofverify.status === 200) {
           var fetchStudentTableConfig = {
             method: "GET",
             url: AllUrl.allRegistratedStudent,
@@ -539,10 +546,10 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
               "Content-Type": "application/json",
             },
           };
-          fetchStudentTable(fetchStudentTableConfig,true);
+          fetchStudentTable(fetchStudentTableConfig, true);
         }
-        else if(resultofverify.status === 404) {
-          toast.error('Some field are empty please edit it',{
+        else if (resultofverify.status === 404) {
+          toast.error('Some field are empty please edit it', {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: true,
@@ -552,8 +559,8 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
             progress: undefined,
           });
         }
-        else if(resultofverify.status === 500) {
-          toast.error('Internal Server Error',{
+        else if (resultofverify.status === 500) {
+          toast.error('Internal Server Error', {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: true,
@@ -569,8 +576,8 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
 
   }
 
-  const {globalFilter} = state;
-  const {pageIndex,pageSize} = state;
+  const { globalFilter } = state;
+  const { pageIndex, pageSize } = state;
 
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
@@ -593,14 +600,14 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
         pauseOnHover
 
       />
-      <div style={{backgroundColor: "#F4F7FC",height: "auto",width: "auto"}}>
-        <div style={{position: 'sticky',top: '80px',width: '100%',paddingTop: '10px',paddingBottom: '10px',backgroundColor: '#f4f7fc',zIndex: '5'}}>
+      <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
+        <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '5' }}>
           <div className="d-flex">
 
             <div className=''>
               <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
                 {
-                  [10,25,50,100].map(pageSize => (
+                  [10, 25, 50, 100].map(pageSize => (
                     <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
                   ))
                 }
@@ -613,7 +620,7 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
               <button type="button" className="btn btn-primary  fw-bold ">Download </button>
             </div>
             <div className='ms-4'>
-              <button onClick={deleteSelfAppliedStudent} type="button" className="btn " style={{backgroundColor: "#f7c3c3"}}>
+              <button onClick={deleteSelfAppliedStudent} type="button" className="btn " style={{ backgroundColor: "#f7c3c3" }}>
                 <img src={delete_icon} alt="delete_icon" /></button>
             </div>
 
@@ -621,7 +628,7 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
 
 
               <div >
-                <CDropdown variant="nav-item" style={{color: 'white'}}>
+                <CDropdown variant="nav-item" style={{ color: 'white' }}>
                   <CDropdownToggle
                     placement="bottom-end"
                     className="py-0"
@@ -654,13 +661,13 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
                     <div className="p-lg-2 pb-0">
                       {headerGroups.map((headerGroup) => (
                         <div
-                          style={{display: "flex flex-column"}}
+                          style={{ display: "flex flex-column" }}
                           {...headerGroup.getHeaderGroupProps()}
                         >
-                          {headerGroup.headers.map((column,i) => (
+                          {headerGroup.headers.map((column, i) => (
                             <div
                               key={i}
-                              style={{display: "block",justifyContent: "center"}}
+                              style={{ display: "block", justifyContent: "center" }}
                             >
                               {column.canFilter ? column.render("Filter") : null}
                             </div>
@@ -677,7 +684,7 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
           </div>
         </div>
         <table {...getTableProps()} id="customers" className="table table-sm">
-          <thead style={{position: 'sticky',top: '135px',width: '100%',backgroundColor: '#f4f7fc',zIndex: '5'}}>
+          <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
@@ -687,14 +694,14 @@ function SelfAppliedStudentTable({table_data,fetchStudentTable}) {
 
                       {column.isSorted ? (
                         column.isSortedDesc ? (
-                          <i style={{transform: 'scale(0.6)'}} className="fas fa-chevron-down"></i>
+                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
                         ) : (
-                          <i style={{transform: 'scale(0.6)'}} className="fas fa-chevron-up"></i>
+                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
                           // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
                         )
                       ) : (
 
-                        column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{marginLeft: "5px"}} alt="" />
+                        column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
 
 
                       )}
@@ -745,8 +752,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchStudentTable: (data,isLoading) => dispatch(fetchStudentTable(data,isLoading)),
+    fetchStudentTable: (data, isLoading) => dispatch(fetchStudentTable(data, isLoading)),
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(SelfAppliedStudentTable);
+export default connect(mapStateToProps, mapDispatchToProps)(SelfAppliedStudentTable);

@@ -21,6 +21,7 @@ import UploadDocumentFrom from '../components/accounts/UploadDocumentFrom'
 import UpdatePersonalDetialOfStudent from "../components/accounts/UpdatePersonalDetialOfStudent";
 import PendingScholarshipTable from "../components/accounts/PendingScholarshipTable";
 import FeesReceiptTable from './../components/accounts/FeesReceiptTable';
+import RegisteredStudent from "../components/accounts/RegisteredStudent";
 
 
 
@@ -69,7 +70,7 @@ function AdminDashboard() {
             <Route path="feesreceiptlist" element={<FeesReceiptTable />} />
 
            {/* =============================== NESTED ROUTING================= */}
-     
+           <Route path="registeredStudent" element={<RegisteredStudent />} />
             <Route path="feesstructuretable" element={<FeesStructureTable />} />
             <Route path="addnewstudent" element={<AddStudent />} />
             <Route path="studentprofile" element={<StudentProfile />} />
