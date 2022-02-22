@@ -128,7 +128,7 @@ function AddNewStudentPage({addStudent,AddNewStudent}) {
 
         feesScheme: editData ? editData.feesScheme : 'none',
         sponsorshipType: editData ? editData.sponsorshipType : 'none',
-        courseFees: editData ? editData.Tutionfee === null ? "" : editData.Tutionfee : "",
+        courseFees: editData ? editData.Totalfee===null? "":editData.Totalfee : "",
         regisrationFees: editData ? editData.reg_Fees : "1500",
         postmatricScolarship: editData ? (editData.is_Postmetric)?.toLowerCase() : "no",
 
