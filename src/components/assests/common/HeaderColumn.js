@@ -31,8 +31,7 @@ function HeaderColumn({ original, changeFeesStatus }) {
       className="table_btn_size"
       style={
         original.active === 1
-          ? ActivateButton
-          : DeactivateButton
+          ? DeactivateButton : ActivateButton
       }
       onClick={() => {
         // console.log(original.email);
@@ -55,18 +54,15 @@ function HeaderColumn({ original, changeFeesStatus }) {
           if (result.isConfirmed) {
             var data = JSON.stringify({
               //Remaining integration 
-              branch_schema_code: original.branchName + original.startingYear,
-              is_active: `${original.active === 1 ? "0" : "1"}`,
+              branchSchemaCode: original.branchName + original.startingYear,
+              isActive: `${original.active === 1 ? "0" : "1"}`,
             });
-            // console.log('====================================');
-            // console.log(data);
-            // console.log('====================================');
             changeStatus(data);
           }
         });
       }}
     >
-      {original.active === 1 ? "Active" : "Deactive"}
+      {original.active === 1 ? "Deactive" : "Active"}
     </button>
   );
 }
