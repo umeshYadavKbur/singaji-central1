@@ -164,15 +164,15 @@ function SelfRegistration() {
                 "branch": formik.values.streamName,
                 "year": formik.values.year,
                 "joinBatch": formik.values.joinBatch,
-                "Tutionfee": formik.values.courseFees,
+                "tutionfee": formik.values.courseFees,
                 "fathersName": formik.values.fatherName,
-                "reg_Fees":"1500",
+                "regFees":"1500",
                 "dob": formik.values.dob,
                 "mobile": formik.values.contactNumber,
                 "fatherContactNumber": formik.values.FatherContactNumber,
                 "email": formik.values.email,
                 "schoolName": formik.values.schoolName,
-                "school12sub": formik.values.subject12,
+                "school12Sub": formik.values.subject12,
                 "rollNumber12": formik.values.rollNumber12,
                 "persentage12": formik.values.percent12,
                 "persentage10": formik.values.percent10,
@@ -304,6 +304,30 @@ function SelfRegistration() {
                 }
             });
             console.log(formik.values.photo);
+
+
+    const getPincode = async (value) => {
+        // console.log(Block,District);
+        if(value?.replace('X','').length === 6) {
+            var config = {
+                method: "get",
+                url: `https://api.postalpincode.in/pincode/${value}`,
+                headers: {},
+            };
+
+            const PincodeResult = await axios(config);
+            if(PincodeResult.status === 200) {
+
+                formik.setFieldValue("district",PincodeResult.data[0].PostOffice[0].District)
+                console.log("formiik::",formik.values.district);
+                formik.setFieldValue("tehsil",PincodeResult.data[0].PostOffice[0].Block)
+            } else {
+                formik.setFieldValue("district",PincodeResult.data[0].PostOffice[0].District)
+                console.log("formiik::",formik.values.district);
+                formik.setFieldValue("tehsil",PincodeResult.data[0].PostOffice[0].Block)
+            }
+        }
+    };
 
     const getCourseFees = async (branch) => {
 
@@ -647,7 +671,7 @@ function SelfRegistration() {
                                     <div className="d-flex form-group col-md-6 my-2">
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">Pincode<span style={{color:'red'}}>*</span></label>  <NumberFormat
-                                                onChange={formik.handleChange}
+                                                onChange={async (e) => {await formik.setFieldValue("pincode",e.target.value); getPincode(e.target.value)}}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.pincode}
                                                 name="pincode"
@@ -1052,7 +1076,7 @@ function SelfRegistration() {
                                                 <option value='0'>Select Track</option>
                                                 {trackNames.map((ele,i) => {
                                                     return (
-                                                        <option key={i} value={ele.trackname}>{ele.trackname}</option>
+                                                        <option key={i} value={ele.trackName}>{ele.trackName}</option>
                                                     )
                                                 })}
 
