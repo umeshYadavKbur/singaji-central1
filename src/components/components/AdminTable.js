@@ -55,10 +55,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             header: 'Name',
             accessor: 'name'
         },
-        {
-            header: 'Admin Id',
-            accessor: 'userId'
-        },
+       
         {
             header: 'Role',
             accessor: 'role',
