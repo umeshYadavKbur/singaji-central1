@@ -69,11 +69,11 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
         },
         {
             header: "Date",
-            accessor: "AccountsReceiptDate",
+            accessor: "accountsReceiptDate",
         },
         {
             header: "Receipt No",
-            accessor: "AccountsReceiptNo",
+            accessor: "accountsReceiptNo",
         },
         {
             header: "Year",
@@ -124,7 +124,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 setLoading(true)
                                 var body = JSON.stringify({
                                     stdId: original.stdId,
-                                    AccountsReceiptNo: original.AccountsReceiptNo,
+                                    accountsReceiptNo: original.accountsReceiptNo,
                                     report_remark: original.report_remark,
                                     is_report: "false",
                                 });
@@ -231,7 +231,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 setLoading(true);
                                 var body = JSON.stringify({
                                     stdId: original.stdId,
-                                    AccountsReceiptNo: original.AccountsReceiptNo,
+                                    accountsReceiptNo: original.accountsReceiptNo,
                                 });
 
                                 var config = {

@@ -186,13 +186,13 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
             },
             {
                 header: "Date",
-                accessor: "AccountsReceiptDate",
+                accessor: "accountsReceiptDate",
                 Filter: "",
                 filter: ""
             },
             {
                 header: "Receipt No",
-                accessor: "AccountsReceiptNo",
+                accessor: "accountsReceiptNo",
                 Filter: "",
                 filter: ""
             },
@@ -223,7 +223,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
             },
             {
                 header: "Installment",
-                accessor: "InstallmentNo",
+                accessor: "installmentNo",
                 Filter: "",
                 filter: ""
             },
