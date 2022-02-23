@@ -7,7 +7,7 @@ import {
 const initialState = {
   loading: false,
   newAdmin: false,
-  error: "",
+  error: false,
 };
 
 const newAdminReducer = (state = initialState, action) => {
@@ -21,13 +21,13 @@ const newAdminReducer = (state = initialState, action) => {
       return {
         loading: false,
         newAdmin: true,
-        error: "",
+        error: false,
       };
     case CREATE_NEW_ADMIN_FAIL:
       return {
         loading: false,
         newAdmin: false,
-        error: action.payload,
+        error: true,
       };
     default:
       return state;

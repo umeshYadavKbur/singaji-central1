@@ -53,7 +53,7 @@ export const fetchFeesTableData = (data, Show) => {
             });
             dispatch(fetchFailTableData(response.data));
           }
-          if (response.status === 404 ) {
+          if (response.status === 404) {
             toast.warn('Data not found', {
               position: "bottom-center",
               autoClose: 3000,
@@ -111,68 +111,102 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
     }
 
     dispatch(feesStructureStatusChange());
+    try {
+      var response = await axios(data);
+      // console.log(response);
+      if (response.status === 200) {
+        if (visible) {
+          setVisible(!visible)
+        }
+        toast.success('Update successfully !', {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(feesStructureStatusSuccess());
+        getUpdatedTableData();
+      }
+      else if (response.status === 400) {
+        if (visible) {
+          setVisible(!visible)
+        }
+        let value = JSON.stringify(response.status);
+        dispatch(feesStructureStatusFailed(value));
+        toast.warn('Internal Server Error', {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      else if (response.status === 404) {
+        if (visible) {
+          setVisible(!visible)
+        }
+        let value = JSON.stringify(response.status);
+        dispatch(feesStructureStatusFailed(value));
+        toast.warn('Internal Server Error', {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      else if (response.status === 500) {
+        if (visible) {
+          setVisible(!visible)
+        }
+        let value = JSON.stringify(response.status);
+        dispatch(feesStructureStatusFailed(value));
+        toast.error("Internal Server Error", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        if (visible) {
+          setVisible(!visible)
+        }
+        toast.error("Internal Server Error", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(feesStructureStatusFailed(response))
+      }
+    } catch (e) {
+      if (visible) {
+        setVisible(!visible)
+      }
+      dispatch(feesStructureStatusFailed());
+      toast.error("Internal Server Error", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
 
-    var response = await axios(data);
-    // console.log(response);
-    if (response.status === 200) {
-      if (visible) {
-        setVisible(!visible)
-      }
-      toast.success('Update successfully !', {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      dispatch(feesStructureStatusSuccess());
-      getUpdatedTableData();
-    } else if (response.status === 400) {
-      if (visible) {
-        setVisible(!visible)
-      }
-      let value = JSON.stringify(response.status);
-      dispatch(feesStructureStatusFailed(value));
-      toast.warn('Internal Server Error', {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } else if (response.status === 500) {
-      if (visible) {
-        setVisible(!visible)
-      }
-      let value = JSON.stringify(response.status);
-      dispatch(feesStructureStatusFailed(value));
-      toast.error("Internal Server Error", {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } else {
-      if (visible) {
-        setVisible(!visible)
-      }
-      toast.error("Internal Server Error", {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      dispatch(feesStructureStatusFailed(response))
     }
   }
 };
@@ -197,44 +231,73 @@ export const changeTotalFees = (data, setVisible, visible) => {
 
     dispatch(changeTotalFeesReq());
 
-    var response = await axios(data);
-    // console.log(response);
-    if (response.status === 200) {
+    try {
+      var response = await axios(data);
+      // console.log(response);
+      if (response.status === 200) {
+        if (visible) {
+          setVisible(!visible)
+        }
+        toast.success('Update successfully !', {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(changeTotalFeesSuccess());
+        getUpdatedTableData();
+      } else if (response.status === 400) {
+        if (visible) {
+          setVisible(!visible)
+        }
+        // let value = JSON.stringify(response.status);
+        dispatch(changeTotalFeesFail());
+        toast.warn('Internal Server Error', {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else if (response.status === 500) {
+        if (visible) {
+          setVisible(!visible)
+        }
+        // let value = JSON.stringify(response.status);
+        dispatch(changeTotalFeesFail());
+        toast.error("Internal Server Error", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        if (visible) {
+          setVisible(!visible)
+        }
+        toast.error("Internal Server Error", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(changeTotalFeesFail(response))
+      }
+    } catch (error) {
       if (visible) {
         setVisible(!visible)
       }
-      toast.success('Update successfully !', {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      dispatch(changeTotalFeesSuccess());
-      getUpdatedTableData();
-    } else if (response.status === 400) {
-      if (visible) {
-        setVisible(!visible)
-      }
-      // let value = JSON.stringify(response.status);
-      dispatch(changeTotalFeesFail());
-      toast.warn('Internal Server Error', {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } else if (response.status === 500) {
-      if (visible) {
-        setVisible(!visible)
-      }
-      // let value = JSON.stringify(response.status);
-      dispatch(changeTotalFeesFail());
       toast.error("Internal Server Error", {
         position: "bottom-center",
         autoClose: 3000,
@@ -244,21 +307,9 @@ export const changeTotalFees = (data, setVisible, visible) => {
         draggable: true,
         progress: undefined,
       });
-    } else {
-      if (visible) {
-        setVisible(!visible)
-      }
-      toast.error("Internal Server Error", {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      dispatch(changeTotalFeesFail(response))
+      dispatch(changeTotalFeesFail(error.message))
     }
+
   }
 };
 

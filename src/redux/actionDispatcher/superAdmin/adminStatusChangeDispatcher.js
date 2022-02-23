@@ -1,7 +1,7 @@
 import { ADMIN_STATUS_CHANGE_SUCCESS, ADMIN_STATUS_CHANGE_FAIL } from "../../constants/actions";
 import { toast } from "react-toastify";
 import AllUrl from "../../constants/url";
-import { fetchTableDataSec } from './adminTableDatadispatcher'
+import { fetchSuccessfailTableData, fetchTableDataSec } from './adminTableDatadispatcher'
 var axios = require('axios');
 // import getData from "../../services/agent";
 
@@ -13,7 +13,7 @@ export const AdminStatusChange = (data) => {
         dispatch(fetchTableDataSec());
         var body = JSON.stringify({
             email: data.email,
-            is_active: data.is_active === 1 ? '0' : '1',
+            isActive: data.isActive === 1 ? '0' : '1',
         });
 
         var config = {
@@ -41,6 +41,7 @@ export const AdminStatusChange = (data) => {
                     draggable: true,
                     progress: undefined,
                 });
+                return userResData.status;
 
             } else if (userResData.status === 404) {
                 toast.warning('Data Not Found', {
@@ -52,7 +53,9 @@ export const AdminStatusChange = (data) => {
                     draggable: true,
                     progress: undefined,
                 });
-                dispatch(AdminStatusChangeFail(userResData.data));
+                dispatch(fetchSuccessfailTableData())
+                dispatch(AdminStatusChangeFail());
+                return userResData.status;
 
             } else if (userResData.status === 208) {
                 toast.warning('user are already available', {
@@ -64,7 +67,9 @@ export const AdminStatusChange = (data) => {
                     draggable: false,
                     progress: undefined,
                 });
-                dispatch(AdminStatusChangeFail('user are already available'));
+                dispatch(AdminStatusChangeFail())
+                dispatch(fetchSuccessfailTableData())
+                return userResData.status;
 
             } else {
                 toast.error('Internal Server Error', {
@@ -77,12 +82,15 @@ export const AdminStatusChange = (data) => {
                     progress: undefined,
                 });
                 let value = JSON.stringify(userResData.status);
-                dispatch(AdminStatusChangeFail(value));
+                dispatch(AdminStatusChangeFail())
+                dispatch(fetchSuccessfailTableData())
+
             }
             return userResData.status;
         } catch (error) {
             //if crudential fails than Login fail action dispatch
-            let value = JSON.stringify(userResData);
+            dispatch(AdminStatusChangeFail())
+            dispatch(fetchSuccessfailTableData())
             toast.error('Internal Server Problem', {
                 position: "bottom-center",
                 autoClose: 3000,
@@ -92,7 +100,8 @@ export const AdminStatusChange = (data) => {
                 draggable: true,
                 progress: undefined,
             });
-            dispatch(AdminStatusChangeFail(value));
+            return error;
+
         }
     };
 };
@@ -105,9 +114,8 @@ const AdminStatusChangeSuccess = (data) => {
     };
 };
 
-const AdminStatusChangeFail = (error) => {
+const AdminStatusChangeFail = () => {
     return {
         type: ADMIN_STATUS_CHANGE_FAIL,
-        payload: error
     };
 };

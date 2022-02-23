@@ -2,8 +2,6 @@ import {
   CButton,
   CModal,
   CModalBody,
-  // CModalHeader,
-  // CModalTitle,
 } from "@coreui/react";
 import React, { useState } from "react";
 import { Tooltip, Whisper } from "rsuite";
@@ -49,7 +47,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
       stream: "",
       startYear: "",
       endYear: "",
-      totalFees: "",
+      totalFees: original ? original.totalFees : "",
     },
     validationSchema,
 
@@ -58,8 +56,8 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
       if (original) {
         if (formik.values.totalFees > 1000) {
           var update = JSON.stringify({
-            branch_schema_code: formik.values.stream + formik.values.startYear,
-            total_fees: `${formik.values.totalFees}`,
+            branchSchemaCode: formik.values.stream + formik.values.startYear,
+            totalFees: `${formik.values.totalFees}`,
           })
 
           var updateSchema = {
@@ -77,10 +75,10 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
       }
       else {
         var data = JSON.stringify({
-          branch_name: formik.values.stream,
-          starting_year: formik.values.startYear,
-          ending_year: formik.values.endYear,
-          total_fees: formik.values.totalFees,
+          branchName: formik.values.stream,
+          startingYear: formik.values.startYear,
+          endingYear: formik.values.endYear,
+          totalFees: formik.values.totalFees,
         });
 
 
@@ -134,9 +132,9 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
   }
 
   if (original) {
-    formik.values.stream = original.branch_name;
-    formik.values.startYear = original.starting_year;
-    formik.values.endYear = original.ending_year;
+    formik.values.stream = original.branchName;
+    formik.values.startYear = original.startingYear;
+    formik.values.endYear = original.endingYear;
   }
 
   return (
@@ -183,11 +181,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
           setVisible(false);
         }}
       >
-        {/* <CModalHeader>
-          <h2 className=" feestructurehead fs-3 ">
-            {original ? "Update Fees Structure" : "Create Fees Structure"}
-          </h2>
-        </CModalHeader> */}
+
 
         <CModalBody>
           <div className="first_div createAdmin">
@@ -203,6 +197,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     Stream
                   </label>
                   <select
+                    disabled={original}
                     name="stream"
                     id="stream"
                     className="form-select input-lg text-secondary  border-secondary  "
@@ -214,7 +209,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                   >
                     <option value='' className="fields form-select"   >
                       {
-                        original ? `${original.branch_name}` : "Stream"
+                        original ? `${original.branchName}` : "Stream"
                       }
                     </option>
                     {
@@ -241,6 +236,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     Start Year
                   </label>
                   <input
+                    disabled={original}
                     value={formik.values.startYear}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -266,6 +262,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
                     End Year
                   </label>
                   <input
+                    disabled={original}
                     value={formik.values.endYear}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}

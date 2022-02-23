@@ -29,7 +29,7 @@ const HeaderLink = () => {
             return "Students";
         }
         else if (currentLocation === "/admin_dashboard/admintable") {
-            return "My Admin";
+            return "Admin List";
         }
         else if (currentLocation === "/admin_dashboard/selfappliedstudent") {
             return "Self Applied Student";

@@ -28,11 +28,10 @@ function HeaderColumn({ original, changeFeesStatus }) {
 
   return (
     <button
-    className="table_btn_size"
+      className="table_btn_size"
       style={
         original.active === 1
-          ? ActivateButton
-          : DeactivateButton
+          ? DeactivateButton : ActivateButton
       }
       onClick={() => {
         // console.log(original.email);
@@ -43,7 +42,7 @@ function HeaderColumn({ original, changeFeesStatus }) {
             "Are you sure?" +
             "<br>" +
             `You want to  ${original.active === 1 ? "deactive" : "active"
-            } this ${original.branch_name}`,
+            } this ${original.branchName}`,
           showCancelButton: true,
           cancelButtonText: "Cancel",
           confirmButtonText: `${original.active === 1 ? "Deactive" : "Active"}`,
@@ -54,15 +53,16 @@ function HeaderColumn({ original, changeFeesStatus }) {
         }).then((result) => {
           if (result.isConfirmed) {
             var data = JSON.stringify({
-              branch_schema_code: original.branch_name + original.starting_year,
-              is_active: `${original.active === 1 ? "0" : "1"}`,
+              //Remaining integration 
+              branchSchemaCode: original.branchName + original.startingYear,
+              isActive: `${original.active === 1 ? "0" : "1"}`,
             });
             changeStatus(data);
           }
         });
       }}
     >
-      {original.active === 1 ? "Active" : "Deactive"}
+      {original.active === 1 ? "Deactive" : "Active"}
     </button>
   );
 }
