@@ -718,28 +718,28 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         setColoumns(mainColoumns)
     }
 
-    const AnimateNum = ({ num }) => {
+    // const AnimateNum = ({ num }) => {
 
 
-        return (
-            <>
-                <CountUp
+    //     return (
+    //         <>
+    //             <CountUp
 
-                    start={30000}
-                    end={num}
-                    duration={1}
-                    separator=","
-                    easingF={function (x, t, b, c, d) { return -c * (t /= d) * (t - 2) + b; }}
-                    prefix="₹ "
+    //                 start={30000}
+    //                 end={num}
+    //                 duration={0.5}
+    //                 separator=","
+    //                 easingF={function (x, t, b, c, d) { return -c * (t /= d) * (t - 2) + b; }}
+    //                 prefix="₹ "
+    //                 startOnMount={false}
 
+    //             >
 
-                >
+    //             </CountUp>
+    //         </>
 
-                </CountUp>
-            </>
-
-        )
-    }
+    //     )
+    // }
 
     const CIcon = () => {
 
@@ -762,19 +762,19 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px', width: '100%' }}>
                     <div className="d-flex row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
                         <div className="col info-col m-2"  >
-                            <h5 style={{ marginTop: "12px" }}> <CountUp start={0} end={MoneyCount.TStudent} duration={0.5}> </CountUp> <br /> <p >Total Students</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}> {MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
                         </div>
                         <div className="col info-col m-2" >
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? <AnimateNum num={MoneyCount.TAmount} /> : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? MoneyCount.TAmount  : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
                         </div>
                         <div className="col info-col m-2" >
-                            <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? <AnimateNum num={MoneyCount.TpaidAmountByDailyReport} /> : <AnimateNum num={MoneyCount.TpaidAmount} />} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport  : MoneyCount.TpaidAmount } <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
                         </div>
                         <div className="col info-col m-2" >
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? <AnimateNum num={MoneyCount.RAmount} /> : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? MoneyCount.RAmount : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
                         </div>
                         <div className="col info-col m-2">
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? <AnimateNum num={MoneyCount.WaiveOff} /> : '0'}<br /> <p >Waive Off</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff  : '0'}<br /> <p >Waive Off</p> </h5>
                         </div>
                     </div>
                     <div className="row  mx-0 mt-3" >
