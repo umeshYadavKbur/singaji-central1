@@ -82,7 +82,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
         },
         {
             header: "Cause",
-            accessor: "report_remark",
+            accessor: "reportRemark",
         },
         {
             header: "Reject",
@@ -125,8 +125,14 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 var body = JSON.stringify({
                                     stdId: original.stdId,
                                     accountsReceiptNo: original.accountsReceiptNo,
-                                    report_remark: original.report_remark,
-                                    is_report: "false",
+                                    reportRemark: original.reportRemark,
+                                    isReport: "false",
+
+
+                                    // "stdId": "963734d3-0815-4d35-99f7-7c05cb4d71b6",
+                                    // "accountsReceiptNo": "BCA164465564",
+                                    // "reportRemark": "reported list list",
+                                    // "isReport": "true"
                                 });
 
                                 var config = {

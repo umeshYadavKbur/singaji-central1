@@ -57,8 +57,8 @@ function FeesRecieptDeletePopup({ data }) {
             var resultData = JSON.stringify({
                 stdId: stdId,
                 AccountsReceiptNo: AccountsReceiptNo,
-                report_remark: formik.values.remark,
-                is_report: "true"
+                reportRemark: formik.values.remark,
+                isReport: "true"
             });
 
             console.log(resultData)
