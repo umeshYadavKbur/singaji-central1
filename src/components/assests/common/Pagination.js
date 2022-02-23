@@ -28,51 +28,81 @@ function Pagination(
             <div className="ml-auto me-3">
                 {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{"<<"}</button> */}
                 <button
-                    style={{ height: "28px", color: "#302E2F", fontWeight: '300', outline: "none", border: "1px solid #D5D7E3",backgroundColor:'#fff',  borderRadius: " 4px 0px 0px 4px" }}
+                    style={{ height: "28px", color: "#302E2F", fontWeight: '300', outline: "none", border: "1px solid #D5D7E3", backgroundColor: '#fff', borderRadius: " 4px 0px 0px 4px" }}
                     onClick={() => previousPage()}
                     disabled={!canPreviousPage}
                 >
                     Previous
                 </button>
+                {/*                
+                {
+                    pageIndex ?
+                        <button
+                            style={
+                                { height: "28px", width: "28px", color: "#302E2F", fontWeight: '300', outline: "none", backgroundColor: '#fff', border: "1px solid #D5D7E3" }
+
+                            }
+                            onClick={() => gotoPage(pageIndex - 1)}
+                        // disabled={pageOptions.length < pageIndex + 2}
+                        >
+                            {pageIndex}
+                        </button>
+                        : ""
+                } */}
                 <button
                     style={{
                         height: "30px", width: "28px",
-                        marginBottom:'5px',
+                        marginBottom: '5px',
                         fontWeight: '300', outline: "none", border: "1px solid #D5D7E3", color: '#302E2F', backgroundColor: '#D5D7E3'
                     }}
                 >
                     {pageIndex + 1}
                 </button>
-                <button
-                    style={
-                        { height: "28px", width: "28px", color: "#302E2F", fontWeight: '300', outline: "none",backgroundColor:'#fff',  border: "1px solid #D5D7E3" }
+                {
+                    pageOptions.length > pageIndex + 1 ?
 
-                    }
-                    onClick={() => gotoPage(pageIndex + 1)}
-                    disabled={pageOptions.length < pageIndex + 2}
-                >
-                    {pageIndex + 2}
-                </button>
+                        <button
+                            style={
+                                { height: "28px", width: "28px", color: "#302E2F", fontWeight: '300', outline: "none", backgroundColor: '#fff', border: "1px solid #D5D7E3" }
+
+                            }
+                            onClick={() => gotoPage(pageIndex + 1)}
+                            disabled={pageOptions.length < pageIndex + 2}
+                        >
+                            {pageIndex + 2}
+                        </button>
+                        : ""
+                }
+                {
+                    pageOptions.length > pageIndex + 2 ?
+
+                        <button
+                            disabled={pageOptions.length < pageIndex + 3}
+                            style={
+                                { height: "28px", width: "28px", color: "#302E2F", fontWeight: '300', outline: "none", backgroundColor: '#fff', border: "1px solid #D5D7E3" }
+                            }
+                            onClick={() => {
+                                gotoPage(pageIndex + 2);
+                            }}
+                        >
+                            {pageIndex + 3}
+                        </button>
+                        : ""
+                }
+                {
+                    pageOptions.length > pageIndex + 3 ?
+
+                        <button
+                            style={{ height: "28px", width: "28px", color: "#302E2F", fontWeight: '300', outline: "none", backgroundColor: '#fff', border: "1px solid #D5D7E3" }}
+                            onClick={() => gotoPage(pageIndex + 3)}
+                            disabled={pageOptions.length < pageIndex + 4}
+                        >
+                            {pageIndex + 4}
+                        </button>
+                        : ""
+                }
                 <button
-                    disabled={pageOptions.length < pageIndex + 3}
-                    style={
-                        { height: "28px", width: "28px", color: "#302E2F", fontWeight: '300', outline: "none",backgroundColor:'#fff',  border: "1px solid #D5D7E3" }
-                    }
-                    onClick={() => {
-                        gotoPage(pageIndex + 2);
-                    }}
-                >
-                    {pageIndex + 3}
-                </button>
-                <button
-                    style={{ height: "28px", width: "28px", color: "#302E2F", fontWeight: '300', outline: "none",backgroundColor:'#fff',  border: "1px solid #D5D7E3" }}
-                    onClick={() => gotoPage(pageIndex + 3)}
-                    disabled={pageOptions.length < pageIndex + 4}
-                >
-                    {pageIndex + 4}
-                </button>
-                <button
-                    style={{ height: "28px", color: "#302E2F", fontWeight: '300', outline: "none",backgroundColor:'#fff', border: "1px solid #D5D7E3", borderRadius: "0px 4px 4px 0px" }}
+                    style={{ height: "28px", color: "#302E2F", fontWeight: '300', outline: "none", backgroundColor: '#fff', border: "1px solid #D5D7E3", borderRadius: "0px 4px 4px 0px" }}
                     onClick={() => nextPage()}
                     disabled={!canNextPage}
                 >
