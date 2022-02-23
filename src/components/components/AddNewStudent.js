@@ -388,7 +388,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                 "fatherContactNumber": formik.values.FatherContactNumber,
                 "email": formik.values.email,
                 "schoolName": formik.values.schoolName,
-                "school12sub": formik.values.subject12,
+                "school12Sub": formik.values.subject12,
                 "rollNumber12": formik.values.rollNumber12,
                 "persentage12": formik.values.persentage12,
                 "persentage10": formik.values.percent10,
@@ -475,7 +475,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
 
                 const StudentCourseFees = await axios(config)
                 if (StudentCourseFees.status === 200) {
-                    formik.setFieldValue('courseFees', StudentCourseFees.data[0].total_fees);
+                    formik.setFieldValue('courseFees',StudentCourseFees.data[0].totalFees);
 
                 } else {
                     formik.setFieldValue('courseFees', '');
