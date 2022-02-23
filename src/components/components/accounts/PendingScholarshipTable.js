@@ -269,7 +269,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
       },
       {
         header: "Total fees",
-        accessor: "total_fees",
+        accessor: "totalFees",
         Filter: "",
         filter: "",
       },
@@ -281,14 +281,14 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
       },
       {
         header: "Pending amount",
-        accessor: "pending_Amount",
+        accessor: "pendingAmount",
         Cell: ({ row: { original } }) => (
           <div className="circle-main  align-items-center">
             <div className="d-flex align-items-center">
               <span
                 className="recieved-fee-circle"
                 style={{ backgroundColor: `${original.pending_Amount <= 0 ? '#56F000' : "#ffc107"}`, marginRight: "10px", marginLeft: "20px" }}
-              ></span>{original.pending_Amount}
+              ></span>{original.pendingAmount}
             </div>
           </div>
         ),

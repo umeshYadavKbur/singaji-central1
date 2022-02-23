@@ -81,14 +81,14 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     },
     {
       header: "Pay status",
-      accessor: "acc_reg_fees_status",
+      accessor: "accRegFeesStatus",
       Cell: ({ row: { original } }) => (
         <button
           className="table_btn_size"
           style={
-            original.acc_reg_fees_status === "Paid"
+            original.accRegFeesStatus === "Paid"
               ? RecievedButton : PendingButton}
-          disabled={original.acc_reg_fees_status === "Paid"}
+          disabled={original.accRegFeesStatus === "Paid"}
           onClick={() => {
             Swal.fire({
               title: 'Payment Confirmation',
@@ -168,7 +168,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               }
             })
           }}>
-          {original.acc_reg_fees_status === "Paid" ? "Recieved" : "Pending"}
+          {original.accRegFeesStatus === "Paid" ? "Recieved" : "Pending"}
 
         </button>)
     },
@@ -181,7 +181,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           style={DeactivateButton}
           onClick={() => {
             // setData(original.status)
-            if (original.acc_reg_fees_status === "Paid") {
+            if (original.accRegFeesStatus === "Paid") {
               console.log(original.email)
               Swal.fire({
                 title: 'Shift to account',
@@ -339,8 +339,8 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
         let data = Object.assign({}, row.original);
         console.log(data);
         delete data.photo;
-        if (data?.ReceivedAmount)
-          data.ReceivedAmount = (data?.ReceivedAmount)?.toString();
+        if (data?.receivedAmount)
+          data.receivedAmount = (data?.receivedAmount)?.toString();
         console.log(data);
         // exportData.push(data)
         // console.log(selectedData);

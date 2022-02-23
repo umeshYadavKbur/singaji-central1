@@ -69,11 +69,11 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
         },
         {
             header: "Date",
-            accessor: "AccountsReceiptDate",
+            accessor: "accountsReceiptDate",
         },
         {
             header: "Receipt No",
-            accessor: "AccountsReceiptNo",
+            accessor: "accountsReceiptNo",
         },
         {
             header: "Year",
@@ -82,7 +82,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
         },
         {
             header: "Cause",
-            accessor: "report_remark",
+            accessor: "reportRemark",
         },
         {
             header: "Reject",
@@ -124,9 +124,15 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 setLoading(true)
                                 var body = JSON.stringify({
                                     stdId: original.stdId,
-                                    AccountsReceiptNo: original.AccountsReceiptNo,
-                                    report_remark: original.report_remark,
-                                    is_report: "false",
+                                    accountsReceiptNo: original.accountsReceiptNo,
+                                    reportRemark: original.reportRemark,
+                                    isReport: "false",
+
+
+                                    // "stdId": "963734d3-0815-4d35-99f7-7c05cb4d71b6",
+                                    // "accountsReceiptNo": "BCA164465564",
+                                    // "reportRemark": "reported list list",
+                                    // "isReport": "true"
                                 });
 
                                 var config = {
@@ -231,7 +237,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 setLoading(true);
                                 var body = JSON.stringify({
                                     stdId: original.stdId,
-                                    AccountsReceiptNo: original.AccountsReceiptNo,
+                                    accountsReceiptNo: original.accountsReceiptNo,
                                 });
 
                                 var config = {
