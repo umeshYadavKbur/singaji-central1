@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import { accountAction } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 
 function UpdateStudentPersonalInfo({ handleClose }) {
@@ -109,7 +109,7 @@ function UpdateStudentPersonalInfo({ handleClose }) {
             console.log(response);
             if (response.status === 200) {
                 toast.success('Personal Information Successfully Updated', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,

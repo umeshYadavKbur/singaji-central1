@@ -22,6 +22,7 @@ import allUrls from '../../../redux/constants/url'
 import { accountAction } from '../../../redux/actionDispatcher/superAdmin/studentAccountTableDataDispatcher';
 import axios from 'axios';
 import FeesRecieptDeletePopup from './FeesRecieptDeletePopup';
+import { Tooltip, Whisper } from 'rsuite';
 
 
 function FeesRecipt({ accountAction }) {
@@ -63,7 +64,7 @@ function FeesRecipt({ accountAction }) {
     const initialValues = {
         payBy: 'Cash',
         studentName: `${StudentName}`,
-        studentClassYear:(StudentAccountData.accountInfo.year?.toString()),
+        studentClassYear: (StudentAccountData.accountInfo.year?.toString()),
         FatherName: StudentAccountData.accountInfo.fathersName,
         waiveOff: '0',
         chequeDate: '',
@@ -116,103 +117,103 @@ function FeesRecipt({ accountAction }) {
         onSubmit: async () => {
 
 
-          const submitForm =async ()=>{
-            
-            setLoading(true)
-            // console.log(values);
+            const submitForm = async () => {
 
-            var submitData = JSON.stringify({
-                "stdId": StudentAccountData.accountInfo.stdId,
-                "year": formik.values.studentClassYear,
-                "receivedAmount": formik.values.feesAmount.split(',').join(''),
-                "lateFeeAmount": formik.values.LateFeeAmount.split(',').join(''),
-                "waiveOf": formik.values.waiveOff.split(',').join(''),
-                "installmentNo": formik.values.installmentNo,
-                "receivedType": formik.values.payBy,
-                "chequeNo": formik.values.ChequeNo,
-                "chequeDate": formik.values.chequeDate,
-                "bankName": formik.values.BankName,
-                "remark": formik.values.Remark
-            })
+                setLoading(true)
+                // console.log(values);
 
-            console.log(JSON.parse(submitData))
-            var config = {
-                method: 'post',
-                url: AllUrl.generateReciept,
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                    'Content-Type': 'application/json'
-                },
-                data: submitData
-            };
-
-            var result = await axios(config);
-            // if (result) setLoading(false)
-
-            if (result.status === 200) {
-                let backData = JSON.stringify({
+                var submitData = JSON.stringify({
                     "stdId": StudentAccountData.accountInfo.stdId,
-                });
-                console.log("______________________________________");
-                console.log("backdata", backData);
-                console.log("______________________________________");
-                let getBackData = {
+                    "year": formik.values.studentClassYear,
+                    "receivedAmount": formik.values.feesAmount.split(',').join(''),
+                    "lateFeeAmount": formik.values.LateFeeAmount.split(',').join(''),
+                    "waiveOf": formik.values.waiveOff.split(',').join(''),
+                    "installmentNo": formik.values.installmentNo,
+                    "receivedType": formik.values.payBy,
+                    "chequeNo": formik.values.ChequeNo,
+                    "chequeDate": formik.values.chequeDate,
+                    "bankName": formik.values.BankName,
+                    "remark": formik.values.Remark
+                })
+
+                console.log(JSON.parse(submitData))
+                var config = {
                     method: 'post',
-                    url: allUrls.allInfoOfActiveStudent,
+                    url: AllUrl.generateReciept,
                     headers: {
-                        'Authorization': `Bearer ${token}`,
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
                         'Content-Type': 'application/json'
                     },
-                    data: backData
+                    data: submitData
                 };
-                accountAction(getBackData, navigate, true, setLoading)
-                // console.log(result.data);
-                const link = document.createElement('a')
-                link.href = result.data;
-                link.target = '_blank';
-                link.download = `${formik.values.studentName}`;
-                document.body.appendChild(link)
-                link.click()
-                document.body.removeChild(link)
+
+                var result = await axios(config);
+                // if (result) setLoading(false)
+
+                if (result.status === 200) {
+                    let backData = JSON.stringify({
+                        "stdId": StudentAccountData.accountInfo.stdId,
+                    });
+                    console.log("______________________________________");
+                    console.log("backdata", backData);
+                    console.log("______________________________________");
+                    let getBackData = {
+                        method: 'post',
+                        url: allUrls.allInfoOfActiveStudent,
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        data: backData
+                    };
+                    accountAction(getBackData, navigate, true, setLoading)
+                    // console.log(result.data);
+                    const link = document.createElement('a')
+                    link.href = result.data;
+                    link.target = '_blank';
+                    link.download = `${formik.values.studentName}`;
+                    document.body.appendChild(link)
+                    link.click()
+                    document.body.removeChild(link)
+                }
+
             }
 
-          }
 
+            Swal.fire({
+                title: `Confirmation`,
 
-                    Swal.fire({
-                            title: `Confirmation`,
+                html: `Student- ${StudentName} , Amount- ${formik.values.feesAmount} , Insta No- ${formik.values.installmentNo} ` +
+                    '<hr>' +
+                    'Are you sure?' +
+                    '<br>' +
+                    `You want to generate fees receipt .`,
+                showCancelButton: true,
+                showConfirmButton: true,
+                cancelButtonText: 'No',
+                confirmButtonText: `Yes `,
+                // confirmButtonText:'Deactive',
+                reverseButtons: true,
+                showCloseButton: true,
+                // cancelButtonColor: 'gray',
+                confirmButtonColor: "#F8A72C",
 
-                            html: `Student- ${StudentName} , Amount- ${formik.values.feesAmount} , Insta No- ${formik.values.installmentNo} ` +
-                                '<hr>' +
-                                'Are you sure?' +
-                                '<br>' +
-                                `You want to generate fees receipt .`,
-                            showCancelButton: true,
-                            showConfirmButton: true,
-                            cancelButtonText: 'No',
-                            confirmButtonText: `Yes `,
-                            // confirmButtonText:'Deactive',
-                            reverseButtons: true,
-                            showCloseButton: true,
-                            // cancelButtonColor: 'gray',
-                            confirmButtonColor: "#F8A72C",
+                showLoaderOnDeny: true,
 
-                            showLoaderOnDeny: true,
+                showClass: {
+                    backdrop: 'swal2-noanimation', // disable backdrop animation
+                    popup: '',                     // disable popup animation
+                    icon: ''                       // disable icon animation
+                },
+                hideClass: {
+                    popup: '',                     // disable popup fade-out animation
+                }
 
-                            showClass: {
-                                backdrop: 'swal2-noanimation', // disable backdrop animation
-                                popup: '',                     // disable popup animation
-                                icon: ''                       // disable icon animation
-                            },
-                            hideClass: {
-                                popup: '',                     // disable popup fade-out animation
-                            }
-
-                        }).then(async (result) => {
-                            if (result.isConfirmed) {
-                                 submitForm()
-                            }
-                        })
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    submitForm()
+                }
+            })
 
 
 
@@ -478,16 +479,16 @@ function FeesRecipt({ accountAction }) {
 
 
                                 <div className="col">
-                                    <label  htmlFor="">{pendingFee.year === 'I' ? 'First Year' : pendingFee.year === 'II' ? 'Second Year' : 'Third Year'}</label>
+                                    <label htmlFor="">{pendingFee.year === 'I' ? 'First Year' : pendingFee.year === 'II' ? 'Second Year' : 'Third Year'}</label>
                                 </div>
                                 <div className="col">
-                                    <label  htmlFor="">{pendingFee.feesAmount}</label>
+                                    <label htmlFor="">{pendingFee.feesAmount}</label>
                                 </div>
                                 <div className="col">
-                                    <label  htmlFor="">{pendingFee.receivedFees}</label>
+                                    <label htmlFor="">{pendingFee.receivedFees}</label>
                                 </div>
                                 <div className="d-flex col-2">
-                                    <label  htmlFor="">{pendingFee.pendingFees}</label>
+                                    <label htmlFor="">{pendingFee.pendingFees}</label>
                                 </div>
                             </div>
                         ))}
@@ -549,7 +550,7 @@ function FeesRecipt({ accountAction }) {
                                                     </p>
                                                 </div>
                                                 <div className="d-flex col justify-content-end ">
-                                                    <p className='p-1' style={{ fontSize: '12px', margin: "auto" ,color: 'white' }}>{StudentAccountData.accountsReceiptNo}</p>
+                                                    <p className='p-1' style={{ fontSize: '12px', margin: "auto", color: 'white' }}>{StudentAccountData.accountsReceiptNo}</p>
                                                 </div>
                                             </div>
 
@@ -564,8 +565,8 @@ function FeesRecipt({ accountAction }) {
                                                         </p>
                                                     </div>
                                                     <div className="d-flex col justify-content-end ">
-                                                        <p className='p-1 m-0 ms-2  ' style={{  fontSize: '15px', color: '#656A87' }}>
-                                                            <span style={{ fontSize: '13px' ,paddingRight: "23px"  }}>Class</span> <br />
+                                                        <p className='p-1 m-0 ms-2  ' style={{ fontSize: '15px', color: '#656A87' }}>
+                                                            <span style={{ fontSize: '13px', paddingRight: "23px" }}>Class</span> <br />
                                                             {StudentClassName + '-' + StudentAccountData.year}
                                                         </p>
                                                     </div>
@@ -603,13 +604,22 @@ function FeesRecipt({ accountAction }) {
                                                         <FeesRecieptDeletePopup></FeesRecieptDeletePopup>
                                                         </div> */}
                                                         <div>
-                                                        {/* <a href={StudentAccountData.AccountsReceiptName} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} alt="downloadImg" /></a> */}
-                                                        <FeesRecieptDeletePopup data={StudentAccountData}  ></FeesRecieptDeletePopup>
+                                                            {/* <a href={StudentAccountData.AccountsReceiptName} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} alt="downloadImg" /></a> */}
+                                                            <FeesRecieptDeletePopup data={StudentAccountData}  ></FeesRecieptDeletePopup>
 
                                                         </div>
-                                                        <a href={StudentAccountData.AccountsReceiptName} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} alt="downloadImg" /></a>
-                                                        </div>
-                                                        
+                                                        <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                                                            <Tooltip>
+                                                                Download Receipt
+                                                            </Tooltip>
+                                                        }>
+
+                                      
+                                                            {/* <img src={Edit_icon} alt='edit_icon'  /> */}
+                                                        <a href={StudentAccountData.accountsReceiptName} style={{ cursor: 'pointer' }} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} alt="downloadImg" /></a>
+                                                        </Whisper>
+                                                    </div>
+
                                                 </div>
                                             </div>
 

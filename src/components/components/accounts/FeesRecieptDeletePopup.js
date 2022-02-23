@@ -8,6 +8,7 @@ import {
     // CModalTitle,
 } from "@coreui/react";
 import React, { useState } from "react";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 // import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -24,10 +25,11 @@ import crossButton from "../../assests/image/crossButton.svg";
 import AllUrl from "../../../redux/constants/url";
 import LoaderButton from "../../assests/common/LoaderButton";
 import Swal from "sweetalert2";
+import { Tooltip, Whisper } from 'rsuite';
 
 function FeesRecieptDeletePopup({ data }) {
 
-    
+
 
     const token = localStorage.getItem("token");
     const stdId = data.stdId
@@ -51,8 +53,8 @@ function FeesRecieptDeletePopup({ data }) {
         },
         validationSchema,
 
-         onSubmit: async (values) => {
-             setLoading(true);
+        onSubmit: async (values) => {
+            setLoading(true);
             console.log(data.stdId);
             var resultData = JSON.stringify({
                 stdId: stdId,
@@ -73,15 +75,14 @@ function FeesRecieptDeletePopup({ data }) {
             };
             var resultOfAxios = await axios(config)
             setLoading(false);
-            if(resultOfAxios.status === 200)
-            {
+            if (resultOfAxios.status === 200) {
                 // console.log(resultOfAxios.status)
                 Swal.fire(
                     'Request sent',
                     ' ',
                     'success'
-                  )
-                   setVisible(!visible)
+                )
+                setVisible(!visible)
 
             }
             console.log(resultOfAxios);
@@ -95,7 +96,14 @@ function FeesRecieptDeletePopup({ data }) {
 
     return (
         <div>
-            <i className="fas fa-trash-alt mr-3 mt-3" style={{ cursor: "pointer" }} onClick={() => setVisible(!visible)} ></i>
+            <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                <Tooltip>
+                    Report Receipt
+                </Tooltip>
+            }>
+                <DeleteOutlineIcon className="mr-3" style={{ color: "#fff", fontSize: '27px', cursor: "pointer", marginTop: '12px' }} onClick={() => setVisible(!visible)}></DeleteOutlineIcon>
+            </Whisper>
+
             <CModal
 
                 alignment="center"
@@ -136,7 +144,7 @@ function FeesRecieptDeletePopup({ data }) {
                                     type="submit"
                                 >
                                     {loading ? <LoaderButton /> : "Request"}
-                                    
+
                                 </button>
                             </form>
                         </div>
