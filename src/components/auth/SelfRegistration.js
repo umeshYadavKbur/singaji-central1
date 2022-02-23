@@ -48,7 +48,7 @@ function SelfRegistration() {
             /////////////////////////
             const villageNamesRes = await axios(allUrls.villageNameList)
             let newVillageName = [];
-            villageNamesRes.data.forEach((ele) => {newVillageName.push({'label': ele.villagename,'value': ele.villagename})})
+            villageNamesRes.data.forEach((ele) => {newVillageName.push({'label': ele.villageName,'value': ele.villageName})})
             // console.log(newVillageName);
             setVillageNames(newVillageName);
 
@@ -164,7 +164,7 @@ function SelfRegistration() {
                 "branch": formik.values.streamName,
                 "year": formik.values.year,
                 "joinBatch": formik.values.joinBatch,
-                "tutionfee": formik.values.courseFees,
+                "tutionFee": formik.values.courseFees,
                 "fathersName": formik.values.fatherName,
                 "regFees":"1500",
                 "dob": formik.values.dob,
@@ -177,7 +177,7 @@ function SelfRegistration() {
                 "persentage12": formik.values.percent12,
                 "persentage10": formik.values.percent10,
                 "rollNumber10": formik.values.rollNumber10,
-                "aadarNo": formik.values.aadharNumber.split(' ').join(''),
+                "aadharNo": formik.values.aadharNumber.split(' ').join(''),
                 "fatherOccupation": formik.values.fatherOccupation,
                 "fatherIncome": formik.values.fatherIncome,
                 "category": formik.values.category,
@@ -349,7 +349,7 @@ function SelfRegistration() {
 
                 const StudentCourseFees = await axios(config)
                 if(StudentCourseFees.status === 200) {
-                    formik.setFieldValue('courseFees',StudentCourseFees.data[0].total_fees);
+                    formik.setFieldValue('courseFees',StudentCourseFees.data[0].totalFees);
 
                 } else {
                     formik.setFieldValue('courseFees','');
