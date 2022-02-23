@@ -7,7 +7,7 @@ export const DeactivateButton = {
     borderRadius: "5px",
     backgroundColor: "#CCE5FF",
     color: "#4F83DF",
-    fontSize: '12px',
+    // fontSize: '12px',
     fontWeight: "bold",
     border: '1px #FFC700',
 }
