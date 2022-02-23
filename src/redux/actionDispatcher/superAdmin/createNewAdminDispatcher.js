@@ -27,15 +27,22 @@ export const createNewAdmin = (data, navigate) => {
             //   timer: 2500
             // })
             navigate('admintable')
-            toast('admin has been successfully created!', {
-              position: "bottom-center",
-              autoClose: 5000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
+            // toast('admin has been successfully created!', {
+            //   position: "bottom-center",
+            //   autoClose: 5000,
+            //   hideProgressBar: true,
+            //   closeOnClick: true,
+            //   pauseOnHover: true,
+            //   draggable: true,
+            //   progress: undefined,
+            // });
+            Swal.fire({
+              position: 'top-center',
+              icon: 'success',
+              title: 'Admin has been created successfully!',
+              showConfirmButton: false,
+              timer: 2500
+            })
           } else if (response.status === 208) {
             dispatch(newAdminReqFail());
             Swal.fire({
