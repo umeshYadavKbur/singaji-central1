@@ -27,9 +27,9 @@ import { VerifyStudent } from "../../redux/actionDispatcher/superAdmin/studentVe
 // import AddNewStudent from "./AddNewStudent";
 import AllUrl from "../../redux/constants/url"
 import updown_sort from '../assests/image/updown_sort.svg'
-import { DeactivateButton, PaidButton, UnpaidButton } from "../assests/common/Color";
+import {  PaidButton, UnpaidButton } from "../assests/common/Color";
 import Pagination from "../assests/common/Pagination";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { Tooltip, Whisper } from "rsuite";
 import NoDataFound from "../assests/common/NoDataFound";
 
@@ -40,7 +40,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 
   const token = localStorage.getItem("token");
   const navigate = useNavigate()
-  var AppliedStudent;
+  // var AppliedStudent;
   const [columns] = React.useState([
     {
       header: "S.No",

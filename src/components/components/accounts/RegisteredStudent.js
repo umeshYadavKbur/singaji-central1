@@ -1,7 +1,7 @@
 import * as React from "react";
 // import { useMemo } from "react";
 
-import Edit_icon from '../../assests/image/Edit_icon.svg'
+// import Edit_icon from '../../assests/image/Edit_icon.svg'
 import Swal from 'sweetalert2'
 import { GlobalFilter } from "../../components/tableComponents/GlobalFilter";
 import {
@@ -27,10 +27,10 @@ import { VerifyStudent } from "../../../redux/actionDispatcher/superAdmin/studen
 // import AddNewStudent from "./AddNewStudent";
 import AllUrl from "../../../redux/constants/url"
 import updown_sort from '../../assests/image/updown_sort.svg'
-import { DeactivateButton, PaidButton, PendingButton, RecievedButton, UnpaidButton } from "../../assests/common/Color";
+import { DeactivateButton, PendingButton, RecievedButton } from "../../assests/common/Color";
 import Pagination from "../../assests/common/Pagination";
-import { useNavigate } from "react-router-dom";
-import { Tooltip, Whisper } from "rsuite";
+// import { useNavigate } from "react-router-dom";
+// import { Tooltip, Whisper } from "rsuite";
 import NoDataFound from "../../assests/common/NoDataFound";
 import { CSVLink } from "react-csv";
 import downloadPdfStudentList from './PdfGeneratorStudentList'
@@ -40,7 +40,7 @@ import downloadPdfStudentList from './PdfGeneratorStudentList'
 
 function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
   const token = localStorage.getItem("token");
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [columns] = React.useState([
     {
@@ -350,7 +350,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     null,
     2
   );
-
+console.log(checkboxData);
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
   ) : table_data.error ? (

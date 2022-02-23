@@ -31,7 +31,7 @@ function SelfRegistration() {
     const [trackNames,setTrackNames] = useState([{trackName: 'loading...',trackId: 0}])
     const [villageNames,setVillageNames] = useState([{label: 'loading...',villageId: 0}])
     const [loaderLoading,setLoaderLoading] = useState(false)
-    const [imgData,setImageData] = useState('');
+    // const [imgData,setImageData] = useState('');
 
 
     useEffect(() => {
@@ -366,37 +366,37 @@ function SelfRegistration() {
         }
     }
 
-    const [expanded,setExpanded] = React.useState({
+    const [expanded] = React.useState({
         panel1: true,
         panel2: true,
         panel3: true,
         panel4: true
     });
 
-    const handleChange = (id) => () => {
-        // console.log(expanded)
-        setExpanded((pre) => {
-            return {
-                ...pre,
-                [id]: !expanded[id]
-            }
+    // const handleChange = (id) => () => {
+    //     // console.log(expanded)
+    //     setExpanded((pre) => {
+    //         return {
+    //             ...pre,
+    //             [id]: !expanded[id]
+    //         }
 
-        });
-    };
+    //     });
+    // };
     const isDesktopOrLaptop = useMediaQuery({
         query: '(min-width:770px)'
     })
     const mobile = useMediaQuery({
         query: '(min-width:455px)'
     })
-    const customStyles = {
-        control: base => ({
-            ...base,
-            height: 26,
-            minHeight: 25,
-            fontSize: 10,
-        })
-    };
+    // const customStyles = {
+    //     control: base => ({
+    //         ...base,
+    //         height: 26,
+    //         minHeight: 25,
+    //         fontSize: 10,
+    //     })
+    // };
     const imageToBase64 = async (file,feildName) => {
         if(file) {
             const options = {
@@ -479,8 +479,8 @@ function SelfRegistration() {
                                 {/* Personal Details */}
 
                                 <div className="form-row  mt-2" style={{cursor: 'pointer'}} >
-                                    {formik.values.photo1 !== '' ? <img style={{cursor: 'pointer',height: !isDesktopOrLaptop ? '50px' : '70px',width: !isDesktopOrLaptop ? '50px' : '70px',borderRadius: '50%',cursor: 'pointer',border:'3px solid #5a607f'}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={formik.values.photo1} alt="image" />
-                                        : <img style={{cursor: 'pointer',height: !isDesktopOrLaptop ? '50px' : '70px',width: !isDesktopOrLaptop ? '50px' : '70px'}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={profile_image} alt="image" /> 
+                                    {formik.values.photo1 !== '' ? <img style={{cursor: 'pointer',height: !isDesktopOrLaptop ? '50px' : '70px',width: !isDesktopOrLaptop ? '50px' : '70px',borderRadius: '50%',border:'3px solid #5a607f'}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={formik.values.photo1} alt="..." />
+                                        : <img style={{cursor: 'pointer',height: !isDesktopOrLaptop ? '50px' : '70px',width: !isDesktopOrLaptop ? '50px' : '70px'}} className='ml-2' onClick={() => {document.getElementById("profilePhoto").click()}} src={profile_image} alt="..." /> 
                                     }
                                     <img src={Plus_icon} alt="Plus_icon" style={{marginTop:'21px', marginLeft:'-11px'}} />
                                     <input type="file" name="photo"  value={formik.values.photo} id="profilePhoto" style={{display: "none"}} accept="image/*" onChange={(e) => {

@@ -81,7 +81,7 @@ export const AdminStatusChange = (data) => {
                     draggable: false,
                     progress: undefined,
                 });
-                let value = JSON.stringify(userResData.status);
+                // let value = JSON.stringify(userResData.status);
                 dispatch(AdminStatusChangeFail())
                 dispatch(fetchSuccessfailTableData())
 

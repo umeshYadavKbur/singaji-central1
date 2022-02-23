@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./styles/AddNewStudent.css"
 import Select from 'react-select'
 import * as Yup from "yup";
-import {Formik,useFormik} from 'formik';
+import {useFormik} from 'formik';
 import axios from 'axios';
 import AddNewStudent from '../../redux/actionDispatcher/superAdmin/addNewStudentDispatcher'
 import {connect} from 'react-redux';
@@ -27,20 +27,20 @@ import SuccessIcon from '../assests/image/SuccessIcon.svg'
 import Rectangle_img from '../assests/image/Rectangle_img.svg'
 import imageCompression from 'browser-image-compression';
 import UploadDocumentImage from '../assests/image/Upload_document_img.svg';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import {useMediaQuery} from 'react-responsive'
 
 
 
 
-function AddNewStudentPage({addStudent,AddNewStudent}) {
+function AddNewStudentPage({AddNewStudent}) {
 
     const isDesktopOrLaptop = useMediaQuery({
         query: '(min-width:770px)'
     })
-    const mobile = useMediaQuery({
-        query: '(min-width:455px)'
-    })
+    // const mobile = useMediaQuery({
+    //     query: '(min-width:455px)'
+    // })
 
     var editDataSelf = JSON.parse(localStorage.getItem('SelfRegistrationEdit'));
     const navigate = useNavigate();
