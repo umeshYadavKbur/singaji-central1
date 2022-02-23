@@ -34,6 +34,9 @@ export const VerifyStudent = (data) => {
 
         let userResData;
 
+        console.log("+++++++++++++++++++++++++++++");
+        console.log(body);
+        console.log("+++++++++++++++++++++++++++++");
         try {
             userResData = await axios(config);
             // console.log(userResData)

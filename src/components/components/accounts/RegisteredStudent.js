@@ -81,7 +81,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     },
     {
       header: "Pay status",
-      accessor: "acc_reg_fees_status",
+      accessor: "accRegFeesStatus",
       Cell: ({ row: { original } }) => (
         <button
           className="table_btn_size"
