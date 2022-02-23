@@ -56,8 +56,8 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
       if (original) {
         if (formik.values.totalFees > 1000) {
           var update = JSON.stringify({
-            branch_schema_code: formik.values.stream + formik.values.startYear,
-            total_fees: `${formik.values.totalFees}`,
+            branchSchemaCode: formik.values.stream + formik.values.startYear,
+            totalFees: `${formik.values.totalFees}`,
           })
 
           var updateSchema = {
