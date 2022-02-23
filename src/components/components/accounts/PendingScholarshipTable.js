@@ -287,7 +287,7 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
             <div className="d-flex align-items-center">
               <span
                 className="recieved-fee-circle"
-                style={{ backgroundColor: `${original.pending_Amount <= 0 ? '#56F000' : "#ffc107"}`, marginRight: "10px", marginLeft: "20px" }}
+                style={{ backgroundColor: `${original.pendingAmount <= 0 ? '#56F000' : "#ffc107"}`, marginRight: "10px", marginLeft: "20px" }}
               ></span>{original.pendingAmount}
             </div>
           </div>
