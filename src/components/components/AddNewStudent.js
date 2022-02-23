@@ -61,7 +61,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
             /////////////////////////
             const villageNamesRes = await axios(allUrls.villageNameList)
             let newVillageName = [];
-            villageNamesRes.data.forEach((ele) => { newVillageName.push({ 'label': ele.villagename, 'value': ele.villagename }) })
+            villageNamesRes.data.forEach((ele) => {newVillageName.push({'label': ele.villageName,'value': ele.villageName }) })
             // console.log(newVillageName);
             setVillageNames(newVillageName);
 
@@ -102,7 +102,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
     //     tehsil: editData ? editData.tehsil : "",
     //     district: editData ? editData.district : "",
     //     email: editData ? editData.email : "",
-    //     aadharNumber: editData ? (editData.aadarNo).match(/.{4}/g).join(' ') : "",
+    //     aadharNumber: editData ? (editData.aadharNo).match(/.{4}/g).join(' ') : "",
     //     category: editData ? editData.category : "",
     //     gender: editData ? editData.gender : "male",
     //     // Personal information end here 
@@ -113,7 +113,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
     //     streamName: editData ? editData.branch : "",
     //     joinBatch: editData ? editData.joinBatch : new Date().getFullYear(),
     //     rollNumber12: editData ? editData.rollNumber12 : "",
-    //     percent12: editData ? editData.persentage12 : "",
+    //     persentage12: editData ? editData.persentage12 : "",
     //     year: editData ? editData.year : "",
     //     percent10: editData ? editData.persentage10 : "",
     //     rollNumber10: editData ? editData.rollNumber10 : "",
@@ -135,21 +135,22 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
     //     sponsorshipType: editData ? editData.sponsorshipType : 'none',
     //     courseFees: editData ? editData.Tutionfee === null ? "" : editData.Tutionfee : "",
     //     regisrationFees: editData ? editData.reg_Fees : "1500",
-    //     postmatricScolarship: editData ? (editData.is_Postmetric)?.toLowerCase() : "no",
+    //     postmatricScolarship: editData ? (editData.is_Postmetric)?.toLowerCase() : "No",
 
     //     //remaining
-    //     gkbScolarship: editData ? (editData.Is_GKB)?.toLowerCase() : "no",//not working
-    //     gkbOwner: editData ? editData.GaonKiBeti === null ? "self" : editData.GaonKiBeti : "self",
-    //     postmatricOwner: editData ? editData.Postmetric === null ? "self" : editData.Postmetric : "self",
+    //     gkbScolarship: editData ? (editData.Is_GKB)?.toLowerCase() : "No",//not working
+    //     gkbOwner: editData ? editData.GaonKiBeti === null ? "Self" : editData.GaonKiBeti : "Self",
+    //     postmatricOwner: editData ? editData.Postmetric === null ? "Self" : editData.Postmetric : "Self",
     //     payableAmmount: editData ? editData.remain_Amount : "",
     //     remark: editData ? editData.remark === null ? "" : editData.remark : "",
-    //     ScholarshipAmount: editData ? editData.ScholarshipAmount : 0,
+    //     scholarshipAmount: editData ? editData.scholarshipAmount : 0,
     //     trackName: editData ? editData.trackName : "",
-    //     busFees: editData ? editData.Busfee === null ? "" : editData.Busfee : "",
+    //     busFee: editData ? editData.Busfee === null ? "" : editData.Busfee : "",
     //     commitment: editData ? editData.commitment : "",
     //     // Fees detail end from here 
 
     // }
+    
 
 
     // editDataSelf
@@ -169,7 +170,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         tehsil: editDataSelf ? editDataSelf.tehsil : "",
         district: editDataSelf ? editDataSelf.district : "",
         email: editDataSelf ? editDataSelf.email : "",
-        aadharNumber: editDataSelf ? (editDataSelf.aadarNo).match(/.{4}/g).join(' ') : "",
+        aadharNumber: editDataSelf ? (editDataSelf.aadharNo).match(/.{4}/g).join(' ') : "",
         category: editDataSelf ? editDataSelf.category : "",
         gender: editDataSelf ? editDataSelf.gender : "male",
         // Personal information end here 
@@ -178,40 +179,40 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         rollNumber10: editDataSelf ? editDataSelf.rollNumber10 : "",
         percent10: editDataSelf ? editDataSelf.persentage10 : "",
         schoolName: editDataSelf ? editDataSelf.schoolName : "",
-        subject12: editDataSelf ? editDataSelf.school12sub : "",
+        subject12: editDataSelf ? editDataSelf.school12Sub : "",
         rollNumber12: editDataSelf ? editDataSelf.rollNumber12 : "",
         streamName: editDataSelf ? editDataSelf.branch : "",
-        percent12: editDataSelf ? editDataSelf.persentage12 : "",
+        persentage12: editDataSelf ? editDataSelf.persentage12 : "",
         joinBatch: editDataSelf ? editDataSelf.joinBatch : new Date().getFullYear(),
-        courseFees: editDataSelf ? editDataSelf.Tutionfee === null ? "" : editDataSelf.Tutionfee : "",
+        courseFees: editDataSelf ? editDataSelf.tutionFee === null ? "" : editDataSelf.tutionFee : "",
         year: editDataSelf ? editDataSelf.year : "",
-        busFees: editDataSelf ? editDataSelf.Busfee : "",
+        busFee: editDataSelf ? editDataSelf.busFee : "",
 
         //Acadmic Details end  here
 
         // Fees detail start from here 
-        GKBAmount: editData ? editData.GaonKiBeti : "self",
-        postmatricAmount: editData ? editData.Postmetric : "self",
+        GKBAmount: editData ? editData.gaonKiBeti : "Self",
+        postmatricAmount: editData ? editData.postmetricAmmount : "",
 
-        firstInstallmentDate: editData ? editData.FirstinstallmentDate : "",
-        firstInstallment: editData ? editData.Firstinstallment : 0,
-        secondInstallmentDate: editData ? editData.SecondinstallmentDate : "",
-        secondInstallment: editData ? editData.Secondinstallment : 0,
-        thirdInstallmentDate: editData ? editData.ThirdinstallmentDate : "",
-        thirdInstallment: editData ? editData.Thirdinstallment : 0,
+        firstInstallmentDate: editData ? editData.firstInstallmentDate : "",
+        firstInstallment: editData ? editData.firstInstallment : 0,
+        secondInstallmentDate: editData ? editData.secondInstallmentDate : "",
+        secondInstallment: editData ? editData.secondInstallment : 0,
+        thirdInstallmentDate: editData ? editData.thirdInstallmentDate : "",
+        thirdInstallment: editData ? editData.thirdInstallment : 0,
 
         feesScheme: editData ? editData.feesScheme : 'none',
         sponsorshipType: editData ? editData.sponsorshipType : 'none',
-        regisrationFees: editData ? editData.reg_Fees : "1500",
-        postmatricScolarship: editData ? (editData.is_Postmetric)?.toLowerCase() : "no",
+        regisrationFees: editData ? editData.regFees : "1500",
+        postmatricScolarship: editData ? (editData.isPostmetric) : "No",
 
 
-        gkbScolarship: editData ? editData.Is_GKB.toLowerCase() : "no",
-        gkbOwner: editData ? editData.GaonKiBeti : "self",
-        postmatricOwner: editData ? editData.Postmetric : "self",
-        payableAmmount: editData ? editData.remain_Amount : "",
+        gkbScolarship: editData ? editData.isGKB : "No",
+        gkbOwner: editData ? editData.gaonKiBeti : "Self",
+        postmatricOwner: editData ? editData.postmetric : "Self",
+        payableAmmount: editData ? editData.totalFee : "",
         remark: editData ? editData.remark : "",
-        ScholarshipAmount: editData ? editData.ScholarshipAmount : 0,
+        scholarshipAmount: editData ? editData.scholarshipAmount : 0,
         trackName: editData ? editData.trackName : "",
         commitment: editData ? editData.commitment : "",
 
@@ -240,7 +241,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         percent10: Yup.string().required("Required!"),
         rollNumber10: Yup.string().required("Required!"),
         joinBatch: Yup.string().trim().required("Required!").test('len', 'Must be exactly 4 digits', val => val?.replace('X', '').length === 4),
-        percent12: Yup.string().required("Required!"),
+        persentage12: Yup.string().required("Required!"),
         rollNumber12: Yup.string().required("Required!"),
         year: Yup.string().required("Required!"),
         streamName: Yup.string().required("Required!"),
@@ -270,7 +271,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
 
         trackName: Yup.string().required("Required!"),
         commitment: Yup.string().required("Required!"),
-        busFees: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        busFee: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
 
     })
     const backToProfilePage = (e) => {
@@ -377,22 +378,22 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                 "year": formik.values.year,
                 "joinBatch": formik.values.joinBatch,
                 "feesScheme": formik.values.feesScheme,
-                "ScholarshipAmount": formik.values.ScholarshipAmount,
-                "Totalfee": formik.values.payableAmmount,
-                "Busfee": formik.values.busFees,
-                "Tutionfee": formik.values.courseFees,
+                "scholarshipAmount": formik.values.scholarshipAmount,
+                "totalFee": formik.values.payableAmmount,
+                "busFee": formik.values.busFee,
+                "tutionFee": formik.values.courseFees,
                 "fathersName": formik.values.fatherName,
                 "dob": formik.values.dob,
                 "mobile": formik.values.contactNumber,
                 "fatherContactNumber": formik.values.FatherContactNumber,
                 "email": formik.values.email,
                 "schoolName": formik.values.schoolName,
-                "school12sub": formik.values.subject12,
+                "school12Sub": formik.values.subject12,
                 "rollNumber12": formik.values.rollNumber12,
-                "persentage12": formik.values.percent12,
+                "persentage12": formik.values.persentage12,
                 "persentage10": formik.values.percent10,
                 "rollNumber10": formik.values.rollNumber10,
-                "aadarNo": formik.values.aadharNumber.split(' ').join(''),
+                "aadharNo": formik.values.aadharNumber.split(' ').join(''),
                 "fatherOccupation": formik.values.fatherOccupation,
                 "fatherIncome": formik.values.fatherIncome,
                 "category": formik.values.category,
@@ -403,24 +404,24 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                 "village": formik.values.village,
                 "tehsil": formik.values.tehsil,
                 "district": formik.values.district,
-                "reg_Fees": formik.values.regisrationFees,
-                "Firstinstallment": formik.values.firstInstallment,
-                "FirstinstallmentDate": formik.values.firstInstallmentDate,
-                "Secondinstallment": formik.values.secondInstallment,
-                "SecondinstallmentDate": formik.values.secondInstallmentDate,
-                "Thirdinstallment": formik.values.thirdInstallment + formik.values.ScholarshipAmount,
-                "ThirdinstallmentDate": formik.values.thirdInstallmentDate,
-                "GaonKiBeti": formik.values.gkbOwner,
-                "GKB_Amount": formik.values.GKBAmount,
-                "Is_GKB": formik.values.gkbScolarship,
-                "Postmetric": formik.values.postmatricOwner,
-                "Postmetric_Amount": formik.values.postmatricAmount,
-                "is_Postmetric": formik.values.postmatricScolarship,
+                "regFees": formik.values.regisrationFees,
+                "firstInstallment": formik.values.firstInstallment,
+                "firstInstallmentDate": formik.values.firstInstallmentDate,
+                "secondInstallment": formik.values.secondInstallment,
+                "secondInstallmentDate": formik.values.secondInstallmentDate,
+                "thirdInstallment": formik.values.thirdInstallment + formik.values.scholarshipAmount,
+                "thirdInstallmentDate": formik.values.thirdInstallmentDate,
+                "gaonKiBeti": formik.values.gkbOwner,
+                "GKBAmount": formik.values.GKBAmount,
+                "isGKB": formik.values.gkbScolarship,
+                "postmetric": formik.values.postmatricOwner,
+                "postmetricAmount": formik.values.postmatricAmount,
+                "isPostmetric": formik.values.postmatricScolarship,
                 "remark": formik.values.remark,
                 "sponsorshipType": formik.values.sponsorshipType,
                 "commitment": formik.values.commitment
             }
-            //Remaining the self register student to shift tha account table 
+            //Remaining the Self register student to shift tha account table 
             editData || editDataSelf ?
                 updateStudentData(bodyData)
                 :
@@ -429,6 +430,30 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         }
     });
     // const [getCourseFee, setGetCourseFee] = useState(true)
+
+
+    const getPincode = async (value) => {
+        // console.log(Block,District);
+        if(value?.replace('X','').length === 6) {
+            var config = {
+                method: "get",
+                url: `https://api.postalpincode.in/pincode/${value}`,
+                headers: {},
+            };
+
+            const PincodeResult = await axios(config);
+            if(PincodeResult.status === 200) {
+
+                formik.setFieldValue("district",PincodeResult.data[0].PostOffice[0].District)
+                console.log("formiik::",formik.values.district);
+                formik.setFieldValue("tehsil",PincodeResult.data[0].PostOffice[0].Block)
+            } else {
+                formik.setFieldValue("district",PincodeResult.data[0].PostOffice[0].District)
+                console.log("formiik::",formik.values.district);
+                formik.setFieldValue("tehsil",PincodeResult.data[0].PostOffice[0].Block)
+            }
+        }
+    };
 
     const getCourseFees = async (branch, joinBatch) => {
 
@@ -450,7 +475,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
 
                 const StudentCourseFees = await axios(config)
                 if (StudentCourseFees.status === 200) {
-                    formik.setFieldValue('courseFees', StudentCourseFees.data[0].total_fees);
+                    formik.setFieldValue('courseFees',StudentCourseFees.data[0].totalFees);
 
                 } else {
                     formik.setFieldValue('courseFees', '');
@@ -719,8 +744,8 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                 <div className='row m-1'>
                                     <div className="col">
                                         <label className="addStdLable" htmlFor="">Pincode*</label>  <NumberFormat
-                                            onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
+                                            onChange={async (e) => {await formik.setFieldValue("pincode",e.target.value); getPincode(e.target.value)}}
                                             value={formik.values.pincode}
                                             name="pincode"
                                             type="text"
@@ -1019,17 +1044,17 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                         <label className="addStdLable" htmlFor="">12<sup>th</sup> Percentage*</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.percent12}
-                                            name="percent12"
+                                            value={formik.values.persentage12}
+                                            name="persentage12"
                                             type="text"
                                             format="##%"
                                             mask={['X', 'X', '%']}
                                             placeholder="XX%"
 
-                                            className={formik.touched.percent12 ? `form-control ${formik.errors.percent12 ? "invalid" : ""}` : 'form-control'}
-                                        /> {formik.errors.percent12 && formik.touched.percent12 ? (
+                                            className={formik.touched.persentage12 ? `form-control ${formik.errors.persentage12 ? "invalid" : ""}` : 'form-control'}
+                                        /> {formik.errors.persentage12 && formik.touched.persentage12 ? (
                                             <div className="text-danger fs-6">
-                                                {formik.errors.percent12}
+                                                {formik.errors.persentage12}
                                             </div>
                                         ) : (
                                             ""
@@ -1280,10 +1305,10 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                             onBlur={formik.handleBlur}
                                             className={formik.touched.postmatricScolarship ? `form-select ${formik.errors.postmatricScolarship ? "invalid" : ""}` : 'form-select'}
                                             id="inputGroupSelect02"
-                                            disabled={formik.values.category === 'Gen' ? true : false}
+                                            disabled={formik.values.category === 'GEN' ? true : false}
                                         >
                                             <option value="yes">Yes</option>
-                                            <option value="no">No</option>
+                                            <option value="No">No</option>
                                         </select>
                                         {formik.errors.postmatricScolarship && formik.touched.postmatricScolarship ? (
                                             <div className="text-danger fs-6">
@@ -1297,12 +1322,12 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                     <div className="col" style={{ marginTop: '7px' }}>
                                         <label className="addStdLable" htmlFor="">GKB Scholarship*</label>
                                         <select name="gkbScolarship" className={formik.touched.gkbScolarship ? `form-select ${formik.errors.gkbScolarship ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02"
-                                            value={formik.values.gender === "male" ? formik.values.gkbScolarship = "no" : formik.values.gkbScolarship}
+                                            value={formik.values.gender === "male" ? formik.values.gkbScolarship = "No" : formik.values.gkbScolarship}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             disabled={formik.values.gender === 'male' ? true : false}>
                                             <option value="yes">Yes</option>
-                                            <option value="no">No</option>
+                                            <option value="No">No</option>
                                         </select>
                                         {formik.errors.gkbScolarship && formik.touched.gkbScolarship ? (
                                             <div className="text-danger fs-6">
@@ -1359,11 +1384,11 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                     <div className="col" style={{ marginTop: '7px' }}>
                                         <label className="addStdLable" htmlFor="">Postmatric Owner*</label>
                                         <select name="postmatricOwner" className={formik.touched.postmatricOwner ? `form-select ${formik.errors.postmatricOwner ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02"
-                                            value={formik.values.postmatricScolarship === "no" ? formik.values.postmatricOwner = "self" : formik.values.postmatricOwner}
+                                            value={formik.values.postmatricScolarship === "No" ? formik.values.postmatricOwner = "Self" : formik.values.postmatricOwner}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            disabled={formik.values.category === 'Gen' ? true : false || formik.values.postmatricScolarship === "no" ? true : false}>
-                                            <option value="self">Self</option>
+                                            disabled={formik.values.category === 'GEN' ? true : false || formik.values.postmatricScolarship === "No" ? true : false}>
+                                            <option value="Self">Self</option>
                                             <option value="ssism">SSISM</option>
                                         </select>
                                         {formik.errors.postmatricOwner && formik.touched.postmatricOwner ? (
@@ -1377,11 +1402,11 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                     <div className="col" style={{ marginTop: '7px' }}>
                                         <label className="addStdLable" htmlFor="">GKB Owner*</label>
                                         <select name="gkbOwner" className={formik.touched.gkbOwner ? `form-select ${formik.errors.gkbOwner ? "invalid" : ""}` : 'form-select'} id="inputGroupSelect02"
-                                            value={formik.values.gkbScolarship === "no" ? formik.values.gkbOwner = "self" : formik.values.gkbOwner}
+                                            value={formik.values.gkbScolarship === "No" ? formik.values.gkbOwner = "Self" : formik.values.gkbOwner}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            disabled={formik.values.gender === 'male' ? true : false || formik.values.gkbScolarship === "no" ? true : false}>
-                                            <option value="self">Self</option>
+                                            disabled={formik.values.gender === 'male' ? true : false || formik.values.gkbScolarship === "No" ? true : false}>
+                                            <option value="Self">Self</option>
                                             <option value="SSISM">SSISM</option>
                                         </select>
                                         {formik.errors.gkbOwner && formik.touched.gkbOwner ? (
@@ -1397,7 +1422,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.payableAmmount = parseInt(formik.values.firstInstallment?.toString().replace(/,/g, '').replace('₹', '')) + parseInt(formik.values.secondInstallment?.toString().replace(/,/g, '').replace('₹', '')) + parseInt(formik.values.thirdInstallment?.toString().replace(/,/g, '').replace('₹', ''))
-                                                + parseInt(formik.values.ScholarshipAmount?.toString().replace(/,/g, '').replace('₹', ''))}
+                                                + parseInt(formik.values.scholarshipAmount?.toString().replace(/,/g, '').replace('₹', ''))}
                                             name="payableAmmount"
                                             className={formik.touched.payableAmmount ? `form-control ${formik.errors.payableAmmount ? "invalid" : ""}` : 'form-control'}
                                             placeholder="Payable Amount"
@@ -1462,13 +1487,13 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                         <label className="addStdLable" htmlFor="">Postmatric Amount*</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.category === "Gen" ? formik.values.postmatricAmount = 0 : formik.values.postmatricOwner === "self" ? formik.values.postmatricAmount = 0 : formik.values.postmatricAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g, '').replace('₹', ''))}
+                                            value={formik.values.category === "GEN" ? formik.values.postmatricAmount = 0 : formik.values.postmatricOwner === "Self" ? formik.values.postmatricAmount = 0 : formik.values.postmatricAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g, '').replace('₹', ''))}
                                             name="postmatricAmount"
                                             thousandSeparator={true}
                                             thousandsGroupStyle='lakh'
                                             prefix='₹' className={formik.touched.postmatricAmount ? `form-control ${formik.errors.postmatricAmount ? "invalid" : ""}` : 'form-control'}
                                             placeholder="Postmatric Amount"
-                                            disabled={formik.values.category === 'Gen' ? true : false || formik.values.postmatricOwner === "self" ? true : false}
+                                            disabled={formik.values.category === 'GEN' ? true : false || formik.values.postmatricOwner === "Self" ? true : false}
                                         />
                                         {formik.errors.postmatricAmount && formik.touched.postmatricAmount ? (
                                             <div className="text-danger fs-6">
@@ -1482,14 +1507,14 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                         <label className="addStdLable" htmlFor="">GKB Amount*</label> <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.gender === 'male' ? formik.values.GKBAmount = 0 : formik.values.gkbOwner === "self" ? formik.values.GKBAmount = 0 : formik.values.GKBAmount = parseInt(formik.values.GKBAmount?.toString().replace(/,/g, '').replace('₹', ''))}
+                                            value={formik.values.gender === 'male' ? formik.values.GKBAmount = 0 : formik.values.gkbOwner === "Self" ? formik.values.GKBAmount = 0 : formik.values.GKBAmount = parseInt(formik.values.GKBAmount?.toString().replace(/,/g, '').replace('₹', ''))}
                                             name="GKBAmount"
                                             thousandSeparator={true}
                                             thousandsGroupStyle='lakh'
                                             prefix='₹'
                                             className={formik.touched.GKBAmount ? `form-control ${formik.errors.GKBAmount ? "invalid" : ""}` : 'form-control'}
                                             placeholder="GKB Amount"
-                                            disabled={formik.values.gender === 'male' ? true : false || formik.values.gkbOwner === "self" ? true : false}
+                                            disabled={formik.values.gender === 'male' ? true : false || formik.values.gkbOwner === "Self" ? true : false}
                                         />
                                         {formik.errors.GKBAmount && formik.touched.GKBAmount ? (
                                             <div className="text-danger fs-6">
@@ -1503,17 +1528,17 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                         <label className="addStdLable" htmlFor="">Scholarship Amount*</label> <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.ScholarshipAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g, '').replace('₹', '')) + parseInt(formik.values.GKBAmount?.toString().replace(/,/g, '').replace('₹', ''))}
-                                            name="ScholarshipAmount"
+                                            value={formik.values.scholarshipAmount = parseInt(formik.values.postmatricAmount?.toString().replace(/,/g, '').replace('₹', '')) + parseInt(formik.values.GKBAmount?.toString().replace(/,/g, '').replace('₹', ''))}
+                                            name="scholarshipAmount"
                                             thousandSeparator={true}
                                             thousandsGroupStyle='lakh'
-                                            prefix='₹' className={formik.touched.ScholarshipAmount ? `form-control ${formik.errors.ScholarshipAmount ? "invalid" : ""}` : 'form-control'}
+                                            prefix='₹' className={formik.touched.scholarshipAmount ? `form-control ${formik.errors.scholarshipAmount ? "invalid" : ""}` : 'form-control'}
                                             placeholder="Scholarship Amount"
                                             disabled={true}
                                         />
-                                        {formik.errors.ScholarshipAmount && formik.touched.ScholarshipAmount ? (
+                                        {formik.errors.scholarshipAmount && formik.touched.scholarshipAmount ? (
                                             <div className="text-danger fs-6">
-                                                {formik.errors.ScholarshipAmount}
+                                                {formik.errors.scholarshipAmount}
                                             </div>
                                         ) : (
                                             ""
@@ -1565,15 +1590,15 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                         <label className="addStdLable" htmlFor="">Bus Fees*</label>  <input
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            value={formik.values.busFees}
-                                            name="busFees"
+                                            value={formik.values.busFee}
+                                            name="busFee"
                                             type="number"
-                                            className={formik.touched.busFees ? `form-control ${formik.errors.busFees ? "invalid" : ""}` : 'form-control'}
+                                            className={formik.touched.busFee ? `form-control ${formik.errors.busFee ? "invalid" : ""}` : 'form-control'}
                                             placeholder="Bus Fees"
                                         />
-                                        {formik.errors.busFees && formik.touched.busFees ? (
+                                        {formik.errors.busFee && formik.touched.busFee ? (
                                             <div className="text-danger fs-6">
-                                                {formik.errors.busFees}
+                                                {formik.errors.busFee}
                                             </div>
                                         ) : (
                                             ""
@@ -1586,7 +1611,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                             <option value='0'>Select Track</option>
                                             {trackNames.map((ele, i) => {
                                                 return (
-                                                    <option key={i} value={ele.trackname}>{ele.trackname}</option>
+                                                    <option key={i} value={ele.trackName}>{ele.trackName}</option>
                                                 )
                                             })}
 
@@ -1671,14 +1696,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(AddNewStudentPage);
 // Is_GKB: "yes"
 // Postmetric: "ssism"
 // Postmetric_Amount: 15000
-// ScholarshipAmount: 20000
+// scholarshipAmount: 20000
 // Secondinstallment: 8000
 // SecondinstallmentDate: "2021-12-23"
 // Thirdinstallment: 0
 // ThirdinstallmentDate: "2021-12-31"
 // Totalfee: 31500
 // Tutionfee: 31500
-// aadarNo: "789456123789"
+// aadharNo: "789456123789"
 // address: "sandalpur khategoan"
 // branch: "BCA"
 // category: "OBC"

@@ -80,7 +80,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
       Cell: ({ row: { original } }) => (
         <div className='circle-main align-items-center'>
           <div className="d-flex align-items-center">
-            {original.acc_reg_fees_status === 'Paid' ? <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000", marginRight: "10px", marginLeft: "15px" }}></span> : <span className='recieved-fee-circle' style={{ backgroundColor: "#F00018", marginRight: "10px", marginLeft: "15px" }}></span>}
+            {original.accRegFeesStatus === 'Paid' ? <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000", marginRight: "10px", marginLeft: "15px" }}></span> : <span className='recieved-fee-circle' style={{ backgroundColor: "#F00018", marginRight: "10px", marginLeft: "15px" }}></span>}
           </div>
         </div>
       ),
@@ -91,14 +91,14 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     },
     {
       header: "Reg. Fees",
-      accessor: "reg_fees_status",
+      accessor: "regFeesStatus",
       Cell: ({ row: { original } }) => (
         <button
           className="table_btn_size"
           style={
-            original.reg_fees_status === "Paid"
+            original.regFeesStatus === "Paid"
               ? PaidButton : UnpaidButton}
-          disabled={original.reg_fees_status === "Paid"}
+          disabled={original.regFeesStatus === "Paid"}
           onClick={() => {
             Swal.fire({
               title: 'Payment Confermation',
@@ -179,7 +179,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               }
             })
           }}>
-          {original.reg_fees_status}
+          {original.regFeesStatus}
         </button>)
     },
 
