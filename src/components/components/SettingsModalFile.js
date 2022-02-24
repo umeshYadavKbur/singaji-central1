@@ -6,7 +6,7 @@ import {
   // CModalTitle,
   // CModalTitle,
 } from "@coreui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -21,7 +21,7 @@ import personal_png from "../assests/image/personal-profile.svg"
 // import { useAnimate } from "react-simple-animate";
 import Settings from '../assests/image/setting.svg';
 import AllUrl from "../../redux/constants/url";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import imageCompression from "browser-image-compression";
 import passKey from "../assests/image/key.svg";
@@ -51,19 +51,31 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
   // console.log(myname)
 
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
 
   const [visible, setVisibleSe] = useState(false);
   const [loading, setLoading] = useState(false)
 
+  const test = (val) => {
+
+    console.log(val);
+    if (show) {
+      return (val ? val.length > 0 : false)
+    } else {
+      return true;
+    }
+  }
+
   const validationSchema = Yup.object({
     name: Yup.string().required("Please fill the field above"),
-    // password: Yup.string().required("Please fill the field above"),
-    // newpass: Yup.string().required("Please fill the field above"),
-    // newpassAgain: Yup.string().required("Please fill the field above"),
+    password: Yup.string().test('len', 'required', test),
+    newpass: Yup.string().test('len', 'required', test),
+    newpassAgain: Yup.string().test('len', 'required', test),
   });
+
+ 
 
   const formik = useFormik({
     initialValues: {
@@ -74,11 +86,11 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
       photo: ''
     },
     validationSchema,
-
     onSubmit: async (values) => {
 
-
-
+     
+      
+      // alert('ok')
 
 
       setLoading(true)
@@ -86,7 +98,6 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
       var data = JSON.stringify({
         userId: userId,
         name: formik.values.name,
-        password: formik.values.role,
         oldPassword: formik.values.password,
         newPassword: formik.values.newpass,
         confirmPassword: formik.values.newpassAgain,
@@ -105,55 +116,104 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
 
       console.log("form submitted ---------------------")
       var response;
-      if (formik.values.password === '' && formik.values.newpass === '' && formik.values.newpassAgain === '') {
+      if(formik.values.password === ''){
 
         response = await axios(config)
+      }
+      else if(formik.values.newpass !== formik.values.newpassAgain) {
+        toast.success('New passwords are not same! ', {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         setLoading(false)
       }
-      else if(formik.values.password !== '' && formik.values.newpass === '' && formik.values.newpassAgain === '' ){
-        toast.warn('Enter the remaining two fields!', {
-                position: "bottom-center",
-                 autoClose: 4000,
-                 hideProgressBar: true,
-                 closeOnClick: true,
-                 pauseOnHover: true,
-                 draggable: true,
-                 progress: undefined,
-               });
-               setLoading(false)
-
-      }else if(formik.values.password !== '' && formik.values.newpass !== '' && formik.values.newpassAgain === ''){
-
-        toast.warn('Enter the remaining one field!', {
-          position: "bottom-center",
-           autoClose: 4000,
-           hideProgressBar: true,
-           closeOnClick: true,
-           pauseOnHover: true,
-           draggable: true,
-           progress: undefined,
-         });
-         setLoading(false)
-      }else{
-        if (formik.values.password !== '' && formik.values.newpass !== '' && formik.values.newpassAgain !== '') {
-          if (formik.values.newpass === formik.values.newpassAgain) {
-            
-            response = await axios(config)
-            setLoading(false)
-          } else {
-            toast.warn('Enter the same new passwords!', {
-              position: "bottom-center",
-              autoClose: 4000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            setLoading(false)
-          }
-        }
+      else{
+        response = await axios(config)
       }
+      console.log(response);
+      setLoading(false)
+      
+      if (response.status === 200) {
+        setLoading(false)
+        toast.success('Crendentials updated successfully ', {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setVisibleSe(!visible)
+        setShow2(false)
+      }
+     else if (response.status === 208) {
+        setLoading(false)
+        toast.warn('Your current password is invalid', {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    
+      // if (formik.values.password === '' && formik.values.newpass === '' && formik.values.newpassAgain === '') {
+
+      //   response = await axios(config)
+      //   setLoading(false)
+      // }
+      // else if (formik.values.password !== '' && formik.values.newpass === '' && formik.values.newpassAgain === '') {
+      //   toast.warn('Enter the remaining two fields!', {
+      //     position: "bottom-center",
+      //     autoClose: 4000,
+      //     hideProgressBar: true,
+      //     closeOnClick: true,
+      //     pauseOnHover: true,
+      //     draggable: true,
+      //     progress: undefined,
+      //   });
+      //   setLoading(false)
+
+      // } else if (formik.values.password !== '' && formik.values.newpass !== '' && formik.values.newpassAgain === '') {
+
+      //   toast.warn('Enter the remaining one field!', {
+      //     position: "bottom-center",
+      //     autoClose: 4000,
+      //     hideProgressBar: true,
+      //     closeOnClick: true,
+      //     pauseOnHover: true,
+      //     draggable: true,
+      //     progress: undefined,
+      //   });
+      //   setLoading(false)
+      // } else {
+      //   if (formik.values.password !== '' && formik.values.newpass !== '' && formik.values.newpassAgain !== '') {
+      //     if (formik.values.newpass === formik.values.newpassAgain) {
+
+      //       response = await axios(config)
+      //       setLoading(false)
+      //     } else {
+      //       toast.warn('Enter the same new passwords!', {
+      //         position: "bottom-center",
+      //         autoClose: 4000,
+      //         hideProgressBar: true,
+      //         closeOnClick: true,
+      //         pauseOnHover: true,
+      //         draggable: true,
+      //         progress: undefined,
+      //       });
+      //       setLoading(false)
+      //     }
+      //   }
+      // }
 
 
 
@@ -176,36 +236,25 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
       //   }
       // }
 
-      if (response.status === 200) {
-        setLoading(false)
-        toast.success('Crendentials updated successfully ', {
-          position: "bottom-center",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        setVisibleSe(!visible)
-        setShow2(false)
-      }
-      if (response.status === 400) {
-        toast.warn('Your current password is invalid', {
-          position: "bottom-center",
-          autoClose: 4000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
+     
 
       // createNewAdmin(config, navigate);
 
     },
   });
+
+  // useEffect(() => {
+  //   console.log(formik.errors);
+  //   if (!show) {
+  //     formik.errors.newpass = ''
+  //     formik.errors.newpassAgain = ''
+  //     formik.errors.password = ''
+  //   }
+  // }, [show, formik.errors])
+  useEffect(()=>{
+
+    console.log(formik.errors);
+  },[formik.errors])
 
   const imageToBase64 = async (file, feildName) => {
     if (file) {
