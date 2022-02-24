@@ -775,237 +775,239 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
     return studentData.loading ? (
         <SkeletonColor></SkeletonColor>
-    ) : studentData.error ? (
-        <OfflinePage />) : (
-        <Fragment>
-            {loading && (
-                <Loader />
-            )}
+    ) :
+        // studentData.error ? (
+        //     <OfflinePage />) : 
+        (
+            <Fragment>
+                {loading && (
+                    <Loader />
+                )}
 
-            <div className="container-fluid">
-                {/* for the header section   */}
-                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px', width: '100%' }}>
-                    <div className="d-flex row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
-                        <div className="col info-col m-2"  >
-                            <h5 style={{ marginTop: "12px" }}> {MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
-                        </div>
-                        <div className="col info-col m-2" >
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? MoneyCount.TAmount : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
-                        </div>
-                        <div className="col info-col m-2" >
-                            <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport : MoneyCount.TpaidAmount} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
-                        </div>
-                        <div className="col info-col m-2" >
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? MoneyCount.RAmount : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
-                        </div>
-                        <div className="col info-col m-2">
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff : '0'}<br /> <p >Waive Off</p> </h5>
-                        </div>
-                    </div>
-                    <div className="row  mx-0 mt-3" >
-                        <div className="d-flex">
-                            <div style={{ marginLeft: '-12px' }}>
-                                <select
-                                    className="form-select table_select_row_options"
-                                    value={pageSize}
-                                    onChange={(e) => setPageSize(Number(e.target.value))}
-                                >
-                                    {[10, 25, 50, 100].map((pageSize) => (
-                                        <option value={pageSize} key={pageSize}>
-                                            Show Entries {pageSize}
-                                        </option>
-                                    ))}
-                                </select>
+                <div className="container-fluid">
+                    {/* for the header section   */}
+                    <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '10px', width: '100%' }}>
+                        <div className="d-flex row Stu-Acc-info " style={{ color: "rgb(90, 96, 127)", margin: "Auto", height: "70px" }} >
+                            <div className="col info-col m-2"  >
+                                <h5 style={{ marginTop: "12px" }}> {MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
                             </div>
+                            <div className="col info-col m-2" >
+                                <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? MoneyCount.TAmount : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
+                            </div>
+                            <div className="col info-col m-2" >
+                                <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport : MoneyCount.TpaidAmount} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
+                            </div>
+                            <div className="col info-col m-2" >
+                                <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? MoneyCount.RAmount : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
+                            </div>
+                            <div className="col info-col m-2">
+                                <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff : '0'}<br /> <p >Waive Off</p> </h5>
+                            </div>
+                        </div>
+                        <div className="row  mx-0 mt-3" >
+                            <div className="d-flex">
+                                <div style={{ marginLeft: '-12px' }}>
+                                    <select
+                                        className="form-select table_select_row_options"
+                                        value={pageSize}
+                                        onChange={(e) => setPageSize(Number(e.target.value))}
+                                    >
+                                        {[10, 25, 50, 100].map((pageSize) => (
+                                            <option value={pageSize} key={pageSize}>
+                                                Show Entries {pageSize}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
 
 
-                            <div className="d-flex  ml-3">
-                                <DateRangePicker
-                                    caretAs={CIcon}
+                                <div className="d-flex  ml-3">
+                                    <DateRangePicker
+                                        caretAs={CIcon}
 
-                                    onClean={(e) => {
+                                        onClean={(e) => {
 
-                                        e.preventDefault();
-                                        getBackPosition()
-                                        set_is_dailyReport(false)
-                                    }}
+                                            e.preventDefault();
+                                            getBackPosition()
+                                            set_is_dailyReport(false)
+                                        }}
 
-                                    onChange={(value) => {
+                                        onChange={(value) => {
 
-                                        if (!value) {
+                                            if (!value) {
 
-                                            return;
+                                                return;
+                                            }
+                                            var a = value[0]
+                                            var b = value[1]
+                                            console.log(value)
+                                            setDate({
+                                                a, b
+                                            })
+                                        }}
+
+                                        appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
+                                    <button onClick={showDailyReport} className='date-range-button'>Daily Report</button>
+                                </div>
+                                <div className="btn-group  ml-3">
+                                    <button className="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Download
+                                    </button>
+                                    <div class="dropdown-menu mt-1">
+                                        <div >
+                                            <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>                                    </div>
+                                        {is_dailyReport ?
+                                            <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
+                                            :
+                                            <div className="dropdown-item" onClick={() => { downloadPdfStudentList(exportCsv) }}><b>Pdf</b></div>
                                         }
-                                        var a = value[0]
-                                        var b = value[1]
-                                        console.log(value)
-                                        setDate({
-                                            a, b
-                                        })
-                                    }}
 
-                                    appearance="default" className='stu-acc-table' placeholder="TO" style={{ width: 230 }} />
-                                <button onClick={showDailyReport} className='date-range-button'>Daily Report</button>
-                            </div>
-                            <div className="btn-group  ml-3">
-                                <button className="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Download
-                                </button>
-                                <div class="dropdown-menu mt-1">
-                                    <div >
-                                        <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>                                    </div>
-                                    {is_dailyReport ?
-                                        <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div>
-                                        :
-                                        <div className="dropdown-item" onClick={() => { downloadPdfStudentList(exportCsv) }}><b>Pdf</b></div>
-                                    }
-
+                                    </div>
                                 </div>
-                            </div>
 
 
-                            <div className="d-flex ml-auto me-3">
-                                <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
+                                <div className="d-flex ml-auto me-3">
+                                    <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
 
-                                    <CDropdown variant="nav-item" style={{ color: 'white' }}>
-                                        <CDropdownToggle
-                                            placement="bottom-end"
-                                            className="py-0"
-                                            caret={false}
-                                        >
-                                            <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
-                                                <Tooltip>
-                                                    Filter Data .
-                                                </Tooltip>
-                                            }>
+                                        <CDropdown variant="nav-item" style={{ color: 'white' }}>
+                                            <CDropdownToggle
+                                                placement="bottom-end"
+                                                className="py-0"
+                                                caret={false}
+                                            >
+                                                <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                                                    <Tooltip>
+                                                        Filter Data .
+                                                    </Tooltip>
+                                                }>
 
-                                                <img
-                                                    src={filtericon}
-                                                    alt=""
-                                                    style={{
-                                                        height: "22px",
-                                                        width: "35px",
-                                                        marginTop: "-35px",
-                                                        marginLeft: "-13px",
-                                                    }}
-                                                /></Whisper>
-                                        </CDropdownToggle>
+                                                    <img
+                                                        src={filtericon}
+                                                        alt=""
+                                                        style={{
+                                                            height: "22px",
+                                                            width: "35px",
+                                                            marginTop: "-35px",
+                                                            marginLeft: "-13px",
+                                                        }}
+                                                    /></Whisper>
+                                            </CDropdownToggle>
 
-                                        <CDropdownMenu
-                                            component={"div"}
-                                            className="pt-0 filter-dropdown-menu-student_account_table"
-                                            placement="bottom-end"
+                                            <CDropdownMenu
+                                                component={"div"}
+                                                className="pt-0 filter-dropdown-menu-student_account_table"
+                                                placement="bottom-end"
 
-                                        >
-                                            <div className="p-lg-2 pb-0">
-                                                {headerGroups.map((headerGroup) => (
-                                                    <div
-                                                        style={{ display: "flex flex-column" }}
-                                                        {...headerGroup.getHeaderGroupProps()}
-                                                    >
-                                                        {headerGroup.headers.map((column, i) => (
-                                                            <div
-                                                                key={i}
-                                                                style={{ display: "block", justifyContent: "center" }}
-                                                            >
-                                                                {column.canFilter ? column.render("Filter") : null}
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </CDropdownMenu>
-                                    </CDropdown>
+                                            >
+                                                <div className="p-lg-2 pb-0">
+                                                    {headerGroups.map((headerGroup) => (
+                                                        <div
+                                                            style={{ display: "flex flex-column" }}
+                                                            {...headerGroup.getHeaderGroupProps()}
+                                                        >
+                                                            {headerGroup.headers.map((column, i) => (
+                                                                <div
+                                                                    key={i}
+                                                                    style={{ display: "block", justifyContent: "center" }}
+                                                                >
+                                                                    {column.canFilter ? column.render("Filter") : null}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </CDropdownMenu>
+                                        </CDropdown>
 
+                                    </div>
+                                    <GlobalFilter
+                                        preGlobalFilteredRows={preGlobalFilteredRows}
+                                        filter={globalFilter}
+                                        setFilter={setGlobalFilter}
+                                    />
                                 </div>
-                                <GlobalFilter
-                                    preGlobalFilteredRows={preGlobalFilteredRows}
-                                    filter={globalFilter}
-                                    setFilter={setGlobalFilter}
-                                />
-                            </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                {/* for the body section  */}
-                {/* <div style={{ width: '100%', height: '70%', paddingBottom: '4%' }}> */}
-                <table {...getTableProps()} id="customers">
+                    {/* for the body section  */}
+                    {/* <div style={{ width: '100%', height: '70%', paddingBottom: '4%' }}> */}
+                    <table {...getTableProps()} id="customers">
 
-                    <thead style={{ position: 'sticky', top: '212px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
-                        {headerGroups.map((headerGroup) => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                        {column.render("header")}
-                                        {/* {console.log(column)} */}
-                                        {column.id !== 'year' && column.id !== 'trackName' ?
+                        <thead style={{ position: 'sticky', top: '212px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+                            {headerGroups.map((headerGroup) => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map((column) => (
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render("header")}
+                                            {/* {console.log(column)} */}
+                                            {column.id !== 'year' && column.id !== 'trackName' ?
 
-                                            <span>
-                                                {column.isSorted ? (
-                                                    column.isSortedDesc ? (
-                                                        <img
-                                                            src={updown_sort}
-                                                            style={{ marginLeft: "5px" }}
-                                                            alt=""
-                                                        />
+                                                <span>
+                                                    {column.isSorted ? (
+                                                        column.isSortedDesc ? (
+                                                            <img
+                                                                src={updown_sort}
+                                                                style={{ marginLeft: "5px" }}
+                                                                alt=""
+                                                            />
+                                                        ) : (
+                                                            <img
+                                                                src={updown_sort}
+                                                                style={{ marginLeft: "5px" }}
+                                                                alt=""
+                                                            />
+                                                        )
                                                     ) : (
-                                                        <img
-                                                            src={updown_sort}
-                                                            style={{ marginLeft: "5px" }}
-                                                            alt=""
-                                                        />
-                                                    )
-                                                ) : (
-                                                    ""
-                                                )}
-                                                {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
-                                            </span>
+                                                        ""
+                                                    )}
+                                                    {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
+                                                </span>
 
-                                            : ''}
+                                                : ''}
 
 
 
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-
-                    <tbody {...getTableBodyProps()} stle={{ width: "100%" }} >
-
-                        {page.map((row) => {
-                            prepareRow(row);
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => {
-                                        return (
-                                            <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                                        );
-                                    })}
+                                        </th>
+                                    ))}
                                 </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-                <NoDataFound rows={rows} />
-                {/* for the pagination section */}
+                            ))}
+                        </thead>
 
-                <Pagination
-                    page={page}
-                    pageIndex={pageIndex}
-                    pageCount={pageCount}
-                    pageSize={pageSize}
-                    canPreviousPage={canPreviousPage}
-                    previousPage={previousPage}
-                    pageOptions={pageOptions}
-                    gotoPage={gotoPage}
-                    canNextPage={canNextPage}
-                    nextPage={nextPage}
-                />
-            </div>
-        </Fragment >
-    );
+                        <tbody {...getTableBodyProps()} stle={{ width: "100%" }} >
+
+                            {page.map((row) => {
+                                prepareRow(row);
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map((cell) => {
+                                            return (
+                                                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                            );
+                                        })}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                    <NoDataFound rows={rows} />
+                    {/* for the pagination section */}
+
+                    <Pagination
+                        page={page}
+                        pageIndex={pageIndex}
+                        pageCount={pageCount}
+                        pageSize={pageSize}
+                        canPreviousPage={canPreviousPage}
+                        previousPage={previousPage}
+                        pageOptions={pageOptions}
+                        gotoPage={gotoPage}
+                        canNextPage={canNextPage}
+                        nextPage={nextPage}
+                    />
+                </div>
+            </Fragment >
+        );
 }
 
 const mapStateToProps = (state) => {

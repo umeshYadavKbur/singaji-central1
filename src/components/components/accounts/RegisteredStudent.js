@@ -353,134 +353,137 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
   console.log(checkboxData);
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
-  ) : table_data.error ? (
-    <h2>{table_data.error}</h2>
-  ) : (
-    <>
-      {table_data.secondLoading && (
-        <Loader />
-      )}
-      <ToastContainer
-        position="top-center"
-        autoClose={2500}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
+  )
+    // : table_data.error ? (
+    //   <h2>{table_data.error}</h2>
+    // ) 
+    : (
 
-      />
-      <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
-        <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '5' }}>
-          <div className="d-flex">
+      <>
+        {table_data.secondLoading && (
+          <Loader />
+        )}
+        <ToastContainer
+          position="top-center"
+          autoClose={2500}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
 
-            <div className=''>
-              <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-                {
-                  [10, 25, 50, 100].map(pageSize => (
-                    <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
-                  ))
-                }
-              </select>
+        />
+        <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
+          <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+            <div className="d-flex">
 
-            </div>
-
-            {/* ===========  Archived button ============= */}
-            <div className=' ml-4 '>
-              <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
-            </div>
-
-            {/* =================== Download to pdf or excel ================ */}
-            <div className="btn-group  ml-3" style={{ position: 'sticky', zIndex: '10' }}>
-              <button className="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Download
-              </button>
-              <div class="dropdown-menu mt-1">
-                <div >
-                  <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>                                    </div>
-
-                {/* <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div> */}
-
-                <div className="dropdown-item " style={{ cursor: "pointer" }} onClick={() => { downloadPdfStudentList(exportCsv) }}><b>Pdf</b></div>
-
+              <div className=''>
+                <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                  {
+                    [10, 25, 50, 100].map(pageSize => (
+                      <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
+                    ))
+                  }
+                </select>
 
               </div>
-            </div>
+
+              {/* ===========  Archived button ============= */}
+              <div className=' ml-4 '>
+                <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
+              </div>
+
+              {/* =================== Download to pdf or excel ================ */}
+              <div className="btn-group  ml-3" style={{ position: 'sticky', zIndex: '10' }}>
+                <button className="btn  btn-sm download-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Download
+                </button>
+                <div class="dropdown-menu mt-1">
+                  <div >
+                    <div ><CSVLink className="dropdown-item" style={{ fontWeight: 'bold' }} data={exportCsv}>Excel</CSVLink></div>                                    </div>
+
+                  {/* <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div> */}
+
+                  <div className="dropdown-item " style={{ cursor: "pointer" }} onClick={() => { downloadPdfStudentList(exportCsv) }}><b>Pdf</b></div>
 
 
-            <div className='d-flex ml-auto me-1'>
+                </div>
+              </div>
 
 
-              {/* <div className='me-4'>
+              <div className='d-flex ml-auto me-1'>
+
+
+                {/* <div className='me-4'>
               <button type="button" class="btn btn-outline-primary fw-bold ">Active</button>
             </div> */}
-              <div className='me-4'>
-                <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
-              </div></div>
+                <div className='me-4'>
+                  <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
+                </div></div>
+            </div>
           </div>
-        </div>
-        <table {...getTableProps()} id="customers" className="table table-sm">
-          {/* <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}> */}
-          <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc' }}>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render("header")}
-                    <span>
+          <table {...getTableProps()} id="customers" className="table table-sm">
+            {/* <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}> */}
+            <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc' }}>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                      {column.render("header")}
+                      <span>
 
-                      {column.isSorted ? (
-                        column.isSortedDesc ? (
-                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
+                        {column.isSorted ? (
+                          column.isSortedDesc ? (
+                            <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
+                          ) : (
+                            <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
+                            // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                          )
                         ) : (
-                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
-                          // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
-                        )
-                      ) : (
 
-                        column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                          column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
 
 
-                      )}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td {...cell.getCellProps()}>{cell.render("Cell")} </td>
-                    );
-                  })}
+                        )}
+                      </span>
+                    </th>
+                  ))}
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <NoDataFound rows={rows} />
-        <Pagination
-          page={page}
-          pageIndex={pageIndex}
-          pageCount={pageCount}
-          pageSize={pageSize}
-          canPreviousPage={canPreviousPage}
-          previousPage={previousPage}
-          pageOptions={pageOptions}
-          gotoPage={gotoPage}
-          canNextPage={canNextPage}
-          nextPage={nextPage}
-        />
-      </div>
-    </>
-  );
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {page.map((row) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <td {...cell.getCellProps()}>{cell.render("Cell")} </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <NoDataFound rows={rows} />
+          <Pagination
+            page={page}
+            pageIndex={pageIndex}
+            pageCount={pageCount}
+            pageSize={pageSize}
+            canPreviousPage={canPreviousPage}
+            previousPage={previousPage}
+            pageOptions={pageOptions}
+            gotoPage={gotoPage}
+            canNextPage={canNextPage}
+            nextPage={nextPage}
+          />
+        </div>
+      </>
+    );
 }
 
 const mapStateToProps = (state) => {

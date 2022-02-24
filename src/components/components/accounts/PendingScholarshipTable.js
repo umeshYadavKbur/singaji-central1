@@ -355,91 +355,94 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
 
   return scholarData.loading ? (
     <SkeletonColor></SkeletonColor>
-  ) : scholarData.error ? (
-    <OfflinePage />
-  ) : (
-    <Fragment>
-      <ToastContainer
-        position="top-center"
-        autoClose={2500}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <div className="container-fluid">
-        <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '6' }}>
-          <div className="d-flex">
-            <div className="">
-              <select
-                className="form-select table_select_row_options"
-                value={pageSize}
-                onChange={(e) => setPageSize(Number(e.target.value))}
-              >
-                {[10, 25, 50, 100].map((pageSize) => (
-                  <option value={pageSize} key={pageSize}>
-                    Show Entries {pageSize}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="d-flex ml-auto me-1">
-              <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
-
-                <CDropdown variant="nav-item" style={{ color: 'white' }}>
-                  <CDropdownToggle
-                    placement="bottom-end"
-                    className="py-0"
-                    caret={false}
-                  > <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
-                    <Tooltip>
-                      Filter Data .
-                    </Tooltip>
-                  }>
-                      <img
-                        src={filtericon}
-                        alt=""
-                        style={{
-                          height: "22px",
-                          width: "35px",
-                          marginTop: "-35px",
-                          marginLeft: "-13px",
-                        }}
-                      /></Whisper>
-                  </CDropdownToggle>
-
-                  <CDropdownMenu
-                    component={"div"}
-                    className="pt-0 filter-dropdown-menu"
-                    placement="bottom-end"
-
-                  >
-                    <div className="p-lg-2 pb-0">
-                      {headerGroups.map((headerGroup) => (
-                        <div
-                          style={{ display: "flex flex-column" }}
-                          {...headerGroup.getHeaderGroupProps()}
-                        >
-                          {headerGroup.headers.map((column, i) => (
-                            <div
-                              key={i}
-                              style={{ display: "block", justifyContent: "center" }}
-                            >
-                              {column.canFilter ? column.render("Filter") : null}
-                            </div>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </CDropdownMenu>
-                </CDropdown>
-
+  )
+    // : 
+    // scholarData.error ? (
+    //   <OfflinePage />
+    // ) 
+    : (
+      <Fragment>
+        <ToastContainer
+          position="top-center"
+          autoClose={2500}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <div className="container-fluid">
+          <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '6' }}>
+            <div className="d-flex">
+              <div className="">
+                <select
+                  className="form-select table_select_row_options"
+                  value={pageSize}
+                  onChange={(e) => setPageSize(Number(e.target.value))}
+                >
+                  {[10, 25, 50, 100].map((pageSize) => (
+                    <option value={pageSize} key={pageSize}>
+                      Show Entries {pageSize}
+                    </option>
+                  ))}
+                </select>
               </div>
-              {/* <CDropdown variant="nav-item" style={{ color: 'white' }}>
+
+              <div className="d-flex ml-auto me-1">
+                <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
+
+                  <CDropdown variant="nav-item" style={{ color: 'white' }}>
+                    <CDropdownToggle
+                      placement="bottom-end"
+                      className="py-0"
+                      caret={false}
+                    > <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                      <Tooltip>
+                        Filter Data .
+                      </Tooltip>
+                    }>
+                        <img
+                          src={filtericon}
+                          alt=""
+                          style={{
+                            height: "22px",
+                            width: "35px",
+                            marginTop: "-35px",
+                            marginLeft: "-13px",
+                          }}
+                        /></Whisper>
+                    </CDropdownToggle>
+
+                    <CDropdownMenu
+                      component={"div"}
+                      className="pt-0 filter-dropdown-menu"
+                      placement="bottom-end"
+
+                    >
+                      <div className="p-lg-2 pb-0">
+                        {headerGroups.map((headerGroup) => (
+                          <div
+                            style={{ display: "flex flex-column" }}
+                            {...headerGroup.getHeaderGroupProps()}
+                          >
+                            {headerGroup.headers.map((column, i) => (
+                              <div
+                                key={i}
+                                style={{ display: "block", justifyContent: "center" }}
+                              >
+                                {column.canFilter ? column.render("Filter") : null}
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </CDropdownMenu>
+                  </CDropdown>
+
+                </div>
+                {/* <CDropdown variant="nav-item" style={{ color: 'white' }}>
               <CDropdownToggle
                 placement="bottom-end"
                 className="py-0"
@@ -484,81 +487,81 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
               </CDropdownMenu>
             </CDropdown> */}
 
-              <div className="ml-auto me-4">
-                <GlobalFilter
-                  preGlobalFilteredRows={preGlobalFilteredRows}
-                  filter={globalFilter}
-                  setFilter={setGlobalFilter}
-                />
+                <div className="ml-auto me-4">
+                  <GlobalFilter
+                    preGlobalFilteredRows={preGlobalFilteredRows}
+                    filter={globalFilter}
+                    setFilter={setGlobalFilter}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <table {...getTableProps()} id="customers">
-          <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render("header")}
-                    <span>
-                      {column.isSorted ? (
-                        column.isSortedDesc ? (
-                          <img
-                            src={updown_sort}
-                            style={{ marginLeft: "5px" }}
-                            alt=""
-                          />
+          <table {...getTableProps()} id="customers">
+            <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                      {column.render("header")}
+                      <span>
+                        {column.isSorted ? (
+                          column.isSortedDesc ? (
+                            <img
+                              src={updown_sort}
+                              style={{ marginLeft: "5px" }}
+                              alt=""
+                            />
+                          ) : (
+                            <img
+                              src={updown_sort}
+                              style={{ marginLeft: "5px" }}
+                              alt=""
+                            />
+                          )
                         ) : (
-                          <img
-                            src={updown_sort}
-                            style={{ marginLeft: "5px" }}
-                            alt=""
-                          />
-                        )
-                      ) : (
-                        ""
-                      )}
-                      {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                    );
-                  })}
+                          ""
+                        )}
+                        {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
+                      </span>
+                    </th>
+                  ))}
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <NoDataFound rows={rows} />
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {page.map((row) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <NoDataFound rows={rows} />
 
-        <Pagination
-          page={page}
-          pageIndex={pageIndex}
-          pageCount={pageCount}
-          pageSize={pageSize}
-          canPreviousPage={canPreviousPage}
-          previousPage={previousPage}
-          pageOptions={pageOptions}
-          gotoPage={gotoPage}
-          canNextPage={canNextPage}
-          nextPage={nextPage}
-        />
-      </div>
-    </Fragment>
-  );
+          <Pagination
+            page={page}
+            pageIndex={pageIndex}
+            pageCount={pageCount}
+            pageSize={pageSize}
+            canPreviousPage={canPreviousPage}
+            previousPage={previousPage}
+            pageOptions={pageOptions}
+            gotoPage={gotoPage}
+            canNextPage={canNextPage}
+            nextPage={nextPage}
+          />
+        </div>
+      </Fragment>
+    );
 }
 
 const mapStateToProps = (state) => {

@@ -110,36 +110,36 @@ function SelectColumnFilter({
 
                                 return (
                                     <Fragment key={i}>
-                                    <div id={`${id}`} style={{height:'30px',cursor:'pointer'}} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
-                                        <label
-                                            onClick={(e) => { e.stopPropagation() }}
-                                            className="font-medium text-gray-700 d-flex align-items-center cursor-pointer"
-                                        // onCLick={}
-                                        style={{cursor:'pointer'}}
-                                        >
-                                            <input
-                                                checked={filterValue.includes(option)}
-                                                type="checkbox"
-                                                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-1"
-                                                id={option}
-                                                name={option}
-                                                value={option}
-                                                style={{ cursor: 'pointer' }}
-                                                onChange={(e) => {
-                                                    setFilter(
-                                                        setFilteredParams(filterValue, e.target.value)
-                                                    );
-                                                }}
+                                        <div id={`${id}`} style={{ height: '30px', cursor: 'pointer' }} className="filter_btn_hover p-1 pt-2 my-1 d-flex align-items-center ">
+                                            <label
                                                 onClick={(e) => { e.stopPropagation() }}
+                                                className="font-medium text-gray-700 d-flex align-items-center cursor-pointer"
+                                                // onCLick={}
+                                                style={{ cursor: 'pointer' }}
                                             >
+                                                <input
+                                                    checked={filterValue.includes(option)}
+                                                    type="checkbox"
+                                                    className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-1"
+                                                    id={option}
+                                                    name={option}
+                                                    value={option}
+                                                    style={{ cursor: 'pointer' }}
+                                                    onChange={(e) => {
+                                                        setFilter(
+                                                            setFilteredParams(filterValue, e.target.value)
+                                                        );
+                                                    }}
+                                                    onClick={(e) => { e.stopPropagation() }}
+                                                >
 
-                                            </input>
+                                                </input>
 
-                                            {option_label}
+                                                {option_label}
 
-                                        </label>
-                                    </div>
-                                </Fragment>
+                                            </label>
+                                        </div>
+                                    </Fragment>
                                 );
                             })}
                         </div>
@@ -205,21 +205,21 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
 function StudentTableFirst({ fetchUsers, studentData }) {
     const token = localStorage.getItem("token");
 
-//     React.useEffect(() => {
-//         // const getData =as ()=>{
-// // 
-//             var config = {
-//                 method: "GET",
-//                 url: AllUrl.allRegistratedStudent,
-//                 headers: {
-//                     Authorization: `Bearer ${localStorage.getItem("token")}`,
-//                     "Content-Type": "application/json",
-//                 },
-//             };
-//             fetchUsers(config);
-//         // }
-//         // getData()
-//     }, []);
+    //     React.useEffect(() => {
+    //         // const getData =as ()=>{
+    // // 
+    //             var config = {
+    //                 method: "GET",
+    //                 url: AllUrl.allRegistratedStudent,
+    //                 headers: {
+    //                     Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //                     "Content-Type": "application/json",
+    //                 },
+    //             };
+    //             fetchUsers(config);
+    //         // }
+    //         // getData()
+    //     }, []);
 
     React.useEffect(() => {
         var config = {
@@ -295,12 +295,12 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                 Cell: ({ row: { original, index } }) => {
                     return (
                         <p
-                        style={{marginTop: "3px" , marginBottom: "3px" , fontWeight: "600" }}
+                            style={{ marginTop: "3px", marginBottom: "3px", fontWeight: "600" }}
                         >
-                            
+
 
                             {original.status ? "Deactive" : "Active"}
-                            
+
                         </p>
                     )
                 },
@@ -361,157 +361,160 @@ function StudentTableFirst({ fetchUsers, studentData }) {
 
     return studentData.loading ? (
         <SkeletonColor></SkeletonColor>
-    ) : studentData.error ? (
-        <OfflinePage />
-    ) : (
-        <Fragment>
-            {studentData.loading && (
-                <Loader />
-            )}
-            <div className="container-fluid">
-                <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '20px' }}>
-                    <div className="row  mx-0 mt-3" >
+    ) :
+        // studentData.error ? (
+        //     <OfflinePage />
+        // ) : 
 
-                        <div className="d-flex">
-                            <div style={{ marginLeft: '-12px' }}>
-                                <select
-                                    className="form-select table_select_row_options"
-                                    value={pageSize}
-                                    onChange={(e) => setPageSize(Number(e.target.value))}
-                                >
-                                    {[10, 25, 50, 100].map((pageSize) => (
-                                        <option value={pageSize} key={pageSize}>
-                                            Show Entries {pageSize}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+        (
+            <Fragment>
+                {studentData.loading && (
+                    <Loader />
+                )}
+                <div className="container-fluid">
+                    <div style={{ position: 'sticky', top: '80px', backgroundColor: '#f4f7fc', zIndex: '6', paddingBottom: '20px' }}>
+                        <div className="row  mx-0 mt-3" >
 
-                            <div className="d-flex ml-auto me-3">
-                                <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
-
-                                    <CDropdown variant="nav-item" style={{ color: 'white' }}>
-                                        <CDropdownToggle
-                                            placement="bottom-end"
-                                            className="py-0"
-                                            caret={false}
-                                        >
-                                            <img
-                                                src={filtericon}
-                                                alt=""
-                                                style={{
-                                                    height: "22px",
-                                                    width: "35px",
-                                                    marginTop: "-35px",
-                                                    marginLeft: "-13px",
-                                                }}
-                                            />
-                                        </CDropdownToggle>
-
-                                        <CDropdownMenu
-                                            component={"div"}
-                                            className="pt-0 filter-dropdown-menu"
-                                            placement="bottom-end"
-
-                                        >
-                                            <div className="p-lg-2 pb-0">
-                                                {headerGroups.map((headerGroup) => (
-                                                    <div
-                                                        style={{ display: "flex flex-column" }}
-                                                        {...headerGroup.getHeaderGroupProps()}
-                                                    >
-                                                        {headerGroup.headers.map((column, i) => (
-                                                            <div
-                                                                key={i}
-                                                                style={{ display: "block", justifyContent: "center" }}
-                                                            >
-                                                                {column.canFilter ? column.render("Filter") : null}
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </CDropdownMenu>
-                                    </CDropdown>
-
+                            <div className="d-flex">
+                                <div style={{ marginLeft: '-12px' }}>
+                                    <select
+                                        className="form-select table_select_row_options"
+                                        value={pageSize}
+                                        onChange={(e) => setPageSize(Number(e.target.value))}
+                                    >
+                                        {[10, 25, 50, 100].map((pageSize) => (
+                                            <option value={pageSize} key={pageSize}>
+                                                Show Entries {pageSize}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
-                                <GlobalFilter
-                                    preGlobalFilteredRows={preGlobalFilteredRows}
-                                    filter={globalFilter}
-                                    setFilter={setGlobalFilter}
-                                />
-                            </div>
 
+                                <div className="d-flex ml-auto me-3">
+                                    <div className="d-flex mr-2" style={{ height: '40px', width: '42px', backgroundColor: '#fff', borderRadius: '3px', border: "1px solid #EDEDED" }}>
+
+                                        <CDropdown variant="nav-item" style={{ color: 'white' }}>
+                                            <CDropdownToggle
+                                                placement="bottom-end"
+                                                className="py-0"
+                                                caret={false}
+                                            >
+                                                <img
+                                                    src={filtericon}
+                                                    alt=""
+                                                    style={{
+                                                        height: "22px",
+                                                        width: "35px",
+                                                        marginTop: "-35px",
+                                                        marginLeft: "-13px",
+                                                    }}
+                                                />
+                                            </CDropdownToggle>
+
+                                            <CDropdownMenu
+                                                component={"div"}
+                                                className="pt-0 filter-dropdown-menu"
+                                                placement="bottom-end"
+
+                                            >
+                                                <div className="p-lg-2 pb-0">
+                                                    {headerGroups.map((headerGroup) => (
+                                                        <div
+                                                            style={{ display: "flex flex-column" }}
+                                                            {...headerGroup.getHeaderGroupProps()}
+                                                        >
+                                                            {headerGroup.headers.map((column, i) => (
+                                                                <div
+                                                                    key={i}
+                                                                    style={{ display: "block", justifyContent: "center" }}
+                                                                >
+                                                                    {column.canFilter ? column.render("Filter") : null}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </CDropdownMenu>
+                                        </CDropdown>
+
+                                    </div>
+                                    <GlobalFilter
+                                        preGlobalFilteredRows={preGlobalFilteredRows}
+                                        filter={globalFilter}
+                                        setFilter={setGlobalFilter}
+                                    />
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <table {...getTableProps()} id="customers">
+                    <table {...getTableProps()} id="customers">
 
-                    <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
-                        {headerGroups.map((headerGroup) => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                        {column.render("header")}
-                                        <span>
-                                            {column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <img
-                                                        src={updown_sort}
-                                                        style={{ marginLeft: "5px" }}
-                                                        alt=""
-                                                    />
+                        <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+                            {headerGroups.map((headerGroup) => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map((column) => (
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render("header")}
+                                            <span>
+                                                {column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <img
+                                                            src={updown_sort}
+                                                            style={{ marginLeft: "5px" }}
+                                                            alt=""
+                                                        />
+                                                    ) : (
+                                                        <img
+                                                            src={updown_sort}
+                                                            style={{ marginLeft: "5px" }}
+                                                            alt=""
+                                                        />
+                                                    )
                                                 ) : (
-                                                    <img
-                                                        src={updown_sort}
-                                                        style={{ marginLeft: "5px" }}
-                                                        alt=""
-                                                    />
-                                                )
-                                            ) : (
-                                                ""
-                                            )}
-                                            {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
-                                        </span>
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {page.map((row) => {
-                            prepareRow(row);
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => {
-                                        return (
-                                            <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                                        );
-                                    })}
+                                                    ""
+                                                )}
+                                                {column.isSorted ? (column.isSortedDesc ? "" : "") : ""}
+                                            </span>
+                                        </th>
+                                    ))}
                                 </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-                <NoDataFound rows={rows} />
+                            ))}
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {page.map((row) => {
+                                prepareRow(row);
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map((cell) => {
+                                            return (
+                                                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                            );
+                                        })}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                    <NoDataFound rows={rows} />
 
-                <Pagination
-                    page={page}
-                    pageIndex={pageIndex}
-                    pageCount={pageCount}
-                    pageSize={pageSize}
-                    canPreviousPage={canPreviousPage}
-                    previousPage={previousPage}
-                    pageOptions={pageOptions}
-                    gotoPage={gotoPage}
-                    canNextPage={canNextPage}
-                    nextPage={nextPage}
-                />
+                    <Pagination
+                        page={page}
+                        pageIndex={pageIndex}
+                        pageCount={pageCount}
+                        pageSize={pageSize}
+                        canPreviousPage={canPreviousPage}
+                        previousPage={previousPage}
+                        pageOptions={pageOptions}
+                        gotoPage={gotoPage}
+                        canNextPage={canNextPage}
+                        nextPage={nextPage}
+                    />
 
-            </div>
+                </div>
 
-        </Fragment >
-    );
+            </Fragment >
+        );
 }
 
 const mapStateToProps = (state) => {

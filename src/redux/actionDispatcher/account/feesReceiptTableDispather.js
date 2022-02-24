@@ -28,7 +28,7 @@ const feesReceiptTableData = (data) => {
                         });
                         dispatch(fetchFailTableData());
                     }
-                    if (response.status === 400) {
+                    if (response.status === 404) {
                         toast.warning('No data found ', {
                             position: "top-center",
                             autoClose: 3000,
@@ -41,6 +41,7 @@ const feesReceiptTableData = (data) => {
                         dispatch(fetchFailTableData());
                     }
                     if (response.status === 500) {
+                        dispatch(fetchFailTableData());
                         toast.warning('Internal server error', {
                             position: "top-center",
                             autoClose: 3000,
@@ -50,10 +51,10 @@ const feesReceiptTableData = (data) => {
                             draggable: true,
                             progress: undefined,
                         });
-                        dispatch(fetchFailTableData());
                     }
                 })
                 .catch(function (error) {
+                    dispatch(fetchFailTableData());
                     toast.warning('Internal server error', {
                         position: "top-center",
                         autoClose: 3000,
@@ -63,7 +64,6 @@ const feesReceiptTableData = (data) => {
                         draggable: true,
                         progress: undefined,
                     });
-                    fetchFailTableData();
                 });
         } catch (error) {
             toast.warning('Internal server error', {
