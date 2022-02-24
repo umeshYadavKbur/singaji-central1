@@ -44,21 +44,22 @@ export const VerifyStudent = (data) => {
 
             if (userResData.status === 200) {
                 dispatch(VerifyStudentSuccess(userResData.data));
-                toast.dark(`student ${data.firstName} ${data.lastName} is shifted to accounts`, {
-                    position: "top-center",
+                toast.success(`student ${data.firstName} ${data.lastName} is shifted to accounts`, {
+                    position: "bottom-center",
                     autoClose: 3000,
-                    hideProgressBar: false,
+                    hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
+                    
                 });
 
             } else if (userResData.status === 406) {
                 toast.warning('Invalid parameters', {
                     position: "top-center",
                     autoClose: 3000,
-                    hideProgressBar: false,
+                    hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
@@ -73,7 +74,7 @@ export const VerifyStudent = (data) => {
                     hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
-                    draggable: false,
+                    draggable: true,
                     progress: undefined,
                 });
                 dispatch(VerifyStudentFail('user are already available'));
@@ -85,7 +86,7 @@ export const VerifyStudent = (data) => {
                     hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
-                    draggable: false,
+                    draggable: true,
                     progress: undefined,
                 });
                 let value = JSON.stringify(userResData.status);
@@ -101,7 +102,7 @@ export const VerifyStudent = (data) => {
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
-                draggable: false,
+                draggable: true,
                 progress: undefined,
             });
             //if crudential fails than Login fail action dispatch
