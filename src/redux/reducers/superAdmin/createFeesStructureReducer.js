@@ -8,7 +8,7 @@ const initialState = {
   second_loading: false,
   loading: false,
   feesStructure: false,
-  error: "",
+  error: false,
 };
 
 const createNewFeesStructure = (state = initialState, action) => {
@@ -25,14 +25,14 @@ const createNewFeesStructure = (state = initialState, action) => {
         loading: false,
         feesStructure: true,
         second_loading: false,
-        error: "",
+        error: false,
       };
     case CREATE_FEES_FAILED:
       return {
         loading: false,
         feesStructure: false,
         second_loading: false,
-        error: action.payload,
+        error: true,
       };
     default:
       return state;

@@ -30,7 +30,7 @@ export const fetchAdminTableData = (data) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(fetchFailTableData(response.data));
+            dispatch(fetchFailTableData());
           }
           if (response.status === 500) {
             toast.warn('Internal Server Error', {
@@ -42,7 +42,7 @@ export const fetchAdminTableData = (data) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(fetchFailTableData(response.data));
+            dispatch(fetchFailTableData());
           }
         })
         .catch(function (error) {
@@ -55,7 +55,7 @@ export const fetchAdminTableData = (data) => {
             draggable: true,
             progress: undefined,
           });
-          fetchFailTableData(error.message);
+          fetchFailTableData();
         });
     } catch (error) {
       toast.warn('Internal Server Error', {
@@ -67,7 +67,7 @@ export const fetchAdminTableData = (data) => {
         draggable: true,
         progress: undefined,
       });
-      fetchFailTableData(error.message);
+      fetchFailTableData();
     }
   };
 };
@@ -139,9 +139,8 @@ const fetchSuccessTableData = (data) => {
   };
 };
 
-const fetchFailTableData = (error) => {
+const fetchFailTableData = () => {
   return {
     type: ADMIN_TABLE_DATA_FAIL,
-    payload: error,
   };
 };

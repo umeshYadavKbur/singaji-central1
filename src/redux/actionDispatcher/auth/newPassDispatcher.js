@@ -14,8 +14,8 @@ export const newPasswordRequest = (data, navigate) => {
 
     const url = `${AllUrl.forgotPassword}${data.token}`;
     dispatch(newPassRequest());
-    var newPasswordData = await getData(data, url);
     try {
+      var newPasswordData = await getData(data, url);
       if (newPasswordData.status === 200) {
         dispatch(passReqSuccess());
         Swal.fire({
@@ -34,12 +34,6 @@ export const newPasswordRequest = (data, navigate) => {
         })
         navigate('/login')
       } else if (newPasswordData.request.status === 406) {
-        // Swal.fire({
-        //   title: "Oops! link expired",
-        //   icon: "warning",
-        //   showConfirmButton: false,
-        //   timer: 2500
-        // });
         toast.warn('Oops! link expired', {
           position: "top-center",
           autoClose: 3000,
@@ -49,7 +43,7 @@ export const newPasswordRequest = (data, navigate) => {
           draggable: true,
           progress: undefined,
         });
-        dispatch(passReqFail(newPasswordData));
+        dispatch(passReqFail());
       } else {
         toast.warn('Oops! link expired', {
           position: "top-center",
@@ -60,11 +54,11 @@ export const newPasswordRequest = (data, navigate) => {
           draggable: true,
           progress: undefined,
         });
-        dispatch(passReqFail(newPasswordData));
+        dispatch(passReqFail());
       }
     } catch (error) {
-      // dispatch(passReqFail(error));
-      toast.error('Internal server error', {
+      dispatch(passReqFail());
+      toast.error('Something went wrong', {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -73,7 +67,6 @@ export const newPasswordRequest = (data, navigate) => {
         draggable: true,
         progress: undefined,
       });
-      // console.log(error);
     }
   };
 };

@@ -132,7 +132,6 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
             console.log(original.email)
             Swal.fire({
               title: 'Shift To Applied',
-
               html:
                 '<hr>' +
                 'Are you sure?' +
@@ -157,12 +156,14 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
               }
 
             }).then(async (result) => {
-              console.log("original values are ::", original)
 
               if (result.isConfirmed) {
                 let data = JSON.stringify({
                   stdId: original.id
                 })
+                console.log('====================================');
+                console.log(data);
+                console.log('====================================');
                 var config = {
                   method: "POST",
                   url: AllUrl.shiftToAppliedStudent,
@@ -172,50 +173,59 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
                   },
                   data: data
                 };
-                const resultofverify = await axios(config);
-                console.log("resultofverify", resultofverify);
-                console.log("resultofverify", resultofverify.status);
-                if (resultofverify.status === 200) {
-                  Swal.fire({
-                    title: 'Shift To Applied Success',
-                  })
-                  var fetchStudentTableConfig = {
-                    method: "GET",
-                    url: AllUrl.allRegistratedStudent,
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                      "Content-Type": "application/json",
-                    },
-                  };
-                  fetchStudentTable(fetchStudentTableConfig, true);
-                }
-                else if (resultofverify.status === 406) {
-                  console.log("404 empty feild");
-                  toast.error('Some field are empty please edit it', {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: false,
-                    progress: undefined,
-                  });
-                } else if (resultofverify.status === 500) {
-                  toast.error('Internal Server Error', {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: false,
-                    progress: undefined,
-                  });
-                }
 
+                try {
+                  const resultofverify = await axios(config);
+                  console.log("resultofverify", resultofverify);
+                  console.log("resultofverify", resultofverify.status);
+                  if (resultofverify.status === 200) {
+                    Swal.fire({
+                      title: 'Shift To Applied Success',
+                    })
+                    var fetchStudentTableConfig = {
+                      method: "GET",
+                      url: AllUrl.allRegistratedStudent,
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                      },
+                    };
+                    fetchStudentTable(fetchStudentTableConfig, true);
+                  } else if (resultofverify.status === 406) {
+                    console.log("404 empty feild");
+                    toast.error('Some field are empty please edit it', {
+                      position: "top-center",
+                      autoClose: 2000,
+                      hideProgressBar: true,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: false,
+                      progress: undefined,
+                    });
+                  } else if (resultofverify.status === 500) {
+                    toast.error('Internal Server Error', {
+                      position: "top-center",
+                      autoClose: 2000,
+                      hideProgressBar: true,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: false,
+                      progress: undefined,
+                    });
+                  }
+                } catch (error) {
+                  toast.warning('Something went wrong !', {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                  });
+                }
               }
-            }).catch((err) =>
-              console.log("err", err))
-
+            })
           }
 
           }>

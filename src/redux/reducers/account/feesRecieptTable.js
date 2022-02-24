@@ -9,7 +9,7 @@ import {
 const initialState = {
     loading: false,
     table_data: [],
-    error: "",
+    error: false,
 };
 
 const feesReceiptTable = (state = initialState, action) => {
@@ -18,16 +18,16 @@ const feesReceiptTable = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
-                error: "",
             };
         case FEES_RECEIPT_TABLE_FAIL:
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                error: true
             };
         case FEES_RECEIPT_TABLE_SUCCESS:
             return {
+                error: false,
                 loading: false,
                 table_data: action.payload,
             };

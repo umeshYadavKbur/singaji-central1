@@ -26,7 +26,7 @@ const feesReceiptTableData = (data) => {
                             draggable: true,
                             progress: undefined,
                         });
-                        dispatch(fetchFailTableData(response.data));
+                        dispatch(fetchFailTableData());
                     }
                     if (response.status === 400) {
                         toast.warning('No data found ', {
@@ -38,7 +38,7 @@ const feesReceiptTableData = (data) => {
                             draggable: true,
                             progress: undefined,
                         });
-                        dispatch(fetchFailTableData(response.data));
+                        dispatch(fetchFailTableData());
                     }
                     if (response.status === 500) {
                         toast.warning('Internal server error', {
@@ -50,7 +50,7 @@ const feesReceiptTableData = (data) => {
                             draggable: true,
                             progress: undefined,
                         });
-                        dispatch(fetchFailTableData(response.data));
+                        dispatch(fetchFailTableData());
                     }
                 })
                 .catch(function (error) {
@@ -63,7 +63,7 @@ const feesReceiptTableData = (data) => {
                         draggable: true,
                         progress: undefined,
                     });
-                    fetchFailTableData(error.message);
+                    fetchFailTableData();
                 });
         } catch (error) {
             toast.warning('Internal server error', {
@@ -75,7 +75,7 @@ const feesReceiptTableData = (data) => {
                 draggable: true,
                 progress: undefined,
             });
-            fetchFailTableData(error.message);
+            fetchFailTableData();
             //   console.log(error);
         }
     };
@@ -97,9 +97,8 @@ const fetchSuccessTableData = (data) => {
     };
 };
 
-const fetchFailTableData = (error) => {
+const fetchFailTableData = () => {
     return {
         type: FEES_RECEIPT_TABLE_FAIL,
-        payload: error,
     };
 };

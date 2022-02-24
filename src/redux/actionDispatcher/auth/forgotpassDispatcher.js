@@ -13,32 +13,51 @@ export const fetchUserEmail = (data, navigate) => {
   return async (dispatch) => {
     const url = AllUrl.resetPassword;
     dispatch(forgotPasswordRequest());
-    var forgetPasswordData = await getData(data, url);
-    if (forgetPasswordData.status === 200) {
-      Swal.fire({
-        title: 'Mail sent successfully',
-        icon: 'success',
-        showConfirmButton: false,
-        timer: 2500,
-        showClass: {
-          backdrop: 'swal2-noanimation', // disable backdrop animation
-          popup: '',                     // disable popup animation
-          icon: ''                       // disable icon animation
-        },
-        hideClass: {
-          popup: '',                     // disable popup fade-out animation
-        }
-      })
-      navigate('./login');
-      dispatch(forgotPasswordSuccess(forgetPasswordData));
-    } else if (forgetPasswordData.request.status === 400) {
-      // Swal.fire({
-      //   title: "Email not Found",
-      //   icon: "warning",
-      //   showConfirmButton: false,
-      //   timer: 2500
-      // });
-      toast.warn('Email not found', {
+    try {
+      var forgetPasswordData = await getData(data, url);
+      if (forgetPasswordData.status === 200) {
+        Swal.fire({
+          title: 'Mail sent successfully',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2500,
+          showClass: {
+            backdrop: 'swal2-noanimation', // disable backdrop animation
+            popup: '',                     // disable popup animation
+            icon: ''                       // disable icon animation
+          },
+          hideClass: {
+            popup: '',                     // disable popup fade-out animation
+          }
+        })
+        navigate('./login');
+        dispatch(forgotPasswordSuccess(forgetPasswordData));
+      } else if (forgetPasswordData.request.status === 400) {
+        toast.warn('Email not found', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(forgotPasswordFailure());
+      }
+      else {
+        toast.error('Internal server error', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(forgotPasswordFailure());
+      }
+    } catch (error) {
+      toast.error('Something went wrong', {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -47,20 +66,7 @@ export const fetchUserEmail = (data, navigate) => {
         draggable: true,
         progress: undefined,
       });
-      dispatch(forgotPasswordFailure(forgetPasswordData.data));
-    }
-
-    else {
-      toast.error('Internal server error', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      dispatch(forgotPasswordFailure(forgetPasswordData));
+      dispatch(forgotPasswordFailure());
     }
   };
 };
@@ -79,9 +85,8 @@ export const forgotPasswordSuccess = (users) => {
   };
 };
 
-export const forgotPasswordFailure = (error) => {
+export const forgotPasswordFailure = () => {
   return {
     type: FORGETPASSWORD_FAIL,
-    payload: error,
   };
 };

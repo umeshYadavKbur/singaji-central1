@@ -17,10 +17,10 @@ export const fetchUsers = (data, navigate) => {
     const url = AllUrl.login;
     // wait untill the data not received so getData function take data and url part
     dispatch(loginRequest());
-    var userResData = await getData(data, url);
     // console.log("the response is ::", userResData.request.status);
     // changing the userResData if we need token so userResData.data.toke will be used
     try {
+      var userResData = await getData(data, url);
       if (userResData.request.status === 200) {
         console.log("Response :: ", userResData);
         //setting the Items in localStorage
@@ -51,7 +51,7 @@ export const fetchUsers = (data, navigate) => {
           draggable: true,
           progress: undefined,
         });
-        dispatch(loginFailure(userResData.data));
+        dispatch(loginFailure());
       }
       else if (userResData.request.status === 403) {
         Swal.fire({
@@ -69,13 +69,13 @@ export const fetchUsers = (data, navigate) => {
           }
         })
 
-        dispatch(loginFailure(userResData.data));
+        dispatch(loginFailure());
       }
 
 
       else if (userResData.request.status === 400) {
         let value = JSON.stringify(userResData.request.status);
-        dispatch(loginFailure(value));
+        dispatch(loginFailure());
         toast.warn('Invalid credentials', {
           position: "top-center",
           autoClose: 3000,
@@ -86,8 +86,7 @@ export const fetchUsers = (data, navigate) => {
           progress: undefined,
         });
       } else {
-        let value = JSON.stringify(userResData.request.status);
-        dispatch(loginFailure(value));
+        dispatch(loginFailure());
         toast.error('Internal server error', {
           position: "top-center",
           autoClose: 3000,
@@ -100,10 +99,7 @@ export const fetchUsers = (data, navigate) => {
       }
       return userResData.request.status;
     } catch (error) {
-      //if crudential fails than Login fail action dispatch
-      // console.log(error)
-      let value = JSON.stringify(userResData.request.status);
-      dispatch(loginFailure(value));
+      dispatch(loginFailure());
       toast.error('Internal server error', {
         position: "top-center",
         autoClose: 3000,
@@ -130,10 +126,9 @@ export const loginSuccess = (users) => {
   };
 };
 
-export const loginFailure = (error) => {
+export const loginFailure = () => {
   return {
     type: LOGIN_FAIL,
-    payload: error,
   };
 };
 

@@ -11,7 +11,7 @@ const initialState = {
   second_loading: false,
   loading: false,
   table_data: [],
-  error: "",
+  error: false,
 };
 
 const adminTableReducer = (state = initialState, action) => {
@@ -26,7 +26,7 @@ const adminTableReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         table_data: action.payload,
-        error: "",
+        error: false,
       };
 
     case ADMIN_TABLE_DATA_FAIL:
@@ -34,7 +34,7 @@ const adminTableReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         // table_data: [],
-        error: action.payload,
+        error: true,
       };
 
     case FETCH_ADMIN_TABLE_DATA_SEC:

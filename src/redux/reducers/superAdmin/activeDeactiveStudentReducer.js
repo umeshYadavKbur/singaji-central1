@@ -8,7 +8,7 @@ import {
 const initialState = {
   loading: false,
   statusChanged: false,
-  error: "",
+  error: false
 };
 
 const changeStudentStatus = (state = initialState, action) => {
@@ -22,19 +22,19 @@ const changeStudentStatus = (state = initialState, action) => {
       return {
         loading: false,
         statusChanged: true,
-        error: "",
+        error: false,
       };
     case REQUEST_STATUS_CHANGE:
       return {
         loading: false,
         statusChanged: false,
-        error: action.payload,
+        error: false,
       };
     case FAIL_STATUS_REQUEST:
       return {
         loading: false,
         statusChanged: false,
-        error: action.payload,
+        error: true,
       };
     default:
       return state;

@@ -11,7 +11,6 @@ const getStudentsdata = (data) => {
         try {
             axios(data)
                 .then(function (response) {
-                    // console.log((response));
                     if (response.status === 200) {
                         dispatch(fetchSuccessTableData(response.data));
                     }
@@ -29,7 +28,7 @@ const getStudentsdata = (data) => {
                             popup: '',                     // disable popup fade-out animation
                         }
                     })
-                    fetchFailTableData(error);
+                    fetchFailTableData();
                 });
         } catch (error) {
             Swal.fire({
@@ -44,8 +43,7 @@ const getStudentsdata = (data) => {
                     popup: '',                     // disable popup fade-out animation
                 }
             })
-            fetchFailTableData(error.message);
-            //   console.log(error);
+            fetchFailTableData();
         }
     };
 };
@@ -66,9 +64,8 @@ const fetchSuccessTableData = (data) => {
     };
 };
 
-const fetchFailTableData = (error) => {
+const fetchFailTableData = () => {
     return {
         type: STUDENTS_TABLE_DATA_FAIL,
-        payload: error,
     };
 };

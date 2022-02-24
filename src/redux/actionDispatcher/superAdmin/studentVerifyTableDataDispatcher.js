@@ -34,9 +34,9 @@ export const VerifyStudent = (data) => {
 
         let userResData;
 
-        console.log("+++++++++++++++++++++++++++++");
-        console.log(body);
-        console.log("+++++++++++++++++++++++++++++");
+        // console.log("+++++++++++++++++++++++++++++");
+        // console.log(body);
+        // console.log("+++++++++++++++++++++++++++++");
         try {
             userResData = await axios(config);
             // console.log(userResData)
@@ -65,7 +65,7 @@ export const VerifyStudent = (data) => {
                     draggable: true,
                     progress: undefined,
                 });
-                dispatch(VerifyStudentFail(userResData.data));
+                dispatch(VerifyStudentFail());
 
             } else if (userResData.status === 208) {
                 toast.warning('user are already available', {
@@ -77,7 +77,7 @@ export const VerifyStudent = (data) => {
                     draggable: true,
                     progress: undefined,
                 });
-                dispatch(VerifyStudentFail('user are already available'));
+                dispatch(VerifyStudentFail());
 
             } else {
                 toast.error('Internal Server Error', {
@@ -90,7 +90,7 @@ export const VerifyStudent = (data) => {
                     progress: undefined,
                 });
                 let value = JSON.stringify(userResData.status);
-                dispatch(VerifyStudentFail(value));
+                dispatch(VerifyStudentFail());
 
             }
             return userResData.status;
@@ -106,8 +106,8 @@ export const VerifyStudent = (data) => {
                 progress: undefined,
             });
             //if crudential fails than Login fail action dispatch
-            let value = JSON.stringify(userResData);
-            dispatch(VerifyStudentFail(value));
+            // let value = JSON.stringify(userResData);
+            dispatch(VerifyStudentFail());
 
         }
     };
@@ -127,9 +127,8 @@ const VerifyStudentSuccess = (data) => {
     };
 };
 
-const VerifyStudentFail = (error) => {
+const VerifyStudentFail = () => {
     return {
         type: VERIFY_STUDENT_TABLE_DATA_FAIL,
-        payload: error
     };
 };

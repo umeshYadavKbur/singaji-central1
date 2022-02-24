@@ -95,10 +95,9 @@ export const deactivateStudent = (users) => {
   };
 };
 
-export const activateStudent = (error) => {
+export const activateStudent = () => {
   return {
     type: ACTIVATE_STUDENT,
-    payload: error,
   };
 };
 

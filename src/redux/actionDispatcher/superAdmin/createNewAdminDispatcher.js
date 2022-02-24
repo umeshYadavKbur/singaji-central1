@@ -19,23 +19,7 @@ export const createNewAdmin = (data, navigate) => {
         .then(function (response) {
           if (response.status === 200) {
             dispatch(newAdminReqSuccess());
-            // Swal.fire({
-            //   position: 'top-center',
-            //   icon: 'success',
-            //   title: 'New admin has been successfully created!',
-            //   showConfirmButton: false,
-            //   timer: 2500
-            // })
             navigate('admintable')
-            // toast('admin has been successfully created!', {
-            //   position: "top-center",
-            //   autoClose: 5000,
-            //   hideProgressBar: true,
-            //   closeOnClick: true,
-            //   pauseOnHover: true,
-            //   draggable: true,
-            //   progress: undefined,
-            // });
             Swal.fire({
               position: 'top-center',
               icon: 'success',
@@ -74,7 +58,7 @@ export const createNewAdmin = (data, navigate) => {
         })
         .catch(function (error) {
           // console.log(error);
-          dispatch(newAdminReqFail(error.message));
+          dispatch(newAdminReqFail());
           Swal.fire({
             position: 'top-center',
             icon: 'error',
@@ -93,7 +77,7 @@ export const createNewAdmin = (data, navigate) => {
 
         });
     } catch (error) {
-      dispatch(newAdminReqFail(error.message));
+      dispatch(newAdminReqFail());
       Swal.fire({
         position: 'top-center',
         icon: 'error',
@@ -126,9 +110,8 @@ export const newAdminReqSuccess = () => {
   };
 };
 
-export const newAdminReqFail = (error) => {
+export const newAdminReqFail = () => {
   return {
     type: CREATE_NEW_ADMIN_FAIL,
-    payload: error,
   };
 };

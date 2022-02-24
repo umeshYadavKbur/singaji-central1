@@ -1,13 +1,13 @@
-import {ADD_STUDENT_REQUEST,ADD_STUDENT_FAIL,ADD_STUDENT_SUCCESS } from "../../constants/actions";
+import { ADD_STUDENT_REQUEST, ADD_STUDENT_FAIL, ADD_STUDENT_SUCCESS } from "../../constants/actions";
 
 const initialState = {
     loading: false,
     newStudent: false,
-    error: "",
+    error: false,
 };
 
-const addNewStudentReducer = (state = initialState,action) => {
-    switch(action.type) {
+const addNewStudentReducer = (state = initialState, action) => {
+    switch (action.type) {
         case ADD_STUDENT_REQUEST:
             return {
                 ...state,
@@ -17,13 +17,13 @@ const addNewStudentReducer = (state = initialState,action) => {
             return {
                 loading: false,
                 newStudent: true,
-                error: "",
+                error: false,
             };
         case ADD_STUDENT_FAIL:
             return {
                 loading: false,
                 newStudent: false,
-                error: action.payload,
+                error: true,
             };
         default:
             return state;

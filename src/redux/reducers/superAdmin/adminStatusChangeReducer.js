@@ -6,7 +6,7 @@ import {
 } from "../../constants/actions";
 
 const initialState = {
-    error: "",
+    error: false,
     AdminStatusChangeData: [],
     loading: false
 };
@@ -22,13 +22,13 @@ const AdminStatusChangeReducer = (state = initialState, action) => {
         case ADMIN_STATUS_CHANGE_SUCCESS:
             return {
                 loading: false,
-                error: '',
+                error: false,
                 AdminStatusChangeData: action.payload,
             };
         case ADMIN_STATUS_CHANGE_FAIL:
             return {
                 loading: false,
-                error: action.payload,
+                error: true,
                 AdminStatusChangeData: '',
             };
 

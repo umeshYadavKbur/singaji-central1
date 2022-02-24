@@ -15,7 +15,7 @@ const initialState = {
   second_loading: false,
   loading: false,
   table_data: [],
-  error: "",
+  error: false,
 };
 
 const feesStructureTableReducer = (state = initialState, action) => {
@@ -31,7 +31,7 @@ const feesStructureTableReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         table_data: action.payload,
-        error: "",
+        error: false,
       };
 
     case FEES_STRUCT_TABLE_DATA_FAIL:
@@ -39,7 +39,7 @@ const feesStructureTableReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         table_data: [],
-        error: action.payload,
+        error: true,
       };
 
     case FEES_STRUCTURE_CHANGE_STATUS:

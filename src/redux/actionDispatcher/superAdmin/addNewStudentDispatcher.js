@@ -7,7 +7,7 @@ import AllUrl from "../../constants/url";
 import axios from "axios";
 import SuccessIcon from '../../../components/assests/image/SuccessIcon.svg'
 
-const AddNewStudent = (data,backToProfilePage) => {
+const AddNewStudent = (data, backToProfilePage) => {
     var dataOfAddStudent = {
         method: 'post',
         url: AllUrl.newRegistraionUrl,
@@ -23,10 +23,11 @@ const AddNewStudent = (data,backToProfilePage) => {
         // const registrationUrl = AllUrl.newRegistraionUrl;
 
         // wait untill the data not received so getData function take data and url part
-        let userResData = await axios(dataOfAddStudent);
-        // console.log("the response is ::", userResData.request.status);
-        // changing the userResData if we need token so userResData.data.toke will be used
         try {
+            let userResData = await axios(dataOfAddStudent);
+            // console.log("the response is ::", userResData.request.status);
+            // changing the userResData if we need token so userResData.data.toke will be used
+
             if (userResData.request.status === 200) {
                 dispatch(AddNewStudentSuccess(userResData.data));
                 backToProfilePage()
@@ -52,7 +53,7 @@ const AddNewStudent = (data,backToProfilePage) => {
                     }
 
                 })
-                
+
             }
             else if (userResData.request.status === 208) {
                 Swal.fire({
@@ -67,7 +68,7 @@ const AddNewStudent = (data,backToProfilePage) => {
                         popup: '',                     // disable popup fade-out animation
                     }
                 })
-                dispatch(AddNewStudentFailure(userResData.data));
+                dispatch(AddNewStudentFailure());
             }
             else if (userResData.request.status === 404) {
                 Swal.fire({
@@ -85,7 +86,7 @@ const AddNewStudent = (data,backToProfilePage) => {
                         popup: '',                     // disable popup fade-out animation
                     }
                 })
-                dispatch(AddNewStudentFailure(userResData.data));
+                dispatch(AddNewStudentFailure());
             }
             else {
                 Swal.fire({
@@ -103,7 +104,7 @@ const AddNewStudent = (data,backToProfilePage) => {
                         popup: '',                     // disable popup fade-out animation
                     }
                 })
-                dispatch(AddNewStudentFailure(userResData.data));
+                dispatch(AddNewStudentFailure());
             }
             return userResData.request.status
         }
@@ -124,7 +125,7 @@ const AddNewStudent = (data,backToProfilePage) => {
                     popup: '',                     // disable popup fade-out animation
                 }
             })
-            dispatch(AddNewStudentFailure(error.message));
+            dispatch(AddNewStudentFailure());
         }
     }
 }
@@ -144,9 +145,8 @@ export const AddNewStudentSuccess = (users) => {
     };
 };
 
-export const AddNewStudentFailure = (error) => {
+export const AddNewStudentFailure = () => {
     return {
         type: ADD_STUDENT_FAIL,
-        payload: error,
     };
 };

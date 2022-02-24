@@ -7,7 +7,7 @@ import {
 } from "../../constants/actions";
 
 const initialState = {
-    error: "",
+    error: false,
     verifyStudentData: [],
     loading: false
 
@@ -24,13 +24,13 @@ const VerifyStudentReducer = (state = initialState, action) => {
         case VERIFY_STUDENT_TABLE_DATA_SUCCESS:
             return {
                 loading: false,
-                error: '',
+                error: false,
                 verifyStudentData: action.payload,
             };
         case VERIFY_STUDENT_TABLE_DATA_FAIL:
             return {
                 loading: false,
-                error: action.payload,
+                error: true,
                 verifyStudentData: '',
             };
 
