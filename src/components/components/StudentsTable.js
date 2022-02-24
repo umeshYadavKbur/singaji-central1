@@ -27,9 +27,9 @@ import { VerifyStudent } from "../../redux/actionDispatcher/superAdmin/studentVe
 // import AddNewStudent from "./AddNewStudent";
 import AllUrl from "../../redux/constants/url"
 import updown_sort from '../assests/image/updown_sort.svg'
-import {  PaidButton, UnpaidButton } from "../assests/common/Color";
+import { PaidButton, UnpaidButton } from "../assests/common/Color";
 import Pagination from "../assests/common/Pagination";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Tooltip, Whisper } from "rsuite";
 import NoDataFound from "../assests/common/NoDataFound";
 
@@ -147,7 +147,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                 // console.log("_____________________________________", result);
                 if (result.status === 200) {
                   toast.success('Registration Fees Paid SuccessFul', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
                     closeOnClick: true,
@@ -167,7 +167,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                 }
                 else if (result.status === 404) {
                   toast.warning('User Not Found', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
                     closeOnClick: true,
@@ -196,7 +196,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
             navigate("/admin_dashboard/addnewstudent")
             localStorage.setItem('RegistrationEdit', JSON.stringify(original))
-            localStorage.setItem('SelfRegistrationEdit', JSON.stringify(original))
+            // localStorage.setItem('SelfRegistrationEdit', JSON.stringify(original))
           }} />
 
         </Whisper>

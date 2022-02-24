@@ -1,5 +1,5 @@
-import React, { useState ,useEffect} from 'react';
-import { NavLink,useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { NavLink, useLocation } from "react-router-dom";
 import Education_svg from "../assests/image/sidebarIcons/Education.svg";
 
 
@@ -20,7 +20,7 @@ const SidebarLinks = ({ Toggle }) => {
 
     // }
 
-    const DLink1 = (currentLocation,name, url, icon, id, parentId) => {
+    const DLink1 = (currentLocation, name, url, icon, id, parentId) => {
         useEffect(() => {
             const changeTab1 = () => {
 
@@ -56,7 +56,7 @@ const SidebarLinks = ({ Toggle }) => {
                             }
                         })
                     }
-                    setActiveDropdown(id); 
+                    setActiveDropdown(id);
                     setActiveTab(parentId)
                 }}
             >
@@ -68,8 +68,6 @@ const SidebarLinks = ({ Toggle }) => {
 
     return (
         <>
-
-
             {/* ---- second dropdown---- */}
             <div className="flex-shrink-0">
                 <ul className="list-unstyled m-0">
@@ -108,7 +106,7 @@ const SidebarLinks = ({ Toggle }) => {
                             <li className="dropdown_items_div ml-1">
                                 {DLink1(currentLocation, "Applied Students", "studenttable", "ok", "Applied_Students", 'education-collapse-btn')}
                                 {DLink1(currentLocation, "Students", "students", "ok", "Students", "education-collapse-btn")}
-                                {DLink1(currentLocation, "Add students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}
+                                {DLink1(currentLocation, "Add Students", "addnewstudent", "ok", "Add_students", 'education-collapse-btn')}
                             </li>
                         </ul>
                     </div>

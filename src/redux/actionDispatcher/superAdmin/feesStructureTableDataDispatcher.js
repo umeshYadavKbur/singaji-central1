@@ -31,7 +31,7 @@ export const fetchFeesTableData = (data, Show) => {
           }
           if (response.status === 400) {
             toast.warn('No data found !', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
@@ -43,7 +43,7 @@ export const fetchFeesTableData = (data, Show) => {
           }
           if (response.status === 500) {
             toast.warn('Internal Server Error', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
@@ -55,7 +55,7 @@ export const fetchFeesTableData = (data, Show) => {
           }
           if (response.status === 404) {
             toast.warn('Data not found', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
@@ -68,7 +68,7 @@ export const fetchFeesTableData = (data, Show) => {
         })
         .catch(function (error) {
           toast.warn('No data found !', {
-            position: "bottom-center",
+            position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -80,7 +80,7 @@ export const fetchFeesTableData = (data, Show) => {
         });
     } catch (error) {
       toast.warn('Internal Server Error', {
-        position: "bottom-center",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -119,7 +119,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
           setVisible(!visible)
         }
         toast.success('Update successfully !', {
-          position: "bottom-center",
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: true,
           closeOnClick: true,
@@ -137,7 +137,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
         let value = JSON.stringify(response.status);
         dispatch(feesStructureStatusFailed(value));
         toast.warn('Internal Server Error', {
-          position: "bottom-center",
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -153,7 +153,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
         let value = JSON.stringify(response.status);
         dispatch(feesStructureStatusFailed(value));
         toast.warn('Internal Server Error', {
-          position: "bottom-center",
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -169,7 +169,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
         let value = JSON.stringify(response.status);
         dispatch(feesStructureStatusFailed(value));
         toast.error("Internal Server Error", {
-          position: "bottom-center",
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: true,
           closeOnClick: true,
@@ -182,7 +182,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
           setVisible(!visible)
         }
         toast.error("Internal Server Error", {
-          position: "bottom-center",
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: true,
           closeOnClick: true,
@@ -198,7 +198,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
       }
       dispatch(feesStructureStatusFailed());
       toast.error("Internal Server Error", {
-        position: "bottom-center",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: true,
         closeOnClick: true,
@@ -239,7 +239,7 @@ export const changeTotalFees = (data, setVisible, visible) => {
           setVisible(!visible)
         }
         toast.success('Update successfully !', {
-          position: "bottom-center",
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: true,
           closeOnClick: true,
@@ -256,7 +256,7 @@ export const changeTotalFees = (data, setVisible, visible) => {
         // let value = JSON.stringify(response.status);
         dispatch(changeTotalFeesFail());
         toast.warn('Internal Server Error', {
-          position: "bottom-center",
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -271,7 +271,7 @@ export const changeTotalFees = (data, setVisible, visible) => {
         // let value = JSON.stringify(response.status);
         dispatch(changeTotalFeesFail());
         toast.error("Internal Server Error", {
-          position: "bottom-center",
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: true,
           closeOnClick: true,
@@ -284,7 +284,7 @@ export const changeTotalFees = (data, setVisible, visible) => {
           setVisible(!visible)
         }
         toast.error("Internal Server Error", {
-          position: "bottom-center",
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: true,
           closeOnClick: true,
@@ -299,7 +299,7 @@ export const changeTotalFees = (data, setVisible, visible) => {
         setVisible(!visible)
       }
       toast.error("Internal Server Error", {
-        position: "bottom-center",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: true,
         closeOnClick: true,

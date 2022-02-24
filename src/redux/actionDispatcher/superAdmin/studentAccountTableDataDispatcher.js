@@ -35,7 +35,7 @@ export const fetchStudentAccountData = (data) => {
           if (response.status === 400) {
             dispatch(accStuDataFail(response.data))
             toast.warn('No data found !', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
@@ -47,7 +47,7 @@ export const fetchStudentAccountData = (data) => {
           if (response.status === 500) {
             dispatch(accStuDataFail(response.data))
             toast.warn('Internal Server Error', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
@@ -60,7 +60,7 @@ export const fetchStudentAccountData = (data) => {
         .catch(function (error) {
           dispatch(accStuDataFail(error.message))
           toast.warn('Internal Server Error', {
-            position: "bottom-center",
+            position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -72,7 +72,7 @@ export const fetchStudentAccountData = (data) => {
     } catch (error) {
       dispatch(accStuDataFail(error.message))
       toast.warn('Internal Server Error', {
-        position: "bottom-center",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -120,7 +120,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
 
           if (response.status === 400) {
             toast.warn('No data found !', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
@@ -132,7 +132,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
           }
           if (response.status === 500) {
             toast.warn('Internal Server Error', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
@@ -147,7 +147,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
           setLoading(false)
 
           toast.warn('Internal Server Error', {
-            position: "bottom-center",
+            position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -161,7 +161,7 @@ export const accountAction = (config, navigate, is_reciptBtn, setLoading) => {
       setLoading(false)
 
       toast.warn('Internal Server Error', {
-        position: "bottom-center",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,

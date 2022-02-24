@@ -147,7 +147,7 @@ function UpdateStudentPersonalInfo({ handleClose }) {
             }
             else if (response.status === 400) {
                 toast.warn('Invalid Email', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -158,7 +158,7 @@ function UpdateStudentPersonalInfo({ handleClose }) {
             }
             else if (response.status === 406) {
                 toast.warn('User Not Found', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -169,7 +169,7 @@ function UpdateStudentPersonalInfo({ handleClose }) {
             }
             else {
                 toast.warn('Internal server error', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,

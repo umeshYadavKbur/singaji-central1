@@ -22,7 +22,7 @@ export const fetchAdminTableData = (data) => {
           }
           if (response.status === 400) {
             toast.warn('No data found !', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
@@ -34,7 +34,7 @@ export const fetchAdminTableData = (data) => {
           }
           if (response.status === 500) {
             toast.warn('Internal Server Error', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
@@ -47,7 +47,7 @@ export const fetchAdminTableData = (data) => {
         })
         .catch(function (error) {
           toast.warn('Internal Server Error', {
-            position: "bottom-center",
+            position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -59,7 +59,7 @@ export const fetchAdminTableData = (data) => {
         });
     } catch (error) {
       toast.warn('Internal Server Error', {
-        position: "bottom-center",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -85,7 +85,7 @@ export const getAdminTableData = (data) => {
         })
         .catch(function (error) {
           toast.warn('Internal Server Error', {
-            position: "bottom-center",
+            position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -97,7 +97,7 @@ export const getAdminTableData = (data) => {
         });
     } catch (error) {
       toast.warn('Internal Server Error', {
-        position: "bottom-center",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,

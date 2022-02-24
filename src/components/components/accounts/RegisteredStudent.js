@@ -136,7 +136,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                 // console.log("_____________________________________", result);
                 if (result.status === 200) {
                   toast.success('Registration Fees Paid SuccessFul', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
                     closeOnClick: true,
@@ -156,7 +156,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                 }
                 else if (result.status === 404) {
                   toast.warning('User Not Found', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
                     closeOnClick: true,
@@ -231,7 +231,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
             }
             else {
               toast.warning('Firstly Pay Registration Fees', {
-                position: "bottom-center",
+                position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: true,
                 closeOnClick: true,
@@ -350,7 +350,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     null,
     2
   );
-console.log(checkboxData);
+  console.log(checkboxData);
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
   ) : table_data.error ? (
@@ -403,7 +403,7 @@ console.log(checkboxData);
 
                 {/* <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div> */}
 
-                <div className="dropdown-item " style={{cursor:"pointer"}} onClick={() => { downloadPdfStudentList(exportCsv) }}><b>Pdf</b></div>
+                <div className="dropdown-item " style={{ cursor: "pointer" }} onClick={() => { downloadPdfStudentList(exportCsv) }}><b>Pdf</b></div>
 
 
               </div>

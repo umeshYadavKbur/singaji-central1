@@ -45,14 +45,14 @@ export const VerifyStudent = (data) => {
             if (userResData.status === 200) {
                 dispatch(VerifyStudentSuccess(userResData.data));
                 toast.success(`student ${data.firstName} ${data.lastName} is shifted to accounts`, {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    
+
                 });
 
             } else if (userResData.status === 406) {
@@ -69,7 +69,7 @@ export const VerifyStudent = (data) => {
 
             } else if (userResData.status === 208) {
                 toast.warning('user are already available', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
                     closeOnClick: true,
@@ -81,7 +81,7 @@ export const VerifyStudent = (data) => {
 
             } else {
                 toast.error('Internal Server Error', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
                     closeOnClick: true,
@@ -97,7 +97,7 @@ export const VerifyStudent = (data) => {
         } catch (error) {
             dispatch(setLoadingStateFalse())
             toast.error('Internal Server Error', {
-                position: "bottom-center",
+                position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: true,
                 closeOnClick: true,

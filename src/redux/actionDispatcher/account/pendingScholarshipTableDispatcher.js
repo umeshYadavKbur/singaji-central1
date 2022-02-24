@@ -18,7 +18,7 @@ const pendingScholarship = (data) => {
                     }
                     if (response.status === 400) {
                         toast.warning('No data found ', {
-                            position: "bottom-center",
+                            position: "top-center",
                             autoClose: 3000,
                             hideProgressBar: true,
                             closeOnClick: true,
@@ -30,7 +30,7 @@ const pendingScholarship = (data) => {
                     }
                     if (response.status === 500) {
                         toast.warning('Internal server error', {
-                            position: "bottom-center",
+                            position: "top-center",
                             autoClose: 3000,
                             hideProgressBar: true,
                             closeOnClick: true,
@@ -44,7 +44,7 @@ const pendingScholarship = (data) => {
                 .catch(function (error) {
                     dispatch(fetchFailTableData(error.message));
                     toast.warning('Something went wrong', {
-                        position: "bottom-center",
+                        position: "top-center",
                         autoClose: 3000,
                         hideProgressBar: true,
                         closeOnClick: true,
@@ -56,7 +56,7 @@ const pendingScholarship = (data) => {
         } catch (error) {
             dispatch(fetchFailTableData(error.message));
             toast.warning('Internal server error', {
-                position: "bottom-center",
+                position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: true,
                 closeOnClick: true,

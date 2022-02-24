@@ -33,7 +33,7 @@ export const fetchStudentTable = (data, isLoading) => {
           if (response.status === 400) {
 
             toast.warn('No data found !', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
@@ -51,7 +51,7 @@ export const fetchStudentTable = (data, isLoading) => {
 
           if (response.status === 500) {
             toast.warn('Internal Server Error', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
@@ -73,7 +73,7 @@ export const fetchStudentTable = (data, isLoading) => {
             dispatch(fetchFailTableData());
           }
           toast.warn('Some Problem Occurred', {
-            position: "bottom-center",
+            position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -98,7 +98,7 @@ export const fetchStudentTable = (data, isLoading) => {
         });
     } catch (error) {
       toast.warn('Some Problem Occurred', {
-        position: "bottom-center",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,

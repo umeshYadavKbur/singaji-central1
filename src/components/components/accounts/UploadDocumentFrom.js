@@ -24,7 +24,7 @@ function UploadDocumentFrom() {
 
     const initialValues = {
         PHOTO: '',//
-        COMMITMENT:'',
+        COMMITMENT: '',
         BANK_PASSBOOK: '',//
         AADHAR_CARD: '',////
         CAST_CERTIFICATE: '',//
@@ -57,13 +57,13 @@ function UploadDocumentFrom() {
                 const data = response.data;
                 console.log(data)
                 data.forEach((ele) => { setImageDataOnline((val) => { return { ...val, [ele.docType]: ele.docUrl } }) })
-              let  arrayObj = data.map(ele => {
+                let arrayObj = data.map(ele => {
                     return {
-                      title: ele.docType,
-                      url: ele.docUrl
+                        title: ele.docType,
+                        url: ele.docUrl
                     };
-                  });
-                  setImageForLightBox(arrayObj);
+                });
+                setImageForLightBox(arrayObj);
                 // data.forEach((ele) => { setImageForLightBox((val) => { return { ...val, [ele.doc_type]: ele.doc_Url } }) })
             }
         }
@@ -117,7 +117,7 @@ function UploadDocumentFrom() {
                 if (result.status === 200) {
                     setLoading(false)
                     toast('file upload succefullly!', {
-                        position: "bottom-center",
+                        position: "top-center",
                         autoClose: 5000,
                         hideProgressBar: true,
                         closeOnClick: true,
@@ -125,13 +125,13 @@ function UploadDocumentFrom() {
                         draggable: true,
                         progress: undefined,
                     });
-                       
+
                     backToProfilePage()
 
                 }
                 console.log(result)
 
-            }else{
+            } else {
                 toast.error('Please Choose File To Upload', {
                     position: "top-center",
                     autoClose: 5000,
@@ -179,7 +179,7 @@ function UploadDocumentFrom() {
     }
 
     const showImgOnLightBox = (image, title) => {
-       let id = ImageForLightBox.findIndex(ele => ele?.title === title)
+        let id = ImageForLightBox.findIndex(ele => ele?.title === title)
 
         setLightBoxIndex(id)
 
@@ -205,7 +205,7 @@ function UploadDocumentFrom() {
                 </div>
                 <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
                     <Tooltip>
-                       Click Here To Choose File
+                        Click Here To Choose File
                     </Tooltip>}>
 
 
@@ -213,10 +213,10 @@ function UploadDocumentFrom() {
                         onClick={() => { document.getElementById(NAME_FOR_FILE).click() }}>
                         {DISPLAY_NAME}</p>
                     {/* <Whisper /> */}
-                    </Whisper>
-                    <input name={NAME_FOR_FILE} placeholder={NAME_FOR_FILE} id={NAME_FOR_FILE} type="file" accept="image/*" onChange={(e) => {
-                        imageToBase64(e.target.files[0], NAME_FOR_FILE);
-                    }} value={formik.values.NAME_FOR_FILE} hidden={true} />
+                </Whisper>
+                <input name={NAME_FOR_FILE} placeholder={NAME_FOR_FILE} id={NAME_FOR_FILE} type="file" accept="image/*" onChange={(e) => {
+                    imageToBase64(e.target.files[0], NAME_FOR_FILE);
+                }} value={formik.values.NAME_FOR_FILE} hidden={true} />
             </div>
         )
     }
@@ -261,10 +261,10 @@ function UploadDocumentFrom() {
                 <div className="d-flex justify-content-end m-1">
                     <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
                         <Tooltip>
-                           Upload Documents
+                            Upload Documents
                         </Tooltip>}>
 
-                        <button  className="btn btn-primary text-light fw-bold " style={{ marginRight: '30px',marginTop:'110px', width: "220px", height: "41px" }} type="submit">Save</button>
+                        <button className="btn btn-primary text-light fw-bold " style={{ marginRight: '30px', marginTop: '110px', width: "220px", height: "41px" }} type="submit">Save</button>
                     </Whisper>
 
                 </div>

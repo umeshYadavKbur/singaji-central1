@@ -18,7 +18,7 @@ const feesReceiptTableData = (data) => {
                     }
                     if (response.status === 400) {
                         toast.warning('No data found ', {
-                            position: "bottom-center",
+                            position: "top-center",
                             autoClose: 3000,
                             hideProgressBar: true,
                             closeOnClick: true,
@@ -30,7 +30,7 @@ const feesReceiptTableData = (data) => {
                     }
                     if (response.status === 400) {
                         toast.warning('No data found ', {
-                            position: "bottom-center",
+                            position: "top-center",
                             autoClose: 3000,
                             hideProgressBar: true,
                             closeOnClick: true,
@@ -42,7 +42,7 @@ const feesReceiptTableData = (data) => {
                     }
                     if (response.status === 500) {
                         toast.warning('Internal server error', {
-                            position: "bottom-center",
+                            position: "top-center",
                             autoClose: 3000,
                             hideProgressBar: true,
                             closeOnClick: true,
@@ -55,7 +55,7 @@ const feesReceiptTableData = (data) => {
                 })
                 .catch(function (error) {
                     toast.warning('Internal server error', {
-                        position: "bottom-center",
+                        position: "top-center",
                         autoClose: 3000,
                         hideProgressBar: true,
                         closeOnClick: true,
@@ -67,7 +67,7 @@ const feesReceiptTableData = (data) => {
                 });
         } catch (error) {
             toast.warning('Internal server error', {
-                position: "bottom-center",
+                position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: true,
                 closeOnClick: true,

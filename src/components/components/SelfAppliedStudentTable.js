@@ -27,12 +27,11 @@ import { TableCheckbox } from "./tableComponents/TableCheckbox";
 // import AddNewStudent from "./AddNewStudent";
 import AllUrl from "../../redux/constants/url"
 import updown_sort from '../assests/image/updown_sort.svg'
-import { DeactivateButton, PaidButton, UnpaidButton } from "../assests/common/Color";
+import { DeactivateButton } from "../assests/common/Color";
 import Pagination from "../assests/common/Pagination";
 import { useNavigate } from "react-router-dom";
 import { Tooltip, Whisper } from "rsuite";
 import NoDataFound from "../assests/common/NoDataFound";
-import { fontSize } from "@mui/system";
 import delete_icon from "../../components/assests/image/delete_Icon.svg"
 import filtericon from "../../components/assests/image/AccountIcons/filter.svg";
 import rightArrow from '../../components/assests/image/right_arrow_icon.svg'
@@ -190,9 +189,9 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
                   };
                   fetchStudentTable(fetchStudentTableConfig, true);
                 }
-                else if(resultofverify.status === 406) {
+                else if (resultofverify.status === 406) {
                   console.log("404 empty feild");
-                  toast.error('Some field are empty please edit it',{
+                  toast.error('Some field are empty please edit it', {
                     position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -201,8 +200,8 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
                     draggable: false,
                     progress: undefined,
                   });
-                } else if(resultofverify.status === 500) {
-                  toast.error('Internal Server Error',{
+                } else if (resultofverify.status === 500) {
+                  toast.error('Internal Server Error', {
                     position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -212,10 +211,10 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
                     progress: undefined,
                   });
                 }
-              
-            }
+
+              }
             }).catch((err) =>
-            console.log("err" ,err))
+              console.log("err", err))
 
           }
 
@@ -239,6 +238,7 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
           <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
             navigate("/admin_dashboard/updateselfappliedstudentdetail");
             localStorage.setItem('SelfRegistrationEdit', JSON.stringify(original))
+            // localStorage.setItem('editData', JSON.stringify(original))
           }} />
         </Whisper>
 
@@ -478,7 +478,7 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
     }
   );
   var idData = [];
-  var exportCsv = [];
+  // var exportCsv = [];
 
   const checkboxData = JSON.stringify(
     {

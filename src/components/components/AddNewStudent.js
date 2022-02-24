@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./styles/AddNewStudent.css"
 import Select from 'react-select'
 import * as Yup from "yup";
-import {  useFormik } from 'formik';
+import { useFormik } from 'formik';
 import axios from 'axios';
 import AddNewStudent from '../../redux/actionDispatcher/superAdmin/addNewStudentDispatcher'
 import { connect } from 'react-redux';
@@ -60,7 +60,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
             /////////////////////////
             const villageNamesRes = await axios(allUrls.villageNameList)
             let newVillageName = [];
-            villageNamesRes.data.forEach((ele) => {newVillageName.push({'label': ele.villageName,'value': ele.villageName }) })
+            villageNamesRes.data.forEach((ele) => { newVillageName.push({ 'label': ele.villageName, 'value': ele.villageName }) })
             // console.log(newVillageName);
             setVillageNames(newVillageName);
 
@@ -149,12 +149,12 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
     //     // Fees detail end from here 
 
     // }
-    
+
 
 
     // editData
     const initialValues = {
-        firstName:  editData ? editData.firstName : "",
+        firstName: editData ? editData.firstName : "",
         lastName: editData ? editData.lastName : "",
         dob: editData ? editData.dob : "",
         contactNumber: editData ? editData.mobile : "",
@@ -220,11 +220,11 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
     }
 
     const validationSchema = Yup.object({
-        firstName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!").test('len','Must be less then 24 character',val => val?.length < 24),
-        lastName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates').required("Required!").test('len','Must be less then 24 character',val => val?.length < 24),
+        firstName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!").test('len', 'Must be less then 24 character', val => val?.length < 24),
+        lastName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates').required("Required!").test('len', 'Must be less then 24 character', val => val?.length < 24),
         dob: Yup.string().required("Required!").test('doc_check', 'Minimum age must be 12-14 years', val => val?.slice(0, 4) <= (new Date().getFullYear()) - 13),
         contactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
-        fatherName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!").test('len','Must be less then 24 character',val => val?.length < 24),
+        fatherName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!").test('len', 'Must be less then 24 character', val => val?.length < 24),
         fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates'),
         fatherIncome: Yup.string().required("Required!").min(4, 'Must be exactly 4 digits').test('Is positive', 'must be positive', val => val > 0),
         FatherContactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
@@ -237,10 +237,10 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         aadharNumber: Yup.string().trim().required("Required!").test('len', 'Must be exactly 12 digits', val => val?.replace('X', '').length === 14),
         category: Yup.string().required("Required!"),
 
-        percent10: Yup.string().required("Required!").test('len','Must be at least 33%',val => val?.replace('X','').replace('%','') > 32),
+        percent10: Yup.string().required("Required!").test('len', 'Must be at least 33%', val => val?.replace('X', '').replace('%', '') > 32),
         rollNumber10: Yup.string().required("Required!"),
         joinBatch: Yup.string().trim().required("Required!").test('len', 'Must be exactly 4 digits', val => val?.replace('X', '').length === 4),
-        persentage12: Yup.string().required("Required!").test('len','Must be at least 33%',val => val?.replace('X','').replace('%','') > 32),
+        persentage12: Yup.string().required("Required!").test('len', 'Must be at least 33%', val => val?.replace('X', '').replace('%', '') > 32),
         rollNumber12: Yup.string().required("Required!"),
         year: Yup.string().required("Required!"),
         streamName: Yup.string().required("Required!"),
@@ -420,7 +420,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                 "commitment": formik.values.commitment
             }
             //Remaining the Self register student to shift tha account table 
-           editData ?
+            editData ?
                 updateStudentData(bodyData)
                 :
                 AddNewStudent(bodyData, backToProfilePage)
@@ -428,14 +428,13 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         }
     });
     // const [getCourseFee, setGetCourseFee] = useState(true)
-if(editData)
-{
-    formik.errors.commitment ='';
-}
+    if (editData) {
+        formik.errors.commitment = '';
+    }
 
     const getPincode = async (value) => {
         // console.log(Block,District);
-        if(value?.replace('X','').length === 6) {
+        if (value?.replace('X', '').length === 6) {
             var config = {
                 method: "get",
                 url: `https://api.postalpincode.in/pincode/${value}`,
@@ -443,22 +442,22 @@ if(editData)
             };
 
             const PincodeResult = await axios(config);
-            if(PincodeResult.status === 200) {
+            if (PincodeResult.status === 200) {
 
-                formik.setFieldValue("district",PincodeResult.data[0].PostOffice[0].District)
-                console.log("formiik::",formik.values.district);
-                formik.setFieldValue("tehsil",PincodeResult.data[0].PostOffice[0].Block)
+                formik.setFieldValue("district", PincodeResult.data[0].PostOffice[0].District)
+                console.log("formiik::", formik.values.district);
+                formik.setFieldValue("tehsil", PincodeResult.data[0].PostOffice[0].Block)
             } else {
-                formik.setFieldValue("district",PincodeResult.data[0].PostOffice[0].District)
-                console.log("formiik::",formik.values.district);
-                formik.setFieldValue("tehsil",PincodeResult.data[0].PostOffice[0].Block)
+                formik.setFieldValue("district", PincodeResult.data[0].PostOffice[0].District)
+                console.log("formiik::", formik.values.district);
+                formik.setFieldValue("tehsil", PincodeResult.data[0].PostOffice[0].Block)
             }
         }
     };
 
     const getCourseFees = async (branch, joinBatch) => {
 
-        if (joinBatch !== '' && joinBatch.replace('X', '').length === 4 && branch !== '') {
+        if (joinBatch !== '' && joinBatch.toString().replace('X', '').length === 4 && branch !== '') {
             // console.log("api calling");
 
             var data = '';
@@ -476,7 +475,7 @@ if(editData)
 
                 const StudentCourseFees = await axios(config)
                 if (StudentCourseFees.status === 200) {
-                    formik.setFieldValue('courseFees',StudentCourseFees.data[0].totalFees);
+                    formik.setFieldValue('courseFees', StudentCourseFees.data[0].totalFees);
 
                 } else {
                     formik.setFieldValue('courseFees', '');
@@ -746,7 +745,7 @@ if(editData)
                                     <div className="col">
                                         <label className="addStdLable" htmlFor="">Pincode*</label>  <NumberFormat
                                             onBlur={formik.handleBlur}
-                                            onChange={async (e) => {await formik.setFieldValue("pincode",e.target.value); getPincode(e.target.value)}}
+                                            onChange={async (e) => { await formik.setFieldValue("pincode", e.target.value); getPincode(e.target.value) }}
                                             value={formik.values.pincode}
                                             name="pincode"
                                             type="text"

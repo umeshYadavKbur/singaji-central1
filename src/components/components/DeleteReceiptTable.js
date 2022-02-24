@@ -148,7 +148,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 const result = await axios(config)
                                 if (result.status === 200) {
                                     toast.success('Receipt Rejected successfully', {
-                                        position: "bottom-center",
+                                        position: "top-center",
                                         autoClose: 2000,
                                         hideProgressBar: true,
                                         closeOnClick: true,
@@ -171,7 +171,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 else if (result.status === 404) {
                                     setLoading(false)
                                     toast.warning('Something went wrong', {
-                                        position: "bottom-center",
+                                        position: "top-center",
                                         autoClose: 2000,
                                         hideProgressBar: true,
                                         closeOnClick: true,
@@ -183,7 +183,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 else {
                                     setLoading(false)
                                     toast.warning('Something went wrong', {
-                                        position: "bottom-center",
+                                        position: "top-center",
                                         autoClose: 2000,
                                         hideProgressBar: true,
                                         closeOnClick: true,
@@ -253,7 +253,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 const result = await axios(config)
                                 if (result.status === 200) {
                                     toast.success('Receipt accepted', {
-                                        position: "bottom-center",
+                                        position: "top-center",
                                         autoClose: 2000,
                                         hideProgressBar: true,
                                         closeOnClick: true,
@@ -275,7 +275,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 }
                                 else if (result.status === 404) {
                                     toast.warning('Somethingn went wrong !', {
-                                        position: "bottom-center",
+                                        position: "top-center",
                                         autoClose: 2000,
                                         hideProgressBar: true,
                                         closeOnClick: true,
@@ -288,7 +288,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 else {
                                     setLoading(false)
                                     toast.warning('Somethingn went wrong !', {
-                                        position: "bottom-center",
+                                        position: "top-center",
                                         autoClose: 2000,
                                         hideProgressBar: true,
                                         closeOnClick: true,

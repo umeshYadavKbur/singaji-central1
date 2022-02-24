@@ -110,39 +110,39 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
         response = await axios(config)
         setLoading(false)
       }
-      else if(formik.values.password !== '' && formik.values.newpass === '' && formik.values.newpassAgain === '' ){
+      else if (formik.values.password !== '' && formik.values.newpass === '' && formik.values.newpassAgain === '') {
         toast.warn('Enter the remaining two fields!', {
-                position: "bottom-center",
-                 autoClose: 4000,
-                 hideProgressBar: true,
-                 closeOnClick: true,
-                 pauseOnHover: true,
-                 draggable: true,
-                 progress: undefined,
-               });
-               setLoading(false)
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setLoading(false)
 
-      }else if(formik.values.password !== '' && formik.values.newpass !== '' && formik.values.newpassAgain === ''){
+      } else if (formik.values.password !== '' && formik.values.newpass !== '' && formik.values.newpassAgain === '') {
 
         toast.warn('Enter the remaining one field!', {
-          position: "bottom-center",
-           autoClose: 4000,
-           hideProgressBar: true,
-           closeOnClick: true,
-           pauseOnHover: true,
-           draggable: true,
-           progress: undefined,
-         });
-         setLoading(false)
-      }else{
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setLoading(false)
+      } else {
         if (formik.values.password !== '' && formik.values.newpass !== '' && formik.values.newpassAgain !== '') {
           if (formik.values.newpass === formik.values.newpassAgain) {
-            
+
             response = await axios(config)
             setLoading(false)
           } else {
             toast.warn('Enter the same new passwords!', {
-              position: "bottom-center",
+              position: "top-center",
               autoClose: 4000,
               hideProgressBar: true,
               closeOnClick: true,
@@ -165,7 +165,7 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
 
       //   } else {
       //     toast.warn('Enter the same new passwords!', {
-      //       position: "bottom-center",
+      //       position: "top-center",
       //       autoClose: 4000,
       //       hideProgressBar: true,
       //       closeOnClick: true,
@@ -179,7 +179,7 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
       if (response.status === 200) {
         setLoading(false)
         toast.success('Crendentials updated successfully ', {
-          position: "bottom-center",
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: true,
           closeOnClick: true,
@@ -192,7 +192,7 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
       }
       if (response.status === 400) {
         toast.warn('Your current password is invalid', {
-          position: "bottom-center",
+          position: "top-center",
           autoClose: 4000,
           hideProgressBar: true,
           closeOnClick: true,

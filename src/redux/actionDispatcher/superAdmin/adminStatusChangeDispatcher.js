@@ -33,7 +33,7 @@ export const AdminStatusChange = (data) => {
             if (userResData.status === 200) {
                 dispatch(AdminStatusChangeSuccess(userResData.data));
                 toast.success(`Successfull `, {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: true,
                     closeOnClick: true,
@@ -45,7 +45,7 @@ export const AdminStatusChange = (data) => {
 
             } else if (userResData.status === 404) {
                 toast.warning('Data Not Found', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 3000,
                     hideProgressBar: true,
                     closeOnClick: true,
@@ -59,7 +59,7 @@ export const AdminStatusChange = (data) => {
 
             } else if (userResData.status === 208) {
                 toast.warning('user are already available', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
                     closeOnClick: true,
@@ -73,7 +73,7 @@ export const AdminStatusChange = (data) => {
 
             } else {
                 toast.error('Internal Server Error', {
-                    position: "bottom-center",
+                    position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
                     closeOnClick: true,
@@ -92,7 +92,7 @@ export const AdminStatusChange = (data) => {
             dispatch(AdminStatusChangeFail())
             dispatch(fetchSuccessfailTableData())
             toast.error('Internal Server Problem', {
-                position: "bottom-center",
+                position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: true,
                 closeOnClick: true,

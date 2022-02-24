@@ -28,7 +28,7 @@ export const createNewAdmin = (data, navigate) => {
             // })
             navigate('admintable')
             // toast('admin has been successfully created!', {
-            //   position: "bottom-center",
+            //   position: "top-center",
             //   autoClose: 5000,
             //   hideProgressBar: true,
             //   closeOnClick: true,
