@@ -227,11 +227,11 @@ function AddNewStudentPage({AddNewStudent}) {
     }
 
     const validationSchema = Yup.object({
-        firstName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!"),
-        lastName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates').required("Required!"),
+        firstName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!").test('len','Must be less then 24 character',val => val?.length < 24),
+        lastName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates').required("Required!").test('len','Must be less then 24 character',val => val?.length < 24),
         dob: Yup.string().required("Required!").test('doc_check','Minimum age must be 12-14 years',val => val?.slice(0,4) <= (new Date().getFullYear()) - 13),
         contactNumber: Yup.string().trim().min(10,'Must be exactly 10 digits').required("Required!"),
-        fatherName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!"),
+        fatherName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!").test('len','Must be less then 24 character',val => val?.length < 24),
         fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates'),
         fatherIncome: Yup.string().required("Required!").min(4,'Must be exactly 4 digits').test('Is positive','must be positive',val => val > 0),
         FatherContactNumber: Yup.string().trim().min(10,'Must be exactly 10 digits').required("Required!"),
@@ -244,10 +244,10 @@ function AddNewStudentPage({AddNewStudent}) {
         aadharNumber: Yup.string().trim().required("Required!").test('len','Must be exactly 12 digits',val => val?.replace('X','').length === 14),
         category: Yup.string().required("Required!"),
 
-        percent10: Yup.string().required("Required!"),
+        percent10: Yup.string().required("Required!").test('len','Must be at least 33%',val => val?.replace('X','').replace('%','') > 32),
         rollNumber10: Yup.string().required("Required!"),
         joinBatch: Yup.string().trim().required("Required!").test('len','Must be exactly 4 digits',val => val?.replace('X','').length === 4),
-        percent12: Yup.string().required("Required!"),
+        percent12: Yup.string().required("Required!").test('len','Must be at least 33%',val => val?.replace('X','').replace('%','') > 32),
         rollNumber12: Yup.string().required("Required!"),
         year: Yup.string().required("Required!"),
         streamName: Yup.string().required("Required!"),
@@ -458,6 +458,8 @@ function AddNewStudentPage({AddNewStudent}) {
             // console.log(bodyData);
         }
     });
+
+  
     // const [getCourseFee, setGetCourseFee] = useState(true)
 
     const getCourseFees = async (branch,joinBatch) => {

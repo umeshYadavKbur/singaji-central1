@@ -35,7 +35,6 @@ import UploadDocumentImage from '../assests/image/Upload_document_img.svg';
 function AddNewStudentPage({ addStudent, AddNewStudent }) {
 
     var editData = JSON.parse(localStorage.getItem('RegistrationEdit'));
-    var editDataSelf = JSON.parse(localStorage.getItem('SelfRegistrationEdit'));
     const navigate = useNavigate();
     // console.log('editdata',editData);
     // var editData = ''
@@ -153,40 +152,40 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
     
 
 
-    // editDataSelf
+    // editData
     const initialValues = {
-        firstName:  editDataSelf ? editDataSelf.firstName : "",
-        lastName: editDataSelf ? editDataSelf.lastName : "",
-        dob: editDataSelf ? editDataSelf.dob : "",
-        contactNumber: editDataSelf ? editDataSelf.mobile : "",
-        fatherName: editDataSelf ? editDataSelf.fathersName : "",
-        fatherOccupation: editDataSelf ? editDataSelf.fatherOccupation : "",
+        firstName:  editData ? editData.firstName : "",
+        lastName: editData ? editData.lastName : "",
+        dob: editData ? editData.dob : "",
+        contactNumber: editData ? editData.mobile : "",
+        fatherName: editData ? editData.fathersName : "",
+        fatherOccupation: editData ? editData.fatherOccupation : "",
 
-        fatherIncome: editDataSelf ? editDataSelf.fatherIncome : "",
-        FatherContactNumber: editDataSelf ? editDataSelf.fatherContactNumber : "",
-        address: editDataSelf ? editDataSelf.address : "",
-        pincode: editDataSelf ? editDataSelf.pincode : "",
-        village: editDataSelf ? editDataSelf.village : "",
-        tehsil: editDataSelf ? editDataSelf.tehsil : "",
-        district: editDataSelf ? editDataSelf.district : "",
-        email: editDataSelf ? editDataSelf.email : "",
-        aadharNumber: editDataSelf ? (editDataSelf.aadharNo).match(/.{4}/g).join(' ') : "",
-        category: editDataSelf ? editDataSelf.category : "",
-        gender: editDataSelf ? editDataSelf.gender : "male",
+        fatherIncome: editData ? editData.fatherIncome : "",
+        FatherContactNumber: editData ? editData.fatherContactNumber : "",
+        address: editData ? editData.address : "",
+        pincode: editData ? editData.pincode : "",
+        village: editData ? editData.village : "",
+        tehsil: editData ? editData.tehsil : "",
+        district: editData ? editData.district : "",
+        email: editData ? editData.email : "",
+        aadharNumber: editData ? (editData.aadharNo).match(/.{4}/g).join(' ') : "",
+        category: editData ? editData.category : "",
+        gender: editData ? editData.gender : "male",
         // Personal information end here 
 
         //Acadmic Details stated from here
-        rollNumber10: editDataSelf ? editDataSelf.rollNumber10 : "",
-        percent10: editDataSelf ? editDataSelf.persentage10 : "",
-        schoolName: editDataSelf ? editDataSelf.schoolName : "",
-        subject12: editDataSelf ? editDataSelf.school12Sub : "",
-        rollNumber12: editDataSelf ? editDataSelf.rollNumber12 : "",
-        streamName: editDataSelf ? editDataSelf.branch : "",
-        persentage12: editDataSelf ? editDataSelf.persentage12 : "",
-        joinBatch: editDataSelf ? editDataSelf.joinBatch : new Date().getFullYear(),
-        courseFees: editDataSelf ? editDataSelf.tutionFee === null ? "" : editDataSelf.tutionFee : "",
-        year: editDataSelf ? editDataSelf.year : "",
-        busFee: editDataSelf ? editDataSelf.busFee : "",
+        rollNumber10: editData ? editData.rollNumber10 : "",
+        percent10: editData ? editData.persentage10 : "",
+        schoolName: editData ? editData.schoolName : "",
+        subject12: editData ? editData.school12Sub : "",
+        rollNumber12: editData ? editData.rollNumber12 : "",
+        streamName: editData ? editData.branch : "",
+        persentage12: editData ? editData.persentage12 : "",
+        joinBatch: editData ? editData.joinBatch : new Date().getFullYear(),
+        courseFees: editData ? editData.tutionFee === null ? "" : editData.tutionFee : "",
+        year: editData ? editData.year : "",
+        busFee: editData ? editData.busFee : "",
 
         //Acadmic Details end  here
 
@@ -221,11 +220,11 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
     }
 
     const validationSchema = Yup.object({
-        firstName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!"),
-        lastName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates').required("Required!"),
+        firstName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!").test('len','Must be less then 24 character',val => val?.length < 24),
+        lastName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/^[a-zA-Z]+$/,'must be alphabates').required("Required!").test('len','Must be less then 24 character',val => val?.length < 24),
         dob: Yup.string().required("Required!").test('doc_check', 'Minimum age must be 12-14 years', val => val?.slice(0, 4) <= (new Date().getFullYear()) - 13),
         contactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
-        fatherName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!"),
+        fatherName: Yup.string().trim().min(3,'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates').required("Required!").test('len','Must be less then 24 character',val => val?.length < 24),
         fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates'),
         fatherIncome: Yup.string().required("Required!").min(4, 'Must be exactly 4 digits').test('Is positive', 'must be positive', val => val > 0),
         FatherContactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
@@ -238,10 +237,10 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         aadharNumber: Yup.string().trim().required("Required!").test('len', 'Must be exactly 12 digits', val => val?.replace('X', '').length === 14),
         category: Yup.string().required("Required!"),
 
-        percent10: Yup.string().required("Required!"),
+        percent10: Yup.string().required("Required!").test('len','Must be at least 33%',val => val?.replace('X','').replace('%','') > 32),
         rollNumber10: Yup.string().required("Required!"),
         joinBatch: Yup.string().trim().required("Required!").test('len', 'Must be exactly 4 digits', val => val?.replace('X', '').length === 4),
-        persentage12: Yup.string().required("Required!"),
+        persentage12: Yup.string().required("Required!").test('len','Must be at least 33%',val => val?.replace('X','').replace('%','') > 32),
         rollNumber12: Yup.string().required("Required!"),
         year: Yup.string().required("Required!"),
         streamName: Yup.string().required("Required!"),
@@ -289,7 +288,6 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
             navigate('/admin_dashboard/studenttable');
         }
     }
-
     const updateStudentData = async (data) => {
         setLoaderLoading(true)
         data.id = editData.id
@@ -422,7 +420,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                 "commitment": formik.values.commitment
             }
             //Remaining the Self register student to shift tha account table 
-            editData || editDataSelf ?
+           editData ?
                 updateStudentData(bodyData)
                 :
                 AddNewStudent(bodyData, backToProfilePage)
@@ -430,7 +428,10 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         }
     });
     // const [getCourseFee, setGetCourseFee] = useState(true)
-
+if(editData)
+{
+    formik.errors.commitment ='';
+}
 
     const getPincode = async (value) => {
         // console.log(Block,District);
