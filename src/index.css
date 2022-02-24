@@ -142,3 +142,33 @@ input.largerCheckbox {
   /* style={{ color: "#5a607f" }} */
   color: #5a607f !important;
 }
+
+/* ---------------------- Toastify ---------------------- */
+.Toastify__toast-theme--light {
+  background: #cce5ff !important;
+  color: #3d5a88 !important;
+  font-weight: bold !important;
+  font-size: 18px !important;
+}
+
+.Toastify__close-button > svg {
+ 
+  display: none !important;
+}
+.Toastify__toast {
+  position: relative;
+  min-height: var(--toastify-toast-min-height);
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  padding: 8px;
+  width: auto;
+  border-radius: 4px;
+  box-shadow: none !important;
+  display: flex;
+  justify-content: space-between;
+  max-height: var(--toastify-toast-max-height);
+  overflow: hidden;
+  font-family: var(--toastify-font-family);
+  cursor: pointer;
+  direction: ltr;
+}
