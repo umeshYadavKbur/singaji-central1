@@ -78,7 +78,6 @@ function AddNewStudentPage({AddNewStudent}) {
             setTrackNames(trackNamesRes.data);
         }
         callingFun();
-        getCourseFees();
 
         // return () => {
         //     localStorage.removeItem('RegistrationEdit')

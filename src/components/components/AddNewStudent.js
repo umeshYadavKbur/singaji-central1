@@ -457,8 +457,9 @@ if(editData)
     };
 
     const getCourseFees = async (branch, joinBatch) => {
+// console.log(joinBatch);
 
-        if (joinBatch !== '' && joinBatch.replace('X', '').length === 4 && branch !== '') {
+        if (joinBatch !== '' && joinBatch.toString()?.replace('X', '').length === 4 && branch !== '') {
             // console.log("api calling");
 
             var data = '';
