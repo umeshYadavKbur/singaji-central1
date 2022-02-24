@@ -533,7 +533,7 @@ function StudentProfile({ accountAction }) {
                                     <div className="d-flex">
                                         <input name="Thirdinstallment" onChange={formik.handleChange} value={formik.values.Thirdinstallment} type="number" className='form-control' placeholder='Third Installment' />
 
-                                        {StudentProfileData.accountInfo.ScholarshipAmount > 0 ? <img style={{marginLeft: "-25px"}} src={checkBoxImg} alt="." /> : ''}
+                                        {StudentProfileData.accountInfo.scholarshipAmount > 0 ? <img style={{marginLeft: "-25px"}} src={checkBoxImg} alt="." /> : ''}
                                         </div>
                                         {formik.errors.Thirdinstallment && formik.touched.Thirdinstallment ? (
                                             <div className=" text-danger fs-6">

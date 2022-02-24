@@ -181,7 +181,7 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
                   })
                   var fetchStudentTableConfig = {
                     method: "GET",
-                    url: AllUrl.allRegistratedStudent,
+                    url: AllUrl.selfRegisterStudents,
                     headers: {
                       Authorization: `Bearer ${token}`,
                       "Content-Type": "application/json",
@@ -546,7 +546,7 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
         if (resultofverify.status === 200) {
           var fetchStudentTableConfig = {
             method: "GET",
-            url: AllUrl.allRegistratedStudent,
+            url: AllUrl.selfRegisterStudents,
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
@@ -554,7 +554,7 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
           };
           fetchStudentTable(fetchStudentTableConfig, true);
         }
-        else if (resultofverify.status === 404) {
+        else if (resultofverify.status === 406) {
           toast.error('Some field are empty please edit it', {
             position: "top-center",
             autoClose: 2000,
