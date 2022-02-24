@@ -41,6 +41,7 @@ import dateIcon from '../../assests/image/AccountIcons/DateIcon.svg'
 import OfflinePage from '../../auth/OfflinePage';
 import NoDataFound from "../../assests/common/NoDataFound";
 import CountUp from 'react-countup';
+import { toast } from "react-toastify";
 
 
 
@@ -584,14 +585,39 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             },
         };
 
-        const result = await axios(config)
-        //if the data is getting successfully than they set the data to upcoming data
-        setLoading(false)
-        if (result.status === 200) {
-            getReport(result.data)
-            setColoumns(dailyReportColumn)
-            set_is_dailyReport(true)
+        try {
+            const result = await axios(config)
+            setLoading(false)
+            if (result.status === 200) {
+                getReport(result.data)
+                setColoumns(dailyReportColumn)
+                set_is_dailyReport(true)
+            } else {
+                setLoading(true)
+                toast.warning('Data not found !', {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                });
+            }
+
+        } catch (error) {
+            setLoading(false)
+            toast.warning('Data not found !', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+            });
         }
+        //if the data is getting successfully than they set the data to upcoming data
     }
 
 
@@ -765,16 +791,16 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                             <h5 style={{ marginTop: "12px" }}> {MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
                         </div>
                         <div className="col info-col m-2" >
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? MoneyCount.TAmount  : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? MoneyCount.TAmount : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
                         </div>
                         <div className="col info-col m-2" >
-                            <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport  : MoneyCount.TpaidAmount } <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport : MoneyCount.TpaidAmount} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
                         </div>
                         <div className="col info-col m-2" >
                             <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? MoneyCount.RAmount : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
                         </div>
                         <div className="col info-col m-2">
-                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff  : '0'}<br /> <p >Waive Off</p> </h5>
+                            <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff : '0'}<br /> <p >Waive Off</p> </h5>
                         </div>
                     </div>
                     <div className="row  mx-0 mt-3" >
