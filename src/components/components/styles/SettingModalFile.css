@@ -87,7 +87,7 @@
     .hidden-inputs{
       
       width: 270px !important;
-      margin-top: 22px !important;
+      /* margin-top: 22px ; */
       height: 40px !important;
     }
 

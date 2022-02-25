@@ -40,7 +40,7 @@ import rightArrow from '../../assests/image/right_arrow_icon.svg'
 import dateIcon from '../../assests/image/AccountIcons/DateIcon.svg'
 import OfflinePage from '../../auth/OfflinePage';
 import NoDataFound from "../../assests/common/NoDataFound";
-import CountUp from 'react-countup';
+// import CountUp from 'react-countup';
 import { toast } from "react-toastify";
 
 

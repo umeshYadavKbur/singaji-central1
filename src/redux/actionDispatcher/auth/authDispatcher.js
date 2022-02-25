@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import AllUrl from "../../constants/url.js";
 import storage from "../../../helpers/Crypto.js";
 import Swal from "sweetalert2";
-import Success_Icon_yellow from '../../../components/assests/image/Success_Icon_yellow.svg'
+// import Success_Icon_yellow from '../../../components/assests/image/Success_Icon_yellow.svg'
 
 
 export const fetchUsers = (data, navigate) => {
