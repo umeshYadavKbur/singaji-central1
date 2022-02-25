@@ -76,7 +76,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     },
     {
       header: "RFS",
-      accessor: "receive_fees_status",
+      accessor: "receiveFeesStatus",
       Cell: ({ row: { original } }) => (
         <div className='circle-main align-items-center'>
           <div className="d-flex align-items-center">
@@ -98,7 +98,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           style={
             original.regFeesStatus === "Paid"
               ? PaidButton : UnpaidButton}
-          disabled={original.regFeesStatus === "Paid"}
+          disabled={original.regFeesStatus === "Paid" || original.receiver !== localStorage.getItem('user')}
           onClick={() => {
             Swal.fire({
               title: 'Payment Confermation',

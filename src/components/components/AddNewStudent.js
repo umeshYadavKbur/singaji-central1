@@ -213,7 +213,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         remark: editData ? editData.remark : "",
         scholarshipAmount: editData ? editData.scholarshipAmount : 0,
         trackName: editData ? editData.trackName : "",
-        commitment: editData ? editData.commitment : "",
+        commitment: editData ? 'null' : "",
 
         // Fees detail end from here 
 
@@ -369,6 +369,11 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         initialValues,
         validationSchema,
         onSubmit: (values) => {
+
+            let CommitValue = formik.values.commitment;
+            if (formik.values.commitment === 'null') {
+                CommitValue = '';
+            }
             const bodyData = {
                 "firstName": formik.values.firstName,
                 "lastName": formik.values.lastName,
@@ -417,7 +422,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                 "isPostmetric": formik.values.postmatricScolarship,
                 "remark": formik.values.remark,
                 "sponsorshipType": formik.values.sponsorshipType,
-                "commitment": formik.values.commitment
+                "commitment": CommitValue
             }
             //Remaining the Self register student to shift tha account table 
             editData ?
@@ -428,9 +433,9 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         }
     });
     // const [getCourseFee, setGetCourseFee] = useState(true)
-    if (editData) {
-        formik.errors.commitment = '';
-    }
+    // if (editData) {
+    //     formik.errors.commitment = '';
+    // }
 
     const getPincode = async (value) => {
         // console.log(Block,District);
@@ -456,7 +461,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
     };
 
     const getCourseFees = async (branch, joinBatch) => {
-// console.log(joinBatch);
+        // console.log(joinBatch);
 
         if (joinBatch !== '' && joinBatch.toString()?.replace('X', '').length === 4 && branch !== '') {
             // console.log("api calling");

@@ -72,15 +72,15 @@ export const fetchStudentTable = (data, isLoading) => {
           } else {
             dispatch(fetchFailTableData());
           }
-          toast.warn('Some Problem Occurred', {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          // toast.warn('Some Problem Occurred', {
+          //   position: "top-center",
+          //   autoClose: 3000,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          // });
           //   Swal.fire({
           //     title: "Some Problem Occurred",
           //     icon: "warning",

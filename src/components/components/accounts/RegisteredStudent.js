@@ -146,7 +146,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                   });
                   var con = {
                     method: "GET",
-                    url: AllUrl.allRegistratedStudent,
+                    url: AllUrl.allRegistratedStudentAccountList,
                     headers: {
                       Authorization: `Bearer ${token}`,
                       "Content-Type": "application/json",
@@ -216,7 +216,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                   if (resultofverify === 200) {
                     var config = {
                       method: "GET",
-                      url: AllUrl.allRegistratedStudent,
+                      url: AllUrl.allRegistratedStudentAccountList,
                       headers: {
                         Authorization: `Bearer ${token}`,
                         "Content-Type": "application/json",
