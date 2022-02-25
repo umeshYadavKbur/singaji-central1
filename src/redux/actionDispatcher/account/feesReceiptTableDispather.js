@@ -26,9 +26,9 @@ const feesReceiptTableData = (data) => {
                             draggable: true,
                             progress: undefined,
                         });
-                        dispatch(fetchFailTableData(response.data));
+                        dispatch(fetchFailTableData());
                     }
-                    if (response.status === 400) {
+                    if (response.status === 404) {
                         toast.warning('No data found ', {
                             position: "top-center",
                             autoClose: 3000,
@@ -38,9 +38,10 @@ const feesReceiptTableData = (data) => {
                             draggable: true,
                             progress: undefined,
                         });
-                        dispatch(fetchFailTableData(response.data));
+                        dispatch(fetchFailTableData());
                     }
                     if (response.status === 500) {
+                        dispatch(fetchFailTableData());
                         toast.warning('Internal server error', {
                             position: "top-center",
                             autoClose: 3000,
@@ -50,10 +51,10 @@ const feesReceiptTableData = (data) => {
                             draggable: true,
                             progress: undefined,
                         });
-                        dispatch(fetchFailTableData(response.data));
                     }
                 })
                 .catch(function (error) {
+                    dispatch(fetchFailTableData());
                     toast.warning('Internal server error', {
                         position: "top-center",
                         autoClose: 3000,
@@ -63,7 +64,6 @@ const feesReceiptTableData = (data) => {
                         draggable: true,
                         progress: undefined,
                     });
-                    fetchFailTableData(error.message);
                 });
         } catch (error) {
             toast.warning('Internal server error', {
@@ -75,7 +75,7 @@ const feesReceiptTableData = (data) => {
                 draggable: true,
                 progress: undefined,
             });
-            fetchFailTableData(error.message);
+            fetchFailTableData();
             //   console.log(error);
         }
     };
@@ -97,9 +97,8 @@ const fetchSuccessTableData = (data) => {
     };
 };
 
-const fetchFailTableData = (error) => {
+const fetchFailTableData = () => {
     return {
         type: FEES_RECEIPT_TABLE_FAIL,
-        payload: error,
     };
 };

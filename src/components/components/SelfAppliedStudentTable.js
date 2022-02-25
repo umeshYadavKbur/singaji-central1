@@ -1,5 +1,5 @@
 import * as React from "react";
-// import { useMemo } from "react";
+import { useState } from "react";
 
 import Edit_icon from '../assests/image/Edit_icon.svg'
 import Swal from 'sweetalert2'
@@ -58,6 +58,7 @@ export const MultipleFilter = (rows, accessor, filterValue) => {
 
 function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
 
+  const [loading, setloading] = useState(false)
   const token = localStorage.getItem("token");
   const navigate = useNavigate()
 
@@ -132,7 +133,6 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
             console.log(original.email)
             Swal.fire({
               title: 'Shift To Applied',
-
               html:
                 '<hr>' +
                 'Are you sure?' +
@@ -157,12 +157,15 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
               }
 
             }).then(async (result) => {
-              console.log("original values are ::", original)
 
               if (result.isConfirmed) {
                 let data = JSON.stringify({
                   stdId: original.id
                 })
+                setloading(true)
+                // console.log('====================================');
+                // console.log(data);
+                // console.log('====================================');
                 var config = {
                   method: "POST",
                   url: AllUrl.shiftToAppliedStudent,
@@ -172,50 +175,63 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
                   },
                   data: data
                 };
-                const resultofverify = await axios(config);
-                console.log("resultofverify", resultofverify);
-                console.log("resultofverify", resultofverify.status);
-                if (resultofverify.status === 200) {
-                  Swal.fire({
-                    title: 'Shift To Applied Success',
-                  })
-                  var fetchStudentTableConfig = {
-                    method: "GET",
-                    url: AllUrl.selfRegisterStudents,
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                      "Content-Type": "application/json",
-                    },
-                  };
-                  fetchStudentTable(fetchStudentTableConfig, true);
-                }
-                else if (resultofverify.status === 406) {
-                  console.log("404 empty feild");
-                  toast.error('Some field are empty please edit it', {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: false,
-                    progress: undefined,
-                  });
-                } else if (resultofverify.status === 500) {
-                  toast.error('Internal Server Error', {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: false,
-                    progress: undefined,
-                  });
-                }
+                var resultofverify;
+                try {
+                  resultofverify = await axios(config);
+                  setloading(false)
 
+                  console.log("resultofverify", resultofverify);
+                  console.log("resultofverify", resultofverify.status);
+                  if (resultofverify.status === 200) {
+                    Swal.fire({
+                      title: 'Shift To Applied Success',
+                    })
+                    var fetchStudentTableConfig = {
+                      method: "GET",
+                      url: AllUrl.selfRegisterStudents,
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                      },
+                    };
+                    fetchStudentTable(fetchStudentTableConfig, true);
+                  } else if (resultofverify.status === 406) {
+                    console.log("404 empty feild");
+                    toast.error('Some field are empty please edit it', {
+                      position: "top-center",
+                      autoClose: 2000,
+                      hideProgressBar: true,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: false,
+                      progress: undefined,
+                    });
+                  } else if (resultofverify.status === 500) {
+                    toast.error('Internal Server Error', {
+                      position: "top-center",
+                      autoClose: 2000,
+                      hideProgressBar: true,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: false,
+                      progress: undefined,
+                    });
+                  }
+                } catch (error) {
+                  setloading(false)
+
+                  toast.warning('Please fill all detail', {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                  });
+                }
               }
-            }).catch((err) =>
-              console.log("err", err))
-
+            })
           }
 
           }>
@@ -587,167 +603,169 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
 
   return table_data.loading ? (
     <SkeletonColor></SkeletonColor>
-  ) : table_data.error ? (
-    <h2>{table_data.error}</h2>
-  ) : (
-    <>
-      {table_data.secondLoading && (
-        <Loader />
-      )}
-      <ToastContainer
-        position="top-center"
-        autoClose={2500}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
+  )
+    // : table_data.error ? (
+    //   <h2>{table_data.error}</h2>
+    // ) 
+    : (
+      <>
+        {(table_data.secondLoading || loading) && (
+          <Loader />
+        )}
+        <ToastContainer
+          position="top-center"
+          autoClose={2500}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
 
-      />
-      <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
-        <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '5' }}>
-          <div className="d-flex">
-
-            <div className=''>
-              <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-                {
-                  [10, 25, 50, 100].map(pageSize => (
-                    <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
-                  ))
-                }
-              </select>
-            </div>
-            <div className='ms-4'>
-              <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
-            </div>
-            <div className='ms-4'>
-              <button type="button" className="btn btn-primary  fw-bold ">Download </button>
-            </div>
-            <div className='ms-4'>
-              <button onClick={deleteSelfAppliedStudent} type="button" className="btn " style={{ backgroundColor: "#f7c3c3" }}>
-                <img src={delete_icon} alt="delete_icon" /></button>
-            </div>
-
-            <div className='d-flex ml-auto me-1'>
-
-
-              <div >
-                <CDropdown variant="nav-item" style={{ color: 'white' }}>
-                  <CDropdownToggle
-                    placement="bottom-end"
-                    className="py-0"
-                    caret={false}
-                  >
-                    <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
-                      <Tooltip>
-                        Filter Data .
-                      </Tooltip>
-                    }>
-
-                      <img
-                        src={filtericon}
-                        alt=""
-                        style={{
-                          height: "22px",
-                          width: "35px",
-                          marginTop: "-35px",
-                          marginLeft: "-13px",
-                        }}
-                      /></Whisper>
-                  </CDropdownToggle>
-
-                  <CDropdownMenu
-                    component={"div"}
-                    className="pt-0 filter-dropdown-menu-student_account_table"
-                    placement="bottom-end"
-
-                  >
-                    <div className="p-lg-2 pb-0">
-                      {headerGroups.map((headerGroup) => (
-                        <div
-                          style={{ display: "flex flex-column" }}
-                          {...headerGroup.getHeaderGroupProps()}
-                        >
-                          {headerGroup.headers.map((column, i) => (
-                            <div
-                              key={i}
-                              style={{ display: "block", justifyContent: "center" }}
-                            >
-                              {column.canFilter ? column.render("Filter") : null}
-                            </div>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </CDropdownMenu>
-                </CDropdown>
-              </div>
-              <div className='me-4'>
-                <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
-              </div></div>
-          </div>
-        </div>
-        <table {...getTableProps()} id="customers" className="table table-sm">
-          <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render("header")}
-                    <span>
-
-                      {column.isSorted ? (
-                        column.isSortedDesc ? (
-                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
-                        ) : (
-                          <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
-                          // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
-                        )
-                      ) : (
-
-                        column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
-
-
-                      )}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td {...cell.getCellProps()}>{cell.render("Cell")} </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <NoDataFound rows={rows} />
-        <Pagination
-          page={page}
-          pageIndex={pageIndex}
-          pageCount={pageCount}
-          pageSize={pageSize}
-          canPreviousPage={canPreviousPage}
-          previousPage={previousPage}
-          pageOptions={pageOptions}
-          gotoPage={gotoPage}
-          canNextPage={canNextPage}
-          nextPage={nextPage}
         />
-      </div>
-    </>
-  );
+        <div style={{ backgroundColor: "#F4F7FC", height: "auto", width: "auto" }}>
+          <div style={{ position: 'sticky', top: '80px', width: '100%', paddingTop: '10px', paddingBottom: '10px', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+            <div className="d-flex">
+
+              <div className=''>
+                <select className="form-select table_select_row_options" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                  {
+                    [10, 25, 50, 100].map(pageSize => (
+                      <option value={pageSize} key={pageSize}>Show Entries {pageSize}</option>
+                    ))
+                  }
+                </select>
+              </div>
+              <div className='ms-4'>
+                <button type="button" className="btn  fw-bold fees-structure-active-button ">Archive <img src={Archived_icon} alt="downloadIcon" /></button>
+              </div>
+              <div className='ms-4'>
+                <button type="button" className="btn btn-primary  fw-bold ">Download </button>
+              </div>
+              <div className='ms-4'>
+                <button onClick={deleteSelfAppliedStudent} type="button" className="btn " style={{ backgroundColor: "#f7c3c3" }}>
+                  <img src={delete_icon} alt="delete_icon" /></button>
+              </div>
+
+              <div className='d-flex ml-auto me-1'>
+
+
+                <div >
+                  <CDropdown variant="nav-item" style={{ color: 'white' }}>
+                    <CDropdownToggle
+                      placement="bottom-end"
+                      className="py-0"
+                      caret={false}
+                    >
+                      <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                        <Tooltip>
+                          Filter Data .
+                        </Tooltip>
+                      }>
+
+                        <img
+                          src={filtericon}
+                          alt=""
+                          style={{
+                            height: "22px",
+                            width: "35px",
+                            marginTop: "-35px",
+                            marginLeft: "-13px",
+                          }}
+                        /></Whisper>
+                    </CDropdownToggle>
+
+                    <CDropdownMenu
+                      component={"div"}
+                      className="pt-0 filter-dropdown-menu-student_account_table"
+                      placement="bottom-end"
+
+                    >
+                      <div className="p-lg-2 pb-0">
+                        {headerGroups.map((headerGroup) => (
+                          <div
+                            style={{ display: "flex flex-column" }}
+                            {...headerGroup.getHeaderGroupProps()}
+                          >
+                            {headerGroup.headers.map((column, i) => (
+                              <div
+                                key={i}
+                                style={{ display: "block", justifyContent: "center" }}
+                              >
+                                {column.canFilter ? column.render("Filter") : null}
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </CDropdownMenu>
+                  </CDropdown>
+                </div>
+                <div className='me-4'>
+                  <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
+                </div></div>
+            </div>
+          </div>
+          <table {...getTableProps()} id="customers" className="table table-sm">
+            <thead style={{ position: 'sticky', top: '135px', width: '100%', backgroundColor: '#f4f7fc', zIndex: '5' }}>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                      {column.render("header")}
+                      <span>
+
+                        {column.isSorted ? (
+                          column.isSortedDesc ? (
+                            <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-down"></i>
+                          ) : (
+                            <i style={{ transform: 'scale(0.6)' }} className="fas fa-chevron-up"></i>
+                            // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+                          )
+                        ) : (
+
+                          column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
+
+
+                        )}
+                      </span>
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {page.map((row) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <td {...cell.getCellProps()}>{cell.render("Cell")} </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <NoDataFound rows={rows} />
+          <Pagination
+            page={page}
+            pageIndex={pageIndex}
+            pageCount={pageCount}
+            pageSize={pageSize}
+            canPreviousPage={canPreviousPage}
+            previousPage={previousPage}
+            pageOptions={pageOptions}
+            gotoPage={gotoPage}
+            canNextPage={canNextPage}
+            nextPage={nextPage}
+          />
+        </div>
+      </>
+    );
 }
 
 const mapStateToProps = (state) => {

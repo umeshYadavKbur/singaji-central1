@@ -7,7 +7,7 @@ import {
 const initialState = {
   loading: false,
   newPass: false,
-  error: "",
+  error: false
 };
 
 const newPassReducer = (state = initialState, action) => {
@@ -21,13 +21,13 @@ const newPassReducer = (state = initialState, action) => {
       return {
         loading: false,
         newPass: true,
-        error: "",
+        error: false,
       };
     case NEW_PASS_FAIL:
       return {
         loading: false,
         newPass: false,
-        error: action.payload,
+        error: true,
       };
     default:
       return state;

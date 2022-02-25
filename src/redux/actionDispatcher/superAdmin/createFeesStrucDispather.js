@@ -73,7 +73,7 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
           }
         })
         .catch(function (error) {
-          dispatch(feesReqFail(error.message));
+          dispatch(feesReqFail());
           Swal.fire({
             position: 'top-center',
             icon: 'error',
@@ -107,7 +107,7 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
         }
       })
       // console.log(error);
-      dispatch(feesReqFail(error.message));
+      dispatch(feesReqFail());
 
     }
   };
@@ -125,9 +125,8 @@ export const feesReqSuccess = () => {
   };
 };
 
-export const feesReqFail = (error) => {
+export const feesReqFail = () => {
   return {
     type: CREATE_FEES_FAILED,
-    payload: error,
   };
 };

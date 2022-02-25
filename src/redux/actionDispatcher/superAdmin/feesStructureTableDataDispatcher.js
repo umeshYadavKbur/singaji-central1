@@ -39,7 +39,7 @@ export const fetchFeesTableData = (data, Show) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(fetchFailTableData(response.data));
+            dispatch(fetchFailTableData());
           }
           if (response.status === 500) {
             toast.warn('Internal Server Error', {
@@ -51,7 +51,7 @@ export const fetchFeesTableData = (data, Show) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(fetchFailTableData(response.data));
+            dispatch(fetchFailTableData());
           }
           if (response.status === 404) {
             toast.warn('Data not found', {
@@ -63,7 +63,7 @@ export const fetchFeesTableData = (data, Show) => {
               draggable: true,
               progress: undefined,
             });
-            dispatch(fetchFailTableData(response.data));
+            dispatch(fetchFailTableData());
           }
         })
         .catch(function (error) {
@@ -76,7 +76,7 @@ export const fetchFeesTableData = (data, Show) => {
             draggable: true,
             progress: undefined,
           });
-          dispatch(fetchFailTableData(error.message));
+          dispatch(fetchFailTableData());
         });
     } catch (error) {
       toast.warn('Internal Server Error', {
@@ -88,7 +88,7 @@ export const fetchFeesTableData = (data, Show) => {
         draggable: true,
         progress: undefined,
       });
-      dispatch(fetchFailTableData(error.message));
+      dispatch(fetchFailTableData());
     }
   };
 };
@@ -135,7 +135,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
           setVisible(!visible)
         }
         let value = JSON.stringify(response.status);
-        dispatch(feesStructureStatusFailed(value));
+        dispatch(feesStructureStatusFailed());
         toast.warn('Internal Server Error', {
           position: "top-center",
           autoClose: 3000,
@@ -151,7 +151,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
           setVisible(!visible)
         }
         let value = JSON.stringify(response.status);
-        dispatch(feesStructureStatusFailed(value));
+        dispatch(feesStructureStatusFailed());
         toast.warn('Internal Server Error', {
           position: "top-center",
           autoClose: 3000,
@@ -167,7 +167,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
           setVisible(!visible)
         }
         let value = JSON.stringify(response.status);
-        dispatch(feesStructureStatusFailed(value));
+        dispatch(feesStructureStatusFailed());
         toast.error("Internal Server Error", {
           position: "top-center",
           autoClose: 3000,
@@ -190,7 +190,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
           draggable: true,
           progress: undefined,
         });
-        dispatch(feesStructureStatusFailed(response))
+        dispatch(feesStructureStatusFailed())
       }
     } catch (e) {
       if (visible) {
@@ -292,7 +292,7 @@ export const changeTotalFees = (data, setVisible, visible) => {
           draggable: true,
           progress: undefined,
         });
-        dispatch(changeTotalFeesFail(response))
+        dispatch(changeTotalFeesFail())
       }
     } catch (error) {
       if (visible) {
@@ -307,7 +307,7 @@ export const changeTotalFees = (data, setVisible, visible) => {
         draggable: true,
         progress: undefined,
       });
-      dispatch(changeTotalFeesFail(error.message))
+      dispatch(changeTotalFeesFail())
     }
 
   }
@@ -344,10 +344,9 @@ const fetchSuccessTableData = (data) => {
   };
 };
 
-const fetchFailTableData = (error) => {
+const fetchFailTableData = () => {
   return {
     type: FEES_STRUCT_TABLE_DATA_FAIL,
-    payload: error,
   };
 };
 
@@ -361,7 +360,7 @@ const feesStructureStatusSuccess = () => {
     type: FEES_STRUCTURE_CHANGE_SUCCESS,
   };
 };
-const feesStructureStatusFailed = (error) => {
+const feesStructureStatusFailed = () => {
   return {
     type: FEES_STRUCTURE_CHANGE_FAIL,
   };

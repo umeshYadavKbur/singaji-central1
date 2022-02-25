@@ -28,9 +28,9 @@ const pendingScholarshipTable = (state = initialState, action) => {
             };
         case PENDING_SCHOLARSHIP_TABLE_SUCCESS:
             return {
+                error: false,
                 loading: false,
                 table_data: action.payload,
-                error: false,
             };
 
         default:

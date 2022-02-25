@@ -341,6 +341,8 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
         },
     ]);
 
+
+
     const {
         getTableProps,
         getTableBodyProps,

@@ -12,7 +12,7 @@ const initialState = {
   email: '',
   token: "",
   userInfo: "",
-  error: "",
+  error: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -24,22 +24,19 @@ const userReducer = (state = initialState, action) => {
       };
     case LOGIN_SUCCESS:
       return {
+        ...state,
         loading: false,
         loginSucces: true,
         role: action.payload.role,
         token: action.payload.token,
         userInfo: action.payload.user,
         email: action.payload.email,
-        error: "",
       };
     case LOGIN_FAIL:
       return {
+        ...state,
         loading: false,
-        loginSucces: false,
-        role: "",
-        token: "",
-        userInfo: "",
-        error: action.payload,
+        error: true,
       };
 
     case LOGOUT:

@@ -9,41 +9,14 @@ import {
 const pendingScholarship = (data) => {
     return (dispatch) => {
         dispatch(fetchTableData());
-        try {
-            axios(data)
-                .then(function (response) {
-                    // console.log((response));
-                    if (response.status === 200) {
-                        dispatch(fetchSuccessTableData(response.data));
-                    }
-                    if (response.status === 400) {
-                        toast.warning('No data found ', {
-                            position: "top-center",
-                            autoClose: 3000,
-                            hideProgressBar: true,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
-                        dispatch(fetchFailTableData(response.data));
-                    }
-                    if (response.status === 500) {
-                        toast.warning('Internal server error', {
-                            position: "top-center",
-                            autoClose: 3000,
-                            hideProgressBar: true,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
-                        dispatch(fetchFailTableData(response.data));
-                    }
-                })
-                .catch(function (error) {
-                    dispatch(fetchFailTableData(error.message));
-                    toast.warning('Something went wrong', {
+        axios(data)
+            .then(function (response) {
+                // console.log((response));
+                if (response.status === 200) {
+                    dispatch(fetchSuccessTableData(response.data));
+                }
+                else if (response.status === 400) {
+                    toast.warning('No data found ', {
                         position: "top-center",
                         autoClose: 3000,
                         hideProgressBar: true,
@@ -52,20 +25,46 @@ const pendingScholarship = (data) => {
                         draggable: true,
                         progress: undefined,
                     });
+                    dispatch(fetchFailTableData());
+                }
+                else if (response.status === 500) {
+                    toast.warning('Internal server error', {
+                        position: "top-center",
+                        autoClose: 3000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    dispatch(fetchFailTableData());
+                }
+                else {
+                    toast.warning('Something went wrong !', {
+                        position: "top-center",
+                        autoClose: 3000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    dispatch(fetchFailTableData());
+                }
+            })
+            .catch(function (error) {
+                dispatch(fetchFailTableData());
+                toast.warning('Something went wrong', {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
                 });
-        } catch (error) {
-            dispatch(fetchFailTableData(error.message));
-            toast.warning('Internal server error', {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
             });
-            //   console.log(error);
-        }
+
     };
 };
 
@@ -85,9 +84,8 @@ const fetchSuccessTableData = (data) => {
     };
 };
 
-const fetchFailTableData = (error) => {
+const fetchFailTableData = () => {
     return {
         type: PENDING_SCHOLARSHIP_TABLE_FAIL,
-        payload: error
     };
 };
