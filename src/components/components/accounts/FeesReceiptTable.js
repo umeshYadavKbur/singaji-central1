@@ -234,7 +234,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                     <div className='circle-main align-items-center'>
                         <div className="d-flex align-items-center">
                             <span className='recieved-fee-circle' style={{ backgroundColor: "#56F000", marginRight: "10px", marginLeft: "23px" }}></span>
-                            {original.ReceivedAmount}
+                            {original.receivedAmount}
                         </div>
                     </div>
                 ),

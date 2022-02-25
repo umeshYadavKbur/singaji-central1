@@ -224,7 +224,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
     React.useEffect(() => {
         var config = {
             method: "GET",
-            url: AllUrl.allRegistratedStudent,
+            url: AllUrl.allActiveStudent,
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",

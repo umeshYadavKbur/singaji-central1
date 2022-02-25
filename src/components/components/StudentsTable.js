@@ -98,7 +98,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           style={
             original.regFeesStatus === "Paid"
               ? PaidButton : UnpaidButton}
-          disabled={original.regFeesStatus === "Paid" || original.receiver !== localStorage.getItem('user')}
+          disabled={original.regFeesStatus === "Paid"}
           onClick={() => {
             Swal.fire({
               title: 'Payment Confermation',
@@ -235,7 +235,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     // eslint-disable-next-line
   }, []);
 
-
+//  || original.receiver !== localStorage.getItem('user')
 
   const {
     getTableProps,
