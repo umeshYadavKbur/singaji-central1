@@ -67,15 +67,15 @@ export const fetchFeesTableData = (data, Show) => {
           }
         })
         .catch(function (error) {
-          toast.warn('No data found !', {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          // toast.warn('No data found !', {
+          //   position: "top-center",
+          //   autoClose: 3000,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          // });
           dispatch(fetchFailTableData());
         });
     } catch (error) {

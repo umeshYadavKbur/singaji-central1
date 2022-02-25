@@ -113,7 +113,7 @@ function StudentProfile({ accountAction }) {
         GKB_Amount: StudentProfileData ? StudentProfileData.accountInfo.GKBAmount : '',
         Busfee: StudentProfileData ? StudentProfileData.accountInfo.busFee : '',
         reg_Fees: StudentProfileData ? StudentProfileData.accountInfo.regFees : '',
-        Tutionfee: StudentProfileData ? StudentProfileData.accountInfo.tutionFee : '',
+        Tutionfee: StudentProfileData ? StudentProfileData.accountInfo.totalFee : '',
         year: StudentProfileData ? StudentProfileData.accountInfo.year : '',
         Firstinstallment: StudentProfileData ? StudentProfileData.accountInfo.firstInstallment : '',
         FirstinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.firstInstallmentDate : '',
@@ -123,7 +123,7 @@ function StudentProfile({ accountAction }) {
         ThirdinstallmentDate: StudentProfileData ? StudentProfileData.accountInfo.thirdInstallmentDate : '',
         sponsorshipType: StudentProfileData ? StudentProfileData.accountInfo.sponsorshipType : '',
         feesScheme: StudentProfileData ? StudentProfileData.accountInfo.feesScheme : '',
-        registrationNumber: StudentProfileData ? StudentProfileData.accountInfo.registrationNumber : '',
+        registrationNumber: StudentProfileData ? StudentProfileData.accountInfo.registrationNo : '',
 
 
     }
@@ -131,7 +131,7 @@ function StudentProfile({ accountAction }) {
 
 
         accountStatus: Yup.string().required("Required!"),
-        // remark: Yup.string().required("Required!"),
+        remark: Yup.string().required("Required!"),
         GKB_Amount: Yup.string().required("Required!"),
         Busfee: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
         reg_Fees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
@@ -163,7 +163,7 @@ function StudentProfile({ accountAction }) {
                 "stdId": StudentProfileData.accountInfo.stdId,
                 "isActive": formik.values.accountStatus,
                 "feesScheme": formik.values.feesScheme,
-                "tutionFee": formik.values.Tutionfee,
+                "totalFee": formik.values.Tutionfee,
                 "sponsorshipType": formik.values.sponsorshipType,
                 'year':formik.values.year,
                 "regFees": formik.values.reg_Fees,
@@ -175,7 +175,8 @@ function StudentProfile({ accountAction }) {
                 "secondInstallmentDate": formik.values.SecondinstallmentDate,
                 "thirdInstallment": formik.values.Thirdinstallment,
                 "thirdInstallmentDate": formik.values.ThirdinstallmentDate,
-                "remark": formik.values.remark
+                "remark": formik.values.remark,
+                "registrationNo":formik.values.registrationNumber
             }
             const token = localStorage.getItem("token");
             var config = {
@@ -403,7 +404,7 @@ function StudentProfile({ accountAction }) {
                                 </div>
                                 <div className="col">
                                     <label className='addStdLable' htmlFor="">Course Fees</label>
-                                    <input name="Tutionfee" onChange={formik.handleChange} value={formik.values.Tutionfee} type="number" className='form-control' placeholder='Course Fees' />
+                                    <input name="Tutionfee" onChange={formik.handleChange} disabled value={formik.values.Tutionfee} type="number" className='form-control' placeholder='Course Fees' />
                                     {formik.errors.Tutionfee && formik.touched.Tutionfee ? (
                                         <div className="text-danger fs-6">
                                             {formik.errors.Tutionfee}
@@ -469,7 +470,7 @@ function StudentProfile({ accountAction }) {
                                 </div>
                                 <div className="col">
                                     <label className='addStdLable' htmlFor="">GKB Amount</label>
-                                    <input name="GKB_Amount" onChange={formik.handleChange} value={formik.values.GKB_Amount} type="number" className='form-control' placeholder='Father contact' />
+                                    <input name="GKB_Amount" onChange={formik.handleChange} disabled value={formik.values.GKB_Amount} type="number" className='form-control' placeholder='Father contact' />
                                     {formik.errors.GKB_Amount && formik.touched.GKB_Amount ? (
                                         <div className="text-danger fs-6">
                                             {formik.errors.GKB_Amount}
