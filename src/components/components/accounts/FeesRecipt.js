@@ -60,6 +60,26 @@ function FeesRecipt({ accountAction }) {
     // }
 
 
+    const getMOnth = () => {
+
+        let MM = new Date().getMonth() + 1;
+        if (MM.toString.length < 2) {
+            return (`0${MM}`)
+
+        } else {
+            return (`${MM}`)
+        }
+    }
+
+    const checkAmount = (val) => {
+        const amt = parseInt(val?.split(',').join(''));
+        const year = formik.values.studentClassYear;
+        const data = StudentAccountData.pendingFee.filter((ele) => ele.year === year)[0];
+        let amt2 = parseInt(data.pendingFees);
+        console.log(amt);
+        console.log(amt2);
+        return(amt <= amt2)
+    }
 
     const initialValues = {
         payBy: 'Cash',
@@ -70,16 +90,17 @@ function FeesRecipt({ accountAction }) {
         chequeDate: '',
         ChequeNo: '',
         feesAmount: '',
-        recieptdate: `${new Date().getFullYear() + '-' + new Date().getMonth() + 1 + '-' + new Date().getDate()}`,
+        recieptdate: `${new Date().getFullYear() + '-' + getMOnth() + '-' + new Date().getDate()}`,
         installmentNo: '1',
         Remark: '',
         LateFeeAmount: '0',
         BankName: '',
     }
+    // console.log(initialValues);
     const validationSchema = Yup.object({
-        recieptdate: Yup.string().required("Required!").test('doc_check', `Date must be greater then ${new Date().getDate() - 8 + '-' + new Date().getMonth() + 1 + '-' + new Date().getFullYear()}`, val => val?.slice(-2) >= (new Date().getDate()) - 8).test('check', value => value?.slice(-2) <= (new Date().getDate())),
+        recieptdate: Yup.string().required("Required!").test('doc_check', `Date must be greater then ${new Date().getDate() - 8 + '-' + getMOnth() + '-' + new Date().getFullYear()}`, val => val?.slice(-2) >= (new Date().getDate()) - 8).test('check', 'invalid Date', value => value?.slice(-2) <= (new Date().getDate())),
         studentClassYear: Yup.string().required("Required!"),
-        feesAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0),
+        feesAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') > 0).test('Is positive', `amount can't be greater than pending amount`, checkAmount),
         LateFeeAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0),
         waiveOff: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0),
         installmentNo: Yup.string().required("Required!"),
@@ -94,13 +115,13 @@ function FeesRecipt({ accountAction }) {
             else return true
         }),
         chequeDate: Yup.string().test('require', 'Required!', (val) => {
-            if (formik.values.payBy === 'Cheque') {
-                if (!val) return false
-                else return true
+                if (formik.values.payBy === 'Cheque') {
+                    if (!val) return false
+                    else return true
 
-            }
-            else return true
-        }),
+                }
+                else return true
+            }),
         BankName: Yup.string().test('require', 'Required!', (val) => {
             if (formik.values.payBy === 'Cheque') {
                 if (!val) return false
@@ -110,6 +131,9 @@ function FeesRecipt({ accountAction }) {
             else return true
         }).trim().matches(/^[a-zA-Z]+$/, 'must be alphabates')
     })
+
+    // .test('date_check', `Date must be greater then ${new Date().getDate() - 1 + '-' + getMOnth() + '-' + new Date().getFullYear()}`, val => val?.slice(-2) >= (new Date().getDate()))
+            // 
 
     const formik = useFormik({
         initialValues,
@@ -294,9 +318,24 @@ function FeesRecipt({ accountAction }) {
                             <label className='addStdLable' htmlFor="">Year</label>
                             <select name='studentClassYear' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.studentClassYear} className='form-select'  >
                                 {/* <option defaultValue={(StudentAccountData.accountInfo.year)?.toString()}>{StudentAccountData.accountInfo.year}</option> */}
-                                <option value="I">I</option>
-                                <option value="II">II</option>
-                                <option value="III">III</option>
+                                {(StudentAccountData.accountInfo.year?.toString()) === 'I' &&
+                                    <>
+                                        <option value="I">I</option>
+                                    </>
+                                }
+                                {(StudentAccountData.accountInfo.year?.toString()) === 'II' &&
+                                    <>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                    </>
+                                }
+                                {(StudentAccountData.accountInfo.year?.toString()) === 'III' &&
+                                    <>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                    </>
+                                }
                             </select>
                             {formik.errors.studentClassYear && formik.touched.studentClassYear ? (
                                 <div className="text-danger fs-6">
@@ -614,9 +653,9 @@ function FeesRecipt({ accountAction }) {
                                                             </Tooltip>
                                                         }>
 
-                                      
+
                                                             {/* <img src={Edit_icon} alt='edit_icon'  /> */}
-                                                        <a href={StudentAccountData.accountsReceiptName} style={{ cursor: 'pointer' }} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} alt="downloadImg" /></a>
+                                                            <a href={StudentAccountData.accountsReceiptName} style={{ cursor: 'pointer' }} rel="noreferrer" target='_blank'><img className='mt-3' src={Icon_feather_download} alt="downloadImg" /></a>
                                                         </Whisper>
                                                     </div>
 
