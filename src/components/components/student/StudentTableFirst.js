@@ -267,6 +267,12 @@ function StudentTableFirst({ fetchUsers, studentData }) {
             },
             {
                 header: "Year",
+                accessor: "year",
+                Filter: SelectColumnFilter,
+                filter: MultipleFilter,
+            },
+            {
+                header: "Join Batch",
                 accessor: "joinBatch",
                 Filter: SelectColumnFilter,
                 filter: MultipleFilter,
@@ -283,12 +289,12 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                 Filter: "",
                 filter: "",
             },
-            {
-                header: "Reg. Fees",
-                accessor: "regFeesStatus",
-                Filter: "",
-                filter: ""
-            },
+            // {
+            //     header: "Reg. Fees",
+            //     accessor: "regFees",
+            //     Filter: "",
+            //     filter: ""
+            // },
             {
                 header: "Status",
                 accessor: "status",
@@ -299,7 +305,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                         >
 
 
-                            {original.status ? "Deactive" : "Active"}
+                            {original.status === "false" ? "Deactive" : "Active"}
 
                         </p>
                     )

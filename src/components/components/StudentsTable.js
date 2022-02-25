@@ -101,7 +101,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           disabled={original.regFeesStatus === "Paid"}
           onClick={() => {
             Swal.fire({
-              title: 'Payment Confermation',
+              title: 'Payment Confirmation',
 
               html:
                 '<hr>' +

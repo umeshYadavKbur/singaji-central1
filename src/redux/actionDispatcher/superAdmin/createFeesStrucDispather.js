@@ -20,7 +20,7 @@ export const createFeesStructure = (data, navigate, setVisible, visible) => {
             Swal.fire({
               position: 'top-center',
               icon: 'warning',
-              title: 'This fees structure is Already createrd!',
+              title: 'This fees structure is Already created!',
               showConfirmButton: false,
               timer: 2500,
               showClass: {
