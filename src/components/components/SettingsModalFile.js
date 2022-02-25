@@ -56,7 +56,8 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
   const [show, setShow] = useState(false);
 
   const [visible, setVisibleSe] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  // const [removemargin , setRemovemargin] = useState(false);
 
   const test = (val) => {
 
@@ -370,7 +371,7 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
 
                         class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
 
-
+                        autocomplete="off" 
                         value={formik.values.pass}
                         onChange={formik.handleChange}
                         onClick={() => setShow(!show)}
@@ -408,11 +409,14 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
                             value={formik.values.newpass}
                             onChange={formik.handleChange}
                             name="newpass"
-
+                            style={{marginTop: `${(formik.errors.newpass && formik.touched.newpass) ? "2px" : "22px"}`}}
+                            autocomplete="off" 
                             placeholder="New password" className="hidden-inputs" />
                           {formik.errors.newpass && formik.touched.newpass ? (
                             <div className="text-danger fs-6">
                               {formik.errors.newpass}
+                         
+
                             </div>
                           ) : (
                             ""
@@ -423,11 +427,13 @@ function CreateAdminPopup({ adminData, createNewAdmin, setShow2 }) {
                             value={formik.values.newpassAgain}
                             onChange={formik.handleChange}
                             name="newpassAgain"
-
+                            style={{marginTop: `${(formik.errors.newpass && formik.touched.newpass) ? "2px" : "22px"}`}}
+                            autocomplete="off" 
                             placeholder="New password, again" className="hidden-inputs" />
                           {formik.errors.newpassAgain && formik.touched.newpassAgain ? (
                             <div className="text-danger fs-6">
                               {formik.errors.newpassAgain}
+                            
                             </div>
                           ) : (
                             ""
