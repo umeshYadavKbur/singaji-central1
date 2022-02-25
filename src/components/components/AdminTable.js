@@ -15,7 +15,7 @@ import updown_sort from '../assests/image/updown_sort.svg'
 import { ActivateButton, DeactivateButton } from '../assests/common/Color';
 import Pagination from '../assests/common/Pagination';
 import Loader from '../assests/common/Loader';
-import OfflinePage from '../auth/OfflinePage';
+// import OfflinePage from '../auth/OfflinePage';
 import NoDataFound from '../assests/common/NoDataFound';
 
 

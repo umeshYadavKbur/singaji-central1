@@ -38,7 +38,7 @@ import Loader from "../../assests/common/Loader";
 import AvatarImg from '../../assests/image/Avtar.jpeg'
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
 import dateIcon from '../../assests/image/AccountIcons/DateIcon.svg'
-import OfflinePage from '../../auth/OfflinePage';
+// import OfflinePage from '../../auth/OfflinePage';
 import NoDataFound from "../../assests/common/NoDataFound";
 // import CountUp from 'react-countup';
 import { toast } from "react-toastify";

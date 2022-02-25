@@ -30,7 +30,7 @@ import SkeletonColor from '../../../helpers/Skeletrone';
 import Pagination from "../../assests/common/Pagination";
 import Loader from "../../assests/common/Loader";
 // import { ActivateButton, DeactivateButton } from "../../assests/common/Color";
-import OfflinePage from "../../auth/OfflinePage";
+// import OfflinePage from "../../auth/OfflinePage";
 import NoDataFound from "../../assests/common/NoDataFound";
 
 export const MultipleFilter = (rows, accessor, filterValue) => {

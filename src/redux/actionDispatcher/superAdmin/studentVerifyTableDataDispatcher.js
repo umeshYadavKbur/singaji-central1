@@ -89,7 +89,7 @@ export const VerifyStudent = (data) => {
                     draggable: true,
                     progress: undefined,
                 });
-                let value = JSON.stringify(userResData.status);
+                // let value = JSON.stringify(userResData.status);
                 dispatch(VerifyStudentFail());
 
             }

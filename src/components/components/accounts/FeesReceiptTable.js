@@ -16,7 +16,7 @@ import SkeletonColor from "../../../helpers/Skeletrone";
 import Pagination from "../../assests/common/Pagination";
 import { Tooltip, Whisper } from "rsuite";
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
-import OfflinePage from "../../auth/OfflinePage";
+// import OfflinePage from "../../auth/OfflinePage";
 import NoDataFound from "../../assests/common/NoDataFound";
 import Icon_feather_download from '../../assests/image/AccountIcons/receipt_download_icon.svg';
 

@@ -134,7 +134,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
         if (visible) {
           setVisible(!visible)
         }
-        let value = JSON.stringify(response.status);
+        // let value = JSON.stringify(response.status);
         dispatch(feesStructureStatusFailed());
         toast.warn('Internal Server Error', {
           position: "top-center",
@@ -150,7 +150,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
         if (visible) {
           setVisible(!visible)
         }
-        let value = JSON.stringify(response.status);
+        // let value = JSON.stringify(response.status);
         dispatch(feesStructureStatusFailed());
         toast.warn('Internal Server Error', {
           position: "top-center",
@@ -166,7 +166,7 @@ export const changeFeesStructureStatus = (data, setVisible, visible) => {
         if (visible) {
           setVisible(!visible)
         }
-        let value = JSON.stringify(response.status);
+        // let value = JSON.stringify(response.status);
         dispatch(feesStructureStatusFailed());
         toast.error("Internal Server Error", {
           position: "top-center",

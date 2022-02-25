@@ -28,7 +28,7 @@ import Pagination from "../../assests/common/Pagination";
 import { GlobalFilter } from "../tableComponents/GlobalFilter";
 import { Tooltip, Whisper } from "rsuite";
 import rightArrow from '../../assests/image/right_arrow_icon.svg'
-import OfflinePage from "../../auth/OfflinePage";
+// import OfflinePage from "../../auth/OfflinePage";
 import NoDataFound from "../../assests/common/NoDataFound";
 
 export const MultipleFilter = (rows, accessor, filterValue) => {
