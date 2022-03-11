@@ -175,22 +175,74 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
     )
 
     const { globalFilter } = state
-    const { pageIndex, pageSize, selectedRowIds } = state
+    const { pageIndex, pageSize } = state
 
 
-    var exportData = [];
     const checkboxData = JSON.stringify(
-        {
-            selectedRowIds: selectedRowIds,
-            'adminList': selectedFlatRows.map(
-                d => d.original
-            ),
-        },
-        null,
-        2
+        selectedFlatRows.map(
+            d => d.original
+        ),
     );
+    // Taking the data from the checkbox 
     console.log("Here", checkboxData);
 
+    const ActiveMultipleAdmin = async () => {
+        var data = JSON.parse(checkboxData)
+        Swal.fire({
+            title: "Activation",
+
+            html:
+                '<hr>' +
+                'Are you sure?' +
+                '<br>' +
+                `You want to activate ${data.length} this admin`,
+            showCancelButton: true,
+            showConfirmButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: "Activate",
+            reverseButtons: true,
+            showCloseButton: true,
+            confirmButtonColor: "#4f83df",
+            showLoaderOnDeny: true,
+            showClass: {
+                backdrop: 'swal2-noanimation', // disable backdrop animation
+                popup: '',                     // disable popup animation
+                icon: ''                       // disable icon animation
+            },
+            hideClass: {
+                popup: '',                     // disable popup fade-out animation
+            }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                data.map((element) => {
+                    // console.log(element.email)
+                    let data = JSON.stringify({
+                        "email": element.email,
+                        "isActive": "1"
+                    })
+                    // return (
+
+                    // )
+                    // let res = await AdminStatusChange(original)
+                })
+                // console.log(res);
+                let res;
+                if (res === 200) {
+                    // var config = {
+                    //     method: "GET",
+                    //     url: AllUrl.infoAllAdmin,
+                    //     headers: {
+                    //         Authorization: `Bearer ${token}`,
+                    //         "Content-Type": "application/json",
+                    //     },
+                    // };
+                    // getAdminTableData(config);
+                    // Getting the data from the table back 
+                }
+            }
+        })
+
+    }
     return table_data.loading ? (
         <SkeletonColor></SkeletonColor>
     )
@@ -227,7 +279,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                                 </select>
                             </div>
                             <div className='d-flex ml-auto me-1'>
-                                <button className='btn btn-primary mr-2'>Active</button>
+                                <button className='btn btn-primary mr-2' onClick={ActiveMultipleAdmin}>Active</button>
                                 <div className='ml-auto me-4'>
                                     <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
                                 </div>
