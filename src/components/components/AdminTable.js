@@ -58,7 +58,6 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             Cell: ({ row: { original } }) => {
                 var data2 = original.role.charAt(0).toUpperCase() + original.role.slice(1).toLowerCase();
                 data2 = data2.replace('admin', ' Admin');
-
                 return (data2)
 
             }
@@ -104,9 +103,9 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             }
 
                         }).then(async (result) => {
-                            console.log('====================================');
-                            console.log("++++++++++++++++++++++++++++");
-                            console.log('====================================');
+                            // console.log('====================================');
+                            // console.log("++++++++++++++++++++++++++++");
+                            // console.log('====================================');
                             if (result.isConfirmed) {
                                 let res = await AdminStatusChange(original)
                                 console.log(res);
@@ -179,18 +178,18 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
     const { pageIndex, pageSize, selectedRowIds } = state
 
 
-    const checkboxData =
-        JSON.stringify(
-            {
-                selectedRowIds: selectedRowIds,
-                'selectedFlatRows[].original': selectedFlatRows.map(
-                    d => d.original
-                ),
-            },
-            null,
-            2
-        )
-    console.log(checkboxData);
+    var exportData = [];
+    const checkboxData = JSON.stringify(
+        {
+            selectedRowIds: selectedRowIds,
+            'adminList': selectedFlatRows.map(
+                d => d.original
+            ),
+        },
+        null,
+        2
+    );
+    console.log("Here", checkboxData);
 
     return table_data.loading ? (
         <SkeletonColor></SkeletonColor>
@@ -228,6 +227,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                                 </select>
                             </div>
                             <div className='d-flex ml-auto me-1'>
+                                <button className='btn btn-primary mr-2'>Active</button>
                                 <div className='ml-auto me-4'>
                                     <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
                                 </div>
