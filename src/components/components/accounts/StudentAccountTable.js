@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Fragment, useMemo } from "react";
 import downloadPdf from "./PdfGeneratorDailyReport";
 import downloadPdfStudentList from './PdfGeneratorStudentList'
+import Avatar from '@mui/material/Avatar';
 import {
     useTable,
     useFilters,
@@ -295,6 +296,26 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     /////////////////////////////////////
 
     // const data = React.useMemo(() => tableData, []);
+    /// for color hex code for any name 
+    // function stringToColor(string) {
+    //     let hash = 0;
+    //     let i;
+      
+    //     /* eslint-disable no-bitwise */
+    //     for (i = 0; i < string.length; i += 1) {
+    //       hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    //     }
+      
+    //     let color = '#';
+      
+    //     for (i = 0; i < 3; i += 1) {
+    //       const value = (hash >> (i * 8)) & 0xff;
+    //       color += `00${value.toString(16)}`.substr(-2);
+    //     }
+    //     /* eslint-enable no-bitwise */
+      
+    //     return color;
+    //   }
     const mainColoumns = [
         {
             header: "S.No",
@@ -318,20 +339,30 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                             View Profile .
                         </Tooltip>
                     }>
-                        {original.photo ? <img
-                            alt="profile"
-                            style={{ cursor: "pointer", borderRadius: '50%', width: "50px", height: "50px" }}
-                            onClick={() => {
-                                getAllInfoOfStudent(original, false)
-                            }}
-                            className="mx-auto"
-                            src={original.photo}
+                        {original.photo ?
+                            <Avatar src={original.photo}
+                                alt="profile"
+                                style={{ cursor: "pointer", borderRadius: '50%', width: "50px", height: "50px" }}
+                                onClick={() => {
+                                    getAllInfoOfStudent(original, false)
+                                }}
+                                className="mx-auto"
+                           
+                            >{original.name.slice(0, 1)}</Avatar>
+                            //  <img
+                            // alt="profile"
+                            // style={{ cursor: "pointer", borderRadius: '50%', width: "50px", height: "50px" }}
+                            // onClick={() => {
+                            //     getAllInfoOfStudent(original, false)
+                            // }}
+                            // className="mx-auto"
+                            //     src={original.photo}
 
 
 
-                            text="Image"
 
-                        /> :
+                            // /> 
+                            :
                             <img
                                 alt="profile"
                                 style={{ cursor: "pointer" }}
@@ -793,16 +824,16 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                 <h5 style={{ marginTop: "12px" }}> {MoneyCount.TStudent} <br /> <p >Total Students</p> </h5>
                             </div>
                             <div className="col info-col m-2" >
-                                <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? MoneyCount.TAmount : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
+                                <h5 style={{ marginTop: "12px" }}>{MoneyCount.TAmount ? MoneyCount.TAmount.toLocaleString('en-IN') : '-'} <br /> <p>{is_dailyReport ? '-' : 'Total Amount'}</p> </h5>
                             </div>
                             <div className="col info-col m-2" >
-                                <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport : MoneyCount.TpaidAmount} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
+                                <h5 style={{ marginTop: "12px" }}>{is_dailyReport ? MoneyCount.TpaidAmountByDailyReport.toLocaleString('en-IN') : MoneyCount.TpaidAmount.toLocaleString('en-IN')} <br /> <p >{is_dailyReport ? 'T. Received Amount' : 'Total Paid Amount'}</p> </h5>
                             </div>
                             <div className="col info-col m-2" >
-                                <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? MoneyCount.RAmount : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
+                                <h5 style={{ marginTop: "12px" }}>{MoneyCount.RAmount ? MoneyCount.RAmount.toLocaleString('en-IN') : '-'} <br /> <p >{is_dailyReport ? '-' : 'Remaining Amount'}</p> </h5>
                             </div>
                             <div className="col info-col m-2">
-                                <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff : '0'}<br /> <p >Waive Off</p> </h5>
+                                <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff.toLocaleString('en-IN') : '0'}<br /> <p >Waive Off</p> </h5>
                             </div>
                         </div>
                         <div className="row  mx-0 mt-3" >

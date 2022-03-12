@@ -42,6 +42,8 @@ function FeesRecipt({ accountAction }) {
     var totalFeesAmount = 0;
     var totalpendingFees = 0;
     var totalReceivedFees = 0;
+    var totalpendingGKB = 0;
+    var totalpendingPostmetric = 0;
 
 
     (StudentAccountData.pendingFee).forEach((ele) => {
@@ -49,6 +51,8 @@ function FeesRecipt({ accountAction }) {
         totalFeesAmount = totalFeesAmount + parseInt(ele.feesAmount)
         totalReceivedFees = totalReceivedFees + parseInt(ele.receivedFees)
         totalpendingFees = totalpendingFees + parseInt(ele.pendingFees)
+        totalpendingPostmetric = totalpendingPostmetric + parseInt(ele.pendingPostmetric)
+        totalpendingGKB = totalpendingGKB + parseInt(ele.pendingGKB)
 
     })
 
@@ -75,10 +79,44 @@ function FeesRecipt({ accountAction }) {
         const amt = parseInt(val?.split(',').join(''));
         const year = formik.values.studentClassYear;
         const data = StudentAccountData.pendingFee.filter((ele) => ele.year === year)[0];
+        console.log(data);
         let amt2 = parseInt(data.pendingFees);
         console.log(amt);
         console.log(amt2);
-        return(amt <= amt2)
+        return (amt <= amt2)
+    }
+    const checkGKBAmount = (val) => {
+        const amt = parseInt(val?.split(',').join(''));
+        const year = formik.values.studentClassYear;
+        const data = StudentAccountData.pendingFee.filter((ele) => ele.year === year)[0];
+        console.log(data);
+        let amt2 = parseInt(data.pendingFees);
+        let GKBpending = parseInt(data.pendingGKB);
+        console.log(amt);
+        console.log(amt2);
+        if (formik.values.installmentNo === "GKB") {
+
+            return (amt <= amt2 && amt <= GKBpending)
+        } else {
+            return (amt <= amt2)
+        }
+    }
+    const checkPOSTAmount = (val) => {
+        const amt = parseInt(val?.split(',').join(''));
+        const year = formik.values.studentClassYear;
+        const data = StudentAccountData.pendingFee.filter((ele) => ele.year === year)[0];
+        console.log(data);
+        let amt2 = parseInt(data.pendingFees);
+        console.log(amt);
+        let POSTpending = parseInt(data.pendingPostmetric);
+        console.log(amt);
+        console.log(amt2);
+        if (formik.values.installmentNo === "POSTMATRIC") {
+
+            return (amt <= amt2 && amt <= POSTpending)
+        } else {
+            return (amt <= amt2)
+        }
     }
 
     const initialValues = {
@@ -100,7 +138,11 @@ function FeesRecipt({ accountAction }) {
     const validationSchema = Yup.object({
         recieptdate: Yup.string().required("Required!").test('doc_check', `Date must be greater then ${new Date().getDate() - 8 + '-' + getMOnth() + '-' + new Date().getFullYear()}`, val => val?.slice(-2) >= (new Date().getDate()) - 8).test('check', 'invalid Date', value => value?.slice(-2) <= (new Date().getDate())),
         studentClassYear: Yup.string().required("Required!"),
-        feesAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') > 0).test('Is positive', `amount can't be greater than pending amount`, checkAmount),
+        feesAmount: Yup.string().required("Required!")
+            .test('Is positive', 'must be positive', val => val?.split(',').join('') > 0)
+            .test('Is positive', `amount can't be greater than total pending fees`, checkAmount)
+            .test('Is GKB positive', `amount can't be greater than GKB pending fees OR total pending fees`, checkGKBAmount)
+            .test('Is POST positive', `amount can't be greater than postmetric pending fees OR total pending fees`, checkPOSTAmount),
         LateFeeAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0),
         waiveOff: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0),
         installmentNo: Yup.string().required("Required!"),
@@ -115,13 +157,13 @@ function FeesRecipt({ accountAction }) {
             else return true
         }),
         chequeDate: Yup.string().test('require', 'Required!', (val) => {
-                if (formik.values.payBy === 'Cheque') {
-                    if (!val) return false
-                    else return true
-
-                }
+            if (formik.values.payBy === 'Cheque') {
+                if (!val) return false
                 else return true
-            }),
+
+            }
+            else return true
+        }),
         BankName: Yup.string().test('require', 'Required!', (val) => {
             if (formik.values.payBy === 'Cheque') {
                 if (!val) return false
@@ -133,7 +175,7 @@ function FeesRecipt({ accountAction }) {
     })
 
     // .test('date_check', `Date must be greater then ${new Date().getDate() - 1 + '-' + getMOnth() + '-' + new Date().getFullYear()}`, val => val?.slice(-2) >= (new Date().getDate()))
-            // 
+    // 
 
     const formik = useFormik({
         initialValues,
@@ -300,11 +342,11 @@ function FeesRecipt({ accountAction }) {
                         <div className="col">
                             <label className='addStdLable' htmlFor="">Installment No.</label>
                             <select name='installmentNo' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.installmentNo} className='form-select' >
-                                <option defaultValue="1">1</option>
+                                <option defaultValue="1">1 </option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
-                                <option value="POSTMATRIC">Postmatric ScolarShip</option>
-                                <option value="GKB">GKB ScolarShip</option>
+                                <option value="POSTMATRIC">Postmatric scholarship</option>
+                                <option value="GKB">GKB scholarship</option>
                             </select>
                             {formik.errors.installmentNo && formik.touched.installmentNo ? (
                                 <div className="text-danger fs-6">
@@ -501,13 +543,19 @@ function FeesRecipt({ accountAction }) {
                                 <label className='addStdLable' htmlFor="">Year</label>
                             </div>
                             <div className="col">
-                                <label className='addStdLable' htmlFor="">Fees Amount</label>
+                                <label className='addStdLable' htmlFor=""> Total Fees</label>
                             </div>
                             <div className="col">
                                 <label className='addStdLable' htmlFor="">Recieved Fees</label>
                             </div>
                             <div className="d-flex col-2">
-                                <label className='addStdLable' htmlFor="">Pending Fees</label>
+                                <label className='addStdLable' htmlFor="">T.Pending Fees</label>
+                            </div>
+                            <div className="d-flex col-2">
+                                <label className='addStdLable' htmlFor="">Postmatric Pending Fees</label>
+                            </div>
+                            <div className="d-flex col-2">
+                                <label className='addStdLable' htmlFor="">GKB Pending Fees</label>
                             </div>
 
                         </div>
@@ -529,6 +577,12 @@ function FeesRecipt({ accountAction }) {
                                 <div className="d-flex col-2">
                                     <label htmlFor="">{pendingFee.pendingFees}</label>
                                 </div>
+                                <div className="d-flex col-2">
+                                    <label htmlFor="">{pendingFee.pendingPostmetric}</label>
+                                </div>
+                                <div className="d-flex col-2">
+                                    <label htmlFor="">{pendingFee.pendingGKB}</label>
+                                </div>
                             </div>
                         ))}
 
@@ -546,6 +600,12 @@ function FeesRecipt({ accountAction }) {
                             </div>
                             <div className="d-flex col-2">
                                 <label className='addStdLable' htmlFor="">{totalpendingFees} </label>
+                            </div>
+                            <div className="d-flex col-2">
+                                <label className='addStdLable' htmlFor="">{totalpendingPostmetric} </label>
+                            </div>
+                            <div className="d-flex col-2">
+                                <label className='addStdLable' htmlFor="">{totalpendingGKB} </label>
                             </div>
                         </div>
 
