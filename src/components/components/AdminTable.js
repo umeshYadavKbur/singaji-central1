@@ -219,9 +219,9 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                 popup: '',                     // disable popup fade-out animation
             }
         }).then(async (result) => {
-            setLoader(true);
             var userResData;
             if (result.isConfirmed) {
+                setLoader(true);
                 data.map(async (element, index) => {
                     let temp = JSON.stringify({
                         "email": element.email,
