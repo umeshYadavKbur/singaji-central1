@@ -17,10 +17,16 @@ import Pagination from '../assests/common/Pagination';
 import Loader from '../assests/common/Loader';
 // import OfflinePage from '../auth/OfflinePage';
 import NoDataFound from '../assests/common/NoDataFound';
+import axios from "axios";
+import { useState } from 'react';
+import { toast } from 'react-toastify'
+
+
 
 
 function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTableData }) {
     const token = localStorage.getItem("token");
+    const [loader, setLoader] = useState(false);
     React.useEffect(() => {
         var config = {
             method: "GET",
@@ -108,7 +114,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             // console.log('====================================');
                             if (result.isConfirmed) {
                                 let res = await AdminStatusChange(original)
-                                console.log(res);
+                                // console.log(res);
                                 if (res === 200) {
                                     var config = {
                                         method: "GET",
@@ -184,7 +190,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
         ),
     );
     // Taking the data from the checkbox 
-    console.log("Here", checkboxData);
+    // console.log("Here", checkboxData);
 
     const ActiveMultipleAdmin = async () => {
         var data = JSON.parse(checkboxData)
@@ -213,32 +219,58 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                 popup: '',                     // disable popup fade-out animation
             }
         }).then(async (result) => {
+            setLoader(true);
+            var userResData;
             if (result.isConfirmed) {
-                data.map((element) => {
-                    // console.log(element.email)
-                    let data = JSON.stringify({
+                data.map(async (element, index) => {
+                    let temp = JSON.stringify({
                         "email": element.email,
                         "isActive": "1"
                     })
-                    // return (
+                    var config = {
+                        method: 'post',
+                        url: AllUrl.adminStatusChange,
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                            'Content-Type': 'application/json'
+                        },
+                        data: temp
+                    };
 
-                    // )
-                    // let res = await AdminStatusChange(original)
-                })
-                // console.log(res);
-                let res;
-                if (res === 200) {
-                    // var config = {
-                    //     method: "GET",
-                    //     url: AllUrl.infoAllAdmin,
-                    //     headers: {
-                    //         Authorization: `Bearer ${token}`,
-                    //         "Content-Type": "application/json",
-                    //     },
-                    // };
-                    // getAdminTableData(config);
-                    // Getting the data from the table back 
+                    try {
+                        userResData = await axios(config);
+                        if (userResData.status === 200) {
+                            // console.log(data.length)
+                            // console.log(index)
+                            if ((data.length) === (index + 2)) {
+                                let config = {
+                                    method: "GET",
+                                    url: AllUrl.infoAllAdmin,
+                                    headers: {
+                                        Authorization: `Bearer ${token}`,
+                                        "Content-Type": "application/json",
+                                    },
+                                };
+                                getAdminTableData(config)
+                                setLoader(false)
+                            }
+                        }
+                    } catch (error) {
+                        toast.warn('Internet Issue !', {
+                            position: "top-center",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        //if crudential fails than Login fail action dispatch
+                        // console.log(error)
+                    }
                 }
+                )
+
             }
         })
 
@@ -252,6 +284,9 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
         : (
             <>
                 {table_data.second_loading && (
+                    <Loader />
+                )}
+                {loader && (
                     <Loader />
                 )}
                 <ToastContainer
