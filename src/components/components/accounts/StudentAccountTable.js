@@ -300,20 +300,20 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
     // function stringToColor(string) {
     //     let hash = 0;
     //     let i;
-      
+
     //     /* eslint-disable no-bitwise */
     //     for (i = 0; i < string.length; i += 1) {
     //       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     //     }
-      
+
     //     let color = '#';
-      
+
     //     for (i = 0; i < 3; i += 1) {
     //       const value = (hash >> (i * 8)) & 0xff;
     //       color += `00${value.toString(16)}`.substr(-2);
     //     }
     //     /* eslint-enable no-bitwise */
-      
+
     //     return color;
     //   }
     const mainColoumns = [
@@ -347,7 +347,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                     getAllInfoOfStudent(original, false)
                                 }}
                                 className="mx-auto"
-                           
+
                             >{original.name.slice(0, 1)}</Avatar>
                             //  <img
                             // alt="profile"
@@ -385,6 +385,32 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
             header: 'Name',
             accessor: 'name',
             Filter: "",
+            Cell: ({ row: { original, index } }) =>
+            // console.log("original.photo",original.photo)
+            (
+                <div className="d-flex m-0 flex-column justify-content-start">
+                    <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
+                        <Tooltip>
+                            View Profile .
+                        </Tooltip>
+                    }>
+                        {
+                            <span
+                                alt="profile"
+                                style={{ cursor: "pointer", borderRadius: '50%', width: "50px", height: "50px" }}
+                                onClick={() => {
+                                    getAllInfoOfStudent(original, false)
+                                }}
+                                className="mx-auto"
+                            >
+                                {original.name}
+
+                            </span>
+
+                        }
+                    </Whisper>
+                </div >
+            ),
             filter: "",
         },
         {

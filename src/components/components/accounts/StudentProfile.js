@@ -24,6 +24,7 @@ import UpdateStudentPersonalInfo from './UpdateStudentPersonalInfo';
 import './Styles/StudentAccountTable.css'
 import LoaderButton from '../../assests/common/LoaderButton'
 import { Tooltip, Whisper } from 'rsuite';
+import { Avatar } from '@mui/material';
 
 
 const StyledModal = styled(ModalUnstyled)`
@@ -308,7 +309,14 @@ function StudentProfile({ accountAction }) {
                             {StudentPhoto.includes('/null') ?
                                 <img style={{borderRadius: "50px",height: "100px",width: '100px',marginLeft: '50px',backgroundColor: '#DDDDDD'}} src={AvatarImg} alt="avtar_photo" />
                                 :
-                                <img style={{borderRadius: "50px",height: "100px",width: '100px',marginLeft: '50px',backgroundColor: '#DDDDDD'}} src={StudentPhoto} alt="avtar_photo" />
+                                <Avatar src={StudentPhoto}
+                                alt="profile"
+                                style={{borderRadius: "50px",height: "100px",width: '100px',marginLeft: '50px',backgroundColor: '#DDDDDD'}}
+                              
+                                className="mx-auto"
+                           
+                            ><span style={{fontSize:'75px',color:'rgb(90, 96, 127)'}}>{StudentName.slice(0, 1)}</span></Avatar>
+                                // <img style={{borderRadius: "50px",height: "100px",width: '100px',marginLeft: '50px',backgroundColor: '#DDDDDD'}} src={StudentPhoto} alt="avtar_photo" />
                             }
 
                             {/* <img src={Edit_icon} alt='edit_icon' className='mt-5' style={{marginLeft: "-10px",height: '20px',width: '20px'}} /> */}
