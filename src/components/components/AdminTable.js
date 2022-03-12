@@ -17,10 +17,16 @@ import Pagination from '../assests/common/Pagination';
 import Loader from '../assests/common/Loader';
 // import OfflinePage from '../auth/OfflinePage';
 import NoDataFound from '../assests/common/NoDataFound';
+import axios from "axios";
+import { useState } from 'react';
+import { toast } from 'react-toastify'
+
+
 
 
 function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTableData }) {
     const token = localStorage.getItem("token");
+    const [loader, setLoader] = useState(false);
     React.useEffect(() => {
         var config = {
             method: "GET",
@@ -58,7 +64,6 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             Cell: ({ row: { original } }) => {
                 var data2 = original.role.charAt(0).toUpperCase() + original.role.slice(1).toLowerCase();
                 data2 = data2.replace('admin', ' Admin');
-
                 return (data2)
 
             }
@@ -104,12 +109,12 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             }
 
                         }).then(async (result) => {
-                            console.log('====================================');
-                            console.log("++++++++++++++++++++++++++++");
-                            console.log('====================================');
+                            // console.log('====================================');
+                            // console.log("++++++++++++++++++++++++++++");
+                            // console.log('====================================');
                             if (result.isConfirmed) {
                                 let res = await AdminStatusChange(original)
-                                console.log(res);
+                                // console.log(res);
                                 if (res === 200) {
                                     var config = {
                                         method: "GET",
@@ -176,22 +181,100 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
     )
 
     const { globalFilter } = state
-    const { pageIndex, pageSize, selectedRowIds } = state
+    const { pageIndex, pageSize } = state
 
 
-    const checkboxData =
-        JSON.stringify(
-            {
-                selectedRowIds: selectedRowIds,
-                'selectedFlatRows[].original': selectedFlatRows.map(
-                    d => d.original
-                ),
+    const checkboxData = JSON.stringify(
+        selectedFlatRows.map(
+            d => d.original
+        ),
+    );
+    // Taking the data from the checkbox 
+    // console.log("Here", checkboxData);
+
+    const ActiveMultipleAdmin = async () => {
+        var data = JSON.parse(checkboxData)
+        Swal.fire({
+            title: "Activation",
+
+            html:
+                '<hr>' +
+                'Are you sure?' +
+                '<br>' +
+                `You want to activate ${data.length} this admin`,
+            showCancelButton: true,
+            showConfirmButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: "Activate",
+            reverseButtons: true,
+            showCloseButton: true,
+            confirmButtonColor: "#4f83df",
+            showLoaderOnDeny: true,
+            showClass: {
+                backdrop: 'swal2-noanimation', // disable backdrop animation
+                popup: '',                     // disable popup animation
+                icon: ''                       // disable icon animation
             },
-            null,
-            2
-        )
-    console.log(checkboxData);
+            hideClass: {
+                popup: '',                     // disable popup fade-out animation
+            }
+        }).then(async (result) => {
+            setLoader(true);
+            var userResData;
+            if (result.isConfirmed) {
+                data.map(async (element, index) => {
+                    let temp = JSON.stringify({
+                        "email": element.email,
+                        "isActive": "1"
+                    })
+                    var config = {
+                        method: 'post',
+                        url: AllUrl.adminStatusChange,
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                            'Content-Type': 'application/json'
+                        },
+                        data: temp
+                    };
 
+                    try {
+                        userResData = await axios(config);
+                        if (userResData.status === 200) {
+                            // console.log(data.length)
+                            // console.log(index)
+                            if ((data.length) === (index + 2)) {
+                                let config = {
+                                    method: "GET",
+                                    url: AllUrl.infoAllAdmin,
+                                    headers: {
+                                        Authorization: `Bearer ${token}`,
+                                        "Content-Type": "application/json",
+                                    },
+                                };
+                                getAdminTableData(config)
+                                setLoader(false)
+                            }
+                        }
+                    } catch (error) {
+                        toast.warn('Internet Issue !', {
+                            position: "top-center",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        //if crudential fails than Login fail action dispatch
+                        // console.log(error)
+                    }
+                }
+                )
+
+            }
+        })
+
+    }
     return table_data.loading ? (
         <SkeletonColor></SkeletonColor>
     )
@@ -201,6 +284,9 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
         : (
             <>
                 {table_data.second_loading && (
+                    <Loader />
+                )}
+                {loader && (
                     <Loader />
                 )}
                 <ToastContainer
@@ -228,6 +314,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                                 </select>
                             </div>
                             <div className='d-flex ml-auto me-1'>
+                                <button className='btn btn-primary mr-2' onClick={ActiveMultipleAdmin}>Active</button>
                                 <div className='ml-auto me-4'>
                                     <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}></GlobalFilter>
                                 </div>
