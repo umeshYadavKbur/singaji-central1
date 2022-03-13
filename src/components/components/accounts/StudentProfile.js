@@ -162,6 +162,7 @@ function StudentProfile({ accountAction }) {
 
             const UpdateAccountInfoData = {
                 "stdId": StudentProfileData.accountInfo.stdId,
+                "currentYear":StudentProfileData.accountInfo.currentYear,
                 "isActive": formik.values.accountStatus,
                 "feesScheme": formik.values.feesScheme,
                 "totalFee": formik.values.Tutionfee,
