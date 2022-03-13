@@ -19,7 +19,7 @@ export const VerifyStudent = (data) => {
 
         dispatch(VerifyStudentRequest());
         var body = JSON.stringify({
-            email: data.email
+            id: data.id
         });
 
         var config = {

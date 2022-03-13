@@ -190,15 +190,15 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         //Acadmic Details end  here
 
         // Fees detail start from here 
-        GKBAmount: editData ? editData.gaonKiBeti : "Self",
-        postmatricAmount: editData ? editData.postmetricAmmount : "",
+        GKBAmount: editData ? editData.GKBAmount : 0,
+        postmatricAmount: editData ? editData.postmetricAmount : 0,
 
         firstInstallmentDate: editData ? editData.firstInstallmentDate : "",
         firstInstallment: editData ? editData.firstInstallment : 0,
         secondInstallmentDate: editData ? editData.secondInstallmentDate : "",
         secondInstallment: editData ? editData.secondInstallment : 0,
         thirdInstallmentDate: editData ? editData.thirdInstallmentDate : "",
-        thirdInstallment: editData ? editData.thirdInstallment : 0,
+        thirdInstallment: editData ? editData.thirdInstallment-(editData.scholarshipAmount ) : 0,
 
         feesScheme: editData ? editData.feesScheme : 'none',
         sponsorshipType: editData ? editData.sponsorshipType : 'none',
@@ -1662,8 +1662,8 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                         height: '41px',
                                         backgroundColor: 'orange'
                                     }}
-                                    disabled={addStudent.loading}
-                                >{addStudent.loading ? (<LoaderButton />) : "Submit"}
+                                    disabled={AddNewStudent.loading}
+                                >{AddNewStudent.loading ? (<LoaderButton />) : "Submit"}
                                 </button>
                         }
                     </div>

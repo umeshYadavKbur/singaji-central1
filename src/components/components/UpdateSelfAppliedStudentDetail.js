@@ -195,15 +195,15 @@ function AddNewStudentPage({ AddNewStudent }) {
         //Acadmic Details end  here
 
         // Fees detail start from here 
-        GKBAmount: editDataSelf ? editDataSelf.gaonKiBeti : "Self",
-        postmatricAmount: editDataSelf ? editDataSelf.Postmetric : "Self",
+        GKBAmount: editDataSelf ? editDataSelf.GKBAmount : 0,
+        postmatricAmount: editDataSelf ? editDataSelf.postmetricAmount : 0,
 
         firstInstallmentDate: editDataSelf ? editDataSelf.firstInstallmentDate : "",
         firstInstallment: editDataSelf ? editDataSelf.firstInstallment : 0,
         secondInstallmentDate: editDataSelf ? editDataSelf.secondInstallmentDate : "",
         secondInstallment: editDataSelf ? editDataSelf.secondInstallment : 0,
         thirdInstallmentDate: editDataSelf ? editDataSelf.thirdInstallmentDate : "",
-        thirdInstallment: editDataSelf ? editDataSelf.thirdInstallment : 0,
+        thirdInstallment: editDataSelf ? editDataSelf.thirdInstallment -(editDataSelf.scholarshipAmount )  : 0,
 
         feesScheme: editDataSelf ? editDataSelf.feesScheme : 'none',
         sponsorshipType: editDataSelf ? editDataSelf.sponsorshipType : 'none',

@@ -397,7 +397,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                         {
                             <span
                                 alt="profile"
-                                style={{ cursor: "pointer", borderRadius: '50%', width: "50px", height: "50px" }}
+                                style={{ cursor: "pointer"}}
                                 onClick={() => {
                                     getAllInfoOfStudent(original, false)
                                 }}

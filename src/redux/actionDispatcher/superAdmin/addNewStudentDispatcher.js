@@ -74,7 +74,7 @@ const AddNewStudent = (data, backToProfilePage) => {
                 Swal.fire({
                     position: 'top-center',
                     icon: 'warning',
-                    title: 'This Student is Already createrd!',
+                    title: 'This Student is Already created!',
                     showConfirmButton: false,
                     timer: 2500,
                     showClass: {
