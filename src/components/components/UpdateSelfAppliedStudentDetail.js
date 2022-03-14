@@ -282,15 +282,15 @@ function AddNewStudentPage({ AddNewStudent }) {
         // e.preventDefault()
         if (isStudentAdmin()) {
             console.log("Navigated ");
-            navigate('/student_admin_dashboard/studenttable');
+            navigate('/student_admin_dashboard/selfappliedstudent');
         }
         else if (isAccountAdmin()) {
             console.log("Navigated ");
-            navigate('/account_admin_dashboard/studenttable');
+            navigate('/account_admin_dashboard/selfappliedstudent');
         }
         else if (isSuperAdmin()) {
             console.log("Navigated ");
-            navigate('/admin_dashboard/studenttable');
+            navigate('/admin_dashboard/selfappliedstudent');
         }
     }
 

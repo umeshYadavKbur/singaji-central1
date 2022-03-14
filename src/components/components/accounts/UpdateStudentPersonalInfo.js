@@ -376,6 +376,11 @@ function UpdateStudentPersonalInfo({ handleClose }) {
                                             onChange={({ value }) => { formik.setFieldValue('village', value) }}
                                             onBlur={formik.handleBlur}
                                             name="village"
+                                            styles={{control: base => ({
+                                                ...base,
+                                                height: 35,
+                                                minHeight: 40
+                                              })}}
                                             className={formik.touched.village ? ` ${formik.errors.village ? "invalid" : ""}` : ''}
                                             defaultValue={StudentProfileData ? { label: StudentProfileData.accountInfo.village, value: StudentProfileData.accountInfo.village } : ''}
                                             placeholder="Village"

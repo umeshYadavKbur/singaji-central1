@@ -95,7 +95,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 
               html:
                 '<hr>' +
-                'have you recieved the payment ',
+                'have you received the payment ',
               // icon: 'warning',
               showCancelButton: true,
               // showCancelButton: true,
@@ -135,7 +135,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
                 const result = await axios(config)
                 // console.log("_____________________________________", result);
                 if (result.status === 200) {
-                  toast.success('Registration Fees Paid SuccessFul', {
+                  toast.success('Registration Fees Paid SuccessFull', {
                     position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
@@ -168,7 +168,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
               }
             })
           }}>
-          {original.accRegFeesStatus === "Paid" ? "Recieved" : "Pending"}
+          {original.accRegFeesStatus === "Paid" ? "Received" : "Pending"}
 
         </button>)
     },

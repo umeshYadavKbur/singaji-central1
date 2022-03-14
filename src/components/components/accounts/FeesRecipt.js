@@ -198,6 +198,7 @@ function FeesRecipt({ accountAction }) {
                     "receivedType": formik.values.payBy,
                     "chequeNo": formik.values.ChequeNo,
                     "chequeDate": formik.values.chequeDate,
+                    "receiptDate":formik.values.recieptdate,
                     "bankName": formik.values.BankName,
                     "remark": formik.values.Remark
                 })

@@ -1121,7 +1121,7 @@ function SelfRegistration() {
                         <button className="btn btn-sm btn-warning text-light fw-bold" type="submit"
                             style={{
                                 width: !isDesktopOrLaptop ? "100%" : "220px",
-                                height: '55px',
+                                height: '41px',
                                 fontSize:'18px',
                                 backgroundColor: 'orange'   
                             }}
