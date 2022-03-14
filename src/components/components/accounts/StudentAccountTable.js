@@ -541,7 +541,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     // <div className="d-flex m-0 flex-column justify-content-start">
                     <Whisper placement="top" controlId="control-id-hover" trigger="hover" speaker={
                         <Tooltip>
-                            Genrate Receipt .
+                            generate reciept .
                         </Tooltip>
                     }>
                         <button className="table_btn_size" onClick={() => {

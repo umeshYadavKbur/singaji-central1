@@ -37,15 +37,15 @@ function App() {
   });
 
   window.addEventListener("offline", function () {              //to check the internet connection
-   
+
     setIs_online(false)
-   
+
   });
 
 
   return (
     <Provider store={store}>
-      
+
       <Router>
         {
           is_online ?
@@ -54,7 +54,7 @@ function App() {
               <Route exact path="/self_registration" element={<SelfRegistration />} />
               <Route exact path="/forgetpassword" element={<ForgotPassword />} />
               <Route
-                exact
+                exactF
                 path="/create_new_password/:token"
                 element={<ResetPassword />}
               />
@@ -71,7 +71,7 @@ function App() {
             </Routes>
             :
             <Routes>
-              <Route exact path="*" element={<Offline isFullPage={true} />} /> 
+              <Route exact path="*" element={<Offline isFullPage={true} />} />
               {/*  passed a prop isFullPage to correct css for full page or to render in a component  */}
             </Routes>
         }

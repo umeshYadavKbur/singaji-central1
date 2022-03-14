@@ -974,6 +974,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                             <option value="BIO">BIO</option>
                                             <option value="Art">Art</option>
                                             <option value="Commerce">Commerce</option>
+                                            <option value="Agriculture">Agriculture</option>
                                         </select>
                                         {formik.errors.subject12 && formik.touched.subject12 ? (
                                             <div className="text-danger fs-6">

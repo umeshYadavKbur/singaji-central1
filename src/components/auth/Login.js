@@ -141,7 +141,7 @@ function Login({ userData, fetchUsers }) {
                   marginBottom: "5px"
                 }}
               >
-              Self Registartion
+              Self Registration
               </Link>
             </div>
           </form>
