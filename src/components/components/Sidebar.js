@@ -31,7 +31,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play, Options }) => {
   // getSelectValue();
   return (
     <>
-      <div id="sidebar">
+      <div id="sidebar" >
         <input type="checkbox" id="check" />
         <div className="sidebar toggle_animation">
           <center className="images_sidebar toggle_animation">
