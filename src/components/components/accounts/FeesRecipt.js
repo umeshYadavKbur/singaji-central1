@@ -171,7 +171,7 @@ function FeesRecipt({ accountAction }) {
 
             }
             else return true
-        }).trim().matches(/^[a-zA-Z]+$/, 'must be alphabates')
+        })
     })
 
     // .test('date_check', `Date must be greater then ${new Date().getDate() - 1 + '-' + getMOnth() + '-' + new Date().getFullYear()}`, val => val?.slice(-2) >= (new Date().getDate()))
@@ -639,7 +639,7 @@ function FeesRecipt({ accountAction }) {
                                         <div className='mx-5 my-3 shadow'>
 
 
-                                            <div className='row p-1' style={{ fontSize: '12px', backgroundColor: 'rgb(255 135 0)', color: 'white', borderRadius: '5px 5px  0 0 ' }}>Sant Singaji institute Of Science & management</div>
+                                            <div className='row p-1' style={{ fontSize: '12px', backgroundColor: 'rgb(255 135 0)', color: 'white', borderRadius: '5px 5px  0 0 ' }}>Sant Singaji institute Of Science & Management</div>
 
                                             <div className="row p-1" style={{ backgroundColor: 'orange' }}>
                                                 <div className="col">
@@ -649,22 +649,20 @@ function FeesRecipt({ accountAction }) {
                                                         {StudentName}
                                                     </p>
                                                 </div>
-                                                <div className="d-flex col justify-content-end ">
+                                                <div className="d-flex col justify-content-start ">
                                                     <p className='p-1' style={{ fontSize: '12px', margin: "auto", color: 'white' }}>{StudentAccountData.accountsReceiptNo}</p>
                                                 </div>
                                             </div>
-
-
                                             <div className="row p-1" style={{ backgroundColor: 'white', borderRadius: '0 0 5px 5px ' }}>
                                                 <div className="row">
                                                     <div className="col">
                                                         <p className='p-1 m-0' style={{ fontSize: '15px', color: '#656A87' }}>
                                                             <span style={{ fontSize: '13px' }}>Date</span>
                                                             <br />
-                                                            {StudentAccountData.accountsReceiptDate}
+                                                            {StudentAccountData.accountsReceiptDate.split("-").reverse().join("-")}
                                                         </p>
                                                     </div>
-                                                    <div className="d-flex col justify-content-end ">
+                                                    <div className="d-flex col justify-content-start ">
                                                         <p className='p-1 m-0 ms-2  ' style={{ fontSize: '15px', color: '#656A87' }}>
                                                             <span style={{ fontSize: '13px', paddingRight: "23px" }}>Class</span> <br />
                                                             {StudentClassName + '-' + StudentAccountData.year}
@@ -678,10 +676,12 @@ function FeesRecipt({ accountAction }) {
                                                             {StudentAccountData.receivedType}
                                                         </p>
                                                     </div>
-                                                    <div className="d-flex col justify-content-end ">
+                                                    <div className="d-flex col justify-content-start ">
                                                         <p className='p-1 pl-4 m-0' style={{ fontSize: '15px', color: '#656A87' }}>
-                                                            <span style={{ fontSize: '13px' }}>Waive off</span> <br />
-                                                            ₹ {StudentAccountData.waiveOf}
+                                                            <span style={{ fontSize: '13px', marginLeft: '6px' }}>Waive off</span> <br />
+                                                            <span style={{ marginLeft: '6px' }}>
+                                                                ₹ {StudentAccountData.waiveOf}
+                                                            </span>
                                                         </p>
 
                                                     </div>
@@ -695,7 +695,7 @@ function FeesRecipt({ accountAction }) {
                                                             <span style={{ fontSize: '12px' }}>Inst.{StudentAccountData.installmentNo}</span>
                                                         </p></div>
 
-                                                    <div className="col-4 d-flex justify-content-end ">
+                                                    <div className="col-4 d-flex justify-content-start ">
                                                         {/* <span><i class="fa fa-camera-retro fa-lg"></i></span>
                                                         {/* <a href={StudentAccountData.AccountsReceiptName} rel="noreferrer" target='_blank'><img className='mt-3' src={} alt="downloadImg" /></a></div> */}
                                                         {/* <div>
@@ -722,7 +722,6 @@ function FeesRecipt({ accountAction }) {
 
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 ))}

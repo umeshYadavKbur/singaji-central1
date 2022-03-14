@@ -120,7 +120,7 @@ function FeesRecieptDeletePopup({ data }) {
                                 <img onClick={() => setVisible(!visible)}
                                     style={{ height: "20px", width: "20px", marginLeft: '110%', marginTop: "-10px", cursor: "pointer" }} src={crossButton} alt="close" className="logo_img" />
                                 <h4 className=" text-aligns-center createAdminhead" style={{ color: '#5A607F', fontWeight: 'bold' }}>
-                                    Delete Reciept
+                                    Delete Receipt
                                 </h4>
                                 {/* <img src={logo} alt="logo ssism" className="logo_img" />{" "} */}
                             </div>

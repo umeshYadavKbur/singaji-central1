@@ -50,7 +50,7 @@ const AllUrl = {
     selfRegisterStudents: `${baseUrl}/api/self_registrated_student`,
     shiftToAppliedStudent: `${baseUrl}/api/shift_to_applied_students`,
     deleteSelfAppliedStudents: `${baseUrl}/api/delete_self_applied_students`,
-    
+
     //_____________________________________
 
     //landing pages urls 
@@ -71,7 +71,7 @@ const AllUrl = {
     reportReceipt: `${baseUrl}/api/list_of_reported_receipt`,
     deleteReportedList: `${baseUrl}/api/delete_reported_receipt`,
     rejectReceipt: `${baseUrl}/api/report_receipt`,//to deactivate a student fees receipt reject
-    
+
     //_____________________________________
 
     //Account admin tables url 
@@ -79,9 +79,9 @@ const AllUrl = {
     dailyReport: `${baseUrl}/api/daily_account_report/`,// these are date
     pendingScholarship: `${baseUrl}/api/get_scholarship_pending_list`,
     feesReceiptTable: `${baseUrl}/api/fees_receipt_list/1&100`,// 3&2 are dynamic
-    generateReciept:`${baseUrl}/api/generate_reciept`,
+    generateReciept: `${baseUrl}/api/generate_reciept`,
 
-    // Fees reciept delete api
+    // Fees Receipt delete api
 
     deletereciept: `${baseUrl}/api/report_receipt`,
 

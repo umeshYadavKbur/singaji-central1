@@ -20,6 +20,7 @@ import NoDataFound from '../assests/common/NoDataFound';
 import axios from "axios";
 import { useState } from 'react';
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -27,6 +28,7 @@ import { toast } from 'react-toastify'
 function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTableData }) {
     const token = localStorage.getItem("token");
     const [loader, setLoader] = useState(false);
+    const navigate = useNavigate()
     React.useEffect(() => {
         var config = {
             method: "GET",
@@ -113,7 +115,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             // console.log("++++++++++++++++++++++++++++");
                             // console.log('====================================');
                             if (result.isConfirmed) {
-                                let res = await AdminStatusChange(original)
+                                let res = await AdminStatusChange(original, navigate)
                                 // console.log(res);
                                 if (res === 200) {
                                     var config = {
@@ -193,7 +195,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
     // console.log("Here", checkboxData);
 
     const ActiveMultipleAdmin = async () => {
-        var data = JSON.parse(checkboxData)
+        let dataSec = JSON.parse(checkboxData)
         Swal.fire({
             title: "Activation",
 
@@ -201,7 +203,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                 '<hr>' +
                 'Are you sure?' +
                 '<br>' +
-                `You want to activate ${data.length} this admin`,
+                `You want to activate ${dataSec.length} this admin`,
             showCancelButton: true,
             showConfirmButton: true,
             cancelButtonText: 'Cancel',
@@ -222,7 +224,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             var userResData;
             if (result.isConfirmed) {
                 setLoader(true);
-                data.map(async (element, index) => {
+                dataSec.map(async (element, index) => {
                     let temp = JSON.stringify({
                         "email": element.email,
                         "isActive": "1"
@@ -242,7 +244,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                         if (userResData.status === 200) {
                             // console.log(data.length)
                             // console.log(index)
-                            if ((data.length) === (index + 2)) {
+                            if ((dataSec.length) === (index + 2)) {
                                 let config = {
                                     method: "GET",
                                     url: AllUrl.infoAllAdmin,
@@ -378,6 +380,8 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                     </table>
                     <NoDataFound rows={rows} />
                     <Pagination
+                        data={table_data.table_data}
+                        rows={rows}
                         page={page}
                         pageIndex={pageIndex}
                         pageCount={pageCount}
@@ -405,7 +409,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchAdminTable: (data) => dispatch(fetchAdminTableData(data)),
-        AdminStatusChange: (data) => dispatch(AdminStatusChange(data)),
+        AdminStatusChange: (data, navigate) => dispatch(AdminStatusChange(data, navigate)),
         getAdminTableData: (data) => dispatch(getAdminTableData(data))
     };
 };
