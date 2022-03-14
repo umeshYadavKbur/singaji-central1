@@ -153,19 +153,19 @@ function SelectColumnFilter({
                     <div className="btn-group filter_btn_hover">
                         {/* === "Join Year" ? "" : option_label */}
                         {
-                            name === "Join Year" ? "" :
-                                <>
-                                    <button
-                                        onClick={(e) => { e.preventDefault() }}
-                                        className="btn filter_btn"
-                                    >
-                                        {name}
-                                    </button>
-                                    <img src={rightArrow} alt=">" width="6px" style={{
-                                        marginTop: "4px",
-                                        marginRight: '10px'
-                                    }} />
-                                </>
+
+                            <>
+                                <button
+                                    onClick={(e) => { e.preventDefault() }}
+                                    className="btn filter_btn"
+                                >
+                                    {name}
+                                </button>
+                                <img src={rightArrow} alt=">" width="6px" style={{
+                                    marginTop: "4px",
+                                    marginRight: '10px'
+                                }} />
+                            </>
                         }
                     </div>
                 </CPopover>
@@ -283,6 +283,16 @@ function StudentTableFirst({ fetchUsers, studentData }) {
             {
                 header: "Join Batch",
                 accessor: "joinBatch",
+                Cell: ({ row: { original, index } }) => {
+                    return (
+                        <p
+
+                        >
+                            {original.joinBatch.toString()}
+
+                        </p>
+                    )
+                },
                 Filter: SelectColumnFilter,
                 filter: MultipleFilter,
             },

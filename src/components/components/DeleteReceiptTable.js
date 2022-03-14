@@ -83,6 +83,12 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
         {
             header: "Cause",
             accessor: "reportRemark",
+            width: 250,
+            
+        },
+        {
+            header: "Amount",
+            accessor: "receivedAmount",
         },
         {
             header: "Reject",

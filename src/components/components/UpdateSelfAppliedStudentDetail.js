@@ -415,12 +415,12 @@ function AddNewStudentPage({ AddNewStudent }) {
                 "fatherContactNumber": formik.values.FatherContactNumber,
                 "email": formik.values.email,
                 "schoolName": formik.values.schoolName,
-                "school12sub": formik.values.school12Sub,
+                "school12Sub": formik.values.school12Sub,
                 "rollNumber12": formik.values.rollNumber12,
                 "persentage12": formik.values.percent12,
                 "persentage10": formik.values.percent10,
                 "rollNumber10": formik.values.rollNumber10,
-                "aadarNo": formik.values.aadharNumber.split(' ').join(''),
+                "aadharNo": formik.values.aadharNumber.split(' ').join(''),
                 "fatherOccupation": formik.values.fatherOccupation,
                 "fatherIncome": formik.values.fatherIncome,
                 "category": formik.values.category,
@@ -431,7 +431,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                 "village": formik.values.village,
                 "tehsil": formik.values.tehsil,
                 "district": formik.values.district,
-                "reg_Fees": formik.values.regisrationFees,
+                "regFees": formik.values.regisrationFees,
                 "firstInstallment": formik.values.firstInstallment,
                 "firstInstallmentDate": formik.values.firstInstallmentDate,
                 "secondInstallment": formik.values.secondInstallment,
@@ -480,7 +480,7 @@ function AddNewStudentPage({ AddNewStudent }) {
 
                 const StudentCourseFees = await axios(config)
                 if (StudentCourseFees.status === 200) {
-                    formik.setFieldValue('courseFees', StudentCourseFees.data[0].total_fees);
+                    formik.setFieldValue('courseFees', StudentCourseFees.data[0].totalFees);
 
                 } else {
                     formik.setFieldValue('courseFees', '');
@@ -1066,10 +1066,7 @@ function AddNewStudentPage({ AddNewStudent }) {
 
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">12<sup>th</sup> Roll Number*</label>  <NumberFormat
-                                                isAllowed={(values) => {
-                                                    const { floatValue } = values;
-                                                    return floatValue <= 10000000000000;
-                                                }}
+                                                format="###############"
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.rollNumber12}
@@ -1134,10 +1131,7 @@ function AddNewStudentPage({ AddNewStudent }) {
 
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">10<sup>th</sup> Roll Number*</label>  <NumberFormat
-                                                isAllowed={(values) => {
-                                                    const { floatValue } = values;
-                                                    return floatValue <= 10000000000000;
-                                                }}
+                                                format="###############"
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.rollNumber10}
@@ -1534,6 +1528,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                                                 onBlur={formik.handleBlur}
                                                 name="commitment"
                                                 type="file"
+                                                accept="image/*"
                                                 id="commitment"
                                                 onChange={(e) => {
                                                     imageToBase64(e.target.files[0], "commitment");
@@ -1770,7 +1765,7 @@ function AddNewStudentPage({ AddNewStudent }) {
                         <button className="btn btn-sm  text-light fw-bold" type="submit"
                             style={{
                                 width: !isDesktopOrLaptop ? "100%" : "220px",
-                                height: '55px',
+                                height: '41px',
                                 fontSize: '18px',
                                 backgroundColor: '#4f83df'
                             }}

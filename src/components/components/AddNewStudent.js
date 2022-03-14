@@ -1032,10 +1032,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                 <div className='row m-1'>
                                     <div className="col-3">
                                         <label className="addStdLable" htmlFor="">12<sup>th</sup> Roll Number*</label>  <NumberFormat
-                                            isAllowed={(values) => {
-                                                const { floatValue } = values;
-                                                return floatValue <= 10000000000000;
-                                            }}
+                                           format="###############"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.rollNumber12}
@@ -1095,6 +1092,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                         <label className="addStdLable" htmlFor="">10<sup>th</sup> Roll Number*</label>  <NumberFormat
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
+                                            format="###############"
                                             value={formik.values.rollNumber10}
                                             name="rollNumber10"
                                             type="text"
@@ -1469,6 +1467,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                             onBlur={formik.handleBlur}
                                             name="commitment"
                                             type="file"
+                                            accept="image/*"
                                             id="commitment"
                                             onChange={(e) => {
                                                 imageToBase64(e.target.files[0], "commitment");

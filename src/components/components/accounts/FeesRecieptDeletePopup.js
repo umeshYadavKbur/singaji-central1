@@ -42,7 +42,7 @@ function FeesRecieptDeletePopup({ data }) {
     // console.log(data)
 
     const validationSchema = Yup.object({
-        remark: Yup.string().required("Please fill the field above"),
+        remark: Yup.string().required("Please fill the field above").test('len_check','length must less than 15 words',val=>val.length<=100),
 
     });
 

@@ -246,7 +246,7 @@ function GlobalFilter({ filter, setFilter, preGlobalFilteredRows }) {
 
 function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData, accountAction }) {
     const [is_dailyReport, set_is_dailyReport] = useState(false)
-    const [MoneyCount, setMoneyCount] = useState({ TStudent: 0, TAmount: 0, TpaidAmount: 0, RAmount: 0, WaiveOff: 0, TpaidAmountByDailyReport: 0 });
+    const [MoneyCount, setMoneyCount] = useState({ TStudent: 0, TAmount: 0, TpaidAmount: 0, RAmount: 0, WaiveOff: 0, TpaidAmountByDailyReport: 0,LateFees:0 });
 
     React.useEffect(() => {
         var config = {
@@ -348,7 +348,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                                 }}
                                 className="mx-auto"
 
-                            >{original.name.slice(0, 1)}</Avatar>
+                            >{original.name?.slice(0, 1)}</Avatar>
                             //  <img
                             // alt="profile"
                             // style={{ cursor: "pointer", borderRadius: '50%', width: "50px", height: "50px" }}
@@ -650,6 +650,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 setColoumns(dailyReportColumn)
                 set_is_dailyReport(true)
             } else {
+                setColoumns(dailyReportColumn)
+                set_is_dailyReport(true)
                 setLoading(true)
                 toast.warning('Data not found !', {
                     position: "top-center",
@@ -664,15 +666,18 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
 
         } catch (error) {
             setLoading(false)
-            toast.warning('Data not found !', {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: false,
-                progress: undefined,
-            });
+            setColoumns(dailyReportColumn)
+            getReport([])
+            set_is_dailyReport(true)
+            // toast.warning('Data Not Found !', {
+            //     position: "top-center",
+            //     autoClose: 2000,
+            //     hideProgressBar: true,
+            //     closeOnClick: true,
+            //     pauseOnHover: true,
+            //     draggable: false,
+            //     progress: undefined,
+            // });
         }
         //if the data is getting successfully than they set the data to upcoming data
     }
@@ -767,11 +772,12 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
         let TpaidAmount = 0;
         let WaiveOff = 0;
         let TpaidAmountByDailyReport = 0;
+        let LateFees = 0;
         data.forEach((ele) => {
             ele = ele.original
             RAmount += ele?.remainAmount
             TAmount += ele?.totalFees
-
+            LateFees += ele?.lateFees
             TpaidAmount += ele?.receivedAmount;
             TpaidAmountByDailyReport += ele?.receivedAmount
             WaiveOff += ele?.waiveOff;
@@ -785,7 +791,8 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                 TAmount,
                 TpaidAmount,
                 WaiveOff,
-                TpaidAmountByDailyReport
+                TpaidAmountByDailyReport,
+                LateFees
 
             }
         })
@@ -860,6 +867,9 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                             </div>
                             <div className="col info-col m-2">
                                 <h5 style={{ marginTop: "12px" }}>{MoneyCount.WaiveOff ? MoneyCount.WaiveOff.toLocaleString('en-IN') : '0'}<br /> <p >Waive Off</p> </h5>
+                            </div>
+                            <div className="col info-col m-2">
+                                <h5 style={{ marginTop: "12px" }}>{MoneyCount.LateFees ? MoneyCount.LateFees.toLocaleString('en-IN') : '0'}<br /> <p >Late Fees</p> </h5>
                             </div>
                         </div>
                         <div className="row  mx-0 mt-3" >

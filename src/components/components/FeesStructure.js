@@ -29,7 +29,7 @@ function FeesStructure({ statusData, createFees, original, changeFeesStatus, tab
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
-    totalFees: Yup.string().required("Required*"),
+    totalFees: Yup.string().required("Required*").test('Is positive', 'must be positive', val => val >= 0).test('Is positive', 'fees must be less than 100000', val => val <= 100000),
     stream: Yup.string().required("Required*"),
     startYear: Yup.number().required("Required*"),
     endYear: Yup.number().required("Required*"),

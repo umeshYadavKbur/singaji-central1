@@ -75,6 +75,19 @@ function FeesRecipt({ accountAction }) {
         }
     }
 
+    const checkwaiveOff = (val) => {
+        const amt = parseInt(val?.split(',').join(''));
+        const year = formik.values.studentClassYear;
+        const feesAmount = formik.values.feesAmount;
+        const amt3 = parseInt(feesAmount?.split(',').join(''));
+        const data = StudentAccountData.pendingFee.filter((ele) => ele.year === year)[0];
+        console.log(data);
+        let amt2 = parseInt(data.pendingFees);
+        console.log(amt);
+        console.log(amt2);
+        console.log(amt3)
+        return (amt <= (amt2 - amt3))
+    }
     const checkAmount = (val) => {
         const amt = parseInt(val?.split(',').join(''));
         const year = formik.values.studentClassYear;
@@ -143,8 +156,13 @@ function FeesRecipt({ accountAction }) {
             .test('Is positive', `amount can't be greater than total pending fees`, checkAmount)
             .test('Is GKB positive', `amount can't be greater than GKB pending fees OR total pending fees`, checkGKBAmount)
             .test('Is POST positive', `amount can't be greater than postmetric pending fees OR total pending fees`, checkPOSTAmount),
-        LateFeeAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0),
-        waiveOff: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0),
+        LateFeeAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0).test('Is not more', `amount can't be greater than ₹1000`, val=> val<=1000),
+        waiveOff: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') > 0)
+            .test('Is positive', `amount can't be greater than total pending fees`, checkAmount)
+            .test('Is GKB positive', `amount can't be greater than GKB pending fees OR total pending fees`, checkGKBAmount)
+            .test('Is POST positive', `amount can't be greater than postmetric pending fees OR total pending fees`, checkPOSTAmount)
+            .test("not more than","waive of is not more than pending amount - fees Amount",checkwaiveOff)
+            ,
         installmentNo: Yup.string().required("Required!"),
         payBy: Yup.string().required("Required!"),
         Remark: Yup.string().required("Required!").trim(),
@@ -198,7 +216,7 @@ function FeesRecipt({ accountAction }) {
                     "receivedType": formik.values.payBy,
                     "chequeNo": formik.values.ChequeNo,
                     "chequeDate": formik.values.chequeDate,
-                    "receiptDate":formik.values.recieptdate,
+                    "receiptDate": formik.values.recieptdate,
                     "bankName": formik.values.BankName,
                     "remark": formik.values.Remark
                 })
@@ -389,7 +407,7 @@ function FeesRecipt({ accountAction }) {
                             )}
                         </div>
                         <div className="col">
-                            <label className='addStdLable' htmlFor="">Reciept Date</label>
+                            <label className='addStdLable' htmlFor="">Receipt Date</label>
                             <input name='recieptdate' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.recieptdate} type="date" className='form-control' placeholder='Date' />
                             {formik.errors.recieptdate && formik.touched.recieptdate ? (
                                 <div className="text-danger fs-6">
@@ -644,7 +662,7 @@ function FeesRecipt({ accountAction }) {
                                             <div className="row p-1" style={{ backgroundColor: 'orange' }}>
                                                 <div className="col">
                                                     <p className='p-1 m-0' style={{ fontSize: '14px', color: 'white' }}>
-                                                        <span style={{ fontSize: '11px' }}>Reciept for</span>
+                                                        <span style={{ fontSize: '11px' }}>Receipt for</span>
                                                         <br />
                                                         {StudentName}
                                                     </p>
