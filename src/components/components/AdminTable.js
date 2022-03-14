@@ -20,6 +20,7 @@ import NoDataFound from '../assests/common/NoDataFound';
 import axios from "axios";
 import { useState } from 'react';
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -27,6 +28,7 @@ import { toast } from 'react-toastify'
 function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTableData }) {
     const token = localStorage.getItem("token");
     const [loader, setLoader] = useState(false);
+    const navigate = useNavigate()
     React.useEffect(() => {
         var config = {
             method: "GET",
@@ -113,7 +115,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                             // console.log("++++++++++++++++++++++++++++");
                             // console.log('====================================');
                             if (result.isConfirmed) {
-                                let res = await AdminStatusChange(original)
+                                let res = await AdminStatusChange(original, navigate)
                                 // console.log(res);
                                 if (res === 200) {
                                     var config = {
@@ -405,7 +407,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchAdminTable: (data) => dispatch(fetchAdminTableData(data)),
-        AdminStatusChange: (data) => dispatch(AdminStatusChange(data)),
+        AdminStatusChange: (data, navigate) => dispatch(AdminStatusChange(data, navigate)),
         getAdminTableData: (data) => dispatch(getAdminTableData(data))
     };
 };

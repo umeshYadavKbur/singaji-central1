@@ -454,7 +454,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                             {headerGroups.map((headerGroup) => (
                                 <tr {...headerGroup.getHeaderGroupProps()}>
                                     {headerGroup.headers.map((column) => (
-                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                        <th  {...column.getHeaderProps(column.getSortByToggleProps())}>
                                             {column.render("header")}
                                             <span>
                                                 {column.isSorted ? (
@@ -465,10 +465,7 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                                         // <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
                                                     )
                                                 ) : (
-
                                                     column.id !== 'Srno' && column.id !== 'selection' && <img src={updown_sort} style={{ marginLeft: "5px" }} alt="" />
-
-
                                                 )}
                                             </span>
                                         </th>
@@ -476,14 +473,14 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                                 </tr>
                             ))}
                         </thead>
-                        <tbody {...getTableBodyProps()}>
+                        <tbody{...getTableBodyProps()}>
                             {page.map((row) => {
                                 prepareRow(row);
                                 return (
                                     <tr {...row.getRowProps()}>
                                         {row.cells.map((cell) => {
                                             return (
-                                                <td {...cell.getCellProps()}>{cell.render("Cell")} </td>
+                                                <td style={{ maxWidth: '250px' }} {...cell.getCellProps()}>{cell.render("Cell")} </td>
                                             );
                                         })}
                                     </tr>

@@ -67,8 +67,9 @@ function SelectColumnFilter({
 
     let offsetObj = [0, 0];
 
-    if (id === 'branch') offsetObj = [78, 18]
-    if (id === 'joinBatch') offsetObj = [35, 18]
+    if (id === 'branch') offsetObj = [190, 18]
+    if (id === 'joinBatch') offsetObj = [150, 18]
+    if (id === 'year') offsetObj = [40, 18]
 
 
 
@@ -81,7 +82,9 @@ function SelectColumnFilter({
         case 'joinBatch':
             name = 'Join Year';
             break;
-
+        case 'year':
+            name = 'Year';
+            break;
         default:
             break;
     }
@@ -104,9 +107,8 @@ function SelectColumnFilter({
                                         option_label = 'Active'
                                     else
                                         option_label = 'Deactive'
-
-
                                 }
+
 
                                 return (
                                     <Fragment key={i}>
@@ -134,9 +136,9 @@ function SelectColumnFilter({
                                                 >
 
                                                 </input>
-
-                                                {option_label}
-
+                                                {
+                                                    option_label
+                                                }
                                             </label>
                                         </div>
                                     </Fragment>
@@ -147,17 +149,24 @@ function SelectColumnFilter({
                     placement="right"
 
                 >
+
                     <div className="btn-group filter_btn_hover">
-                        <button
-                            onClick={(e) => { e.preventDefault() }}
-                            className="btn filter_btn"
-                        >
-                            {name}
-                        </button>
-                        <img src={rightArrow} alt=">" width="6px" style={{
-                            marginTop: "4px",
-                            marginRight: '10px'
-                        }} />
+                        {/* === "Join Year" ? "" : option_label */}
+                        {
+                            name === "Join Year" ? "" :
+                                <>
+                                    <button
+                                        onClick={(e) => { e.preventDefault() }}
+                                        className="btn filter_btn"
+                                    >
+                                        {name}
+                                    </button>
+                                    <img src={rightArrow} alt=">" width="6px" style={{
+                                        marginTop: "4px",
+                                        marginRight: '10px'
+                                    }} />
+                                </>
+                        }
                     </div>
                 </CPopover>
             </div >

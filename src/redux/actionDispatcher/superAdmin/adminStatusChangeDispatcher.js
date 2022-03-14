@@ -6,7 +6,7 @@ var axios = require('axios');
 // import getData from "../../services/agent";
 
 
-export const AdminStatusChange = (data) => {
+export const AdminStatusChange = (data, navigate) => {
     // console.log("data dispatch", data);
     return async (dispatch) => {
         // dispatch(AdminStatusChangeRequest());
@@ -31,6 +31,10 @@ export const AdminStatusChange = (data) => {
             userResData = await axios(config);
             // console.log(userResData)
             if (userResData.status === 200) {
+                let email = localStorage.getItem('email')
+                if (data.email === email) {
+                    navigate('/');
+                }
                 dispatch(AdminStatusChangeSuccess(userResData.data));
                 toast.success(`Successfull `, {
                     position: "top-center",
