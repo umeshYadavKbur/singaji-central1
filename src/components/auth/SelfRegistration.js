@@ -870,6 +870,10 @@ function SelfRegistration() {
                                     <div className="d-flex form-group col-md-6 my-2 ">
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">10<sup>th</sup> Roll Number<span style={{ color: 'red' }}>*</span></label>  <NumberFormat
+                                                isAllowed={(values) => {
+                                                    const { floatValue } = values;
+                                                    return floatValue <= 10000000000000;
+                                                }}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.rollNumber10}
@@ -956,6 +960,10 @@ function SelfRegistration() {
                                     <div className="d-flex form-group col-md-6 my-2">
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">12<sup>th</sup> Roll Number</label>  <NumberFormat
+                                                isAllowed={(values) => {
+                                                    const { floatValue } = values;
+                                                    return floatValue <= 10000000000000;
+                                                }}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.rollNumber12}
