@@ -6,6 +6,8 @@ import { logout } from "../../redux/actionDispatcher/auth/authDispatcher";
 import { connect } from "react-redux";
 import { Tooltip, Whisper } from "rsuite";
 import SettingsModalFile from "./SettingsModalFile";
+import imageCompression from "browser-image-compression";
+import david from "../assests/image/Avtar.jpeg"
 
 const AppHeaderDropdown = ({ userData, logout }) => {
   // const history = useHistory();
@@ -17,6 +19,28 @@ const AppHeaderDropdown = ({ userData, logout }) => {
     localStorage.clear();
     navigate("/login");
   };
+  const [photo, setPhoto] = useState("");
+  async function imageToBase64(file) {
+    if (file) {
+      const compressedFile = await imageCompression(file, {
+        maxSizeMB: 0.05,
+        maxWidthOrHeight: 1920
+      });
+      // var size = compressedFile.size / 1024 / 1024
+      // size.slice(0,4)
+      // console.log(` file size ${size} mb`);
+      var reader = new FileReader();
+      reader.readAsDataURL(compressedFile);
+      reader.onload = async () => {
+        var base64 = reader.result;
+        console.log(base64);
+        setPhoto(base64);
+      };
+      reader.onerror = (err) => {
+        console.log(err);
+      };
+    }
+  }
 
 
   return (
@@ -33,6 +57,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
             height: "42px",
             width: "42px",
             margin: "10px",
+            marginRight: "0px",
             cursor: "pointer"
           }}
         />
@@ -41,14 +66,47 @@ const AppHeaderDropdown = ({ userData, logout }) => {
         show ?
           <div style={{ position: 'fixed', marginLeft: '-270px', marginTop: '10px' }}>
             <div style={{ flexDirection: 'column', backgroundColor: '#7e84a3', minHeight: '369px', width: '294px', alignItems: 'center', paddingTop: '49px', display: 'flex', flex: 'basis', zIndex: '510' }}>
-              <img
+              {/* <img
                 alt=""
                 src={avatar8}
                 style={{
                   height: "82px",
                   width: "82px",
                 }}
-              />
+              /> */}
+               <input
+        type="file"
+        accept="image/*"
+        name="photo"
+        id="photoOK"
+        style={{ display: "none",cursor: "pointer" }}
+        onChange={(e) => imageToBase64(e.target.files[0])}
+      /> <div>
+      {photo === "" ? (
+        <img
+          height="100px"
+          width="100px"
+          onClick={() => {
+            document.getElementById("photoOK").click();
+          }}
+          style={{borderRadius: "50%" , cursor: "pointer"}}
+          src={david}
+          alt="--"
+        />
+      ) : (
+        <img
+          onClick={() => {
+            document.getElementById("photoOK").click();
+          }}
+          style={{borderRadius: "50%", cursor: "pointer"}}
+
+          height="100px"
+          width="100px"
+          src={photo}
+          alt="---"
+        />
+      )}
+    </div>
               <p style={{
                 textAlign: 'center',
                 color: 'white',
@@ -82,6 +140,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
               <button
                 style={{
                   marginTop: '10px',
+
                   outline: "1px solid white",
                   color: "white",
                   backgroundColor: "#7e84a3",

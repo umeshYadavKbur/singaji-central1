@@ -172,3 +172,22 @@ input.largerCheckbox {
   cursor: pointer;
   direction: ltr;
 }
+
+
+/* ------------------header link side profile admin name div ------------------------ */
+.admin-name{
+  z-index: -1;
+    height: 42px;
+    width: auto;
+    border-radius: 8px;
+    margin-left: -20px;
+    background-color: #e8e6e9;
+    color: #717171;
+    /* padding: auto; */
+    text-align: center;
+  padding: 15px;
+  padding-left: 30px;
+  padding-top: 3px;
+  font-weight: 500;
+  font-size: larger;
+}

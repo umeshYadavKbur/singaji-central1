@@ -4,6 +4,7 @@ function Navbar({ Options }) {
   return (
     <div >
       <Options />
+      
     </div>
   )
 }

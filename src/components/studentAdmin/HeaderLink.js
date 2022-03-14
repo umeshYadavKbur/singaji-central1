@@ -4,6 +4,7 @@ import AppHeaderDropdown from "../components/HeaderDropdown";
 // import CreateAdminPopup from "../components/CreateAdminPopup";
 // import FeesStructure from "../components/FeesStructure";
 import { useLocation, useNavigate } from "react-router-dom";
+import AdminName from "../assests/common/AdminName";
 
 const HeaderLink = () => {
     const currentLocation = useLocation().pathname;
@@ -35,7 +36,7 @@ const HeaderLink = () => {
             <div className="navbar_container_start_side">
                 <h3 className=" fw-bolder ml-4" style={{ color: "#5A607F" }}>{location}</h3>
             </div>
-            <div className="navbar_container_end_side">
+            <div className="navbar_container_end_side mr-5">
                 {location === "Applied Student" && (
                     <div className="changing_navbar_containt_conditional">
                         <button
@@ -58,6 +59,7 @@ const HeaderLink = () => {
                     </div>
                 )}
                 <AppHeaderDropdown />
+              <AdminName/>
             </div>
         </div>
     );
