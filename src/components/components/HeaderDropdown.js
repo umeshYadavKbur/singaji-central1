@@ -11,6 +11,9 @@ const AppHeaderDropdown = ({ userData, logout }) => {
   // const history = useHistory();
   const [show, setShow2] = useState(false)
   const navigate = useNavigate();
+  const myname = localStorage.getItem("user");
+  const userEmail = localStorage.getItem("email");
+
 
   const logoutfunction = () => {
     logout();
@@ -58,8 +61,8 @@ const AppHeaderDropdown = ({ userData, logout }) => {
                   color: 'white',
                   fontSize: '13px',
                   fontWeight: 'bold'
-                }}>{userData.userInfo}</span>
-                <br /> {userData.email}</p>
+                }}>{myname}</span>
+                <br /> {userEmail}</p>
               <hr style={{
                 color: 'white',
                 width: '294px',

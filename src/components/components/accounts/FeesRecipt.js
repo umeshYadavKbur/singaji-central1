@@ -638,7 +638,7 @@ function FeesRecipt({ accountAction }) {
                                         <div className='mx-5 my-3 shadow'>
 
 
-                                            <div className='row p-1' style={{ fontSize: '12px', backgroundColor: 'rgb(255 135 0)', color: 'white', borderRadius: '5px 5px  0 0 ' }}>Sant Singaji Institude Of Science & Managment</div>
+                                            <div className='row p-1' style={{ fontSize: '12px', backgroundColor: 'rgb(255 135 0)', color: 'white', borderRadius: '5px 5px  0 0 ' }}>Sant Singaji institute Of Science & management</div>
 
                                             <div className="row p-1" style={{ backgroundColor: 'orange' }}>
                                                 <div className="col">

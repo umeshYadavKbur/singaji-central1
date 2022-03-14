@@ -30,7 +30,7 @@ function HeaderColumn({ original, changeFeesStatus }) {
     <button
       className="table_btn_size"
       style={
-        original.active === 1
+        original.active === 0
           ? DeactivateButton : ActivateButton
       }
       onClick={() => {
@@ -62,7 +62,7 @@ function HeaderColumn({ original, changeFeesStatus }) {
         });
       }}
     >
-      {original.active === 1 ? "Deactive" : "Active"}
+      {original.active === 0 ? "Deactive" : "Active"}
     </button>
   );
 }
