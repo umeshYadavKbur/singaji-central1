@@ -203,7 +203,7 @@ function AddNewStudentPage({ AddNewStudent }) {
         secondInstallmentDate: editDataSelf ? editDataSelf.secondInstallmentDate : "",
         secondInstallment: editDataSelf ? editDataSelf.secondInstallment : 0,
         thirdInstallmentDate: editDataSelf ? editDataSelf.thirdInstallmentDate : "",
-        thirdInstallment: editDataSelf ? editDataSelf.thirdInstallment -(editDataSelf.scholarshipAmount )  : 0,
+        thirdInstallment: editDataSelf ? editDataSelf.thirdInstallment - (editDataSelf.scholarshipAmount) : 0,
 
         feesScheme: editDataSelf ? editDataSelf.feesScheme : 'none',
         sponsorshipType: editDataSelf ? editDataSelf.sponsorshipType : 'none',
@@ -1066,6 +1066,10 @@ function AddNewStudentPage({ AddNewStudent }) {
 
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">12<sup>th</sup> Roll Number*</label>  <NumberFormat
+                                                isAllowed={(values) => {
+                                                    const { floatValue } = values;
+                                                    return floatValue <= 10000000000000;
+                                                }}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.rollNumber12}
@@ -1130,6 +1134,10 @@ function AddNewStudentPage({ AddNewStudent }) {
 
                                         <div className="col">
                                             <label className="addStdLable" htmlFor="">10<sup>th</sup> Roll Number*</label>  <NumberFormat
+                                                isAllowed={(values) => {
+                                                    const { floatValue } = values;
+                                                    return floatValue <= 10000000000000;
+                                                }}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.rollNumber10}

@@ -198,7 +198,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
         secondInstallmentDate: editData ? editData.secondInstallmentDate : "",
         secondInstallment: editData ? editData.secondInstallment : 0,
         thirdInstallmentDate: editData ? editData.thirdInstallmentDate : "",
-        thirdInstallment: editData ? editData.thirdInstallment-(editData.scholarshipAmount ) : 0,
+        thirdInstallment: editData ? editData.thirdInstallment - (editData.scholarshipAmount) : 0,
 
         feesScheme: editData ? editData.feesScheme : 'none',
         sponsorshipType: editData ? editData.sponsorshipType : 'none',
@@ -1032,6 +1032,10 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                 <div className='row m-1'>
                                     <div className="col-3">
                                         <label className="addStdLable" htmlFor="">12<sup>th</sup> Roll Number*</label>  <NumberFormat
+                                            isAllowed={(values) => {
+                                                const { floatValue } = values;
+                                                return floatValue <= 10000000000000;
+                                            }}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.rollNumber12}
@@ -1107,6 +1111,10 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                     </div>
                                     <div className="col-3">
                                         <label className="addStdLable" htmlFor="">10<sup>th</sup> Percentage*</label>  <NumberFormat
+                                            isAllowed={(values) => {
+                                                const { floatValue } = values;
+                                                return floatValue <= 10000000000000;
+                                            }}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             value={formik.values.percent10}
