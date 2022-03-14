@@ -24,7 +24,7 @@ import UpdateStudentPersonalInfo from './UpdateStudentPersonalInfo';
 import './Styles/StudentAccountTable.css'
 import LoaderButton from '../../assests/common/LoaderButton'
 import { Tooltip, Whisper } from 'rsuite';
-import BackButton from '../../assests/common/BackButton';
+// import BackButton from '../../assests/common/BackButton';
 
 
 const StyledModal = styled(ModalUnstyled)`

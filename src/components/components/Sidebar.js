@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./styles/sidebar.css";
 import logoimage from "../assests/image/logoimage.png";
 import logo from "../assests/image/logo.png";
-import david from "../assests/image/david.png";
 import { connect } from "react-redux";
 
 import {
