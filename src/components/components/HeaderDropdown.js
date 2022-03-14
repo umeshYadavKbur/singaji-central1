@@ -8,9 +8,12 @@ import { Tooltip, Whisper } from "rsuite";
 import SettingsModalFile from "./SettingsModalFile";
 import imageCompression from "browser-image-compression";
 import david from "../assests/image/Avtar.jpeg"
+import AllUrl from "../../redux/constants/url";
+import axios from "axios";
 
 const AppHeaderDropdown = ({ userData, logout }) => {
   // const history = useHistory();
+  const token = localStorage.getItem("token");
   const [show, setShow2] = useState(false)
   const navigate = useNavigate();
 
@@ -20,6 +23,37 @@ const AppHeaderDropdown = ({ userData, logout }) => {
     navigate("/login");
   };
   const [photo, setPhoto] = useState("");
+  React.useEffect(() => {
+    if (photo) {
+      async function fetchMyAPI() {
+        console.log(photo);
+        let response = await axios(config)
+        setPhoto("")
+      }
+      var data = JSON.stringify({
+        userId: "",
+        name: "",
+        oldPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+        photo: photo
+      })
+      var config = {
+        method: "POST",
+        url: AllUrl.settingApi,
+        headers: {
+          authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+      fetchMyAPI(config)
+    }
+    return () => {
+
+    }
+  }, [photo])
+
   async function imageToBase64(file) {
     if (file) {
       const compressedFile = await imageCompression(file, {
@@ -43,6 +77,8 @@ const AppHeaderDropdown = ({ userData, logout }) => {
   }
 
 
+
+
   return (
     <div>
       <Whisper placement="bottom" controlId="control-id-hover" trigger="hover" speaker={
@@ -52,7 +88,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
       }>
         <img
           onClick={() => setShow2(!show)}
-          src={avatar8} alt=""
+          src={userData.photo} alt=""
           style={{
             height: "42px",
             width: "42px",
@@ -74,39 +110,39 @@ const AppHeaderDropdown = ({ userData, logout }) => {
                   width: "82px",
                 }}
               /> */}
-               <input
-        type="file"
-        accept="image/*"
-        name="photo"
-        id="photoOK"
-        style={{ display: "none",cursor: "pointer" }}
-        onChange={(e) => imageToBase64(e.target.files[0])}
-      /> <div>
-      {photo === "" ? (
-        <img
-          height="100px"
-          width="100px"
-          onClick={() => {
-            document.getElementById("photoOK").click();
-          }}
-          style={{borderRadius: "50%" , cursor: "pointer"}}
-          src={david}
-          alt="--"
-        />
-      ) : (
-        <img
-          onClick={() => {
-            document.getElementById("photoOK").click();
-          }}
-          style={{borderRadius: "50%", cursor: "pointer"}}
+              <input
+                type="file"
+                accept="image/*"
+                name="photo"
+                id="photoOK"
+                style={{ display: "none", cursor: "pointer" }}
+                onChange={(e) => imageToBase64(e.target.files[0])}
+              /> <div>
+                {photo === "" ? (
+                  <img
+                    height="100px"
+                    width="100px"
+                    onClick={() => {
+                      document.getElementById("photoOK").click();
+                    }}
+                    style={{ borderRadius: "50%", cursor: "pointer" }}
+                    src={david}
+                    alt="--"
+                  />
+                ) : (
+                  <img
+                    onClick={() => {
+                      document.getElementById("photoOK").click();
+                    }}
+                    style={{ borderRadius: "50%", cursor: "pointer" }}
 
-          height="100px"
-          width="100px"
-          src={photo}
-          alt="---"
-        />
-      )}
-    </div>
+                    height="100px"
+                    width="100px"
+                    src={photo}
+                    alt="---"
+                  />
+                )}
+              </div>
               <p style={{
                 textAlign: 'center',
                 color: 'white',
@@ -124,7 +160,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
                 height: '1px',
                 opacity: '1'
               }} />
-                      
+
               <div style={{ marginTop: '-23px', cursor: 'pointer' }}>
 
                 <span style={{
@@ -133,7 +169,7 @@ const AppHeaderDropdown = ({ userData, logout }) => {
                   marginLeft: '8px'
                 }}>
                   {/* Settings */}
-                  <SettingsModalFile   setShow2={setShow2} />
+                  <SettingsModalFile setShow2={setShow2} />
                 </span>
               </div>
               <hr style={{ color: 'white', width: '294px', height: '1px', opacity: '1' }} />

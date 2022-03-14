@@ -12,6 +12,7 @@ const initialState = {
   email: '',
   token: "",
   userInfo: "",
+  photo: "",
   error: false,
 };
 
@@ -31,6 +32,7 @@ const userReducer = (state = initialState, action) => {
         token: action.payload.token,
         userInfo: action.payload.user,
         email: action.payload.email,
+        photo: action.payload.photo,
       };
     case LOGIN_FAIL:
       return {
