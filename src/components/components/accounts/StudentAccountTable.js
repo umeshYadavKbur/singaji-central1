@@ -1051,7 +1051,7 @@ function StudentAccountTable({ backOriginal, getReport, fetchUsers, studentData,
                     <NoDataFound rows={rows} />
                     {/* for the pagination section */}
 
-                    <Pagination
+                    <Pagination data={studentData.table_data} rows={rows}
                         page={page}
                         pageIndex={pageIndex}
                         pageCount={pageCount}

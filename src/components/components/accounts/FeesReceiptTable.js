@@ -512,7 +512,7 @@ function FeesReceiptTable({ feesReceipt, fetchData }) {
                     </table>
                     <NoDataFound rows={rows} />
                     {/* ================= passing table page data too the pagintaion component ================= */}
-                    <Pagination
+                    <Pagination data={feesReceipt.table_data} rows={rows}
                         page={page}
                         pageIndex={pageIndex}
                         pageCount={pageCount}

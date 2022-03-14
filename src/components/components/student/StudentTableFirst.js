@@ -513,7 +513,7 @@ function StudentTableFirst({ fetchUsers, studentData }) {
                     </table>
                     <NoDataFound rows={rows} />
 
-                    <Pagination
+                    <Pagination data={studentData.table_data} rows={rows}
                         page={page}
                         pageIndex={pageIndex}
                         pageCount={pageCount}

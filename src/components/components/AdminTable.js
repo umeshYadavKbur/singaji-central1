@@ -195,7 +195,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
     // console.log("Here", checkboxData);
 
     const ActiveMultipleAdmin = async () => {
-        var data = JSON.parse(checkboxData)
+        let dataSec = JSON.parse(checkboxData)
         Swal.fire({
             title: "Activation",
 
@@ -203,7 +203,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                 '<hr>' +
                 'Are you sure?' +
                 '<br>' +
-                `You want to activate ${data.length} this admin`,
+                `You want to activate ${dataSec.length} this admin`,
             showCancelButton: true,
             showConfirmButton: true,
             cancelButtonText: 'Cancel',
@@ -224,7 +224,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
             var userResData;
             if (result.isConfirmed) {
                 setLoader(true);
-                data.map(async (element, index) => {
+                dataSec.map(async (element, index) => {
                     let temp = JSON.stringify({
                         "email": element.email,
                         "isActive": "1"
@@ -244,7 +244,7 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                         if (userResData.status === 200) {
                             // console.log(data.length)
                             // console.log(index)
-                            if ((data.length) === (index + 2)) {
+                            if ((dataSec.length) === (index + 2)) {
                                 let config = {
                                     method: "GET",
                                     url: AllUrl.infoAllAdmin,
@@ -380,6 +380,8 @@ function DataTable({ table_data, fetchAdminTable, AdminStatusChange, getAdminTab
                     </table>
                     <NoDataFound rows={rows} />
                     <Pagination
+                        data={table_data.table_data}
+                        rows={rows}
                         page={page}
                         pageIndex={pageIndex}
                         pageCount={pageCount}

@@ -489,7 +489,9 @@ function DeleteReceiptTable({ table_data, fetchFeesTable }) {
                         </tbody>
                     </table>
                     <NoDataFound rows={rows} />
-                    <Pagination
+                    <Pagination data={table_data.table_data}
+
+                        rows={rows}
                         page={page}
                         pageIndex={pageIndex}
                         pageCount={pageCount}

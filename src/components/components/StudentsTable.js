@@ -235,7 +235,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
     // eslint-disable-next-line
   }, []);
 
-//  || original.receiver !== localStorage.getItem('user')
+  //  || original.receiver !== localStorage.getItem('user')
 
   const {
     getTableProps,
@@ -379,7 +379,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
             </tbody>
           </table>
           <NoDataFound rows={rows} />
-          <Pagination
+          <Pagination data={table_data.table_data} rows={rows}
             page={page}
             pageIndex={pageIndex}
             pageCount={pageCount}
