@@ -42,7 +42,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play, Options }) => {
                 id="sidebar_btn"
                 onClick={handleClick}
                 src={!toggle ? back_btn : toggle_btn_icon}
-                style={{ marginBlockEnd: "6px" }}
+                style={{ marginBlockEnd: "-161vh" }}
                 alt="back"
               />
             </label>
@@ -56,7 +56,7 @@ const Sidebar = ({ hideSideBar, showSideBar, isPlaying, play, Options }) => {
             ) : (
               <>
                 {/* <img src={david} className="small_logo_avtar" alt="" /> */}
-                <img src={david} className="profile_image2" alt="" />
+                <img src=""  className="profile_image2" alt="" />
                 <img src={logo} className="small_logo" alt="" />
               </>
             )}

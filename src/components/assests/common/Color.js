@@ -1,4 +1,5 @@
 
+
 // ========= All the table buttons ====================================
 
 export const DeactivateButton = {
@@ -8,7 +9,7 @@ export const DeactivateButton = {
     backgroundColor: "#CCE5FF",
     color: "#4F83DF",
     // fontSize: '12px',
-    fontWeight: "bold",
+    fontWeight: "500",
     border: '1px #FFC700',
 }
 
@@ -51,7 +52,7 @@ export const PendingButton = {
     // backgroundColor: "#edcda4",
     backgroundColor: "#f8d7da",
     borderRadius: "5px",
-    fontWeight: "bold",
+    fontWeight: "500",
     color: "#f16f50",
     border: 'none',
 }
@@ -62,7 +63,10 @@ export const RecievedButton = {
     // backgroundColor: "#edcda4",
     backgroundColor: "#A4E6B1",
     borderRadius: "5px",
-    fontWeight: "bold",
+    fontWeight: "500",
     color: "#056A0C",
     border: 'none',
 }
+
+
+

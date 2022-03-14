@@ -4,6 +4,7 @@ import AppHeaderDropdown from "../components/HeaderDropdown";
 import CreateAdminPopup from "../components/CreateAdminPopup";
 import FeesStructure from "../components/FeesStructure";
 import { useLocation, useNavigate } from "react-router-dom";
+import BackButton from "../assests/common/BackButton";
 
 const HeaderLink = () => {
     if (localStorage.getItem('userEdit')) {
@@ -44,8 +45,9 @@ const HeaderLink = () => {
             if (editData) {
                 return (
                     <div className='d-flex flex-column'>
-                        <span className="m-0 p-0">{editData.accountInfo.firstName + "  " + editData.accountInfo.lastName} <span className="recieved-fee-circle" style={{ backgroundColor:`${editData.accountInfo.isActive === 'true'?'#56F000':'#f99300'}`  }}></span></span>
-                        <span className="" style={{ fontSize: '15px' }}>{`${editData.accountInfo.branch}-${editData.accountInfo.year} (${editData.accountInfo.joinBatch}-${editData.accountInfo.joinBatch + 3})`}</span>
+                        
+                        <span className="m-0 p-0"><BackButton/>{editData.accountInfo.firstName + "  " + editData.accountInfo.lastName} <span className="recieved-fee-circle" style={{ backgroundColor:`${editData.accountInfo.isActive === 'true'?'#56F000':'#f99300'}`  }}></span></span>
+                        <span className="" style={{ fontSize: '15px' , marginLeft: "27px" }}>{`${editData.accountInfo.branch}-${editData.accountInfo.year} (${editData.accountInfo.joinBatch}-${editData.accountInfo.joinBatch + 3})`}</span>
                     </div>
                 )
             }
@@ -71,7 +73,7 @@ const HeaderLink = () => {
     return (
         <div className="container_navbar">
             <div className="navbar_container_start_side">
-                <h3 className="fw-bolder ml-4" style={{ color: "#5A607F" }}>{location}</h3>
+                <h3 className="fw-bolder ml-4" style={{ color: "#5A607F" }}>{location === "Add New Student" ? <BackButton  addStudent="true"  /> : ''}{location}</h3>
             </div>
             <div className="navbar_container_end_side">
                 {location === "Fees Structure" && (
