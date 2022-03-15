@@ -44,6 +44,8 @@ function FeesRecipt({ accountAction }) {
     var totalReceivedFees = 0;
     var totalpendingGKB = 0;
     var totalpendingPostmetric = 0;
+    var totalLateFees = 0;
+    var totalWaiveOf = 0;
 
 
     (StudentAccountData.pendingFee).forEach((ele) => {
@@ -53,6 +55,8 @@ function FeesRecipt({ accountAction }) {
         totalpendingFees = totalpendingFees + parseInt(ele.pendingFees)
         totalpendingPostmetric = totalpendingPostmetric + parseInt(ele.pendingPostmetric)
         totalpendingGKB = totalpendingGKB + parseInt(ele.pendingGKB)
+        totalWaiveOf = totalWaiveOf + parseInt(ele.waiveOf)
+        totalLateFees = totalLateFees + parseInt(ele.lateFees)
 
     })
 
@@ -576,6 +580,12 @@ function FeesRecipt({ accountAction }) {
                             <div className="d-flex col-2">
                                 <label className='addStdLable' htmlFor="">GKB Pending Fees</label>
                             </div>
+                            <div className="d-flex col">
+                                <label className='addStdLable' htmlFor="">WaiveOff</label>
+                            </div>
+                            <div className="d-flex col">
+                                <label className='addStdLable' htmlFor="">Late Fees</label>
+                            </div>
 
                         </div>
                         {StudentAccountData.pendingFee.map(pendingFee => (
@@ -602,6 +612,12 @@ function FeesRecipt({ accountAction }) {
                                 <div className="d-flex col-2">
                                     <label htmlFor="">{pendingFee.pendingGKB}</label>
                                 </div>
+                                <div className="d-flex col">
+                                    <label htmlFor="">{pendingFee.waiveOf}</label>
+                                </div>
+                                <div className="d-flex col">
+                                    <label htmlFor="">{pendingFee.lateFees}</label>
+                                </div>
                             </div>
                         ))}
 
@@ -625,6 +641,12 @@ function FeesRecipt({ accountAction }) {
                             </div>
                             <div className="d-flex col-2">
                                 <label className='addStdLable' htmlFor="">{totalpendingGKB} </label>
+                            </div>
+                            <div className="d-flex col">
+                                <label className='addStdLable' htmlFor="">{totalWaiveOf} </label>
+                            </div>
+                            <div className="d-flex col">
+                                <label className='addStdLable' htmlFor="">{totalLateFees} </label>
                             </div>
                         </div>
 
