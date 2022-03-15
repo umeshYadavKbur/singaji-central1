@@ -64,7 +64,8 @@ function SelectColumnFilter({
 
   let offsetObj = [0, 0];
 
-  if (id === 'stream') offsetObj = [75, 18]
+  if (id === 'year') offsetObj = [60, 18]
+  else if (id === 'branch') offsetObj = [153, 18]
   else if (id === 'category') offsetObj = [48, 18]
   else if (id === 'feesScheme') offsetObj = [65, 18]
 
@@ -251,9 +252,26 @@ function PendingScholarshipTable({ scholarData, fetchData }) {
       },
       {
         header: "Stream",
-        accessor: "stream",
+        accessor: "branch",
+        Cell: ({ row: { original } }) => (
+          <span className='' >
+            {`${original.branch}( ${original.year} )`}
+          </span>
+        ),
         Filter: SelectColumnFilter,
         filter: MultipleFilter,
+      },
+      {
+        header: () => <span style={{ display: 'none', width: '0px' }}></span>,
+        accessor: "year",
+        Filter: SelectColumnFilter,
+        filter: MultipleFilter,
+        Cell: ({ row: { original } }) => (
+          <>
+          </>
+        ),
+        width: 0
+
       },
       {
         header: "Category",
