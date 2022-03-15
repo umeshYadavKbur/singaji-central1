@@ -22,10 +22,11 @@ import LoaderButton from "../assests/common/LoaderButton";
 import profile_image from "../assests/image/profile_img.svg"
 import imageCompression from 'browser-image-compression';
 import Plus_icon from '../assests/image/Plus_icon.svg'
+import { useNavigate } from 'react-router-dom';
 
 
 function SelfRegistration() {
-
+    const navigate = useNavigate()
 
     const [branchNames, setBranchNames] = useState([{ subjects: 'loading...', id: 0 }])
     const [trackNames, setTrackNames] = useState([{ trackName: 'loading...', trackId: 0 }])
@@ -106,11 +107,11 @@ function SelfRegistration() {
     }
 
     const validationSchema = Yup.object({
-        firstName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates').required("Required!").test('len', 'Must be less then 24 character', val => val?.length < 24),
+        firstName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!").test('len', 'Must be less then 24 character', val => val?.length < 24),
         lastName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates').required("Required!").test('len', 'Must be less then 24 character', val => val?.length < 24),
         dob: Yup.string().required("Required!").test('doc_check', 'Minimum age must be 12-14 years', val => val?.slice(0, 4) <= (new Date().getFullYear()) - 13),
         contactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
-        fatherName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/^[a-zA-Z]+$/, 'must be alphabates').required("Required!").test('len', 'Must be less then 24 character', val => val?.length < 24),
+        fatherName: Yup.string().trim().min(3, 'minimum 3 characters required').matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/, 'must be alphabates').required("Required!").test('len', 'Must be less then 24 character', val => val?.length < 24),
         // fatherOccupation: Yup.string().required("Required!").matches(/[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/,'must be alphabates'),
         // fatherIncome: Yup.string().required("Required!").min(4,'Must be exactly 4 digits').test('Is positive','must be positive',val => val > 0),
         FatherContactNumber: Yup.string().trim().min(10, 'Must be exactly 10 digits').required("Required!"),
@@ -126,14 +127,14 @@ function SelfRegistration() {
         percent10: Yup.string().required("Required!").test('len', 'Must be at least 33%', val => val?.replace('X', '').replace('%', '') > 32),
         rollNumber10: Yup.string().required("Required!"),
         // joinBatch: Yup.string().trim().required("Required!").test('len','Must be exactly 4 digits',val => val?.replace('X','').length === 4),
-        // percent12: Yup.string().required("Required!"),
-        // rollNumber12: Yup.string().required("Required!"),
+        percent12: Yup.string().required("Required!").test('len', 'Must be at least 33%', val => val?.replace('X', '').replace('%', '') > 32),
+        rollNumber12: Yup.string().required("Required!"),
         year: Yup.string().required("Required!"),
         streamName: Yup.string().required("Required!"),
         subject12: Yup.string().required("Required!"),
         schoolName: Yup.string().required("Required!"),
         // courseFees: Yup.string().required("Required!").test('Is positive','must be positive',val => val >= 0),
-        // trackName: Yup.string().required("Required!"),
+        trackName: Yup.string().required("Required!"),
 
     })
 
@@ -205,7 +206,7 @@ function SelfRegistration() {
 
             if (response.status === 200) {
                 setLoaderLoading(false)
-
+                navigate('/');
                 Swal.fire({
                     borderRadius: isDesktopOrLaptop ? '' : '40px',
                     title: 'Success',
@@ -481,7 +482,7 @@ function SelfRegistration() {
                                     <input type="file" name="photo" value={formik.values.photo} id="profilePhoto" style={{ display: "none" }} accept="image/*" onChange={(e) => {
                                         imageToBase64(e.target.files[0], "photo");
                                     }} />
-                                    <p className='my-auto ml-2 fw-bold' style={{ cursor: 'pointer', color: "#5a607f" }}> Upload Profile<span style={{ color: 'red' }}><span style={{ color: 'red' }}>*</span></span></p>
+                                    <p className='my-auto ml-2 fw-bold' style={{ cursor: 'pointer', color: "#5a607f" }}> Upload Profile</p>
                                 </div>
 
                                 {/* first four input feild */}

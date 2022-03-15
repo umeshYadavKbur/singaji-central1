@@ -160,13 +160,13 @@ function FeesRecipt({ accountAction }) {
             .test('Is positive', `amount can't be greater than total pending fees`, checkAmount)
             .test('Is GKB positive', `amount can't be greater than GKB pending fees OR total pending fees`, checkGKBAmount)
             .test('Is POST positive', `amount can't be greater than postmetric pending fees OR total pending fees`, checkPOSTAmount),
-        LateFeeAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0).test('Is not more', `amount can't be greater than ₹1000`, val=> val<=1000),
+        LateFeeAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0).test('Is not more', `amount can't be greater than ₹1000`, val => val <= 1000),
         waiveOff: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0)
             .test('Is positive', `amount can't be greater than total pending fees`, checkAmount)
             .test('Is GKB positive', `amount can't be greater than GKB pending fees OR total pending fees`, checkGKBAmount)
             .test('Is POST positive', `amount can't be greater than postmetric pending fees OR total pending fees`, checkPOSTAmount)
-            .test("not more than","waive of is not more than pending amount - fees Amount",checkwaiveOff)
-            ,
+            .test("not more than", "waive of is not more than pending amount - fees Amount", checkwaiveOff)
+        ,
         installmentNo: Yup.string().required("Required!"),
         payBy: Yup.string().required("Required!"),
         Remark: Yup.string().required("Required!").trim(),
@@ -255,8 +255,7 @@ function FeesRecipt({ accountAction }) {
                         },
                         data: backData
                     };
-                    accountAction(getBackData, navigate, true, setLoading)
-                    // console.log(result.data);
+                    accountAction(getBackData, navigate, true, setLoading);
                     const link = document.createElement('a')
                     link.href = result.data;
                     link.target = '_blank';
@@ -264,6 +263,7 @@ function FeesRecipt({ accountAction }) {
                     document.body.appendChild(link)
                     link.click()
                     document.body.removeChild(link)
+                    clearForm();
                 }
 
             }
@@ -309,7 +309,11 @@ function FeesRecipt({ accountAction }) {
 
         }
     })
+    const clearForm = () => {
 
+
+        formik.resetForm();
+    }
     const [expanded, setExpanded] = React.useState({
         panel1: true
     });
@@ -465,7 +469,7 @@ function FeesRecipt({ accountAction }) {
                         </div>
                         <div className="col">
                             <label className='addStdLable' htmlFor="">Late Fees</label>
-                            <Numberformat name='LateFeeAmount' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.LateFeeAmount} className='form-control' placeholder='Waive off' />
+                            <Numberformat name='LateFeeAmount' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.LateFeeAmount} className='form-control' placeholder='Late Fees' />
                             {formik.errors.LateFeeAmount && formik.touched.LateFeeAmount ? (
                                 <div className="text-danger fs-6">
                                     {formik.errors.LateFeeAmount}

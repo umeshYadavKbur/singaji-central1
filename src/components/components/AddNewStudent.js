@@ -270,7 +270,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
 
         trackName: Yup.string().required("Required!"),
         commitment: Yup.string().required("Required!"),
-        busFee: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0),
+        busFee: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val >= 0).test('Is positive', 'must be less than 20,000', val => val <= 20000),
 
     })
     const backToProfilePage = (e) => {
