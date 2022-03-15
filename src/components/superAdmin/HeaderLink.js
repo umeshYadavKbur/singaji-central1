@@ -47,7 +47,7 @@ const HeaderLink = () => {
                     <div className='d-flex flex-column'>
                         
                         <span className="m-0 p-0"><BackButton/>{editData.accountInfo.firstName + "  " + editData.accountInfo.lastName} <span className="recieved-fee-circle" style={{ backgroundColor:`${editData.accountInfo.isActive === 'true'?'#56F000':'#f99300'}`  }}></span></span>
-                        <span className="" style={{ fontSize: '15px' , marginLeft: "27px" }}>{`${editData.accountInfo.branch}-${editData.accountInfo.year} (${editData.accountInfo.joinBatch}-${editData.accountInfo.joinBatch + 3})`}</span>
+                        <span className="" style={{ fontSize: '15px' , marginLeft: "35px" }}>{`${editData.accountInfo.branch}-${editData.accountInfo.year} (${editData.accountInfo.joinBatch}-${editData.accountInfo.joinBatch + 3})`}</span>
                     </div>
                 )
             }
