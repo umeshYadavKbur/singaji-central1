@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import SidebarLinks from "./SidebarLinks";
 import HeaderLink from "./HeaderLink";
 import StudentTableFirst from './../components/student/StudentTableFirst';
+import SelfAppliedStudentTable from "../components/SelfAppliedStudentTable";
 
 
 function AdminDashboard() {
@@ -56,6 +57,7 @@ function AdminDashboard() {
           <Routes>
             <Route path="" element={<Dashboard />} />
             <Route path="studenttable" element={<StudentTable />} />
+            <Route path="selfappliedstudent" element={<SelfAppliedStudentTable />} />
             <Route path="students" element={<StudentTableFirst />} />
             <Route path="addnewstudent" element={<AddNewStudent />} />
             <Route path="*" element={<Navigate replace to="/login" />} />
