@@ -200,6 +200,7 @@ function AddStudent() {
                           value={formik.values.dob}
                           onChange={formik.handleChange}
                           type="date"
+                          max="9999-12-31"
                           className="form-control"
                           placeholder="DOB"
                         />
@@ -778,6 +779,7 @@ function AddStudent() {
                           value={formik.values.firstInstallmentDate}
                           onChange={formik.handleChange}
                           type="date"
+                          max="9999-12-31"
                           className="form-control"
                           placeholder="Date"
                           disabled={
@@ -808,6 +810,7 @@ function AddStudent() {
                           value={formik.values.secondInstallmentDate}
                           onChange={formik.handleChange}
                           type="date"
+                          max="9999-12-31"
                           className="form-control"
                           placeholder="Date"
                           disabled={
@@ -838,6 +841,7 @@ function AddStudent() {
                           value={formik.values.thirdInstallmentDate}
                           onChange={formik.handleChange}
                           type="date"
+                          max="9999-12-31"
                           className="form-control"
                           placeholder="Date"
                           disabled={

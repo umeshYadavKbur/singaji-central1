@@ -533,6 +533,7 @@ function SelfRegistration() {
                                                 value={formik.values.dob}
                                                 name="dob"
                                                 type="Date"
+                                                max="9999-12-31"
                                                 className={!isDesktopOrLaptop ? formik.touched.dob ? `form-control form-control-sm ${formik.errors.dob ? "invalid" : ""}` : 'form-control form-control-sm' : formik.touched.dob ? `form-control  ${formik.errors.dob ? "invalid" : ""}` : 'form-control '}
                                                 placeholder="DOB"
                                             />
