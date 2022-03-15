@@ -157,7 +157,7 @@ function FeesRecipt({ accountAction }) {
             .test('Is GKB positive', `amount can't be greater than GKB pending fees OR total pending fees`, checkGKBAmount)
             .test('Is POST positive', `amount can't be greater than postmetric pending fees OR total pending fees`, checkPOSTAmount),
         LateFeeAmount: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0).test('Is not more', `amount can't be greater than ₹1000`, val=> val<=1000),
-        waiveOff: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') > 0)
+        waiveOff: Yup.string().required("Required!").test('Is positive', 'must be positive', val => val?.split(',').join('') >= 0)
             .test('Is positive', `amount can't be greater than total pending fees`, checkAmount)
             .test('Is GKB positive', `amount can't be greater than GKB pending fees OR total pending fees`, checkGKBAmount)
             .test('Is POST positive', `amount can't be greater than postmetric pending fees OR total pending fees`, checkPOSTAmount)

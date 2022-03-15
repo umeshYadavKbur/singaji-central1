@@ -32,6 +32,8 @@ import Pagination from "../assests/common/Pagination";
 import { useNavigate } from "react-router-dom";
 import { Tooltip, Whisper } from "rsuite";
 import NoDataFound from "../assests/common/NoDataFound";
+import { isStudentAdmin } from "../../helpers/StudentAdmin";
+import { isSuperAdmin } from "../../helpers/SuperAdmin";
 
 // import { baseUrl } from "../../redux/constants/url";
 
@@ -39,7 +41,20 @@ import NoDataFound from "../assests/common/NoDataFound";
 function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 
   const token = localStorage.getItem("token");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const backToUpdatePage = (e) => {
+    // e.preventDefault()
+    if (isStudentAdmin()) {
+      console.log("Navigated ");
+
+      navigate('/student_admin_dashboard/addnewstudent');
+    }
+    else if (isSuperAdmin()) {
+      console.log("Navigated ");
+      navigate("/admin_dashboard/addnewstudent");
+
+    }
+  }
   // var AppliedStudent;
   const [columns] = React.useState([
     {
@@ -194,7 +209,8 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
           </Tooltip>
         }>
           <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
-            navigate("/admin_dashboard/addnewstudent")
+
+            backToUpdatePage();
             localStorage.setItem('RegistrationEdit', JSON.stringify(original))
             // localStorage.setItem('SelfRegistrationEdit', JSON.stringify(original))
           }} />

@@ -43,6 +43,8 @@ import {
   CDropdownToggle,
   CPopover,
 } from "@coreui/react";
+import { isStudentAdmin } from "../../helpers/StudentAdmin";
+import { isSuperAdmin } from "../../helpers/SuperAdmin";
 
 
 // import { baseUrl } from "../../redux/constants/url";
@@ -61,6 +63,19 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
   const [loading, setloading] = useState(false)
   const token = localStorage.getItem("token");
   const navigate = useNavigate()
+
+  const backToUpdatePage = (e) => {
+    // e.preventDefault()
+    if (isStudentAdmin()) {
+      console.log("Navigated ");
+      navigate('/student_admin_dashboard/updateselfappliedstudentdetail');
+    }
+    else if (isSuperAdmin()) {
+      console.log("Navigated ");
+      navigate("/admin_dashboard/updateselfappliedstudentdetail");
+
+    }
+  }
 
   const [columns] = React.useState([
     {
@@ -252,7 +267,7 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
           </Tooltip>
         }>
           <img src={Edit_icon} style={{ cursor: "pointer" }} alt="Edit" onClick={() => {
-            navigate("/admin_dashboard/updateselfappliedstudentdetail");
+            backToUpdatePage();
             localStorage.setItem('SelfRegistrationEdit', JSON.stringify(original))
             // localStorage.setItem('editData', JSON.stringify(original))
           }} />

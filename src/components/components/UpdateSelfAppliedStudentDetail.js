@@ -461,8 +461,8 @@ function AddNewStudentPage({ AddNewStudent }) {
     // const [getCourseFee, setGetCourseFee] = useState(true)
 
     const getCourseFees = async (branch, joinBatch) => {
-
-        if (joinBatch !== '' && joinBatch?.replace('X', '').length === 4 && branch !== '') {
+        console.log(branch, joinBatch);
+        if (joinBatch !== '' && joinBatch.toString()?.replace('X', '').length === 4 && branch !== '') {
             // console.log("api calling");
 
             var data = '';

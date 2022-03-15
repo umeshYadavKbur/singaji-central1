@@ -17,6 +17,7 @@ import SidebarLinks from "./SidebarLinks";
 import HeaderLink from "./HeaderLink";
 import StudentTableFirst from './../components/student/StudentTableFirst';
 import SelfAppliedStudentTable from "../components/SelfAppliedStudentTable";
+import UpdateSelfAppliedStudentDetail from "../components/UpdateSelfAppliedStudentDetail";
 
 
 function AdminDashboard() {
@@ -60,6 +61,7 @@ function AdminDashboard() {
             <Route path="selfappliedstudent" element={<SelfAppliedStudentTable />} />
             <Route path="students" element={<StudentTableFirst />} />
             <Route path="addnewstudent" element={<AddNewStudent />} />
+            <Route path="updateselfappliedstudentdetail" element={<UpdateSelfAppliedStudentDetail />} />
             <Route path="*" element={<Navigate replace to="/login" />} />
           </Routes>
         </div>
