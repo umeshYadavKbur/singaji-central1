@@ -3,6 +3,7 @@
     "steoates.autoimport",
     "cweijan.vscode-mysql-client2",
     "hookyqr.beautify",
-    "pranaygp.vscode-css-peek"
+    "pranaygp.vscode-css-peek",
+    "CoenraadS.bracket-pair-colorizer-2"
   ]
 }
