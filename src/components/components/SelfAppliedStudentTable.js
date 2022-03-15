@@ -209,6 +209,7 @@ function SelfAppliedStudentTable({ table_data, fetchStudentTable }) {
                         "Content-Type": "application/json",
                       },
                     };
+                    window.location.reload();
                     fetchStudentTable(fetchStudentTableConfig, true);
                   } else if (resultofverify.status === 406) {
                     console.log("404 empty feild");
