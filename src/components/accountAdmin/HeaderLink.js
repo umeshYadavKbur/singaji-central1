@@ -14,14 +14,14 @@ const HeaderLink = () => {
     var location = getLocation();
 
     const navigate = useNavigate();
-        // ======== Function to get the location of the current path the it will change the header text according to path ============
+    // ======== Function to get the location of the current path the it will change the header text according to path ============
     function getLocation() {
 
         if (currentLocation === "/account_admin_dashboard") {
             return "Dashboard";
         }
         else if (currentLocation === "/account_admin_dashboard/studentaccounttable") {
-            return "All Students";
+            return "Student Accouont";
         }
         else if (currentLocation === "/account_admin_dashboard/pendingscholarship") {
             return "Pending Scholarship";
@@ -40,9 +40,9 @@ const HeaderLink = () => {
             if (editData) {
                 return (
                     <div className='d-flex flex-column'>
-                    <span className="m-0 p-0">{editData.accountInfo.firstName + "  " + editData.accountInfo.lastName} <span className="recieved-fee-circle" style={{ backgroundColor:`${editData.accountInfo.isActive === 'true'?'#56F000':'#f99300'}`  }}></span></span>
-                    <span className="" style={{ fontSize: '15px' }}>{`${editData.accountInfo.branch}-${editData.accountInfo.year} (${editData.accountInfo.joinBatch}-${editData.accountInfo.joinBatch + 3})`}</span>
-                </div>
+                        <span className="m-0 p-0">{editData.accountInfo.firstName + "  " + editData.accountInfo.lastName} <span className="recieved-fee-circle" style={{ backgroundColor: `${editData.accountInfo.isActive === 'true' ? '#56F000' : '#f99300'}` }}></span></span>
+                        <span className="" style={{ fontSize: '15px' }}>{`${editData.accountInfo.branch}-${editData.accountInfo.year} (${editData.accountInfo.joinBatch}-${editData.accountInfo.joinBatch + 3})`}</span>
+                    </div>
                 )
             }
             return "Add Student";
