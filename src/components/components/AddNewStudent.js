@@ -624,6 +624,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                             value={formik.values.dob}
                                             name="dob"
                                             type="date"
+                                            max="9999-12-31"
                                             className={formik.touched.dob ? `form-control ${formik.errors.dob ? "invalid" : ""}` : 'form-control'}
                                             placeholder="DOB"
                                         />
@@ -1218,6 +1219,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                             value={formik.values.firstInstallmentDate}
                                             name="firstInstallmentDate"
                                             type="date"
+                                            max="9999-12-31"
                                             className={formik.touched.firstInstallmentDate ? `form-control ${formik.errors.firstInstallmentDate ? "invalid" : ""}` : 'form-control'}
                                             placeholder="First Installment Date"
                                         />
@@ -1294,6 +1296,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                             value={formik.values.secondInstallment === 0 ? formik.values.secondInstallmentDate = formik.values.firstInstallmentDate : formik.values.secondInstallmentDate}
                                             name="secondInstallmentDate"
                                             type="date"
+                                            max="9999-12-31"
                                             className={formik.touched.secondInstallmentDate ? `form-control ${formik.errors.secondInstallmentDate ? "invalid" : ""}` : 'form-control'}
                                             placeholder="Second Installment Date"
                                             disabled={formik.values.feesScheme === "oneShot" ? true : false}
@@ -1378,6 +1381,7 @@ function AddNewStudentPage({ addStudent, AddNewStudent }) {
                                             value={formik.values.thirdInstallment === 0 ? formik.values.thirdInstallmentDate = formik.values.secondInstallmentDate : formik.values.thirdInstallmentDate}
                                             name="thirdInstallmentDate"
                                             type="date"
+                                            max="9999-12-31"
                                             className={formik.touched.thirdInstallmentDate ? `form-control ${formik.errors.thirdInstallmentDate ? "invalid" : ""}` : 'form-control'}
                                             placeholder="Third Installment Date"
                                             disabled={formik.values.feesScheme === "oneShot" ? true : false}

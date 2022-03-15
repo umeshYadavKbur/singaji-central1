@@ -416,7 +416,7 @@ function FeesRecipt({ accountAction }) {
                         </div>
                         <div className="col">
                             <label className='addStdLable' htmlFor="">Receipt Date</label>
-                            <input name='recieptdate' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.recieptdate} type="date" className='form-control' placeholder='Date' />
+                            <input name='recieptdate' onBlur={formik.handleBlur}   max="9999-12-31" onChange={formik.handleChange} value={formik.values.recieptdate} type="date" className='form-control' placeholder='Date' />
                             {formik.errors.recieptdate && formik.touched.recieptdate ? (
                                 <div className="text-danger fs-6">
                                     {formik.errors.recieptdate}
@@ -484,7 +484,7 @@ function FeesRecipt({ accountAction }) {
 
                         <div className="col">
                             <label className='addStdLable' htmlFor="">Cheque Date</label>
-                            <input name='chequeDate' onBlur={formik.handleBlur}
+                            <input name='chequeDate'   max="9999-12-31" onBlur={formik.handleBlur}
                                 disabled={formik.values.payBy !== 'Cheque'}
                                 onChange={formik.handleChange} value={formik.values.chequeDate} type="date" className='form-control' />
                             {formik.errors.chequeDate && formik.touched.chequeDate ? (
