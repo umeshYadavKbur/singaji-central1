@@ -406,7 +406,7 @@ function StudentTable({ table_data, fetchStudentTable, VerifyStudent }) {
 
                   {/* <div className="dropdown-item" onClick={() => { downloadPdf(exportCsv) }}><b>Pdf</b></div> */}
 
-                  <div className="dropdown-item " style={{ cursor: "pointer" }} onClick={() => { downloadPdfStudentList(exportCsv) }}><b>Pdf</b></div>
+                  {/* <div className="dropdown-item " style={{ cursor: "pointer" }} onClick={() => { downloadPdfStudentList(exportCsv) }}><b>Pdf</b></div> */}
 
 
                 </div>
