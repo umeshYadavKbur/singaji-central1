@@ -145,6 +145,10 @@ function SelectColumnFilter({
                                     else if (option === 'male')
                                         option_label = 'Male'
 
+                                }else if(id === "trackName"){
+                                    if(option === null){
+                                        option_label = "Not Available"
+                                    }
                                 }
 
                                 return (
